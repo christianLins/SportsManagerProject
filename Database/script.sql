@@ -1,218 +1,503 @@
-﻿delete from Country;
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-insert into Country (Name, Description) VALUES('Afghanistan', 'Islamic Republic of Afghanistan');
-insert into Country (Name, Description) VALUES('Albania', 'Republic of Albania');
-insert into Country (Name, Description) VALUES('Algeria', 'People s Democratic Republic of Algeria');
-insert into Country (Name, Description) VALUES('Andorra', 'Principality of Andorra');
-insert into Country (Name, Description) VALUES('Angola', 'Republic of Angola');
-insert into Country (Name, Description) VALUES('Antigua and Barbuda', '');
-insert into Country (Name, Description) VALUES('Argentina', 'Argentine Republic');
-insert into Country (Name, Description) VALUES('Armenia', 'Republic of Armenia');
-insert into Country (Name, Description) VALUES('Australia', 'Commonwealth of Australia');
-insert into Country (Name, Description) VALUES('Austria', 'Republic of Austria');
-insert into Country (Name, Description) VALUES('Azerbaijan', 'Republic of Azerbaijan');
-insert into Country (Name, Description) VALUES('Bahamas', 'Commonwealth of The Bahamas');
-insert into Country (Name, Description) VALUES('Bahrain', 'Kingdom of Bahrain');
-insert into Country (Name, Description) VALUES('Bangladesh', 'People s Republic of Bangladesh');
-insert into Country (Name, Description) VALUES('Barbados', '');
-insert into Country (Name, Description) VALUES('Belarus', 'Republic of Belarus');
-insert into Country (Name, Description) VALUES('Belgium', 'Kingdom of Belgium');
-insert into Country (Name, Description) VALUES('Belize', '');
-insert into Country (Name, Description) VALUES('Benin', 'Republic of Benin');
-insert into Country (Name, Description) VALUES('Bhutan', 'Kingdom of Bhutan');
-insert into Country (Name, Description) VALUES('Bolivia', 'Plurinational State of Bolivia');
-insert into Country (Name, Description) VALUES('Bosnia and Herzegovina', '');
-insert into Country (Name, Description) VALUES('Botswana', 'Republic of Botswana');
-insert into Country (Name, Description) VALUES('Brazil', 'Federative Republic of Brazil');
-insert into Country (Name, Description) VALUES('Brunei', 'State of Brunei, Abode of Peace');
-insert into Country (Name, Description) VALUES('Bulgaria', 'Republic of Bulgaria');
-insert into Country (Name, Description) VALUES('Burkina Faso', '');
-insert into Country (Name, Description) VALUES('Burma', 'Republic of the Union of Myanmar');
-insert into Country (Name, Description) VALUES('Burundi', 'Republic of Burundi');
-insert into Country (Name, Description) VALUES('Cambodia', 'Kingdom of Cambodia');
-insert into Country (Name, Description) VALUES('Cameroon', 'Republic of Cameroon');
-insert into Country (Name, Description) VALUES('Canada', '');
-insert into Country (Name, Description) VALUES('Cape Verde', 'Republic of Cape Verde');
-insert into Country (Name, Description) VALUES('Central African Republic', '');
-insert into Country (Name, Description) VALUES('Chad', 'Republic of Chad');
-insert into Country (Name, Description) VALUES('Chile', 'Republic of Chile');
-insert into Country (Name, Description) VALUES('China', 'People s Republic of China');
-insert into Country (Name, Description) VALUES('Colombia', 'Republic of Colombia');
-insert into Country (Name, Description) VALUES('Comoros', 'Union of the Comoros');
-insert into Country (Name, Description) VALUES('Congo, Democratic Republic of the (Congo-Kinshasa)', '');
-insert into Country (Name, Description) VALUES('Congo, Republic of the (Congo-Brazzaville)', '');
-insert into Country (Name, Description) VALUES('Costa Rica', 'Republic of Costa Rica');
-insert into Country (Name, Description) VALUES('Côte d Ivoire', 'Republic of Côte d Ivoire (Ivory Coast)');
-insert into Country (Name, Description) VALUES('Croatia', 'Republic of Croatia');
-insert into Country (Name, Description) VALUES('Cuba', 'Republic of Cuba');
-insert into Country (Name, Description) VALUES('Cyprus', 'Republic of Cyprus');
-insert into Country (Name, Description) VALUES('Czech Republic', '');
-insert into Country (Name, Description) VALUES('Denmark', 'Kingdom of Denmark');
-insert into Country (Name, Description) VALUES('The Danish Realm also includes two self-governing territories:', '');
-insert into Country (Name, Description) VALUES('Faroe Islands (Føroyar/Færøerne)', '');
-insert into Country (Name, Description) VALUES('Greenland (Kalaallit Nunaat/Grønland)', '');
-insert into Country (Name, Description) VALUES('Djibouti', 'Republic of Djibouti');
-insert into Country (Name, Description) VALUES('Dominica', 'Commonwealth of Dominica');
-insert into Country (Name, Description) VALUES('Dominican Republic', '');
-insert into Country (Name, Description) VALUES('East Timor', 'Democratic Republic of Timor-Leste');
-insert into Country (Name, Description) VALUES('Ecuador', 'Republic of Ecuador');
-insert into Country (Name, Description) VALUES('Egypt', 'Arab Republic of Egypt');
-insert into Country (Name, Description) VALUES('El Salvador', 'Republic of El Salvador');
-insert into Country (Name, Description) VALUES('Equatorial Guinea', 'Republic of Equatorial Guinea');
-insert into Country (Name, Description) VALUES('Eritrea', 'State of Eritrea');
-insert into Country (Name, Description) VALUES('Estonia', 'Republic of Estonia');
-insert into Country (Name, Description) VALUES('Ethiopia', 'Federal Democratic Republic of Ethiopia');
-insert into Country (Name, Description) VALUES('Fiji', 'Republic of Fiji');
-insert into Country (Name, Description) VALUES('Finland', 'Republic of Finland');
-insert into Country (Name, Description) VALUES('France', 'French Republic');
-insert into Country (Name, Description) VALUES('Gabon', 'Gabonese Republic');
-insert into Country (Name, Description) VALUES('The Gambia', 'Republic of The Gambia');
-insert into Country (Name, Description) VALUES('Georgia', '');
-insert into Country (Name, Description) VALUES('Germany', 'Federal Republic of Germany');
-insert into Country (Name, Description) VALUES('Ghana', 'Republic of Ghana');
-insert into Country (Name, Description) VALUES('Greece', 'Hellenic Republic');
-insert into Country (Name, Description) VALUES('Grenada', '');
-insert into Country (Name, Description) VALUES('Guatemala', 'Republic of Guatemala');
-insert into Country (Name, Description) VALUES('Guinea', 'Republic of Guinea');
-insert into Country (Name, Description) VALUES('Guinea-Bissau', 'Republic of Guinea-Bissau');
-insert into Country (Name, Description) VALUES('Guyana', 'Co-operative Republic of Guyana');
-insert into Country (Name, Description) VALUES('Haiti', 'Republic of Haiti');
-insert into Country (Name, Description) VALUES('Honduras', 'Republic of Honduras');
-insert into Country (Name, Description) VALUES('Hungary', '');
-insert into Country (Name, Description) VALUES('Iceland', '');
-insert into Country (Name, Description) VALUES('India', 'Republic of India');
-insert into Country (Name, Description) VALUES('Indonesia', 'Republic of Indonesia');
-insert into Country (Name, Description) VALUES('Iran', 'Islamic Republic of Iran');
-insert into Country (Name, Description) VALUES('Iraq', 'Republic of Iraq');
-insert into Country (Name, Description) VALUES('Ireland', '');
-insert into Country (Name, Description) VALUES('Israel', '');
-insert into Country (Name, Description) VALUES('Italy', 'Italian Republic');
-insert into Country (Name, Description) VALUES('Jamaica', '');
-insert into Country (Name, Description) VALUES('Japan', '');
-insert into Country (Name, Description) VALUES('Jordan', 'Hashemite Kingdom of Jordan');
-insert into Country (Name, Description) VALUES('Kazakhstan', 'Republic of Kazakhstan');
-insert into Country (Name, Description) VALUES('Kenya', 'Republic of Kenya');
-insert into Country (Name, Description) VALUES('Kiribati', 'Republic of Kiribati');
-insert into Country (Name, Description) VALUES('Korea, North', '');
-insert into Country (Name, Description) VALUES('Korea, South', '');
-insert into Country (Name, Description) VALUES('Kosovo → Kosovo', '');
-insert into Country (Name, Description) VALUES('Kuwait', 'State of Kuwait');
-insert into Country (Name, Description) VALUES('Kyrgyzstan', 'Kyrgyz Republic');
-insert into Country (Name, Description) VALUES('Laos', 'Lao People s Democratic Republic');
-insert into Country (Name, Description) VALUES('Latvia', 'Republic of Latvia');
-insert into Country (Name, Description) VALUES('Lebanon', 'Lebanese Republic');
-insert into Country (Name, Description) VALUES('Lesotho', 'Kingdom of Lesotho');
-insert into Country (Name, Description) VALUES('Liberia', 'Republic of Liberia');
-insert into Country (Name, Description) VALUES('Libya', '');
-insert into Country (Name, Description) VALUES('Liechtenstein', 'Principality of Liechtenstein');
-insert into Country (Name, Description) VALUES('Lithuania', 'Republic of Lithuania');
-insert into Country (Name, Description) VALUES('Luxembourg', 'Grand Duchy of Luxembourg');
-insert into Country (Name, Description) VALUES('Macedonia', '');
-insert into Country (Name, Description) VALUES('Madagascar', 'Republic of Madagascar');
-insert into Country (Name, Description) VALUES('Malawi', 'Republic of Malawi');
-insert into Country (Name, Description) VALUES('Malaysia', '');
-insert into Country (Name, Description) VALUES('Maldives', 'Republic of Maldives');
-insert into Country (Name, Description) VALUES('Mali', 'Republic of Mali');
-insert into Country (Name, Description) VALUES('Malta', 'Republic of Malta');
-insert into Country (Name, Description) VALUES('Marshall Islands', 'Republic of the Marshall Islands');
-insert into Country (Name, Description) VALUES('Mauritania', 'Islamic Republic of Mauritania');
-insert into Country (Name, Description) VALUES('Mauritius', 'Republic of Mauritius');
-insert into Country (Name, Description) VALUES('Mexico', 'United Mexican States');
-insert into Country (Name, Description) VALUES('Micronesia, Federated States of', '');
-insert into Country (Name, Description) VALUES('Moldova', 'Republic of Moldova');
-insert into Country (Name, Description) VALUES('Monaco', 'Principality of Monaco');
-insert into Country (Name, Description) VALUES('Mongolia', '');
-insert into Country (Name, Description) VALUES('Montenegro', '');
-insert into Country (Name, Description) VALUES('Morocco', 'Kingdom of Morocco');
-insert into Country (Name, Description) VALUES('Mozambique', 'Republic of Mozambique');
-insert into Country (Name, Description) VALUES('Namibia', 'Republic of Namibia');
-insert into Country (Name, Description) VALUES('Nauru', 'Republic of Nauru');
-insert into Country (Name, Description) VALUES('Nepal', 'Federal Democratic Republic of Nepal');
-insert into Country (Name, Description) VALUES('Netherlands', 'Kingdom of the Netherlands');
-insert into Country (Name, Description) VALUES('New Zealand', '');
-insert into Country (Name, Description) VALUES('Nicaragua', 'Republic of Nicaragua');
-insert into Country (Name, Description) VALUES('Niger', 'Republic of Niger');
-insert into Country (Name, Description) VALUES('Nigeria', 'Federal Republic of Nigeria');
-insert into Country (Name, Description) VALUES('Northern Cyprus → Northern Cyprus', '');
-insert into Country (Name, Description) VALUES('North Korea → Korea, North', '');
-insert into Country (Name, Description) VALUES('Norway', 'Kingdom of Norway');
-insert into Country (Name, Description) VALUES('Oman', 'Sultanate of Oman');
-insert into Country (Name, Description) VALUES('Pakistan', 'Islamic Republic of Pakistan');
-insert into Country (Name, Description) VALUES('Palau', 'Republic of Palau');
-insert into Country (Name, Description) VALUES('Panama', 'Republic of Panama');
-insert into Country (Name, Description) VALUES('Papua New Guinea', 'Independent State of Papua New Guinea');
-insert into Country (Name, Description) VALUES('Paraguay', 'Republic of Paraguay');
-insert into Country (Name, Description) VALUES('Peru', 'Republic of Peru');
-insert into Country (Name, Description) VALUES('Philippines', 'Republic of the Philippines');
-insert into Country (Name, Description) VALUES('Poland', 'Republic of Poland');
-insert into Country (Name, Description) VALUES('Portugal', 'Portuguese Republic');
-insert into Country (Name, Description) VALUES('Pridnestrovie → Transnistria', '');
-insert into Country (Name, Description) VALUES('Qatar', 'State of Qatar');
-insert into Country (Name, Description) VALUES('Romania', '');
-insert into Country (Name, Description) VALUES('Russia', 'Russian Federation');
-insert into Country (Name, Description) VALUES('Rwanda', 'Republic of Rwanda');
-insert into Country (Name, Description) VALUES('Saint Kitts and Nevis', 'Federation of Saint Kitts and Nevis');
-insert into Country (Name, Description) VALUES('Saint Lucia', '');
-insert into Country (Name, Description) VALUES('Saint Vincent and the Grenadines', '');
-insert into Country (Name, Description) VALUES('Samoa', 'Independent State of Samoa');
-insert into Country (Name, Description) VALUES('San Marino', 'Republic of San Marino');
-insert into Country (Name, Description) VALUES('São Tomé and Príncipe', 'Democratic Republic of São Tomé and Príncipe');
-insert into Country (Name, Description) VALUES('Saudi Arabia', 'Kingdom of Saudi Arabia');
-insert into Country (Name, Description) VALUES('Senegal', 'Republic of Senegal');
-insert into Country (Name, Description) VALUES('Serbia', 'Republic of Serbia');
-insert into Country (Name, Description) VALUES('Seychelles', 'Republic of Seychelles');
-insert into Country (Name, Description) VALUES('Sierra Leone', 'Republic of Sierra Leone');
-insert into Country (Name, Description) VALUES('Singapore', 'Republic of Singapore');
-insert into Country (Name, Description) VALUES('Slovakia', 'Slovak Republic');
-insert into Country (Name, Description) VALUES('Slovenia', 'Republic of Slovenia');
-insert into Country (Name, Description) VALUES('Solomon Islands', '');
-insert into Country (Name, Description) VALUES('Somalia', 'Federal Republic of Somalia');
-insert into Country (Name, Description) VALUES('South Africa', 'Republic of South Africa');
-insert into Country (Name, Description) VALUES('South Sudan', 'Republic of South Sudan');
-insert into Country (Name, Description) VALUES('Spain', 'Kingdom of Spain');
-insert into Country (Name, Description) VALUES('Sri Lanka', 'Democratic Socialist Republic of Sri Lanka');
-insert into Country (Name, Description) VALUES('Sudan', 'Republic of the Sudan');
-insert into Country (Name, Description) VALUES('Sudan, South → South Sudan', '');
-insert into Country (Name, Description) VALUES('Suriname', 'Republic of Suriname');
-insert into Country (Name, Description) VALUES('Swaziland', 'Kingdom of Swaziland');
-insert into Country (Name, Description) VALUES('Sweden', 'Kingdom of Sweden');
-insert into Country (Name, Description) VALUES('Switzerland', 'Swiss Confederation');
-insert into Country (Name, Description) VALUES('Syria', 'Syrian Arab Republic');
-insert into Country (Name, Description) VALUES('Tajikistan', 'Republic of Tajikistan');
-insert into Country (Name, Description) VALUES('Tanzania', 'United Republic of Tanzania');
-insert into Country (Name, Description) VALUES('Thailand', 'Kingdom of Thailand');
-insert into Country (Name, Description) VALUES('Togo', 'Togolese Republic');
-insert into Country (Name, Description) VALUES('Tonga', 'Kingdom of Tonga');
-insert into Country (Name, Description) VALUES('Trinidad and Tobago', 'Republic of Trinidad and Tobago');
-insert into Country (Name, Description) VALUES('Tunisia', 'Republic of Tunisia');
-insert into Country (Name, Description) VALUES('Turkey', 'Republic of Turkey');
-insert into Country (Name, Description) VALUES('Turkmenistan', '');
-insert into Country (Name, Description) VALUES('Tuvalu', '');
-insert into Country (Name, Description) VALUES('Uganda', 'Republic of Uganda');
-insert into Country (Name, Description) VALUES('Ukraine', '');
-insert into Country (Name, Description) VALUES('United Arab Emirates', '');
-insert into Country (Name, Description) VALUES('United Kingdom', 'United Kingdom of Great Britain and Northern Ireland');
-insert into Country (Name, Description) VALUES('United States', 'United States of America');
-insert into Country (Name, Description) VALUES('Uruguay', 'Oriental Republic of Uruguay');
-insert into Country (Name, Description) VALUES('Uzbekistan', 'Republic of Uzbekistan');
-insert into Country (Name, Description) VALUES('Vanuatu', 'Republic of Vanuatu');
-insert into Country (Name, Description) VALUES('Vatican City', '');
-insert into Country (Name, Description) VALUES('Venezuela', 'Bolivarian Republic of Venezuela');
-insert into Country (Name, Description) VALUES('Vietnam', 'Socialist Republic of Vietnam');
-insert into Country (Name, Description) VALUES('Yemen', 'Republic of Yemen');
-insert into Country (Name, Description) VALUES('Zambia', 'Republic of Zambia');
-insert into Country (Name, Description) VALUES('Zimbabwe', 'Republic of Zimbabwe');
-insert into Country (Name, Description) VALUES('Abkhazia', '');
-insert into Country (Name, Description) VALUES('Cook Islands', '');
-insert into Country (Name, Description) VALUES('Kosovo', 'Republic of Kosovo');
-insert into Country (Name, Description) VALUES('Nagorno-Karabakh', 'Nagorno-Karabakh Republic');
-insert into Country (Name, Description) VALUES('Niue Member of some', '');
-insert into Country (Name, Description) VALUES('Northern Cyprus', 'Turkish Republic of Northern Cyprus');
-insert into Country (Name, Description) VALUES('Palestine', 'State of Palestine');
-insert into Country (Name, Description) VALUES('Sahrawi Arab Democratic Republic', '');
-insert into Country (Name, Description) VALUES('Somaliland', 'Republic of Somaliland');
-insert into Country (Name, Description) VALUES('South Ossetia', 'Republic of South Ossetia');
-insert into Country (Name, Description) VALUES('Taiwan', 'Republic of China Former');
-insert into Country (Name, Description) VALUES('Transnistria', 'Transnistrian Moldovan Republic (Pridnestrovie, Trans-Dniester)');
+DROP SCHEMA IF EXISTS `SportClubManagement` ;
+CREATE SCHEMA IF NOT EXISTS `SportClubManagement` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
+USE `SportClubManagement` ;
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`Department`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`Department` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Department` (
+  `idDepartment` INT NOT NULL AUTO_INCREMENT ,
+  `Name` VARCHAR(45) NOT NULL ,
+  `Description` VARCHAR(45) NULL ,
+  PRIMARY KEY (`idDepartment`) ,
+  UNIQUE INDEX `idDepartment_UNIQUE` (`idDepartment` ASC) )
+ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`TypeOfSport`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`TypeOfSport` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`TypeOfSport` (
+  `idTypeOfSport` INT NOT NULL AUTO_INCREMENT ,
+  `Name` VARCHAR(45) NOT NULL ,
+  `Description` VARCHAR(45) NULL ,
+  PRIMARY KEY (`idTypeOfSport`) ,
+  UNIQUE INDEX `idTypeOfSport_UNIQUE` (`idTypeOfSport` ASC) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`Department_has_TypeOfSport`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`Department_has_TypeOfSport` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Department_has_TypeOfSport` (
+  `idDepartmentTypeOfSport` INT NOT NULL AUTO_INCREMENT ,
+  `TypeOfSport` INT NOT NULL ,
+  `Department_idDepartment` INT NOT NULL ,
+  PRIMARY KEY (`idDepartmentTypeOfSport`) ,
+  UNIQUE INDEX `idDepartmentTypeOfSport_UNIQUE` (`idDepartmentTypeOfSport` ASC) ,
+  INDEX `fk_DepartmentTypeOfSport_TypeOfSport1_idx` (`TypeOfSport` ASC) ,
+  INDEX `fk_DepartmentTypeOfSport_Department1_idx` (`Department_idDepartment` ASC) ,
+  CONSTRAINT `fk_DepartmentTypeOfSport_TypeOfSport1`
+    FOREIGN KEY (`TypeOfSport` )
+    REFERENCES `SportClubManagement`.`TypeOfSport` (`idTypeOfSport` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_DepartmentTypeOfSport_Department1`
+    FOREIGN KEY (`Department_idDepartment` )
+    REFERENCES `SportClubManagement`.`Department` (`idDepartment` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`League`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`League` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`League` (
+  `idLeague` INT NOT NULL AUTO_INCREMENT ,
+  `Name` VARCHAR(45) NOT NULL ,
+  `Description` VARCHAR(45) NULL ,
+  PRIMARY KEY (`idLeague`) ,
+  UNIQUE INDEX `idLeague_UNIQUE` (`idLeague` ASC) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`Team`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`Team` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Team` (
+  `idTeam` INT NOT NULL AUTO_INCREMENT ,
+  `Name` VARCHAR(45) NOT NULL ,
+  `Description` VARCHAR(45) NULL ,
+  `League` INT NOT NULL ,
+  PRIMARY KEY (`idTeam`) ,
+  UNIQUE INDEX `idTeam_UNIQUE` (`idTeam` ASC) ,
+  INDEX `fk_Team_League1_idx` (`League` ASC) ,
+  CONSTRAINT `fk_Team_League10`
+    FOREIGN KEY (`League` )
+    REFERENCES `SportClubManagement`.`League` (`idLeague` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`ClubTeam`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`ClubTeam` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`ClubTeam` (
+  `idTeam` INT NOT NULL ,
+  INDEX `fk_ClubTeam_Team1_idx` (`idTeam` ASC) ,
+  PRIMARY KEY (`idTeam`) ,
+  CONSTRAINT `fk_ClubTeam_Team1`
+    FOREIGN KEY (`idTeam` )
+    REFERENCES `SportClubManagement`.`Team` (`idTeam` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`Department_has_Team`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`Department_has_Team` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Department_has_Team` (
+  `Department` INT NOT NULL ,
+  `Team` INT NOT NULL ,
+  PRIMARY KEY (`Department`, `Team`) ,
+  INDEX `fk_DepartmentTeam_Department1_idx` (`Department` ASC) ,
+  INDEX `fk_DepartmentTeam_ClubTeam1_idx` (`Team` ASC) ,
+  CONSTRAINT `fk_DepartmentTeam_Department1`
+    FOREIGN KEY (`Department` )
+    REFERENCES `SportClubManagement`.`Department` (`idDepartment` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_DepartmentTeam_ClubTeam1`
+    FOREIGN KEY (`Team` )
+    REFERENCES `SportClubManagement`.`ClubTeam` (`idTeam` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`Trainer`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`Trainer` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Trainer` (
+  `idTrainer` INT NOT NULL ,
+  INDEX `fk_Trainer_Role1_idx` (`idTrainer` ASC) ,
+  PRIMARY KEY (`idTrainer`) ,
+  CONSTRAINT `fk_Trainer_Role10`
+    FOREIGN KEY (`idTrainer` )
+    REFERENCES `SportClubManagement`.`Role` (`idRole` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`Team_has_Trainer`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`Team_has_Trainer` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Team_has_Trainer` (
+  `Trainer` INT NOT NULL ,
+  `Team` INT NOT NULL ,
+  INDEX `fk_Team_has_Trainer_Trainer1_idx` (`Trainer` ASC) ,
+  INDEX `fk_Team_has_Trainer_ClubTeam1_idx` (`Team` ASC) ,
+  PRIMARY KEY (`Trainer`, `Team`) ,
+  CONSTRAINT `fk_Team_has_Trainer_Trainer1`
+    FOREIGN KEY (`Trainer` )
+    REFERENCES `SportClubManagement`.`Trainer` (`idMember` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Team_has_Trainer_ClubTeam1`
+    FOREIGN KEY (`Team` )
+    REFERENCES `SportClubManagement`.`ClubTeam` (`idTeam` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`Team_has_Player`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`Team_has_Player` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Team_has_Player` (
+  `Team` INT NOT NULL ,
+  `Player` INT NOT NULL ,
+  PRIMARY KEY (`Team`, `Player`) ,
+  INDEX `fk_Team_has_Member_ClubTeam1_idx` (`Team` ASC) ,
+  CONSTRAINT `fk_Team_has_Member_ClubTeam1`
+    FOREIGN KEY (`Team` )
+    REFERENCES `SportClubManagement`.`ClubTeam` (`idTeam` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`Country`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`Country` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Country` (
+  `idCountry` INT NOT NULL AUTO_INCREMENT ,
+  `Name` VARCHAR(45) NOT NULL ,
+  `Alpha3` VARCHAR(100) NULL ,
+  `Alpha2` VARCHAR(100) NULL ,
+  `TLD` VARCHAR(100) NULL ,
+  `Deutsch` VARCHAR(100) NULL ,
+  `Espanol` VARCHAR(100) NULL ,
+  `Francaise` VARCHAR(100) NULL ,
+  `Italiano` VARCHAR(100) NULL ,
+  `Portugues` VARCHAR(100) NULL ,
+  UNIQUE INDEX `idCountry_UNIQUE` (`idCountry` ASC) ,
+  PRIMARY KEY (`idCountry`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`Address`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`Address` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Address` (
+  `idAddress` INT NOT NULL AUTO_INCREMENT ,
+  `Country` INT NOT NULL ,
+  `Street` VARCHAR(45) NOT NULL ,
+  `StreetNumber` INT NOT NULL ,
+  `Village` VARCHAR(45) NOT NULL ,
+  `PostalCode` INT NOT NULL ,
+  PRIMARY KEY (`idAddress`) ,
+  UNIQUE INDEX `idAddress_UNIQUE` (`idAddress` ASC) ,
+  INDEX `fk_Address_Country_idx` (`Country` ASC) ,
+  CONSTRAINT `fk_Address_Country0`
+    FOREIGN KEY (`Country` )
+    REFERENCES `SportClubManagement`.`Country` (`idCountry` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`Member`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`Member` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Member` (
+  `idMember` INT NOT NULL AUTO_INCREMENT ,
+  `Prename` VARCHAR(45) NOT NULL ,
+  `Lastname` VARCHAR(45) NOT NULL ,
+  `DateOfBirth` VARCHAR(45) NOT NULL ,
+  `Address` INT NOT NULL ,
+  `MemberFrom` DATE NOT NULL ,
+  `MemberTo` DATE NULL ,
+  `Nationality` INT NOT NULL ,
+  `Telephonenumber` VARCHAR(45) NULL ,
+  `EmailAddress` VARCHAR(45) NULL ,
+  `Gender` TINYINT(1) NULL ,
+  PRIMARY KEY (`idMember`) ,
+  UNIQUE INDEX `idMember_UNIQUE` (`idMember` ASC) ,
+  INDEX `fk_Member_Address1_idx` (`Address` ASC) ,
+  INDEX `fk_Member_Country1_idx` (`Nationality` ASC) ,
+  CONSTRAINT `fk_Member_Address10`
+    FOREIGN KEY (`Address` )
+    REFERENCES `SportClubManagement`.`Address` (`idAddress` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Member_Country10`
+    FOREIGN KEY (`Nationality` )
+    REFERENCES `SportClubManagement`.`Country` (`idCountry` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`Role`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`Role` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Role` (
+  `idRole` INT NOT NULL ,
+  `Member_idMember` INT NOT NULL ,
+  PRIMARY KEY (`idRole`) ,
+  INDEX `fk_Role_Member1_idx` (`Member_idMember` ASC) ,
+  CONSTRAINT `fk_Role_Member1`
+    FOREIGN KEY (`Member_idMember` )
+    REFERENCES `SportClubManagement`.`Member` (`idMember` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`Player`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`Player` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Player` (
+  `Role_idRole` INT NOT NULL ,
+  PRIMARY KEY (`Role_idRole`) ,
+  CONSTRAINT `fk_Player_Role1`
+    FOREIGN KEY (`Role_idRole` )
+    REFERENCES `SportClubManagement`.`Role` (`idRole` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`Player_has_TypeOfSport`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`Player_has_TypeOfSport` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Player_has_TypeOfSport` (
+  `TypeOfSport_idTypeOfSport` INT NOT NULL ,
+  `Player_Role_idRole` INT NOT NULL ,
+  PRIMARY KEY (`TypeOfSport_idTypeOfSport`, `Player_Role_idRole`) ,
+  INDEX `fk_Member_has_TypeOfSport_TypeOfSport1_idx` (`TypeOfSport_idTypeOfSport` ASC) ,
+  INDEX `fk_Player_has_TypeOfSport_Player1_idx` (`Player_Role_idRole` ASC) ,
+  CONSTRAINT `fk_Member_has_TypeOfSport_TypeOfSport1`
+    FOREIGN KEY (`TypeOfSport_idTypeOfSport` )
+    REFERENCES `SportClubManagement`.`TypeOfSport` (`idTypeOfSport` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Player_has_TypeOfSport_Player1`
+    FOREIGN KEY (`Player_Role_idRole` )
+    REFERENCES `SportClubManagement`.`Player` (`Role_idRole` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`Matchresult`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`Matchresult` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Matchresult` (
+  `idMatchresult` INT NOT NULL AUTO_INCREMENT ,
+  `PointsHometeam` DOUBLE NOT NULL ,
+  `PointsForeignteam` DOUBLE NOT NULL ,
+  PRIMARY KEY (`idMatchresult`) ,
+  UNIQUE INDEX `idMatchresult_UNIQUE` (`idMatchresult` ASC) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`Competition`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`Competition` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Competition` (
+  `idCompetition` INT NOT NULL AUTO_INCREMENT ,
+  `DateFrom` DATE NOT NULL ,
+  `DateTo` DATE NULL ,
+  `Payment` DOUBLE NULL ,
+  PRIMARY KEY (`idCompetition`) ,
+  UNIQUE INDEX `idCompetition_UNIQUE` (`idCompetition` ASC) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`Match`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`Match` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Match` (
+  `idMatch` INT NOT NULL AUTO_INCREMENT ,
+  `Hometeam` INT NOT NULL ,
+  `Foreignteam` INT NOT NULL ,
+  `Matchresult` INT NOT NULL ,
+  `Competition` INT NOT NULL ,
+  `DateFrom` DATE NOT NULL ,
+  `DateTo` DATE NULL ,
+  PRIMARY KEY (`idMatch`) ,
+  UNIQUE INDEX `idMatch_UNIQUE` (`idMatch` ASC) ,
+  INDEX `fk_Match_Team1_idx` (`Hometeam` ASC) ,
+  INDEX `fk_Match_Team2_idx` (`Foreignteam` ASC) ,
+  INDEX `fk_Match_Matchresult1_idx` (`Matchresult` ASC) ,
+  INDEX `fk_Match_Competition1_idx` (`Competition` ASC) ,
+  CONSTRAINT `fk_Match_Team10`
+    FOREIGN KEY (`Hometeam` )
+    REFERENCES `SportClubManagement`.`Team` (`idTeam` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Match_Team20`
+    FOREIGN KEY (`Foreignteam` )
+    REFERENCES `SportClubManagement`.`Team` (`idTeam` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Match_Matchresult10`
+    FOREIGN KEY (`Matchresult` )
+    REFERENCES `SportClubManagement`.`Matchresult` (`idMatchresult` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Match_Competition10`
+    FOREIGN KEY (`Competition` )
+    REFERENCES `SportClubManagement`.`Competition` (`idCompetition` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`Competition_has_Team`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`Competition_has_Team` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Competition_has_Team` (
+  `Competition` INT NOT NULL ,
+  `Team` INT NOT NULL ,
+  PRIMARY KEY (`Competition`, `Team`) ,
+  INDEX `fk_Competition_has_Team_Team1_idx` (`Team` ASC) ,
+  INDEX `fk_Competition_has_Team_Competition1_idx` (`Competition` ASC) ,
+  CONSTRAINT `fk_Competition_has_Team_Competition10`
+    FOREIGN KEY (`Competition` )
+    REFERENCES `SportClubManagement`.`Competition` (`idCompetition` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Competition_has_Team_Team10`
+    FOREIGN KEY (`Team` )
+    REFERENCES `SportClubManagement`.`Team` (`idTeam` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`DepartmentHead`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`DepartmentHead` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`DepartmentHead` (
+  `idDepartmentHead` INT NOT NULL ,
+  INDEX `fk_DepartmentHead_Role1_idx` (`idDepartmentHead` ASC) ,
+  PRIMARY KEY (`idDepartmentHead`) ,
+  CONSTRAINT `fk_DepartmentHead_Role10`
+    FOREIGN KEY (`idDepartmentHead` )
+    REFERENCES `SportClubManagement`.`Role` (`idRole` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`Trainer`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`Trainer` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Trainer` (
+  `idTrainer` INT NOT NULL ,
+  INDEX `fk_Trainer_Role1_idx` (`idTrainer` ASC) ,
+  PRIMARY KEY (`idTrainer`) ,
+  CONSTRAINT `fk_Trainer_Role10`
+    FOREIGN KEY (`idTrainer` )
+    REFERENCES `SportClubManagement`.`Role` (`idRole` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`Permisssion`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`Permisssion` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Permisssion` (
+  `idPermisssion` INT NOT NULL AUTO_INCREMENT ,
+  `Name` VARCHAR(45) NOT NULL ,
+  `Description` VARCHAR(45) NULL ,
+  PRIMARY KEY (`idPermisssion`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`Role_has_Permisssion`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`Role_has_Permisssion` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Role_has_Permisssion` (
+  `Role_idRole` INT NOT NULL ,
+  `Permisssion_idPermisssion` INT NOT NULL ,
+  PRIMARY KEY (`Role_idRole`, `Permisssion_idPermisssion`) ,
+  INDEX `fk_Role_has_Permisssion_Permisssion1_idx` (`Permisssion_idPermisssion` ASC) ,
+  INDEX `fk_Role_has_Permisssion_Role1_idx` (`Role_idRole` ASC) ,
+  CONSTRAINT `fk_Role_has_Permisssion_Role1`
+    FOREIGN KEY (`Role_idRole` )
+    REFERENCES `SportClubManagement`.`Role` (`idRole` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Role_has_Permisssion_Permisssion1`
+    FOREIGN KEY (`Permisssion_idPermisssion` )
+    REFERENCES `SportClubManagement`.`Permisssion` (`idPermisssion` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
