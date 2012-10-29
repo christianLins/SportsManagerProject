@@ -394,7 +394,7 @@ public class DatabaseManager
     
     private static void restoreClubTeams()
     {
-        
+        // Test
     }
     
     private static void restoreDepartmentHead()
