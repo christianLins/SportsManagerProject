@@ -51,7 +51,7 @@ public class TypeOfSportTest
         EasyMock.expect(expected.getDescription()).andReturn("Testdescription");
 
         DomainFacade.set(expected);
-        DomainFacade.remove(expected);
+        DomainFacade.delete(expected);
 
         List<ITypeOfSport> actuals = DomainFacade.getAll(ITypeOfSport.class);
 

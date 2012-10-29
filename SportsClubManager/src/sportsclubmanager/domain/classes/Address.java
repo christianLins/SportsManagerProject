@@ -72,6 +72,15 @@ public class Address implements Serializable
         this.village = village;
         this.postalCode = postalCode;
     }
+    
+      public Address(String street, int streetNumber, String village, int postalCode, Country country)
+    {
+        this.idAddress = idAddress;
+        this.street = street;
+        this.streetNumber = streetNumber;
+        this.village = village;
+        this.postalCode = postalCode;
+    }
 
     public Integer getIdAddress()
     {

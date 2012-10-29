@@ -16,9 +16,9 @@ import static org.junit.Assert.*;
 
  @author Thomas
  */
-public class Department
+public class DepartmentTest
 {
-    public Department()
+    public DepartmentTest()
     {
     }
     

@@ -4,6 +4,9 @@
  */
 package sportsclubmanager.database;
 
+import java.text.*;
+import java.util.*;
+import java.util.logging.*;
 import sportsclubmanager.domain.DomainFacade;
 import sportsclubmanager.domain.classes.*;
 
@@ -18,10 +21,10 @@ public class DatabaseManager
         DomainFacade.delete(Match.class);
         DomainFacade.delete(Competition.class);
         DomainFacade.delete(League.class);
-
+        
         DomainFacade.delete(ClubTeam.class);
         DomainFacade.delete(Team.class);
-
+        
         DomainFacade.delete(Department.class);
         DomainFacade.delete(Player.class);
         DomainFacade.delete(DepartmentHead.class);
@@ -31,27 +34,27 @@ public class DatabaseManager
         DomainFacade.delete(Country.class);
         DomainFacade.delete(TypeOfSport.class);
     }
-
+    
     public static void restoreDefault()
     {
         clearDatabase();
-
+        
         restoreTypeOfSport();
         restoreCountry();
-        restoreMember();
-        restoreTrainer();
-        restoreDepartmentHead();
         restorePlayer();
-        restoreDepartment();
-
-        restoreTeams();
+        restoreTrainer();
         restoreClubTeams();
-
+        
+        restoreDepartmentHead();
+        restoreDepartment();
+        
+        restoreTeams();
+        
         restoreLeagues();
         restoreCompetitions();
         restoreMatches();
     }
-
+    
     private static void restoreTypeOfSport()
     {
         String[] values = new String[]
@@ -69,7 +72,7 @@ public class DatabaseManager
             "Volleyball",
             "Beachvolleyball"
         };
-
+        
         for (String value : values)
         {
             TypeOfSport type = new TypeOfSport();
@@ -78,7 +81,7 @@ public class DatabaseManager
             DomainFacade.set(type);
         }
     }
-
+    
     private static void restoreCountry()
     {
         DomainFacade.set(new Country("AFG", "AF", ".af", " Afghanistan", "Afghanistan", "Afganistán", " Afghanistan", "Afghanistan", " Afeganistão"));
@@ -327,12 +330,112 @@ public class DatabaseManager
         DomainFacade.set(new Country("YEM", "YE", ".ye", "Yemen", "Jemen", "Yemen", " Yémen", "Yemen", " Iémen"));
         DomainFacade.set(new Country("ZMB", "ZM", ".zm", "Zambia", "Sambia", "Zambia", " Zambie", "Zambia", " Zâmbia"));
     }
-
-    private static void restoreMember()
-    {       
+    
+    private static void restorePlayer()
+    {        
         for (int i = 0; i < 1000; i++)
         {
-              DomainFacade.set(new Person());
+            try
+            {
+                Country country = DomainFacade.getByName(Country.class, "Togo");
+                Address address = new Address("Street" + i, i, "Village" + i, 6500 + i, country);
+                int day = new Random().nextInt(28);
+                int month = new Random().nextInt(12);                
+                int year = new Random().nextInt(90);                
+                
+                Date dateOfBirth = DateFormat.getDateInstance().parse(day + "/" + month + "/" + year + " 4:5 PM, PDT");
+                Date memberFrom = DateFormat.getDateInstance().parse(day + "/" + month + "/" + (year + 7) + " 4:5 PM, PDT");                
+                String telephoneNumber = "+43/" + new Random().nextInt();                
+                String emailAddress = new Random().nextInt(100000) + "@sample.com";                
+                
+                List<TypeOfSport> list = new LinkedList<TypeOfSport>();
+                list.add(DomainFacade.getByName(TypeOfSport.class, "Volleyball"));
+                
+                List<Role> roles = new LinkedList<Role>();
+                roles.add(DomainFacade.getByName(Role.class, "Player"));
+
+                DomainFacade.set(new Member("Prename" + i, "Lastname" + i, address, dateOfBirth, memberFrom, country, telephoneNumber, emailAddress, i % 2 == 0, list, roles));
+            }
+            catch (ParseException ex)
+            {
+                Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    private static void restoreTrainer()
+    {
+        for (int i = 0; i < 100; i++)
+        {
+            try
+            {
+                Country country = DomainFacade.getByName(Country.class, "Togo");
+                Address address = new Address("Street" + i, i, "Village" + i, 6500 + i, country);
+                int day = new Random().nextInt(28);
+                int month = new Random().nextInt(12);                
+                int year = new Random().nextInt(90);                
+                
+                Date dateOfBirth = DateFormat.getDateInstance().parse(day + "/" + month + "/" + year + " 4:5 PM, PDT");
+                Date memberFrom = DateFormat.getDateInstance().parse(day + "/" + month + "/" + (year + 7) + " 4:5 PM, PDT");                
+                String telephoneNumber = "+43/" + new Random().nextInt();                
+                String emailAddress = new Random().nextInt(100000) + "@sample.com";                
+                
+                List<Role> roles = new LinkedList<Role>();
+                roles.add(DomainFacade.getByName(Role.class, "Trainer"));
+                
+                DomainFacade.set(new Member("PrenameTrainer" + i, "LastnameTrainer" + i, address, dateOfBirth, memberFrom, country, telephoneNumber, emailAddress, i % 2 == 0,null, roles));
+            }
+            catch (ParseException ex)
+            {
+                Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    private static void restoreClubTeams()
+    {
+        
+    }
+    
+    private static void restoreDepartmentHead()
+    {
+        for (int i = 0; i < 100; i++)
+        {
+            try
+            {
+                Country country = DomainFacade.getByName(Country.class, "Togo");
+                Address address = new Address("Street" + i, i, "Village" + i, 6500 + i, country);
+                int day = new Random().nextInt(28);
+                int month = new Random().nextInt(12);                
+                int year = new Random().nextInt(90);                
+                
+                Date dateOfBirth = DateFormat.getDateInstance().parse(day + "/" + month + "/" + year + " 4:5 PM, PDT");
+                Date memberFrom = DateFormat.getDateInstance().parse(day + "/" + month + "/" + (year + 7) + " 4:5 PM, PDT");                
+                String telephoneNumber = "+43/" + new Random().nextInt();                
+                String emailAddress = new Random().nextInt(100000) + "@sample.com";                
+                
+                List<Role> roles = new LinkedList<Role>();
+                roles.add(DomainFacade.getByName(Role.class, "DepartmentHead"));
+                
+                DomainFacade.set(new Member("PrenameDepartmentHead" + i, "LastnameDepartmentHead" + i, address, dateOfBirth, memberFrom, country, telephoneNumber, emailAddress, i % 2 == 0, null, roles));
+            }
+            catch (ParseException ex)
+            {
+                Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        private static void restoreDepartment()
+        {
+          DomainFacade.set(new Department("Basketball", "", DomainFacade.getByName(TypeOfSport.class, "Basketball"));
+          DomainFacade.set(new Department("Baseball", "", DomainFacade.getByName(TypeOfSport.class, "Baseball"));
+          DomainFacade.set(new Department("American Football", "", DomainFacade.getByName(TypeOfSport.class, "American Football"), DomainFacade.getByName(TypeOfSport.class, "Rugby"));
+          DomainFacade.set(new Department("Football", "", DomainFacade.getByName(TypeOfSport.class, "Football"));
+          DomainFacade.set(new Department("Cricket", "", DomainFacade.getByName(TypeOfSport.class, "Cricket"));
+          DomainFacade.set(new Department("Hockey", "", DomainFacade.getByName(TypeOfSport.class, "Hockey"), DomainFacade.getByName(TypeOfSport.class, "Ice Hockey"));
+          DomainFacade.set(new Department("Curling", "", DomainFacade.getByName(TypeOfSport.class, "Curling"));
+          DomainFacade.set(new Department("Fistball", "", DomainFacade.getByName(TypeOfSport.class, "Fistball"));
+          DomainFacade.set(new Department("Volleyball", "", DomainFacade.getByName(TypeOfSport.class, "Volleyball"), DomainFacade.getByName(TypeOfSport.class, "Beachvolleyball"));
         }
     }
 }
