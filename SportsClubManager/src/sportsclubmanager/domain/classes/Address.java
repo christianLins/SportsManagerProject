@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package sportsclubmanager.domain.classes;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -27,8 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "Address")
 @XmlRootElement
-public class Address implements Serializable
-{
+public class Address implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,10 +44,8 @@ public class Address implements Serializable
     @Basic(optional = false)
     @Column(name = "PostalCode")
     private int postalCode;
-    @Column(name = "Addresscol")
-    private String addresscol;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "address")
-    private Collection<Member1> member1Collection;
+    private List<Member1> member1List;
     @JoinColumn(name = "Country", referencedColumnName = "idCountry")
     @ManyToOne(optional = false)
     private Country country;
@@ -65,15 +60,6 @@ public class Address implements Serializable
     }
 
     public Address(Integer idAddress, String street, int streetNumber, String village, int postalCode)
-    {
-        this.idAddress = idAddress;
-        this.street = street;
-        this.streetNumber = streetNumber;
-        this.village = village;
-        this.postalCode = postalCode;
-    }
-    
-      public Address(String street, int streetNumber, String village, int postalCode, Country country)
     {
         this.idAddress = idAddress;
         this.street = street;
@@ -132,25 +118,15 @@ public class Address implements Serializable
         this.postalCode = postalCode;
     }
 
-    public String getAddresscol()
-    {
-        return addresscol;
-    }
-
-    public void setAddresscol(String addresscol)
-    {
-        this.addresscol = addresscol;
-    }
-
     @XmlTransient
-    public Collection<Member1> getMember1Collection()
+    public List<Member1> getMember1List()
     {
-        return member1Collection;
+        return member1List;
     }
 
-    public void setMember1Collection(Collection<Member1> member1Collection)
+    public void setMember1List(List<Member1> member1List)
     {
-        this.member1Collection = member1Collection;
+        this.member1List = member1List;
     }
 
     public Country getCountry()
@@ -190,7 +166,7 @@ public class Address implements Serializable
     @Override
     public String toString()
     {
-        return "sportsclubmanager.domain.Address[ idAddress=" + idAddress + " ]";
+        return "sportsclubmanager.domain.classes.Address[ idAddress=" + idAddress + " ]";
     }
-    
+
 }

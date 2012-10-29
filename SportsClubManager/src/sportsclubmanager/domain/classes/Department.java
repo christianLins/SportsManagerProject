@@ -1,12 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package sportsclubmanager.domain.classes;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,11 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -30,8 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "Department")
 @XmlRootElement
-public class Department implements Serializable
-{
+public class Department implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,20 +38,17 @@ public class Department implements Serializable
     private String name;
     @Column(name = "Description")
     private String description;
-    @Basic(optional = false)
-    @Column(name = "DateFrom")
-    @Temporal(TemporalType.DATE)
-    private Date dateFrom;
-    @Column(name = "DateTo")
-    @Temporal(TemporalType.DATE)
-    private Date dateTo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "department")
-    private Collection<DepartmentTeam> departmentTeamCollection;
+    @JoinTable(name = "Department_has_Team", joinColumns =
+    {
+        @JoinColumn(name = "Department", referencedColumnName = "idDepartment")
+    }, inverseJoinColumns =
+    {
+        @JoinColumn(name = "Team", referencedColumnName = "idTeam")
+    })
+    @ManyToMany
+    private List<ClubTeam> clubTeamList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "departmentidDepartment")
-    private Collection<DepartmentTypeOfSport> departmentTypeOfSportCollection;
-    @JoinColumn(name = "HeadOfDepartment", referencedColumnName = "idMember")
-    @ManyToOne(optional = false)
-    private Member1 headOfDepartment;
+    private List<DepartmenthasTypeOfSport> departmenthasTypeOfSportList;
 
     public Department()
     {
@@ -67,11 +59,10 @@ public class Department implements Serializable
         this.idDepartment = idDepartment;
     }
 
-    public Department(Integer idDepartment, String name, Date dateFrom)
+    public Department(Integer idDepartment, String name)
     {
         this.idDepartment = idDepartment;
         this.name = name;
-        this.dateFrom = dateFrom;
     }
 
     public Integer getIdDepartment()
@@ -104,56 +95,26 @@ public class Department implements Serializable
         this.description = description;
     }
 
-    public Date getDateFrom()
+    @XmlTransient
+    public List<ClubTeam> getClubTeamList()
     {
-        return dateFrom;
+        return clubTeamList;
     }
 
-    public void setDateFrom(Date dateFrom)
+    public void setClubTeamList(List<ClubTeam> clubTeamList)
     {
-        this.dateFrom = dateFrom;
-    }
-
-    public Date getDateTo()
-    {
-        return dateTo;
-    }
-
-    public void setDateTo(Date dateTo)
-    {
-        this.dateTo = dateTo;
+        this.clubTeamList = clubTeamList;
     }
 
     @XmlTransient
-    public Collection<DepartmentTeam> getDepartmentTeamCollection()
+    public List<DepartmenthasTypeOfSport> getDepartmenthasTypeOfSportList()
     {
-        return departmentTeamCollection;
+        return departmenthasTypeOfSportList;
     }
 
-    public void setDepartmentTeamCollection(Collection<DepartmentTeam> departmentTeamCollection)
+    public void setDepartmenthasTypeOfSportList(List<DepartmenthasTypeOfSport> departmenthasTypeOfSportList)
     {
-        this.departmentTeamCollection = departmentTeamCollection;
-    }
-
-    @XmlTransient
-    public Collection<DepartmentTypeOfSport> getDepartmentTypeOfSportCollection()
-    {
-        return departmentTypeOfSportCollection;
-    }
-
-    public void setDepartmentTypeOfSportCollection(Collection<DepartmentTypeOfSport> departmentTypeOfSportCollection)
-    {
-        this.departmentTypeOfSportCollection = departmentTypeOfSportCollection;
-    }
-
-    public Member1 getHeadOfDepartment()
-    {
-        return headOfDepartment;
-    }
-
-    public void setHeadOfDepartment(Member1 headOfDepartment)
-    {
-        this.headOfDepartment = headOfDepartment;
+        this.departmenthasTypeOfSportList = departmenthasTypeOfSportList;
     }
 
     @Override
@@ -183,7 +144,7 @@ public class Department implements Serializable
     @Override
     public String toString()
     {
-        return "sportsclubmanager.domain.Department[ idDepartment=" + idDepartment + " ]";
+        return "sportsclubmanager.domain.classes.Department[ idDepartment=" + idDepartment + " ]";
     }
-    
+
 }

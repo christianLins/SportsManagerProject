@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package sportsclubmanager.domain.classes;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,22 +9,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
-
- @author Markus Mohanty <markus.mo at gmx.net>
+ *
+ * @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
 @Table(name = "Country")
 @XmlRootElement
-public class Country
-        implements Serializable
-{
+public class Country implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,17 +33,28 @@ public class Country
     @Basic(optional = false)
     @Column(name = "Name")
     private String name;
-    @Lob
-    @Column(name = "Description")
-    private String description;
+    @Column(name = "Alpha3")
+    private String alpha3;
+    @Column(name = "Alpha2")
+    private String alpha2;
+    @Column(name = "TLD")
+    private String tld;
+    @Column(name = "Deutsch")
+    private String deutsch;
+    @Column(name = "Espanol")
+    private String espanol;
+    @Column(name = "Francaise")
+    private String francaise;
+    @Column(name = "Italiano")
+    private String italiano;
+    @Column(name = "Portugues")
+    private String portugues;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nationality")
+    private List<Member1> member1List;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "country")
-    private Collection<Address> addressCollection;
+    private List<Address> addressList;
 
     public Country()
-    {
-    }
-
-    public Country(String Alpha3, String Alpha2, String TLD, String Name, String Deutsch, String Espanol, String Francaise, String Italiano, String Portugues)
     {
     }
 
@@ -83,25 +89,106 @@ public class Country
         this.name = name;
     }
 
-    public String getDescription()
+    public String getAlpha3()
     {
-        return description;
+        return alpha3;
     }
 
-    public void setDescription(String description)
+    public void setAlpha3(String alpha3)
     {
-        this.description = description;
+        this.alpha3 = alpha3;
+    }
+
+    public String getAlpha2()
+    {
+        return alpha2;
+    }
+
+    public void setAlpha2(String alpha2)
+    {
+        this.alpha2 = alpha2;
+    }
+
+    public String getTld()
+    {
+        return tld;
+    }
+
+    public void setTld(String tld)
+    {
+        this.tld = tld;
+    }
+
+    public String getDeutsch()
+    {
+        return deutsch;
+    }
+
+    public void setDeutsch(String deutsch)
+    {
+        this.deutsch = deutsch;
+    }
+
+    public String getEspanol()
+    {
+        return espanol;
+    }
+
+    public void setEspanol(String espanol)
+    {
+        this.espanol = espanol;
+    }
+
+    public String getFrancaise()
+    {
+        return francaise;
+    }
+
+    public void setFrancaise(String francaise)
+    {
+        this.francaise = francaise;
+    }
+
+    public String getItaliano()
+    {
+        return italiano;
+    }
+
+    public void setItaliano(String italiano)
+    {
+        this.italiano = italiano;
+    }
+
+    public String getPortugues()
+    {
+        return portugues;
+    }
+
+    public void setPortugues(String portugues)
+    {
+        this.portugues = portugues;
     }
 
     @XmlTransient
-    public Collection<Address> getAddressCollection()
+    public List<Member1> getMember1List()
     {
-        return addressCollection;
+        return member1List;
     }
 
-    public void setAddressCollection(Collection<Address> addressCollection)
+    public void setMember1List(List<Member1> member1List)
     {
-        this.addressCollection = addressCollection;
+        this.member1List = member1List;
+    }
+
+    @XmlTransient
+    public List<Address> getAddressList()
+    {
+        return addressList;
+    }
+
+    public void setAddressList(List<Address> addressList)
+    {
+        this.addressList = addressList;
     }
 
     @Override
@@ -131,6 +218,7 @@ public class Country
     @Override
     public String toString()
     {
-        return "sportsclubmanager.domain.Country[ idCountry=" + idCountry + " ]";
+        return "sportsclubmanager.domain.classes.Country[ idCountry=" + idCountry + " ]";
     }
+
 }

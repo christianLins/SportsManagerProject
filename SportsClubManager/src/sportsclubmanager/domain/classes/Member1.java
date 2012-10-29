@@ -1,12 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package sportsclubmanager.domain.classes;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,12 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -33,9 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "Member")
 @XmlRootElement
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Member1 implements Serializable
-{
+public class Member1 implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,24 +47,22 @@ public class Member1 implements Serializable
     @Temporal(TemporalType.DATE)
     private Date memberFrom;
     @Column(name = "MemberTo")
-    private String memberTo;
+    @Temporal(TemporalType.DATE)
+    private Date memberTo;
+    @Column(name = "Telephonenumber")
+    private String telephonenumber;
+    @Column(name = "EmailAddress")
+    private String emailAddress;
+    @Column(name = "Gender")
+    private Boolean gender;
+    @JoinColumn(name = "Nationality", referencedColumnName = "idCountry")
+    @ManyToOne(optional = false)
+    private Country nationality;
     @JoinColumn(name = "Address", referencedColumnName = "idAddress")
     @ManyToOne(optional = false)
     private Address address;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "member1")
-    private Trainer trainer;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "member1")
-    private Greenkeeper greenkeeper;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "member1")
-    private FinanceManager financeManager;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "member1")
-    private VicePresident vicePresident;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "member1")
-    private President president;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "headOfDepartment")
-    private Collection<Department> departmentCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "memberidMember")
-    private Collection<TeamMember> teamMemberCollection;
+    private List<Role> roleList;
 
     public Member1()
     {
@@ -143,14 +132,54 @@ public class Member1 implements Serializable
         this.memberFrom = memberFrom;
     }
 
-    public String getMemberTo()
+    public Date getMemberTo()
     {
         return memberTo;
     }
 
-    public void setMemberTo(String memberTo)
+    public void setMemberTo(Date memberTo)
     {
         this.memberTo = memberTo;
+    }
+
+    public String getTelephonenumber()
+    {
+        return telephonenumber;
+    }
+
+    public void setTelephonenumber(String telephonenumber)
+    {
+        this.telephonenumber = telephonenumber;
+    }
+
+    public String getEmailAddress()
+    {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress)
+    {
+        this.emailAddress = emailAddress;
+    }
+
+    public Boolean getGender()
+    {
+        return gender;
+    }
+
+    public void setGender(Boolean gender)
+    {
+        this.gender = gender;
+    }
+
+    public Country getNationality()
+    {
+        return nationality;
+    }
+
+    public void setNationality(Country nationality)
+    {
+        this.nationality = nationality;
     }
 
     public Address getAddress()
@@ -163,76 +192,15 @@ public class Member1 implements Serializable
         this.address = address;
     }
 
-    public Trainer getTrainer()
-    {
-        return trainer;
-    }
-
-    public void setTrainer(Trainer trainer)
-    {
-        this.trainer = trainer;
-    }
-
-    public Greenkeeper getGreenkeeper()
-    {
-        return greenkeeper;
-    }
-
-    public void setGreenkeeper(Greenkeeper greenkeeper)
-    {
-        this.greenkeeper = greenkeeper;
-    }
-
-    public FinanceManager getFinanceManager()
-    {
-        return financeManager;
-    }
-
-    public void setFinanceManager(FinanceManager financeManager)
-    {
-        this.financeManager = financeManager;
-    }
-
-    public VicePresident getVicePresident()
-    {
-        return vicePresident;
-    }
-
-    public void setVicePresident(VicePresident vicePresident)
-    {
-        this.vicePresident = vicePresident;
-    }
-
-    public President getPresident()
-    {
-        return president;
-    }
-
-    public void setPresident(President president)
-    {
-        this.president = president;
-    }
-
     @XmlTransient
-    public Collection<Department> getDepartmentCollection()
+    public List<Role> getRoleList()
     {
-        return departmentCollection;
+        return roleList;
     }
 
-    public void setDepartmentCollection(Collection<Department> departmentCollection)
+    public void setRoleList(List<Role> roleList)
     {
-        this.departmentCollection = departmentCollection;
-    }
-
-    @XmlTransient
-    public Collection<TeamMember> getTeamMemberCollection()
-    {
-        return teamMemberCollection;
-    }
-
-    public void setTeamMemberCollection(Collection<TeamMember> teamMemberCollection)
-    {
-        this.teamMemberCollection = teamMemberCollection;
+        this.roleList = roleList;
     }
 
     @Override
@@ -262,7 +230,7 @@ public class Member1 implements Serializable
     @Override
     public String toString()
     {
-        return "sportsclubmanager.domain.Member1[ idMember=" + idMember + " ]";
+        return "sportsclubmanager.domain.classes.Member1[ idMember=" + idMember + " ]";
     }
-    
+
 }

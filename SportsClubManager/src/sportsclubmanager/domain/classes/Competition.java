@@ -1,12 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package sportsclubmanager.domain.classes;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -31,8 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "Competition")
 @XmlRootElement
-public class Competition implements Serializable
-{
+public class Competition implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,6 +43,9 @@ public class Competition implements Serializable
     @Column(name = "DateTo")
     @Temporal(TemporalType.DATE)
     private Date dateTo;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "Payment")
+    private Double payment;
     @JoinTable(name = "Competition_has_Team", joinColumns =
     {
         @JoinColumn(name = "Competition", referencedColumnName = "idCompetition")
@@ -54,9 +54,9 @@ public class Competition implements Serializable
         @JoinColumn(name = "Team", referencedColumnName = "idTeam")
     })
     @ManyToMany
-    private Collection<Team> teamCollection;
+    private List<Team> teamList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "competition")
-    private Collection<Match> matchCollection;
+    private List<Match> matchList;
 
     public Competition()
     {
@@ -103,26 +103,36 @@ public class Competition implements Serializable
         this.dateTo = dateTo;
     }
 
+    public Double getPayment()
+    {
+        return payment;
+    }
+
+    public void setPayment(Double payment)
+    {
+        this.payment = payment;
+    }
+
     @XmlTransient
-    public Collection<Team> getTeamCollection()
+    public List<Team> getTeamList()
     {
-        return teamCollection;
+        return teamList;
     }
 
-    public void setTeamCollection(Collection<Team> teamCollection)
+    public void setTeamList(List<Team> teamList)
     {
-        this.teamCollection = teamCollection;
+        this.teamList = teamList;
     }
 
     @XmlTransient
-    public Collection<Match> getMatchCollection()
+    public List<Match> getMatchList()
     {
-        return matchCollection;
+        return matchList;
     }
 
-    public void setMatchCollection(Collection<Match> matchCollection)
+    public void setMatchList(List<Match> matchList)
     {
-        this.matchCollection = matchCollection;
+        this.matchList = matchList;
     }
 
     @Override
@@ -152,7 +162,7 @@ public class Competition implements Serializable
     @Override
     public String toString()
     {
-        return "sportsclubmanager.domain.Competition[ idCompetition=" + idCompetition + " ]";
+        return "sportsclubmanager.domain.classes.Competition[ idCompetition=" + idCompetition + " ]";
     }
-    
+
 }
