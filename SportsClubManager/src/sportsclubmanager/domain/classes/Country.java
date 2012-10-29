@@ -20,13 +20,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
- * @author Markus Mohanty <markus.mo at gmx.net>
+
+ @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
 @Table(name = "Country")
 @XmlRootElement
-public class Country implements Serializable
+public class Country
+        implements Serializable
 {
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,6 +45,10 @@ public class Country implements Serializable
     private Collection<Address> addressCollection;
 
     public Country()
+    {
+    }
+
+    public Country(String Alpha3, String Alpha2, String TLD, String Name, String Deutsch, String Espanol, String Francaise, String Italiano, String Portugues)
     {
     }
 
@@ -128,5 +133,4 @@ public class Country implements Serializable
     {
         return "sportsclubmanager.domain.Country[ idCountry=" + idCountry + " ]";
     }
-    
 }
