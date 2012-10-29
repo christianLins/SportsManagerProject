@@ -2,4 +2,5 @@
 /SportsClubManager/nbproject/project.properties
 /SportsClubManager/build.xml
 /SportsClubManager/dist/
-/SportsClubManager/build
+/SportsClubManager/build/
+/SportsClubManager/.gitignore
