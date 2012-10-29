@@ -2,25 +2,25 @@
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
   <persistence-unit name="SportsClubManagerPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>sportsclubmanager.domain.Matchresult</class>
-    <class>sportsclubmanager.domain.Member1</class>
-    <class>sportsclubmanager.domain.Greenkeeper</class>
-    <class>sportsclubmanager.domain.TeamhasTrainer</class>
-    <class>sportsclubmanager.domain.FinanceManager</class>
-    <class>sportsclubmanager.domain.Team</class>
-    <class>sportsclubmanager.domain.Country</class>
-    <class>sportsclubmanager.domain.TypeOfSport</class>
-    <class>sportsclubmanager.domain.League</class>
-    <class>sportsclubmanager.domain.Competition</class>
-    <class>sportsclubmanager.domain.President</class>
-    <class>sportsclubmanager.domain.TeamMember</class>
-    <class>sportsclubmanager.domain.DepartmentTeam</class>
-    <class>sportsclubmanager.domain.DepartmentTypeOfSport</class>
-    <class>sportsclubmanager.domain.Match</class>
-    <class>sportsclubmanager.domain.Address</class>
-    <class>sportsclubmanager.domain.VicePresident</class>
-    <class>sportsclubmanager.domain.Department</class>
-    <class>sportsclubmanager.domain.Trainer</class>
+    <class>sportsclubmanager.domain.classes.Competition</class>
+    <class>sportsclubmanager.domain.classes.TeamhasTrainer</class>
+    <class>sportsclubmanager.domain.classes.Trainer</class>
+    <class>sportsclubmanager.domain.classes.TeamMember</class>
+    <class>sportsclubmanager.domain.classes.Match</class>
+    <class>sportsclubmanager.domain.classes.President</class>
+    <class>sportsclubmanager.domain.classes.DepartmentTypeOfSport</class>
+    <class>sportsclubmanager.domain.classes.Matchresult</class>
+    <class>sportsclubmanager.domain.classes.Greenkeeper</class>
+    <class>sportsclubmanager.domain.classes.VicePresident</class>
+    <class>sportsclubmanager.domain.classes.TypeOfSport</class>
+    <class>sportsclubmanager.domain.classes.FinanceManager</class>
+    <class>sportsclubmanager.domain.classes.DepartmentTeam</class>
+    <class>sportsclubmanager.domain.classes.Department</class>
+    <class>sportsclubmanager.domain.classes.Country</class>
+    <class>sportsclubmanager.domain.classes.Address</class>
+    <class>sportsclubmanager.domain.classes.Team</class>
+    <class>sportsclubmanager.domain.classes.Member1</class>
+    <class>sportsclubmanager.domain.classes.League</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/SportClubManagement?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value=""/>
