@@ -1,0 +1,18 @@
+package sportsclubmanager.domain;
+
+/**
+ *
+ * @author Markus Mohanty <markus.mo at gmx.net>
+ */
+class CouldNotSaveException extends Exception 
+{
+    public CouldNotSaveException(Exception ex)
+    {
+        super(ex.getMessage());
+    }
+    
+    public CouldNotSaveException(String message)
+    {
+        super(message);
+    }
+}

@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -27,6 +28,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Department")
 @XmlRootElement
 public class Department implements Serializable {
+    @JoinColumn(name = "DepartmentHead", referencedColumnName = "idDepartmentHead")
+    @ManyToOne(optional = false)
+    private DepartmentHead departmentHead;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -145,6 +149,16 @@ public class Department implements Serializable {
     public String toString()
     {
         return "sportsclubmanager.domain.classes.Department[ idDepartment=" + idDepartment + " ]";
+    }
+
+    public DepartmentHead getDepartmentHead()
+    {
+        return departmentHead;
+    }
+
+    public void setDepartmentHead(DepartmentHead departmentHead)
+    {
+        this.departmentHead = departmentHead;
     }
 
 }
