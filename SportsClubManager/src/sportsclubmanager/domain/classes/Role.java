@@ -2,18 +2,7 @@ package sportsclubmanager.domain.classes;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -22,9 +11,9 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
-@Table(name = "Role")
+@Table(name = "Role1")
 @XmlRootElement
-@Inheritance
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Role implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -39,13 +28,7 @@ public class Role implements Serializable {
         @JoinColumn(name = "Permisssion_idPermisssion", referencedColumnName = "idPermisssion")
     })
     @ManyToMany
-    private List<Permisssion> permisssionList;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "role")
-    private Player player;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "role")
-    private Trainer trainer;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "role")
-    private DepartmentHead departmentHead;
+    private List<Permission> permisssionList;
     @JoinColumn(name = "Member_idMember", referencedColumnName = "idMember")
     @ManyToOne(optional = false)
     private Member memberidMember;
@@ -70,44 +53,14 @@ public class Role implements Serializable {
     }
 
     @XmlTransient
-    public List<Permisssion> getPermisssionList()
+    public List<Permission> getPermisssionList()
     {
         return permisssionList;
     }
 
-    public void setPermisssionList(List<Permisssion> permisssionList)
+    public void setPermisssionList(List<Permission> permisssionList)
     {
         this.permisssionList = permisssionList;
-    }
-
-    public Player getPlayer()
-    {
-        return player;
-    }
-
-    public void setPlayer(Player player)
-    {
-        this.player = player;
-    }
-
-    public Trainer getTrainer()
-    {
-        return trainer;
-    }
-
-    public void setTrainer(Trainer trainer)
-    {
-        this.trainer = trainer;
-    }
-
-    public DepartmentHead getDepartmentHead()
-    {
-        return departmentHead;
-    }
-
-    public void setDepartmentHead(DepartmentHead departmentHead)
-    {
-        this.departmentHead = departmentHead;
     }
 
     public Member getMemberidMember()

@@ -2,19 +2,7 @@ package sportsclubmanager.domain.classes;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -25,7 +13,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "ClubTeam")
 @XmlRootElement
-public class ClubTeam implements Serializable {
+public class ClubTeam extends Team implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -38,15 +26,20 @@ public class ClubTeam implements Serializable {
         @JoinColumn(name = "Team", referencedColumnName = "idTeam")
     }, inverseJoinColumns =
     {
-        @JoinColumn(name = "Trainer", referencedColumnName = "idTrainer")
+        @JoinColumn(name = "Trainer", referencedColumnName = "idRole")
     })
     @ManyToMany
     private List<Trainer> trainerList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clubTeam")
-    private List<TeamhasPlayer> teamhasPlayerList;
-    @JoinColumn(name = "idTeam", referencedColumnName = "idTeam", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private Team team;
+    //rebuild table to member connection not role connection
+    @JoinTable(name = "Team_Has_Player", joinColumns =
+    {
+        @JoinColumn(name = "Team", referencedColumnName = "idTeam")
+    }, inverseJoinColumns =
+    {
+        @JoinColumn(name = "Player", referencedColumnName = "idRole")
+    })
+    @ManyToMany
+    private List<Player> players;
 
     public ClubTeam()
     {
@@ -57,14 +50,15 @@ public class ClubTeam implements Serializable {
         this.idTeam = idTeam;
     }
 
-    public Integer getIdTeam()
+    @XmlTransient
+    public List<Player> getPlayers()
     {
-        return idTeam;
+        return players;
     }
 
-    public void setIdTeam(Integer idTeam)
+    public void setPlayers(List<Player> players)
     {
-        this.idTeam = idTeam;
+        this.players = players;
     }
 
     @XmlTransient
@@ -87,27 +81,6 @@ public class ClubTeam implements Serializable {
     public void setTrainerList(List<Trainer> trainerList)
     {
         this.trainerList = trainerList;
-    }
-
-    @XmlTransient
-    public List<TeamhasPlayer> getTeamhasPlayerList()
-    {
-        return teamhasPlayerList;
-    }
-
-    public void setTeamhasPlayerList(List<TeamhasPlayer> teamhasPlayerList)
-    {
-        this.teamhasPlayerList = teamhasPlayerList;
-    }
-
-    public Team getTeam()
-    {
-        return team;
-    }
-
-    public void setTeam(Team team)
-    {
-        this.team = team;
     }
 
     @Override

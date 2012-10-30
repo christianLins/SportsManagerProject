@@ -2,20 +2,7 @@ package sportsclubmanager.domain.classes;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -43,12 +30,12 @@ public class TypeOfSport implements Serializable {
         @JoinColumn(name = "TypeOfSport_idTypeOfSport", referencedColumnName = "idTypeOfSport")
     }, inverseJoinColumns =
     {
-        @JoinColumn(name = "Player_Role_idRole", referencedColumnName = "Role_idRole")
+        @JoinColumn(name = "Player_Role_idRole", referencedColumnName = "idRole")
     })
     @ManyToMany
     private List<Player> playerList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeOfSport")
-    private List<DepartmenthasTypeOfSport> departmenthasTypeOfSportList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeOfSports")
+    private List<Department> departments;
 
     public TypeOfSport()
     {
@@ -107,14 +94,14 @@ public class TypeOfSport implements Serializable {
     }
 
     @XmlTransient
-    public List<DepartmenthasTypeOfSport> getDepartmenthasTypeOfSportList()
+    public List<Department> getDepartments()
     {
-        return departmenthasTypeOfSportList;
+        return departments;
     }
 
-    public void setDepartmenthasTypeOfSportList(List<DepartmenthasTypeOfSport> departmenthasTypeOfSportList)
+    public void setDepartments(List<Department> departments)
     {
-        this.departmenthasTypeOfSportList = departmenthasTypeOfSportList;
+        this.departments = departments;
     }
 
     @Override

@@ -2,19 +2,7 @@ package sportsclubmanager.domain.classes;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -26,7 +14,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Department")
 @XmlRootElement
 public class Department implements Serializable {
-    @JoinColumn(name = "DepartmentHead", referencedColumnName = "idDepartmentHead")
+    @JoinColumn(name = "DepartmentHead", referencedColumnName = "idRole")
     @ManyToOne(optional = false)
     private DepartmentHead departmentHead;
     private static final long serialVersionUID = 1L;
@@ -49,8 +37,15 @@ public class Department implements Serializable {
     })
     @ManyToMany
     private List<ClubTeam> clubTeamList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departmentidDepartment")
-    private List<DepartmenthasTypeOfSport> departmenthasTypeOfSportList;
+    @JoinTable(name = "Department_has_TypeOfSport", joinColumns =
+    {
+        @JoinColumn(name = "Department", referencedColumnName = "idDepartment")
+    }, inverseJoinColumns =
+    {
+        @JoinColumn(name = "TypeOfSport", referencedColumnName = "idTypeOfSport")
+    })
+    @ManyToMany
+    private List<TypeOfSport> typeOfSports;
 
     public Department()
     {
@@ -109,14 +104,14 @@ public class Department implements Serializable {
     }
 
     @XmlTransient
-    public List<DepartmenthasTypeOfSport> getDepartmenthasTypeOfSportList()
+    public List<TypeOfSport> geTypeOfSports()
     {
-        return departmenthasTypeOfSportList;
+        return typeOfSports;
     }
 
-    public void setDepartmenthasTypeOfSportList(List<DepartmenthasTypeOfSport> departmenthasTypeOfSportList)
+    public void setTypeOfSports(List<TypeOfSport> typeOfSports)
     {
-        this.departmenthasTypeOfSportList = departmenthasTypeOfSportList;
+        this.typeOfSports = typeOfSports;
     }
 
     @Override

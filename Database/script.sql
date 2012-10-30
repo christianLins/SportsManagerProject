@@ -85,11 +85,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `SportClubManagement`.`Role`
+-- Table `SportClubManagement`.`Role1`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `SportClubManagement`.`Role` ;
+DROP TABLE IF EXISTS `SportClubManagement`.`Role1` ;
 
-CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Role` (
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Role1` (
   `idRole` INT NOT NULL ,
   `Member_idMember` INT NOT NULL ,
   PRIMARY KEY (`idRole`) ,
@@ -113,7 +113,7 @@ CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`DepartmentHead` (
   PRIMARY KEY (`idDepartmentHead`) ,
   CONSTRAINT `fk_DepartmentHead_Role10`
     FOREIGN KEY (`idDepartmentHead` )
-    REFERENCES `SportClubManagement`.`Role` (`idRole` )
+    REFERENCES `SportClubManagement`.`Role1` (`idRole` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -267,7 +267,7 @@ CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Trainer` (
   PRIMARY KEY (`idTrainer`) ,
   CONSTRAINT `fk_Trainer_Role10`
     FOREIGN KEY (`idTrainer` )
-    REFERENCES `SportClubManagement`.`Role` (`idRole` )
+    REFERENCES `SportClubManagement`.`Role1` (`idRole` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -325,7 +325,7 @@ CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Player` (
   PRIMARY KEY (`Role_idRole`) ,
   CONSTRAINT `fk_Player_Role1`
     FOREIGN KEY (`Role_idRole` )
-    REFERENCES `SportClubManagement`.`Role` (`idRole` )
+    REFERENCES `SportClubManagement`.`Role1` (`idRole` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -451,37 +451,37 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `SportClubManagement`.`Permisssion`
+-- Table `SportClubManagement`.`Permission`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `SportClubManagement`.`Permisssion` ;
+DROP TABLE IF EXISTS `SportClubManagement`.`Permission` ;
 
-CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Permisssion` (
-  `idPermisssion` INT NOT NULL AUTO_INCREMENT ,
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Permission` (
+  `idPermission` INT NOT NULL AUTO_INCREMENT ,
   `Name` VARCHAR(45) NOT NULL ,
   `Description` VARCHAR(45) NULL ,
-  PRIMARY KEY (`idPermisssion`) )
+  PRIMARY KEY (`idPermission`) )
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `SportClubManagement`.`Role_has_Permisssion`
+-- Table `SportClubManagement`.`Role_has_Permission`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `SportClubManagement`.`Role_has_Permisssion` ;
+DROP TABLE IF EXISTS `SportClubManagement`.`Role_has_Permission` ;
 
-CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Role_has_Permisssion` (
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Role_has_Permission` (
   `Role_idRole` INT NOT NULL ,
-  `Permisssion_idPermisssion` INT NOT NULL ,
-  PRIMARY KEY (`Role_idRole`, `Permisssion_idPermisssion`) ,
-  INDEX `fk_Role_has_Permisssion_Permisssion1_idx` (`Permisssion_idPermisssion` ASC) ,
-  INDEX `fk_Role_has_Permisssion_Role1_idx` (`Role_idRole` ASC) ,
-  CONSTRAINT `fk_Role_has_Permisssion_Role1`
+  `Permission_idPermission` INT NOT NULL ,
+  PRIMARY KEY (`Role_idRole`, `Permission_idPermission`) ,
+  INDEX `fk_Role_has_Permission_Permission1_idx` (`Permission_idPermission` ASC) ,
+  INDEX `fk_Role_has_Permission_Role1_idx` (`Role_idRole` ASC) ,
+  CONSTRAINT `fk_Role_has_Permission_Role1`
     FOREIGN KEY (`Role_idRole` )
-    REFERENCES `SportClubManagement`.`Role` (`idRole` )
+    REFERENCES `SportClubManagement`.`Role1` (`idRole` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Role_has_Permisssion_Permisssion1`
-    FOREIGN KEY (`Permisssion_idPermisssion` )
-    REFERENCES `SportClubManagement`.`Permisssion` (`idPermisssion` )
+  CONSTRAINT `fk_Role_has_Permission_Permission1`
+    FOREIGN KEY (`Permission_idPermission` )
+    REFERENCES `SportClubManagement`.`Permission` (`idPermission` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

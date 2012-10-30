@@ -15,32 +15,29 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "Player")
 @XmlRootElement
-public class Player extends Role implements Serializable{
+public class Player extends Role implements Serializable
+{
+
     private static final long serialVersionUID = 1L;
     @ManyToMany(mappedBy = "playerList")
     private List<TypeOfSport> typeOfSportList;
-//    @JoinColumn(name = "Role_idRole", referencedColumnName = "idRole", insertable = false, updatable = false)
-//    @OneToOne(optional = false)
-//    private Role role;
+    @ManyToMany(mappedBy = "players")
+    private List<ClubTeam> clubTeams;
 
     public Player()
     {
     }
+    
+    @XmlTransient
+    public List<ClubTeam> getClubTeams()
+    {
+        return clubTeams;
+    }
 
-//    public Player(Integer roleidRole)
-//    {
-//        this.roleidRole = roleidRole;
-//    }
-//
-//    public Integer getRoleidRole()
-//    {
-//        return roleidRole;
-//    }
-//
-//    public void setRoleidRole(Integer roleidRole)
-//    {
-//        this.roleidRole = roleidRole;
-//    }
+    public void setClubTeams(List<ClubTeam> clubTeams)
+    {
+        this.clubTeams = clubTeams;
+    }
 
     @XmlTransient
     public List<TypeOfSport> getTypeOfSportList()
@@ -52,22 +49,4 @@ public class Player extends Role implements Serializable{
     {
         this.typeOfSportList = typeOfSportList;
     }
-
-//    public Role getRole()
-//    {
-//        return role;
-//    }
-//
-//    public void setRole(Role role)
-//    {
-//        this.role = role;
-//    }
-//
-//    @Override
-//    public int hashCode()
-//    {
-//        int hash = 0;
-//        hash += (roleidRole != null ? roleidRole.hashCode() : 0);
-//        return hash;
-//    }
 }

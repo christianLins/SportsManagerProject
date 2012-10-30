@@ -11,15 +11,10 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.NotYetImplementedException;
 import org.hibernate.criterion.Restrictions;
-import sportsclubmanager.domain.classes.Competition;
-import sportsclubmanager.domain.classes.Department;
-import sportsclubmanager.domain.classes.DepartmenthasTypeOfSport;
-import sportsclubmanager.domain.classes.Match;
-import sportsclubmanager.domain.classes.Member;
-import sportsclubmanager.domain.classes.TypeOfSport;
+import sportsclubmanager.domain.classes.*;
 import sportsclubmanager.utils.HibernateUtil;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
@@ -52,12 +47,13 @@ public class DomainFacade
      */
     public static Department getDepartmentsBySport(TypeOfSport sport)
     {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        Query query = session.createQuery("from DepartmenthasTypeOfSport where typeOfSport = :sport");
-        query.setParameter("sport", sport);
-        DepartmenthasTypeOfSport temp = (DepartmenthasTypeOfSport) query.uniqueResult();
-        return temp.getDepartmentidDepartment();
+//        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//        session.beginTransaction();
+//        Query query = session.createQuery("from DepartmenthasTypeOfSport where typeOfSport = :sport");
+//        query.setParameter("sport", sport);
+//        DepartmenthasTypeOfSport temp = (DepartmenthasTypeOfSport) query.uniqueResult();
+//        return temp.getDepartmentidDepartment();
+        throw new NotYetImplementedException("new query to be written");
     }
 
     /**
