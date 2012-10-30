@@ -4,7 +4,7 @@ package sportsclubmanager.domain;
  *
  * @author Markus Mohanty <markus.mo at gmx.net>
  */
-class CouldNotDeleteException extends Exception 
+public class CouldNotDeleteException extends Exception 
 {
     public CouldNotDeleteException(Exception ex)
     {

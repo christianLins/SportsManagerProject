@@ -13,8 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -62,7 +60,7 @@ public class Department implements Serializable {
     {
         this.idDepartment = idDepartment;
     }
-
+    
     public Department(Integer idDepartment, String name)
     {
         this.idDepartment = idDepartment;

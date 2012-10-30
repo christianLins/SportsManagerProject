@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "Member")
 @XmlRootElement
-public class Member1 implements Serializable {
+public class Member implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,16 +64,16 @@ public class Member1 implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "memberidMember")
     private List<Role> roleList;
 
-    public Member1()
+    public Member()
     {
     }
 
-    public Member1(Integer idMember)
+    public Member(Integer idMember)
     {
         this.idMember = idMember;
     }
 
-    public Member1(Integer idMember, String prename, String lastname, String dateOfBirth, Date memberFrom)
+    public Member(Integer idMember, String prename, String lastname, String dateOfBirth, Date memberFrom)
     {
         this.idMember = idMember;
         this.prename = prename;
@@ -215,11 +215,11 @@ public class Member1 implements Serializable {
     public boolean equals(Object object)
     {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Member1))
+        if (!(object instanceof Member))
         {
             return false;
         }
-        Member1 other = (Member1) object;
+        Member other = (Member) object;
         if ((this.idMember == null && other.idMember != null) || (this.idMember != null && !this.idMember.equals(other.idMember)))
         {
             return false;

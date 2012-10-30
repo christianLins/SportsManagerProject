@@ -16,7 +16,7 @@ import sportsclubmanager.domain.classes.Competition;
 import sportsclubmanager.domain.classes.Department;
 import sportsclubmanager.domain.classes.DepartmenthasTypeOfSport;
 import sportsclubmanager.domain.classes.Match;
-import sportsclubmanager.domain.classes.Member1;
+import sportsclubmanager.domain.classes.Member;
 import sportsclubmanager.domain.classes.TypeOfSport;
 import sportsclubmanager.utils.HibernateUtil;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -82,12 +82,12 @@ public class DomainFacade
      * @param lastname the lastname of the member
      * @return a member with the firstname and lastname given
      */
-    public static Member1 getMemberByName(String firstname, String lastname)
+    public static Member getMemberByName(String firstname, String lastname)
     {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         Query query = session.createQuery("from Member1 where prename = :firstname and lastname = :lastname");
-        return (Member1) query.uniqueResult();
+        return (Member) query.uniqueResult();
     }
 
     /**

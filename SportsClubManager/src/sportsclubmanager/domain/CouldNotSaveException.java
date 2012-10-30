@@ -4,7 +4,7 @@ package sportsclubmanager.domain;
  *
  * @author Markus Mohanty <markus.mo at gmx.net>
  */
-class CouldNotSaveException extends Exception 
+public class CouldNotSaveException extends Exception 
 {
     public CouldNotSaveException(Exception ex)
     {

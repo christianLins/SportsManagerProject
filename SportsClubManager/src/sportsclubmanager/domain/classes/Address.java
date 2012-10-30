@@ -11,8 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -45,7 +43,7 @@ public class Address implements Serializable {
     @Column(name = "PostalCode")
     private int postalCode;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "address")
-    private List<Member1> member1List;
+    private List<Member> member1List;
     @JoinColumn(name = "Country", referencedColumnName = "idCountry")
     @ManyToOne(optional = false)
     private Country country;
@@ -59,6 +57,16 @@ public class Address implements Serializable {
         this.idAddress = idAddress;
     }
 
+    public Address(String street, int streetNumber, String village, int postalCode, Country country)
+    {
+        this.street = street;
+        this.streetNumber = streetNumber;
+        this.village = village;
+        this.postalCode = postalCode;
+        this.member1List = member1List;
+        this.country = country;
+    }
+    
     public Address(Integer idAddress, String street, int streetNumber, String village, int postalCode)
     {
         this.idAddress = idAddress;
@@ -119,12 +127,12 @@ public class Address implements Serializable {
     }
 
     @XmlTransient
-    public List<Member1> getMember1List()
+    public List<Member> getMember1List()
     {
         return member1List;
     }
 
-    public void setMember1List(List<Member1> member1List)
+    public void setMember1List(List<Member> member1List)
     {
         this.member1List = member1List;
     }

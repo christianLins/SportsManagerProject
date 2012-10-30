@@ -50,7 +50,7 @@ public class Country implements Serializable {
     @Column(name = "Portugues")
     private String portugues;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nationality")
-    private List<Member1> member1List;
+    private List<Member> member1List;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "country")
     private List<Address> addressList;
 
@@ -58,6 +58,19 @@ public class Country implements Serializable {
     {
     }
 
+    public Country(String name, String alpha3, String alpha2, String tld, String deutsch, String espanol, String francaise, String italiano, String portugues)
+    {
+        this.name = name;
+        this.alpha3 = alpha3;
+        this.alpha2 = alpha2;
+        this.tld = tld;
+        this.deutsch = deutsch;
+        this.espanol = espanol;
+        this.francaise = francaise;
+        this.italiano = italiano;
+        this.portugues = portugues;
+    }
+    
     public Country(Integer idCountry)
     {
         this.idCountry = idCountry;
@@ -170,12 +183,12 @@ public class Country implements Serializable {
     }
 
     @XmlTransient
-    public List<Member1> getMember1List()
+    public List<Member> getMember1List()
     {
         return member1List;
     }
 
-    public void setMember1List(List<Member1> member1List)
+    public void setMember1List(List<Member> member1List)
     {
         this.member1List = member1List;
     }

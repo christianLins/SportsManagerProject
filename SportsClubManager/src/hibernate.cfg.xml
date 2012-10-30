@@ -6,5 +6,24 @@
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/SportClubManagement?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
+    <mapping class="sportsclubmanager.domain.clases.Address"/>
+    <mapping class="sportsclubmanager.domain.clases.ClubTeam"/>
+    <mapping class="sportsclubmanager.domain.clases.Competition"/>
+    <mapping class="sportsclubmanager.domain.clases.Country"/>
+    <mapping class="sportsclubmanager.domain.clases.Department"/>
+    <mapping class="sportsclubmanager.domain.clases.DepartmentHead"/>
+    <mapping class="sportsclubmanager.domain.clases.DepartmenthasTypeOfSport"/>
+    <mapping class="sportsclubmanager.domain.clases.League"/>
+    <mapping class="sportsclubmanager.domain.clases.Match"/>
+    <mapping class="sportsclubmanager.domain.clases.Matchresult"/>
+    <mapping class="sportsclubmanager.domain.clases.Member"/>
+    <mapping class="sportsclubmanager.domain.clases.Permission"/>
+    <mapping class="sportsclubmanager.domain.clases.Player"/>
+    <mapping class="sportsclubmanager.domain.clases.Role"/>
+    <mapping class="sportsclubmanager.domain.clases.Team"/>
+    <mapping class="sportsclubmanager.domain.clases.TeamhasPlayer"/>
+    <mapping class="sportsclubmanager.domain.clases.TeamhasPlayerPK"/>
+    <mapping class="sportsclubmanager.domain.clases.Trainer"/>
+    <mapping class="sportsclubmanager.domain.clases.TypeOfSport"/>
   </session-factory>
 </hibernate-configuration>

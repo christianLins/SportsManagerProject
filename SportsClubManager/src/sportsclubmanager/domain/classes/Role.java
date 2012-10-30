@@ -48,7 +48,7 @@ public class Role implements Serializable {
     private DepartmentHead departmentHead;
     @JoinColumn(name = "Member_idMember", referencedColumnName = "idMember")
     @ManyToOne(optional = false)
-    private Member1 memberidMember;
+    private Member memberidMember;
 
     public Role()
     {
@@ -110,12 +110,12 @@ public class Role implements Serializable {
         this.departmentHead = departmentHead;
     }
 
-    public Member1 getMemberidMember()
+    public Member getMemberidMember()
     {
         return memberidMember;
     }
 
-    public void setMemberidMember(Member1 memberidMember)
+    public void setMemberidMember(Member memberidMember)
     {
         this.memberidMember = memberidMember;
     }
