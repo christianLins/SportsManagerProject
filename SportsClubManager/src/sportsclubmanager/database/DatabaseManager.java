@@ -57,7 +57,6 @@ public class DatabaseManager
         restoreTeams();
 
         restoreCompetitions();
-        restoreMatches();
     }
 
     private static void restoreTypeOfSport()
@@ -429,6 +428,18 @@ public class DatabaseManager
 
     private static void restoreTeams()
     {
+<<<<<<< HEAD
+=======
+        for (int i = 0; i < 10; i++)
+        {
+            League league = DomainFacade.getByName(League.class, "League" + i);
+
+            for (int j = 0; j < 19; j++)
+            {
+                DomainFacade.set(new Team("Foreign Team" + (i * 10 + j), "Description for foreign Team " + (i * 10 + j), league));
+            }
+        }
+>>>>>>> exceptions updated
     }
 
     private static void restoreDepartmentHead()
@@ -471,5 +482,20 @@ public class DatabaseManager
         DomainFacade.set(new Department("Curling", "", DomainFacade.getByName(TypeOfSport.class, "Curling"));
         DomainFacade.set(new Department("Fistball", "", DomainFacade.getByName(TypeOfSport.class, "Fistball"));
         DomainFacade.set(new Department("Volleyball", "", DomainFacade.getByName(TypeOfSport.class, "Volleyball"), DomainFacade.getByName(TypeOfSport.class, "Beachvolleyball"));
+    }
+
+    private static void restoreCompetitions()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            List<Match> matches = new LinkedList<Match>();
+            
+            for (int j = 0; j < 100; j++)
+            {
+                
+            }
+                
+            DomainFacade.set(new Competition("Fistball", "", DomainFacade.getByName(TypeOfSport.class, "Fistball"));
+        }
     }
 }
