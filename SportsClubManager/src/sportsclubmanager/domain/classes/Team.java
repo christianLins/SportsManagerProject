@@ -1,23 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package sportsclubmanager.domain.classes;
 
 import java.io.Serializable;
-import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import java.util.List;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -28,8 +13,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "Team")
 @XmlRootElement
-public class Team implements Serializable
-{
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class Team implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,21 +26,15 @@ public class Team implements Serializable
     private String name;
     @Column(name = "Description")
     private String description;
-    @ManyToMany(mappedBy = "teamCollection")
-    private Collection<Competition> competitionCollection;
+    @ManyToMany(mappedBy = "teamList")
+    private List<Competition> competitionList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "foreignteam")
-    private Collection<Match> matchCollection;
+    private List<Match> matchList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hometeam")
-    private Collection<Match> matchCollection1;
+    private List<Match> matchList1;
     @JoinColumn(name = "League", referencedColumnName = "idLeague")
     @ManyToOne(optional = false)
     private League league;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
-    private Collection<DepartmentTeam> departmentTeamCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
-    private Collection<TeamhasTrainer> teamhasTrainerCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
-    private Collection<TeamMember> teamMemberCollection;
 
     public Team()
     {
@@ -103,36 +82,36 @@ public class Team implements Serializable
     }
 
     @XmlTransient
-    public Collection<Competition> getCompetitionCollection()
+    public List<Competition> getCompetitionList()
     {
-        return competitionCollection;
+        return competitionList;
     }
 
-    public void setCompetitionCollection(Collection<Competition> competitionCollection)
+    public void setCompetitionList(List<Competition> competitionList)
     {
-        this.competitionCollection = competitionCollection;
-    }
-
-    @XmlTransient
-    public Collection<Match> getMatchCollection()
-    {
-        return matchCollection;
-    }
-
-    public void setMatchCollection(Collection<Match> matchCollection)
-    {
-        this.matchCollection = matchCollection;
+        this.competitionList = competitionList;
     }
 
     @XmlTransient
-    public Collection<Match> getMatchCollection1()
+    public List<Match> getMatchList()
     {
-        return matchCollection1;
+        return matchList;
     }
 
-    public void setMatchCollection1(Collection<Match> matchCollection1)
+    public void setMatchList(List<Match> matchList)
     {
-        this.matchCollection1 = matchCollection1;
+        this.matchList = matchList;
+    }
+
+    @XmlTransient
+    public List<Match> getMatchList1()
+    {
+        return matchList1;
+    }
+
+    public void setMatchList1(List<Match> matchList1)
+    {
+        this.matchList1 = matchList1;
     }
 
     public League getLeague()
@@ -143,39 +122,6 @@ public class Team implements Serializable
     public void setLeague(League league)
     {
         this.league = league;
-    }
-
-    @XmlTransient
-    public Collection<DepartmentTeam> getDepartmentTeamCollection()
-    {
-        return departmentTeamCollection;
-    }
-
-    public void setDepartmentTeamCollection(Collection<DepartmentTeam> departmentTeamCollection)
-    {
-        this.departmentTeamCollection = departmentTeamCollection;
-    }
-
-    @XmlTransient
-    public Collection<TeamhasTrainer> getTeamhasTrainerCollection()
-    {
-        return teamhasTrainerCollection;
-    }
-
-    public void setTeamhasTrainerCollection(Collection<TeamhasTrainer> teamhasTrainerCollection)
-    {
-        this.teamhasTrainerCollection = teamhasTrainerCollection;
-    }
-
-    @XmlTransient
-    public Collection<TeamMember> getTeamMemberCollection()
-    {
-        return teamMemberCollection;
-    }
-
-    public void setTeamMemberCollection(Collection<TeamMember> teamMemberCollection)
-    {
-        this.teamMemberCollection = teamMemberCollection;
     }
 
     @Override
@@ -205,7 +151,7 @@ public class Team implements Serializable
     @Override
     public String toString()
     {
-        return "sportsclubmanager.domain.Team[ idTeam=" + idTeam + " ]";
+        return "sportsclubmanager.domain.classes.Team[ idTeam=" + idTeam + " ]";
     }
-    
+
 }

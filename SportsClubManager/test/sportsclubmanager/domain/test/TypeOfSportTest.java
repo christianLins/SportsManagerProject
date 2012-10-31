@@ -5,10 +5,15 @@ package sportsclubmanager.domain.test;
  * and open the template in the editor.
  */
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
 import org.easymock.EasyMock;
-import org.junit.*;
-import sportsclubmanager.database.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import sportsclubmanager.database.DatabaseManager;
+import sportsclubmanager.domain.CouldNotDeleteException;
+import sportsclubmanager.domain.CouldNotSaveException;
 import sportsclubmanager.domain.DomainFacade;
 import sportsclubmanager.domain.contract.ITypeOfSport;
 
@@ -31,8 +36,13 @@ public class TypeOfSportTest
 
         EasyMock.expect(expected.getName()).andReturn("Testname");
         EasyMock.expect(expected.getDescription()).andReturn("Testdescription");
-
-        DomainFacade.set(expected);
+        try
+        {
+            DomainFacade.set(expected);
+        } catch (CouldNotSaveException ex)
+        {
+            Assert.fail();
+        }
 
         List<ITypeOfSport> actuals = DomainFacade.getAll(ITypeOfSport.class);
         ITypeOfSport actual = actuals.get(0);
@@ -45,17 +55,23 @@ public class TypeOfSportTest
     @Test
     public void GetAndDeleteTypeOfSport()
     {
-        ITypeOfSport expected = EasyMock.createMock(ITypeOfSport.class);
+        try
+        {
+            ITypeOfSport expected = EasyMock.createMock(ITypeOfSport.class);
 
-        EasyMock.expect(expected.getName()).andReturn("Testname");
-        EasyMock.expect(expected.getDescription()).andReturn("Testdescription");
+            EasyMock.expect(expected.getName()).andReturn("Testname");
+            EasyMock.expect(expected.getDescription()).andReturn("Testdescription");
 
-        DomainFacade.set(expected);
-        DomainFacade.delete(expected);
+            DomainFacade.set(expected);
+            DomainFacade.delete(expected);
 
-        List<ITypeOfSport> actuals = DomainFacade.getAll(ITypeOfSport.class);
+            List<ITypeOfSport> actuals = DomainFacade.getAll(ITypeOfSport.class);
 
-        Assert.assertEquals(0, actuals.size());
+            Assert.assertEquals(0, actuals.size());
+        } catch (CouldNotDeleteException | CouldNotSaveException ex)
+        {
+            Assert.fail();
+        }
     }
 
     @Test
@@ -71,7 +87,13 @@ public class TypeOfSportTest
             EasyMock.expect(expected.getDescription()).andReturn("Testdescription" + i);
 
             expecteds.add(expected);
-            DomainFacade.set(expected);
+            try
+            {
+                DomainFacade.set(expected);
+            } catch (CouldNotSaveException ex)
+            {
+                Assert.fail();
+            }
         }
 
         List<ITypeOfSport> actuals = DomainFacade.getAll(ITypeOfSport.class);

@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package sportsclubmanager.domain.classes;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -25,8 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "Matchresult")
 @XmlRootElement
-public class Matchresult implements Serializable
-{
+public class Matchresult implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,10 +36,8 @@ public class Matchresult implements Serializable
     @Basic(optional = false)
     @Column(name = "PointsForeignteam")
     private double pointsForeignteam;
-    @Column(name = "Matchresultcol")
-    private String matchresultcol;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "matchresult")
-    private Collection<Match> matchCollection;
+    private List<Match> matchList;
 
     public Matchresult()
     {
@@ -90,25 +85,15 @@ public class Matchresult implements Serializable
         this.pointsForeignteam = pointsForeignteam;
     }
 
-    public String getMatchresultcol()
-    {
-        return matchresultcol;
-    }
-
-    public void setMatchresultcol(String matchresultcol)
-    {
-        this.matchresultcol = matchresultcol;
-    }
-
     @XmlTransient
-    public Collection<Match> getMatchCollection()
+    public List<Match> getMatchList()
     {
-        return matchCollection;
+        return matchList;
     }
 
-    public void setMatchCollection(Collection<Match> matchCollection)
+    public void setMatchList(List<Match> matchList)
     {
-        this.matchCollection = matchCollection;
+        this.matchList = matchList;
     }
 
     @Override
@@ -138,7 +123,7 @@ public class Matchresult implements Serializable
     @Override
     public String toString()
     {
-        return "sportsclubmanager.domain.Matchresult[ idMatchresult=" + idMatchresult + " ]";
+        return "sportsclubmanager.domain.classes.Matchresult[ idMatchresult=" + idMatchresult + " ]";
     }
-    
+
 }

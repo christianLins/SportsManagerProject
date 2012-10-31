@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package sportsclubmanager.domain.classes;
 
 import java.io.Serializable;
@@ -14,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,8 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "Match")
 @XmlRootElement
-public class Match implements Serializable
-{
+public class Match implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -166,7 +163,7 @@ public class Match implements Serializable
     @Override
     public String toString()
     {
-        return "sportsclubmanager.domain.Match[ idMatch=" + idMatch + " ]";
+        return "sportsclubmanager.domain.classes.Match[ idMatch=" + idMatch + " ]";
     }
-    
+
 }

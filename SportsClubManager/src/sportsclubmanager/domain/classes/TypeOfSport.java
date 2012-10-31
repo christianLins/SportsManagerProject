@@ -1,20 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package sportsclubmanager.domain.classes;
 
 import java.io.Serializable;
-import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import java.util.List;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -25,8 +13,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "TypeOfSport")
 @XmlRootElement
-public class TypeOfSport implements Serializable
-{
+public class TypeOfSport implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,8 +25,17 @@ public class TypeOfSport implements Serializable
     private String name;
     @Column(name = "Description")
     private String description;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeOfSport")
-    private Collection<DepartmentTypeOfSport> departmentTypeOfSportCollection;
+    @JoinTable(name = "Player_has_TypeOfSport", joinColumns =
+    {
+        @JoinColumn(name = "TypeOfSport_idTypeOfSport", referencedColumnName = "idTypeOfSport")
+    }, inverseJoinColumns =
+    {
+        @JoinColumn(name = "Player_Role_idRole", referencedColumnName = "idRole")
+    })
+    @ManyToMany
+    private List<Player> playerList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeOfSports")
+    private List<Department> departments;
 
     public TypeOfSport()
     {
@@ -87,14 +83,25 @@ public class TypeOfSport implements Serializable
     }
 
     @XmlTransient
-    public Collection<DepartmentTypeOfSport> getDepartmentTypeOfSportCollection()
+    public List<Player> getPlayerList()
     {
-        return departmentTypeOfSportCollection;
+        return playerList;
     }
 
-    public void setDepartmentTypeOfSportCollection(Collection<DepartmentTypeOfSport> departmentTypeOfSportCollection)
+    public void setPlayerList(List<Player> playerList)
     {
-        this.departmentTypeOfSportCollection = departmentTypeOfSportCollection;
+        this.playerList = playerList;
+    }
+
+    @XmlTransient
+    public List<Department> getDepartments()
+    {
+        return departments;
+    }
+
+    public void setDepartments(List<Department> departments)
+    {
+        this.departments = departments;
     }
 
     @Override
@@ -124,7 +131,7 @@ public class TypeOfSport implements Serializable
     @Override
     public String toString()
     {
-        return "sportsclubmanager.domain.TypeOfSport[ idTypeOfSport=" + idTypeOfSport + " ]";
+        return "sportsclubmanager.domain.classes.TypeOfSport[ idTypeOfSport=" + idTypeOfSport + " ]";
     }
-    
+
 }
