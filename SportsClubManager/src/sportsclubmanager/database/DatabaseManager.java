@@ -6,8 +6,8 @@ package sportsclubmanager.database;
 
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.util.Map.Entry;
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import sportsclubmanager.domain.CouldNotDeleteException;
