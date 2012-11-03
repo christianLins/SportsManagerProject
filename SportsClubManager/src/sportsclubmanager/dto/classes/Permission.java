@@ -9,6 +9,12 @@ public class Permission
     private String name;
     private String description;
 
+    Permission(IPermission d)
+    {
+        name = d.getName();
+        description = d.getDescription();
+    }
+
     @Override
     public String getName()
     {

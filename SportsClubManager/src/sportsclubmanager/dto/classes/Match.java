@@ -14,6 +14,16 @@ public class Match
     private Team foreignteam;
     private Team hometeam;
 
+    Match(IMatch c)
+    {
+        dateFrom = c.getDateFrom();
+        dateTo = c.getDateTo();
+        competition = new Competition(c.getCompetition());
+        matchresult = new Matchresult(c.getMatchresult());
+        foreignteam = new Team(c.getForeignteam());
+        hometeam = new Team(c.getHometeam());
+    }
+
     @Override
     public Date getDateFrom()
     {
@@ -47,7 +57,7 @@ public class Match
     @Override
     public void setCompetition(ICompetition competition)
     {
-        this.competition = competition;
+        this.competition = new Competition(competition);
     }
 
     @Override
@@ -59,7 +69,7 @@ public class Match
     @Override
     public void setMatchresult(IMatchresult matchresult)
     {
-        this.matchresult = matchresult;
+        this.matchresult = new Matchresult(matchresult);
     }
 
     @Override
@@ -71,7 +81,7 @@ public class Match
     @Override
     public void setForeignteam(ITeam foreignteam)
     {
-        this.foreignteam = foreignteam;
+        this.foreignteam = new Team(foreignteam);
     }
 
     @Override
@@ -83,6 +93,6 @@ public class Match
     @Override
     public void setHometeam(ITeam hometeam)
     {
-        this.hometeam = hometeam;
+        this.hometeam = new Team(hometeam);
     }
 }

@@ -21,13 +21,13 @@ public class Member
     private List<Role> roleList;
 
     @Override
-    public int getIdMember()
+    public Integer getIdMember()
     {
         return idMember;
     }
 
     @Override
-    public void setIdMember(int idMember)
+    public void setIdMember(Integer idMember)
     {
         this.idMember = idMember;
     }
@@ -137,7 +137,7 @@ public class Member
     @Override
     public void setNationality(ICountry nationality)
     {
-        this.nationality = nationality;
+        this.nationality = new Country(nationality);
     }
 
     @Override
@@ -149,18 +149,32 @@ public class Member
     @Override
     public void setAddress(IAddress address)
     {
-        this.address = address;
+        this.address = new Address(address);
     }
 
     @Override
     public List<IRole> getRoleList()
     {
-        return roleList;
+        List<IRole> result = new LinkedList<>();
+
+        for (Role c : roleList)
+        {
+            result.add(c);
+        }
+
+        return result;
     }
 
     @Override
     public void setRoleList(List<IRole> roleList)
     {
-        this.roleList = roleList;
+        List<Role> result = new LinkedList<>();
+
+        for (IRole c : roleList)
+        {
+            result.add(new Role(c));
+        }
+
+        this.roleList = result;
     }
 }

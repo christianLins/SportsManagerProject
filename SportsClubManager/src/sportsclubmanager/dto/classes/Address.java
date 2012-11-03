@@ -1,7 +1,6 @@
 package sportsclubmanager.dto.classes;
 
 import java.io.Serializable;
-import sportsclubmanager.domain.classes.Country;
 import sportsclubmanager.domain.contract.*;
 
 public class Address
@@ -12,6 +11,15 @@ public class Address
     private String village;
     private int postalCode;
     private Country country;
+
+    Address(IAddress address)
+    {
+        street = address.getStreet();
+        streetNumber = address.getStreetNumber();
+        village = address.getVillage();
+        postalCode = address.getPostalCode();
+        country = new Country(address.getCountry());
+    }
 
     @Override
     public String getStreet()

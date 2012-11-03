@@ -1,7 +1,7 @@
 package sportsclubmanager.dto.classes;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.*;
 import sportsclubmanager.domain.contract.*;
 
 public class TypeOfSport
@@ -9,7 +9,19 @@ public class TypeOfSport
 {
     private String name;
     private String description;
-    private List<Player> playerList;
+    private List<Player> playerList = new LinkedList<>();
+
+    TypeOfSport(ITypeOfSport d)
+    {
+        this.name = d.getName();
+        this.description = d.getDescription();
+
+
+        for (IPlayer p : d.getPlayerList())
+        {
+            this.playerList.add(new Player(p));
+        }
+    }
 
     @Override
     public String getName()
@@ -38,12 +50,26 @@ public class TypeOfSport
     @Override
     public List<IPlayer> getPlayerList()
     {
-        return playerList;
+        List<IPlayer> result = new LinkedList<>();
+
+        for (Player d : playerList)
+        {
+            result.add(d);
+        }
+
+        return result;
     }
 
     @Override
     public void setPlayerList(List<IPlayer> playerList)
     {
-        this.playerList = playerList;
+        List<Player> result = new LinkedList<>();
+
+        for (IPlayer d : playerList)
+        {
+            result.add(new Player(d));
+        }
+
+        this.playerList = result;
     }
 }

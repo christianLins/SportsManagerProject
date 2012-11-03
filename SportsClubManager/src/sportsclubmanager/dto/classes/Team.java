@@ -1,7 +1,7 @@
 package sportsclubmanager.dto.classes;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.*;
 import sportsclubmanager.domain.contract.*;
 
 public class Team
@@ -9,26 +9,51 @@ public class Team
 {
     private String name;
     private String description;
-    private List<Competition> competitionList;
-    private ClubTeam clubTeam;
-    private List<Match> matchList;
+    private List<Competition> competitionList = new LinkedList<>();
+    private List<Match> matchList = new LinkedList<>();
     private League league;
 
+    public Team()
+    {
+    }
+
+    public Team(ITeam c)
+    {
+        name = c.getName();
+        description = c.getDescription();
+
+        for (ICompetition competition : c.getCompetitionList())
+        {
+            competitionList.add(new Competition(competition));
+        }
+
+        for (IMatch match : c.getMatchList())
+        {
+            matchList.add(new Match(match));
+        }
+
+        league = new League(c.getLeague());
+    }
+
+    @Override
     public String getName()
     {
         return name;
     }
 
+    @Override
     public void setName(String name)
     {
         this.name = name;
     }
 
+    @Override
     public String getDescription()
     {
         return description;
     }
 
+    @Override
     public void setDescription(String description)
     {
         this.description = description;
@@ -36,45 +61,63 @@ public class Team
 
     public List<ICompetition> getCompetitionList()
     {
-        return competitionList;
+        List<ICompetition> result = new LinkedList<>();
+
+        for (Competition c : competitionList)
+        {
+            result.add(c);
+        }
+
+        return result;
     }
 
     public void setCompetitionList(List<ICompetition> competitionList)
     {
-        // TODO clone methode missing
-        this.competitionList = competitionList;
+        List<Competition> result = new LinkedList<>();
+
+        for (ICompetition c : competitionList)
+        {
+            result.add(new Competition(c));
+        }
+
+        this.competitionList = result;
     }
 
-    public IClubTeam getClubTeam()
-    {
-        return clubTeam;
-    }
-
-    public void setClubTeam(IClubTeam clubTeam)
-    {
-        // TODO clone methode missing
-        this.clubTeam = clubTeam;
-    }
-
+    @Override
     public List<IMatch> getMatchList()
     {
-        return matchList;
+        List<IMatch> result = new LinkedList<>();
+
+        for (IMatch c : matchList)
+        {
+            result.add(new Match(c));
+        }
+
+        return result;
     }
 
+    @Override
     public void setMatchList(List<IMatch> matchList)
     {
-        // TODO clone methode missing
-        this.matchList = matchList;
+        List<Match> result = new LinkedList<>();
+
+        for (IMatch c : matchList)
+        {
+            result.add(new Match(c));
+        }
+
+        this.matchList = result;
     }
 
+    @Override
     public ILeague getLeague()
     {
         return league;
     }
 
+    @Override
     public void setLeague(ILeague league)
     {
-        // TODO clone methode missing
-        this.league = league;
+        this.league = new League(league);
     }
 }
