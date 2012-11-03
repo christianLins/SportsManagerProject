@@ -1,22 +1,26 @@
 package sportsclubmanager.domain.classes;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import sportsclubmanager.domain.contract.*;
 
 /**
- *
- * @author Markus Mohanty <markus.mo at gmx.net>
+
+ @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
 @Table(name = "DepartmentHead")
 @XmlRootElement
-public class DepartmentHead extends Role implements Serializable {
+public class DepartmentHead
+        extends Role
+        implements Serializable, IDepartmentHead
+{
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "departmentHead")
     private List<Department> departmentList;
     private static final long serialVersionUID = 1L;
@@ -26,13 +30,29 @@ public class DepartmentHead extends Role implements Serializable {
     }
 
     @XmlTransient
-    public List<Department> getDepartmentList()
+    @Override
+    public List<IDepartment> getDepartmentList()
     {
-        return departmentList;
+        List<IDepartment> result = new LinkedList<>();
+
+        for (Department d : departmentList)
+        {
+            result.add(d);
+        }
+
+        return result;
     }
 
-    public void setDepartmentList(List<Department> departmentList)
+    @Override
+    public void setDepartmentList(List<IDepartment> departmentList)
     {
-        this.departmentList = departmentList;
+        List<Department> result = new LinkedList<>();
+
+        for (IDepartment d : departmentList)
+        {
+            result.add((Department) d);
+        }
+
+        this.departmentList = result;
     }
 }

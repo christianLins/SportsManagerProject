@@ -1,35 +1,21 @@
 package sportsclubmanager.domain.classes;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import java.util.*;
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
+import sportsclubmanager.domain.contract.*;
 
 /**
- *
- * @author Markus Mohanty <markus.mo at gmx.net>
+
+ @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
 @Table(name = "Competition")
 @XmlRootElement
-public class Competition implements Serializable {
+public class Competition
+        implements Serializable, ICompetition
+{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -83,56 +69,94 @@ public class Competition implements Serializable {
         this.idCompetition = idCompetition;
     }
 
+    @Override
     public Date getDateFrom()
     {
         return dateFrom;
     }
 
+    @Override
     public void setDateFrom(Date dateFrom)
     {
         this.dateFrom = dateFrom;
     }
 
+    @Override
     public Date getDateTo()
     {
         return dateTo;
     }
 
+    @Override
     public void setDateTo(Date dateTo)
     {
         this.dateTo = dateTo;
     }
 
+    @Override
     public Double getPayment()
     {
         return payment;
     }
 
+    @Override
     public void setPayment(Double payment)
     {
         this.payment = payment;
     }
 
     @XmlTransient
-    public List<Team> getTeamList()
+    @Override
+    public List<ITeam> getTeamList()
     {
-        return teamList;
+        List<ITeam> result = new LinkedList<>();
+
+        for (Team d : teamList)
+        {
+            result.add(d);
+        }
+
+        return result;
     }
 
-    public void setTeamList(List<Team> teamList)
+    @Override
+    public void setTeamList(List<ITeam> teamList)
     {
-        this.teamList = teamList;
+        List<Team> result = new LinkedList<>();
+
+        for (ITeam d : teamList)
+        {
+            result.add((Team) d);
+        }
+
+        this.teamList = result;
     }
 
     @XmlTransient
-    public List<Match> getMatchList()
+    @Override
+    public List<IMatch> getMatchList()
     {
-        return matchList;
+        List<IMatch> result = new LinkedList<>();
+
+        for (Match d : matchList)
+        {
+            result.add(d);
+        }
+
+        return result;
     }
 
-    public void setMatchList(List<Match> matchList)
+    @Override
+    public void setMatchList(List<IMatch> matchList)
     {
-        this.matchList = matchList;
+        List<Match> result = new LinkedList<>();
+
+        for (IMatch d : matchList)
+        {
+            result.add((Match) d);
+        }
+
+        this.matchList = result;
     }
 
     @Override
@@ -164,5 +188,4 @@ public class Competition implements Serializable {
     {
         return "sportsclubmanager.domain.classes.Competition[ idCompetition=" + idCompetition + " ]";
     }
-
 }

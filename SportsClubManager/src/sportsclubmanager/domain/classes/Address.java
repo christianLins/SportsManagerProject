@@ -15,15 +15,18 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import sportsclubmanager.domain.contract.*;
 
 /**
- *
- * @author Markus Mohanty <markus.mo at gmx.net>
+
+ @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
 @Table(name = "Address")
 @XmlRootElement
-public class Address implements Serializable {
+public class Address
+        implements Serializable, IAddress
+{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,10 +66,9 @@ public class Address implements Serializable {
         this.streetNumber = streetNumber;
         this.village = village;
         this.postalCode = postalCode;
-        this.member1List = member1List;
         this.country = country;
     }
-    
+
     public Address(Integer idAddress, String street, int streetNumber, String village, int postalCode)
     {
         this.idAddress = idAddress;
@@ -86,41 +88,49 @@ public class Address implements Serializable {
         this.idAddress = idAddress;
     }
 
+    @Override
     public String getStreet()
     {
         return street;
     }
 
+    @Override
     public void setStreet(String street)
     {
         this.street = street;
     }
 
+    @Override
     public int getStreetNumber()
     {
         return streetNumber;
     }
 
+    @Override
     public void setStreetNumber(int streetNumber)
     {
         this.streetNumber = streetNumber;
     }
 
+    @Override
     public String getVillage()
     {
         return village;
     }
 
+    @Override
     public void setVillage(String village)
     {
         this.village = village;
     }
 
+    @Override
     public int getPostalCode()
     {
         return postalCode;
     }
 
+    @Override
     public void setPostalCode(int postalCode)
     {
         this.postalCode = postalCode;
@@ -137,14 +147,16 @@ public class Address implements Serializable {
         this.member1List = member1List;
     }
 
-    public Country getCountry()
+    @Override
+    public ICountry getCountry()
     {
         return country;
     }
 
-    public void setCountry(Country country)
+    @Override
+    public void setCountry(ICountry country)
     {
-        this.country = country;
+        this.country = (Country) country;
     }
 
     @Override
@@ -176,5 +188,4 @@ public class Address implements Serializable {
     {
         return "sportsclubmanager.domain.classes.Address[ idAddress=" + idAddress + " ]";
     }
-
 }

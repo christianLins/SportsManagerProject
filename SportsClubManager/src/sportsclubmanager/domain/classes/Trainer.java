@@ -1,21 +1,25 @@
 package sportsclubmanager.domain.classes;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.*;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import sportsclubmanager.domain.contract.*;
 
 /**
- *
- * @author Markus Mohanty <markus.mo at gmx.net>
+
+ @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
 @Table(name = "Trainer")
 @XmlRootElement
-public class Trainer extends Role implements Serializable {
+public class Trainer
+        extends Role
+        implements Serializable, ITrainer
+{
     private static final long serialVersionUID = 1L;
     @ManyToMany(mappedBy = "trainerList")
     private List<ClubTeam> clubTeamList;
@@ -25,13 +29,29 @@ public class Trainer extends Role implements Serializable {
     }
 
     @XmlTransient
-    public List<ClubTeam> getClubTeamList()
+    @Override
+    public List<IClubTeam> getClubTeamList()
     {
-        return clubTeamList;
+        List<IClubTeam> result = new LinkedList<>();
+
+        for (ClubTeam d : clubTeamList)
+        {
+            result.add(d);
+        }
+
+        return result;
     }
 
-    public void setClubTeamList(List<ClubTeam> clubTeamList)
+    @Override
+    public void setClubTeamList(List<IClubTeam> clubTeamList)
     {
-        this.clubTeamList = clubTeamList;
+        List<ClubTeam> result = new LinkedList<>();
+
+        for (IClubTeam d : clubTeamList)
+        {
+            result.add((ClubTeam) d);
+        }
+
+        this.clubTeamList = result;
     }
 }

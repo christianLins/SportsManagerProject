@@ -1,20 +1,22 @@
 package sportsclubmanager.domain.classes;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.*;
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
+import sportsclubmanager.domain.contract.*;
 
 /**
- *
- * @author Markus Mohanty <markus.mo at gmx.net>
+
+ @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
 @Table(name = "Team")
 @XmlRootElement
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Team implements Serializable {
+public class Team
+        implements Serializable, ITeam
+{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,46 +63,81 @@ public class Team implements Serializable {
         this.idTeam = idTeam;
     }
 
+    @Override
     public String getName()
     {
         return name;
     }
 
+    @Override
     public void setName(String name)
     {
         this.name = name;
     }
 
+    @Override
     public String getDescription()
     {
         return description;
     }
 
+    @Override
     public void setDescription(String description)
     {
         this.description = description;
     }
 
     @XmlTransient
-    public List<Competition> getCompetitionList()
+    @Override
+    public List<ICompetition> getCompetitionList()
     {
-        return competitionList;
+        List<ICompetition> result = new LinkedList<>();
+
+        for (Competition d : competitionList)
+        {
+            result.add(d);
+        }
+
+        return result;
     }
 
-    public void setCompetitionList(List<Competition> competitionList)
+    @Override
+    public void setCompetitionList(List<ICompetition> competitionList)
     {
-        this.competitionList = competitionList;
+        List<Competition> result = new LinkedList<>();
+
+        for (ICompetition d : competitionList)
+        {
+            result.add((Competition) d);
+        }
+
+        this.competitionList = result;
     }
 
     @XmlTransient
-    public List<Match> getMatchList()
+    @Override
+    public List<IMatch> getMatchList()
     {
-        return matchList;
+        List<IMatch> result = new LinkedList<>();
+
+        for (Match d : matchList)
+        {
+            result.add(d);
+        }
+
+        return result;
     }
 
-    public void setMatchList(List<Match> matchList)
+    public void setMatchList(List<IMatch> matchList)
     {
-        this.matchList = matchList;
+        List<Match> result = new LinkedList<>();
+
+        for (IMatch d : matchList)
+        {
+            result.add((Match) d);
+        }
+
+        this.matchList = result;
     }
 
     @XmlTransient
@@ -114,14 +151,16 @@ public class Team implements Serializable {
         this.matchList1 = matchList1;
     }
 
-    public League getLeague()
+    @Override
+    public ILeague getLeague()
     {
         return league;
     }
 
-    public void setLeague(League league)
+    @Override
+    public void setLeague(ILeague league)
     {
-        this.league = league;
+        this.league = (League) league;
     }
 
     @Override
@@ -153,5 +192,4 @@ public class Team implements Serializable {
     {
         return "sportsclubmanager.domain.classes.Team[ idTeam=" + idTeam + " ]";
     }
-
 }

@@ -1,20 +1,23 @@
 package sportsclubmanager.domain.classes;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.*;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import sportsclubmanager.domain.contract.*;
 
 /**
- *
- * @author Markus Mohanty <markus.mo at gmx.net>
+
+ @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
 @Table(name = "Role1")
 @XmlRootElement
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Role implements Serializable {
+public class Role
+        implements Serializable, IRole
+{
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -53,14 +56,30 @@ public class Role implements Serializable {
     }
 
     @XmlTransient
-    public List<Permission> getPermisssionList()
+    @Override
+    public List<IPermission> getPermisssionList()
     {
-        return permisssionList;
+        List<IPermission> result = new LinkedList<>();
+
+        for (Permission d : permisssionList)
+        {
+            result.add(d);
+        }
+
+        return result;
     }
 
-    public void setPermisssionList(List<Permission> permisssionList)
+    @Override
+    public void setPermisssionList(List<IPermission> permisssionList)
     {
-        this.permisssionList = permisssionList;
+        List<Permission> result = new LinkedList<>();
+
+        for (IPermission d : permisssionList)
+        {
+            result.add((Permission) d);
+        }
+
+        this.permisssionList = result;
     }
 
     public Member getMemberidMember()
@@ -102,5 +121,4 @@ public class Role implements Serializable {
     {
         return "sportsclubmanager.domain.classes.Role[ idRole=" + idRole + " ]";
     }
-
 }

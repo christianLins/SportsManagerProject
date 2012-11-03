@@ -1,19 +1,23 @@
 package sportsclubmanager.domain.classes;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.*;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import sportsclubmanager.domain.contract.*;
 
 /**
- *
- * @author Markus Mohanty <markus.mo at gmx.net>
+
+ @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
 @Table(name = "ClubTeam")
 @XmlRootElement
-public class ClubTeam extends Team implements Serializable {
+public class ClubTeam
+        extends Team
+        implements Serializable, IClubTeam
+{
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -51,36 +55,84 @@ public class ClubTeam extends Team implements Serializable {
     }
 
     @XmlTransient
-    public List<Player> getPlayers()
+    @Override
+    public List<IPlayer> getPlayerList()
     {
-        return players;
+        List<IPlayer> result = new LinkedList<>();
+
+        for (Player d : players)
+        {
+            result.add(d);
+        }
+
+        return result;
     }
 
-    public void setPlayers(List<Player> players)
+    @Override
+    public void setPlayerList(List<IPlayer> players)
     {
-        this.players = players;
+        List<Player> result = new LinkedList<>();
+
+        for (IPlayer d : players)
+        {
+            result.add((Player) d);
+        }
+
+        this.players = result;
     }
 
     @XmlTransient
-    public List<Department> getDepartmentList()
+    @Override
+    public List<IDepartment> getDepartmentList()
     {
-        return departmentList;
+        List<IDepartment> result = new LinkedList<>();
+
+        for (Department d : departmentList)
+        {
+            result.add(d);
+        }
+
+        return result;
     }
 
-    public void setDepartmentList(List<Department> departmentList)
+    @Override
+    public void setDepartmentList(List<IDepartment> departmentList)
     {
-        this.departmentList = departmentList;
+        List<Department> result = new LinkedList<>();
+
+        for (IDepartment d : departmentList)
+        {
+            result.add((Department) d);
+        }
+
+        this.departmentList = result;
     }
 
     @XmlTransient
-    public List<Trainer> getTrainerList()
+    @Override
+    public List<ITrainer> getTrainerList()
     {
-        return trainerList;
+        List<ITrainer> result = new LinkedList<>();
+
+        for (Trainer d : trainerList)
+        {
+            result.add(d);
+        }
+
+        return result;
     }
 
-    public void setTrainerList(List<Trainer> trainerList)
+    @Override
+    public void setTrainerList(List<ITrainer> trainerList)
     {
-        this.trainerList = trainerList;
+        List<Trainer> result = new LinkedList<>();
+
+        for (ITrainer d : trainerList)
+        {
+            result.add((Trainer) d);
+        }
+
+        this.trainerList = result;
     }
 
     @Override
@@ -112,5 +164,4 @@ public class ClubTeam extends Team implements Serializable {
     {
         return "sportsclubmanager.domain.classes.ClubTeam[ idTeam=" + idTeam + " ]";
     }
-
 }

@@ -1,25 +1,20 @@
 package sportsclubmanager.domain.classes;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import sportsclubmanager.domain.contract.IPermission;
 
 /**
- *
- * @author Markus Mohanty <markus.mo at gmx.net>
+
+ @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
 @Table(name = "Permission")
 @XmlRootElement
-public class Permission implements Serializable {
+public class Permission
+        implements Serializable, IPermission
+{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,21 +52,25 @@ public class Permission implements Serializable {
         this.idPermission = idPermission;
     }
 
+    @Override
     public String getName()
     {
         return name;
     }
 
+    @Override
     public void setName(String name)
     {
         this.name = name;
     }
 
+    @Override
     public String getDescription()
     {
         return description;
     }
 
+    @Override
     public void setDescription(String description)
     {
         this.description = description;
@@ -106,5 +105,4 @@ public class Permission implements Serializable {
     {
         return "sportsclubmanager.domain.classes.Permission[ idPermission=" + idPermission + " ]";
     }
-
 }
