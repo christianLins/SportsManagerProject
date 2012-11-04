@@ -1,19 +1,21 @@
 package sportsclubmanager.domain.classes;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.*;
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
+import sportsclubmanager.domain.contract.*;
 
 /**
- *
- * @author Markus Mohanty <markus.mo at gmx.net>
+
+ @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
 @Table(name = "Department")
 @XmlRootElement
-public class Department implements Serializable {
+public class Department
+        implements Serializable, IDepartment
+{
     @JoinColumn(name = "DepartmentHead", referencedColumnName = "idRole")
     @ManyToOne(optional = false)
     private DepartmentHead departmentHead;
@@ -55,11 +57,31 @@ public class Department implements Serializable {
     {
         this.idDepartment = idDepartment;
     }
-    
+
     public Department(Integer idDepartment, String name)
     {
         this.idDepartment = idDepartment;
         this.name = name;
+    }
+
+    public Department(String name, String description, ITypeOfSport typeOfSport)
+    {
+        this.name = name;
+        this.description = description;
+        this.typeOfSports = new LinkedList<>();
+        this.typeOfSports.add((TypeOfSport) typeOfSport);
+    }
+
+    public Department(String name, String description, ITypeOfSport... typeOfSports)
+    {
+        this.name = name;
+        this.description = description;
+        this.typeOfSports = new LinkedList<>();
+
+        for (ITypeOfSport typeOfSport : typeOfSports)
+        {
+            this.typeOfSports.add((TypeOfSport) typeOfSport);
+        }
     }
 
     public Integer getIdDepartment()
@@ -72,46 +94,82 @@ public class Department implements Serializable {
         this.idDepartment = idDepartment;
     }
 
+    @Override
     public String getName()
     {
         return name;
     }
 
+    @Override
     public void setName(String name)
     {
         this.name = name;
     }
 
+    @Override
     public String getDescription()
     {
         return description;
     }
 
+    @Override
     public void setDescription(String description)
     {
         this.description = description;
     }
 
     @XmlTransient
-    public List<ClubTeam> getClubTeamList()
+    @Override
+    public List<IClubTeam> getClubTeamList()
     {
-        return clubTeamList;
+        List<IClubTeam> result = new LinkedList<>();
+
+        for (ClubTeam d : clubTeamList)
+        {
+            result.add(d);
+        }
+
+        return result;
     }
 
-    public void setClubTeamList(List<ClubTeam> clubTeamList)
+    @Override
+    public void setClubTeamList(List<IClubTeam> clubTeamList)
     {
-        this.clubTeamList = clubTeamList;
+        List<ClubTeam> result = new LinkedList<>();
+
+        for (IClubTeam d : clubTeamList)
+        {
+            result.add((ClubTeam) d);
+        }
+
+        this.clubTeamList = result;
     }
 
     @XmlTransient
-    public List<TypeOfSport> geTypeOfSports()
+    @Override
+    public List<ITypeOfSport> getTypeOfSportList()
     {
-        return typeOfSports;
+        List<ITypeOfSport> result = new LinkedList<>();
+
+        for (TypeOfSport d : typeOfSports)
+        {
+            result.add(d);
+        }
+
+        return result;
     }
 
-    public void setTypeOfSports(List<TypeOfSport> typeOfSports)
+    @Override
+    public void setTypeOfSportList(List<ITypeOfSport> typeOfSports)
     {
-        this.typeOfSports = typeOfSports;
+        List<TypeOfSport> result = new LinkedList<>();
+
+        for (ITypeOfSport d : typeOfSports)
+        {
+            result.add((TypeOfSport) d);
+        }
+
+        this.typeOfSports = result;
     }
 
     @Override
@@ -144,14 +202,15 @@ public class Department implements Serializable {
         return "sportsclubmanager.domain.classes.Department[ idDepartment=" + idDepartment + " ]";
     }
 
-    public DepartmentHead getDepartmentHead()
+    @Override
+    public IDepartmentHead getDepartmentHead()
     {
         return departmentHead;
     }
 
-    public void setDepartmentHead(DepartmentHead departmentHead)
+    @Override
+    public void setDepartmentHead(IDepartmentHead departmentHead)
     {
-        this.departmentHead = departmentHead;
+        this.departmentHead = (DepartmentHead) departmentHead;
     }
-
 }

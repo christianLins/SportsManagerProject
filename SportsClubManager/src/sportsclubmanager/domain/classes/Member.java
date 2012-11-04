@@ -1,32 +1,21 @@
 package sportsclubmanager.domain.classes;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import java.util.*;
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
+import sportsclubmanager.domain.contract.*;
 
 /**
- *
- * @author Markus Mohanty <markus.mo at gmx.net>
+
+ @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
 @Table(name = "Member")
 @XmlRootElement
-public class Member implements Serializable {
+public class Member
+        implements Serializable, IMember
+{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -82,125 +71,163 @@ public class Member implements Serializable {
         this.memberFrom = memberFrom;
     }
 
+    @Override
     public Integer getIdMember()
     {
         return idMember;
     }
 
+    @Override
     public void setIdMember(Integer idMember)
     {
         this.idMember = idMember;
     }
 
+    @Override
     public String getPrename()
     {
         return prename;
     }
 
+    @Override
     public void setPrename(String prename)
     {
         this.prename = prename;
     }
 
+    @Override
     public String getLastname()
     {
         return lastname;
     }
 
+    @Override
     public void setLastname(String lastname)
     {
         this.lastname = lastname;
     }
 
-    public String getDateOfBirth()
+    @Override
+    public Date getDateOfBirth()
     {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth)
+    @Override
+    public void setDateOfBirth(Date dateOfBirth)
     {
         this.dateOfBirth = dateOfBirth;
     }
 
+    @Override
     public Date getMemberFrom()
     {
         return memberFrom;
     }
 
+    @Override
     public void setMemberFrom(Date memberFrom)
     {
         this.memberFrom = memberFrom;
     }
 
+    @Override
     public Date getMemberTo()
     {
         return memberTo;
     }
 
+    @Override
     public void setMemberTo(Date memberTo)
     {
         this.memberTo = memberTo;
     }
 
+    @Override
     public String getTelephonenumber()
     {
         return telephonenumber;
     }
 
+    @Override
     public void setTelephonenumber(String telephonenumber)
     {
         this.telephonenumber = telephonenumber;
     }
 
+    @Override
     public String getEmailAddress()
     {
         return emailAddress;
     }
 
+    @Override
     public void setEmailAddress(String emailAddress)
     {
         this.emailAddress = emailAddress;
     }
 
+    @Override
     public Boolean getGender()
     {
         return gender;
     }
 
+    @Override
     public void setGender(Boolean gender)
     {
         this.gender = gender;
     }
 
-    public Country getNationality()
+    @Override
+    public ICountry getNationality()
     {
         return nationality;
     }
 
-    public void setNationality(Country nationality)
+    @Override
+    public void setNationality(ICountry nationality)
     {
-        this.nationality = nationality;
+        this.nationality = (Country) nationality;
     }
 
-    public Address getAddress()
+    @Override
+    public IAddress getAddress()
     {
         return address;
     }
 
-    public void setAddress(Address address)
+    @Override
+    public void setAddress(IAddress address)
     {
-        this.address = address;
+        this.address = (Address) address;
     }
 
     @XmlTransient
-    public List<Role> getRoleList()
+    @Override
+    public List<IRole> getRoleList()
     {
-        return roleList;
+        List<IRole> result = new LinkedList<>();
+
+        for (Role d : roleList)
+        {
+            result.add(d);
+        }
+
+        return result;
     }
 
-    public void setRoleList(List<Role> roleList)
+    @Override
+    public void setRoleList(List<IRole> roleList)
     {
-        this.roleList = roleList;
+        List<Role> result = new LinkedList<>();
+
+        for (IRole d : roleList)
+        {
+            result.add((Role) d);
+        }
+
+        this.roleList = result;
     }
 
     @Override
@@ -232,5 +259,4 @@ public class Member implements Serializable {
     {
         return "sportsclubmanager.domain.classes.Member1[ idMember=" + idMember + " ]";
     }
-
 }

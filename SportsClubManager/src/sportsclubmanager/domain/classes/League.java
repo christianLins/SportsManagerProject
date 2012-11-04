@@ -1,29 +1,21 @@
 package sportsclubmanager.domain.classes;
 
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import java.util.*;
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
+import sportsclubmanager.domain.contract.*;
 
 /**
- *
- * @author Markus Mohanty <markus.mo at gmx.net>
+
+ @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
 @Table(name = "League")
 @XmlRootElement
-public class League implements Serializable {
+public class League
+        implements Serializable, ILeague
+{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,35 +55,55 @@ public class League implements Serializable {
         this.idLeague = idLeague;
     }
 
+    @Override
     public String getName()
     {
         return name;
     }
 
+    @Override
     public void setName(String name)
     {
         this.name = name;
     }
 
+    @Override
     public String getDescription()
     {
         return description;
     }
 
+    @Override
     public void setDescription(String description)
     {
         this.description = description;
     }
 
     @XmlTransient
-    public List<Team> getTeamList()
+    @Override
+    public List<ITeam> getTeamList()
     {
-        return teamList;
+        List<ITeam> result = new LinkedList<>();
+
+        for (Team d : teamList)
+        {
+            result.add(d);
+        }
+
+        return result;
     }
 
-    public void setTeamList(List<Team> teamList)
+    @Override
+    public void setTeamList(List<ITeam> teamList)
     {
-        this.teamList = teamList;
+        List<Team> result = new LinkedList<>();
+
+        for (ITeam d : teamList)
+        {
+            result.add((Team) d);
+        }
+
+        this.teamList = result;
     }
 
     @Override
@@ -123,5 +135,4 @@ public class League implements Serializable {
     {
         return "sportsclubmanager.domain.classes.League[ idLeague=" + idLeague + " ]";
     }
-
 }

@@ -4,20 +4,16 @@
  */
 package sportsclubmanager.database;
 
-import java.text.DateFormat;
-import java.text.ParseException;
+import java.text.*;
 import java.util.*;
-import java.util.Map.Entry;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import sportsclubmanager.domain.CouldNotDeleteException;
-import sportsclubmanager.domain.CouldNotSaveException;
-import sportsclubmanager.domain.DomainFacade;
+import java.util.logging.*;
+import sportsclubmanager.domain.*;
 import sportsclubmanager.domain.classes.*;
+import sportsclubmanager.domain.contract.*;
 
 /**
- *
- * @author Thomas
+
+ @author Thomas
  */
 public class DatabaseManager
 {
@@ -372,26 +368,31 @@ public class DatabaseManager
                 String telephoneNumber = "+43/" + new Random().nextInt();
                 String emailAddress = new Random().nextInt(100000) + "@sample.com";
 
-                List<TypeOfSport> list = new LinkedList<TypeOfSport>();
-                list.add(DomainFacade.getByName(TypeOfSport.class, "Volleyball"));
+                List<ITypeOfSport> list = new LinkedList<>();
+                list.add(DomainFacade.getByName(ITypeOfSport.class, "Volleyball"));
 
-                List<Role> roles = new LinkedList<Role>();
-                roles.add(DomainFacade.getByName(Role.class, "Player"));
-                
-                
-                Member mem = new Member();
-                mem.setPrename("Prename"+i);
-                mem.setLastname("Lastname"+1);
-                mem.setDateOfBirth(dateOfBirth.toString());
-                mem.setMemberFrom(memberFrom);
-                mem.setTelephonenumber(telephoneNumber);
-                mem.setEmailAddress(emailAddress);
-                mem.setGender(i%2==0);
-                mem.setNationality(country);
-                mem.setAddress(address);
-                mem.setRoleList(roles);
-                DomainFacade.set(mem);
-            } catch (    CouldNotSaveException | ParseException ex)
+                List<IRole> roles = new LinkedList<>();
+                roles.add(DomainFacade.getByName(IRole.class, "Player"));
+
+                IMember member = new Member();
+                member.setPrename("Prename" + i);
+                member.setLastname("Lastname" + i);
+                member.setAddress(address);
+                member.setDateOfBirth(dateOfBirth);
+                member.setMemberFrom(memberFrom);
+                member.setTelephonenumber(telephoneNumber);
+                member.setEmailAddress(emailAddress);
+                member.setGender(i % 2 == 0);
+                member.setRoleList(roles);
+                member.setNationality(country);
+
+                DomainFacade.set(member);
+            }
+            catch (CouldNotSaveException ex)
+            {
+                Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            catch (ParseException ex)
             {
                 Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -415,23 +416,28 @@ public class DatabaseManager
                 String telephoneNumber = "+43/" + new Random().nextInt();
                 String emailAddress = new Random().nextInt(100000) + "@sample.com";
 
-                List<Role> roles = new LinkedList<Role>();
-                roles.add(DomainFacade.getByName(Role.class, "Trainer"));
-                
-                Member mem = new Member();
-                mem.setPrename("PrenameTrainer"+1);
-                mem.setLastname("LastnameTrainer"+1);
-                mem.setDateOfBirth(dateOfBirth.toString());
-                mem.setAddress(address);
-                mem.setMemberFrom(memberFrom);
-                mem.setNationality(country);
-                mem.setTelephonenumber(telephoneNumber);
-                mem.setEmailAddress(emailAddress);
-                mem.setGender(i%2==0);
-                mem.setRoleList(roles);
-                
-                DomainFacade.set(mem);
-            } catch (    CouldNotSaveException | ParseException ex)
+                List<IRole> roles = new LinkedList<>();
+                roles.add(DomainFacade.getByName(IRole.class, "Trainer"));
+
+                IMember member = new Member();
+                member.setPrename("PrenameTrainer" + i);
+                member.setLastname("LastnameTrainer" + i);
+                member.setAddress(address);
+                member.setDateOfBirth(dateOfBirth);
+                member.setMemberFrom(memberFrom);
+                member.setTelephonenumber(telephoneNumber);
+                member.setEmailAddress(emailAddress);
+                member.setGender(i % 2 == 0);
+                member.setRoleList(roles);
+                member.setNationality(country);
+
+                DomainFacade.set(member);
+            }
+            catch (CouldNotSaveException ex)
+            {
+                Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            catch (ParseException ex)
             {
                 Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -442,29 +448,30 @@ public class DatabaseManager
     {
         for (int i = 0; i < 10; i++)
         {
+            List<IPlayer> players = new LinkedList<>();
+
             try
             {
-                List<Member> players = new LinkedList<Member>();
-
                 for (int j = 0; j < 20; j++)
                 {
-                    players.add(DomainFacade.getByName(Member.class, "Prename" + (i * 10 + j)));
+                    IPlayer m = DomainFacade.getByName(IPlayer.class, "Prename" + (i * 10 + j));
+                    players.add(m);
                 }
-                ClubTeam team = new ClubTeam();
-                team.setName("Team"+i);
-                team.setDescription("Description for Team"+i);
-                League league = new League();
-                league.setName("Legue"+i);
-                league.setDescription("Description for Legue"+i);
+
+                League league = DomainFacade.getByName(League.class, "League" + i);
+
+
+                IClubTeam team = new ClubTeam();
+                team.setName("Team" + i);
+                team.setDescription("Description for Team " + i);
                 team.setLeague(league);
-                //team.setPlayers(players);
-                /*
-                 * The problem is that at the current state we connect the role player
-                 * with the team... not members directly
-                 * see ClubTeam joincolumn for further infos
-                 */
+                team.setPlayerList(players);
                 DomainFacade.set(team);
-            } catch (CouldNotSaveException ex)
+
+                DomainFacade.set(team);
+
+            }
+            catch (CouldNotSaveException ex)
             {
                 Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -473,23 +480,25 @@ public class DatabaseManager
 
     private static void restoreTeams()
     {
-        try{
         for (int i = 0; i < 10; i++)
         {
             League league = DomainFacade.getByName(League.class, "League" + i);
 
             for (int j = 0; j < 19; j++)
             {
-                Team team = new Team();
-                team.setLeague(league);
-                team.setName("Foreign Team"+i);
-                team.setDescription("Description for foreign team"+i);
-                DomainFacade.set(team);
+                try
+                {
+                    ITeam team = new Team();
+                    team.setName("Foreign Team" + (i * 10 + j));
+                    team.setDescription("Description for foreign Team " + (i * 10 + j));
+                    team.setLeague(league);
+                    DomainFacade.set(team);
+                }
+                catch (CouldNotSaveException ex)
+                {
+                    Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-        }
-        }catch(CouldNotSaveException ex)
-        {
-             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -510,23 +519,28 @@ public class DatabaseManager
                 String telephoneNumber = "+43/" + new Random().nextInt();
                 String emailAddress = new Random().nextInt(100000) + "@sample.com";
 
-                List<Role> roles = new LinkedList<Role>();
+                List<IRole> roles = new LinkedList<>();
                 roles.add(DomainFacade.getByName(Role.class, "DepartmentHead"));
 
-                Member mem = new Member();
-                mem.setPrename("DeptHead"+1);
-                mem.setLastname("DeptHeadLastname"+1);
-                mem.setDateOfBirth(dateOfBirth.toString());
-                mem.setAddress(address);
-                mem.setMemberFrom(memberFrom);
-                mem.setNationality(country);
-                mem.setTelephonenumber(telephoneNumber);
-                mem.setEmailAddress(emailAddress);
-                mem.setGender(i%2==0);
-                mem.setRoleList(roles);
-                
-                DomainFacade.set(mem);
-            } catch (CouldNotSaveException | ParseException ex)
+                IMember member = new Member();
+                member.setPrename("PrenameDepartmentHead" + i);
+                member.setLastname("LastnameDepartmentHead" + i);
+                member.setAddress(address);
+                member.setDateOfBirth(dateOfBirth);
+                member.setMemberFrom(memberFrom);
+                member.setTelephonenumber(telephoneNumber);
+                member.setEmailAddress(emailAddress);
+                member.setGender(i % 2 == 0);
+                member.setRoleList(roles);
+                member.setNationality(country);
+
+                DomainFacade.set(member);
+            }
+            catch (CouldNotSaveException ex)
+            {
+                Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            catch (ParseException ex)
             {
                 Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -535,67 +549,76 @@ public class DatabaseManager
 
     private static void restoreDepartment()
     {
-        HashMap<String,LinkedList<TypeOfSport>> map = new HashMap<String,LinkedList<TypeOfSport>>();
-        LinkedList<TypeOfSport> list = new LinkedList<TypeOfSport>();
-        list.add(DomainFacade.getByName(TypeOfSport.class, "Basketball"));
-        map.put("Basketball", list);
-        list.clear();
-        list.add(DomainFacade.getByName(TypeOfSport.class, "Baseball"));
-        map.put("Baseball",list);
-        list.clear();
-        list.add(DomainFacade.getByName(TypeOfSport.class, "American Football"));
-        list.add(DomainFacade.getByName(TypeOfSport.class, "Rugby"));
-        map.put("American Football", list);
-        list.clear();
-        list.add(DomainFacade.getByName(TypeOfSport.class, "Football"));
-        map.put("Football",list);
-        list.clear();
-        list.add(DomainFacade.getByName(TypeOfSport.class, "Cricket"));
-        map.put("Cricket", list);
-        list.clear();
-        list.add(DomainFacade.getByName(TypeOfSport.class, "Hockey"));
-        list.add(DomainFacade.getByName(TypeOfSport.class, "Ice Hockey"));
-        map.put("Hockey", list);
-        list.clear();
-        list.add(DomainFacade.getByName(TypeOfSport.class, "Curling"));
-        map.put("Curling", list);
-        list.clear();
-        list.add(DomainFacade.getByName(TypeOfSport.class, "Fistball"));
-        map.put("Fistball", list);
-        list.clear();
-        list.add(DomainFacade.getByName(TypeOfSport.class, "Volleyball"));
-        list.add(DomainFacade.getByName(TypeOfSport.class, "Beachvolleyball"));
-        map.put("Volleyball", list);
-        
-        for(Entry<String,LinkedList<TypeOfSport>> en: map.entrySet())
+        try
         {
-            try
-            {
-                Department dep = new Department();
-                dep.setName(en.getKey());
-                dep.setDescription("");
-                dep.setTypeOfSports(list);
-                DomainFacade.set(dep);
-            } catch (CouldNotSaveException ex)
-            {
-                Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            DomainFacade.set(new Department("Basketball", "", DomainFacade.getByName(ITypeOfSport.class, "Basketball")));
+            DomainFacade.set(new Department("Baseball", "", DomainFacade.getByName(ITypeOfSport.class, "Baseball")));
+            DomainFacade.set(new Department("American Football", "", DomainFacade.getByName(ITypeOfSport.class, "American Football"), DomainFacade.getByName(TypeOfSport.class, "Rugby")));
+            DomainFacade.set(new Department("Football", "", DomainFacade.getByName(ITypeOfSport.class, "Football")));
+            DomainFacade.set(new Department("Cricket", "", DomainFacade.getByName(ITypeOfSport.class, "Cricket")));
+            DomainFacade.set(new Department("Hockey", "", DomainFacade.getByName(ITypeOfSport.class, "Hockey"), DomainFacade.getByName(TypeOfSport.class, "Ice Hockey")));
+            DomainFacade.set(new Department("Curling", "", DomainFacade.getByName(ITypeOfSport.class, "Curling")));
+            DomainFacade.set(new Department("Fistball", "", DomainFacade.getByName(ITypeOfSport.class, "Fistball")));
+            DomainFacade.set(new Department("Volleyball", "", DomainFacade.getByName(ITypeOfSport.class, "Volleyball"), DomainFacade.getByName(TypeOfSport.class, "Beachvolleyball")));
+        }
+        catch (CouldNotSaveException ex)
+        {
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     private static void restoreCompetitions()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 1; i <= 10; i++)
         {
-            List<Match> matches = new LinkedList<Match>();
-            
-            for (int j = 0; j < 100; j++)
+            try
             {
-                
+                List<ITeam> teams = new LinkedList<>();
+
+                teams.add(DomainFacade.getByName(ITeam.class, "Team" + i));
+
+                for (int j = 0; j < 19; j++)
+                {
+                    teams.add(DomainFacade.getByName(ITeam.class, "Foreign Team" + j));
+                }
+
+                Date dateFrom = DateFormat.getDateInstance().parse(i + "/12/112 4:5 PM, PDT");
+                Date dateTo = DateFormat.getDateInstance().parse((i + 2) + "/12/112 4:5 PM, PDT");
+
+                Competition c = new Competition();
+
+                c.setTeamList(teams);
+
+                for (ITeam team : teams)
+                {
+                    for (ITeam otherTeam : teams)
+                    {
+                        if (otherTeam.equals(team))
+                        {
+                            continue;
+                        }
+
+                        IMatch match = new Match();
+                        match.setHometeam(team);
+                        match.setForeignteam(otherTeam);
+                        match.setDateFrom(dateFrom);
+                        match.setDateTo(dateTo);
+                        match.setCompetition(c);
+
+                        DomainFacade.set(match);
+                    }
+                }
+
+                DomainFacade.set(c);
             }
-            //Competition com = new Competition();
-            
-            //DomainFacade.set(new Competition("Fistball", "", DomainFacade.getByName(TypeOfSport.class, "Fistball"));
+            catch (CouldNotSaveException ex)
+            {
+                Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            catch (ParseException ex)
+            {
+                Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }

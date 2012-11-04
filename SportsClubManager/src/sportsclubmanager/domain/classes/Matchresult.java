@@ -2,28 +2,20 @@ package sportsclubmanager.domain.classes;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
+import sportsclubmanager.domain.contract.IMatchresult;
 
 /**
- *
- * @author Markus Mohanty <markus.mo at gmx.net>
+
+ @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
 @Table(name = "Matchresult")
 @XmlRootElement
-public class Matchresult implements Serializable {
+public class Matchresult
+        implements Serializable, IMatchresult
+{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,21 +57,25 @@ public class Matchresult implements Serializable {
         this.idMatchresult = idMatchresult;
     }
 
+    @Override
     public double getPointsHometeam()
     {
         return pointsHometeam;
     }
 
+    @Override
     public void setPointsHometeam(double pointsHometeam)
     {
         this.pointsHometeam = pointsHometeam;
     }
 
+    @Override
     public double getPointsForeignteam()
     {
         return pointsForeignteam;
     }
 
+    @Override
     public void setPointsForeignteam(double pointsForeignteam)
     {
         this.pointsForeignteam = pointsForeignteam;
@@ -125,5 +121,4 @@ public class Matchresult implements Serializable {
     {
         return "sportsclubmanager.domain.classes.Matchresult[ idMatchresult=" + idMatchresult + " ]";
     }
-
 }

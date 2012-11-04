@@ -3,17 +3,19 @@ package sportsclubmanager.domain.classes;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
+import sportsclubmanager.domain.contract.ICountry;
 
 /**
- *
- * @author Markus Mohanty <markus.mo at gmx.net>
+
+ @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
 @Table(name = "Country")
 @XmlRootElement
-public class Country implements Serializable {
+public class Country
+        implements Serializable, ICountry
+{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,7 +62,7 @@ public class Country implements Serializable {
         this.italiano = italiano;
         this.portugues = portugues;
     }
-    
+
     public Country(Integer idCountry)
     {
         this.idCountry = idCountry;
@@ -117,31 +119,37 @@ public class Country implements Serializable {
         return tld;
     }
 
+    @Override
     public void setTld(String tld)
     {
         this.tld = tld;
     }
 
+    @Override
     public String getDeutsch()
     {
         return deutsch;
     }
 
+    @Override
     public void setDeutsch(String deutsch)
     {
         this.deutsch = deutsch;
     }
 
+    @Override
     public String getEspanol()
     {
         return espanol;
     }
 
+    @Override
     public void setEspanol(String espanol)
     {
         this.espanol = espanol;
     }
 
+    @Override
     public String getFrancaise()
     {
         return francaise;
@@ -223,5 +231,4 @@ public class Country implements Serializable {
     {
         return "sportsclubmanager.domain.classes.Country[ idCountry=" + idCountry + " ]";
     }
-
 }

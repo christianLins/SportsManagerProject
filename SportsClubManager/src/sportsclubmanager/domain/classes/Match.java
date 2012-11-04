@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import sportsclubmanager.domain.contract.*;
 
 /**
  *
@@ -24,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "Match")
 @XmlRootElement
-public class Match implements Serializable {
+public class Match implements Serializable, IMatch {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -76,64 +77,76 @@ public class Match implements Serializable {
         this.idMatch = idMatch;
     }
 
+    @Override
     public Date getDateFrom()
     {
         return dateFrom;
     }
 
+    @Override
     public void setDateFrom(Date dateFrom)
     {
         this.dateFrom = dateFrom;
     }
 
+    @Override
     public Date getDateTo()
     {
         return dateTo;
     }
 
+    @Override
     public void setDateTo(Date dateTo)
     {
         this.dateTo = dateTo;
     }
 
-    public Competition getCompetition()
+    @Override
+    public ICompetition getCompetition()
     {
         return competition;
     }
 
-    public void setCompetition(Competition competition)
+    @Override
+    public void setCompetition(ICompetition competition)
     {
-        this.competition = competition;
+        this.competition = (Competition)competition;
     }
 
-    public Matchresult getMatchresult()
+    @Override
+    public IMatchresult getMatchresult()
     {
         return matchresult;
     }
 
-    public void setMatchresult(Matchresult matchresult)
+    @Override
+    public void setMatchresult(IMatchresult matchresult)
     {
-        this.matchresult = matchresult;
+        this.matchresult = (Matchresult)matchresult;
     }
 
-    public Team getForeignteam()
+    @Override
+    public ITeam getForeignteam()
     {
         return foreignteam;
     }
 
-    public void setForeignteam(Team foreignteam)
+    @Override
+    public void setForeignteam(ITeam foreignteam)
     {
-        this.foreignteam = foreignteam;
+        this.foreignteam = (Team)foreignteam;
     }
 
-    public Team getHometeam()
+    @Override
+    public ITeam getHometeam()
     {
         return hometeam;
     }
 
-    public void setHometeam(Team hometeam)
+    @Override
+    public void setHometeam(ITeam hometeam)
     {
-        this.hometeam = hometeam;
+        this.hometeam = (Team)hometeam;
     }
 
     @Override

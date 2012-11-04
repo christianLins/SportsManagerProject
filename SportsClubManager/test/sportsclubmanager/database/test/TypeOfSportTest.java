@@ -1,20 +1,13 @@
-package sportsclubmanager.domain.test;
+package sportsclubmanager.database.test;
 
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import org.easymock.EasyMock;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import sportsclubmanager.database.DatabaseManager;
-import sportsclubmanager.domain.CouldNotDeleteException;
-import sportsclubmanager.domain.CouldNotSaveException;
-import sportsclubmanager.domain.DomainFacade;
+import org.junit.*;
+import sportsclubmanager.domain.*;
 import sportsclubmanager.domain.contract.ITypeOfSport;
 
 /**
@@ -23,33 +16,35 @@ import sportsclubmanager.domain.contract.ITypeOfSport;
  */
 public class TypeOfSportTest
 {
-        @Before
+    @Before
     public void setUp()
     {
         DatabaseManager.clearDatabase();
     }
-        
+
     @Test
     public void GetAndSetTypeOfSport()
     {
-        ITypeOfSport expected = EasyMock.createMock(ITypeOfSport.class);
-
-        EasyMock.expect(expected.getName()).andReturn("Testname");
-        EasyMock.expect(expected.getDescription()).andReturn("Testdescription");
         try
         {
+            ITypeOfSport expected = EasyMock.createMock(ITypeOfSport.class);
+
+            EasyMock.expect(expected.getName()).andReturn("Testname");
+            EasyMock.expect(expected.getDescription()).andReturn("Testdescription");
+
             DomainFacade.set(expected);
-        } catch (CouldNotSaveException ex)
-        {
-            Assert.fail();
+
+            List<ITypeOfSport> actuals = DomainFacade.getAll(ITypeOfSport.class);
+            ITypeOfSport actual = actuals.get(0);
+
+            Assert.assertEquals(1, actuals.size());
+            Assert.assertEquals(expected.getName(), actual.getName());
+            Assert.assertEquals(expected.getDescription(), actual.getDescription());
         }
-
-        List<ITypeOfSport> actuals = DomainFacade.getAll(ITypeOfSport.class);
-        ITypeOfSport actual = actuals.get(0);
-
-        Assert.assertEquals(1, actuals.size());
-        Assert.assertEquals(expected.getName(), actual.getName());
-        Assert.assertEquals(expected.getDescription(), actual.getDescription());
+        catch (CouldNotSaveException ex)
+        {
+            Assert.fail("A exception is thrown");
+        }
     }
 
     @Test
@@ -68,9 +63,14 @@ public class TypeOfSportTest
             List<ITypeOfSport> actuals = DomainFacade.getAll(ITypeOfSport.class);
 
             Assert.assertEquals(0, actuals.size());
-        } catch (CouldNotDeleteException | CouldNotSaveException ex)
+        }
+        catch (CouldNotSaveException ex)
         {
-            Assert.fail();
+            Assert.fail("A exception is thrown");
+        }
+        catch (CouldNotDeleteException ex)
+        {
+            Assert.fail("A exception is thrown");
         }
     }
 
@@ -81,18 +81,19 @@ public class TypeOfSportTest
 
         for (int i = 0; i < 2; i++)
         {
-            ITypeOfSport expected = EasyMock.createMock(ITypeOfSport.class);
-
-            EasyMock.expect(expected.getName()).andReturn("Testname" + i);
-            EasyMock.expect(expected.getDescription()).andReturn("Testdescription" + i);
-
-            expecteds.add(expected);
             try
             {
+                ITypeOfSport expected = EasyMock.createMock(ITypeOfSport.class);
+
+                EasyMock.expect(expected.getName()).andReturn("Testname" + i);
+                EasyMock.expect(expected.getDescription()).andReturn("Testdescription" + i);
+
+                expecteds.add(expected);
                 DomainFacade.set(expected);
-            } catch (CouldNotSaveException ex)
+            }
+            catch (CouldNotSaveException ex)
             {
-                Assert.fail();
+                Assert.fail("A exception is thrown");
             }
         }
 
@@ -108,6 +109,4 @@ public class TypeOfSportTest
             Assert.assertEquals(expected.getDescription(), actual.getDescription());
         }
     }
-    
-    
 }
