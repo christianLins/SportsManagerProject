@@ -11,9 +11,9 @@ package sportsclubmanager.communication.rmi.client;
 class CommunicationProblemException extends Exception
 {
 
-    public CommunicationProblemException(java.lang.Exception e)
+    public CommunicationProblemException(String message, java.lang.Exception e)
     {
-        super("Connection could not be established", e);
+        super(message, e);
     }
     
 }

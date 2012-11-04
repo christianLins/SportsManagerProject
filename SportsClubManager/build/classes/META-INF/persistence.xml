@@ -19,10 +19,6 @@
     <class>sportsclubmanager.domain.classes.Country</class>
     <class>sportsclubmanager.domain.classes.Address</class>
     <class>sportsclubmanager.domain.classes.Team</class>
-<<<<<<< HEAD
-    <class>sportsclubmanager.domain.classes.Member1</class>
-    <class>sportsclubmanager.domain.classes.League</class>
-=======
     <class>sportsclubmanager.domain.classes.League</class>
     <class>sportsclubmanager.domain.classes.Permisssion</class>
     <class>sportsclubmanager.domain.classes.ClubTeam</class>
@@ -32,7 +28,7 @@
     <class>sportsclubmanager.domain.classes.Role</class>
     <class>sportsclubmanager.domain.classes.Player</class>
     <class>sportsclubmanager.domain.classes.Member</class>
->>>>>>> 71972543da4a4fae5431750163538fd8d6392224
+    <class>sportsclubmanager.domain.classes.Permission</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/SportClubManagement?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value=""/>
