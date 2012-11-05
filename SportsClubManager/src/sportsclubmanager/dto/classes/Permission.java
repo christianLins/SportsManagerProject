@@ -1,21 +1,23 @@
 package sportsclubmanager.dto.classes;
 
 import java.io.Serializable;
-import java.util.*;
-import sportsclubmanager.domain.contract.*;
+import java.util.HashMap;
+import sportsclubmanager.dto.contract.IPermission;
 
 public class Permission
         implements Serializable, IPermission
 {
+    private int id;
     private String name;
     private String description;
+    private static HashMap<sportsclubmanager.domain.contract.IPermission, Permission> competitions = new HashMap<>();
 
-    public Permission()
+    public Permission(int id)
     {
+        this.id = id;
     }
-    private static HashMap<IPermission, Permission> competitions = new HashMap<>();
 
-    public static Permission copy(IPermission permission)
+    public static Permission copy(sportsclubmanager.domain.contract.IPermission permission)
     {
         Permission a;
 
@@ -25,7 +27,7 @@ public class Permission
         }
         else
         {
-            a = new Permission();
+            a = new Permission(permission.getId());
 
             a.setName(permission.getName());
             a.setDescription(permission.getDescription());
@@ -58,5 +60,11 @@ public class Permission
     public void setDescription(String description)
     {
         this.description = description;
+    }
+
+    @Override
+    public Integer getId()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

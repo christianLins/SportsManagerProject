@@ -7,7 +7,7 @@ package sportsclubmanager.dto.classes;
 import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.domain.contract.*;
+import sportsclubmanager.dto.contract.*;
 
 /**
 
@@ -86,11 +86,12 @@ public class TeamTest
     {
         Team a = new Team();
 
-        List<ICompetition> expected = new LinkedList<>();
-        expected.add(EasyMock.createMock(ICompetition.class));
-        expected.add(EasyMock.createMock(ICompetition.class));
-        expected.add(EasyMock.createMock(ICompetition.class));
-        List<ICompetition> actual;
+        List<Integer> expected = new LinkedList<>();
+        expected.add(1);
+        expected.add(2);
+        expected.add(3);
+
+        List<Integer> actual;
 
         a.setCompetitionList(expected);
         actual = a.getCompetitionList();
@@ -103,11 +104,12 @@ public class TeamTest
     {
         Team a = new Team();
 
-        List<IMatch> expected = new LinkedList<>();
-        expected.add(EasyMock.createMock(IMatch.class));
-        expected.add(EasyMock.createMock(IMatch.class));
-        expected.add(EasyMock.createMock(IMatch.class));
-        List<IMatch> actual;
+        List<Integer> expected = new LinkedList<>();
+        expected.add(1);
+        expected.add(2);
+        expected.add(3);
+
+        List<Integer> actual;
 
         a.setMatchList(expected);
         actual = a.getMatchList();
@@ -120,12 +122,12 @@ public class TeamTest
     {
         Team a = new Team();
 
-        ILeague expected = EasyMock.createMock(ILeague.class);
-        ILeague actual;
+        Integer expected =3;
+        Integer actual;
 
         a.setLeague(expected);
         actual = a.getLeague();
 
-        Assert.assertSame(expected, actual);
+        Assert.assertEquals(expected, actual);
     }
 }

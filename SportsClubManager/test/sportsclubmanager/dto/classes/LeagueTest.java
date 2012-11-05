@@ -5,9 +5,8 @@
 package sportsclubmanager.dto.classes;
 
 import java.util.*;
-import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.domain.contract.*;
+import sportsclubmanager.dto.contract.ILeague;
 
 /**
 
@@ -86,12 +85,12 @@ public class LeagueTest
     {
         League a = new League();
 
-        List<ITeam> expected = new LinkedList<ITeam>();
-        expected.add(EasyMock.createMock(ITeam.class));
-        expected.add(EasyMock.createMock(ITeam.class));
-        expected.add(EasyMock.createMock(ITeam.class));
+        List<Integer> expected = new LinkedList<>();
+        expected.add(1);
+        expected.add(2);
+        expected.add(3);
 
-        List<ITeam> actual;
+        List<Integer> actual;
 
         a.setTeamList(expected);
         actual = a.getTeamList();

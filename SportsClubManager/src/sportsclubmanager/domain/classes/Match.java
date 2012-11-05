@@ -67,12 +67,12 @@ public class Match implements Serializable, IMatch {
         this.dateFrom = dateFrom;
     }
 
-    public Integer getIdMatch()
+    public Integer getId()
     {
         return idMatch;
     }
 
-    public void setIdMatch(Integer idMatch)
+    public void setId(Integer idMatch)
     {
         this.idMatch = idMatch;
     }

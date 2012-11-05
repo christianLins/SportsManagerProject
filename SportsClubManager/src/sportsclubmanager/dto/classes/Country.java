@@ -2,7 +2,7 @@ package sportsclubmanager.dto.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import sportsclubmanager.domain.contract.*;
+import sportsclubmanager.dto.contract.*;
 
 /**
 
@@ -11,6 +11,7 @@ import sportsclubmanager.domain.contract.*;
 public class Country
         implements Serializable, ICountry
 {
+    private int id;
     private String name;
     private String alpha3;
     private String alpha2;
@@ -25,9 +26,19 @@ public class Country
     {
     }
 
-      private static HashMap<ICountry, Country> countries = new HashMap<>();
+    public Country(int id)
+    {
+        this.id = id;
+    }
 
-    public static Country copy(ICountry country)
+    @Override
+    public Integer getId()
+    {
+        return id;
+    }
+    private static HashMap<sportsclubmanager.domain.contract.ICountry, Country> countries = new HashMap<>();
+
+    public static Country copy(sportsclubmanager.domain.contract.ICountry country)
     {
         Country a;
 
@@ -54,7 +65,7 @@ public class Country
 
         return a;
     }
-   
+
     @Override
     public String getName()
     {

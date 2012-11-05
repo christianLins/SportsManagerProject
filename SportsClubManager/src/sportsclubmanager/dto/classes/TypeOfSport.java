@@ -2,21 +2,24 @@ package sportsclubmanager.dto.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import sportsclubmanager.domain.contract.*;
+import sportsclubmanager.dto.contract.ITypeOfSport;
 
 public class TypeOfSport
         implements Serializable, ITypeOfSport
 {
+    private int id;
     private String name;
     private String description;
-    private List<Player> playerList = new LinkedList<>();
+    private List<Integer> playerList = new LinkedList<>();
 
-    public TypeOfSport()
+    public TypeOfSport(int id)
     {
+        this.id = id;
     }
-    private static HashMap<ITypeOfSport, TypeOfSport> typeOfSports = new HashMap<>();
+    
+    private static HashMap<sportsclubmanager.domain.contract.ITypeOfSport, TypeOfSport> typeOfSports = new HashMap<>();
 
-    public static TypeOfSport copy(ITypeOfSport typeOfSport)
+    public static TypeOfSport copy(sportsclubmanager.domain.contract.ITypeOfSport typeOfSport)
     {
         TypeOfSport a;
 
@@ -26,16 +29,18 @@ public class TypeOfSport
         }
         else
         {
-            a = new TypeOfSport();
-
+            a = new TypeOfSport(typeOfSport.getId());
             a.setName(typeOfSport.getName());
             a.setDescription(typeOfSport.getDescription());
-            a.setPlayerList(typeOfSport.getPlayerList());
 
             typeOfSports.put(typeOfSport, a);
         }
 
         return a;
+    }
+
+    TypeOfSport()
+    {
     }
 
     @Override
@@ -63,28 +68,20 @@ public class TypeOfSport
     }
 
     @Override
-    public List<IPlayer> getPlayerList()
+    public List<Integer> getPlayerList()
     {
-        List<IPlayer> result = new LinkedList<>();
-
-        for (Player d : playerList)
-        {
-            result.add(d);
-        }
-
-        return result;
+        return playerList;
     }
 
     @Override
-    public void setPlayerList(List<IPlayer> playerList)
+    public void setPlayerList(List<Integer> playerList)
     {
-        List<Player> result = new LinkedList<>();
+        this.playerList = playerList;
+    }
 
-        for (IPlayer d : playerList)
-        {
-            result.add(Player.copy(d));
-        }
-
-        this.playerList = result;
+    @Override
+    public Integer getId()
+    {
+        return id;
     }
 }

@@ -12,7 +12,9 @@ import java.util.*;
  */
 public interface IDepartment
 {
-    List<IClubTeam> getClubTeamList();
+       Integer getId();
+
+       List<IClubTeam> getClubTeamList();
 
     IDepartmentHead getDepartmentHead();
 

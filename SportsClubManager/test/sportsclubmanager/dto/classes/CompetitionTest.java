@@ -5,9 +5,8 @@
 package sportsclubmanager.dto.classes;
 
 import java.util.*;
-import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.domain.contract.*;
+import sportsclubmanager.dto.contract.ICompetition;
 
 /**
 
@@ -100,12 +99,12 @@ public class CompetitionTest
     {
         Competition a = new Competition();
 
-        List<ITeam> expected = new LinkedList<ITeam>();
-        expected.add(EasyMock.createMock(ITeam.class));
-        expected.add(EasyMock.createMock(ITeam.class));
-        expected.add(EasyMock.createMock(ITeam.class));
+        List<Integer> expected = new LinkedList<>();
+        expected.add(1);
+        expected.add(2);
+        expected.add(3);
 
-        List<ITeam> actual;
+        List<Integer> actual;
 
         a.setTeamList(expected);
         actual = a.getTeamList();
@@ -118,12 +117,12 @@ public class CompetitionTest
     {
         Competition a = new Competition();
 
-        List<IMatch> expected = new LinkedList<IMatch>();
-        expected.add(EasyMock.createMock(IMatch.class));
-        expected.add(EasyMock.createMock(IMatch.class));
-        expected.add(EasyMock.createMock(IMatch.class));
+        List<Integer> expected = new LinkedList<>();
+        expected.add(1);
+        expected.add(2);
+        expected.add(3);
 
-        List<IMatch> actual;
+        List<Integer> actual;
 
         a.setMatchList(expected);
         actual = a.getMatchList();

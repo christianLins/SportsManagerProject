@@ -61,7 +61,7 @@ public class RoleTest
 
         Role a = new Role(idRole);
 
-        Assert.assertEquals(idRole, a.getIdRole());
+        Assert.assertEquals(idRole, a.getId());
     }
 
     @Test
@@ -69,7 +69,7 @@ public class RoleTest
     {
         Role a = new Role();
 
-        List<IPermission> expected = new LinkedList<IPermission>();
+        List<IPermission> expected = new LinkedList<>();
         expected.add(EasyMock.createMock(IPermission.class));
         expected.add(EasyMock.createMock(IPermission.class));
         expected.add(EasyMock.createMock(IPermission.class));

@@ -4,7 +4,7 @@
  */
 package sportsclubmanager.domain.contract;
 
-import java.util.*;
+import java.util.Date;
 
 /**
 
@@ -12,8 +12,10 @@ import java.util.*;
  */
 public interface IMatch
 {
-    ICompetition getCompetition();
+      Integer getId();
 
+      ICompetition getCompetition();
+    
     Date getDateFrom();
 
     Date getDateTo();
@@ -24,9 +26,9 @@ public interface IMatch
 
     IMatchresult getMatchresult();
 
-    void setCompetition(ICompetition competition);
-
-    void setDateFrom(Date dateFrom);
+     void setCompetition(ICompetition competition);
+    
+     void setDateFrom(Date dateFrom);
 
     void setDateTo(Date dateTo);
 

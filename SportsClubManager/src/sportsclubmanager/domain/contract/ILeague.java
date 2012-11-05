@@ -13,11 +13,12 @@ import javax.xml.bind.annotation.*;
  */
 public interface ILeague
 {
-    String getDescription();
+       Integer getId();
+
+       String getDescription();
 
     String getName();
 
-    @XmlTransient
     List<ITeam> getTeamList();
 
     void setDescription(String description);

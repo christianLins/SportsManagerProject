@@ -64,7 +64,7 @@ public class AddressTest
 
         Address a = new Address(idAddress, street, streetNumber, village, postalCode);
 
-        Assert.assertEquals(idAddress, a.getIdAddress());
+        Assert.assertEquals(idAddress, a.getId());
         Assert.assertSame(street, a.getStreet());
         Assert.assertEquals(streetNumber, a.getStreetNumber());
         Assert.assertSame(village, a.getVillage());
@@ -72,15 +72,15 @@ public class AddressTest
     }
 
     @Test
-    public void idAddressTest()
+    public void idTest()
     {
         Address a = new Address();
 
         int expected = new Random().nextInt(10000);
         int actual = Integer.MAX_VALUE;
 
-        a.setIdAddress(expected);
-        actual = a.getIdAddress();
+        a.setId(expected);
+        actual = a.getId();
 
         Assert.assertEquals(expected, actual);
     }

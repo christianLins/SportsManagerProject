@@ -2,20 +2,21 @@ package sportsclubmanager.dto.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import sportsclubmanager.domain.contract.*;
+import sportsclubmanager.dto.contract.ITrainer;
 
 public class Trainer
         extends Role
         implements Serializable, ITrainer
 {
-    private List<ClubTeam> clubTeamList = new LinkedList<>();
+    private List<Integer> clubTeamList = new LinkedList<>();
 
-    public Trainer()
+    public Trainer(int id)
     {
+        super(id);
     }
-    private static HashMap<ITrainer, Trainer> trainers = new HashMap<>();
+    private static HashMap<sportsclubmanager.domain.contract.ITrainer, Trainer> trainers = new HashMap<>();
 
-    public static Trainer copy(ITrainer trainer)
+    public static Trainer copy(sportsclubmanager.domain.contract.ITrainer trainer)
     {
         Trainer a;
 
@@ -25,9 +26,16 @@ public class Trainer
         }
         else
         {
-            a = new Trainer();
+            a = new Trainer(trainer.getId());
 
-            a.setClubTeamList(trainer.getClubTeamList());
+            List<Integer> l = new LinkedList<>();
+
+            for (sportsclubmanager.domain.contract.IClubTeam c : trainer.getClubTeamList())
+            {
+                l.add(c.getId());
+            }
+
+            a.setClubTeamList(l);
 
             trainers.put(trainer, a);
         }
@@ -35,29 +43,19 @@ public class Trainer
         return a;
     }
 
-    @Override
-    public List<IClubTeam> getClubTeamList()
+    Trainer()
     {
-        List<IClubTeam> result = new LinkedList<>();
-
-        for (ClubTeam d : clubTeamList)
-        {
-            result.add(d);
-        }
-
-        return result;
     }
 
     @Override
-    public void setClubTeamList(List<IClubTeam> clubTeamList)
+    public List<Integer> getClubTeamList()
     {
-        List<ClubTeam> result = new LinkedList<>();
+        return clubTeamList;
+    }
 
-        for (IClubTeam d : clubTeamList)
-        {
-            result.add(ClubTeam.copy(d));
-        }
-
-        this.clubTeamList = result;
+    @Override
+    public void setClubTeamList(List<Integer> clubTeamList)
+    {
+        this.clubTeamList = clubTeamList;
     }
 }

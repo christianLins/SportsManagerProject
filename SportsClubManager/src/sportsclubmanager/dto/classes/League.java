@@ -2,21 +2,33 @@ package sportsclubmanager.dto.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import sportsclubmanager.domain.contract.*;
+import sportsclubmanager.dto.contract.ILeague;
 
 public class League
         implements Serializable, ILeague
 {
+    private int id;
     private String name;
     private String description;
-    private List<Team> teamList = new LinkedList<>();
+    private List<Integer> teamList = new LinkedList<>();
 
     public League()
     {
     }
-    private static HashMap<ILeague, League> leagues = new HashMap<>();
 
-    public static League copy(ILeague league)
+    public League(int id)
+    {
+        this.id = id;
+    }
+
+    @Override
+    public Integer getId()
+    {
+        return id;
+    }
+    private static HashMap<sportsclubmanager.domain.contract.ILeague, League> leagues = new HashMap<>();
+
+    public static League copy(sportsclubmanager.domain.contract.ILeague league)
     {
         League a;
 
@@ -30,7 +42,11 @@ public class League
 
             a.setName(league.getName());
             a.setDescription(league.getDescription());
-            a.setTeamList(league.getTeamList());
+
+            for (sportsclubmanager.domain.contract.ITeam d : league.getTeamList())
+            {
+                a.teamList.add(d.getId());
+            }
 
             leagues.put(league, a);
         }
@@ -63,28 +79,14 @@ public class League
     }
 
     @Override
-    public List<ITeam> getTeamList()
+    public List<Integer> getTeamList()
     {
-        List<ITeam> result = new LinkedList<>();
-
-        for (Team c : teamList)
-        {
-            result.add(c);
-        }
-
-        return result;
+        return teamList;
     }
 
     @Override
-    public void setTeamList(List<ITeam> teamList)
+    public void setTeamList(List<Integer> teamList)
     {
-        List<Team> result = new LinkedList<>();
-
-        for (ITeam c : teamList)
-        {
-            result.add(Team.copy(c));
-        }
-
-        this.teamList = result;
+        this.teamList = teamList;
     }
 }

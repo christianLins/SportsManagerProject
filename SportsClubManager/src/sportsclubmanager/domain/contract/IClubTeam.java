@@ -14,7 +14,7 @@ import sportsclubmanager.domain.classes.Team;
 public interface IClubTeam
         extends ITeam
 {
-    List<IDepartment> getDepartmentList();
+      List<IDepartment> getDepartmentList();
 
     List<IPlayer> getPlayerList();
 

@@ -2,21 +2,22 @@ package sportsclubmanager.dto.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import sportsclubmanager.domain.contract.*;
+import sportsclubmanager.dto.contract.ITeam;
 
 public class Team
         implements Serializable, ITeam
 {
+    private int id;
     private String name;
     private String description;
-    private List<Competition> competitionList = new LinkedList<>();
-    private List<Match> matchList = new LinkedList<>();
-    private League league;
+    private List<Integer> competitionList = new LinkedList<>();
+    private List<Integer> matchList = new LinkedList<>();
+    private Integer league;
+    private static HashMap<ITeam, Team> teams = new HashMap<>();
 
     public Team()
     {
     }
-    private static HashMap<ITeam, Team> teams = new HashMap<>();
 
     public static Team copy(ITeam team)
     {
@@ -68,66 +69,44 @@ public class Team
     }
 
     @Override
-    public List<ICompetition> getCompetitionList()
+    public List<Integer> getCompetitionList()
     {
-        List<ICompetition> result = new LinkedList<>();
-
-        for (Competition c : competitionList)
-        {
-            result.add(c);
-        }
-
-        return result;
+        return competitionList;
     }
 
     @Override
-    public void setCompetitionList(List<ICompetition> competitionList)
+    public void setCompetitionList(List<Integer> competitionList)
     {
-        List<Competition> result = new LinkedList<>();
-
-        for (ICompetition c : competitionList)
-        {
-            result.add(Competition.copy(c));
-        }
-
-        this.competitionList = result;
+        this.competitionList = competitionList;
     }
 
     @Override
-    public List<IMatch> getMatchList()
+    public List<Integer> getMatchList()
     {
-        List<IMatch> result = new LinkedList<>();
-
-        for (IMatch c : matchList)
-        {
-            result.add(Match.copy(c));
-        }
-
-        return result;
+        return matchList;
     }
 
     @Override
-    public void setMatchList(List<IMatch> matchList)
+    public void setMatchList(List<Integer> matchList)
     {
-        List<Match> result = new LinkedList<>();
-
-        for (IMatch c : matchList)
-        {
-            result.add(Match.copy(c));
-        }
-
-        this.matchList = result;
+        this.matchList = matchList;
     }
 
     @Override
-    public ILeague getLeague()
+    public Integer getLeague()
     {
         return league;
     }
 
     @Override
-    public void setLeague(ILeague league)
+    public void setLeague(Integer league)
     {
-        this.league = League.copy(league);
+        this.league = league;
+    }
+
+    @Override
+    public Integer getId()
+    {
+        return id;
     }
 }

@@ -2,12 +2,12 @@ package sportsclubmanager.dto.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import sportsclubmanager.domain.contract.*;
+import sportsclubmanager.dto.contract.IMember;
 
 public class Member
         implements Serializable, IMember
 {
-    private Integer idMember;
+    private Integer id;
     private String prename;
     private String lastname;
     private Date dateOfBirth;
@@ -16,20 +16,20 @@ public class Member
     private String telephonenumber;
     private String emailAddress;
     private Boolean gender;
-    private Country nationality;
-    private Address address;
-    private List<Role> roleList;
+    private Integer nationality;
+    private Integer address;
+    private List<Integer> roleList;
 
     @Override
-    public Integer getIdMember()
+    public Integer getId()
     {
-        return idMember;
+        return id;
     }
 
     @Override
-    public void setIdMember(Integer idMember)
+    public void setId(Integer idMember)
     {
-        this.idMember = idMember;
+        this.id = idMember;
     }
 
     @Override
@@ -129,52 +129,38 @@ public class Member
     }
 
     @Override
-    public ICountry getNationality()
+    public Integer getNationality()
     {
         return nationality;
     }
 
     @Override
-    public void setNationality(ICountry nationality)
+    public void setNationality(Integer nationality)
     {
-        this.nationality = Country.copy(nationality);
+        this.nationality = nationality;
     }
 
     @Override
-    public IAddress getAddress()
+    public Integer getAddress()
     {
         return address;
     }
 
     @Override
-    public void setAddress(IAddress address)
+    public void setAddress(Integer address)
     {
-        this.address = Address.copy(address);
+        this.address = address;
     }
 
     @Override
-    public List<IRole> getRoleList()
+    public List<Integer> getRoleList()
     {
-        List<IRole> result = new LinkedList<>();
-
-        for (Role c : roleList)
-        {
-            result.add(c);
-        }
-
-        return result;
+        return roleList;
     }
 
     @Override
-    public void setRoleList(List<IRole> roleList)
+    public void setRoleList(List<Integer> roleList)
     {
-        List<Role> result = new LinkedList<>();
-
-        for (IRole c : roleList)
-        {
-            result.add(new Role(c));
-        }
-
-        this.roleList = result;
+        this.roleList = roleList;
     }
 }

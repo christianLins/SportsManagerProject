@@ -10,7 +10,9 @@ package sportsclubmanager.domain.contract;
  */
 public interface IPermission
 {
-    String getDescription();
+  Integer getId();
+  
+  String getDescription();
 
     String getName();
 

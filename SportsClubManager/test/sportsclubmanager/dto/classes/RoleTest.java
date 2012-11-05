@@ -5,9 +5,8 @@
 package sportsclubmanager.dto.classes;
 
 import java.util.*;
-import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.domain.contract.*;
+import sportsclubmanager.dto.contract.IRole;
 
 /**
 
@@ -58,13 +57,12 @@ public class RoleTest
     {
         Role a = new Role();
 
-        List<IPermission> expected = new LinkedList<>();
-        expected.add(EasyMock.createMock(IPermission.class));
-        expected.add(EasyMock.createMock(IPermission.class));
-        expected.add(EasyMock.createMock(IPermission.class));
-        expected.add(EasyMock.createMock(IPermission.class));
+        List<Integer> expected = new LinkedList<>();
+        expected.add(1);
+        expected.add(2);
+        expected.add(3);
 
-        List<IPermission> actual;
+        List<Integer> actual;
 
         a.setPermisssionList(expected);
         actual = a.getPermisssionList();

@@ -2,23 +2,29 @@ package sportsclubmanager.dto.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import sportsclubmanager.domain.contract.*;
+import sportsclubmanager.dto.contract.*;
 
 public class Competition
         implements Serializable, ICompetition
 {
+    private int id;
     private Date dateFrom;
     private Date dateTo;
     private Double payment;
-    private List<Team> teamList;
-    private List<Match> matchList;
+    private List<Integer> teamList = new LinkedList<>();
+    private List<Integer> matchList = new LinkedList<>();
 
     public Competition()
     {
     }
-    private static HashMap<ICompetition, Competition> competitions = new HashMap<>();
 
-    public static Competition copy(ICompetition competition)
+    public Competition(int id)
+    {
+        this.id = id;
+    }
+    private static HashMap<sportsclubmanager.domain.contract.ICompetition, Competition> competitions = new HashMap<>();
+
+    public static Competition copy(sportsclubmanager.domain.contract.ICompetition competition)
     {
         Competition a;
 
@@ -28,18 +34,31 @@ public class Competition
         }
         else
         {
-            a = new Competition();
+            a = new Competition(competition.getId());
 
             a.setDateFrom(competition.getDateFrom());
             a.setDateTo(competition.getDateTo());
             a.setPayment(competition.getPayment());
-            a.setTeamList(competition.getTeamList());
-            a.setMatchList(competition.getMatchList());
 
+            for (sportsclubmanager.domain.contract.ITeam d : competition.getTeamList())
+            {
+                a.teamList.add(d.getId());
+            }
+
+            for (sportsclubmanager.domain.contract.IMatch d : competition.getMatchList())
+            {
+                a.matchList.add(d.getId());
+            }
             competitions.put(competition, a);
         }
 
         return a;
+    }
+
+    @Override
+    public Integer getId()
+    {
+        return id;
     }
 
     @Override
@@ -79,54 +98,26 @@ public class Competition
     }
 
     @Override
-    public List<ITeam> getTeamList()
+    public List<Integer> getTeamList()
     {
-        List<ITeam> result = new LinkedList<>();
-
-        for (Team c : teamList)
-        {
-            result.add(Team.copy(c));
-        }
-
-        return result;
+        return teamList;
     }
 
     @Override
-    public void setTeamList(List<ITeam> teamList)
+    public void setTeamList(List<Integer> teamList)
     {
-        List<Team> result = new LinkedList<>();
-
-        for (ITeam c : teamList)
-        {
-            result.add(Team.copy(c));
-        }
-
-        this.teamList = result;
+        this.teamList = teamList;
     }
 
     @Override
-    public List<IMatch> getMatchList()
+    public List<Integer> getMatchList()
     {
-        List<IMatch> result = new LinkedList<>();
-
-        for (Match c : matchList)
-        {
-            result.add(Match.copy(c));
-        }
-
-        return result;
+        return matchList;
     }
 
     @Override
-    public void setMatchList(List<IMatch> matchList)
+    public void setMatchList(List<Integer> matchList)
     {
-        List<Match> result = new LinkedList<>();
-
-        for (IMatch c : matchList)
-        {
-            result.add(Match.copy(c));
-        }
-
-        this.matchList = result;
+        this.matchList = matchList;
     }
 }

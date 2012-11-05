@@ -74,12 +74,12 @@ public class Country
         this.name = name;
     }
 
-    public Integer getIdCountry()
+    public Integer getId()
     {
         return idCountry;
     }
 
-    public void setIdCountry(Integer idCountry)
+    public void setId(Integer idCountry)
     {
         this.idCountry = idCountry;
     }

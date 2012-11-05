@@ -5,7 +5,6 @@
 package sportsclubmanager.domain.contract;
 
 import java.util.*;
-import javax.xml.bind.annotation.*;
 
 /**
 

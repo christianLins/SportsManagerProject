@@ -6,7 +6,7 @@ package sportsclubmanager.dto.classes;
 
 import java.util.Random;
 import org.junit.*;
-import sportsclubmanager.domain.contract.IMatchresult;
+import sportsclubmanager.dto.contract.IMatchresult;
 
 /**
 

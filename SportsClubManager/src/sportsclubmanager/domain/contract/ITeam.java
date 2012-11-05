@@ -5,7 +5,6 @@
 package sportsclubmanager.domain.contract;
 
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
 
@@ -13,14 +12,14 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 public interface ITeam
 {
-    @XmlTransient
+    Integer getId();
+
     List<ICompetition> getCompetitionList();
 
     String getDescription();
 
     ILeague getLeague();
 
-    @XmlTransient
     List<IMatch> getMatchList();
 
     String getName();

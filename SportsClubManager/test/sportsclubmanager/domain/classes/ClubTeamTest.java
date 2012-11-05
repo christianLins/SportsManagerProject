@@ -7,8 +7,6 @@ package sportsclubmanager.domain.classes;
 import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.domain.classes.ClubTeam;
-import sportsclubmanager.domain.classes.Team;
 import sportsclubmanager.domain.contract.*;
 
 /**
@@ -70,7 +68,7 @@ public class ClubTeamTest
 
         ClubTeam a = new ClubTeam(idClubTeam);
 
-        Assert.assertEquals(idClubTeam, a.getIdTeam());
+        Assert.assertEquals(idClubTeam, a.getId());
     }
 
     @Test
@@ -81,8 +79,8 @@ public class ClubTeamTest
         int expected = new Random().nextInt(10000);
         int actual = Integer.MAX_VALUE;
 
-        a.setIdTeam(expected);
-        actual = a.getIdTeam();
+        a.setId(expected);
+        actual = a.getId();
 
         Assert.assertEquals(expected, actual);
     }

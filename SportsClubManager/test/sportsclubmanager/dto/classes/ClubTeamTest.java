@@ -5,9 +5,8 @@
 package sportsclubmanager.dto.classes;
 
 import java.util.*;
-import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.domain.contract.*;
+import sportsclubmanager.dto.contract.*;
 
 /**
 
@@ -66,11 +65,12 @@ public class ClubTeamTest
     {
         ClubTeam a = new ClubTeam();
 
-        List<IDepartment> expected = new LinkedList<>();
-        expected.add(EasyMock.createMock(IDepartment.class));
-        expected.add(EasyMock.createMock(IDepartment.class));
-        expected.add(EasyMock.createMock(IDepartment.class));
-        List<IDepartment> actual;
+        List<Integer> expected = new LinkedList<>();
+        expected.add(1);
+        expected.add(2);
+        expected.add(3);
+
+        List<Integer> actual;
 
         a.setDepartmentList(expected);
         actual = a.getDepartmentList();
@@ -83,11 +83,12 @@ public class ClubTeamTest
     {
         ClubTeam a = new ClubTeam();
 
-        List<ITrainer> expected = new LinkedList<ITrainer>();
-        expected.add(EasyMock.createMock(ITrainer.class));
-        expected.add(EasyMock.createMock(ITrainer.class));
-        expected.add(EasyMock.createMock(ITrainer.class));
-        List<ITrainer> actual;
+        List<Integer> expected = new LinkedList<>();
+        expected.add(1);
+        expected.add(2);
+        expected.add(3);
+
+        List<Integer> actual;
 
         a.setTrainerList(expected);
         actual = a.getTrainerList();
@@ -100,11 +101,12 @@ public class ClubTeamTest
     {
         ClubTeam a = new ClubTeam();
 
-        List<IPlayer> expected = new LinkedList<IPlayer>();
-        expected.add(EasyMock.createMock(IPlayer.class));
-        expected.add(EasyMock.createMock(IPlayer.class));
-        expected.add(EasyMock.createMock(IPlayer.class));
-        List<IPlayer> actual;
+        List<Integer> expected = new LinkedList<>();
+        expected.add(1);
+        expected.add(2);
+        expected.add(3);
+
+        List<Integer> actual;
 
         a.setPlayerList(expected);
         actual = a.getPlayerList();

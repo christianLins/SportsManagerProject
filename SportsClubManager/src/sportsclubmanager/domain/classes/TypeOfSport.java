@@ -60,12 +60,12 @@ public class TypeOfSport
         this.name = name;
     }
 
-    public Integer getIdTypeOfSport()
+    public Integer getId()
     {
         return idTypeOfSport;
     }
 
-    public void setIdTypeOfSport(Integer idTypeOfSport)
+    public void setId(Integer idTypeOfSport)
     {
         this.idTypeOfSport = idTypeOfSport;
     }

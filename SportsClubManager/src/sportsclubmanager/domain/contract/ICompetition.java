@@ -5,14 +5,14 @@
 package sportsclubmanager.domain.contract;
 
 import java.util.*;
-import javax.xml.bind.annotation.*;
 
 /**
-
  @author Thomas
  */
 public interface ICompetition
 {
+    Integer getId();
+
     Date getDateFrom();
 
     Date getDateTo();
@@ -32,5 +32,4 @@ public interface ICompetition
     void setPayment(Double payment);
 
     void setTeamList(List<ITeam> teamList);
-    
 }

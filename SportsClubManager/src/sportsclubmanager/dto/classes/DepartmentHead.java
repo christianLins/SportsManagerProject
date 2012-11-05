@@ -2,20 +2,21 @@ package sportsclubmanager.dto.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import sportsclubmanager.domain.contract.*;
+import sportsclubmanager.dto.contract.IDepartmentHead;
 
 public class DepartmentHead
         extends Role
         implements Serializable, IDepartmentHead
 {
-    private List<Department> departmentList = new LinkedList<>();
+    private List<Integer> departmentList = new LinkedList<>();
 
-    public DepartmentHead()
+    public DepartmentHead(int id)
     {
+        super(id);
     }
-    private static HashMap<IDepartmentHead, DepartmentHead> departmentHeads = new HashMap<>();
+    private static HashMap<sportsclubmanager.domain.contract.IDepartmentHead, DepartmentHead> departmentHeads = new HashMap<>();
 
-    public static DepartmentHead copy(IDepartmentHead departmentHead)
+    public static DepartmentHead copy(sportsclubmanager.domain.contract.IDepartmentHead departmentHead)
     {
         DepartmentHead a;
 
@@ -25,9 +26,16 @@ public class DepartmentHead
         }
         else
         {
-            a = new DepartmentHead();
+            a = new DepartmentHead(departmentHead.getId());
 
-            a.setDepartmentList(departmentHead.getDepartmentList());
+            List<Integer> l = new LinkedList<>();
+
+            for (sportsclubmanager.domain.contract.IDepartment t : departmentHead.getDepartmentList())
+            {
+                l.add(t.getId());
+            }
+
+            a.setDepartmentList(l);
 
             departmentHeads.put(departmentHead, a);
         }
@@ -35,29 +43,20 @@ public class DepartmentHead
         return a;
     }
 
-    @Override
-    public List<IDepartment> getDepartmentList()
+    DepartmentHead()
     {
-        List<IDepartment> result = new LinkedList<>();
-
-        for (Department d : departmentList)
-        {
-            result.add(d);
-        }
-
-        return result;
+        super();
     }
 
     @Override
-    public void setDepartmentList(List<IDepartment> departmentList)
+    public List<Integer> getDepartmentList()
     {
-        List<Department> result = new LinkedList<>();
+        return departmentList;
+    }
 
-        for (IDepartment d : departmentList)
-        {
-            result.add(Department.copy(d));
-        }
-
-        this.departmentList = result;
+    @Override
+    public void setDepartmentList(List<Integer> departmentList)
+    {
+        this.departmentList = departmentList;
     }
 }

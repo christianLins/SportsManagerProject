@@ -5,10 +5,8 @@
 package sportsclubmanager.dto.classes;
 
 import java.util.*;
-import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.domain.contract.*;
-import sportsclubmanager.dto.classes.Player;
+import sportsclubmanager.dto.contract.IPlayer;
 
 /**
 
@@ -59,16 +57,17 @@ public class PlayerTest
     {
         Player a = new Player();
 
-        List<ITypeOfSport> expected = new LinkedList<ITypeOfSport>();
-        List<ITypeOfSport> actual;
+        List<Integer> expected = new LinkedList<>();
+        expected.add(1);
+        expected.add(2);
+        expected.add(3);
 
-        expected.add(EasyMock.createMock(ITypeOfSport.class));
-        expected.add(EasyMock.createMock(ITypeOfSport.class));
-        expected.add(EasyMock.createMock(ITypeOfSport.class));
-        expected.add(EasyMock.createMock(ITypeOfSport.class));
+        List<Integer> actual;
 
         a.setTypeOfSportList(expected);
         actual = a.getTypeOfSportList();
+
+        Assert.assertEquals(expected.size(), actual.size());
 
         Assert.assertEquals(expected, actual);
     }

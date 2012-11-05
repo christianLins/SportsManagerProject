@@ -2,26 +2,38 @@ package sportsclubmanager.dto.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import sportsclubmanager.domain.contract.*;
+import sportsclubmanager.dto.contract.IDepartment;
 
 public class Department
         implements Serializable, IDepartment
 {
-    private DepartmentHead departmentHead;
+    private int id;
+    private Integer departmentHead;
     private String name;
     private String description;
-    private List<ClubTeam> clubTeamList = new LinkedList<>();
-    private List<TypeOfSport> typeOfSportList = new LinkedList<>();
-
+    private List<Integer> clubTeamList = new LinkedList<>();
+    private List<Integer> typeOfSportList = new LinkedList<>();
+    
     public Department()
     {
     }
-    private static HashMap<IDepartment, Department> departments = new HashMap<>();
-
-    public static Department copy(IDepartment department)
+    
+    public Department(int id)
+    {
+        this.id = id;
+    }
+    
+    @Override
+    public Integer getId()
+    {
+        return id;
+    }
+    private static HashMap<sportsclubmanager.domain.contract.IDepartment, Department> departments = new HashMap<>();
+    
+    public static Department copy(sportsclubmanager.domain.contract.IDepartment department)
     {
         Department a;
-
+        
         if (departments.containsKey(department))
         {
             a = departments.get(department);
@@ -29,103 +41,82 @@ public class Department
         else
         {
             a = new Department();
-
+            
             a.setName(department.getName());
             a.setDescription(department.getDescription());
-            a.setClubTeamList(department.getClubTeamList());
-            a.setTypeOfSportList(department.getTypeOfSportList());
-
+            
+            for (sportsclubmanager.domain.contract.IClubTeam c : department.getClubTeamList())
+            {
+                a.clubTeamList.add(c.getId());
+            }
+            
+            for (sportsclubmanager.domain.contract.ITypeOfSport d : department.getTypeOfSportList())            
+            {
+                a.typeOfSportList.add(d.getId());
+            }
+            
             departments.put(department, a);
         }
-
         return a;
     }
-
+    
     @Override
     public String getName()
     {
         return name;
     }
-
+    
     @Override
     public void setName(String name)
     {
         this.name = name;
     }
-
+    
     @Override
     public String getDescription()
     {
         return description;
     }
-
+    
     @Override
     public void setDescription(String description)
     {
         this.description = description;
     }
-
+    
     @Override
-    public List<IClubTeam> getClubTeamList()
+    public List<Integer> getClubTeamList()
     {
-        List<IClubTeam> result = new LinkedList<>();
-
-        for (ClubTeam c : clubTeamList)
-        {
-            result.add(c);
-        }
-
-        return result;
+        return clubTeamList;
     }
-
+    
     @Override
-    public void setClubTeamList(List<IClubTeam> clubTeamList)
+    public void setClubTeamList(List<Integer> clubTeamList)
     {
-        List<ClubTeam> result = new LinkedList<>();
-
-        for (IClubTeam c : clubTeamList)
-        {
-            result.add(ClubTeam.copy(c));
-        }
-
-        this.clubTeamList = result;
+        this.clubTeamList = clubTeamList;
     }
-
+    
     @Override
-    public List<ITypeOfSport> getTypeOfSportList()
+    public List<Integer> getTypeOfSportList()
     {
-        List<ITypeOfSport> result = new LinkedList<>();
-
-        for (TypeOfSport c : typeOfSportList)
-        {
-            result.add(c);
-        }
-
-        return result;
+        return typeOfSportList;
     }
-
+    
     @Override
-    public void setTypeOfSportList(List<ITypeOfSport> typeOfSportList)
+    public void setTypeOfSportList(List<Integer> typeOfSportList)
     {
-        List<TypeOfSport> result = new LinkedList<>();
-
-        for (ITypeOfSport c : typeOfSportList)
-        {
-            result.add(TypeOfSport.copy(c));
-        }
-
-        this.typeOfSportList = result;
+        this.typeOfSportList = typeOfSportList;
     }
-
+    
     @Override
-    public IDepartmentHead getDepartmentHead()
+    public Integer getDepartmentHead()
     {
         return departmentHead;
     }
-
+    
     @Override
-    public void setDepartmentHead(IDepartmentHead departmentHead)
+    public void setDepartmentHead(Integer departmentHead)
     {
-        this.departmentHead = DepartmentHead.copy(departmentHead);
+        this.departmentHead = departmentHead;
     }
 }

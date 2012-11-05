@@ -7,7 +7,7 @@ package sportsclubmanager.dto.classes;
 import java.util.Random;
 import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.domain.contract.ICountry;
+import sportsclubmanager.dto.contract.ICountry;
 
 /**
 
@@ -56,7 +56,7 @@ public class CountryTest
     @Test
     public void interfaceConstructorTest()
     {
-        ICountry country = EasyMock.createMock(ICountry.class);
+        sportsclubmanager.domain.contract.ICountry country = EasyMock.createMock(sportsclubmanager.domain.contract.ICountry.class);
         EasyMock.expect(country.getAlpha2()).andReturn("1").anyTimes();
         EasyMock.expect(country.getAlpha3()).andReturn("2").anyTimes();
         EasyMock.expect(country.getDeutsch()).andReturn("3").anyTimes();

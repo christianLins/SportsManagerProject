@@ -78,12 +78,12 @@ public class Address
         this.postalCode = postalCode;
     }
 
-    public Integer getIdAddress()
+    public Integer getId()
     {
         return idAddress;
     }
 
-    public void setIdAddress(Integer idAddress)
+    public void setId(Integer idAddress)
     {
         this.idAddress = idAddress;
     }

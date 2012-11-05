@@ -2,24 +2,36 @@ package sportsclubmanager.dto.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import sportsclubmanager.domain.contract.*;
+import sportsclubmanager.dto.contract.IMatch;
 
 public class Match
         implements Serializable, IMatch
 {
+    private int id;
     private Date dateFrom;
     private Date dateTo;
-    private Competition competition;
-    private Matchresult matchresult;
-    private Team foreignteam;
-    private Team hometeam;
+    private Integer competition;
+    private Integer matchresult;
+    private Integer foreignteam;
+    private Integer hometeam;
 
     public Match()
     {
     }
-    private static HashMap<IMatch, Match> matchs = new HashMap<>();
 
-    public static Match copy(IMatch match)
+    public Match(int id)
+    {
+        this.id = id;
+    }
+
+    @Override
+    public Integer getId()
+    {
+        return id;
+    }
+    private static HashMap<sportsclubmanager.domain.contract.IMatch, Match> matchs = new HashMap<>();
+
+    public static Match copy(sportsclubmanager.domain.contract.IMatch match)
     {
         Match a;
 
@@ -33,10 +45,10 @@ public class Match
 
             a.setDateFrom(match.getDateFrom());
             a.setDateTo(match.getDateTo());
-            a.setCompetition(match.getCompetition());
-            a.setMatchresult(match.getMatchresult());
-            a.setForeignteam(match.getForeignteam());
-            a.setHometeam(match.getHometeam());
+            a.competition = match.getCompetition().getId();
+            a.matchresult = match.getMatchresult().getId();
+            a.foreignteam = match.getForeignteam().getId();
+            a.hometeam = match.getHometeam().getId();
 
             matchs.put(match, a);
         }
@@ -69,50 +81,50 @@ public class Match
     }
 
     @Override
-    public ICompetition getCompetition()
+    public Integer getCompetition()
     {
         return competition;
     }
 
     @Override
-    public void setCompetition(ICompetition competition)
+    public void setCompetition(Integer competition)
     {
-        this.competition = Competition.copy(competition);
+        this.competition = competition;
     }
 
     @Override
-    public IMatchresult getMatchresult()
+    public Integer getMatchresult()
     {
         return matchresult;
     }
 
     @Override
-    public void setMatchresult(IMatchresult matchresult)
+    public void setMatchresult(Integer matchresult)
     {
-        this.matchresult = Matchresult.copy(matchresult);
+        this.matchresult = matchresult;
     }
 
     @Override
-    public ITeam getForeignteam()
+    public Integer getForeignteam()
     {
         return foreignteam;
     }
 
     @Override
-    public void setForeignteam(ITeam foreignteam)
+    public void setForeignteam(Integer foreignteam)
     {
-        this.foreignteam = Team.copy(foreignteam);
+        this.foreignteam = foreignteam;
     }
 
     @Override
-    public ITeam getHometeam()
+    public Integer getHometeam()
     {
         return hometeam;
     }
 
     @Override
-    public void setHometeam(ITeam hometeam)
+    public void setHometeam(Integer hometeam)
     {
-        this.hometeam = Team.copy(hometeam);
+        this.hometeam = hometeam;
     }
 }

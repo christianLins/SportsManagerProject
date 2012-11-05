@@ -2,48 +2,48 @@ package sportsclubmanager.dto.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import sportsclubmanager.domain.contract.*;
+import sportsclubmanager.dto.contract.IRole;
 
 public class Role
         implements Serializable, IRole
 {
-    private List<Permission> permissionList = new LinkedList<>();
+    private int id;
+    private List<Integer> permissionList = new LinkedList<>();
 
     public Role()
     {
     }
 
-    public Role(IRole c)
+    public Role(int id)
     {
-        for (IPermission d : c.getPermisssionList())
+        this.id = id;
+    }
+
+    public Role(sportsclubmanager.domain.contract.IRole c)
+    {
+        this.id = c.getId();
+
+        for (sportsclubmanager.domain.contract.IPermission d : c.getPermisssionList())
         {
-            permissionList.add(Permission.copy(d));
+            permissionList.add(d.getId());
         }
     }
 
     @Override
-    public List<IPermission> getPermisssionList()
+    public List<Integer> getPermisssionList()
     {
-        List<IPermission> result = new LinkedList<>();
-
-        for (Permission c : permissionList)
-        {
-            result.add(c);
-        }
-
-        return result;
+        return permissionList;
     }
 
     @Override
-    public void setPermisssionList(List<IPermission> permissionList)
+    public void setPermisssionList(List<Integer> permissionList)
     {
-        List<Permission> result = new LinkedList<>();
+        this.permissionList = permissionList;
+    }
 
-        for (IPermission c : permissionList)
-        {
-            result.add(Permission.copy(c));
-        }
-
-        this.permissionList = result;
+    @Override
+    public Integer getId()
+    {
+        return id;
     }
 }

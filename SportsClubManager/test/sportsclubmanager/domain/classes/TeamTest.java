@@ -60,7 +60,7 @@ public class TeamTest
 
         Team a = new Team(idTeam);
 
-        Assert.assertEquals(idTeam, a.getIdTeam());
+        Assert.assertEquals(idTeam, a.getId());
     }
 
     @Test
@@ -71,7 +71,7 @@ public class TeamTest
 
         Team a = new Team(idTeam, name);
 
-        Assert.assertEquals(idTeam, a.getIdTeam());
+        Assert.assertEquals(idTeam, a.getId());
         Assert.assertSame(name, a.getName());
     }
 
@@ -83,8 +83,8 @@ public class TeamTest
         int expected = new Random().nextInt(10000);
         int actual = Integer.MAX_VALUE;
 
-        a.setIdTeam(expected);
-        actual = a.getIdTeam();
+        a.setId(expected);
+        actual = a.getId();
 
         Assert.assertEquals(expected, actual);
     }

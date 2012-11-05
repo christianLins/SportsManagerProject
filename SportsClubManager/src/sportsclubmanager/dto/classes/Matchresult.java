@@ -1,21 +1,23 @@
 package sportsclubmanager.dto.classes;
 
 import java.io.Serializable;
-import java.util.*;
-import sportsclubmanager.domain.contract.*;
+import java.util.HashMap;
+import sportsclubmanager.dto.contract.IMatchresult;
 
 public class Matchresult
         implements Serializable, IMatchresult
 {
+    private int id;
     private double pointsHometeam;
     private double pointsForeignteam;
 
-    public Matchresult()
+    public Matchresult(int id)
     {
+        this.id = id;
     }
-    private static HashMap<IMatchresult, Matchresult> matchresults = new HashMap<>();
+    private static HashMap<sportsclubmanager.domain.contract.IMatchresult, Matchresult> matchresults = new HashMap<>();
 
-    public static Matchresult copy(IMatchresult matchresult)
+    public static Matchresult copy(sportsclubmanager.domain.contract.IMatchresult matchresult)
     {
         Matchresult a;
 
@@ -25,7 +27,7 @@ public class Matchresult
         }
         else
         {
-            a = new Matchresult();
+            a = new Matchresult(matchresult.getId());
 
             a.setPointsHometeam(matchresult.getPointsHometeam());
             a.setPointsForeignteam(matchresult.getPointsForeignteam());
@@ -34,6 +36,10 @@ public class Matchresult
         }
 
         return a;
+    }
+
+    Matchresult()
+    {
     }
 
     @Override
@@ -58,5 +64,11 @@ public class Matchresult
     public void setPointsForeignteam(double pointsForeignteam)
     {
         this.pointsForeignteam = pointsForeignteam;
+    }
+
+    @Override
+    public Integer getId()
+    {
+        return id;
     }
 }

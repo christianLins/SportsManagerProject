@@ -61,7 +61,7 @@ public class DepartmentTest
 
         Department a = new Department(idDepartment);
 
-        Assert.assertEquals(idDepartment, a.getIdDepartment());
+        Assert.assertEquals(idDepartment, a.getId());
     }
 
     @Test
@@ -72,7 +72,7 @@ public class DepartmentTest
 
         Department a = new Department(idDepartment, name);
 
-        Assert.assertEquals(name, a.getIdDepartment());
+        Assert.assertEquals(name, a.getId());
         Assert.assertSame(name, a.getName());
     }
 
@@ -84,8 +84,8 @@ public class DepartmentTest
         int expected = new Random().nextInt(10000);
         int actual = Integer.MAX_VALUE;
 
-        a.setIdDepartment(expected);
-        actual = a.getIdDepartment();
+        a.setId(expected);
+        actual = a.getId();
 
         Assert.assertEquals(expected, actual);
     }

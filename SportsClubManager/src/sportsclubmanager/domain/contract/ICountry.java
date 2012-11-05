@@ -10,7 +10,9 @@ package sportsclubmanager.domain.contract;
  */
 public interface ICountry
 {
-    String getAlpha2();
+        Integer getId();
+
+        String getAlpha2();
 
     String getAlpha3();
 

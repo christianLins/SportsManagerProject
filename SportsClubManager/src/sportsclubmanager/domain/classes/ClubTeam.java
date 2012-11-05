@@ -51,7 +51,7 @@ public class ClubTeam
 
     public ClubTeam(Integer idTeam)
     {
-        this.idTeam = idTeam;
+        super(idTeam);
     }
 
     @XmlTransient
@@ -170,5 +170,11 @@ public class ClubTeam
     public String toString()
     {
         return "sportsclubmanager.domain.classes.ClubTeam[ idTeam=" + idTeam + " ]";
+    }
+
+    @Override
+    public Integer getId()
+    {
+        return this.idTeam;
     }
 }
