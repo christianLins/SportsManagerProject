@@ -8,7 +8,6 @@ import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
 import sportsclubmanager.domain.contract.*;
-import sportsclubmanager.dto.classes.Competition;
 
 /**
 
@@ -52,30 +51,6 @@ public class CompetitionTest
         Competition a = new Competition();
 
         Assert.assertTrue(a instanceof ICompetition);
-    }
-
-    @Test
-    public void hibernateContructorTest()
-    {
-        Integer idCompetition = new Random().nextInt();
-
-        Competition a = new Competition(idCompetition);
-
-        Assert.assertEquals(idCompetition, a.getIdCompetition());
-    }
-
-    @Test
-    public void idCompetitionTest()
-    {
-        Competition a = new Competition();
-
-        int expected = new Random().nextInt(10000);
-        int actual = Integer.MAX_VALUE;
-
-        a.setIdCompetition(expected);
-        actual = a.getIdCompetition();
-
-        Assert.assertEquals(expected, actual);
     }
 
     @Test

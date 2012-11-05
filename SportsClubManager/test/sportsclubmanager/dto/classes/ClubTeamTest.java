@@ -8,8 +8,6 @@ import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
 import sportsclubmanager.domain.contract.*;
-import sportsclubmanager.dto.classes.ClubTeam;
-import sportsclubmanager.dto.classes.Team;
 
 /**
 
@@ -64,35 +62,11 @@ public class ClubTeamTest
     }
 
     @Test
-    public void hibernateContructorTest()
-    {
-        Integer idClubTeam = new Random().nextInt();
-
-        ClubTeam a = new ClubTeam(idClubTeam);
-
-        Assert.assertEquals(idClubTeam, a.getIdTeam());
-    }
-
-    @Test
-    public void idClubTeamTest()
-    {
-        ClubTeam a = new ClubTeam();
-
-        int expected = new Random().nextInt(10000);
-        int actual = Integer.MAX_VALUE;
-
-        a.setIdTeam(expected);
-        actual = a.getIdTeam();
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
     public void departmentListTest()
     {
         ClubTeam a = new ClubTeam();
 
-        List<IDepartment> expected = new LinkedList<IDepartment>();
+        List<IDepartment> expected = new LinkedList<>();
         expected.add(EasyMock.createMock(IDepartment.class));
         expected.add(EasyMock.createMock(IDepartment.class));
         expected.add(EasyMock.createMock(IDepartment.class));

@@ -8,7 +8,6 @@ import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
 import sportsclubmanager.domain.contract.*;
-import sportsclubmanager.dto.classes.DepartmentHead;
 
 /**
 
@@ -59,7 +58,7 @@ public class DepartmentHeadTest
     {
         DepartmentHead a = new DepartmentHead();
 
-        List<IDepartment> expected = new LinkedList<IDepartment>();
+        List<IDepartment> expected = new LinkedList<>();
         expected.add(EasyMock.createMock(IDepartment.class));
         expected.add(EasyMock.createMock(IDepartment.class));
         expected.add(EasyMock.createMock(IDepartment.class));

@@ -17,7 +17,7 @@ public class Role
     {
         for (IPermission d : c.getPermisssionList())
         {
-            permissionList.add(new Permission(d));
+            permissionList.add(Permission.copy(d));
         }
     }
 
@@ -41,7 +41,7 @@ public class Role
 
         for (IPermission c : permissionList)
         {
-            result.add(new Permission(c));
+            result.add(Permission.copy(c));
         }
 
         this.permissionList = result;

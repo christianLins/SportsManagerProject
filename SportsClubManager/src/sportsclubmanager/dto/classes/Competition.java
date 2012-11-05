@@ -13,21 +13,33 @@ public class Competition
     private List<Team> teamList;
     private List<Match> matchList;
 
-    Competition(ICompetition c)
+    public Competition()
     {
-        dateFrom = c.getDateFrom();
-        dateTo = c.getDateTo();
-        payment = c.getPayment();
+    }
+    private static HashMap<ICompetition, Competition> competitions = new HashMap<>();
 
-        for (ITeam t : c.getTeamList())
+    public static Competition copy(ICompetition competition)
+    {
+        Competition a;
+
+        if (competitions.containsKey(competition))
         {
-            teamList.add(new Team(t));
+            a = competitions.get(competition);
+        }
+        else
+        {
+            a = new Competition();
+
+            a.setDateFrom(competition.getDateFrom());
+            a.setDateTo(competition.getDateTo());
+            a.setPayment(competition.getPayment());
+            a.setTeamList(competition.getTeamList());
+            a.setMatchList(competition.getMatchList());
+
+            competitions.put(competition, a);
         }
 
-        for (IMatch ty : c.getMatchList())
-        {
-            matchList.add(new Match(ty));
-        }
+        return a;
     }
 
     @Override
@@ -73,7 +85,7 @@ public class Competition
 
         for (Team c : teamList)
         {
-            result.add(new Team(c));
+            result.add(Team.copy(c));
         }
 
         return result;
@@ -86,7 +98,7 @@ public class Competition
 
         for (ITeam c : teamList)
         {
-            result.add(new Team(c));
+            result.add(Team.copy(c));
         }
 
         this.teamList = result;
@@ -99,7 +111,7 @@ public class Competition
 
         for (Match c : matchList)
         {
-            result.add(new Match(c));
+            result.add(Match.copy(c));
         }
 
         return result;
@@ -112,7 +124,7 @@ public class Competition
 
         for (IMatch c : matchList)
         {
-            result.add(new Match(c));
+            result.add(Match.copy(c));
         }
 
         this.matchList = result;

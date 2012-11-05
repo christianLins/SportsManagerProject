@@ -22,8 +22,6 @@
     <mapping class="sportsclubmanager.domain.classes.Player"/>
     <mapping class="sportsclubmanager.domain.classes.Role"/>
     <mapping class="sportsclubmanager.domain.classes.Team"/>
-    <mapping class="sportsclubmanager.domain.classes.TeamhasPlayer"/>
-    <mapping class="sportsclubmanager.domain.classes.TeamhasPlayerPK"/>
     <mapping class="sportsclubmanager.domain.classes.Trainer"/>
     <mapping class="sportsclubmanager.domain.classes.TypeOfSport"/>
   </session-factory>

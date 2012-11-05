@@ -10,12 +10,29 @@ public class Trainer
 {
     private List<ClubTeam> clubTeamList = new LinkedList<>();
 
-    Trainer(ITrainer d)
+    public Trainer()
     {
-        for (IClubTeam c : d.getClubTeamList())
+    }
+    private static HashMap<ITrainer, Trainer> trainers = new HashMap<>();
+
+    public static Trainer copy(ITrainer trainer)
+    {
+        Trainer a;
+
+        if (trainers.containsKey(trainer))
         {
-            clubTeamList.add(new ClubTeam(c));
+            a = trainers.get(trainer);
         }
+        else
+        {
+            a = new Trainer();
+
+            a.setClubTeamList(trainer.getClubTeamList());
+
+            trainers.put(trainer, a);
+        }
+
+        return a;
     }
 
     @Override
@@ -38,7 +55,7 @@ public class Trainer
 
         for (IClubTeam d : clubTeamList)
         {
-            result.add(new ClubTeam(d));
+            result.add(ClubTeam.copy(d));
         }
 
         this.clubTeamList = result;

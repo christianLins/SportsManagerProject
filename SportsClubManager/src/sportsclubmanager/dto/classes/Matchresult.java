@@ -1,7 +1,8 @@
 package sportsclubmanager.dto.classes;
 
 import java.io.Serializable;
-import sportsclubmanager.domain.contract.IMatchresult;
+import java.util.*;
+import sportsclubmanager.domain.contract.*;
 
 public class Matchresult
         implements Serializable, IMatchresult
@@ -9,10 +10,30 @@ public class Matchresult
     private double pointsHometeam;
     private double pointsForeignteam;
 
-    Matchresult(IMatchresult matchresult)
+    public Matchresult()
     {
-        pointsHometeam = matchresult.getPointsHometeam();
-        pointsForeignteam = matchresult.getPointsForeignteam();
+    }
+    private static HashMap<IMatchresult, Matchresult> matchresults = new HashMap<>();
+
+    public static Matchresult copy(IMatchresult matchresult)
+    {
+        Matchresult a;
+
+        if (matchresults.containsKey(matchresult))
+        {
+            a = matchresults.get(matchresult);
+        }
+        else
+        {
+            a = new Matchresult();
+
+            a.setPointsHometeam(matchresult.getPointsHometeam());
+            a.setPointsForeignteam(matchresult.getPointsForeignteam());
+
+            matchresults.put(matchresult, a);
+        }
+
+        return a;
     }
 
     @Override

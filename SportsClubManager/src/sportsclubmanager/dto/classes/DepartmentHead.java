@@ -13,13 +13,26 @@ public class DepartmentHead
     public DepartmentHead()
     {
     }
+    private static HashMap<IDepartmentHead, DepartmentHead> departmentHeads = new HashMap<>();
 
-    public DepartmentHead(IDepartmentHead d)
+    public static DepartmentHead copy(IDepartmentHead departmentHead)
     {
-        for (IDepartment c : d.getDepartmentList())
+        DepartmentHead a;
+
+        if (departmentHeads.containsKey(departmentHead))
         {
-            departmentList.add(new Department(c));
+            a = departmentHeads.get(departmentHead);
         }
+        else
+        {
+            a = new DepartmentHead();
+
+            a.setDepartmentList(departmentHead.getDepartmentList());
+
+            departmentHeads.put(departmentHead, a);
+        }
+
+        return a;
     }
 
     @Override
@@ -42,7 +55,7 @@ public class DepartmentHead
 
         for (IDepartment d : departmentList)
         {
-            result.add(new Department(d));
+            result.add(Department.copy(d));
         }
 
         this.departmentList = result;

@@ -8,7 +8,6 @@ import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
 import sportsclubmanager.domain.contract.*;
-import sportsclubmanager.dto.classes.Match;
 
 /**
 
@@ -52,42 +51,6 @@ public class MatchTest
         Match a = new Match();
 
         Assert.assertTrue(a instanceof IMatch);
-    }
-
-    @Test
-    public void hibernateContructorTest()
-    {
-        Integer idMatch = new Random().nextInt();
-
-        Match a = new Match(idMatch);
-
-        Assert.assertEquals(idMatch, a.getIdMatch());
-    }
-
-    @Test
-    public void databaseManagerContructorTest()
-    {
-        Integer idMatch = new Random().nextInt();
-        Date dateFrom = new Date();
-
-        Match a = new Match(idMatch, dateFrom);
-
-        Assert.assertEquals(idMatch, a.getIdMatch());
-        Assert.assertSame(dateFrom, a.getDateFrom());
-    }
-
-    @Test
-    public void idMatchTest()
-    {
-        Match a = new Match();
-
-        int expected = new Random().nextInt(10000);
-        int actual = Integer.MAX_VALUE;
-
-        a.setIdMatch(expected);
-        actual = a.getIdMatch();
-
-        Assert.assertEquals(expected, actual);
     }
 
     @Test

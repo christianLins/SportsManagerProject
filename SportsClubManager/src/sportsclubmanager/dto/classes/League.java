@@ -11,15 +11,31 @@ public class League
     private String description;
     private List<Team> teamList = new LinkedList<>();
 
-    League(ILeague league)
+    public League()
     {
-        this.name = league.getName();
-        this.description = league.getDescription();
+    }
+    private static HashMap<ILeague, League> leagues = new HashMap<>();
 
-        for (ITeam c : league.getTeamList())
+    public static League copy(ILeague league)
+    {
+        League a;
+
+        if (leagues.containsKey(league))
         {
-            teamList.add(new Team(c));
+            a = leagues.get(league);
         }
+        else
+        {
+            a = new League();
+
+            a.setName(league.getName());
+            a.setDescription(league.getDescription());
+            a.setTeamList(league.getTeamList());
+
+            leagues.put(league, a);
+        }
+
+        return a;
     }
 
     @Override
@@ -66,7 +82,7 @@ public class League
 
         for (ITeam c : teamList)
         {
-            result.add(new Team(c));
+            result.add(Team.copy(c));
         }
 
         this.teamList = result;

@@ -8,7 +8,6 @@ import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
 import sportsclubmanager.domain.contract.*;
-import sportsclubmanager.dto.classes.TypeOfSport;
 
 /**
 
@@ -55,42 +54,6 @@ public class TypeOfSportTest
     }
 
     @Test
-    public void hibernateContructorTest()
-    {
-        Integer idTypeOfSport = new Random().nextInt();
-
-        TypeOfSport a = new TypeOfSport(idTypeOfSport);
-
-        Assert.assertEquals(idTypeOfSport, a.getIdTypeOfSport());
-    }
-
-    @Test
-    public void secondHibernateContructorTest()
-    {
-        Integer idTypeOfSport = new Random().nextInt();
-        String name = new Random().nextInt() + "";
-
-        TypeOfSport a = new TypeOfSport(idTypeOfSport, name);
-
-        Assert.assertEquals(idTypeOfSport, a.getIdTypeOfSport());
-        Assert.assertSame(idTypeOfSport, a.getName());
-    }
-
-    @Test
-    public void idAddressTest()
-    {
-        TypeOfSport a = new TypeOfSport();
-
-        int expected = new Random().nextInt(10000);
-        int actual = Integer.MAX_VALUE;
-
-        a.setIdTypeOfSport(expected);
-        actual = a.getIdTypeOfSport();
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
     public void nameTest()
     {
         TypeOfSport a = new TypeOfSport();
@@ -123,7 +86,7 @@ public class TypeOfSportTest
     {
         TypeOfSport a = new TypeOfSport();
 
-        List<IPlayer> expected = new LinkedList<IPlayer>();
+        List<IPlayer> expected = new LinkedList<>();
         expected.add(EasyMock.createMock(IPlayer.class));
         expected.add(EasyMock.createMock(IPlayer.class));
         expected.add(EasyMock.createMock(IPlayer.class));

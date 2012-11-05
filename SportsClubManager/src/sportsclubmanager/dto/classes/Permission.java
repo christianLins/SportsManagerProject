@@ -1,7 +1,8 @@
 package sportsclubmanager.dto.classes;
 
 import java.io.Serializable;
-import sportsclubmanager.domain.contract.IPermission;
+import java.util.*;
+import sportsclubmanager.domain.contract.*;
 
 public class Permission
         implements Serializable, IPermission
@@ -9,10 +10,30 @@ public class Permission
     private String name;
     private String description;
 
-    Permission(IPermission d)
+    public Permission()
     {
-        name = d.getName();
-        description = d.getDescription();
+    }
+    private static HashMap<IPermission, Permission> competitions = new HashMap<>();
+
+    public static Permission copy(IPermission permission)
+    {
+        Permission a;
+
+        if (competitions.containsKey(permission))
+        {
+            a = competitions.get(permission);
+        }
+        else
+        {
+            a = new Permission();
+
+            a.setName(permission.getName());
+            a.setDescription(permission.getDescription());
+
+            competitions.put(permission, a);
+        }
+
+        return a;
     }
 
     @Override

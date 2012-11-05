@@ -10,12 +10,35 @@ public class Player
 {
     private List<TypeOfSport> typeOfSportList;
 
-    Player(IPlayer d)
+    public Player()
     {
-        for (ITypeOfSport c : d.getTypeOfSportList())
+    }
+
+    private Player(IRole role)
+    {
+        super(role);
+    }
+    
+    private static HashMap<IPlayer, Player> players = new HashMap<>();
+
+    public static Player copy(IPlayer player)
+    {
+        Player a;
+
+        if (players.containsKey(player))
         {
-            typeOfSportList.add(new TypeOfSport(c));
+            a = players.get(player);
         }
+        else
+        {
+            a = new Player(player);
+
+            a.setTypeOfSportList(player.getTypeOfSportList());
+
+            players.put(player, a);
+        }
+
+        return a;
     }
 
     @Override
@@ -38,7 +61,7 @@ public class Player
 
         for (ITypeOfSport d : typeOfSportList)
         {
-            result.add(new TypeOfSport(d));
+            result.add(TypeOfSport.copy(d));
         }
 
         this.typeOfSportList = result;

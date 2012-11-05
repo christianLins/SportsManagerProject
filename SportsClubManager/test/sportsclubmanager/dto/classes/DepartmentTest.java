@@ -8,7 +8,6 @@ import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
 import sportsclubmanager.domain.contract.*;
-import sportsclubmanager.dto.classes.Department;
 
 /**
 
@@ -52,42 +51,6 @@ public class DepartmentTest
         Department a = new Department();
 
         Assert.assertTrue(a instanceof IDepartment);
-    }
-
-    @Test
-    public void hibernateContructorTest()
-    {
-        Integer idDepartment = new Random().nextInt();
-
-        Department a = new Department(idDepartment);
-
-        Assert.assertEquals(idDepartment, a.getIdDepartment());
-    }
-
-    @Test
-    public void databaseManagerContructorTest()
-    {
-        int idDepartment = new Random().nextInt();
-        String name = new Random().nextInt() + "";
-
-        Department a = new Department(idDepartment, name);
-
-        Assert.assertEquals(name, a.getIdDepartment());
-        Assert.assertSame(name, a.getName());
-    }
-
-    @Test
-    public void idDepartmentTest()
-    {
-        Department a = new Department();
-
-        int expected = new Random().nextInt(10000);
-        int actual = Integer.MAX_VALUE;
-
-        a.setIdDepartment(expected);
-        actual = a.getIdDepartment();
-
-        Assert.assertEquals(expected, actual);
     }
 
     @Test

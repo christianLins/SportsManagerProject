@@ -43,6 +43,12 @@ public class TypeOfSport
     {
     }
 
+    public TypeOfSport(ITypeOfSport typeOfSport)
+    {
+        this.name = typeOfSport.getName();
+        this.description = typeOfSport.getDescription();
+    }
+
     public TypeOfSport(Integer idTypeOfSport)
     {
         this.idTypeOfSport = idTypeOfSport;

@@ -1,6 +1,7 @@
 package sportsclubmanager.dto.classes;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import sportsclubmanager.domain.contract.*;
 
 public class Address
@@ -11,14 +12,31 @@ public class Address
     private String village;
     private int postalCode;
     private Country country;
+    
+    private static HashMap<IAddress, Address> addresses = new HashMap<>();
 
-    Address(IAddress address)
+    public static Address copy(IAddress address)
     {
-        street = address.getStreet();
-        streetNumber = address.getStreetNumber();
-        village = address.getVillage();
-        postalCode = address.getPostalCode();
-        country = new Country(address.getCountry());
+        Address a;
+
+        if (addresses.containsKey(address))
+        {
+            a = addresses.get(address);
+        }
+        else
+        {
+            a = new Address();
+
+            a.setStreet(address.getStreet());
+            a.setPostalCode(address.getPostalCode());
+            a.setStreetNumber(address.getStreetNumber());
+            a.setVillage(address.getVillage());
+            a.setCountry(address.getCountry());
+
+            addresses.put(address, a);
+        }
+
+        return a;
     }
 
     @Override
@@ -78,6 +96,6 @@ public class Address
     @Override
     public void setCountry(ICountry country)
     {
-        this.country = (Country) country;
+        this.country =  Country.copy(country);
     }
 }

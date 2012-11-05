@@ -7,7 +7,6 @@ package sportsclubmanager.dto.classes;
 import java.util.Random;
 import org.junit.*;
 import sportsclubmanager.domain.contract.IMatchresult;
-import sportsclubmanager.dto.classes.Matchresult;
 
 /**
 
@@ -51,44 +50,6 @@ public class MatchresultTest
         Matchresult a = new Matchresult();
 
         Assert.assertTrue(a instanceof IMatchresult);
-    }
-
-    @Test
-    public void hibernateContructorTest()
-    {
-        Integer idMatchresult = new Random().nextInt();
-
-        Matchresult a = new Matchresult(idMatchresult);
-
-        Assert.assertEquals(idMatchresult, a.getIdMatchresult());
-    }
-
-    @Test
-    public void databaseManagerContructorTest()
-    {
-        Integer idMatchresult = new Random().nextInt();
-        double pointsHometeam = new Random().nextDouble();
-        double pointsForeignteam = new Random().nextDouble();
-
-        Matchresult a = new Matchresult(idMatchresult, pointsHometeam, pointsForeignteam);
-
-        Assert.assertEquals(idMatchresult, a.getIdMatchresult());
-        Assert.assertEquals(pointsHometeam, a.getPointsHometeam(), 0);
-        Assert.assertEquals(pointsForeignteam, a.getPointsForeignteam(), 0);
-    }
-
-    @Test
-    public void idMatchresultTest()
-    {
-        Matchresult a = new Matchresult();
-
-        int expected = new Random().nextInt(10000);
-        int actual = Integer.MAX_VALUE;
-
-        a.setIdMatchresult(expected);
-        actual = a.getIdMatchresult();
-
-        Assert.assertEquals(expected, actual);
     }
 
     @Test

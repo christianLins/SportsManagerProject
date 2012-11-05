@@ -8,7 +8,6 @@ import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
 import sportsclubmanager.domain.contract.*;
-import sportsclubmanager.dto.classes.Team;
 
 /**
 
@@ -55,42 +54,6 @@ public class TeamTest
     }
 
     @Test
-    public void hibernateContructorTest()
-    {
-        Integer idTeam = new Random().nextInt();
-
-        Team a = new Team(idTeam);
-
-        Assert.assertEquals(idTeam, a.getIdTeam());
-    }
-
-    @Test
-    public void secondHibernateContructorTest()
-    {
-        Integer idTeam = new Random().nextInt();
-        String name = new Random().nextInt() + "";
-
-        Team a = new Team(idTeam, name);
-
-        Assert.assertEquals(idTeam, a.getIdTeam());
-        Assert.assertSame(name, a.getName());
-    }
-
-    @Test
-    public void idTeamTest()
-    {
-        Team a = new Team();
-
-        int expected = new Random().nextInt(10000);
-        int actual = Integer.MAX_VALUE;
-
-        a.setIdTeam(expected);
-        actual = a.getIdTeam();
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
     public void nameTest()
     {
         Team a = new Team();
@@ -123,7 +86,7 @@ public class TeamTest
     {
         Team a = new Team();
 
-        List<ICompetition> expected = new LinkedList<ICompetition>();
+        List<ICompetition> expected = new LinkedList<>();
         expected.add(EasyMock.createMock(ICompetition.class));
         expected.add(EasyMock.createMock(ICompetition.class));
         expected.add(EasyMock.createMock(ICompetition.class));
@@ -136,25 +99,11 @@ public class TeamTest
     }
 
     @Test
-    public void clubTeamTest()
-    {
-        Team a = new Team();
-
-        IClubTeam expected = EasyMock.createMock(IClubTeam.class);
-        IClubTeam actual;
-
-        a.setClubTeam(expected);
-        actual = a.getClubTeam();
-
-        Assert.assertSame(expected, actual);
-    }
-
-    @Test
     public void matchListTest()
     {
         Team a = new Team();
 
-        List<IMatch> expected = new LinkedList<IMatch>();
+        List<IMatch> expected = new LinkedList<>();
         expected.add(EasyMock.createMock(IMatch.class));
         expected.add(EasyMock.createMock(IMatch.class));
         expected.add(EasyMock.createMock(IMatch.class));

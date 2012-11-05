@@ -11,16 +11,31 @@ public class TypeOfSport
     private String description;
     private List<Player> playerList = new LinkedList<>();
 
-    TypeOfSport(ITypeOfSport d)
+    public TypeOfSport()
     {
-        this.name = d.getName();
-        this.description = d.getDescription();
+    }
+    private static HashMap<ITypeOfSport, TypeOfSport> typeOfSports = new HashMap<>();
 
+    public static TypeOfSport copy(ITypeOfSport typeOfSport)
+    {
+        TypeOfSport a;
 
-        for (IPlayer p : d.getPlayerList())
+        if (typeOfSports.containsKey(typeOfSport))
         {
-            this.playerList.add(new Player(p));
+            a = typeOfSports.get(typeOfSport);
         }
+        else
+        {
+            a = new TypeOfSport();
+
+            a.setName(typeOfSport.getName());
+            a.setDescription(typeOfSport.getDescription());
+            a.setPlayerList(typeOfSport.getPlayerList());
+
+            typeOfSports.put(typeOfSport, a);
+        }
+
+        return a;
     }
 
     @Override
@@ -67,7 +82,7 @@ public class TypeOfSport
 
         for (IPlayer d : playerList)
         {
-            result.add(new Player(d));
+            result.add(Player.copy(d));
         }
 
         this.playerList = result;

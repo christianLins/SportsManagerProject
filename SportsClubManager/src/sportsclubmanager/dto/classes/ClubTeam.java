@@ -16,25 +16,28 @@ public class ClubTeam
     {
         super();
     }
+    private static HashMap<IClubTeam, ClubTeam> clubTeams = new HashMap<>();
 
-    public ClubTeam(IClubTeam c)
+    public static ClubTeam copy(IClubTeam clubTeam)
     {
-        super(c);
+        ClubTeam a;
 
-        for (IDepartment d : c.getDepartmentList())
+        if (clubTeams.containsKey(clubTeam))
         {
-            this.departmentList.add(new Department(d));
+            a = clubTeams.get(clubTeam);
+        }
+        else
+        {
+            a = new ClubTeam();
+
+            a.setDepartmentList(clubTeam.getDepartmentList());
+            a.setTrainerList(clubTeam.getTrainerList());
+            a.setPlayerList(clubTeam.getPlayerList());
+
+            clubTeams.put(clubTeam, a);
         }
 
-        for (ITrainer d : c.getTrainerList())
-        {
-            this.trainerList.add(new Trainer(d));
-        }
-
-        for (IPlayer d : c.getPlayerList())
-        {
-            this.playerList.add(new Player(d));
-        }
+        return a;
     }
 
     @Override
@@ -57,7 +60,7 @@ public class ClubTeam
 
         for (IDepartment d : departmentList)
         {
-            result.add(new Department(d));
+            result.add(Department.copy(d));
         }
 
         this.departmentList = result;
@@ -84,7 +87,7 @@ public class ClubTeam
 
         for (ITrainer d : trainerList)
         {
-            result.add(new Trainer(d));
+            result.add(Trainer.copy(d));
         }
 
         this.trainerList = result;
@@ -110,7 +113,7 @@ public class ClubTeam
 
         for (IPlayer d : playerList)
         {
-            result.add(new Player(d));
+            result.add(Player.copy(d));
         }
 
         this.playerList = result;

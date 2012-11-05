@@ -7,6 +7,7 @@ package sportsclubmanager.database.test;
 import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
+import sportsclubmanager.database.DatabaseManager;
 import sportsclubmanager.domain.*;
 import sportsclubmanager.domain.contract.*;
 
@@ -74,15 +75,20 @@ public class AddressTest
     @Test
     public void GetAndSetMultipleTest()
     {
-        List<IAddress> expecteds = new LinkedList<IAddress>();
+        List<IAddress> expecteds = new LinkedList<>();
 
         for (int i = 0; i < 2; i++)
         {
             try
             {
-                IAddress expected = EasyMock.createMock(IAddress.class);
+                ICountry country = EasyMock.createMock(ICountry.class);
 
+                IAddress expected = EasyMock.createMock(IAddress.class);
+                EasyMock.expect(expected.getCountry()).andReturn(country);
+                EasyMock.expect(expected.getPostalCode()).andReturn(new Random().nextInt());
                 EasyMock.expect(expected.getStreet()).andReturn("Teststreet" + i);
+                EasyMock.expect(expected.getStreetNumber()).andReturn(new Random().nextInt());
+                EasyMock.expect(expected.getVillage()).andReturn("Testvillage" + i);
 
                 expecteds.add(expected);
                 DomainFacade.set(expected);
@@ -102,6 +108,7 @@ public class AddressTest
             IAddress expected = expecteds.get(i);
             IAddress actual = actuals.get(i);
             Assert.assertEquals(expected.getStreet(), actual.getStreet());
+            Assert.assertEquals(expected.getVillage(), actual.getVillage());
         }
     }
 }

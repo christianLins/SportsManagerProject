@@ -7,7 +7,6 @@ package sportsclubmanager.domain.classes;
 import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.domain.classes.Team;
 import sportsclubmanager.domain.contract.*;
 
 /**
@@ -133,20 +132,6 @@ public class TeamTest
         actual = a.getCompetitionList();
 
         Assert.assertArrayEquals(expected.toArray(), actual.toArray());
-    }
-
-    @Test
-    public void clubTeamTest()
-    {
-        Team a = new Team();
-
-        IClubTeam expected = EasyMock.createMock(IClubTeam.class);
-        IClubTeam actual;
-
-        a.setClubTeam(expected);
-        actual = a.getClubTeam();
-
-        Assert.assertSame(expected, actual);
     }
 
     @Test

@@ -16,23 +16,31 @@ public class Team
     public Team()
     {
     }
+    private static HashMap<ITeam, Team> teams = new HashMap<>();
 
-    public Team(ITeam c)
+    public static Team copy(ITeam team)
     {
-        name = c.getName();
-        description = c.getDescription();
+        Team a;
 
-        for (ICompetition competition : c.getCompetitionList())
+        if (teams.containsKey(team))
         {
-            competitionList.add(new Competition(competition));
+            a = teams.get(team);
+        }
+        else
+        {
+            a = new Team();
+
+            a.setName(team.getName());
+            a.setDescription(team.getDescription());
+            a.setLeague(team.getLeague());
+            a.setCompetitionList(team.getCompetitionList());
+            a.setLeague(team.getLeague());
+            a.setMatchList(team.getMatchList());
+
+            teams.put(team, a);
         }
 
-        for (IMatch match : c.getMatchList())
-        {
-            matchList.add(new Match(match));
-        }
-
-        league = new League(c.getLeague());
+        return a;
     }
 
     @Override
@@ -59,6 +67,7 @@ public class Team
         this.description = description;
     }
 
+    @Override
     public List<ICompetition> getCompetitionList()
     {
         List<ICompetition> result = new LinkedList<>();
@@ -71,13 +80,14 @@ public class Team
         return result;
     }
 
+    @Override
     public void setCompetitionList(List<ICompetition> competitionList)
     {
         List<Competition> result = new LinkedList<>();
 
         for (ICompetition c : competitionList)
         {
-            result.add(new Competition(c));
+            result.add(Competition.copy(c));
         }
 
         this.competitionList = result;
@@ -90,7 +100,7 @@ public class Team
 
         for (IMatch c : matchList)
         {
-            result.add(new Match(c));
+            result.add(Match.copy(c));
         }
 
         return result;
@@ -103,7 +113,7 @@ public class Team
 
         for (IMatch c : matchList)
         {
-            result.add(new Match(c));
+            result.add(Match.copy(c));
         }
 
         this.matchList = result;
@@ -118,6 +128,6 @@ public class Team
     @Override
     public void setLeague(ILeague league)
     {
-        this.league = new League(league);
+        this.league = League.copy(league);
     }
 }

@@ -137,7 +137,7 @@ public class Member
     @Override
     public void setNationality(ICountry nationality)
     {
-        this.nationality = new Country(nationality);
+        this.nationality = Country.copy(nationality);
     }
 
     @Override
@@ -149,7 +149,7 @@ public class Member
     @Override
     public void setAddress(IAddress address)
     {
-        this.address = new Address(address);
+        this.address = Address.copy(address);
     }
 
     @Override

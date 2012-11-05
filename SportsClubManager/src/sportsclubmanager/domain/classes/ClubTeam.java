@@ -75,7 +75,14 @@ public class ClubTeam
 
         for (IPlayer d : players)
         {
-            result.add((Player) d);
+            if (d instanceof Player)
+            {
+                result.add((Player) d);
+            }
+            else
+            {
+                result.add(new Player(d));
+            }
         }
 
         this.players = result;

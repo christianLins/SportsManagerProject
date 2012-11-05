@@ -126,7 +126,7 @@ public class ClubTeamTest
     {
         ClubTeam a = new ClubTeam();
 
-        List<IPlayer> expected = new LinkedList<IPlayer>();
+        List<IPlayer> expected = new LinkedList<>();
         expected.add(EasyMock.createMock(IPlayer.class));
         expected.add(EasyMock.createMock(IPlayer.class));
         expected.add(EasyMock.createMock(IPlayer.class));

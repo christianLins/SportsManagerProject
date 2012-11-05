@@ -30,7 +30,8 @@ public class Member
     private String lastname;
     @Basic(optional = false)
     @Column(name = "DateOfBirth")
-    private String dateOfBirth;
+    @Temporal(TemporalType.DATE)
+    private Date dateOfBirth;
     @Basic(optional = false)
     @Column(name = "MemberFrom")
     @Temporal(TemporalType.DATE)
@@ -62,7 +63,7 @@ public class Member
         this.idMember = idMember;
     }
 
-    public Member(Integer idMember, String prename, String lastname, String dateOfBirth, Date memberFrom)
+    public Member(Integer idMember, String prename, String lastname, Date dateOfBirth, Date memberFrom)
     {
         this.idMember = idMember;
         this.prename = prename;

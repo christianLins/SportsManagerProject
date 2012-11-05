@@ -13,21 +13,32 @@ public class Department
     private List<ClubTeam> clubTeamList = new LinkedList<>();
     private List<TypeOfSport> typeOfSportList = new LinkedList<>();
 
-    Department(IDepartment d)
+    public Department()
     {
-        departmentHead = new DepartmentHead(d.getDepartmentHead());
-        name = d.getName();
-        description = d.getDescription();
+    }
+    private static HashMap<IDepartment, Department> departments = new HashMap<>();
 
-        for (IClubTeam c : d.getClubTeamList())
+    public static Department copy(IDepartment department)
+    {
+        Department a;
+
+        if (departments.containsKey(department))
         {
-            clubTeamList.add(new ClubTeam(c));
+            a = departments.get(department);
+        }
+        else
+        {
+            a = new Department();
+
+            a.setName(department.getName());
+            a.setDescription(department.getDescription());
+            a.setClubTeamList(department.getClubTeamList());
+            a.setTypeOfSportList(department.getTypeOfSportList());
+
+            departments.put(department, a);
         }
 
-        for (ITypeOfSport c : d.getTypeOfSportList())
-        {
-            typeOfSportList.add(new TypeOfSport(c));
-        }
+        return a;
     }
 
     @Override
@@ -74,7 +85,7 @@ public class Department
 
         for (IClubTeam c : clubTeamList)
         {
-            result.add(new ClubTeam(c));
+            result.add(ClubTeam.copy(c));
         }
 
         this.clubTeamList = result;
@@ -100,7 +111,7 @@ public class Department
 
         for (ITypeOfSport c : typeOfSportList)
         {
-            result.add(new TypeOfSport(c));
+            result.add(TypeOfSport.copy(c));
         }
 
         this.typeOfSportList = result;
@@ -115,6 +126,6 @@ public class Department
     @Override
     public void setDepartmentHead(IDepartmentHead departmentHead)
     {
-        this.departmentHead = new DepartmentHead(departmentHead);
+        this.departmentHead = DepartmentHead.copy(departmentHead);
     }
 }

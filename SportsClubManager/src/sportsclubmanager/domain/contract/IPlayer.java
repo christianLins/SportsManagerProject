@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.*;
 
  @author Thomas
  */
-public interface IPlayer
+public interface IPlayer extends IRole
 {
     //    public Player(Integer roleidRole)
     //    {

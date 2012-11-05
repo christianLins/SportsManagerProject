@@ -1,7 +1,7 @@
 package sportsclubmanager.dto.classes;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.*;
 import sportsclubmanager.domain.contract.*;
 
 public class Match
@@ -14,14 +14,34 @@ public class Match
     private Team foreignteam;
     private Team hometeam;
 
-    Match(IMatch c)
+    public Match()
     {
-        dateFrom = c.getDateFrom();
-        dateTo = c.getDateTo();
-        competition = new Competition(c.getCompetition());
-        matchresult = new Matchresult(c.getMatchresult());
-        foreignteam = new Team(c.getForeignteam());
-        hometeam = new Team(c.getHometeam());
+    }
+    private static HashMap<IMatch, Match> matchs = new HashMap<>();
+
+    public static Match copy(IMatch match)
+    {
+        Match a;
+
+        if (matchs.containsKey(match))
+        {
+            a = matchs.get(match);
+        }
+        else
+        {
+            a = new Match();
+
+            a.setDateFrom(match.getDateFrom());
+            a.setDateTo(match.getDateTo());
+            a.setCompetition(match.getCompetition());
+            a.setMatchresult(match.getMatchresult());
+            a.setForeignteam(match.getForeignteam());
+            a.setHometeam(match.getHometeam());
+
+            matchs.put(match, a);
+        }
+
+        return a;
     }
 
     @Override
@@ -57,7 +77,7 @@ public class Match
     @Override
     public void setCompetition(ICompetition competition)
     {
-        this.competition = new Competition(competition);
+        this.competition = Competition.copy(competition);
     }
 
     @Override
@@ -69,7 +89,7 @@ public class Match
     @Override
     public void setMatchresult(IMatchresult matchresult)
     {
-        this.matchresult = new Matchresult(matchresult);
+        this.matchresult = Matchresult.copy(matchresult);
     }
 
     @Override
@@ -81,7 +101,7 @@ public class Match
     @Override
     public void setForeignteam(ITeam foreignteam)
     {
-        this.foreignteam = new Team(foreignteam);
+        this.foreignteam = Team.copy(foreignteam);
     }
 
     @Override
@@ -93,6 +113,6 @@ public class Match
     @Override
     public void setHometeam(ITeam hometeam)
     {
-        this.hometeam = new Team(hometeam);
+        this.hometeam = Team.copy(hometeam);
     }
 }

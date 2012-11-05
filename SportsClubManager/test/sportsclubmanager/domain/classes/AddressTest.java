@@ -7,7 +7,6 @@ package sportsclubmanager.domain.classes;
 import java.util.Random;
 import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.domain.classes.Address;
 import sportsclubmanager.domain.contract.*;
 
 /**
@@ -70,24 +69,6 @@ public class AddressTest
         Assert.assertEquals(streetNumber, a.getStreetNumber());
         Assert.assertSame(village, a.getVillage());
         Assert.assertEquals(postalCode, a.getPostalCode());
-    }
-
-    @Test
-    public void databaseManagerContructorTest()
-    {
-        String street = new Random().nextInt() + "";
-        int streetNumber = new Random().nextInt();
-        String village = new Random().nextInt() + "";
-        int postalCode = new Random().nextInt();
-        ICountry country = EasyMock.createMock(ICountry.class);
-
-        Address a = new Address(street, streetNumber, village, postalCode, country);
-
-        Assert.assertSame(street, a.getStreet());
-        Assert.assertEquals(streetNumber, a.getStreetNumber());
-        Assert.assertSame(village, a.getVillage());
-        Assert.assertEquals(postalCode, a.getPostalCode());
-        Assert.assertSame(country, a.getCountry());
     }
 
     @Test

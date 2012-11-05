@@ -8,7 +8,6 @@ import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
 import sportsclubmanager.domain.contract.*;
-import sportsclubmanager.dto.classes.League;
 
 /**
 
@@ -52,41 +51,6 @@ public class LeagueTest
         League a = new League();
 
         Assert.assertTrue(a instanceof ILeague);
-    }
-
-    @Test
-    public void hibernateContructorTest()
-    {
-        Integer idLeague = new Random().nextInt();
-
-        League a = new League(idLeague);
-
-        Assert.assertEquals(idLeague, a.getIdLeague());
-    }
-
-    @Test
-    public void secondHibernateContructorTest()
-    {
-        Integer idLeague = new Random().nextInt();
-        String name = new Random().nextInt() + "";
-
-        League a = new League(idLeague, name);
-
-        Assert.assertEquals(idLeague, a.getIdLeague());
-    }
-
-    @Test
-    public void idLeagueTest()
-    {
-        League a = new League();
-
-        int expected = new Random().nextInt(10000);
-        int actual = Integer.MAX_VALUE;
-
-        a.setIdLeague(expected);
-        actual = a.getIdLeague();
-
-        Assert.assertEquals(expected, actual);
     }
 
     @Test

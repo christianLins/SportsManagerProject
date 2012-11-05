@@ -7,6 +7,7 @@ package sportsclubmanager.database.test;
 import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
+import sportsclubmanager.database.DatabaseManager;
 import sportsclubmanager.domain.*;
 import sportsclubmanager.domain.contract.ITypeOfSport;
 

@@ -73,7 +73,7 @@ public class TypeOfSportTest
         TypeOfSport a = new TypeOfSport(idTypeOfSport, name);
 
         Assert.assertEquals(idTypeOfSport, a.getIdTypeOfSport());
-        Assert.assertSame(idTypeOfSport, a.getName());
+        Assert.assertSame(name, a.getName());
     }
 
     @Test
@@ -123,7 +123,7 @@ public class TypeOfSportTest
     {
         TypeOfSport a = new TypeOfSport();
 
-        List<IPlayer> expected = new LinkedList<IPlayer>();
+        List<IPlayer> expected = new LinkedList<>();
         expected.add(EasyMock.createMock(IPlayer.class));
         expected.add(EasyMock.createMock(IPlayer.class));
         expected.add(EasyMock.createMock(IPlayer.class));
