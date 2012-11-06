@@ -5,59 +5,63 @@
 package sportsclubmanager.communication.rmi.client;
 
 import java.net.MalformedURLException;
-import java.rmi.Naming;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import sportsclubmanager.controller.CompetitionService;
-import sportsclubmanager.controller.MemberService;
+import java.rmi.*;
 import sportsclubmanager.communication.rmi.server.service.RmiServiceFactory;
+import sportsclubmanager.controller.*;
 
 /**
- * this class provides the server-side services via rmi
- *
- * @author Lins Christian (christian.lins87@gmail.com)
+ this class provides the server-side services via rmi
+
+ @author Lins Christian (christian.lins87@gmail.com)
  */
 public class RmiServiceClient
 {
     private final String host;
     private final int port;
-    
     private RmiServiceFactory factory;
-    
+
     /**
-     * instantiate a new rmi-service-client by passing host and port of the server
-     * 
-     * @param host
-     * @param port
-     * 
-     * @throws CommunicationProblemException (invalid host/port)
+     instantiate a new rmi-service-client by passing host and port of the server
+
+     @param host
+     @param port
+
+     @throws CommunicationProblemException (invalid host/port)
      */
-    public RmiServiceClient(String host, int port) throws CommunicationProblemException {
-        if(host == null || port == 0) throw new NullPointerException();
+    public RmiServiceClient(String host, int port)
+            throws CommunicationProblemException
+    {
+        if (host == null || port == 0)
+        {
+            throw new NullPointerException();
+        }
         this.host = host;
         this.port = port;
         initConnection();
     }
 
-    private void initConnection() throws CommunicationProblemException
-    {        
+    private void initConnection()
+            throws CommunicationProblemException
+    {
         try
         {
             factory = (RmiServiceFactory) Naming.lookup("rmi://" + host + ":" + port + "/RmiSportsClubManagerServiceFactory");
-        } catch( RemoteException | MalformedURLException | NotBoundException e) {
+        }
+        catch (RemoteException | MalformedURLException | NotBoundException e)
+        {
             throw new CommunicationProblemException("Connection could not be established", e);
         }
     }
-    
+
     /**
-     * you get a competition service object from the server
-     * 
-     * @return
-     * @throws RemoteException 
+     you get a competition service object from the server
+
+     @return
+     @throws RemoteException
      */
-    public CompetitionService getCompetitionManager() throws CommunicationProblemException {
+    public CompetitionService getCompetitionManager()
+            throws CommunicationProblemException
+    {
         CompetitionService competitionManager;
         try
         {
@@ -69,14 +73,16 @@ public class RmiServiceClient
         }
         return competitionManager;
     }
-    
+
     /**
-     * you get a member service object from the server
-     * 
-     * @return
-     * @throws RemoteException 
+     you get a member service object from the server
+
+     @return
+     @throws RemoteException
      */
-    public MemberService getMemberManager() throws CommunicationProblemException {
+    public MemberService getMemberManager()
+            throws CommunicationProblemException
+    {
         MemberService memberManager = null;
         try
         {
@@ -88,6 +94,4 @@ public class RmiServiceClient
         }
         return memberManager;
     }
-    
-    
 }

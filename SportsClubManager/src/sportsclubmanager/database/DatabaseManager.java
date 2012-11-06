@@ -12,7 +12,6 @@ import sportsclubmanager.domain.classes.*;
 import sportsclubmanager.domain.contract.*;
 
 /**
-
  @author Thomas
  */
 public class DatabaseManager

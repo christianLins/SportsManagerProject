@@ -5,15 +5,14 @@
 package sportsclubmanager.communication.rmi.server;
 
 /**
- *
- * @author Lins Christian (christian.lins87@gmail.com)
- */
-class RmiServerException extends Exception
-{
 
+ @author Lins Christian (christian.lins87@gmail.com)
+ */
+class RmiServerException
+        extends Exception
+{
     public RmiServerException(java.io.IOException ex)
     {
         super("Rmi could not be started", ex);
     }
-    
 }

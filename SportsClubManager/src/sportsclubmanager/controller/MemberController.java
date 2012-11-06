@@ -4,28 +4,31 @@
  */
 package sportsclubmanager.controller;
 
-import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import sportsclubmanager.domain.CouldNotSaveException;
-import sportsclubmanager.domain.DomainFacade;
+import java.util.logging.*;
+import sportsclubmanager.domain.*;
 import sportsclubmanager.domain.contract.IMember;
-import sportsclubmanager.dto.classes.*;
 
 /**
- *
- * @author Lins Christian (christian.lins87@gmail.com)
+
+ @author Lins Christian (christian.lins87@gmail.com)
  */
-public class MemberController implements MemberService
+public class MemberController
+        implements MemberService
 {
     static MemberController singleton = null;
-    private MemberController(){};
-    
-    public static MemberController getInstance() {
-       if(singleton == null)
-           singleton = new MemberController();
-       
+
+    private MemberController()
+    {
+    }
+
+    public static MemberController getInstance()
+    {
+        if (singleton == null)
+        {
+            singleton = new MemberController();
+        }
+
         return singleton;
     }
 
@@ -33,10 +36,12 @@ public class MemberController implements MemberService
     public IMember getMember(Integer id)
     {
         List<IMember> memberlist = DomainFacade.getAll(IMember.class);
-        for(IMember m : memberlist)
+        for (IMember m : memberlist)
         {
-            if(m.getIdMember()==id)
+            if (m.getIdMember() == id)
+            {
                 return m;
+            }
         }
         return null;
     }
@@ -44,13 +49,16 @@ public class MemberController implements MemberService
     @Override
     public boolean createNewMember(IMember member)
     {
-        if(member != null)
+        if (member != null)
         {
-            try {
+            try
+            {
                 member.setIdMember(getNextMemberId()); //hier Id Set beabsichtigt?
                 DomainFacade.set(member);
                 return true;
-            } catch (CouldNotSaveException ex) {
+            }
+            catch (CouldNotSaveException ex)
+            {
                 Logger.getLogger(MemberController.class.getName()).log(Level.SEVERE, null, ex);
                 return false;
             }
@@ -61,12 +69,15 @@ public class MemberController implements MemberService
     @Override
     public boolean changeMember(IMember changedMember)
     {
-        if(changedMember != null)
+        if (changedMember != null)
         {
-            try {
+            try
+            {
                 DomainFacade.set(changedMember);
                 return true;
-            } catch (CouldNotSaveException ex) {
+            }
+            catch (CouldNotSaveException ex)
+            {
                 Logger.getLogger(MemberController.class.getName()).log(Level.SEVERE, null, ex);
                 return false;
             }
@@ -74,20 +85,23 @@ public class MemberController implements MemberService
         return false;
     }
 
-    
     Integer getNextMemberId()
     {
-        Integer highest = 0; 
+        Integer highest = 0;
         List<IMember> memberlist = DomainFacade.getAll(IMember.class);
-        if(memberlist.isEmpty())
-            return 0;
-        
-        for(IMember m : memberlist)
+        if (memberlist.isEmpty())
         {
-            if(m.getIdMember() > highest)
-                highest = m.getIdMember();
+            return 0;
         }
-        
+
+        for (IMember m : memberlist)
+        {
+            if (m.getIdMember() > highest)
+            {
+                highest = m.getIdMember();
+            }
+        }
+
         return highest++;
     }
 }

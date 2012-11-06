@@ -1,33 +1,14 @@
 package sportsclubmanager.presentation.forms.member;
 
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.List;
-import javax.swing.BorderFactory;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.GroupLayout;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.LayoutStyle;
-import javax.swing.WindowConstants;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import javax.swing.*;
+import javax.swing.event.*;
 import javax.swing.table.DefaultTableModel;
-import javax.xml.bind.ParseConversionEvent;
 import sportsclubmanager.controller.MemberController;
-import sportsclubmanager.controller.MemberService;
 import sportsclubmanager.dto.classes.Member;
-import sportsclubmanager.presentation.basics.AbstractForm;
-import sportsclubmanager.presentation.basics.AbstractMainForm;
+import sportsclubmanager.presentation.basics.*;
 
 /**
  *
@@ -97,7 +78,7 @@ public class SearchMemberForm extends AbstractMainForm {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
         dataExists = false;
-        mController = new MemberController(); 
+        mController =  MemberController.getInstance(); 
         member = new Member();
         
         paneSearch = new JPanel();
