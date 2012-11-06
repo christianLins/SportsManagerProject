@@ -4,6 +4,13 @@
  */
 package sportsclubmanager.controller;
 
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import sportsclubmanager.domain.CouldNotSaveException;
+import sportsclubmanager.domain.DomainFacade;
+import sportsclubmanager.domain.contract.IMember;
 import sportsclubmanager.dto.classes.*;
 
 /**
@@ -12,28 +19,75 @@ import sportsclubmanager.dto.classes.*;
  */
 public class MemberController implements MemberService
 {
+    static MemberController singleton = null;
+    private MemberController(){};
     
     public static MemberController getInstance() {
-        // implement as singleton
+       if(singleton == null)
+           singleton = new MemberController();
+       
+        return singleton;
+    }
+
+    @Override
+    public IMember getMember(Integer id)
+    {
+        List<IMember> memberlist = DomainFacade.getAll(IMember.class);
+        for(IMember m : memberlist)
+        {
+            if(m.getIdMember()==id)
+                return m;
+        }
         return null;
     }
 
     @Override
-    public Member getMember(Integer id)
+    public boolean createNewMember(IMember member)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if(member != null)
+        {
+            try {
+                member.setIdMember(getNextMemberId()); //hier Id Set beabsichtigt?
+                DomainFacade.set(member);
+                return true;
+            } catch (CouldNotSaveException ex) {
+                Logger.getLogger(MemberController.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+            }
+        }
+        return false;
     }
 
     @Override
-    public boolean createNewMember()
+    public boolean changeMember(IMember changedMember)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if(changedMember != null)
+        {
+            try {
+                DomainFacade.set(changedMember);
+                return true;
+            } catch (CouldNotSaveException ex) {
+                Logger.getLogger(MemberController.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+            }
+        }
+        return false;
     }
 
-    @Override
-    public boolean changeMember()
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
     
+    Integer getNextMemberId()
+    {
+        Integer highest = 0; 
+        List<IMember> memberlist = DomainFacade.getAll(IMember.class);
+        if(memberlist.isEmpty())
+            return 0;
+        
+        for(IMember m : memberlist)
+        {
+            if(m.getIdMember() > highest)
+                highest = m.getIdMember();
+        }
+        
+        return highest++;
+    }
 }

@@ -5,6 +5,8 @@
 package sportsclubmanager.controller;
 
 import java.io.Serializable;
+import java.util.Date;
+import sportsclubmanager.domain.contract.IMember;
 import sportsclubmanager.dto.classes.Member;
 
 /**
@@ -13,9 +15,9 @@ import sportsclubmanager.dto.classes.Member;
  */
 public interface MemberService extends Serializable
 {
-    public Member getMember(Integer id); // add paraemeters
-    public boolean createNewMember();
-    public boolean changeMember();
+    public IMember getMember(Integer id); // add paraemeters
+    public boolean createNewMember(IMember member);
+    public boolean changeMember(IMember changedMember);
     
     
 }
