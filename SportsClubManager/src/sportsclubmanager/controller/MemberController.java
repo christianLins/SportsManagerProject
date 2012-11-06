@@ -19,7 +19,7 @@ public class MemberController implements MemberService
     }
 
     @Override
-    public Member getMember()
+    public Member getMember(Integer id)
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }

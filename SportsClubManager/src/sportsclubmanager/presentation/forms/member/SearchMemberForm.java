@@ -12,6 +12,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import sportsclubmanager.controller.MemberService;
 import sportsclubmanager.presentation.basics.AbstractForm;
 import sportsclubmanager.presentation.basics.AbstractMainForm;
 
@@ -58,7 +59,7 @@ public class SearchMemberForm extends AbstractForm {
             
             public void mouseClicked(MouseEvent evt) {
                 if (evt.isMetaDown()) {
-                    int row = tabMember.getSelectedRow();
+                    final int row = tabMember.getSelectedRow();
                     
                     JPopupMenu pop = new JPopupMenu();
                     JMenuItem edit = new JMenuItem("Edit member Data");
@@ -67,9 +68,11 @@ public class SearchMemberForm extends AbstractForm {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             NewMemberForm changeMember = new NewMemberForm(null);
-                             //MemberID id = tabMember.getModel().getValueAt(row, 1);
-                            //Member member = getMember(id);
-                            //changeMember.setMemberData(Member member);
+                            MemberService member = null;
+                            Integer id = (Integer)tabMember.getModel().getValueAt(row, 1);
+                            member.getMember(id);
+                            changeMember.setMemberData(member);                            
+                             
                             //form.displayAddMember(member);
                             throw new UnsupportedOperationException("Not supported yet.");
                         }

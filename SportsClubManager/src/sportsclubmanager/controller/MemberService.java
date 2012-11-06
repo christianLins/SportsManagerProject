@@ -13,7 +13,7 @@ import sportsclubmanager.dto.classes.Member;
  */
 public interface MemberService extends Serializable
 {
-    public Member getMember(); // add paraemeters
+    public Member getMember(Integer id); // add paraemeters
     public boolean createNewMember();
     public boolean changeMember();
     

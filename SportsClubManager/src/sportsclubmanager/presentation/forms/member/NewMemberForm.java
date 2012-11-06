@@ -12,6 +12,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
+import sportsclubmanager.controller.MemberService;
 import sportsclubmanager.presentation.basics.AbstractMainForm;
 
 /**
@@ -460,7 +461,7 @@ public class NewMemberForm extends AbstractMainForm {
         // TODO add your handling code here:
     }
 
-    public void setMemberData(/*MemberObject member*/){
+    public void setMemberData(MemberService member){
 //        txtfieldFName.setText(member.getFirstName());
 //        txtfieldLName.setText(member.getLastName());  
 //        txtfieldAddress.setText(member.getAddress());
