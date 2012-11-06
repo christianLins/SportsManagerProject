@@ -5,3 +5,10 @@
 /SportsClubManager/build/
 /SportsClubManager/.gitignore
 /SportsClubManager/nbproject/build-impl.xml
+/PipesAndFilters/nbproject/private/
+/PipesAndFilters/nbproject/project.properties
+/PipesAndFilters/build.xml
+/PipesAndFilters/dist/
+/PipesAndFilters/build/
+/PipesAndFilters/.gitignore
+/PipesAndFilters/nbproject/build-impl.xml
