@@ -2,23 +2,17 @@ package sportsclubmanager.presentation.forms;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTable;
 import javax.swing.LayoutStyle;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
-import sportsclubmanager.controller.MemberService;
 import sportsclubmanager.presentation.basics.AbstractForm;
 import sportsclubmanager.presentation.forms.competition.AddCompetitionResultsForm;
 import sportsclubmanager.presentation.forms.competition.ChangeCompetitionTeam;
@@ -145,6 +139,7 @@ public class SportsClubManager extends AbstractForm {
         //show match results
         btnShowCompetition.setText("Show Competition");
         btnShowCompetition.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnShowResultActionPerformed(evt);
             }
@@ -153,6 +148,7 @@ public class SportsClubManager extends AbstractForm {
         //add match results
         btnAddResult.setText("Add Result");
         btnAddResult.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddResultActionPerformed(evt);
             }
@@ -160,6 +156,7 @@ public class SportsClubManager extends AbstractForm {
 
         btnCreateCompet.setText("Create Competition");
         btnCreateCompet.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCreateCompetActionPerformed(evt);
             }
@@ -168,6 +165,7 @@ public class SportsClubManager extends AbstractForm {
 
         btnChangeTeam.setText("Change Team");
         btnChangeTeam.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChangeTeamActionPerformed(evt);
             }

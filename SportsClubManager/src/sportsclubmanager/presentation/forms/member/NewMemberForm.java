@@ -1,14 +1,24 @@
 package sportsclubmanager.presentation.forms.member;
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+import sportsclubmanager.controller.MemberController;
 import sportsclubmanager.controller.MemberService;
+import sportsclubmanager.domain.classes.DepartmentHead;
+import sportsclubmanager.dto.classes.Member;
 import sportsclubmanager.presentation.basics.AbstractForm;
 import sportsclubmanager.presentation.basics.AbstractMainForm;
 
@@ -59,6 +69,10 @@ public class NewMemberForm extends AbstractMainForm {
     private JTextField txtfieldMail;
     private JTextField txtfieldPhone;
     private JTextField txtfieldPostCode;
+    
+    private Member member;
+    private MemberController mController;
+    
     // End of variables declaration
     
     /**
@@ -73,6 +87,9 @@ public class NewMemberForm extends AbstractMainForm {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
+        member = new Member();
+        mController = new MemberController();
+        
         panel = new JPanel();
         panePersonData = new JPanel();
         lblFName = new JLabel();
@@ -118,56 +135,22 @@ public class NewMemberForm extends AbstractMainForm {
         setTitle("Member Data");
         setMinimumSize(new java.awt.Dimension(848, 549));
         setPreferredSize(new java.awt.Dimension(848, 549));
-
         
 
         panePersonData.setBorder(javax.swing.BorderFactory.createTitledBorder("Person Data"));
 
         lblFName.setText("First Name");
-
-        txtfieldFName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfieldFNameActionPerformed(evt);
-            }
-        });
-
         lblLName.setText("Last Name");
-
         lblAddress.setText("Address");
-
-        txtfieldAddress.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfieldAddressActionPerformed(evt);
-            }
-        });
-
         lblPostCode.setText("Post Code");
-
         lblCity.setText("City");
-
-        txtfieldCity.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfieldCityActionPerformed(evt);
-            }
-        });
-
         lblCountry.setText("Country");
-
         lblMail.setText("Mail");
-
         lblBirthDate.setText("Birth Date");
-
         lblGender.setText("Gender");
-
         lblPhone.setText("Phone");
 
-        radioFemale.setText("female");
-        radioFemale.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioFemaleActionPerformed(evt);
-            }
-        });
-
+        radioFemale.setText("female");       
         radioMale.setText("male");
 
         javax.swing.GroupLayout panePersonDataLayout = new javax.swing.GroupLayout(panePersonData);
@@ -272,42 +255,21 @@ public class NewMemberForm extends AbstractMainForm {
         paneMembershipData.setBorder(javax.swing.BorderFactory.createTitledBorder("Membership Data"));
 
         lblEntryDate.setText("Entry Date");
-
         lblSport.setText("Sport/s");
-
+        
         radioFootball.setText("Football");
-
-        radioVolleyball.setText("Volleyball");
-        radioVolleyball.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioVolleyballActionPerformed(evt);
-            }
-        });
-
-        radioHandball.setText("Handball");
-
+        radioVolleyball.setText("Volleyball");       
+        radioHandball.setText("Handball");        
         radioIceHockey.setText("IceHockey");
-        radioIceHockey.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioIceHockeyActionPerformed(evt);
-            }
-        });
-
+        
         lblDepartment.setText("Department");
-
-        comboDepartment.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        String [] comboDeps = getDepartments();         
+        comboDepartment.setModel(new DefaultComboBoxModel(comboDeps));        
 
         lblRole.setText("Role");
 
-        radioAdmin.setText("Administrator");
-        radioAdmin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioAdminActionPerformed(evt);
-            }
-        });
-
+        radioAdmin.setText("Administrator");       
         radioTrainer.setText("Trainer");
-
         radioPlayer.setText("Player");
 
         lblTeam.setText("Team");
@@ -385,7 +347,23 @@ public class NewMemberForm extends AbstractMainForm {
         );
 
         btnSaveMember.setText("Save Member");
+        btnSaveMember.addActionListener(new ActionListener() {
 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                setMemberData();
+                boolean success = true;
+                
+                if(mController.createNewMember() == success){
+                    JOptionPane.showMessageDialog(parent, "Saved member");
+                }
+                else{
+                    JOptionPane.showMessageDialog(parent, "An error occured! Could not create member");
+                }
+                
+            }           
+        });
+        
         javax.swing.GroupLayout paneNewMemberLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(paneNewMemberLayout);
         paneNewMemberLayout.setHorizontalGroup(
@@ -426,73 +404,48 @@ public class NewMemberForm extends AbstractMainForm {
         pack();
     }// </editor-fold>
 
-    private void txtfieldFNameActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+    private void setMemberData(){
+        member.setPrename(txtfieldFName.getText());
+        member.setLastname(txtfieldLName.getText());
+        member.setAddress(Integer.parseInt(txtfieldAddress.getText()));
+        member.setNationality(Integer.parseInt(txtfieldCountry.getText()));
+        member.setDateOfBirth(dateChooserBirth.getDate());
+        member.setEmailAddress(txtfieldMail.getText());
+        member.setTelephonenumber(txtfieldPhone.getText());
+        member.setMemberFrom(dateChooserEntry.getDate());
+        
+        boolean gender = false;
+        if(radioFemale.isSelected()){
+           gender = true;
+        }
+        member.setGender(gender);
+        
+        List<Integer> roles = new LinkedList<Integer>();
+        if(radioAdmin.isSelected()){
+            roles.add(1);
+        }
+        if(radioTrainer.isSelected()){
+            roles.add(2);
+        }
+        if(radioPlayer.isSelected()){
+            roles.add(3);
+        }
+        member.setRoleList(roles);                  
     }
-
-    private void txtfieldAddressActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void txtfieldCityActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void radioVolleyballActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void radioIceHockeyActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void radioFemaleActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void radioAdminActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
+    
+  
     private void comboTeamActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }
+    }   
 
-    public void setMemberData(MemberService member){
-//        txtfieldFName.setText(member.getFirstName());
-//        txtfieldLName.setText(member.getLastName());  
-//        txtfieldAddress.setText(member.getAddress());
-//        txtfieldPostCode.setText(member.getPLZ());
-//        txtfieldCity.setText(member.getCity());
-//        txtfieldCountry.setText(member.getCountry());
-//        txtfieldPhone.setText(member.getPhone());
-//        txtfieldMail.setText(member.getMail);
+    private String[] getDepartments() {
+//        DepartmentHead depHead = new DepartmentHead();
+//        Object[] list = depHead.getDepartmentList().toArray();            
+        String [] deps = null;
         
-        //set comboDepartment focus
-//        dateChooserBirth.setDate(member.getBirthday());
-//        dateChooserEntry.setDate(member.getEntryDate());
-        
-//        if(member.getGender() == male){
-//            radioMale.setSelected(true);
-//        }
-//        else{
-//            radioFemale.setSelected(true);
-//        }
-        
-//        if(member.getRole() == "admin"){
-//            radioAdmin.setSelected(true);
-//        }
-//        else if(member.getRole() == "Trainer"){
-//            radioTrainer.setSelected(true);
-//        }
-//        else{
-//            radioPlayer.setSelected(true);
-//        }
-        
-        //TODO: set member sport
-                
-          
+//        for(int i = 0; i < list.length; i++){
+//            deps[i] = list[i].toString();
+//        }       
+        return deps;
     }
-
-    
 }
