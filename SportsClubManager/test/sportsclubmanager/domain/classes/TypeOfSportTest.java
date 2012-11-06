@@ -7,7 +7,6 @@ package sportsclubmanager.domain.classes;
 import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.domain.classes.TypeOfSport;
 import sportsclubmanager.domain.contract.*;
 
 /**
@@ -61,7 +60,7 @@ public class TypeOfSportTest
 
         TypeOfSport a = new TypeOfSport(idTypeOfSport);
 
-        Assert.assertEquals(idTypeOfSport, a.getIdTypeOfSport());
+        Assert.assertEquals(idTypeOfSport, a.getId());
     }
 
     @Test
@@ -72,8 +71,8 @@ public class TypeOfSportTest
 
         TypeOfSport a = new TypeOfSport(idTypeOfSport, name);
 
-        Assert.assertEquals(idTypeOfSport, a.getIdTypeOfSport());
-        Assert.assertSame(idTypeOfSport, a.getName());
+        Assert.assertEquals(idTypeOfSport, a.getId());
+        Assert.assertSame(name, a.getName());
     }
 
     @Test
@@ -84,8 +83,8 @@ public class TypeOfSportTest
         int expected = new Random().nextInt(10000);
         int actual = Integer.MAX_VALUE;
 
-        a.setIdTypeOfSport(expected);
-        actual = a.getIdTypeOfSport();
+        a.setId(expected);
+        actual = a.getId();
 
         Assert.assertEquals(expected, actual);
     }
@@ -123,7 +122,7 @@ public class TypeOfSportTest
     {
         TypeOfSport a = new TypeOfSport();
 
-        List<IPlayer> expected = new LinkedList<IPlayer>();
+        List<IPlayer> expected = new LinkedList<>();
         expected.add(EasyMock.createMock(IPlayer.class));
         expected.add(EasyMock.createMock(IPlayer.class));
         expected.add(EasyMock.createMock(IPlayer.class));

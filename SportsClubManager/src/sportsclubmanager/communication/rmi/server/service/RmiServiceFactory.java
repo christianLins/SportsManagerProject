@@ -4,19 +4,19 @@
  */
 package sportsclubmanager.communication.rmi.server.service;
 
-import sportsclubmanager.controller.MemberService;
-import sportsclubmanager.controller.CompetitionService;
-import java.rmi.Remote;
-import java.rmi.RemoteException;
+import java.rmi.*;
+import sportsclubmanager.controller.*;
 
 /**
- *
- * @author Lins Christian (christian.lins87@gmail.com)
+
+ @author Lins Christian (christian.lins87@gmail.com)
  */
-public interface RmiServiceFactory extends Remote
+public interface RmiServiceFactory
+        extends Remote
 {
-    
-    public CompetitionService getCompetitionManager() throws RemoteException;
-    public MemberService getMemberManager() throws RemoteException;
-    
+    public CompetitionService getCompetitionManager()
+            throws RemoteException;
+
+    public MemberService getMemberManager()
+            throws RemoteException;
 }

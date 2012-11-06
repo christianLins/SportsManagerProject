@@ -51,7 +51,7 @@ public class ClubTeam
 
     public ClubTeam(Integer idTeam)
     {
-        this.idTeam = idTeam;
+        super(idTeam);
     }
 
     @XmlTransient
@@ -75,7 +75,14 @@ public class ClubTeam
 
         for (IPlayer d : players)
         {
-            result.add((Player) d);
+            if (d instanceof Player)
+            {
+                result.add((Player) d);
+            }
+            else
+            {
+                result.add(new Player(d));
+            }
         }
 
         this.players = result;
@@ -163,5 +170,11 @@ public class ClubTeam
     public String toString()
     {
         return "sportsclubmanager.domain.classes.ClubTeam[ idTeam=" + idTeam + " ]";
+    }
+
+    @Override
+    public Integer getId()
+    {
+        return this.idTeam;
     }
 }

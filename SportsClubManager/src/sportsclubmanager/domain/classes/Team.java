@@ -53,12 +53,13 @@ public class Team
         this.name = name;
     }
 
-    public Integer getIdTeam()
+    @Override
+    public Integer getId()
     {
         return idTeam;
     }
 
-    public void setIdTeam(Integer idTeam)
+    public void setId(Integer idTeam)
     {
         this.idTeam = idTeam;
     }

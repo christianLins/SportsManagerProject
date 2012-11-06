@@ -4,16 +4,14 @@
  */
 package sportsclubmanager.domain.contract;
 
-import java.util.*;
-import javax.xml.bind.annotation.*;
+import java.util.List;
 
 /**
 
  @author Thomas
  */
-public interface ITrainer
+public interface ITrainer extends IRole
 {
-    @XmlTransient
     List<IClubTeam> getClubTeamList();
 
     void setClubTeamList(List<IClubTeam> clubTeamList);

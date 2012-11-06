@@ -7,8 +7,7 @@ package sportsclubmanager.dto.classes;
 import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.domain.contract.*;
-import sportsclubmanager.dto.classes.TypeOfSport;
+import sportsclubmanager.dto.contract.ITypeOfSport;
 
 /**
 
@@ -55,39 +54,18 @@ public class TypeOfSportTest
     }
 
     @Test
-    public void hibernateContructorTest()
+    public void copyTest()
     {
-        Integer idTypeOfSport = new Random().nextInt();
+        sportsclubmanager.domain.contract.ITypeOfSport t4 = EasyMock.createMock(sportsclubmanager.domain.contract.ITypeOfSport.class);
+                EasyMock.expect(t4.getId()).andReturn(2).anyTimes();
+        EasyMock.expect(t4.getName()).andReturn("name4").anyTimes();
+        EasyMock.expect(t4.getDescription()).andReturn("description4").anyTimes();
+        EasyMock.replay(t4);
 
-        TypeOfSport a = new TypeOfSport(idTypeOfSport);
+        sportsclubmanager.dto.contract.ITypeOfSport actual = TypeOfSport.copy(t4);
 
-        Assert.assertEquals(idTypeOfSport, a.getIdTypeOfSport());
-    }
-
-    @Test
-    public void secondHibernateContructorTest()
-    {
-        Integer idTypeOfSport = new Random().nextInt();
-        String name = new Random().nextInt() + "";
-
-        TypeOfSport a = new TypeOfSport(idTypeOfSport, name);
-
-        Assert.assertEquals(idTypeOfSport, a.getIdTypeOfSport());
-        Assert.assertSame(idTypeOfSport, a.getName());
-    }
-
-    @Test
-    public void idAddressTest()
-    {
-        TypeOfSport a = new TypeOfSport();
-
-        int expected = new Random().nextInt(10000);
-        int actual = Integer.MAX_VALUE;
-
-        a.setIdTypeOfSport(expected);
-        actual = a.getIdTypeOfSport();
-
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(t4.getDescription(), actual.getDescription());
+        Assert.assertEquals(t4.getName(), actual.getName());
     }
 
     @Test
@@ -123,13 +101,12 @@ public class TypeOfSportTest
     {
         TypeOfSport a = new TypeOfSport();
 
-        List<IPlayer> expected = new LinkedList<IPlayer>();
-        expected.add(EasyMock.createMock(IPlayer.class));
-        expected.add(EasyMock.createMock(IPlayer.class));
-        expected.add(EasyMock.createMock(IPlayer.class));
-        expected.add(EasyMock.createMock(IPlayer.class));
+        List<Integer> expected = new LinkedList<>();
+        expected.add(1);
+        expected.add(2);
+        expected.add(3);
 
-        List<IPlayer> actual;
+        List<Integer> actual;
 
         a.setPlayerList(expected);
         actual = a.getPlayerList();

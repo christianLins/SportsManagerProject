@@ -10,6 +10,8 @@ package sportsclubmanager.domain.contract;
  */
 public interface IAddress
 {
+    Integer getId();
+
     ICountry getCountry();
 
     int getPostalCode();

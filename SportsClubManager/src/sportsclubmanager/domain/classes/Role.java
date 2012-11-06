@@ -45,12 +45,12 @@ public class Role
         this.idRole = idRole;
     }
 
-    public Integer getIdRole()
+    public Integer getId()
     {
         return idRole;
     }
 
-    public void setIdRole(Integer idRole)
+    public void setId(Integer idRole)
     {
         this.idRole = idRole;
     }

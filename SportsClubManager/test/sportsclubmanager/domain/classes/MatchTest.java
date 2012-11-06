@@ -7,7 +7,6 @@ package sportsclubmanager.domain.classes;
 import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.domain.classes.Match;
 import sportsclubmanager.domain.contract.*;
 
 /**
@@ -61,7 +60,7 @@ public class MatchTest
 
         Match a = new Match(idMatch);
 
-        Assert.assertEquals(idMatch, a.getIdMatch());
+        Assert.assertEquals(idMatch, a.getId());
     }
 
     @Test
@@ -72,7 +71,7 @@ public class MatchTest
 
         Match a = new Match(idMatch, dateFrom);
 
-        Assert.assertEquals(idMatch, a.getIdMatch());
+        Assert.assertEquals(idMatch, a.getId());
         Assert.assertSame(dateFrom, a.getDateFrom());
     }
 
@@ -84,8 +83,8 @@ public class MatchTest
         int expected = new Random().nextInt(10000);
         int actual = Integer.MAX_VALUE;
 
-        a.setIdMatch(expected);
-        actual = a.getIdMatch();
+        a.setId(expected);
+        actual = a.getId();
 
         Assert.assertEquals(expected, actual);
     }

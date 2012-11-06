@@ -4,13 +4,13 @@
  */
 package sportsclubmanager.domain.contract;
 
-import java.util.*;
+import java.util.List;
 
 /**
 
  @author Thomas
  */
-public interface IDepartmentHead
+public interface IDepartmentHead extends IRole
 {
     List<IDepartment> getDepartmentList();
 

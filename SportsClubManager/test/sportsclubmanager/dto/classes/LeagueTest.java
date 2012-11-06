@@ -5,10 +5,8 @@
 package sportsclubmanager.dto.classes;
 
 import java.util.*;
-import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.domain.contract.*;
-import sportsclubmanager.dto.classes.League;
+import sportsclubmanager.dto.contract.ILeague;
 
 /**
 
@@ -55,41 +53,6 @@ public class LeagueTest
     }
 
     @Test
-    public void hibernateContructorTest()
-    {
-        Integer idLeague = new Random().nextInt();
-
-        League a = new League(idLeague);
-
-        Assert.assertEquals(idLeague, a.getIdLeague());
-    }
-
-    @Test
-    public void secondHibernateContructorTest()
-    {
-        Integer idLeague = new Random().nextInt();
-        String name = new Random().nextInt() + "";
-
-        League a = new League(idLeague, name);
-
-        Assert.assertEquals(idLeague, a.getIdLeague());
-    }
-
-    @Test
-    public void idLeagueTest()
-    {
-        League a = new League();
-
-        int expected = new Random().nextInt(10000);
-        int actual = Integer.MAX_VALUE;
-
-        a.setIdLeague(expected);
-        actual = a.getIdLeague();
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
     public void nameTest()
     {
         League a = new League();
@@ -122,12 +85,12 @@ public class LeagueTest
     {
         League a = new League();
 
-        List<ITeam> expected = new LinkedList<ITeam>();
-        expected.add(EasyMock.createMock(ITeam.class));
-        expected.add(EasyMock.createMock(ITeam.class));
-        expected.add(EasyMock.createMock(ITeam.class));
+        List<Integer> expected = new LinkedList<>();
+        expected.add(1);
+        expected.add(2);
+        expected.add(3);
 
-        List<ITeam> actual;
+        List<Integer> actual;
 
         a.setTeamList(expected);
         actual = a.getTeamList();

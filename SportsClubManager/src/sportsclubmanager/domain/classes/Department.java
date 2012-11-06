@@ -84,12 +84,12 @@ public class Department
         }
     }
 
-    public Integer getIdDepartment()
+    public Integer getId()
     {
         return idDepartment;
     }
 
-    public void setIdDepartment(Integer idDepartment)
+    public void setId(Integer idDepartment)
     {
         this.idDepartment = idDepartment;
     }

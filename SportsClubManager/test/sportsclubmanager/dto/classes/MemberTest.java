@@ -5,10 +5,8 @@
 package sportsclubmanager.dto.classes;
 
 import java.util.*;
-import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.domain.contract.*;
-import sportsclubmanager.dto.classes.Member;
+import sportsclubmanager.dto.contract.IMember;
 
 /**
 
@@ -55,34 +53,6 @@ public class MemberTest
     }
 
     @Test
-    public void hibernateContructorTest()
-    {
-        Integer idMember = new Random().nextInt();
-
-        Member a = new Member(idMember);
-
-        Assert.assertEquals(idMember, a.getIdMember());
-    }
-
-    @Test
-    public void secondHibernateContructorTest()
-    {
-        Integer idMember = new Random().nextInt();
-        String prename = new Random().nextInt() + "";
-        String lastname = new Random().nextInt() + "";
-        Date dateOfBirth = new Date();
-        Date memberFrom = new Date();
-
-        Member a = new Member(idMember, prename, lastname, dateOfBirth, memberFrom);
-
-        Assert.assertEquals(idMember, a.getIdMember());
-        Assert.assertSame(prename, a.getPrename());
-        Assert.assertSame(lastname, a.getLastname());
-        Assert.assertSame(dateOfBirth, a.getDateOfBirth());
-        Assert.assertSame(memberFrom, a.getMemberFrom());
-    }
-
-    @Test
     public void idMemberTest()
     {
         Member a = new Member();
@@ -90,8 +60,8 @@ public class MemberTest
         int expected = new Random().nextInt(10000);
         int actual = Integer.MAX_VALUE;
 
-        a.setIdMember(expected);
-        actual = a.getIdMember();
+        a.setId(expected);
+        actual = a.getId();
 
         Assert.assertEquals(expected, actual);
     }
@@ -213,13 +183,13 @@ public class MemberTest
     {
         Member a = new Member();
 
-        ICountry expected = EasyMock.createMock(ICountry.class);
-        ICountry actual;
+        Integer actual;
+        Integer country = 4;
 
-        a.setNationality(expected);
+        a.setNationality(country);
         actual = a.getNationality();
 
-        Assert.assertSame(expected, actual);
+        Assert.assertEquals(country, actual);
     }
 
     @Test
@@ -227,13 +197,13 @@ public class MemberTest
     {
         Member a = new Member();
 
-        IAddress expected = EasyMock.createMock(IAddress.class);
-        IAddress actual;
+        Integer expected = 2;
+        Integer actual;
 
         a.setAddress(expected);
         actual = a.getAddress();
 
-        Assert.assertSame(expected, actual);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -241,12 +211,12 @@ public class MemberTest
     {
         Member a = new Member();
 
-        List<IRole> expected = new LinkedList<IRole>();
-        expected.add(EasyMock.createMock(IRole.class));
-        expected.add(EasyMock.createMock(IRole.class));
-        expected.add(EasyMock.createMock(IRole.class));
+        List<Integer> expected = new LinkedList<>();
+        expected.add(1);
+        expected.add(2);
+        expected.add(3);
 
-        List<IRole> actual;
+        List<Integer> actual;
 
         a.setRoleList(expected);
         actual = a.getRoleList();

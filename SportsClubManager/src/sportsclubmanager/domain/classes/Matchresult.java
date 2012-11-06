@@ -47,12 +47,12 @@ public class Matchresult
         this.pointsForeignteam = pointsForeignteam;
     }
 
-    public Integer getIdMatchresult()
+    public Integer getId()
     {
         return idMatchresult;
     }
 
-    public void setIdMatchresult(Integer idMatchresult)
+    public void setId(Integer idMatchresult)
     {
         this.idMatchresult = idMatchresult;
     }

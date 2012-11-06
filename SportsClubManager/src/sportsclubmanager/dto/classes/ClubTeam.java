@@ -2,117 +2,97 @@ package sportsclubmanager.dto.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import sportsclubmanager.domain.contract.*;
+import sportsclubmanager.dto.contract.*;
 
 public class ClubTeam
         extends Team
         implements Serializable, IClubTeam
 {
-    private List<Department> departmentList = new LinkedList<>();
-    private List<Trainer> trainerList = new LinkedList<>();
-    private List<Player> playerList = new LinkedList<>();
+    private List<Integer> departmentList = new LinkedList<>();
+    private List<Integer> trainerList = new LinkedList<>();
+    private List<Integer> playerList = new LinkedList<>();
 
     public ClubTeam()
     {
         super();
     }
+    private static HashMap<sportsclubmanager.domain.contract.IClubTeam, ClubTeam> clubTeams = new HashMap<>();
 
-    public ClubTeam(IClubTeam c)
+    public static ClubTeam copy(sportsclubmanager.domain.contract.IClubTeam clubTeam)
     {
-        super(c);
+        ClubTeam a;
 
-        for (IDepartment d : c.getDepartmentList())
+        if (clubTeams.containsKey(clubTeam))
         {
-            this.departmentList.add(new Department(d));
+            a = clubTeams.get(clubTeam);
+        }
+        else
+        {
+            a = new ClubTeam();
+
+            List<Integer> l = new LinkedList<>();
+
+            for (sportsclubmanager.domain.contract.IDepartment t : clubTeam.getDepartmentList())
+            {
+                l.add(t.getId());
+            }
+            a.setDepartmentList(l);
+
+            List<Integer> l2 = new LinkedList<>();
+
+            for (sportsclubmanager.domain.contract.ITrainer t : clubTeam.getTrainerList())
+            {
+                l.add(t.getId());
+            }
+            a.setTrainerList(l2);
+
+            List<Integer> l3 = new LinkedList<>();
+
+            for (sportsclubmanager.domain.contract.IPlayer t : clubTeam.getPlayerList())
+            {
+                l.add(t.getId());
+            }
+            a.setPlayerList(l3);
+
+            clubTeams.put(clubTeam, a);
         }
 
-        for (ITrainer d : c.getTrainerList())
-        {
-            this.trainerList.add(new Trainer(d));
-        }
-
-        for (IPlayer d : c.getPlayerList())
-        {
-            this.playerList.add(new Player(d));
-        }
+        return a;
     }
 
     @Override
-    public List<IDepartment> getDepartmentList()
+    public List<Integer> getDepartmentList()
     {
-        List<IDepartment> result = new LinkedList<>();
-
-        for (Department d : departmentList)
-        {
-            result.add(d);
-        }
-
-        return result;
+        return departmentList;
     }
 
     @Override
-    public void setDepartmentList(List<IDepartment> departmentList)
+    public void setDepartmentList(List<Integer> departmentList)
     {
-        List<Department> result = new LinkedList<>();
-
-        for (IDepartment d : departmentList)
-        {
-            result.add(new Department(d));
-        }
-
-        this.departmentList = result;
+        this.departmentList = departmentList;
     }
 
     @Override
-    public List<ITrainer> getTrainerList()
+    public List<Integer> getTrainerList()
     {
-        List<ITrainer> result = new LinkedList<>();
-
-        for (Trainer d : trainerList)
-        {
-            result.add(d);
-        }
-
-        return result;
+        return trainerList;
     }
 
     @Override
-    public void setTrainerList(List<ITrainer> trainerList)
+    public void setTrainerList(List<Integer> trainerList)
     {
-
-        List<Trainer> result = new LinkedList<>();
-
-        for (ITrainer d : trainerList)
-        {
-            result.add(new Trainer(d));
-        }
-
-        this.trainerList = result;
+        this.trainerList = trainerList;
     }
 
     @Override
-    public List<IPlayer> getPlayerList()
+    public List<Integer> getPlayerList()
     {
-        List<IPlayer> result = new LinkedList<>();
-
-        for (Player d : playerList)
-        {
-            result.add(d);
-        }
-
-        return result;
+        return playerList;
     }
 
     @Override
-    public void setPlayerList(List<IPlayer> playerList)
+    public void setPlayerList(List<Integer> playerList)
     {
-        List<Player> result = new LinkedList<>();
-
-        for (IPlayer d : playerList)
-        {
-            result.add(new Player(d));
-        }
-
-        this.playerList = result;
+        this.playerList = playerList;
     }
 }

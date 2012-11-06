@@ -7,7 +7,6 @@ package sportsclubmanager.domain.classes;
 import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.domain.classes.Team;
 import sportsclubmanager.domain.contract.*;
 
 /**
@@ -61,7 +60,7 @@ public class TeamTest
 
         Team a = new Team(idTeam);
 
-        Assert.assertEquals(idTeam, a.getIdTeam());
+        Assert.assertEquals(idTeam, a.getId());
     }
 
     @Test
@@ -72,7 +71,7 @@ public class TeamTest
 
         Team a = new Team(idTeam, name);
 
-        Assert.assertEquals(idTeam, a.getIdTeam());
+        Assert.assertEquals(idTeam, a.getId());
         Assert.assertSame(name, a.getName());
     }
 
@@ -84,8 +83,8 @@ public class TeamTest
         int expected = new Random().nextInt(10000);
         int actual = Integer.MAX_VALUE;
 
-        a.setIdTeam(expected);
-        actual = a.getIdTeam();
+        a.setId(expected);
+        actual = a.getId();
 
         Assert.assertEquals(expected, actual);
     }
@@ -133,20 +132,6 @@ public class TeamTest
         actual = a.getCompetitionList();
 
         Assert.assertArrayEquals(expected.toArray(), actual.toArray());
-    }
-
-    @Test
-    public void clubTeamTest()
-    {
-        Team a = new Team();
-
-        IClubTeam expected = EasyMock.createMock(IClubTeam.class);
-        IClubTeam actual;
-
-        a.setClubTeam(expected);
-        actual = a.getClubTeam();
-
-        Assert.assertSame(expected, actual);
     }
 
     @Test

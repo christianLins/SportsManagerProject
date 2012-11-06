@@ -5,10 +5,8 @@
 package sportsclubmanager.dto.classes;
 
 import java.util.*;
-import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.domain.contract.*;
-import sportsclubmanager.dto.classes.Department;
+import sportsclubmanager.dto.contract.IDepartment;
 
 /**
 
@@ -55,42 +53,6 @@ public class DepartmentTest
     }
 
     @Test
-    public void hibernateContructorTest()
-    {
-        Integer idDepartment = new Random().nextInt();
-
-        Department a = new Department(idDepartment);
-
-        Assert.assertEquals(idDepartment, a.getIdDepartment());
-    }
-
-    @Test
-    public void databaseManagerContructorTest()
-    {
-        int idDepartment = new Random().nextInt();
-        String name = new Random().nextInt() + "";
-
-        Department a = new Department(idDepartment, name);
-
-        Assert.assertEquals(name, a.getIdDepartment());
-        Assert.assertSame(name, a.getName());
-    }
-
-    @Test
-    public void idDepartmentTest()
-    {
-        Department a = new Department();
-
-        int expected = new Random().nextInt(10000);
-        int actual = Integer.MAX_VALUE;
-
-        a.setIdDepartment(expected);
-        actual = a.getIdDepartment();
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
     public void nameTest()
     {
         Department a = new Department();
@@ -123,8 +85,8 @@ public class DepartmentTest
     {
         Department a = new Department();
 
-        IDepartmentHead expected = EasyMock.createMock(IDepartmentHead.class);
-        IDepartmentHead actual;
+        Integer expected = 2;
+        Integer actual;
 
         a.setDepartmentHead(expected);
         actual = a.getDepartmentHead();
@@ -137,12 +99,12 @@ public class DepartmentTest
     {
         Department a = new Department();
 
-        List<IClubTeam> expected = new LinkedList<IClubTeam>();
-        expected.add(EasyMock.createMock(IClubTeam.class));
-        expected.add(EasyMock.createMock(IClubTeam.class));
-        expected.add(EasyMock.createMock(IClubTeam.class));
+        List<Integer> expected = new LinkedList<>();
+        expected.add(1);
+        expected.add(2);
+        expected.add(3);
 
-        List<IClubTeam> actual;
+        List<Integer> actual;
 
         a.setClubTeamList(expected);
         actual = a.getClubTeamList();
@@ -154,17 +116,22 @@ public class DepartmentTest
     public void typeOfSportListTest()
     {
         Department a = new Department();
+        
+        List<Integer> expected = new LinkedList<>();
+        expected.add(1);
+        expected.add(2);
+        expected.add(3);
 
-        List<ITypeOfSport> expected = new LinkedList<ITypeOfSport>();
-        expected.add(EasyMock.createMock(ITypeOfSport.class));
-        expected.add(EasyMock.createMock(ITypeOfSport.class));
-        expected.add(EasyMock.createMock(ITypeOfSport.class));
-
-        List<ITypeOfSport> actual;
+        List<Integer> actual;
 
         a.setTypeOfSportList(expected);
         actual = a.getTypeOfSportList();
 
-        Assert.assertArrayEquals(expected.toArray(), actual.toArray());
+        Assert.assertEquals(expected.size(), actual.size());
+
+        for (int i = 0; i < actual.size(); i++)
+        {
+            Assert.assertEquals(expected, actual);
+        }
     }
 }

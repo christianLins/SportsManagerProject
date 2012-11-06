@@ -1,24 +1,51 @@
 package sportsclubmanager.dto.classes;
 
 import java.io.Serializable;
-import sportsclubmanager.domain.contract.*;
+import java.util.HashMap;
+import sportsclubmanager.dto.contract.IAddress;
 
 public class Address
         implements Serializable, IAddress
 {
+    private int id;
     private String street;
     private int streetNumber;
     private String village;
     private int postalCode;
-    private Country country;
+    private int country;
+    private static HashMap<sportsclubmanager.domain.contract.IAddress, Address> addresses = new HashMap<>();
 
-    Address(IAddress address)
+    public Address(int id)
     {
-        street = address.getStreet();
-        streetNumber = address.getStreetNumber();
-        village = address.getVillage();
-        postalCode = address.getPostalCode();
-        country = new Country(address.getCountry());
+        this.id = id;
+    }
+
+    public static Address copy(sportsclubmanager.domain.contract.IAddress address)
+    {
+        Address a;
+
+        if (addresses.containsKey(address))
+        {
+            a = addresses.get(address);
+        }
+        else
+        {
+            a = new Address(address.getId());
+
+            a.setStreet(address.getStreet());
+            a.setPostalCode(address.getPostalCode());
+            a.setStreetNumber(address.getStreetNumber());
+            a.setVillage(address.getVillage());
+            a.setCountry(address.getCountry().getId());
+
+            addresses.put(address, a);
+        }
+
+        return a;
+    }
+
+    Address()
+    {
     }
 
     @Override
@@ -70,14 +97,20 @@ public class Address
     }
 
     @Override
-    public ICountry getCountry()
+    public int getCountry()
     {
         return country;
     }
 
     @Override
-    public void setCountry(ICountry country)
+    public void setCountry(int country)
     {
-        this.country = (Country) country;
+        this.country = country;
+    }
+
+    @Override
+    public Integer getId()
+    {
+        return id;
     }
 }

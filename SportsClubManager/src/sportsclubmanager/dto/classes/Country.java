@@ -1,7 +1,8 @@
 package sportsclubmanager.dto.classes;
 
 import java.io.Serializable;
-import sportsclubmanager.domain.contract.ICountry;
+import java.util.*;
+import sportsclubmanager.dto.contract.*;
 
 /**
 
@@ -10,6 +11,7 @@ import sportsclubmanager.domain.contract.ICountry;
 public class Country
         implements Serializable, ICountry
 {
+    private int id;
     private String name;
     private String alpha3;
     private String alpha2;
@@ -24,17 +26,44 @@ public class Country
     {
     }
 
-    public Country(ICountry c)
+    public Country(int id)
     {
-        this.name = c.getName();
-        this.alpha3 = c.getAlpha3();
-        this.alpha2 = c.getAlpha2();
-        this.tld = c.getTld();
-        this.deutsch = c.getDeutsch();
-        this.espanol = c.getEspanol();
-        this.francaise = c.getFrancaise();
-        this.italiano = c.getItaliano();
-        this.portugues = c.getPortugues();
+        this.id = id;
+    }
+
+    @Override
+    public Integer getId()
+    {
+        return id;
+    }
+    private static HashMap<sportsclubmanager.domain.contract.ICountry, Country> countries = new HashMap<>();
+
+    public static Country copy(sportsclubmanager.domain.contract.ICountry country)
+    {
+        Country a;
+
+        if (countries.containsKey(country))
+        {
+            a = countries.get(country);
+        }
+        else
+        {
+            a = new Country();
+
+            a.setName(country.getName());
+            a.setAlpha3(country.getAlpha3());
+            a.setAlpha2(country.getAlpha2());
+            a.setTld(country.getTld());
+            a.setDeutsch(country.getDeutsch());
+            a.setEspanol(country.getEspanol());
+            a.setFrancaise(country.getFrancaise());
+            a.setItaliano(country.getItaliano());
+            a.setPortugues(country.getPortugues());
+
+            countries.put(country, a);
+        }
+
+        return a;
     }
 
     @Override

@@ -45,12 +45,12 @@ public class League
         this.name = name;
     }
 
-    public Integer getIdLeague()
+    public Integer getId()
     {
         return idLeague;
     }
 
-    public void setIdLeague(Integer idLeague)
+    public void setId(Integer idLeague)
     {
         this.idLeague = idLeague;
     }

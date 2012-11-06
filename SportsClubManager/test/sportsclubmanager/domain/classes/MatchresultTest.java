@@ -60,7 +60,7 @@ public class MatchresultTest
 
         Matchresult a = new Matchresult(idMatchresult);
 
-        Assert.assertEquals(idMatchresult, a.getIdMatchresult());
+        Assert.assertEquals(idMatchresult, a.getId());
     }
 
     @Test
@@ -72,7 +72,7 @@ public class MatchresultTest
 
         Matchresult a = new Matchresult(idMatchresult, pointsHometeam, pointsForeignteam);
 
-        Assert.assertEquals(idMatchresult, a.getIdMatchresult());
+        Assert.assertEquals(idMatchresult, a.getId());
         Assert.assertEquals(pointsHometeam, a.getPointsHometeam(), 0);
         Assert.assertEquals(pointsForeignteam, a.getPointsForeignteam(), 0);
     }
@@ -85,8 +85,8 @@ public class MatchresultTest
         int expected = new Random().nextInt(10000);
         int actual = Integer.MAX_VALUE;
 
-        a.setIdMatchresult(expected);
-        actual = a.getIdMatchresult();
+        a.setId(expected);
+        actual = a.getId();
 
         Assert.assertEquals(expected, actual);
     }

@@ -2,37 +2,46 @@ package sportsclubmanager.dto.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import sportsclubmanager.domain.contract.*;
+import sportsclubmanager.dto.contract.ITeam;
 
 public class Team
         implements Serializable, ITeam
 {
+    private int id;
     private String name;
     private String description;
-    private List<Competition> competitionList = new LinkedList<>();
-    private List<Match> matchList = new LinkedList<>();
-    private League league;
+    private List<Integer> competitionList = new LinkedList<>();
+    private List<Integer> matchList = new LinkedList<>();
+    private Integer league;
+    private static HashMap<ITeam, Team> teams = new HashMap<>();
 
     public Team()
     {
     }
 
-    public Team(ITeam c)
+    public static Team copy(ITeam team)
     {
-        name = c.getName();
-        description = c.getDescription();
+        Team a;
 
-        for (ICompetition competition : c.getCompetitionList())
+        if (teams.containsKey(team))
         {
-            competitionList.add(new Competition(competition));
+            a = teams.get(team);
+        }
+        else
+        {
+            a = new Team();
+
+            a.setName(team.getName());
+            a.setDescription(team.getDescription());
+            a.setLeague(team.getLeague());
+            a.setCompetitionList(team.getCompetitionList());
+            a.setLeague(team.getLeague());
+            a.setMatchList(team.getMatchList());
+
+            teams.put(team, a);
         }
 
-        for (IMatch match : c.getMatchList())
-        {
-            matchList.add(new Match(match));
-        }
-
-        league = new League(c.getLeague());
+        return a;
     }
 
     @Override
@@ -59,65 +68,45 @@ public class Team
         this.description = description;
     }
 
-    public List<ICompetition> getCompetitionList()
+    @Override
+    public List<Integer> getCompetitionList()
     {
-        List<ICompetition> result = new LinkedList<>();
-
-        for (Competition c : competitionList)
-        {
-            result.add(c);
-        }
-
-        return result;
-    }
-
-    public void setCompetitionList(List<ICompetition> competitionList)
-    {
-        List<Competition> result = new LinkedList<>();
-
-        for (ICompetition c : competitionList)
-        {
-            result.add(new Competition(c));
-        }
-
-        this.competitionList = result;
+        return competitionList;
     }
 
     @Override
-    public List<IMatch> getMatchList()
+    public void setCompetitionList(List<Integer> competitionList)
     {
-        List<IMatch> result = new LinkedList<>();
-
-        for (IMatch c : matchList)
-        {
-            result.add(new Match(c));
-        }
-
-        return result;
+        this.competitionList = competitionList;
     }
 
     @Override
-    public void setMatchList(List<IMatch> matchList)
+    public List<Integer> getMatchList()
     {
-        List<Match> result = new LinkedList<>();
-
-        for (IMatch c : matchList)
-        {
-            result.add(new Match(c));
-        }
-
-        this.matchList = result;
+        return matchList;
     }
 
     @Override
-    public ILeague getLeague()
+    public void setMatchList(List<Integer> matchList)
+    {
+        this.matchList = matchList;
+    }
+
+    @Override
+    public Integer getLeague()
     {
         return league;
     }
 
     @Override
-    public void setLeague(ILeague league)
+    public void setLeague(Integer league)
     {
-        this.league = new League(league);
+        this.league = league;
+    }
+
+    @Override
+    public Integer getId()
+    {
+        return id;
     }
 }

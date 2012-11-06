@@ -5,17 +5,18 @@
 package sportsclubmanager.controller;
 
 import java.io.Serializable;
-import sportsclubmanager.dto.classes.Member;
+import sportsclubmanager.domain.contract.IMember;
 
 /**
- *
- * @author Lins Christian (christian.lins87@gmail.com)
+
+ @author Lins Christian (christian.lins87@gmail.com)
  */
-public interface MemberService extends Serializable
+public interface MemberService
+        extends Serializable
 {
-    public Member getMember(); // add paraemeters
-    public boolean createNewMember();
-    public boolean changeMember();
-    
-    
+    public IMember getMember(Integer id); // add paraemeters
+
+    public boolean createNewMember(IMember member);
+
+    public boolean changeMember(IMember changedMember);
 }

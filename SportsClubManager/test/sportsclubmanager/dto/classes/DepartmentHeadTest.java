@@ -5,10 +5,8 @@
 package sportsclubmanager.dto.classes;
 
 import java.util.*;
-import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.domain.contract.*;
-import sportsclubmanager.dto.classes.DepartmentHead;
+import sportsclubmanager.dto.contract.IDepartmentHead;
 
 /**
 
@@ -59,12 +57,12 @@ public class DepartmentHeadTest
     {
         DepartmentHead a = new DepartmentHead();
 
-        List<IDepartment> expected = new LinkedList<IDepartment>();
-        expected.add(EasyMock.createMock(IDepartment.class));
-        expected.add(EasyMock.createMock(IDepartment.class));
-        expected.add(EasyMock.createMock(IDepartment.class));
-        expected.add(EasyMock.createMock(IDepartment.class));
-        List<IDepartment> actual;
+        List<Integer> expected = new LinkedList<>();
+        expected.add(1);
+        expected.add(2);
+        expected.add(3);
+
+        List<Integer> actual;
 
         a.setDepartmentList(expected);
         actual = a.getDepartmentList();

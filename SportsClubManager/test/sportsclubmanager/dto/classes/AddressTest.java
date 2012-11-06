@@ -7,8 +7,7 @@ package sportsclubmanager.dto.classes;
 import java.util.Random;
 import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.domain.contract.*;
-import sportsclubmanager.dto.classes.Address;
+import sportsclubmanager.dto.contract.*;
 
 /**
 
@@ -55,53 +54,29 @@ public class AddressTest
     }
 
     @Test
-    public void hibernateContructorTest()
+    public void interfaceConstructorTest()
     {
-        Integer idAddress = new Random().nextInt();
-        String street = new Random().nextInt() + "";
-        int streetNumber = new Random().nextInt();
-        String village = new Random().nextInt() + "";
-        int postalCode = new Random().nextInt();
+        sportsclubmanager.domain.contract.ICountry country = EasyMock.createMock(sportsclubmanager.domain.contract.ICountry.class);
+        EasyMock.expect(country.getId()).andReturn(1).anyTimes();
+        EasyMock.replay(country);
 
-        Address a = new Address(idAddress, street, streetNumber, village, postalCode);
+        sportsclubmanager.domain.contract.IAddress expected = EasyMock.createMock(sportsclubmanager.domain.contract.IAddress.class);
+        EasyMock.expect(expected.getId()).andReturn(2).anyTimes();
+        EasyMock.expect(expected.getCountry()).andReturn(country).anyTimes();
+        EasyMock.expect(expected.getPostalCode()).andReturn(1).anyTimes();
+        EasyMock.expect(expected.getStreet()).andReturn("Teststreet").anyTimes();
+        EasyMock.expect(expected.getStreetNumber()).andReturn(2).anyTimes();
+        EasyMock.expect(expected.getVillage()).andReturn("Testvillage").anyTimes();
+        EasyMock.replay(expected);
 
-        Assert.assertEquals(idAddress, a.getIdAddress());
-        Assert.assertSame(street, a.getStreet());
-        Assert.assertEquals(streetNumber, a.getStreetNumber());
-        Assert.assertSame(village, a.getVillage());
-        Assert.assertEquals(postalCode, a.getPostalCode());
-    }
+        Address actual = Address.copy(expected);
 
-    @Test
-    public void databaseManagerContructorTest()
-    {
-        String street = new Random().nextInt() + "";
-        int streetNumber = new Random().nextInt();
-        String village = new Random().nextInt() + "";
-        int postalCode = new Random().nextInt();
-        ICountry country = EasyMock.createMock(ICountry.class);
+        Assert.assertEquals(expected.getPostalCode(), actual.getPostalCode());
+        Assert.assertEquals(expected.getStreet(), actual.getStreet());
+        Assert.assertEquals(expected.getStreetNumber(), actual.getStreetNumber());
+        Assert.assertEquals(expected.getVillage(), actual.getVillage());
 
-        Address a = new Address(street, streetNumber, village, postalCode, country);
-
-        Assert.assertSame(street, a.getStreet());
-        Assert.assertEquals(streetNumber, a.getStreetNumber());
-        Assert.assertSame(village, a.getVillage());
-        Assert.assertEquals(postalCode, a.getPostalCode());
-        Assert.assertSame(country, a.getCountry());
-    }
-
-    @Test
-    public void idAddressTest()
-    {
-        Address a = new Address();
-
-        int expected = new Random().nextInt(10000);
-        int actual = Integer.MAX_VALUE;
-
-        a.setIdAddress(expected);
-        actual = a.getIdAddress();
-
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(country.getId(), (Integer) actual.getCountry());
     }
 
     @Test
@@ -165,12 +140,12 @@ public class AddressTest
     {
         Address a = new Address();
 
-        ICountry expected = EasyMock.createMock(ICountry.class);
-        ICountry actual;
+        Integer country = 1;
+        Integer actual;
 
-        a.setCountry(expected);
+        a.setCountry(country);
         actual = a.getCountry();
 
-        Assert.assertSame(expected, actual);
+        Assert.assertEquals(country, actual);
     }
 }

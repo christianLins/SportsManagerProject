@@ -2,45 +2,64 @@ package sportsclubmanager.dto.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import sportsclubmanager.domain.contract.*;
+import sportsclubmanager.dto.contract.IPlayer;
 
 public class Player
         extends Role
         implements Serializable, IPlayer
 {
-    private List<TypeOfSport> typeOfSportList;
+    private List<Integer> typeOfSportList;
 
-    Player(IPlayer d)
+    public Player()
     {
-        for (ITypeOfSport c : d.getTypeOfSportList())
+    }
+    
+    public Player(int id)
+    {
+        super(id);
+    }
+
+    private Player(sportsclubmanager.domain.contract.IRole role)
+    {
+        super(role);
+    }
+    private static HashMap<sportsclubmanager.domain.contract.IPlayer, Player> players = new HashMap<>();
+
+    public static Player copy(sportsclubmanager.domain.contract.IPlayer player)
+    {
+        Player a;
+
+        if (players.containsKey(player))
         {
-            typeOfSportList.add(new TypeOfSport(c));
+            a = players.get(player);
         }
+        else
+        {
+            a = new Player(player);
+
+            List<Integer> l = new LinkedList<>();
+
+            for (sportsclubmanager.domain.contract.ITypeOfSport t : player.getTypeOfSportList())
+            {
+                l.add(t.getId());
+            }
+            a.setTypeOfSportList(l);
+
+            players.put(player, a);
+        }
+
+        return a;
     }
 
     @Override
-    public List<ITypeOfSport> getTypeOfSportList()
+    public List<Integer> getTypeOfSportList()
     {
-        List<ITypeOfSport> result = new LinkedList<>();
-
-        for (TypeOfSport d : typeOfSportList)
-        {
-            result.add(d);
-        }
-
-        return result;
+        return typeOfSportList;
     }
 
     @Override
-    public void setTypeOfSportList(List<ITypeOfSport> typeOfSportList)
+    public void setTypeOfSportList(List<Integer> typeOfSportList)
     {
-        List<TypeOfSport> result = new LinkedList<>();
-
-        for (ITypeOfSport d : typeOfSportList)
-        {
-            result.add(new TypeOfSport(d));
-        }
-
-        this.typeOfSportList = result;
+        this.typeOfSportList = typeOfSportList;
     }
 }

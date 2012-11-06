@@ -42,12 +42,12 @@ public class Permission
         this.name = name;
     }
 
-    public Integer getIdPermission()
+    public Integer getId()
     {
         return idPermission;
     }
 
-    public void setIdPermission(Integer idPermission)
+    public void setId(Integer idPermission)
     {
         this.idPermission = idPermission;
     }

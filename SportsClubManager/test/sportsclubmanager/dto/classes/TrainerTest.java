@@ -5,10 +5,8 @@
 package sportsclubmanager.dto.classes;
 
 import java.util.*;
-import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.domain.contract.*;
-import sportsclubmanager.dto.classes.Trainer;
+import sportsclubmanager.dto.contract.ITrainer;
 
 /**
 
@@ -59,13 +57,13 @@ public class TrainerTest
     {
         Trainer a = new Trainer();
 
-        List<IClubTeam> expected = new LinkedList<IClubTeam>();
-        List<IClubTeam> actual;
+        List<Integer> expected = new LinkedList<>();
+        expected.add(1);
+        expected.add(2);
+        expected.add(3);
 
-        expected.add(EasyMock.createMock(IClubTeam.class));
-        expected.add(EasyMock.createMock(IClubTeam.class));
-        expected.add(EasyMock.createMock(IClubTeam.class));
-        expected.add(EasyMock.createMock(IClubTeam.class));
+        List<Integer> actual;
+
 
         a.setClubTeamList(expected);
         actual = a.getClubTeamList();

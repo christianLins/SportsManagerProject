@@ -65,24 +65,6 @@ public class MemberTest
     }
 
     @Test
-    public void secondHibernateContructorTest()
-    {
-        Integer idMember = new Random().nextInt();
-        String prename = new Random().nextInt() + "";
-        String lastname = new Random().nextInt() + "";
-        Date dateOfBirth = new Date();
-        Date memberFrom = new Date();
-
-        Member a = new Member(idMember, prename, lastname, dateOfBirth, memberFrom);
-
-        Assert.assertEquals(idMember, a.getIdMember());
-        Assert.assertSame(prename, a.getPrename());
-        Assert.assertSame(lastname, a.getLastname());
-        Assert.assertSame(dateOfBirth, a.getDateOfBirth());
-        Assert.assertSame(memberFrom, a.getMemberFrom());
-    }
-
-    @Test
     public void idMemberTest()
     {
         Member a = new Member();

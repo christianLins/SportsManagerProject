@@ -12,6 +12,8 @@ import java.util.List;
  */
 public interface ITypeOfSport
 {
+    Integer getId();
+
     String getName();
 
     void setName(String name);

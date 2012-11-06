@@ -4,11 +4,10 @@
  */
 package sportsclubmanager.dto.classes;
 
-import java.util.*;
+import java.util.Date;
 import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.domain.contract.*;
-import sportsclubmanager.dto.classes.Match;
+import sportsclubmanager.dto.contract.IMatch;
 
 /**
 
@@ -55,39 +54,41 @@ public class MatchTest
     }
 
     @Test
-    public void hibernateContructorTest()
+    public void copyTest()
     {
-        Integer idMatch = new Random().nextInt();
-
-        Match a = new Match(idMatch);
-
-        Assert.assertEquals(idMatch, a.getIdMatch());
-    }
-
-    @Test
-    public void databaseManagerContructorTest()
-    {
-        Integer idMatch = new Random().nextInt();
         Date dateFrom = new Date();
+        Date dateTo = new Date();
 
-        Match a = new Match(idMatch, dateFrom);
+        sportsclubmanager.domain.contract.ITeam hteam = EasyMock.createMock(sportsclubmanager.domain.contract.ITeam.class);
+        EasyMock.expect(hteam.getId()).andReturn(1).anyTimes();
+        EasyMock.replay(hteam);
 
-        Assert.assertEquals(idMatch, a.getIdMatch());
-        Assert.assertSame(dateFrom, a.getDateFrom());
-    }
+        sportsclubmanager.domain.contract.ITeam fteam = EasyMock.createMock(sportsclubmanager.domain.contract.ITeam.class);
+        EasyMock.expect(fteam.getId()).andReturn(3).anyTimes();
+        EasyMock.replay(fteam);
 
-    @Test
-    public void idMatchTest()
-    {
-        Match a = new Match();
+        sportsclubmanager.domain.contract.IMatchresult result = EasyMock.createMock(sportsclubmanager.domain.contract.IMatchresult.class);
+        EasyMock.expect(result.getId()).andReturn(2).anyTimes();
+        EasyMock.replay(result);
 
-        int expected = new Random().nextInt(10000);
-        int actual = Integer.MAX_VALUE;
+        sportsclubmanager.domain.contract.ICompetition competition = EasyMock.createMock(sportsclubmanager.domain.contract.ICompetition.class);
+        EasyMock.expect(competition.getId()).andReturn(2).anyTimes();
+        EasyMock.replay(competition);
 
-        a.setIdMatch(expected);
-        actual = a.getIdMatch();
+        sportsclubmanager.domain.contract.IMatch expected = EasyMock.createMock(sportsclubmanager.domain.contract.IMatch.class);
+        EasyMock.expect(expected.getId()).andReturn(2).anyTimes();
+        EasyMock.expect(expected.getDateFrom()).andReturn(dateFrom).anyTimes();
+        EasyMock.expect(expected.getDateTo()).andReturn(dateTo).anyTimes();
+        EasyMock.expect(expected.getForeignteam()).andReturn(fteam).anyTimes();
+        EasyMock.expect(expected.getHometeam()).andReturn(hteam).anyTimes();
+        EasyMock.expect(expected.getMatchresult()).andReturn(result).anyTimes();
+        EasyMock.expect(expected.getCompetition()).andReturn(competition).anyTimes();
 
-        Assert.assertEquals(expected, actual);
+        EasyMock.replay(expected);
+
+        Match a = Match.copy(expected);
+
+        Assert.assertTrue(a instanceof IMatch);
     }
 
     @Test
@@ -123,8 +124,8 @@ public class MatchTest
     {
         Match a = new Match();
 
-        ICompetition expected = EasyMock.createMock(ICompetition.class);
-        ICompetition actual;
+        Integer expected = 1;
+        Integer actual;
 
         a.setCompetition(expected);
         actual = a.getCompetition();
@@ -137,8 +138,8 @@ public class MatchTest
     {
         Match a = new Match();
 
-        IMatchresult expected = EasyMock.createMock(IMatchresult.class);
-        IMatchresult actual;
+        Integer expected = 2;
+        Integer actual;
 
         a.setMatchresult(expected);
         actual = a.getMatchresult();
@@ -151,8 +152,8 @@ public class MatchTest
     {
         Match a = new Match();
 
-        ITeam expected = EasyMock.createMock(ITeam.class);
-        ITeam actual;
+        Integer expected = 1;
+        Integer actual;
 
         a.setForeignteam(expected);
         actual = a.getForeignteam();
@@ -165,8 +166,8 @@ public class MatchTest
     {
         Match a = new Match();
 
-        ITeam expected = EasyMock.createMock(ITeam.class);
-        ITeam actual;
+        Integer expected = 1;
+        Integer actual;
 
         a.setHometeam(expected);
         actual = a.getHometeam();

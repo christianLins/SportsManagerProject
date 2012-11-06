@@ -6,7 +6,6 @@ package sportsclubmanager.domain.classes;
 
 import java.util.Random;
 import org.junit.*;
-import sportsclubmanager.domain.classes.Country;
 import sportsclubmanager.domain.contract.ICountry;
 
 /**
@@ -60,7 +59,7 @@ public class CountryTest
 
         Country a = new Country(idCountry);
 
-        Assert.assertEquals(idCountry, a.getIdCountry());
+        Assert.assertEquals(idCountry, a.getId());
     }
 
     @Test
@@ -71,7 +70,7 @@ public class CountryTest
 
         Country a = new Country(idCountry, name);
 
-        Assert.assertEquals(idCountry, a.getIdCountry());
+        Assert.assertEquals(idCountry, a.getId());
         Assert.assertSame(name, a.getName());
     }
 
@@ -109,8 +108,8 @@ public class CountryTest
         int expected = new Random().nextInt(10000);
         int actual = Integer.MAX_VALUE;
 
-        a.setIdCountry(expected);
-        actual = a.getIdCountry();
+        a.setId(expected);
+        actual = a.getId();
 
         Assert.assertEquals(expected, actual);
     }

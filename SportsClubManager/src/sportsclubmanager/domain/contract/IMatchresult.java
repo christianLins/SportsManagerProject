@@ -4,15 +4,14 @@
  */
 package sportsclubmanager.domain.contract;
 
-import java.util.*;
-import javax.xml.bind.annotation.*;
-
 /**
 
  @author Thomas
  */
 public interface IMatchresult
 {
+    Integer getId();
+
     double getPointsForeignteam();
 
     double getPointsHometeam();

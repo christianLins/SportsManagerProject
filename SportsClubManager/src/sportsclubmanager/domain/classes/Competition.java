@@ -59,12 +59,13 @@ public class Competition
         this.dateFrom = dateFrom;
     }
 
-    public Integer getIdCompetition()
+    @Override
+    public Integer getId()
     {
         return idCompetition;
     }
 
-    public void setIdCompetition(Integer idCompetition)
+    public void setId(Integer idCompetition)
     {
         this.idCompetition = idCompetition;
     }
