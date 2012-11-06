@@ -10,7 +10,7 @@ import sportsclubmanager.domain.contract.IPermission;
  @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
-@Table(name = "Permission")
+@Table(name = "Permisssion")
 @XmlRootElement
 public class Permission
         implements Serializable, IPermission
@@ -19,7 +19,7 @@ public class Permission
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idPermission")
+    @Column(name = "idPermisssion")
     private Integer idPermission;
     @Basic(optional = false)
     @Column(name = "Name")
