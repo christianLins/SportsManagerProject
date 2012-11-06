@@ -1,18 +1,15 @@
 package sportsclubmanager.presentation.forms.member;
 
 
-import javax.swing.BorderFactory;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 import sportsclubmanager.controller.MemberService;
+import sportsclubmanager.presentation.basics.AbstractForm;
 import sportsclubmanager.presentation.basics.AbstractMainForm;
 
 /**
@@ -68,7 +65,7 @@ public class NewMemberForm extends AbstractMainForm {
      * Creates new form NewMemb
      */
     
-    public NewMemberForm(AbstractMainForm form) {
+    public NewMemberForm(AbstractForm form) {
         super(form);
         initComponents();
     }
@@ -122,7 +119,9 @@ public class NewMemberForm extends AbstractMainForm {
         setMinimumSize(new java.awt.Dimension(848, 549));
         setPreferredSize(new java.awt.Dimension(848, 549));
 
-        panePersonData.setBorder(BorderFactory.createTitledBorder("Person Data"));
+        
+
+        panePersonData.setBorder(javax.swing.BorderFactory.createTitledBorder("Person Data"));
 
         lblFName.setText("First Name");
 
@@ -133,6 +132,7 @@ public class NewMemberForm extends AbstractMainForm {
         });
 
         lblLName.setText("Last Name");
+
         lblAddress.setText("Address");
 
         txtfieldAddress.addActionListener(new java.awt.event.ActionListener() {
@@ -152,9 +152,13 @@ public class NewMemberForm extends AbstractMainForm {
         });
 
         lblCountry.setText("Country");
+
         lblMail.setText("Mail");
+
         lblBirthDate.setText("Birth Date");
+
         lblGender.setText("Gender");
+
         lblPhone.setText("Phone");
 
         radioFemale.setText("female");
@@ -166,112 +170,106 @@ public class NewMemberForm extends AbstractMainForm {
 
         radioMale.setText("male");
 
-        GroupLayout panePersonDataLayout = new GroupLayout(panePersonData);
+        javax.swing.GroupLayout panePersonDataLayout = new javax.swing.GroupLayout(panePersonData);
         panePersonData.setLayout(panePersonDataLayout);
         panePersonDataLayout.setHorizontalGroup(
-            panePersonDataLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panePersonDataLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panePersonDataLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblFName)
                     .addComponent(lblAddress)
                     .addComponent(lblCity)
                     .addComponent(lblBirthDate)
                     .addComponent(lblPhone))
-                .addGap(18, 18, 18)
-                .addGroup(panePersonDataLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(panePersonDataLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                .addGap(26, 26, 26)
+                .addGroup(panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(txtfieldCity)
                         .addComponent(txtfieldFName)
-                        .addComponent(txtfieldAddress, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panePersonDataLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(txtfieldAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txtfieldPhone)
                         .addGroup(panePersonDataLayout.createSequentialGroup()
-                            .addComponent(dateChooserBirth, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dateChooserBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(96, 96, 96))))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                .addGroup(panePersonDataLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(GroupLayout.Alignment.TRAILING, panePersonDataLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(lblMail)
-                        .addGroup(panePersonDataLayout.createSequentialGroup()
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addGroup(panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panePersonDataLayout.createSequentialGroup()
+                        .addGroup(panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMail)
                             .addComponent(lblCountry)
-                            .addGap(10, 10, 10))
-                        .addComponent(lblGender))
-                    .addComponent(lblLName, GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblPostCode, GroupLayout.Alignment.TRAILING))
+                            .addComponent(lblGender))
+                        .addGap(10, 10, 10))
+                    .addComponent(lblLName, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblPostCode, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
-                .addGroup(panePersonDataLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(panePersonDataLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(panePersonDataLayout.createSequentialGroup()
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 1, GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panePersonDataLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(txtfieldCountry)
-                                .addGroup(panePersonDataLayout.createSequentialGroup()
-                                    .addComponent(txtfieldLName, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(0, 0, Short.MAX_VALUE))
-                                .addComponent(txtfieldPostCode)))
-                        .addGroup(panePersonDataLayout.createSequentialGroup()
-                            .addComponent(radioFemale)
-                            .addGap(18, 18, 18)
-                            .addComponent(radioMale)
-                            .addGap(0, 0, Short.MAX_VALUE)))
-                    .addGroup(GroupLayout.Alignment.TRAILING, panePersonDataLayout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(txtfieldMail, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)))
-                .addGap(199, 199, 199))
+                .addGroup(panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panePersonDataLayout.createSequentialGroup()
+                        .addComponent(radioFemale)
+                        .addGap(18, 18, 18)
+                        .addComponent(radioMale)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(panePersonDataLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtfieldCountry)
+                            .addComponent(txtfieldPostCode)
+                            .addComponent(txtfieldLName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtfieldMail, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(191, 191, 191))
         );
         panePersonDataLayout.setVerticalGroup(
-            panePersonDataLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panePersonDataLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panePersonDataLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panePersonDataLayout.createSequentialGroup()
-                        .addComponent(txtfieldFName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtfieldAddress, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtfieldCity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtfieldFName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtfieldAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtfieldCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
-                        .addComponent(txtfieldPhone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dateChooserBirth, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtfieldPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panePersonDataLayout.createSequentialGroup()
-                        .addGroup(panePersonDataLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addGroup(panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblLName)
-                            .addComponent(txtfieldLName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtfieldLName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblFName))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panePersonDataLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblPostCode)
-                            .addComponent(txtfieldPostCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtfieldPostCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblAddress))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panePersonDataLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtfieldCountry, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtfieldCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblCountry)
                             .addComponent(lblCity))
-                        .addGap(27, 27, 27)
-                        .addGroup(panePersonDataLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                        .addGap(30, 30, 30)
+                        .addGroup(panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(panePersonDataLayout.createSequentialGroup()
-                                .addGroup(panePersonDataLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtfieldMail, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblMail))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(panePersonDataLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addGroup(panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblMail)
+                                    .addComponent(txtfieldMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(radioFemale)
                                     .addComponent(radioMale)
                                     .addComponent(lblGender)))
                             .addGroup(panePersonDataLayout.createSequentialGroup()
-                                .addGroup(panePersonDataLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                .addGroup(panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lblBirthDate)
                                     .addGroup(panePersonDataLayout.createSequentialGroup()
                                         .addComponent(lblPhone)
-                                        .addGap(29, 29, 29)))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 4, GroupLayout.PREFERRED_SIZE)))))
+                                        .addGap(29, 29, 29))
+                                    .addComponent(dateChooserBirth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 4, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
-        paneMembershipData.setBorder(BorderFactory.createTitledBorder("Membership Data"));
+        paneMembershipData.setBorder(javax.swing.BorderFactory.createTitledBorder("Membership Data"));
 
         lblEntryDate.setText("Entry Date");
 
@@ -297,8 +295,7 @@ public class NewMemberForm extends AbstractMainForm {
 
         lblDepartment.setText("Department");
 
-        //TODO: add Departments
-        comboDepartment.setModel(new DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboDepartment.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         lblRole.setText("Role");
 
@@ -310,32 +307,32 @@ public class NewMemberForm extends AbstractMainForm {
         });
 
         radioTrainer.setText("Trainer");
+
         radioPlayer.setText("Player");
-        
+
         lblTeam.setText("Team");
 
-        //TODO: add teams to combobox
-        comboTeam.setModel(new DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboTeam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboTeam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboTeamActionPerformed(evt);
             }
         });
 
-        GroupLayout paneMembershipDataLayout = new GroupLayout(paneMembershipData);
+        javax.swing.GroupLayout paneMembershipDataLayout = new javax.swing.GroupLayout(paneMembershipData);
         paneMembershipData.setLayout(paneMembershipDataLayout);
         paneMembershipDataLayout.setHorizontalGroup(
-            paneMembershipDataLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneMembershipDataLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(paneMembershipDataLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDepartment)
                     .addComponent(lblEntryDate)
                     .addComponent(lblTeam)
                     .addComponent(lblRole)
                     .addComponent(lblSport))
                 .addGap(18, 18, 18)
-                .addGroup(paneMembershipDataLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(paneMembershipDataLayout.createSequentialGroup()
                         .addComponent(radioFootball)
                         .addGap(18, 18, 18)
@@ -350,80 +347,80 @@ public class NewMemberForm extends AbstractMainForm {
                         .addComponent(radioTrainer)
                         .addGap(18, 18, 18)
                         .addComponent(radioPlayer))
-                    .addGroup(paneMembershipDataLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                        .addComponent(dateChooserEntry, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+                    .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(dateChooserEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(comboDepartment, 0, 200, Short.MAX_VALUE))
-                    .addComponent(comboTeam, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(comboTeam, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(390, Short.MAX_VALUE))
         );
         paneMembershipDataLayout.setVerticalGroup(
-            paneMembershipDataLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneMembershipDataLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(paneMembershipDataLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblEntryDate)
-                    .addComponent(dateChooserEntry, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(paneMembershipDataLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(dateChooserEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDepartment)
-                    .addComponent(comboDepartment, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(paneMembershipDataLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(radioFootball)
                     .addComponent(radioVolleyball)
                     .addComponent(radioHandball)
                     .addComponent(radioIceHockey)
                     .addComponent(lblSport))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(paneMembershipDataLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboTeam, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboTeam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTeam))
                 .addGap(6, 6, 6)
-                .addGroup(paneMembershipDataLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRole)
                     .addComponent(radioAdmin)
                     .addComponent(radioTrainer)
                     .addComponent(radioPlayer))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         btnSaveMember.setText("Save Member");
 
-        GroupLayout paneNewMemberLayout = new GroupLayout(panel);
+        javax.swing.GroupLayout paneNewMemberLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(paneNewMemberLayout);
         paneNewMemberLayout.setHorizontalGroup(
-            paneNewMemberLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            paneNewMemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneNewMemberLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(paneNewMemberLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(panePersonData, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(paneMembershipData, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(paneNewMemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panePersonData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(paneMembershipData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(paneNewMemberLayout.createSequentialGroup()
                         .addComponent(btnSaveMember)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         paneNewMemberLayout.setVerticalGroup(
-            paneNewMemberLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            paneNewMemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneNewMemberLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panePersonData, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(panePersonData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(paneMembershipData, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(paneMembershipData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSaveMember)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
-        GroupLayout layout = new GroupLayout(getContentPane());
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(panel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

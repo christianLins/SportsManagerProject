@@ -13,7 +13,7 @@ import javax.swing.JFrame;
  */
 public class AbstractForm extends JFrame{
     
-    AbstractForm parent;
+    public AbstractForm parent;
     EventHandler eventHandler;
     
     public AbstractForm() {

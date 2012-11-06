@@ -2,18 +2,24 @@ package sportsclubmanager.presentation.forms;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.LayoutStyle;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
-import sportsclubmanager.presentation.basics.AbstractMainForm;
+import sportsclubmanager.controller.MemberService;
+import sportsclubmanager.presentation.basics.AbstractForm;
 import sportsclubmanager.presentation.forms.competition.AddCompetitionResultsForm;
 import sportsclubmanager.presentation.forms.competition.ChangeCompetitionTeam;
 import sportsclubmanager.presentation.forms.competition.CreateCompetitionForm;
@@ -25,7 +31,7 @@ import sportsclubmanager.presentation.forms.member.SearchMemberForm;
  *
  * @author Lucia
  */
-public class SportsClubManager extends AbstractMainForm {
+public class SportsClubManager extends AbstractForm {
 
     private JButton btnChangeTeam;
     private JButton btnAddResult;
@@ -44,7 +50,7 @@ public class SportsClubManager extends AbstractMainForm {
     private JSplitPane tabMember;
     private JTabbedPane tabPane;
 
-    public SportsClubManager(AbstractMainForm form) {
+    public SportsClubManager(AbstractForm form) {
         super(form);
         this.setTitle("SportsClubManager");
         this.setExtendedState(this.getExtendedState() | MAXIMIZED_BOTH);
@@ -76,9 +82,10 @@ public class SportsClubManager extends AbstractMainForm {
         jMenu1 = new JMenu();
         jMenu2 = new JMenu();
         btnNewMember = new JButton("Add New Member");
-        btnMember = new JButton("Search Member");
+        btnMember = new JButton("Member");
 
-
+        paneMemberMain = new JPanel();
+       
         paneMemberNavi.setMinimumSize(new java.awt.Dimension(140, 549));
         paneMemberNavi.setPreferredSize(new java.awt.Dimension(140, 549));
         paneMemberNavi.setRequestFocusEnabled(false);
@@ -229,22 +236,22 @@ public class SportsClubManager extends AbstractMainForm {
     //set SearchMember as Main
     private void displaySearchMain() {
         paneMemberMain.removeAll();
-        paneMemberMain = new SearchMemberForm(null).panel;
+        paneMemberMain = new SearchMemberForm(this).paneSearch;
 
         tabMember.setRightComponent(paneMemberMain);
         tabMember.validate();
         tabMember.repaint();
     }
 
-    protected void displayAddMember() {
+    public void displayAddMember() {
         paneMemberMain.removeAll();
-        paneMemberMain = new NewMemberForm(null).panel;
+        paneMemberMain = new NewMemberForm(this).panel;
 
         tabMember.setRightComponent(paneMemberMain);
         tabMember.validate();
         tabMember.repaint();
     }
-
+    
     private void btnShowResultActionPerformed(java.awt.event.ActionEvent evt) {
         paneMatchMain.removeAll();
         paneMatchMain = new ShowCompetitionForm(null).paneShowInfo;

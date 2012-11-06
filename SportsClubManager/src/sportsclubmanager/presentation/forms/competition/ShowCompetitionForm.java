@@ -14,6 +14,7 @@ import javax.swing.JTable;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
+import sportsclubmanager.presentation.basics.AbstractForm;
 import sportsclubmanager.presentation.basics.AbstractMainForm;
 
 
@@ -39,7 +40,7 @@ public class ShowCompetitionForm extends AbstractMainForm{
      /**
      * Creates new form ShowCompetitionForm
      */    
-    public ShowCompetitionForm(AbstractMainForm form) {
+    public ShowCompetitionForm(AbstractForm form) {
         super(form);
         initComponents();
     }

@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
+import sportsclubmanager.presentation.basics.AbstractForm;
 import sportsclubmanager.presentation.basics.AbstractMainForm;
 
 /**
@@ -40,7 +41,7 @@ public class ChangeCompetitionTeam extends AbstractMainForm{
     private JScrollPane scrollTeam;
     // End of variables declaration
     
-    public ChangeCompetitionTeam(AbstractMainForm form){
+    public ChangeCompetitionTeam(AbstractForm form){
         super(form);
         initComponents();
     }

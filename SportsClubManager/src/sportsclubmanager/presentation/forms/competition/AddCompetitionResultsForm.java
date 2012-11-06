@@ -18,6 +18,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
+import sportsclubmanager.presentation.basics.AbstractForm;
 import sportsclubmanager.presentation.basics.AbstractMainForm;
 
 /**
@@ -47,7 +48,7 @@ public class AddCompetitionResultsForm extends AbstractMainForm{
       /**
      * Creates new form AddMatchResultsForm
      */    
-    public AddCompetitionResultsForm(AbstractMainForm form) {
+    public AddCompetitionResultsForm(AbstractForm form) {
         super(form);
         initComponents();
     }

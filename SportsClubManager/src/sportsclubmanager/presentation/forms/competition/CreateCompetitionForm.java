@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import sportsclubmanager.presentation.basics.AbstractForm;
 import sportsclubmanager.presentation.basics.AbstractMainForm;
 
 
@@ -57,7 +58,7 @@ public class CreateCompetitionForm extends AbstractMainForm{
     private JTextField txtfieldplz;
     // End of variables declaration
     
-    public CreateCompetitionForm(AbstractMainForm parent) {
+    public CreateCompetitionForm(AbstractForm parent) {
         super(parent);
         initComponents();    
     }

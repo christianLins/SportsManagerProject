@@ -1,7 +1,5 @@
 package sportsclubmanager.presentation.basics;
 
-import javax.swing.JFrame;
-
 /**
  *
  * @author Lucia
