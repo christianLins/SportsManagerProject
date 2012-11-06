@@ -53,7 +53,7 @@ public class MemberController
         {
             try
             {
-                member.setIdMember(getNextMemberId()); //hier Id Set beabsichtigt?
+                //member.setIdMember(getNextMemberId()); //hier Id Set beabsichtigt?
                 DomainFacade.set(member);
                 return true;
             }
