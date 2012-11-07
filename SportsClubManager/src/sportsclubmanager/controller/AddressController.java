@@ -33,6 +33,19 @@ public class AddressController
 
         return controller;
     }
+    public sportsclubmanager.domain.contract.IAddress getDomainById(Integer id)
+            throws IdNotFoundException
+    {
+        for (sportsclubmanager.domain.contract.IAddress a : DomainFacade.getAll(sportsclubmanager.domain.contract.IAddress.class))
+        {
+            if (a.getId() == id)
+            {
+                return a;
+            }
+        }
+
+        throw new IdNotFoundException();
+    }
 
     @Override
     public IAddress getById(Integer id)

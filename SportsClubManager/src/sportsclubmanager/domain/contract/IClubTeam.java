@@ -5,7 +5,6 @@
 package sportsclubmanager.domain.contract;
 
 import java.util.List;
-import sportsclubmanager.domain.classes.Team;
 
 /**
 
