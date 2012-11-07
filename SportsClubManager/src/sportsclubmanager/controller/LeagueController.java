@@ -5,6 +5,7 @@
 package sportsclubmanager.controller;
 
 import java.util.*;
+import java.util.logging.*;
 import sportsclubmanager.controller.contract.IController;
 import sportsclubmanager.domain.*;
 import sportsclubmanager.dto.classes.*;
@@ -73,8 +74,54 @@ public class LeagueController
     }
 
     @Override
-    public void set(ILeague value)
+    public Integer set(ILeague value)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try
+        {
+            sportsclubmanager.domain.classes.League league = createDomain(value);
+
+            return DomainFacade.set(league);
+        }
+        catch (IdNotFoundException | CouldNotSaveException ex)
+        {
+            Logger.getLogger(LeagueController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return 0;
+    }
+
+    @Override
+    public void delete(ILeague value)
+    {
+        try
+        {
+            sportsclubmanager.domain.classes.League league = createDomain(value);
+
+            DomainFacade.delete(league);
+        }
+        catch (IdNotFoundException | CouldNotDeleteException ex)
+        {
+            Logger.getLogger(LeagueController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private sportsclubmanager.domain.classes.League createDomain(ILeague value)
+            throws IdNotFoundException
+    {
+        sportsclubmanager.domain.classes.League league = new sportsclubmanager.domain.classes.League(value.getId());
+
+        league.setDescription(value.getDescription());
+        league.setName(value.getName());
+
+        List<sportsclubmanager.domain.contract.ITeam> teamList = new LinkedList<>();
+
+        for (int i : value.getTeamList())
+        {
+            teamList.add(new TeamController().getDomainById(i));
+        }
+
+        league.setTeamList(teamList);
+
+        return league;
     }
 }
