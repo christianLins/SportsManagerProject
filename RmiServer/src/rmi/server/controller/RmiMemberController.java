@@ -5,8 +5,8 @@
 package rmi.server.controller;
 
 import dto.contract.IMember;
-import dto.controller.MemberController;
-import dto.controller.contract.IdNotFoundException;
+import dto.mapper.MemberMapper;
+import dto.mapper.contract.IdNotFoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
@@ -32,13 +32,13 @@ public class RmiMemberController extends UnicastRemoteObject implements IRmiMemb
     @Override
     public dto.contract.IMember getById(Integer id) throws IdNotFoundException, RemoteException
     {
-        return MemberController.getInstance().getById(id);
+        return MemberMapper.getInstance().getById(id);
     }
 
     @Override
     public List<IMember> getAll() throws RemoteException
     {
-        return MemberController.getInstance().getAll();
+        return MemberMapper.getInstance().getAll();
     }
 
     @Override

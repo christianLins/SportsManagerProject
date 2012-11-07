@@ -6,7 +6,7 @@ package rmi.client;
 
 import java.rmi.RemoteException;
 import rmi.contract.IRmiServiceFactory;
-import dto.controller.contract.IController;
+import dto.mapper.contract.IMapper;
 import dto.contract.*;
 
 /**
@@ -29,7 +29,7 @@ public class RmiServiceClient implements SeviceClient
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    public IController<IAddress> getAddressManager()
+    public IMapper<IAddress> getAddressManager()
             throws CommunicationProblemException
     {
         try
@@ -42,7 +42,7 @@ public class RmiServiceClient implements SeviceClient
         }
     }
 
-    public IController<IClubTeam> getClubTeamManager()
+    public IMapper<IClubTeam> getClubTeamManager()
             throws CommunicationProblemException
     {
         try
@@ -55,7 +55,7 @@ public class RmiServiceClient implements SeviceClient
         }
     }
 
-    public IController<ICountry> getCountryManager()
+    public IMapper<ICountry> getCountryManager()
             throws CommunicationProblemException
     {
         try
@@ -68,7 +68,7 @@ public class RmiServiceClient implements SeviceClient
         }
     }
 
-    public IController<IDepartment> getDepartmentManager()
+    public IMapper<IDepartment> getDepartmentManager()
             throws CommunicationProblemException
     {
         try
@@ -81,7 +81,7 @@ public class RmiServiceClient implements SeviceClient
         }
     }
 
-    public IController<IDepartmentHead> getDepartmentHeadManager()
+    public IMapper<IDepartmentHead> getDepartmentHeadManager()
             throws CommunicationProblemException
     {
         try
@@ -94,7 +94,7 @@ public class RmiServiceClient implements SeviceClient
         }
     }
 
-    public IController<ILeague> getLeagueManager()
+    public IMapper<ILeague> getLeagueManager()
             throws CommunicationProblemException
     {
         try
@@ -107,7 +107,7 @@ public class RmiServiceClient implements SeviceClient
         }
     }
 
-    public IController<IMatch> getMatchManager()
+    public IMapper<IMatch> getMatchManager()
             throws CommunicationProblemException
     {
         try
@@ -120,7 +120,7 @@ public class RmiServiceClient implements SeviceClient
         }
     }
 
-    public IController<IMatchresult> getMatchresultManager()
+    public IMapper<IMatchresult> getMatchresultManager()
             throws CommunicationProblemException
     {
         try
@@ -133,7 +133,7 @@ public class RmiServiceClient implements SeviceClient
         }
     }
 
-    public IController<IMember> getMemberManager()
+    public IMapper<IMember> getMemberManager()
             throws CommunicationProblemException
     {
         try
@@ -146,7 +146,7 @@ public class RmiServiceClient implements SeviceClient
         }
     }
 
-    public IController<IPermission> getPermissionManager()
+    public IMapper<IPermission> getPermissionManager()
             throws CommunicationProblemException
     {
         try
@@ -159,7 +159,7 @@ public class RmiServiceClient implements SeviceClient
         }
     }
 
-    public IController<IPlayer> getPlayerManager()
+    public IMapper<IPlayer> getPlayerManager()
             throws CommunicationProblemException
     {
         try
@@ -172,7 +172,7 @@ public class RmiServiceClient implements SeviceClient
         }
     }
 
-    public IController<ITeam> getTeamManager()
+    public IMapper<ITeam> getTeamManager()
             throws CommunicationProblemException
     {
         try
@@ -185,7 +185,7 @@ public class RmiServiceClient implements SeviceClient
         }
     }
 
-    public IController<ITrainer> getTrainerManager()
+    public IMapper<ITrainer> getTrainerManager()
             throws CommunicationProblemException
     {
         try
@@ -198,7 +198,7 @@ public class RmiServiceClient implements SeviceClient
         }
     }
 
-    public IController<ITypeOfSport> getTypeOfSportManager()
+    public IMapper<ITypeOfSport> getTypeOfSportManager()
             throws CommunicationProblemException
     {
         try
@@ -211,7 +211,7 @@ public class RmiServiceClient implements SeviceClient
         }
     }
 
-    public IController<ICompetition> getCompetitionManager()
+    public IMapper<ICompetition> getCompetitionManager()
     {
         throw new UnsupportedOperationException("Not yet implemented");
     }
