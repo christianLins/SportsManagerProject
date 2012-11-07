@@ -23,7 +23,7 @@ import javax.swing.LayoutStyle;
 import javax.swing.ListModel;
 import javax.swing.WindowConstants;
 import sportsclubmanager.controller.CompetitionController;
-import sportsclubmanager.controller.IdNotFoundException;
+import sportsclubmanager.controller.contract.IdNotFoundException;
 import sportsclubmanager.controller.TeamController;
 import sportsclubmanager.controller.contract.IController;
 import sportsclubmanager.dto.contract.ICompetition;

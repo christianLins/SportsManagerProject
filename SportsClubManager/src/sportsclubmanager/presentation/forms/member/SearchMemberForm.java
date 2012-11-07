@@ -32,7 +32,7 @@ import sportsclubmanager.controller.ClubTeamController;
 import sportsclubmanager.controller.CountryController;
 import sportsclubmanager.controller.DepartmentController;
 import sportsclubmanager.controller.DepartmentHeadController;
-import sportsclubmanager.controller.IdNotFoundException;
+import sportsclubmanager.controller.contract.IdNotFoundException;
 import sportsclubmanager.controller.MemberController;
 import sportsclubmanager.controller.PlayerController;
 import sportsclubmanager.controller.contract.IController;

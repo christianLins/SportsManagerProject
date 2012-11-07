@@ -4,6 +4,7 @@
  */
 package sportsclubmanager.controller;
 
+import sportsclubmanager.controller.contract.IdNotFoundException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.logging.*;
