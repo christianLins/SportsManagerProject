@@ -2,12 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package sportsclubmanager.controller;
+package sportsclubmanager.dto.controller;
 
-import sportsclubmanager.controller.contract.IdNotFoundException;
+import sportsclubmanager.dto.controller.contract.IdNotFoundException;
 import java.util.*;
 import java.util.logging.*;
-import sportsclubmanager.controller.contract.IController;
+import sportsclubmanager.dto.controller.contract.IController;
 import sportsclubmanager.domain.*;
 import sportsclubmanager.dto.classes.*;
 import sportsclubmanager.dto.contract.*;
@@ -16,12 +16,12 @@ import sportsclubmanager.dto.contract.*;
 
  @author Thomas
  */
-public class TeamController
+ class TeamController
         implements IController<ITeam>
 {
     private static TeamController controller;
 
-    public TeamController()
+     TeamController()
     {
     }
 

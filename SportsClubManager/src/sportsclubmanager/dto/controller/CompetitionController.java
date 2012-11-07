@@ -2,25 +2,25 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package sportsclubmanager.controller;
+package sportsclubmanager.dto.controller;
 
 import java.util.*;
 import java.util.logging.*;
-import sportsclubmanager.controller.contract.*;
 import sportsclubmanager.domain.*;
 import sportsclubmanager.dto.classes.Competition;
 import sportsclubmanager.dto.contract.ICompetition;
+import sportsclubmanager.dto.controller.contract.*;
 
 /**
 
  @author Lins Christian (christian.lins87@gmail.com)
  */
-public class CompetitionController
+ class CompetitionController
         implements IController<ICompetition>
 {
     private static CompetitionController controller;
 
-    public CompetitionController()
+     CompetitionController()
     {
     }
 
