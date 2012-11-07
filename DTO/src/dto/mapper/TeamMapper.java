@@ -2,14 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.controller;
+package dto.mapper;
 
 import domain.CouldNotSaveException;
 import domain.DomainFacade;
 import dto.classes.Team;
 import dto.contract.ITeam;
-import dto.controller.contract.IController;
-import dto.controller.contract.IdNotFoundException;
+import dto.mapper.contract.IMapper;
+import dto.mapper.contract.IdNotFoundException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -19,20 +19,20 @@ import java.util.logging.Logger;
 
  @author Thomas
  */
- public class TeamController
-        implements IController<ITeam>
+ public class TeamMapper
+        implements IMapper<ITeam>
 {
-    private static TeamController controller;
+    private static TeamMapper controller;
 
-     TeamController()
+     TeamMapper()
     {
     }
 
-    public static IController<ITeam> getInstance()
+    public static IMapper<ITeam> getInstance()
     {
         if (controller == null)
         {
-            controller = new TeamController();
+            controller = new TeamMapper();
         }
 
         return controller;
@@ -92,7 +92,7 @@ import java.util.logging.Logger;
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
-            Logger.getLogger(AddressController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddressMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally
         {
@@ -116,19 +116,19 @@ import java.util.logging.Logger;
         
         team.setDescription(value.getDescription());
         team.setName(value.getName());
-        team.setLeague(new LeagueController().getDomainById(value.getLeague()));
+        team.setLeague(new LeagueMapper().getDomainById(value.getLeague()));
         
         LinkedList<domain.contract.ICompetition>  c = new LinkedList<>();
         for(int id:competitions)
         {
-            c.add(new CompetitionController().getDomainById(id));
+            c.add(new CompetitionMapper().getDomainById(id));
         }
         team.setCompetitionList(c);
         
         LinkedList<domain.contract.IMatch> m = new LinkedList<>();
         for(int id:matches)
         {
-            m.add(new MatchController().getDomainById(id));
+            m.add(new MatchMapper().getDomainById(id));
         }
         team.setMatchList(m);
         return team;

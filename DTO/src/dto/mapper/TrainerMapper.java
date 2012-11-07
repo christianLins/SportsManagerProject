@@ -2,33 +2,33 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.controller;
+package dto.mapper;
 
 import java.util.*;
 import java.util.logging.*;
 import domain.*;
 import dto.classes.Trainer;
 import dto.contract.ITrainer;
-import dto.controller.contract.*;
+import dto.mapper.contract.*;
 
 /**
 
  @author Thomas
  */
- public class TrainerController
-        implements IController<ITrainer>
+ public class TrainerMapper
+        implements IMapper<ITrainer>
 {
-    private static TrainerController controller;
+    private static TrainerMapper controller;
 
-     TrainerController()
+     TrainerMapper()
     {
     }
 
-    public static IController<ITrainer> getInstance()
+    public static IMapper<ITrainer> getInstance()
     {
         if (controller == null)
         {
-            controller = new TrainerController();
+            controller = new TrainerMapper();
         }
 
         return controller;
@@ -84,7 +84,7 @@ import dto.controller.contract.*;
             List<domain.contract.IClubTeam> clubTeamList = new LinkedList<>();
             for (int i : value.getClubTeamList())
             {
-                clubTeamList.add(new ClubTeamController().getDomainById(i));
+                clubTeamList.add(new ClubTeamMapper().getDomainById(i));
             }
             trainer.setClubTeamList(clubTeamList);
 
@@ -92,7 +92,7 @@ import dto.controller.contract.*;
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
-            Logger.getLogger(AddressController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddressMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally
         {
@@ -111,7 +111,7 @@ import dto.controller.contract.*;
         }
         catch (IdNotFoundException | CouldNotDeleteException ex)
         {
-            Logger.getLogger(AddressController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddressMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -126,7 +126,7 @@ import dto.controller.contract.*;
         LinkedList<domain.contract.IClubTeam> teams = new LinkedList<>();
         for (int id : clubTeams)
         {
-            teams.add(new ClubTeamController().getDomainById(id));
+            teams.add(new ClubTeamMapper().getDomainById(id));
         }
         trainer.setClubTeamList(teams);
 
@@ -134,7 +134,7 @@ import dto.controller.contract.*;
 
         for (int id : permisssions)
         {
-            p.add(new PermissionController().getDomainById(id));
+            p.add(new PermissionMapper().getDomainById(id));
         }
         trainer.setPermisssionList(p);
 

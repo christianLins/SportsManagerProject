@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.controller;
+package dto.mapper;
 
-import dto.controller.contract.IdNotFoundException;
+import dto.mapper.contract.IdNotFoundException;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import dto.controller.contract.IController;
+import dto.mapper.contract.IMapper;
 import domain.*;
 import dto.classes.*;
 import dto.contract.*;
@@ -17,20 +17,20 @@ import dto.contract.*;
 
  @author Thomas
  */
- public class PlayerController
-        implements IController<IPlayer>
+ public class PlayerMapper
+        implements IMapper<IPlayer>
 {
-    private static PlayerController controller;
+    private static PlayerMapper controller;
 
-     PlayerController()
+     PlayerMapper()
     {
     }
 
-    public static IController<IPlayer> getInstance()
+    public static IMapper<IPlayer> getInstance()
     {
         if (controller == null)
         {
-            controller = new PlayerController();
+            controller = new PlayerMapper();
         }
 
         return controller;
@@ -87,7 +87,7 @@ import dto.contract.*;
         }
         catch (IdNotFoundException ex)
         {
-            Logger.getLogger(PlayerController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PlayerMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally
         {
@@ -106,14 +106,14 @@ import dto.contract.*;
         LinkedList<domain.contract.IPermission> p = new LinkedList<>();
         for(int id : permissionList)
         {
-            p.add(new PermissionController().getDomainById(id));
+            p.add(new PermissionMapper().getDomainById(id));
         }
         player.setPermisssionList(p);
         
         LinkedList<domain.contract.ITypeOfSport> typeOfSports = new LinkedList<>();
         for(int id : typeOfSportList)
         {
-            typeOfSports.add(new TypeOfSportController().getDomainById(id));
+            typeOfSports.add(new TypeOfSportMapper().getDomainById(id));
         }
         player.setTypeOfSportList(typeOfSports);
         
@@ -130,7 +130,7 @@ import dto.contract.*;
         }
         catch (IdNotFoundException | CouldNotDeleteException ex)
         {
-            Logger.getLogger(PlayerController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PlayerMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

@@ -2,33 +2,33 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.controller;
+package dto.mapper;
 
-import java.util.*;
-import java.util.logging.*;
 import domain.*;
 import dto.classes.TypeOfSport;
 import dto.contract.ITypeOfSport;
-import dto.controller.contract.*;
+import dto.mapper.contract.*;
+import java.util.*;
+import java.util.logging.*;
 
 /**
 
  @author Thomas
  */
- public class TypeOfSportController
-        implements IController<ITypeOfSport>
+ public class TypeOfSportMapper
+        implements IMapper<ITypeOfSport>
 {
-    private static TypeOfSportController controller;
+    private static TypeOfSportMapper controller;
 
-     TypeOfSportController()
+     TypeOfSportMapper()
     {
     }
 
-    public static IController<ITypeOfSport> getInstance()
+    public static IMapper<ITypeOfSport> getInstance()
     {
         if (controller == null)
         {
-            controller = new TypeOfSportController();
+            controller = new TypeOfSportMapper();
         }
 
         return controller;
@@ -87,7 +87,7 @@ import dto.controller.contract.*;
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
-            Logger.getLogger(AddressController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddressMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return 0;
@@ -104,7 +104,7 @@ import dto.controller.contract.*;
         }
         catch (IdNotFoundException | CouldNotDeleteException ex)
         {
-            Logger.getLogger(AddressController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddressMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -119,7 +119,7 @@ import dto.controller.contract.*;
         LinkedList<domain.contract.IPlayer> list = new LinkedList<>();
         for (Integer id : value.getPlayerList())
         {
-            list.add(new PlayerController().getDomainById(id));
+            list.add(new PlayerMapper().getDomainById(id));
         }
         typeofsport.setPlayerList(list);
 

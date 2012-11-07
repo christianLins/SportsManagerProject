@@ -2,33 +2,33 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.controller;
+package dto.mapper;
 
 import java.util.*;
 import java.util.logging.*;
 import domain.*;
 import dto.classes.Member;
 import dto.contract.IMember;
-import dto.controller.contract.*;
+import dto.mapper.contract.*;
 
 /**
 
  @author Lins Christian (christian.lins87@gmail.com)
  */
-public class MemberController
-        implements IController<IMember>
+public class MemberMapper
+        implements IMapper<IMember>
 {
-    private static MemberController controller;
+    private static MemberMapper controller;
 
-    public MemberController()
+    public MemberMapper()
     {
     }
 
-    public static IController<IMember> getInstance()
+    public static IMapper<IMember> getInstance()
     {
         if (controller == null)
         {
-            controller = new MemberController();
+            controller = new MemberMapper();
         }
 
         return controller;
@@ -87,7 +87,7 @@ public class MemberController
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
-            Logger.getLogger(MemberController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MemberMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return 0;
@@ -104,7 +104,7 @@ public class MemberController
         }
         catch (IdNotFoundException | CouldNotDeleteException ex)
         {
-            Logger.getLogger(MemberController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MemberMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -123,8 +123,8 @@ public class MemberController
         member.setPrename(value.getPrename());
         member.setTelephonenumber(value.getTelephonenumber());
 
-        member.setAddress(new AddressController().getDomainById(value.getAddress()));
-        member.setNationality(new CountryController().getDomainById(value.getNationality()));
+        member.setAddress(new AddressMapper().getDomainById(value.getAddress()));
+        member.setNationality(new CountryMapper().getDomainById(value.getNationality()));
 
         List< domain.contract.IRole> roleList = new LinkedList<>();
 

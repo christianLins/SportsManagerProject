@@ -2,33 +2,33 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.controller;
+package dto.mapper;
 
 import java.util.*;
 import java.util.logging.*;
 import domain.*;
 import dto.classes.Permission;
 import dto.contract.IPermission;
-import dto.controller.contract.*;
+import dto.mapper.contract.*;
 
 /**
 
  @author Thomas
  */
- public class PermissionController
-        implements IController<IPermission>
+ public class PermissionMapper
+        implements IMapper<IPermission>
 {
-    private static PermissionController controller;
+    private static PermissionMapper controller;
     
-     PermissionController()
+     PermissionMapper()
     {
     }
     
-    public static IController<IPermission> getInstance()
+    public static IMapper<IPermission> getInstance()
     {
         if (controller == null)
         {
-            controller = new PermissionController();
+            controller = new PermissionMapper();
         }
         
         return controller;
@@ -87,7 +87,7 @@ import dto.controller.contract.*;
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
-            Logger.getLogger(PermissionController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PermissionMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return 0;
@@ -104,7 +104,7 @@ import dto.controller.contract.*;
         }
         catch (IdNotFoundException | CouldNotDeleteException ex)
         {
-            Logger.getLogger(PermissionController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PermissionMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
