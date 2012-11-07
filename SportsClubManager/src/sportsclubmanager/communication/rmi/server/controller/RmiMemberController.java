@@ -7,8 +7,8 @@ package sportsclubmanager.communication.rmi.server.controller;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
-import sportsclubmanager.controller.IdNotFoundException;
 import sportsclubmanager.controller.MemberController;
+import sportsclubmanager.controller.contract.IdNotFoundException;
 import sportsclubmanager.domain.contract.IMember;
 
 /**
@@ -44,7 +44,7 @@ public class RmiMemberController extends UnicastRemoteObject implements IRmiMemb
     @Override
     public void set(IMember value) throws RemoteException
     {
-        MemberController.getInstance().set(value);
+//        MemberController.getInstance().set(value);
     }
     
     

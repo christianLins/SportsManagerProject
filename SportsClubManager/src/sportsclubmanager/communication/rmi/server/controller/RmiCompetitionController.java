@@ -6,18 +6,9 @@ package sportsclubmanager.communication.rmi.server.controller;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import sportsclubmanager.controller.CompetitionController;
-import sportsclubmanager.controller.IdNotFoundException;
-import sportsclubmanager.controller.MatchController;
-import sportsclubmanager.controller.TeamController;
-import sportsclubmanager.domain.CouldNotDeleteException;
-import sportsclubmanager.domain.CouldNotSaveException;
-import sportsclubmanager.domain.DomainFacade;
-import sportsclubmanager.dto.classes.Competition;
+import sportsclubmanager.controller.contract.IdNotFoundException;
 import sportsclubmanager.dto.contract.ICompetition;
 
 /**
