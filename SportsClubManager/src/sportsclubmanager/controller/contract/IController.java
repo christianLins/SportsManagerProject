@@ -5,7 +5,6 @@
 package sportsclubmanager.controller.contract;
 
 import java.io.Serializable;
-import java.rmi.Remote;
 import java.util.List;
 import sportsclubmanager.controller.IdNotFoundException;
 
@@ -20,4 +19,6 @@ public interface IController<T> extends Serializable
     List<T> getAll();
 
     Integer set(T value);
+    
+    void delete(T value);
 }
