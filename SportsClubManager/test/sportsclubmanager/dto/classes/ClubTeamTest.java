@@ -4,9 +4,10 @@
  */
 package sportsclubmanager.dto.classes;
 
+import dto.classes.ClubTeam;
 import java.util.*;
 import org.junit.*;
-import sportsclubmanager.dto.contract.*;
+import dto.contract.*;
 
 /**
 

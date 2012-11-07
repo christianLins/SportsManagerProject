@@ -7,8 +7,8 @@ package sportsclubmanager.domain.classes;
 import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.domain.classes.Trainer;
-import sportsclubmanager.domain.contract.*;
+import domain.classes.Trainer;
+import domain.contract.*;
 
 /**
 

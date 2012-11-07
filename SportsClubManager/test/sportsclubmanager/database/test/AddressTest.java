@@ -4,12 +4,19 @@ package sportsclubmanager.database.test;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-import java.util.*;
+import database.DatabaseManager;
+import domain.CouldNotDeleteException;
+import domain.CouldNotSaveException;
+import domain.DomainFacade;
+import domain.contract.IAddress;
+import domain.contract.ICountry;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 import org.easymock.EasyMock;
-import org.junit.*;
-import sportsclubmanager.database.DatabaseManager;
-import sportsclubmanager.domain.*;
-import sportsclubmanager.domain.contract.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
 

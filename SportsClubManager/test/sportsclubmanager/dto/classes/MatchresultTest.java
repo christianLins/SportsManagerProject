@@ -4,9 +4,10 @@
  */
 package sportsclubmanager.dto.classes;
 
+import dto.classes.Matchresult;
 import java.util.Random;
 import org.junit.*;
-import sportsclubmanager.dto.contract.IMatchresult;
+import dto.contract.IMatchresult;
 
 /**
 

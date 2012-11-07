@@ -4,9 +4,10 @@
  */
 package sportsclubmanager.domain.classes;
 
+import domain.classes.Country;
 import java.util.Random;
 import org.junit.*;
-import sportsclubmanager.domain.contract.ICountry;
+import domain.contract.ICountry;
 
 /**
 

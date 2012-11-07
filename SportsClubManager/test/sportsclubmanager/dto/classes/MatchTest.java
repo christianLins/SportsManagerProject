@@ -4,10 +4,11 @@
  */
 package sportsclubmanager.dto.classes;
 
+import dto.classes.Match;
 import java.util.Date;
 import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.dto.contract.IMatch;
+import dto.contract.IMatch;
 
 /**
 
@@ -59,23 +60,23 @@ public class MatchTest
         Date dateFrom = new Date();
         Date dateTo = new Date();
 
-        sportsclubmanager.domain.contract.ITeam hteam = EasyMock.createMock(sportsclubmanager.domain.contract.ITeam.class);
+        domain.contract.ITeam hteam = EasyMock.createMock(domain.contract.ITeam.class);
         EasyMock.expect(hteam.getId()).andReturn(1).anyTimes();
         EasyMock.replay(hteam);
 
-        sportsclubmanager.domain.contract.ITeam fteam = EasyMock.createMock(sportsclubmanager.domain.contract.ITeam.class);
+        domain.contract.ITeam fteam = EasyMock.createMock(domain.contract.ITeam.class);
         EasyMock.expect(fteam.getId()).andReturn(3).anyTimes();
         EasyMock.replay(fteam);
 
-        sportsclubmanager.domain.contract.IMatchresult result = EasyMock.createMock(sportsclubmanager.domain.contract.IMatchresult.class);
+        domain.contract.IMatchresult result = EasyMock.createMock(domain.contract.IMatchresult.class);
         EasyMock.expect(result.getId()).andReturn(2).anyTimes();
         EasyMock.replay(result);
 
-        sportsclubmanager.domain.contract.ICompetition competition = EasyMock.createMock(sportsclubmanager.domain.contract.ICompetition.class);
+        domain.contract.ICompetition competition = EasyMock.createMock(domain.contract.ICompetition.class);
         EasyMock.expect(competition.getId()).andReturn(2).anyTimes();
         EasyMock.replay(competition);
 
-        sportsclubmanager.domain.contract.IMatch expected = EasyMock.createMock(sportsclubmanager.domain.contract.IMatch.class);
+        domain.contract.IMatch expected = EasyMock.createMock(domain.contract.IMatch.class);
         EasyMock.expect(expected.getId()).andReturn(2).anyTimes();
         EasyMock.expect(expected.getDateFrom()).andReturn(dateFrom).anyTimes();
         EasyMock.expect(expected.getDateTo()).andReturn(dateTo).anyTimes();

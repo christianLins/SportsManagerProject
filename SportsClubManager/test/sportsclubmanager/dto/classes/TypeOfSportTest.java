@@ -4,10 +4,11 @@
  */
 package sportsclubmanager.dto.classes;
 
+import dto.classes.TypeOfSport;
 import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.dto.contract.ITypeOfSport;
+import dto.contract.ITypeOfSport;
 
 /**
 
@@ -56,13 +57,13 @@ public class TypeOfSportTest
     @Test
     public void copyTest()
     {
-        sportsclubmanager.domain.contract.ITypeOfSport t4 = EasyMock.createMock(sportsclubmanager.domain.contract.ITypeOfSport.class);
+        domain.contract.ITypeOfSport t4 = EasyMock.createMock(domain.contract.ITypeOfSport.class);
                 EasyMock.expect(t4.getId()).andReturn(2).anyTimes();
         EasyMock.expect(t4.getName()).andReturn("name4").anyTimes();
         EasyMock.expect(t4.getDescription()).andReturn("description4").anyTimes();
         EasyMock.replay(t4);
 
-        sportsclubmanager.dto.contract.ITypeOfSport actual = TypeOfSport.copy(t4);
+        dto.contract.ITypeOfSport actual = TypeOfSport.copy(t4);
 
         Assert.assertEquals(t4.getDescription(), actual.getDescription());
         Assert.assertEquals(t4.getName(), actual.getName());

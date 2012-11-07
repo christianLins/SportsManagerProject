@@ -4,10 +4,11 @@
  */
 package sportsclubmanager.domain.classes;
 
+import domain.classes.Address;
 import java.util.Random;
 import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.domain.contract.*;
+import domain.contract.*;
 
 /**
 

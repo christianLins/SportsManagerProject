@@ -4,9 +4,10 @@
  */
 package sportsclubmanager.dto.classes;
 
+import dto.classes.Player;
 import java.util.*;
 import org.junit.*;
-import sportsclubmanager.dto.contract.IPlayer;
+import dto.contract.IPlayer;
 
 /**
 

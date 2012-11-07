@@ -4,10 +4,11 @@
  */
 package sportsclubmanager.dto.classes;
 
+import dto.classes.Team;
 import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.dto.contract.*;
+import dto.contract.*;
 
 /**
 

@@ -4,10 +4,12 @@
  */
 package sportsclubmanager.domain.classes;
 
+import domain.classes.ClubTeam;
+import domain.classes.Team;
 import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.domain.contract.*;
+import domain.contract.*;
 
 /**
 

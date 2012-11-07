@@ -4,10 +4,11 @@
  */
 package sportsclubmanager.dto.classes;
 
+import dto.classes.Address;
 import java.util.Random;
 import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.dto.contract.*;
+import dto.contract.*;
 
 /**
 
@@ -56,11 +57,11 @@ public class AddressTest
     @Test
     public void interfaceConstructorTest()
     {
-        sportsclubmanager.domain.contract.ICountry country = EasyMock.createMock(sportsclubmanager.domain.contract.ICountry.class);
+        domain.contract.ICountry country = EasyMock.createMock(domain.contract.ICountry.class);
         EasyMock.expect(country.getId()).andReturn(1).anyTimes();
         EasyMock.replay(country);
 
-        sportsclubmanager.domain.contract.IAddress expected = EasyMock.createMock(sportsclubmanager.domain.contract.IAddress.class);
+        domain.contract.IAddress expected = EasyMock.createMock(domain.contract.IAddress.class);
         EasyMock.expect(expected.getId()).andReturn(2).anyTimes();
         EasyMock.expect(expected.getCountry()).andReturn(country).anyTimes();
         EasyMock.expect(expected.getPostalCode()).andReturn(1).anyTimes();

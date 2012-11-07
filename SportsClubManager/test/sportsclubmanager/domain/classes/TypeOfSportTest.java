@@ -4,10 +4,14 @@
  */
 package sportsclubmanager.domain.classes;
 
-import java.util.*;
+import domain.classes.TypeOfSport;
+import domain.contract.IPlayer;
+import domain.contract.ITypeOfSport;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 import org.easymock.EasyMock;
 import org.junit.*;
-import sportsclubmanager.domain.contract.*;
 
 /**
 

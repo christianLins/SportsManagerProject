@@ -6,8 +6,8 @@ package sportsclubmanager.domain.classes;
 
 import java.util.Random;
 import org.junit.*;
-import sportsclubmanager.domain.classes.Matchresult;
-import sportsclubmanager.domain.contract.IMatchresult;
+import domain.classes.Matchresult;
+import domain.contract.IMatchresult;
 
 /**
 
