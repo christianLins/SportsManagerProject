@@ -11,7 +11,7 @@ public class Matchresult
     private double pointsHometeam;
     private double pointsForeignteam;
 
-    public Matchresult(int id)
+     Matchresult(int id)
     {
         this.id = id;
     }

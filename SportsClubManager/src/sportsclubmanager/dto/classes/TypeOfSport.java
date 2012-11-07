@@ -12,11 +12,10 @@ public class TypeOfSport
     private String description;
     private List<Integer> playerList = new LinkedList<>();
 
-    public TypeOfSport(int id)
+    TypeOfSport(int id)
     {
         this.id = id;
     }
-    
     private static HashMap<sportsclubmanager.domain.contract.ITypeOfSport, TypeOfSport> typeOfSports = new HashMap<>();
 
     public static TypeOfSport copy(sportsclubmanager.domain.contract.ITypeOfSport typeOfSport)

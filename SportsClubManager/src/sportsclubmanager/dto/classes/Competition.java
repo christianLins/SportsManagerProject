@@ -14,7 +14,7 @@ public class Competition
     private List<Integer> teamList = new LinkedList<>();
     private List<Integer> matchList = new LinkedList<>();
 
-    public Competition()
+     Competition()
     {
     }
 

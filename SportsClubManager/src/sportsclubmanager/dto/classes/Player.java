@@ -10,11 +10,11 @@ public class Player
 {
     private List<Integer> typeOfSportList;
 
-    public Player()
+     Player()
     {
     }
     
-    public Player(int id)
+     Player(int id)
     {
         super(id);
     }

@@ -22,11 +22,11 @@ public class Country
     private String italiano;
     private String portugues;
 
-    public Country()
+     Country()
     {
     }
 
-    public Country(int id)
+     Country(int id)
     {
         this.id = id;
     }

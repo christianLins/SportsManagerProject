@@ -12,10 +12,11 @@ public class ClubTeam
     private List<Integer> trainerList = new LinkedList<>();
     private List<Integer> playerList = new LinkedList<>();
 
-    public ClubTeam()
+     ClubTeam()
     {
         super();
     }
+    
     private static HashMap<sportsclubmanager.domain.contract.IClubTeam, ClubTeam> clubTeams = new HashMap<>();
 
     public static ClubTeam copy(sportsclubmanager.domain.contract.IClubTeam clubTeam)

@@ -10,7 +10,7 @@ public class Trainer
 {
     private List<Integer> clubTeamList = new LinkedList<>();
 
-    public Trainer(int id)
+    Trainer(int id)
     {
         super(id);
     }

@@ -12,11 +12,11 @@ public class League
     private String description;
     private List<Integer> teamList = new LinkedList<>();
 
-    public League()
+     League()
     {
     }
 
-    public League(int id)
+     League(int id)
     {
         this.id = id;
     }

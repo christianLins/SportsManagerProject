@@ -10,16 +10,16 @@ public class Role
     private int id;
     private List<Integer> permissionList = new LinkedList<>();
 
-    public Role()
+     Role()
     {
     }
 
-    public Role(int id)
+     Role(int id)
     {
         this.id = id;
     }
 
-    public Role(sportsclubmanager.domain.contract.IRole c)
+     Role(sportsclubmanager.domain.contract.IRole c)
     {
         this.id = c.getId();
 

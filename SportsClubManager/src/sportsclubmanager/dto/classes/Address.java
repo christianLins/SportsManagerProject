@@ -15,7 +15,7 @@ public class Address
     private int country;
     private static HashMap<sportsclubmanager.domain.contract.IAddress, Address> addresses = new HashMap<>();
 
-    public Address(int id)
+     Address(int id)
     {
         this.id = id;
     }
