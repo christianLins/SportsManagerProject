@@ -7,6 +7,42 @@ import sportsclubmanager.dto.contract.IMember;
 public class Member
         implements Serializable, IMember
 {
+    private static HashMap<sportsclubmanager.domain.contract.IMember, Member> members = new HashMap<>();
+
+    public static IMember copy(sportsclubmanager.domain.contract.IMember member)
+    {
+        Member a;
+
+        if (members.containsKey(member))
+        {
+            a = members.get(member);
+        }
+        else
+        {
+            a = new Member();
+
+            a.setId(member.getIdMember());
+            a.setPrename(member.getPrename());
+            a.setLastname(member.getLastname());
+
+            a.setDateOfBirth(member.getDateOfBirth());
+            a.setMemberFrom(member.getMemberFrom());
+            a.setMemberTo(member.getMemberTo());
+
+            a.setTelephonenumber(member.getTelephonenumber());
+            a.setEmailAddress(member.getEmailAddress());
+            a.setGender(member.getGender());
+            a.setNationality(member.getNationality().getId());
+            a.setAddress(member.getAddress().getId());
+
+            for (sportsclubmanager.domain.contract.IRole c : member.getRoleList())
+            {
+                a.roleList.add(c.getId());
+            }
+        }
+
+        return a;
+    }
     private Integer id;
     private String prename;
     private String lastname;
@@ -18,7 +54,7 @@ public class Member
     private Boolean gender;
     private Integer nationality;
     private Integer address;
-    private List<Integer> roleList;
+    private List<Integer> roleList = new LinkedList<>();
 
     @Override
     public Integer getId()

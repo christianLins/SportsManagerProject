@@ -1,19 +1,42 @@
 package sportsclubmanager.presentation.forms.member;
 
-import java.awt.event.*;
-import java.util.*;
-import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.WindowConstants;
+import sportsclubmanager.controller.AddressController;
+import sportsclubmanager.controller.CountryController;
+import sportsclubmanager.controller.DepartmentController;
+import sportsclubmanager.controller.DepartmentHeadController;
 import sportsclubmanager.controller.MemberController;
-import sportsclubmanager.dto.classes.Member;
-import sportsclubmanager.presentation.basics.*;
+import sportsclubmanager.controller.PlayerController;
+import sportsclubmanager.controller.TeamController;
+import sportsclubmanager.controller.contract.IController;
+import sportsclubmanager.dto.contract.IAddress;
+import sportsclubmanager.dto.contract.ICountry;
+import sportsclubmanager.dto.contract.IDepartment;
+import sportsclubmanager.dto.contract.IDepartmentHead;
+import sportsclubmanager.dto.contract.IMember;
+import sportsclubmanager.dto.contract.IPlayer;
+import sportsclubmanager.dto.contract.ITeam;
+import sportsclubmanager.presentation.basics.AbstractForm;
+import sportsclubmanager.presentation.basics.AbstractMainForm;
 
 /**
-
- @author Lucia
+ *
+ * @author Lucia
  */
-public class NewMemberForm
-        extends AbstractMainForm
-{
+public class NewMemberForm extends AbstractMainForm {
+
     // Variables declaration - do not modify
     private JButton btnSaveMember;
     private JComboBox comboDepartment;
@@ -55,24 +78,47 @@ public class NewMemberForm
     private JTextField txtfieldMail;
     private JTextField txtfieldPhone;
     private JTextField txtfieldPostCode;
-    private Member member;
-    private MemberController mController;
+    //Controler and contract
+    IController<IMember> memberCtrl;
+    IController<IAddress> addressCtrl;
+    IController<ICountry> countryCtrl;
+    IController<IPlayer> playerCtrl;
+    IController<IDepartmentHead> depHeadCtrl;
+    IController<IDepartment> depCtrl;
+    IController<ITeam> teamCtrl;
+    IMember m;
+    IAddress address;
+    ICountry country;
+    IDepartmentHead depHead;
+    IDepartment department;
+    ITeam team;
 
     // End of variables declaration
     /**
-     Creates new form NewMemb
+     * Creates new form NewMemb
      */
-    public NewMemberForm(AbstractForm form)
-    {
+    public NewMemberForm(AbstractForm form) {
         super(form);
         initComponents();
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
-    private void initComponents()
-    {
-        member = new Member();
-        mController = MemberController.getInstance();
+    private void initComponents() {
+
+
+        memberCtrl = MemberController.getInstance();
+        addressCtrl = AddressController.getInstance();
+        countryCtrl = CountryController.getInstance();
+        playerCtrl = PlayerController.getInstance();
+        depHeadCtrl = DepartmentHeadController.getInstance();
+        depCtrl = DepartmentController.getInstance();
+        teamCtrl = TeamController.getInstance();
+        team = null;
+        m = null;
+        address = null;
+        country = null;
+        depHead = null;
+        department = null;
 
         panel = new JPanel();
         panePersonData = new JPanel();
@@ -247,7 +293,15 @@ public class NewMemberForm
         lblDepartment.setText("Department");
         String[] comboDeps = getDepartments();
         comboDepartment.setModel(new DefaultComboBoxModel(comboDeps));
+        comboDepartment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                //get teams from department and set selectable teams for combobox 
+                comboTeam.setModel(new DefaultComboBoxModel(getTeams(comboDepartment.getSelectedItem().toString())));
+            }
+        });
 
+//        String [] comboTeams = getTeams();
+//        comboTeam.setModel(new DefaultComboBoxModel(comboTeams/*new String[] { "Item 1", "Item 2" }*/));
         lblRole.setText("Role");
 
         radioAdmin.setText("Administrator");
@@ -256,17 +310,6 @@ public class NewMemberForm
 
         lblTeam.setText("Team");
 
-        comboTeam.setModel(new javax.swing.DefaultComboBoxModel(new String[]
-                {
-                    "Item 1", "Item 2", "Item 3", "Item 4"
-                }));
-        comboTeam.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                comboTeamActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout paneMembershipDataLayout = new javax.swing.GroupLayout(paneMembershipData);
         paneMembershipData.setLayout(paneMembershipDataLayout);
@@ -332,23 +375,16 @@ public class NewMemberForm
                 .addContainerGap(26, Short.MAX_VALUE)));
 
         btnSaveMember.setText("Save Member");
-        btnSaveMember.addActionListener(new ActionListener()
-        {
+        btnSaveMember.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
-//                setMemberData();
-                boolean success = true;
-
-                if (mController.createNewMember() == success)
-                {
-                    JOptionPane.showMessageDialog(parent, "Saved member");
+            public void actionPerformed(ActionEvent e) {
+                if (validInput()) {
+                    setMemberData();
+                    //TODO add some success message       
                 }
-                else
-                {
-                    JOptionPane.showMessageDialog(parent, "An error occured! Could not create member");
+                else{
+                    JOptionPane.showMessageDialog(parent, "Please fill in all text fields!");
                 }
-
             }
         });
 
@@ -388,54 +424,147 @@ public class NewMemberForm
         pack();
     }// </editor-fold>
 
-    private void setMemberData()
-    {
-        member.setPrename(txtfieldFName.getText());
-        member.setLastname(txtfieldLName.getText());
-        member.setAddress(Integer.parseInt(txtfieldAddress.getText()));
-        member.setNationality(Integer.parseInt(txtfieldCountry.getText()));
-        member.setDateOfBirth(dateChooserBirth.getDate());
-        member.setEmailAddress(txtfieldMail.getText());
-        member.setTelephonenumber(txtfieldPhone.getText());
-        member.setMemberFrom(dateChooserEntry.getDate());
+    private void setMemberData() {
+        m.setPrename(txtfieldFName.getText());
+        m.setLastname(txtfieldLName.getText());
+        m.setDateOfBirth(dateChooserBirth.getDate());
+        m.setMemberFrom(dateChooserEntry.getDate());
+        m.setTelephonenumber(txtfieldPhone.getText());
+        m.setEmailAddress(txtfieldMail.getText());
+        m.setId(0);
+
+        address.setStreet(txtfieldAddress.getText());
+        address.setPostalCode(Integer.parseInt(txtfieldPostCode.getText()));
+        address.setVillage(txtfieldCity.getText());
+        country.setName(txtfieldCountry.getText());
 
         boolean gender = false;
-        if (radioFemale.isSelected())
-        {
+        if (radioFemale.isSelected()) {
             gender = true;
         }
-        member.setGender(gender);
+        m.setGender(gender);
 
         List<Integer> roles = new LinkedList<Integer>();
-        if (radioAdmin.isSelected())
-        {
+        if (radioAdmin.isSelected()) {
             roles.add(1);
         }
-        if (radioTrainer.isSelected())
-        {
+        if (radioTrainer.isSelected()) {
             roles.add(2);
         }
-        if (radioPlayer.isSelected())
-        {
+        if (radioPlayer.isSelected()) {
             roles.add(3);
         }
-        member.setRoleList(roles);
+        m.setRoleList(roles);
+
+        department = getSelectedDepartment(comboDepartment.getSelectedItem().toString());
+        team = getSelectedTeam(comboTeam.getSelectedItem().toString());
+
+        List<String> types = getSportTypes();
+        
+        
+        //TODO add department, type of sports, team
     }
 
-    private void comboTeamActionPerformed(java.awt.event.ActionEvent evt)
-    {
+    private void comboTeamActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private String[] getDepartments()
-    {
+    private String[] getDepartments() {
 //        DepartmentHead depHead = new DepartmentHead();
 //        Object[] list = depHead.getDepartmentList().toArray();            
-        String[] deps = null;
+        String[] deps = {"Department 1", "Department 2"};
 
 //        for(int i = 0; i < list.length; i++){
 //            deps[i] = list[i].toString();
 //        }       
         return deps;
+    }
+
+    private String[] getTeams() {
+//        Team depHead = new Team();
+//        Object[] list = depHead.getDepartmentList().toArray();            
+        String[] teams = {"Team 1", "Team 2"};
+
+//        for(int i = 0; i < list.length; i++){
+//            deps[i] = list[i].toString();
+//        }       
+        return teams;
+    }
+
+    private String[] getTeams(String name) {
+//        Team depHead = new Team();
+//        Object[] list = depHead.getDepartmentList().toArray();            
+        String[] teams = {"Team 1", "Team 2"};
+
+//        for(int i = 0; i < list.length; i++){
+//            deps[i] = list[i].toString();
+//        }       
+        return teams;
+    }
+
+    private ITeam getSelectedTeam(String name) {
+        List<ITeam> teamList = teamCtrl.getAll();
+        ITeam selTeam = null;
+
+        for (ITeam t : teamList) {
+            if (t.getName().equals(name)) {
+                selTeam = t;
+            }
+        }
+        return selTeam;
+    }
+
+    private IDepartment getSelectedDepartment(String name) {
+        List<IDepartment> depList = depCtrl.getAll();
+        IDepartment selDepartment = null;
+
+        for (IDepartment d : depList) {
+            if (d.getName().equals(name)) {
+                selDepartment = d;
+            }
+        }
+        return selDepartment;
+    }
+    
+    private boolean validInput(){
+        boolean success = true;
+        
+        if (txtfieldFName.getText().isEmpty()) {
+            success = false;            
+        }
+        else if(txtfieldLName.getText().isEmpty()){
+            success = false;
+        }
+        else if(txtfieldCity.getText().isEmpty()){
+            success = false;
+        }
+        else if(dateChooserBirth.getDate() == null){
+            success = false;
+        }
+        else if(comboTeam.getSelectedItem() == null){
+            success = false;
+        }        
+        
+        return success;
+    }
+
+    private List<String> getSportTypes() {
+        List<String> types = new LinkedList<>();
+        
+        if(radioFootball.isSelected()){
+            types.add("Football");
+        }
+        if(radioHandball.isSelected()){
+            types.add("Handball");
+        }
+        if(radioVolleyball.isSelected()){
+            types.add("Volleyball");
+        }
+        if(radioIceHockey.isSelected()){
+            types.add("IceHockey");
+        }
+        
+        return types;
+   
     }
 }

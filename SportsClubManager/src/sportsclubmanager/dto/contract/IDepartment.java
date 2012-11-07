@@ -11,9 +11,8 @@ import java.util.List;
  @author Thomas
  */
 public interface IDepartment
+        extends IDto
 {
-        Integer getId();
-
     List<Integer> getClubTeamList();
 
     Integer getDepartmentHead();

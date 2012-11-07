@@ -1,14 +1,48 @@
 package sportsclubmanager.presentation.forms.member;
 
 import java.awt.Dimension;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.LinkedList;
 import java.util.List;
-import javax.swing.*;
-import javax.swing.event.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle;
+import javax.swing.WindowConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import sportsclubmanager.controller.AddressController;
+import sportsclubmanager.controller.ClubTeamController;
+import sportsclubmanager.controller.CountryController;
+import sportsclubmanager.controller.DepartmentController;
+import sportsclubmanager.controller.DepartmentHeadController;
+import sportsclubmanager.controller.IdNotFoundException;
 import sportsclubmanager.controller.MemberController;
-import sportsclubmanager.dto.classes.Member;
-import sportsclubmanager.presentation.basics.*;
+import sportsclubmanager.controller.PlayerController;
+import sportsclubmanager.controller.contract.IController;
+import sportsclubmanager.dto.contract.IDepartment;
+import sportsclubmanager.dto.contract.IDepartmentHead;
+import sportsclubmanager.dto.contract.ICountry;
+import sportsclubmanager.dto.contract.IAddress;
+import sportsclubmanager.dto.contract.IClubTeam;
+import sportsclubmanager.dto.contract.IMember;
+import sportsclubmanager.dto.contract.IPlayer;
+import sportsclubmanager.presentation.basics.AbstractForm;
+import sportsclubmanager.presentation.basics.AbstractMainForm;
 
 /**
  *
@@ -62,25 +96,33 @@ public class SearchMemberForm extends AbstractMainForm {
     private JTextField txtfieldPhone;
     private JTextField txtfieldPostCode;
     private JTextField txtfieldSearchMemb;
-    
     private boolean dataExists;
-    MemberController mController;
-    Member member;
+    //Controler and contract
+    IController<IMember> memberCtrl;
+    IController<IAddress> addressCtrl;
+    IController<ICountry> countryCtrl;
+    IController<IPlayer> playerCtrl;
+    IController<IDepartmentHead> depHeadCtrl;
+    IController<IDepartment> depCtrl;
+    IController<IClubTeam> clubCtrl;
+    IMember m;
+    IAddress address;
+    ICountry country;
+    IDepartmentHead depHead;
+    IDepartment department;
+    IClubTeam club;
     // End of variables declaration    
 
     public SearchMemberForm(AbstractForm form) {
         super(form);
         initComponents();
 
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
         dataExists = false;
-        mController =  MemberController.getInstance(); 
-        member = new Member();
-        
+
         paneSearch = new JPanel();
         txtfieldSearchMemb = new JTextField();
         btnSearch = new JButton();
@@ -127,6 +169,20 @@ public class SearchMemberForm extends AbstractMainForm {
         txtfieldMemberNr = new JTextField();
         btnApplyChange = new JButton();
 
+        memberCtrl = MemberController.getInstance();
+        addressCtrl = AddressController.getInstance();
+        countryCtrl = CountryController.getInstance();
+        playerCtrl = PlayerController.getInstance();
+        depHeadCtrl = DepartmentHeadController.getInstance();
+        depCtrl = DepartmentController.getInstance();
+        clubCtrl = ClubTeamController.getInstance();
+        club = null;
+        m = null;
+        address = null;
+        country = null;
+        depHead = null;
+        department = null;
+
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(848, 549));
 
@@ -134,14 +190,33 @@ public class SearchMemberForm extends AbstractMainForm {
         btnSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mController = null;
-                // m = m.getMember(txtfieldSearchMemb.getText());
 
-                if (mController == null) {
-                    JOptionPane.showMessageDialog(parent, "Your entry ' " + txtfieldSearchMemb.getText() + "' could not be found!");
+                if (txtfieldSearchMemb.getText() == null) {
+                    JOptionPane.showMessageDialog(parent, "Please enter a name!");
+                } else {
+                    List<IMember> result = null /*findMember(txtfieldSearchMemb.getText())*/;
+
+                    if (result == null || result.isEmpty()) {
+                        JOptionPane.showMessageDialog(parent, "Your entry ' " + txtfieldSearchMemb.getText() + "' could not be found!");
+                    } else {
+                        TableModel tableModel = tabMember.getModel();
+
+                        for (int row = 0; row < result.size(); row++) {
+                            IMember tmpMember = result.remove(row);
+
+                            tableModel.setValueAt(m.getId().toString(), row, 0);
+                            tableModel.setValueAt(m.getPrename(), row, 1);
+                            tableModel.setValueAt(m.getLastname(), row, 2);
+                            tableModel.setValueAt(m.getDateOfBirth().toString(), row, 3);
+                            if (m.getGender() == true) {
+                                tableModel.setValueAt("female", row, 4);
+                            } else {
+                                tableModel.setValueAt("male", row, 4);
+                            }
+                        }
+                        tabMember.setModel(tableModel);
+                    }
                 }
-
-                //TODO: fill up table
             }
         });
 
@@ -153,21 +228,24 @@ public class SearchMemberForm extends AbstractMainForm {
                     {null, null, null, null, null, null}
                 },
                 new String[]{
-                    "Membership Nr.", "First Name", "Last Name", "Sport", "Birth Date", "Gender"
+                    "Membership Nr.", "First Name", "Last Name"/*, "Sport"*/, "Birth Date", "Gender"
                 }));
 
-
+        //get member from selected table row
         tabMember.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
 
                 final int row = tabMember.getSelectedRow();
-                mController = null;
                 Integer id = (Integer) tabMember.getModel().getValueAt(row, 1);
-                
+
                 if (id != null) {
-                    member = mController.getMember(id);
-                    updateDetailPane();
+                    try {
+                        m = memberCtrl.getById(id);
+                        updateDetailPane();
+                    } catch (IdNotFoundException ex) {
+                        JOptionPane.showMessageDialog(parent, "ID '" + id + "' could not be found!");
+                    }
                 }
             }
         });
@@ -191,11 +269,26 @@ public class SearchMemberForm extends AbstractMainForm {
         radioFemale.setText("female");
         radioFemale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-               // radioFemaleActionPerformed(evt);
+                if (radioFemale.isSelected()) {
+                    radioMale.setEnabled(false);
+                } else {
+                    radioMale.setEnabled(true);
+                }
             }
         });
 
         radioMale.setText("male");
+        radioMale.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (radioMale.isSelected()) {
+                    radioFemale.setEnabled(false);
+                } else {
+                    radioFemale.setEnabled(true);
+                }
+            }
+        });
+
         lblEntryDate.setText("Entry Date");
         lblDepartment.setText("Department");
         lblSport.setText("Sport/s");
@@ -203,17 +296,10 @@ public class SearchMemberForm extends AbstractMainForm {
         lblRole.setText("Role");
 
         radioAdmin.setText("Administrator");
-        radioAdmin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-               // radioAdminActionPerformed(evt);
-            }
-        });
-
         radioTrainer.setText("Trainer");
-
         radioPlayer.setText("Player");
 
-        comboTeam.setModel(new DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
+        comboTeam.setModel(new DefaultComboBoxModel(new String[]{"Team"}));
         comboTeam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboTeamActionPerformed(evt);
@@ -221,60 +307,37 @@ public class SearchMemberForm extends AbstractMainForm {
         });
 
         radioFootball.setText("Football");
-
         radioVolleyball.setText("Volleyball");
-        radioVolleyball.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-              //  radioVolleyballActionPerformed(evt);
-            }
-        });
-
         radioHandball.setText("Handball");
-
         radioIceHockey.setText("IceHockey");
-        radioIceHockey.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-              //  radioIceHockeyActionPerformed(evt);
-            }
-        });
 
         lblLName.setText("Last Name");
-
         lblPostCode.setText("Post Code");
-
         lblCountry.setText("Country");
-
         lblMail.setText("Mail");
-
-//        txtfieldPostCode.addActionListener(new java.awt.event.ActionListener() {
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                txtfieldPostCodeActionPerformed(evt);
-//            }
-//        });
-
-        comboDepartment.setModel(new DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
-
         lblMemberNr.setText("Membership Nr.");
+
+        
+        comboDepartment.setModel(new DefaultComboBoxModel(getComboDepartment()));
+        comboDepartment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboDepartmentActionPerformed(evt);
+            }
+        });
+
         btnApplyChange.setText("Apply Changes");
         btnApplyChange.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                boolean success; 
+
                 if (dataExists != false) {
                     updateMemberData();
-                    mController = null;
-                    success = mController.changeMember(); 
-                    
-                    if(success == true){
-                        JOptionPane.showMessageDialog(parent, "Data sucessfully changed!");
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(parent, "Changes could not be applied!");
-                    }
-                }
-                else{
+                    memberCtrl.set(m);
+                    //Throw exception in case of an error !!!!!
+
+                } else {
                     JOptionPane.showMessageDialog(parent, "There is no data to change!");
-                }              
+                }
             }
         });
 
@@ -474,58 +537,161 @@ public class SearchMemberForm extends AbstractMainForm {
         pack();
     }// </editor-fold>
 
+    private List<IMember> findMember(String name) {
+        List<IMember> result = new LinkedList<>();
+        List<IMember> memberList = memberCtrl.getAll();
+
+        for (IMember m : memberList) {
+            if (m.getPrename().equals(name) || m.getLastname().equals(name)) {
+                result.add(m);
+            }
+        }
+        return result;
+    }
+
     private void updateDetailPane() {
-        dataExists = true;
-        txtfieldFName.setText(member.getPrename());
-        txtfieldLName.setText(member.getLastname());
-        txtfieldAddress.setText(member.getAddress().toString());
-//        txtfieldPostCode.setText(member.getPostCode);
-//        txtfieldCity.setText(member.getCity());
-        txtfieldCountry.setText(member.getNationality().toString());
-        txtfieldMail.setText(member.getEmailAddress());
-        txtfieldPhone.setText(member.getTelephonenumber());
-        txtfieldMemberNr.setText(member.getId().toString());
+        try {
+            dataExists = true;
+            txtfieldFName.setText(m.getPrename());
+            txtfieldLName.setText(m.getLastname());
+            txtfieldMail.setText(m.getEmailAddress());
+            txtfieldPhone.setText(m.getTelephonenumber());
 
-        if (member.getGender() == true) {
-            radioFemale.setSelected(true);
-        } else {
-            radioMale.setSelected(true);
+            address = addressCtrl.getById(m.getAddress());
+            txtfieldAddress.setText(address.getStreet());
+            //TODO: ADD AN EXTRA STREET NR FIELD
+            String postCode = Integer.toString(address.getPostalCode());
+            txtfieldPostCode.setText(postCode);
+            txtfieldCity.setText(address.getVillage());
+
+            country = countryCtrl.getById(m.getNationality());
+            txtfieldCountry.setText(country.getName());
+
+            txtfieldMemberNr.setText(m.getId().toString());
+
+            if (m.getGender() == true) {
+                radioFemale.setSelected(true);
+            } else {
+                radioMale.setSelected(true);
+            }
+
+            dateEntry.setDate(m.getMemberFrom());
+            dateBirthday.setDate(m.getDateOfBirth());
+
+            List<Integer> roles = m.getRoleList();
+
+            if (roles.contains(1)) {
+                radioAdmin.setSelected(true);
+            }
+            if (roles.contains(2)) {
+                radioTrainer.setSelected(true);
+            }
+            if (roles.contains(3)) {
+                radioPlayer.setSelected(true);
+                IPlayer player = playerCtrl.getById(3);
+
+                List<Integer> sportsID = player.getTypeOfSportList();
+                //TODO: add sports                
+            }
+            
+            //TODO: set combobox focus on department of member
+            comboDepartment.getModel().setSelectedItem(department.getName());
+            
+
+        } catch (IdNotFoundException ex) {
+            Logger.getLogger(SearchMemberForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        dateEntry.setDate(member.getMemberFrom());
-        dateBirthday.setDate(member.getDateOfBirth());
-
-        List<Integer> roles = member.getRoleList();
-        if (roles.contains(1)) {
-            radioAdmin.setSelected(true);
-        }
-        if (roles.contains(2)) {
-            radioTrainer.setSelected(true);
-        }
-        if (roles.contains(3)) {
-            radioPlayer.setSelected(true);
-        }
-
-        //TODO set SPORTS        
-
     }
 
     private void updateMemberData() {
-        member.setPrename(txtfieldFName.getText());
-        member.setLastname(txtfieldLName.getText());
-        member.setAddress(Integer.parseInt(txtfieldAddress.getText()));
-        member.setEmailAddress(txtfieldMail.getText());
-        member.setNationality(1);
-        member.setTelephonenumber(txtfieldPhone.getText());
-      
-        //TODO change role list
-        
+        m.setPrename(txtfieldFName.getText());
+        m.setLastname(txtfieldLName.getText());
+        m.setDateOfBirth(dateBirthday.getDate());
+        m.setMemberFrom(dateEntry.getDate());
+        m.setTelephonenumber(txtfieldPhone.getText());
+        m.setEmailAddress(txtfieldMail.getText());
+        m.setId(Integer.parseInt(txtfieldMemberNr.getText()));
+
+        address.setStreet(txtfieldAddress.getText());
+        address.setPostalCode(Integer.parseInt(txtfieldPostCode.getText()));
+        address.setVillage(txtfieldCity.getText());
+        country.setName(txtfieldCountry.getText());
+
+        if (radioFemale.isSelected()) {
+            m.setGender(true);
+        } else {
+            m.setGender(false);
+        }
+
+        //TODO: make this work
+        List<Integer> role = new LinkedList<>();
+
+        if (radioAdmin.isSelected()) {
+        } else if (radioTrainer.isSelected()) {
+        } else if (radioPlayer.isSelected()) {
+        }
+        m.setRoleList(role);
+
+        //type of sport   
+        List<Integer> sports = new LinkedList<>();
+        if (radioFootball.isSelected()) {
+        }
+        if (radioHandball.isSelected()) {
+        }
+        if (radioIceHockey.isSelected()) {
+        }
+        if (radioVolleyball.isSelected()) {
+        }
+        //add list with type of sports
+
+        //TODO: add "club" to team
+        //TODO: add "department" to departmetn
     }
 
-   
     private void comboTeamActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        String name = comboTeam.getSelectedItem().toString();
+        List<IClubTeam> clublist = clubCtrl.getAll();
+
+        for (IClubTeam c : clublist) {
+            if (c.getName().equals(name)) {
+                club = c;
+            }
+        }
     }
 
-   
+    private void comboDepartmentActionPerformed(ActionEvent evt) {
+        String name = comboDepartment.getSelectedItem().toString();
+        List<IDepartment> deplist = depCtrl.getAll();
+
+        for (IDepartment d : deplist) {
+            if (d.getName().equals(name)) {
+                department = d;
+            }
+        }
+    }
+
+    //List<IDepartment>
+    private List<String> getDepartments() {
+        //List<IDepartment> depList = depCtrl.getAll();
+        
+        //only for testing:
+        List<String> depList = new LinkedList<>();
+        depList.add("dep 1");
+        depList.add("dep2");
+
+        return depList;
+    }
+
+    //private IDepartment[] getComboDepartment() {
+    private String[] getComboDepartment() {
+//        List<String> depList = getDepartments();
+//        IDepartment[] depArray = new IDepartment[depList.size()];
+        List<String> depList = getDepartments();
+        String[] depArray = new String[depList.size()];
+        
+        for(int i = 0; i<depList.size(); i++){
+            depArray[i] = depList.get(i);
+        }
+        return depArray;       
+    }
 }

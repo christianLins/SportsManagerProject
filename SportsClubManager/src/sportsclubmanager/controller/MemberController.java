@@ -4,104 +4,65 @@
  */
 package sportsclubmanager.controller;
 
-import java.util.List;
-import java.util.logging.*;
-import sportsclubmanager.domain.*;
-import sportsclubmanager.domain.contract.IMember;
+import java.util.*;
+import sportsclubmanager.controller.contract.IController;
+import sportsclubmanager.domain.DomainFacade;
+import sportsclubmanager.dto.classes.Member;
+import sportsclubmanager.dto.contract.IMember;
 
 /**
 
  @author Lins Christian (christian.lins87@gmail.com)
  */
 public class MemberController
-        implements MemberService
+        implements IController<IMember>
 {
-    static MemberController singleton = null;
+    private static MemberController controller;
 
     private MemberController()
     {
     }
 
-    public static MemberController getInstance()
+    public static IController<IMember> getInstance()
     {
-        if (singleton == null)
+        if (controller == null)
         {
-            singleton = new MemberController();
+            controller = new MemberController();
         }
 
-        return singleton;
+        return controller;
     }
 
     @Override
-    public IMember getMember(Integer id)
+    public IMember getById(Integer id)throws IdNotFoundException
     {
-        List<IMember> memberlist = DomainFacade.getAll(IMember.class);
-        for (IMember m : memberlist)
+        for (sportsclubmanager.domain.contract.IMember a : DomainFacade.getAll(sportsclubmanager.domain.contract.IMember.class))
         {
-            if (m.getIdMember() == id)
+            if (a.getIdMember() == id)
             {
-                return m;
+                return Member.copy(a);
             }
         }
-        return null;
+        
+        throw new IdNotFoundException();
     }
 
     @Override
-    public boolean createNewMember(IMember member)
+    public List<IMember> getAll()
     {
-        if (member != null)
+        List<IMember> result = new LinkedList<>();
+
+        for (sportsclubmanager.domain.contract.IMember a : DomainFacade.getAll(sportsclubmanager.domain.contract.IMember.class))
         {
-            try
-            {
-                //member.setIdMember(getNextMemberId()); //hier Id Set beabsichtigt?
-                DomainFacade.set(member);
-                return true;
-            }
-            catch (CouldNotSaveException ex)
-            {
-                Logger.getLogger(MemberController.class.getName()).log(Level.SEVERE, null, ex);
-                return false;
-            }
+            result.add(Member.copy(a));
         }
-        return false;
+
+        return result;
     }
 
     @Override
-    public boolean changeMember(IMember changedMember)
+    public void set(IMember value)
     {
-        if (changedMember != null)
-        {
-            try
-            {
-                DomainFacade.set(changedMember);
-                return true;
-            }
-            catch (CouldNotSaveException ex)
-            {
-                Logger.getLogger(MemberController.class.getName()).log(Level.SEVERE, null, ex);
-                return false;
-            }
-        }
-        return false;
-    }
-
-    Integer getNextMemberId()
-    {
-        Integer highest = 0;
-        List<IMember> memberlist = DomainFacade.getAll(IMember.class);
-        if (memberlist.isEmpty())
-        {
-            return 0;
-        }
-
-        for (IMember m : memberlist)
-        {
-            if (m.getIdMember() > highest)
-            {
-                highest = m.getIdMember();
-            }
-        }
-
-        return highest++;
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

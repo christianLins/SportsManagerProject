@@ -13,7 +13,7 @@ import java.util.List;
 public interface IPlayer
         extends IRole
 {
-     //    public Player(Integer roleidRole)
+    //    public Player(Integer roleidRole)
     //    {
     //        this.roleidRole = roleidRole;
     //    }

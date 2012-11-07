@@ -9,10 +9,9 @@ package sportsclubmanager.dto.contract;
  @author Thomas
  */
 public interface IMatchresult
+        extends IDto
 {
-       Integer getId();
-
-       double getPointsForeignteam();
+    double getPointsForeignteam();
 
     double getPointsHometeam();
 

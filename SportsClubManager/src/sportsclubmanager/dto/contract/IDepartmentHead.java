@@ -11,9 +11,8 @@ import java.util.List;
  @author Thomas
  */
 public interface IDepartmentHead
+        extends IDto
 {
-    Integer getId();
-    
     List<Integer> getDepartmentList();
 
     void setDepartmentList(List<Integer> departmentList);

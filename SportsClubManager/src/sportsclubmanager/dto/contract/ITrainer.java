@@ -11,6 +11,7 @@ import java.util.List;
  @author Thomas
  */
 public interface ITrainer
+        extends IRole
 {
     List<Integer> getClubTeamList();
 

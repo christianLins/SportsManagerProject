@@ -11,9 +11,8 @@ import java.util.List;
  @author Thomas
  */
 public interface ILeague
+        extends IDto
 {
-    Integer getId();
-
     String getDescription();
 
     String getName();

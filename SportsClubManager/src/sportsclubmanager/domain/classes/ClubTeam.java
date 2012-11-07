@@ -3,8 +3,7 @@ package sportsclubmanager.domain.classes;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
 import sportsclubmanager.domain.contract.*;
 
 /**
@@ -19,6 +18,10 @@ public class ClubTeam
         implements Serializable, IClubTeam
 {
     private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @Column(name = "idTeam")
+    private Integer idTeam;
     @ManyToMany(mappedBy = "clubTeamList")
     private List<Department> departmentList;
     @JoinTable(name = "Team_has_Trainer", joinColumns =
@@ -139,6 +142,14 @@ public class ClubTeam
     }
 
     @Override
+    public int hashCode()
+    {
+        int hash = 0;
+        hash += (idTeam != null ? idTeam.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
     public boolean equals(Object object)
     {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -147,10 +158,22 @@ public class ClubTeam
             return false;
         }
         ClubTeam other = (ClubTeam) object;
-        if ((this.getId() == null && other.getId() != null) || (this.getId() != null && !this.getId().equals(other.getId())))
+        if ((this.idTeam == null && other.idTeam != null) || (this.idTeam != null && !this.idTeam.equals(other.idTeam)))
         {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "sportsclubmanager.domain.classes.ClubTeam[ idTeam=" + idTeam + " ]";
+    }
+
+    @Override
+    public Integer getId()
+    {
+        return this.idTeam;
     }
 }

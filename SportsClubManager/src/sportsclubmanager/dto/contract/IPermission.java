@@ -9,15 +9,13 @@ package sportsclubmanager.dto.contract;
  @author Thomas
  */
 public interface IPermission
+        extends IDto
 {
-      Integer getId();
-
-      String getDescription();
+    String getDescription();
 
     String getName();
 
     void setDescription(String description);
 
     void setName(String name);
-    
 }

@@ -11,10 +11,9 @@ import java.util.*;
  @author Thomas
  */
 public interface ICompetition
+        extends IDto
 {
-     Integer getId();
-
-     Date getDateFrom();
+    Date getDateFrom();
 
     Date getDateTo();
 
@@ -33,5 +32,4 @@ public interface ICompetition
     void setPayment(Double payment);
 
     void setTeamList(List<Integer> teamList);
-    
 }

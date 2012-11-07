@@ -1,4 +1,4 @@
-package sportsclubmanager.presentation.forms;
+package sportsclubmanager.presentation;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

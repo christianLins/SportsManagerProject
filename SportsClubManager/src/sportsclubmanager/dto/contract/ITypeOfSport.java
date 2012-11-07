@@ -11,9 +11,8 @@ import java.util.List;
  @author Thomas
  */
 public interface ITypeOfSport
+        extends IDto
 {
-    Integer getId();
-
     String getName();
 
     void setName(String name);

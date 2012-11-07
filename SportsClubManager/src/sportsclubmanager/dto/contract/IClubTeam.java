@@ -13,7 +13,7 @@ import java.util.List;
 public interface IClubTeam
         extends ITeam
 {
-      List<Integer> getDepartmentList();
+    List<Integer> getDepartmentList();
 
     List<Integer> getPlayerList();
 

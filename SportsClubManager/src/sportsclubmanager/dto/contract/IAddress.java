@@ -9,9 +9,8 @@ package sportsclubmanager.dto.contract;
  @author Thomas
  */
 public interface IAddress
+        extends IDto
 {
-    Integer getId();
-
     int getCountry();
 
     int getPostalCode();

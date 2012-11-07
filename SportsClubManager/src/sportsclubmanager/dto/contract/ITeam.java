@@ -11,9 +11,8 @@ import java.util.List;
  @author Thomas
  */
 public interface ITeam
+        extends IDto
 {
-    Integer getId();
-
     List<Integer> getCompetitionList();
 
     String getDescription();

@@ -9,10 +9,9 @@ package sportsclubmanager.dto.contract;
  @author Thomas
  */
 public interface ICountry
+        extends IDto
 {
-      Integer getId();
-
-      String getAlpha2();
+    String getAlpha2();
 
     String getAlpha3();
 
@@ -47,5 +46,4 @@ public interface ICountry
     void setPortugues(String portugues);
 
     void setTld(String tld);
-    
 }

@@ -13,13 +13,13 @@ public class Team
     private List<Integer> competitionList = new LinkedList<>();
     private List<Integer> matchList = new LinkedList<>();
     private Integer league;
-    private static HashMap<ITeam, Team> teams = new HashMap<>();
+    private static HashMap<sportsclubmanager.domain.contract.ITeam, Team> teams = new HashMap<>();
 
     public Team()
     {
     }
 
-    public static Team copy(ITeam team)
+    public static Team copy(sportsclubmanager.domain.contract.ITeam team)
     {
         Team a;
 
@@ -33,11 +33,17 @@ public class Team
 
             a.setName(team.getName());
             a.setDescription(team.getDescription());
-            a.setLeague(team.getLeague());
-            a.setCompetitionList(team.getCompetitionList());
-            a.setLeague(team.getLeague());
-            a.setMatchList(team.getMatchList());
+            a.setLeague(team.getLeague().getId());
+            for (sportsclubmanager.domain.contract.ICompetition c : team.getCompetitionList())
+            {
+                a.competitionList.add(c.getId());
+            }
 
+            for (sportsclubmanager.domain.contract.IMatch c : team.getMatchList())
+            {
+                a.matchList.add(c.getId());
+            }
+            
             teams.put(team, a);
         }
 

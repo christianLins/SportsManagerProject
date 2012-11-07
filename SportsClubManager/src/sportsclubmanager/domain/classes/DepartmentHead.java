@@ -2,12 +2,8 @@ package sportsclubmanager.domain.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
 import sportsclubmanager.domain.contract.*;
 
 /**

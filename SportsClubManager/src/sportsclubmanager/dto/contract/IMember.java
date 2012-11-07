@@ -11,9 +11,8 @@ import java.util.*;
  @author Thomas
  */
 public interface IMember
+        extends IDto
 {
-     Integer getId();
-
     void setId(Integer idMember);
 
     Integer getAddress();
@@ -32,6 +31,8 @@ public interface IMember
 
     Integer getNationality();
 
+    
+    
     String getPrename();
 
     List<Integer> getRoleList();

@@ -5,143 +5,64 @@
 package sportsclubmanager.controller;
 
 import java.util.*;
-import java.util.logging.*;
+import sportsclubmanager.controller.contract.IController;
 import sportsclubmanager.domain.*;
-import sportsclubmanager.domain.classes.*;
-import sportsclubmanager.domain.contract.*;
+import sportsclubmanager.dto.classes.*;
+import sportsclubmanager.dto.contract.*;
 
 /**
 
  @author Lins Christian (christian.lins87@gmail.com)
  */
 public class CompetitionController
-        implements CompetitionService
+        implements IController<ICompetition>
 {
+    private static CompetitionController controller;
+
     private CompetitionController()
     {
     }
-    static CompetitionController singleton = null;
 
-    public static CompetitionController getInstance()
+    public static IController<ICompetition> getInstance()
     {
-        if (singleton == null)
+        if (controller == null)
         {
-            singleton = new CompetitionController();
+            controller = new CompetitionController();
         }
 
-        return singleton;
+        return controller;
     }
 
     @Override
-    public boolean createCompetition(ICompetition competition, IMember member)
+    public ICompetition getById(Integer id)throws IdNotFoundException
     {
-        //TODO hat Recht um competition zu erstellen
-
-        List<IRole> roleList = member.getRoleList();
-        for (IRole role : roleList)
+        for (sportsclubmanager.domain.contract.ICompetition a : DomainFacade.getAll(sportsclubmanager.domain.contract.ICompetition.class))
         {
-            role.getPermisssionList();
+            if (a.getId() == id)
+            {
+                return Competition.copy(a);
+            }
         }
-
-        try
-        {
-            DomainFacade.set(competition);
-            return true;
-        }
-        catch (CouldNotSaveException ex)
-        {
-            Logger.getLogger(CompetitionController.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
+        
+        throw new IdNotFoundException();
     }
 
     @Override
-    public boolean removePlayer(IClubTeam team, ITrainer trainer, IPlayer player)
+    public List<ICompetition> getAll()
     {
+        List<ICompetition> result = new LinkedList<>();
 
-        if (team.getTrainerList().contains(trainer))
+        for (sportsclubmanager.domain.contract.ICompetition a : DomainFacade.getAll(sportsclubmanager.domain.contract.ICompetition.class))
         {
-            List<IPlayer> playerList = team.getPlayerList();
-            IPlayer playerToRemove = null;
-            for (IPlayer pla : playerList)
-            {
-                if (pla.equals(player))
-                { //muss noch gestestet werden ob equals hier funktioniert
-                    playerToRemove = pla;
-                }
-            }
-
-            if (playerToRemove != null)
-            {
-                playerList.remove(playerToRemove);
-            }
-
-            try
-            {
-                DomainFacade.set(playerList);
-                return true;
-            }
-            catch (CouldNotSaveException ex)
-            {
-                Logger.getLogger(CompetitionController.class.getName()).log(Level.SEVERE, null, ex);
-                return false;
-            }
+            result.add(Competition.copy(a));
         }
-        return false;
+
+        return result;
     }
 
     @Override
-    public boolean addPlayer(IClubTeam team, ITrainer trainer, IPlayer player)
+    public void set(ICompetition value)
     {
-
-        if (team.getTrainerList().contains(trainer))
-        {
-            try
-            {
-                DomainFacade.set(team.getPlayerList().add(player));
-                return true;
-            }
-            catch (CouldNotSaveException ex)
-            {
-                Logger.getLogger(CompetitionController.class.getName()).log(Level.SEVERE, null, ex);
-                return false;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean createMatchResult(IMatch match, IClubTeam clubTeam, ITrainer trainer, IMatchresult result)
-    {
-        if (clubTeam.getTrainerList().contains(trainer)) //hier homeTeam auf IClubteam damit trainer erlmittelt werden kann?
-        {
-            match.setMatchresult(result);
-            try
-            {
-                DomainFacade.set(match);
-                return true;
-            }
-            catch (CouldNotSaveException ex)
-            {
-                Logger.getLogger(CompetitionController.class.getName()).log(Level.SEVERE, null, ex);
-                return false;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public Collection<IMatchresult> getMetchresults(ICompetition competition)
-    {
-
-        ArrayList<Match> matchList = DomainFacade.getMatchesByCompetition((Competition) competition);
-        Collection<IMatchresult> returnCollection = new ArrayList<>();
-
-        for (Match ma : matchList)
-        {
-            returnCollection.add(ma.getMatchresult()); //auch matches ohne ergebnis werden mitgeliefert!!
-        }
-
-        return returnCollection;
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

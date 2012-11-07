@@ -4,15 +4,11 @@
  */
 package sportsclubmanager.dto.contract;
 
-import java.util.List;
-
 /**
+
  @author Thomas
  */
-public interface IRole
-        extends IDto
+public interface IDto
 {
-    List<Integer> getPermisssionList();
-
-    void setPermisssionList(List<Integer> permisssionList);
+          Integer getId();
 }
