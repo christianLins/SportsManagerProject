@@ -20,7 +20,7 @@ public class AddressController
 {
     private static AddressController controller;
 
-    private AddressController()
+    public AddressController()
     {
     }
 
@@ -33,6 +33,7 @@ public class AddressController
 
         return controller;
     }
+
     public sportsclubmanager.domain.contract.IAddress getDomainById(Integer id)
             throws IdNotFoundException
     {
@@ -112,7 +113,7 @@ public class AddressController
     {
         sportsclubmanager.domain.classes.Address address = new sportsclubmanager.domain.classes.Address(value.getId());
 
-        address.setCountry(CountryController.getDomainById(value.getCountry()));
+        address.setCountry(new CountryController().getDomainById(value.getCountry()));
         address.setPostalCode(value.getPostalCode());
         address.setStreet(value.getStreet());
         address.setStreetNumber(value.getStreetNumber());

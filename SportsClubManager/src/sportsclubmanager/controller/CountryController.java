@@ -20,7 +20,7 @@ public class CountryController
 {
     private static CountryController controller;
 
-    static sportsclubmanager.domain.contract.ICountry getDomainById(int id)
+     sportsclubmanager.domain.contract.ICountry getDomainById(int id)
             throws IdNotFoundException
     {
         for (sportsclubmanager.domain.contract.ICountry a : DomainFacade.getAll(sportsclubmanager.domain.contract.ICountry.class))
@@ -34,7 +34,7 @@ public class CountryController
         throw new IdNotFoundException();
     }
 
-    private CountryController()
+    public CountryController()
     {
     }
 

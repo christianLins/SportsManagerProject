@@ -357,7 +357,7 @@ public class DatabaseManager
             try
             {
                 Country country = DomainFacade.getByName(Country.class, "Togo");
-                ITypeOfSport address = new ITypeOfSport("Street" + i, i, "Village" + i, 6500 + i, country);
+                IAddress address = new Address("Street" + i, i, "Village" + i, 6500 + i, country);
                 int day = new Random().nextInt(28);
                 int month = new Random().nextInt(12);
                 int year = new Random().nextInt(90);
@@ -405,7 +405,7 @@ public class DatabaseManager
             try
             {
                 Country country = DomainFacade.getByName(Country.class, "Togo");
-                ITypeOfSport address = new ITypeOfSport("Street" + i, i, "Village" + i, 6500 + i, country);
+                IAddress address = new Address("Street" + i, i, "Village" + i, 6500 + i, country);
                 int day = new Random().nextInt(28);
                 int month = new Random().nextInt(12);
                 int year = new Random().nextInt(90);
@@ -508,7 +508,8 @@ public class DatabaseManager
             try
             {
                 Country country = DomainFacade.getByName(Country.class, "Togo");
-                ITypeOfSport address = new ITypeOfSport("Street" + i, i, "Village" + i, 6500 + i, country);
+                IAddress address = new Address("Street" + i, i, "Village" + i, 6500 + i, country);
+
                 int day = new Random().nextInt(28);
                 int month = new Random().nextInt(12);
                 int year = new Random().nextInt(90);
