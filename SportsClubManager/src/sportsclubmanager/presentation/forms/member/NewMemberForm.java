@@ -18,6 +18,8 @@ import javax.swing.WindowConstants;
 import sportsclubmanager.communication.rmi.client.CommunicationProblemException;
 import sportsclubmanager.communication.rmi.client.RmiServiceClient;
 import sportsclubmanager.controller.contract.IController;
+import sportsclubmanager.dto.classes.Address;
+import sportsclubmanager.dto.classes.Player;
 import sportsclubmanager.dto.contract.IRole;
 import sportsclubmanager.dto.contract.IAddress;
 import sportsclubmanager.dto.contract.IClubTeam;
@@ -383,8 +385,12 @@ public class NewMemberForm extends AbstractMainForm {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (validInput()) {
-                    setMemberData();
-                    //TODO add some success message       
+                    try {
+                        setMemberData();
+                        //TODO add some success message
+                    } catch (CommunicationProblemException ex) {
+                        Logger.getLogger(NewMemberForm.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 else{
                     JOptionPane.showMessageDialog(parent, "Please fill in all text fields!");
@@ -428,26 +434,35 @@ public class NewMemberForm extends AbstractMainForm {
         pack();
     }// </editor-fold>
 
-    private void setMemberData() {
+    private void setMemberData() throws CommunicationProblemException {
         m.setPrename(txtfieldFName.getText());
         m.setLastname(txtfieldLName.getText());
         m.setDateOfBirth(dateChooserBirth.getDate());
         m.setMemberFrom(dateChooserEntry.getDate());
         m.setTelephonenumber(txtfieldPhone.getText());
         m.setEmailAddress(txtfieldMail.getText());
-        m.setId(0);
-
+        
         address.setStreet(txtfieldAddress.getText());
         address.setPostalCode(Integer.parseInt(txtfieldPostCode.getText()));
         address.setVillage(txtfieldCity.getText());
+        m.setAddress(address.getId());
+        
         country.setName(txtfieldCountry.getText());
-
+        m.setNationality(country.getId());
+        
         boolean gender = false;
         if (radioFemale.isSelected()) {
             gender = true;
         }
         m.setGender(gender);
 
+        IController<IPlayer> player = rmiClient.getPlayerManager();
+        List<IPlayer> playList = player.getAll();
+                
+                
+                
+                
+        
         List<IRole> roleList = new LinkedList<>();
         List<Integer> roles = new LinkedList<Integer>();
         if (radioAdmin.isSelected()) {
