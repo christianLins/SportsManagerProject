@@ -7,6 +7,10 @@ package sportsclubmanager.communication.rmi.server;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import sportsclubmanager.communication.rmi.contract.IRmiServiceFactory;
+import sportsclubmanager.communication.rmi.server.controller.IRmiCompetitionController;
+import sportsclubmanager.communication.rmi.server.controller.IRmiMemberController;
+import sportsclubmanager.communication.rmi.server.controller.RmiCompetitionController;
+import sportsclubmanager.communication.rmi.server.controller.RmiMemberController;
 import sportsclubmanager.controller.*;
 import sportsclubmanager.controller.contract.IController;
 import sportsclubmanager.dto.contract.*;
@@ -24,6 +28,15 @@ public class RmiServiceFactoryImpl
     {
         super();
     }
+        
+    public IRmiMemberController getMemberController() throws RemoteException {
+        return RmiMemberController.getInstance();
+    }
+    
+    public IRmiCompetitionController getCompetitionController() throws RemoteException {
+        return RmiCompetitionController.getInstance();
+    }
+    
 
     @Override
     public IController<ICompetition> getCompetitionManager()
