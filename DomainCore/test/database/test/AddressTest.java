@@ -1,22 +1,15 @@
-package sportsclubmanager.database.test;
+package database.test;
 
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 import database.DatabaseManager;
-import domain.CouldNotDeleteException;
-import domain.CouldNotSaveException;
-import domain.DomainFacade;
-import domain.contract.IAddress;
-import domain.contract.ICountry;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import domain.*;
+import domain.contract.*;
+import java.util.*;
 import org.easymock.EasyMock;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 /**
 
@@ -69,11 +62,7 @@ public class AddressTest
 
             Assert.assertEquals(0, actuals.size());
         }
-        catch (CouldNotSaveException ex)
-        {
-            Assert.fail("A exception is thrown");
-        }
-        catch (CouldNotDeleteException ex)
+        catch (CouldNotSaveException | CouldNotDeleteException ex)
         {
             Assert.fail("A exception is thrown");
         }

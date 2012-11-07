@@ -1,4 +1,4 @@
-package sportsclubmanager.database.test;
+package database.test;
 
 /*
  * To change this template, choose Tools | Templates
