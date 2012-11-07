@@ -2,25 +2,25 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package sportsclubmanager.controller;
+package sportsclubmanager.dto.controller;
 
 import java.util.*;
 import java.util.logging.*;
-import sportsclubmanager.controller.contract.*;
 import sportsclubmanager.domain.*;
 import sportsclubmanager.dto.classes.DepartmentHead;
 import sportsclubmanager.dto.contract.IDepartmentHead;
+import sportsclubmanager.dto.controller.contract.*;
 
 /**
 
  @author Thomas
  */
-public class DepartmentHeadController
+ class DepartmentHeadController
         implements IController<IDepartmentHead>
 {
     private static DepartmentHeadController controller;
 
-    public DepartmentHeadController()
+     DepartmentHeadController()
     {
     }
 

@@ -7,16 +7,12 @@ package sportsclubmanager.communication.rmi.server;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import sportsclubmanager.communication.rmi.contract.IRmiServiceFactory;
-import sportsclubmanager.communication.rmi.server.controller.IRmiCompetitionController;
-import sportsclubmanager.communication.rmi.server.controller.IRmiMemberController;
-import sportsclubmanager.communication.rmi.server.controller.RmiCompetitionController;
-import sportsclubmanager.communication.rmi.server.controller.RmiMemberController;
-import sportsclubmanager.controller.*;
-import sportsclubmanager.controller.contract.IController;
+import sportsclubmanager.communication.rmi.server.controller.*;
 import sportsclubmanager.dto.contract.*;
+import sportsclubmanager.dto.controller.*;
+import sportsclubmanager.dto.controller.contract.IController;
 
 /**
-
  @author Lins Christian (christian.lins87@gmail.com)
  */
 public class RmiServiceFactoryImpl
@@ -56,90 +52,90 @@ public class RmiServiceFactoryImpl
     public IController<IAddress> getAddressManager()
             throws RemoteException
     {
-               return AddressController.getInstance();
+        return AddressController.getInstance();
     }
 
     @Override
     public IController<IClubTeam> getClubTeamManager()
             throws RemoteException
     {
-               return ClubTeamController.getInstance();
+        return ClubTeamController.getInstance();
     }
 
     @Override
     public IController<ICountry> getCountryManager()
             throws RemoteException
     {
-             return CountryController.getInstance();
+        return CountryController.getInstance();
     }
 
     @Override
     public IController<IDepartment> getDepartmentManager()
             throws RemoteException
     {
-             return DepartmentController.getInstance();
+        return DepartmentController.getInstance();
     }
 
     @Override
     public IController<ITeam> getTeamManager()
             throws RemoteException
     {
-             return TeamController.getInstance();
+        return TeamController.getInstance();
     }
 
     @Override
     public IController<ITypeOfSport> getTypeOfSportManager()
             throws RemoteException
     {
-             return TypeOfSportController.getInstance();
+        return TypeOfSportController.getInstance();
     }
 
     @Override
     public IController<ITrainer> getTrainerManager()
             throws RemoteException
     {
-             return TrainerController.getInstance();
+        return TrainerController.getInstance();
     }
 
     @Override
     public IController<IDepartmentHead> getDepartmentHeadManager()
             throws RemoteException
     {
-             return DepartmentHeadController.getInstance();
+        return DepartmentHeadController.getInstance();
     }
 
     @Override
     public IController<ILeague> getLeagueManager()
             throws RemoteException
     {
-             return LeagueController.getInstance();
+        return LeagueController.getInstance();
     }
 
     @Override
     public IController<IPermission> getPermissionManager()
             throws RemoteException
     {
-             return PermissionController.getInstance();
+        return PermissionController.getInstance();
     }
 
     @Override
     public IController<IPlayer> getPlayerManager()
             throws RemoteException
     {
-             return PlayerController.getInstance();
+        return PlayerController.getInstance();
     }
 
     @Override
     public IController<IMatchresult> getMatchresultManager()
             throws RemoteException
     {
-             return MatchresultController.getInstance();
+        return MatchresultController.getInstance();
     }
 
     @Override
     public IController<IMatch> getMatchManager()
             throws RemoteException
     {
-             return MatchController.getInstance();
+        return MatchController.getInstance();
     }
 }

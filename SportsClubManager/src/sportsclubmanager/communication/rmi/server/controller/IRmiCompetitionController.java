@@ -5,7 +5,7 @@
 package sportsclubmanager.communication.rmi.server.controller;
 
 import java.util.List;
-import sportsclubmanager.controller.contract.IdNotFoundException;
+import sportsclubmanager.dto.controller.contract.IdNotFoundException;
 import sportsclubmanager.dto.contract.ICompetition;
 
 /**
@@ -14,7 +14,6 @@ import sportsclubmanager.dto.contract.ICompetition;
  */
 public interface IRmiCompetitionController
 {
-
     void delete(ICompetition value);
 
     List<ICompetition> getAll();
@@ -22,5 +21,4 @@ public interface IRmiCompetitionController
     ICompetition getById(Integer id) throws IdNotFoundException;
 
     Integer set(ICompetition value);
-    
 }

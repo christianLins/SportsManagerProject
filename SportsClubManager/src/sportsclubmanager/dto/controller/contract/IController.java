@@ -2,13 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package sportsclubmanager.controller.contract;
+package sportsclubmanager.dto.controller.contract;
 
 import java.io.Serializable;
 import java.util.List;
 
 /**
-
  @author Thomas
  */
 public interface IController<T> extends Serializable

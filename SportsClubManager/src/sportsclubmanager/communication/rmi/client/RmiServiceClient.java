@@ -4,9 +4,9 @@
  */
 package sportsclubmanager.communication.rmi.client;
 
-import java.rmi.*;
+import java.rmi.RemoteException;
 import sportsclubmanager.communication.rmi.contract.IRmiServiceFactory;
-import sportsclubmanager.controller.contract.IController;
+import sportsclubmanager.dto.controller.contract.IController;
 import sportsclubmanager.dto.contract.*;
 
 /**

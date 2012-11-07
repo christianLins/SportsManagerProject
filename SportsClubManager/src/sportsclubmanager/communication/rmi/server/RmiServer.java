@@ -55,7 +55,7 @@ public class RmiServer
 
 
             RmiServiceFactoryImpl rmiServiceFactory = new RmiServiceFactoryImpl();
-            Naming.rebind("rmi://localhost:" + port + "/RmiSportsClubManagerServiceFactory", rmiServiceFactory);
+            Naming.rebind("rmi://localhost:" + port + "/CommunicationFactory", rmiServiceFactory);
             isRunning = true;
             System.out.println("rmi server is running on port " + port);
         } catch (RemoteException | MalformedURLException ex) {

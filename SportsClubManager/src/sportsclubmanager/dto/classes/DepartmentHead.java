@@ -10,7 +10,7 @@ public class DepartmentHead
 {
     private List<Integer> departmentList = new LinkedList<>();
 
-    public DepartmentHead(int id)
+     DepartmentHead(int id)
     {
         super(id);
     }

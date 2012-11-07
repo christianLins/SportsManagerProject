@@ -15,11 +15,11 @@ public class Match
     private Integer foreignteam;
     private Integer hometeam;
 
-    public Match()
+     Match()
     {
     }
 
-    public Match(int id)
+     Match(int id)
     {
         this.id = id;
     }

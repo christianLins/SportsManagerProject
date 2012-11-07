@@ -9,6 +9,11 @@ public class Member
 {
     private static HashMap<sportsclubmanager.domain.contract.IMember, Member> members = new HashMap<>();
 
+    Member()
+    {
+        
+    }
+    
     public static IMember copy(sportsclubmanager.domain.contract.IMember member)
     {
         Member a;

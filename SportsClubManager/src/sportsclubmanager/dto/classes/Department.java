@@ -14,11 +14,11 @@ public class Department
     private List<Integer> clubTeamList = new LinkedList<>();
     private List<Integer> typeOfSportList = new LinkedList<>();
 
-    public Department()
+     Department()
     {
     }
 
-    public Department(int id)
+     Department(int id)
     {
         this.id = id;
     }
