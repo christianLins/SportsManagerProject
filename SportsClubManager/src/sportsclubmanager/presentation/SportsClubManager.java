@@ -282,7 +282,7 @@ public class SportsClubManager extends AbstractForm {
 
     private void btnCreateCompetActionPerformed(ActionEvent evt) {
         paneMatchMain.removeAll();
-        paneMatchMain = new CreateCompetitionForm(null).panel;
+        paneMatchMain = new CreateCompetitionForm(null, rmiClient).panel;
 
         tabMatch.setRightComponent(paneMatchMain);
         tabMatch.validate();

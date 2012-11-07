@@ -6,10 +6,10 @@ package sportsclubmanager.controller;
 
 import java.util.*;
 import java.util.logging.*;
-import sportsclubmanager.controller.contract.IController;
+import sportsclubmanager.controller.contract.*;
 import sportsclubmanager.domain.*;
-import sportsclubmanager.dto.classes.*;
-import sportsclubmanager.dto.contract.*;
+import sportsclubmanager.dto.classes.Matchresult;
+import sportsclubmanager.dto.contract.IMatchresult;
 
 /**
 

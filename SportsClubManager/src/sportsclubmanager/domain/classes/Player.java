@@ -28,6 +28,11 @@ public class Player
         
     }
     
+    public Player(int id)
+    {
+        super(id);
+    }
+    
     Player(IPlayer d)
     {
         typeOfSportList = new LinkedList<>();

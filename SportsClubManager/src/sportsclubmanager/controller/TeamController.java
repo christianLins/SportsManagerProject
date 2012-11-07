@@ -4,6 +4,7 @@
  */
 package sportsclubmanager.controller;
 
+import sportsclubmanager.controller.contract.IdNotFoundException;
 import java.util.*;
 import java.util.logging.*;
 import sportsclubmanager.controller.contract.IController;
@@ -77,37 +78,56 @@ public class TeamController
     }
 
     @Override
-    public void set(ITeam value)
+    public Integer set(ITeam value)
     {
+        Integer rv = 0;
         try
         {
-            sportsclubmanager.domain.classes.Team team = new sportsclubmanager.domain.classes.Team();
+            sportsclubmanager.domain.classes.Team team = createDomain(value);
 
-            List<sportsclubmanager.domain.contract.ICompetition> competitionList = new LinkedList<>();
-            for (int i : value.getCompetitionList())
-            {
-                competitionList.add(new CompetitionController().getDomainById(i));
-            }
-            team.setCompetitionList(competitionList);
-
-            team.setDescription(value.getDescription());
-
-            team.setLeague(new LeagueController().getDomainById(value.getLeague()));
-
-            List<sportsclubmanager.domain.contract.IMatch> matchList = new LinkedList<>();
-            for (int i : value.getMatchList())
-            {
-                matchList.add(new MatchController().getDomainById(i));
-            }
-            team.setMatchList(matchList);
-
-            team.setName(value.getName());
-
-            DomainFacade.set(team);
+            rv = DomainFacade.set(team);
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
             Logger.getLogger(AddressController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        finally
+        {
+            return rv;
+        }
+    }
+
+    @Override
+    public void delete(ITeam value)
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    private sportsclubmanager.domain.classes.Team createDomain(ITeam value)
+            throws IdNotFoundException
+    {
+        sportsclubmanager.domain.classes.Team team = new sportsclubmanager.domain.classes.Team(value.getId());
+        
+        List<Integer> competitions = value.getCompetitionList();
+        List<Integer> matches = value.getMatchList();
+        
+        team.setDescription(value.getDescription());
+        team.setName(value.getName());
+        team.setLeague(new LeagueController().getDomainById(value.getLeague()));
+        
+        LinkedList<sportsclubmanager.domain.contract.ICompetition>  c = new LinkedList<>();
+        for(int id:competitions)
+        {
+            c.add(new CompetitionController().getDomainById(id));
+        }
+        team.setCompetitionList(c);
+        
+        LinkedList<sportsclubmanager.domain.contract.IMatch> m = new LinkedList<>();
+        for(int id:matches)
+        {
+            m.add(new MatchController().getDomainById(id));
+        }
+        team.setMatchList(m);
+        return team;
     }
 }

@@ -4,6 +4,7 @@
  */
 package sportsclubmanager.dto.contract;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -11,7 +12,7 @@ import java.util.*;
  @author Thomas
  */
 public interface ICompetition
-        extends IDto
+        extends Serializable, IDto
 {
     Date getDateFrom();
 

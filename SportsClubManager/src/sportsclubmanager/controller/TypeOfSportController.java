@@ -5,26 +5,22 @@
 package sportsclubmanager.controller;
 
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.*;
 import sportsclubmanager.controller.contract.*;
-import sportsclubmanager.domain.CouldNotDeleteException;
-import sportsclubmanager.domain.CouldNotSaveException;
-import sportsclubmanager.domain.DomainFacade;
-import sportsclubmanager.domain.classes.Player;
+import sportsclubmanager.domain.*;
 import sportsclubmanager.dto.classes.TypeOfSport;
-import sportsclubmanager.dto.contract.*;
+import sportsclubmanager.dto.contract.ITypeOfSport;
 
 /**
 
  @author Thomas
  */
 public class TypeOfSportController
-      implements IController<ITypeOfSport>
+        implements IController<ITypeOfSport>
 {
-  private static TypeOfSportController controller;
+    private static TypeOfSportController controller;
 
-    private TypeOfSportController()
+    public TypeOfSportController()
     {
     }
 
@@ -37,9 +33,24 @@ public class TypeOfSportController
 
         return controller;
     }
-    
+
+    public sportsclubmanager.domain.contract.ITypeOfSport getDomainById(Integer id)
+            throws IdNotFoundException
+    {
+        for (sportsclubmanager.domain.contract.ITypeOfSport a : DomainFacade.getAll(sportsclubmanager.domain.contract.ITypeOfSport.class))
+        {
+            if (a.getId() == id)
+            {
+                return a;
+            }
+        }
+
+        throw new IdNotFoundException();
+    }
+
     @Override
-    public ITypeOfSport getById(Integer id) throws IdNotFoundException
+    public ITypeOfSport getById(Integer id)
+            throws IdNotFoundException
     {
         for (sportsclubmanager.domain.contract.ITypeOfSport a : DomainFacade.getAll(sportsclubmanager.domain.contract.ITypeOfSport.class))
         {
@@ -96,7 +107,7 @@ public class TypeOfSportController
             Logger.getLogger(AddressController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private sportsclubmanager.domain.classes.TypeOfSport createDomain(ITypeOfSport value)
             throws IdNotFoundException
     {
@@ -106,13 +117,12 @@ public class TypeOfSportController
         typeofsport.setId(value.getId());
         typeofsport.setName(value.getName());
         LinkedList<sportsclubmanager.domain.contract.IPlayer> list = new LinkedList<>();
-        for(Integer id : value.getPlayerList())
+        for (Integer id : value.getPlayerList())
         {
-            list.add(new PlayerController.getDomainByID(id));
+            list.add(new PlayerController().getDomainById(id));
         }
         typeofsport.setPlayerList(list);
 
         return typeofsport;
     }
-    
 }

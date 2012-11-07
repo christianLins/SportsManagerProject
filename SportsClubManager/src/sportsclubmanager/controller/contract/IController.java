@@ -6,7 +6,6 @@ package sportsclubmanager.controller.contract;
 
 import java.io.Serializable;
 import java.util.List;
-import sportsclubmanager.controller.IdNotFoundException;
 
 /**
 

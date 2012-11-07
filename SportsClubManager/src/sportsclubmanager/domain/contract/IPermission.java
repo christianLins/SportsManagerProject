@@ -8,14 +8,14 @@ package sportsclubmanager.domain.contract;
 
  @author Thomas
  */
-public interface IPermission extends IDomain
-{  
-  String getDescription();
+public interface IPermission
+        extends IDomain
+{
+    String getDescription();
 
     String getName();
 
     void setDescription(String description);
 
     void setName(String name);
-    
 }
