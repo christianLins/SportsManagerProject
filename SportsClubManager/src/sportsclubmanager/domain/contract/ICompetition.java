@@ -9,10 +9,8 @@ import java.util.*;
 /**
  @author Thomas
  */
-public interface ICompetition
+public interface ICompetition extends IDomain
 {
-    Integer getId();
-
     Date getDateFrom();
 
     Date getDateTo();

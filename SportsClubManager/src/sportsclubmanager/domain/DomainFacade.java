@@ -9,6 +9,7 @@ import org.hibernate.*;
 import org.hibernate.cfg.NotYetImplementedException;
 import org.hibernate.criterion.Restrictions;
 import sportsclubmanager.domain.classes.*;
+import sportsclubmanager.domain.contract.IDomain;
 import sportsclubmanager.utils.HibernateUtil;
 
 /**
@@ -96,7 +97,7 @@ public class DomainFacade
         return (T) session.createCriteria(clazz).add(Restrictions.eq("name", name)).uniqueResult();
     }
 
-    public static <T> void set(T expected)
+    public static <T extends IDomain> Integer set(T expected)
             throws CouldNotSaveException
     {
         try
@@ -105,6 +106,8 @@ public class DomainFacade
             Transaction t = session.beginTransaction();
             session.saveOrUpdate(expected);
             t.commit();
+
+            return expected.getId();
         }
         catch (HibernateException ex)
         {

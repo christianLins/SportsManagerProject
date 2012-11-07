@@ -5,8 +5,10 @@
 package sportsclubmanager.controller;
 
 import java.util.*;
+import java.util.logging.*;
 import sportsclubmanager.controller.contract.IController;
 import sportsclubmanager.domain.*;
+import sportsclubmanager.domain.contract.*;
 import sportsclubmanager.dto.classes.*;
 import sportsclubmanager.dto.contract.IAddress;
 
@@ -34,7 +36,8 @@ public class AddressController
     }
 
     @Override
-    public IAddress getById(Integer id) throws IdNotFoundException
+    public IAddress getById(Integer id)
+            throws IdNotFoundException
     {
         for (sportsclubmanager.domain.contract.IAddress a : DomainFacade.getAll(sportsclubmanager.domain.contract.IAddress.class))
         {
@@ -43,7 +46,7 @@ public class AddressController
                 return Address.copy(a);
             }
         }
-        
+
         throw new IdNotFoundException();
     }
 
@@ -63,6 +66,21 @@ public class AddressController
     @Override
     public void set(IAddress value)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try
+        {
+            sportsclubmanager.domain.classes.Address address = new sportsclubmanager.domain.classes.Address(value.getId());
+
+            address.setCountry(CountryController.getDomainById(value.getCountry()));
+            address.setPostalCode(value.getPostalCode());
+            address.setStreet(value.getStreet());
+            address.setStreetNumber(value.getStreetNumber());
+            address.setVillage(value.getVillage());
+
+            DomainFacade.set(address);
+        }
+        catch (IdNotFoundException | CouldNotSaveException ex)
+        {
+            Logger.getLogger(AddressController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -5,6 +5,7 @@
 package sportsclubmanager.controller;
 
 import java.util.*;
+import java.util.logging.*;
 import sportsclubmanager.controller.contract.IController;
 import sportsclubmanager.domain.*;
 import sportsclubmanager.dto.classes.*;
@@ -19,7 +20,7 @@ public class TrainerController
 {
     private static TrainerController controller;
 
-    private TrainerController()
+    public TrainerController()
     {
     }
 
@@ -33,8 +34,20 @@ public class TrainerController
         return controller;
     }
 
+    public sportsclubmanager.domain.contract.ITrainer getDomainById(Integer id)
+            throws IdNotFoundException
+    {
+        for (sportsclubmanager.domain.contract.ITrainer a : DomainFacade.getAll(sportsclubmanager.domain.contract.ITrainer.class))
+        {
+            return a;
+        }
+
+        throw new IdNotFoundException();
+    }
+
     @Override
-    public ITrainer getById(Integer id)throws IdNotFoundException
+    public ITrainer getById(Integer id)
+            throws IdNotFoundException
     {
         for (sportsclubmanager.domain.contract.ITrainer a : DomainFacade.getAll(sportsclubmanager.domain.contract.ITrainer.class))
         {
@@ -43,7 +56,7 @@ public class TrainerController
                 return Trainer.copy(a);
             }
         }
-        
+
         throw new IdNotFoundException();
     }
 
@@ -63,6 +76,22 @@ public class TrainerController
     @Override
     public void set(ITrainer value)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try
+        {
+            sportsclubmanager.domain.classes.Trainer trainer = new sportsclubmanager.domain.classes.Trainer(value.getId());
+
+            List<sportsclubmanager.domain.contract.IClubTeam> clubTeamList = new LinkedList<>();
+            for (int i : value.getClubTeamList())
+            {
+                clubTeamList.add(new ClubTeamController().getDomainById(i));
+            }
+            trainer.setClubTeamList(clubTeamList);
+
+            DomainFacade.set(trainer);
+        }
+        catch (IdNotFoundException | CouldNotSaveException ex)
+        {
+            Logger.getLogger(AddressController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

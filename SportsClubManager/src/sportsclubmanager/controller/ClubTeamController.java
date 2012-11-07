@@ -5,6 +5,7 @@
 package sportsclubmanager.controller;
 
 import java.util.*;
+import java.util.logging.*;
 import sportsclubmanager.controller.contract.IController;
 import sportsclubmanager.domain.*;
 import sportsclubmanager.dto.classes.*;
@@ -19,7 +20,7 @@ public class ClubTeamController
 {
     private static ClubTeamController controller;
 
-    private ClubTeamController()
+    public ClubTeamController()
     {
     }
 
@@ -33,8 +34,20 @@ public class ClubTeamController
         return controller;
     }
 
+    public sportsclubmanager.domain.contract.IClubTeam getDomainById(Integer id)
+            throws IdNotFoundException
+    {
+        for (sportsclubmanager.domain.contract.IClubTeam a : DomainFacade.getAll(sportsclubmanager.domain.contract.IClubTeam.class))
+        {
+            return a;
+        }
+
+        throw new IdNotFoundException();
+    }
+
     @Override
-    public IClubTeam getById(Integer id)throws IdNotFoundException
+    public IClubTeam getById(Integer id)
+            throws IdNotFoundException
     {
         for (sportsclubmanager.domain.contract.IClubTeam a : DomainFacade.getAll(sportsclubmanager.domain.contract.IClubTeam.class))
         {
@@ -43,7 +56,7 @@ public class ClubTeamController
                 return ClubTeam.copy(a);
             }
         }
-        
+
         throw new IdNotFoundException();
     }
 
@@ -63,6 +76,37 @@ public class ClubTeamController
     @Override
     public void set(IClubTeam value)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try
+        {
+            sportsclubmanager.domain.classes.ClubTeam clubTeam = new sportsclubmanager.domain.classes.ClubTeam();
+
+            List<sportsclubmanager.domain.contract.IDepartment> departmentList = new LinkedList<>();
+            for (int i : value.getDepartmentList())
+            {
+                departmentList.add(new DepartmentController().getDomainById(i));
+            }
+
+            List<sportsclubmanager.domain.contract.IPlayer> teamhasPlayerList = new LinkedList<>();
+            for (int i : value.getPlayerList())
+            {
+                teamhasPlayerList.add(new PlayerController().getDomainById(i));
+            }
+
+            List<sportsclubmanager.domain.contract.ITrainer> trainerList = new LinkedList<>();
+            for (int i : value.getTrainerList())
+            {
+                trainerList.add(new TrainerController().getDomainById(i));
+            }
+
+            clubTeam.setDepartmentList(departmentList);
+            clubTeam.setPlayerList(teamhasPlayerList);
+            clubTeam.setTrainerList(trainerList);
+
+            DomainFacade.set(clubTeam);
+        }
+        catch (IdNotFoundException | CouldNotSaveException ex)
+        {
+            Logger.getLogger(AddressController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

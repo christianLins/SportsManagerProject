@@ -5,6 +5,7 @@
 package sportsclubmanager.controller;
 
 import java.util.*;
+import java.util.logging.*;
 import sportsclubmanager.controller.contract.IController;
 import sportsclubmanager.domain.*;
 import sportsclubmanager.dto.classes.*;
@@ -19,7 +20,7 @@ public class PermissionController
 {
     private static PermissionController controller;
 
-    private PermissionController()
+    public PermissionController()
     {
     }
 
@@ -34,7 +35,8 @@ public class PermissionController
     }
 
     @Override
-    public IPermission getById(Integer id)throws IdNotFoundException
+    public IPermission getById(Integer id)
+            throws IdNotFoundException
     {
         for (sportsclubmanager.domain.contract.IPermission a : DomainFacade.getAll(sportsclubmanager.domain.contract.IPermission.class))
         {
@@ -43,7 +45,7 @@ public class PermissionController
                 return Permission.copy(a);
             }
         }
-        
+
         throw new IdNotFoundException();
     }
 
@@ -63,6 +65,6 @@ public class PermissionController
     @Override
     public void set(IPermission value)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+ 
     }
 }

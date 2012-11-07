@@ -10,7 +10,7 @@ import java.util.*;
 
  @author Thomas
  */
-public interface IMember
+public interface IMember extends IDomain
 {
     Integer getIdMember();
 

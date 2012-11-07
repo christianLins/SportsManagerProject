@@ -11,11 +11,9 @@ import javax.xml.bind.annotation.*;
 
  @author Thomas
  */
-public interface ILeague
+public interface ILeague extends IDomain
 {
-       Integer getId();
-
-       String getDescription();
+    String getDescription();
 
     String getName();
 

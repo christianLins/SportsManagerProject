@@ -20,7 +20,7 @@ public class MemberController
 {
     private static MemberController controller;
 
-    private MemberController()
+    public MemberController()
     {
     }
 

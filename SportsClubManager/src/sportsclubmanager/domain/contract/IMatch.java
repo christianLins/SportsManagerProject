@@ -11,11 +11,10 @@ import java.util.Date;
  @author Thomas
  */
 public interface IMatch
+        extends IDomain
 {
-      Integer getId();
+    ICompetition getCompetition();
 
-      ICompetition getCompetition();
-    
     Date getDateFrom();
 
     Date getDateTo();
@@ -26,9 +25,9 @@ public interface IMatch
 
     IMatchresult getMatchresult();
 
-     void setCompetition(ICompetition competition);
-    
-     void setDateFrom(Date dateFrom);
+    void setCompetition(ICompetition competition);
+
+    void setDateFrom(Date dateFrom);
 
     void setDateTo(Date dateTo);
 

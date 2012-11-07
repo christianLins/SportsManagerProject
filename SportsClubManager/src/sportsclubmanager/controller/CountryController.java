@@ -5,6 +5,7 @@
 package sportsclubmanager.controller;
 
 import java.util.*;
+import java.util.logging.*;
 import sportsclubmanager.controller.contract.IController;
 import sportsclubmanager.domain.*;
 import sportsclubmanager.dto.classes.*;
@@ -18,6 +19,20 @@ public class CountryController
         implements IController<ICountry>
 {
     private static CountryController controller;
+
+    static sportsclubmanager.domain.contract.ICountry getDomainById(int id)
+            throws IdNotFoundException
+    {
+        for (sportsclubmanager.domain.contract.ICountry a : DomainFacade.getAll(sportsclubmanager.domain.contract.ICountry.class))
+        {
+            if (a.getId() == id)
+            {
+                return a;
+            }
+        }
+
+        throw new IdNotFoundException();
+    }
 
     private CountryController()
     {
@@ -34,7 +49,8 @@ public class CountryController
     }
 
     @Override
-    public ICountry getById(Integer id)throws IdNotFoundException
+    public ICountry getById(Integer id)
+            throws IdNotFoundException
     {
         for (sportsclubmanager.domain.contract.ICountry a : DomainFacade.getAll(sportsclubmanager.domain.contract.ICountry.class))
         {
@@ -43,7 +59,7 @@ public class CountryController
                 return Country.copy(a);
             }
         }
-        
+
         throw new IdNotFoundException();
     }
 
@@ -63,6 +79,5 @@ public class CountryController
     @Override
     public void set(ICountry value)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

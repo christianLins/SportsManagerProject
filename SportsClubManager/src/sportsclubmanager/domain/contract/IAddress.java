@@ -9,9 +9,8 @@ package sportsclubmanager.domain.contract;
  @author Thomas
  */
 public interface IAddress
+        extends IDomain
 {
-    Integer getId();
-
     ICountry getCountry();
 
     int getPostalCode();

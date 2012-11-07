@@ -8,10 +8,8 @@ package sportsclubmanager.domain.contract;
 
  @author Thomas
  */
-public interface IPermission
-{
-  Integer getId();
-  
+public interface IPermission extends IDomain
+{  
   String getDescription();
 
     String getName();

@@ -19,7 +19,7 @@ public class LeagueController
 {
     private static LeagueController controller;
 
-    private LeagueController()
+    public LeagueController()
     {
     }
 
@@ -33,8 +33,20 @@ public class LeagueController
         return controller;
     }
 
+    public sportsclubmanager.domain.contract.ILeague getDomainById(Integer id)
+            throws IdNotFoundException
+    {
+        for (sportsclubmanager.domain.contract.ILeague a : DomainFacade.getAll(sportsclubmanager.domain.contract.ILeague.class))
+        {
+            return a;
+        }
+
+        throw new IdNotFoundException();
+    }
+
     @Override
-    public ILeague getById(Integer id)throws IdNotFoundException
+    public ILeague getById(Integer id)
+            throws IdNotFoundException
     {
         for (sportsclubmanager.domain.contract.ILeague a : DomainFacade.getAll(sportsclubmanager.domain.contract.ILeague.class))
         {
@@ -43,7 +55,7 @@ public class LeagueController
                 return League.copy(a);
             }
         }
-        
+
         throw new IdNotFoundException();
     }
 

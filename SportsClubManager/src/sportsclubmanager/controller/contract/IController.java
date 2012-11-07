@@ -19,5 +19,5 @@ public interface IController<T> extends Serializable
 
     List<T> getAll();
 
-    void set(T value);
+    Integer set(T value);
 }

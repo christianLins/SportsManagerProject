@@ -10,9 +10,8 @@ import java.util.List;
 
  @author Thomas
  */
-public interface ITeam
+public interface ITeam extends IDomain
 {
-    Integer getId();
 
     List<ICompetition> getCompetitionList();
 

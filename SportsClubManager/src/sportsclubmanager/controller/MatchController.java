@@ -19,7 +19,7 @@ public class MatchController
 {
     private static MatchController controller;
 
-    private MatchController()
+    public MatchController()
     {
     }
 
@@ -33,8 +33,20 @@ public class MatchController
         return controller;
     }
 
+    public sportsclubmanager.domain.contract.IMatch getDomainById(Integer id)
+            throws IdNotFoundException
+    {
+        for (sportsclubmanager.domain.contract.IMatch a : DomainFacade.getAll(sportsclubmanager.domain.contract.IMatch.class))
+        {
+            return a;
+        }
+
+        throw new IdNotFoundException();
+    }
+
     @Override
-    public IMatch getById(Integer id)throws IdNotFoundException
+    public IMatch getById(Integer id)
+            throws IdNotFoundException
     {
         for (sportsclubmanager.domain.contract.IMatch a : DomainFacade.getAll(sportsclubmanager.domain.contract.IMatch.class))
         {
@@ -43,7 +55,7 @@ public class MatchController
                 return Match.copy(a);
             }
         }
-        
+
         throw new IdNotFoundException();
     }
 

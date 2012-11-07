@@ -9,10 +9,9 @@ package sportsclubmanager.domain.contract;
  @author Thomas
  */
 public interface ICountry
+        extends IDomain
 {
-        Integer getId();
-
-        String getAlpha2();
+    String getAlpha2();
 
     String getAlpha3();
 
@@ -47,5 +46,4 @@ public interface ICountry
     void setPortugues(String portugues);
 
     void setTld(String tld);
-    
 }

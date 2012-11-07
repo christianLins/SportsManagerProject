@@ -19,7 +19,7 @@ public class PlayerController
 {
     private static PlayerController controller;
 
-    private PlayerController()
+    public PlayerController()
     {
     }
 
@@ -33,17 +33,29 @@ public class PlayerController
         return controller;
     }
 
-    @Override
-    public IPlayer getById(Integer id) throws IdNotFoundException
+    public sportsclubmanager.domain.contract.IPlayer getDomainById(Integer id)
+            throws IdNotFoundException
     {
-       for (sportsclubmanager.domain.contract.IPlayer a : DomainFacade.getAll(sportsclubmanager.domain.contract.IPlayer.class))
+        for (sportsclubmanager.domain.contract.IPlayer a : DomainFacade.getAll(sportsclubmanager.domain.contract.IPlayer.class))
+        {
+            return a;
+        }
+
+        throw new IdNotFoundException();
+    }
+
+    @Override
+    public IPlayer getById(Integer id)
+            throws IdNotFoundException
+    {
+        for (sportsclubmanager.domain.contract.IPlayer a : DomainFacade.getAll(sportsclubmanager.domain.contract.IPlayer.class))
         {
             if (a.getId() == id)
             {
                 return Player.copy(a);
             }
         }
-        
+
         throw new IdNotFoundException();
     }
 

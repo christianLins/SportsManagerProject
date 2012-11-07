@@ -10,10 +10,8 @@ import java.util.List;
 
  @author Thomas
  */
-public interface ITypeOfSport
+public interface ITypeOfSport extends IDomain
 {
-    Integer getId();
-
     String getName();
 
     void setName(String name);

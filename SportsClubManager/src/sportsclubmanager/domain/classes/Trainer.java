@@ -25,6 +25,11 @@ public class Trainer
     {
     }
 
+    public Trainer(int id)
+    {
+        super(id);
+    }
+
     @XmlTransient
     @Override
     public List<IClubTeam> getClubTeamList()

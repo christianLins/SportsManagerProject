@@ -30,8 +30,6 @@ public interface IMember
     Date getMemberTo();
 
     Integer getNationality();
-
-    
     
     String getPrename();
 

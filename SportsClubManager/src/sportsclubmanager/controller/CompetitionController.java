@@ -5,10 +5,11 @@
 package sportsclubmanager.controller;
 
 import java.util.*;
+import java.util.logging.*;
 import sportsclubmanager.controller.contract.IController;
 import sportsclubmanager.domain.*;
-import sportsclubmanager.dto.classes.*;
-import sportsclubmanager.dto.contract.*;
+import sportsclubmanager.dto.classes.Competition;
+import sportsclubmanager.dto.contract.ICompetition;
 
 /**
 
@@ -19,7 +20,7 @@ public class CompetitionController
 {
     private static CompetitionController controller;
 
-    private CompetitionController()
+    public CompetitionController()
     {
     }
 
@@ -33,8 +34,20 @@ public class CompetitionController
         return controller;
     }
 
+    public sportsclubmanager.domain.contract.ICompetition getDomainById(Integer id)
+            throws IdNotFoundException
+    {
+        for (sportsclubmanager.domain.contract.ICompetition a : DomainFacade.getAll(sportsclubmanager.domain.contract.ICompetition.class))
+        {
+            return a;
+        }
+
+        throw new IdNotFoundException();
+    }
+
     @Override
-    public ICompetition getById(Integer id)throws IdNotFoundException
+    public ICompetition getById(Integer id)
+            throws IdNotFoundException
     {
         for (sportsclubmanager.domain.contract.ICompetition a : DomainFacade.getAll(sportsclubmanager.domain.contract.ICompetition.class))
         {
@@ -43,7 +56,7 @@ public class CompetitionController
                 return Competition.copy(a);
             }
         }
-        
+
         throw new IdNotFoundException();
     }
 
@@ -61,8 +74,38 @@ public class CompetitionController
     }
 
     @Override
-    public void set(ICompetition value)
+    public Integer set(ICompetition value)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try
+        {
+            sportsclubmanager.domain.classes.Competition competition = new sportsclubmanager.domain.classes.Competition();
+
+            competition.setDateFrom(value.getDateFrom());
+
+            competition.setDateTo(value.getDateTo());
+
+            List<sportsclubmanager.domain.contract.IMatch> matchList = new LinkedList<>();
+            for (int i : value.getMatchList())
+            {
+                matchList.add(new MatchController().getDomainById(i));
+            }
+            competition.setMatchList(matchList);
+
+            competition.setPayment(value.getPayment());
+
+            List< sportsclubmanager.domain.contract.ITeam> teamList = new LinkedList<>();
+            for (int i : value.getTeamList())
+            {
+                teamList.add(new TeamController().getDomainById(i));
+            }
+
+            competition.setTeamList(teamList);
+
+           return DomainFacade.set(competition);
+        }
+        catch (IdNotFoundException | CouldNotSaveException ex)
+        {
+            Logger.getLogger(AddressController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -43,9 +43,27 @@ public class Team
             {
                 a.matchList.add(c.getId());
             }
-            
+
             teams.put(team, a);
         }
+
+        return a;
+    }
+
+    public static sportsclubmanager.domain.contract.ITeam copy(ITeam team,
+                                                               sportsclubmanager.domain.contract.ILeague league,
+                                                               List<sportsclubmanager.domain.contract.ICompetition> competitionList,
+                                                               List<sportsclubmanager.domain.contract.IMatch> matchList)
+    {
+        sportsclubmanager.domain.contract.ITeam a = new sportsclubmanager.domain.classes.Team(team.getId());
+
+        a.setName(team.getName());
+        a.setDescription(team.getDescription());
+        a.setLeague(league);
+
+        a.setCompetitionList(competitionList);
+
+        a.setMatchList(matchList);
 
         return a;
     }

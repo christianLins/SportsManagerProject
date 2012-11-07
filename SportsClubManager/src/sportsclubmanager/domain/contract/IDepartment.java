@@ -11,10 +11,9 @@ import java.util.*;
  @author Thomas
  */
 public interface IDepartment
+        extends IDomain
 {
-       Integer getId();
-
-       List<IClubTeam> getClubTeamList();
+    List<IClubTeam> getClubTeamList();
 
     IDepartmentHead getDepartmentHead();
 

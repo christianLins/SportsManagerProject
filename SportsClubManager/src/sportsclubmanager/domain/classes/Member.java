@@ -73,6 +73,12 @@ public class Member
     }
 
     @Override
+    public Integer getId()
+    {
+        return idMember;
+    }
+
+    @Override
     public Integer getIdMember()
     {
         return idMember;

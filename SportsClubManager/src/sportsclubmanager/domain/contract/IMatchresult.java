@@ -8,10 +8,8 @@ package sportsclubmanager.domain.contract;
 
  @author Thomas
  */
-public interface IMatchresult
+public interface IMatchresult extends IDomain
 {
-    Integer getId();
-
     double getPointsForeignteam();
 
     double getPointsHometeam();

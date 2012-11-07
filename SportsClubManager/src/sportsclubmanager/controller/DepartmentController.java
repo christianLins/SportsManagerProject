@@ -19,7 +19,7 @@ public class DepartmentController
 {
     private static DepartmentController controller;
 
-    private DepartmentController()
+    public DepartmentController()
     {
     }
 
@@ -33,24 +33,36 @@ public class DepartmentController
         return controller;
     }
 
-    @Override
-    public IDepartment getById(Integer id) throws IdNotFoundException
+    public sportsclubmanager.domain.contract.IDepartment getDomainById(Integer id)
+            throws IdNotFoundException
     {
-               for (sportsclubmanager.domain.contract.IDepartment a : DomainFacade.getAll(sportsclubmanager.domain.contract.IDepartment.class))
+        for (sportsclubmanager.domain.contract.IDepartment a : DomainFacade.getAll(sportsclubmanager.domain.contract.IDepartment.class))
+        {
+            return a;
+        }
+
+        throw new IdNotFoundException();
+    }
+
+    @Override
+    public IDepartment getById(Integer id)
+            throws IdNotFoundException
+    {
+        for (sportsclubmanager.domain.contract.IDepartment a : DomainFacade.getAll(sportsclubmanager.domain.contract.IDepartment.class))
         {
             if (a.getId() == id)
             {
                 return Department.copy(a);
             }
         }
-        
+
         throw new IdNotFoundException();
     }
 
     @Override
     public List<IDepartment> getAll()
     {
-          List<IDepartment> result = new LinkedList<>();
+        List<IDepartment> result = new LinkedList<>();
 
         for (sportsclubmanager.domain.contract.IDepartment a : DomainFacade.getAll(sportsclubmanager.domain.contract.IDepartment.class))
         {
