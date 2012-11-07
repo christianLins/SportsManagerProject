@@ -19,7 +19,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import sportsclubmanager.communication.rmi.client.CommunicationProblemException;
 import sportsclubmanager.communication.rmi.client.RmiServiceClient;
-import sportsclubmanager.controller.contract.IController;
+import sportsclubmanager.dto.controller.contract.IController;
 import sportsclubmanager.dto.classes.Competition;
 import sportsclubmanager.dto.contract.ICompetition;
 import sportsclubmanager.dto.contract.IMatch;

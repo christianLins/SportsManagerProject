@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import sportsclubmanager.communication.rmi.client.CommunicationProblemException;
 import sportsclubmanager.communication.rmi.client.RmiServiceClient;
-import sportsclubmanager.controller.contract.IController;
+import sportsclubmanager.dto.controller.contract.IController;
 import sportsclubmanager.dto.classes.Address;
 import sportsclubmanager.dto.classes.Player;
 import sportsclubmanager.dto.contract.IRole;

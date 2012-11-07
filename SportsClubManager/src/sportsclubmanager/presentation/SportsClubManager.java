@@ -22,7 +22,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 import sportsclubmanager.communication.rmi.client.CommunicationProblemException;
 import sportsclubmanager.communication.rmi.client.RmiServiceClient;
-import sportsclubmanager.communication.rmi.contract.IRmiServiceFactory;
+import sportsclubmanager.communication.rmi.contract.*;
 import sportsclubmanager.presentation.basics.AbstractForm;
 import sportsclubmanager.presentation.forms.competition.AddCompetitionResultsForm;
 import sportsclubmanager.presentation.forms.competition.ChangeCompetitionTeam;
@@ -32,11 +32,12 @@ import sportsclubmanager.presentation.forms.member.NewMemberForm;
 import sportsclubmanager.presentation.forms.member.SearchMemberForm;
 
 /**
- *
- * @author Lucia
- */
-public class SportsClubManager extends AbstractForm {
 
+ @author Lucia
+ */
+public class SportsClubManager
+        extends AbstractForm
+{
     private JButton btnChangeTeam;
     private JButton btnAddResult;
     private JButton btnCreateCompet;
@@ -55,7 +56,8 @@ public class SportsClubManager extends AbstractForm {
     private JTabbedPane tabPane;
     private RmiServiceClient rmiClient;
 
-    public SportsClubManager(AbstractForm form, RmiServiceClient rmiClient) {
+    public SportsClubManager(AbstractForm form, RmiServiceClient rmiClient)
+    {
         super(form);
         this.rmiClient = rmiClient;
         this.setTitle("SportsClubManager");
@@ -65,7 +67,8 @@ public class SportsClubManager extends AbstractForm {
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
-    private void initComponents() {
+    private void initComponents()
+    {
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sports Club Manager");
@@ -118,16 +121,20 @@ public class SportsClubManager extends AbstractForm {
         tabMember.setLeftComponent(paneMemberNavi);
 
         //buttons Member
-        btnMember.addActionListener(new ActionListener() {
+        btnMember.addActionListener(new ActionListener()
+        {
             @Override
-            public void actionPerformed(ActionEvent evt) {
+            public void actionPerformed(ActionEvent evt)
+            {
                 displaySearchMain();
             }
         });
 
-        btnNewMember.addActionListener(new ActionListener() {
+        btnNewMember.addActionListener(new ActionListener()
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
                 displayAddMember();
             }
         });
@@ -150,35 +157,43 @@ public class SportsClubManager extends AbstractForm {
 
         //show match results
         btnShowCompetition.setText("Show Competition");
-        btnShowCompetition.addActionListener(new java.awt.event.ActionListener() {
+        btnShowCompetition.addActionListener(new java.awt.event.ActionListener()
+        {
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnShowResultActionPerformed(evt);
             }
         });
 
         //add match results
         btnAddResult.setText("Add Result");
-        btnAddResult.addActionListener(new java.awt.event.ActionListener() {
+        btnAddResult.addActionListener(new java.awt.event.ActionListener()
+        {
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnAddResultActionPerformed(evt);
             }
         });
 
         btnCreateCompet.setText("Create Competition");
-        btnCreateCompet.addActionListener(new java.awt.event.ActionListener() {
+        btnCreateCompet.addActionListener(new java.awt.event.ActionListener()
+        {
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnCreateCompetActionPerformed(evt);
             }
         });
 
 
         btnChangeTeam.setText("Change Team");
-        btnChangeTeam.addActionListener(new java.awt.event.ActionListener() {
+        btnChangeTeam.addActionListener(new java.awt.event.ActionListener()
+        {
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnChangeTeamActionPerformed(evt);
             }
         });
@@ -244,7 +259,8 @@ public class SportsClubManager extends AbstractForm {
     }// </editor-fold>
 
     //set SearchMember as Main
-    private void displaySearchMain() {
+    private void displaySearchMain()
+    {
         paneMemberMain.removeAll();
         paneMemberMain = new SearchMemberForm(this, rmiClient).paneSearch;
 
@@ -253,7 +269,8 @@ public class SportsClubManager extends AbstractForm {
         tabMember.repaint();
     }
 
-    public void displayAddMember() {
+    public void displayAddMember()
+    {
         paneMemberMain.removeAll();
         paneMemberMain = new NewMemberForm(this, rmiClient).panel;
 
@@ -262,7 +279,8 @@ public class SportsClubManager extends AbstractForm {
         tabMember.repaint();
     }
 
-    private void btnShowResultActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnShowResultActionPerformed(java.awt.event.ActionEvent evt)
+    {
         paneMatchMain.removeAll();
         paneMatchMain = new ShowCompetitionForm(null).paneShowInfo;
 
@@ -271,7 +289,8 @@ public class SportsClubManager extends AbstractForm {
         tabMatch.repaint();
     }
 
-    private void btnAddResultActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnAddResultActionPerformed(java.awt.event.ActionEvent evt)
+    {
         paneMatchMain.removeAll();
         paneMatchMain = new AddCompetitionResultsForm(null).paneMatchResults;
 
@@ -280,7 +299,8 @@ public class SportsClubManager extends AbstractForm {
         tabMatch.repaint();
     }
 
-    private void btnCreateCompetActionPerformed(ActionEvent evt) {
+    private void btnCreateCompetActionPerformed(ActionEvent evt)
+    {
         paneMatchMain.removeAll();
         paneMatchMain = new CreateCompetitionForm(null, rmiClient).panel;
 
@@ -289,7 +309,8 @@ public class SportsClubManager extends AbstractForm {
         tabMatch.repaint();
     }
 
-    private void btnChangeTeamActionPerformed(ActionEvent evt) {
+    private void btnChangeTeamActionPerformed(ActionEvent evt)
+    {
         paneMatchMain.removeAll();
         paneMatchMain = new ChangeCompetitionTeam(null).panelChangeTeam;
 
@@ -299,42 +320,61 @@ public class SportsClubManager extends AbstractForm {
     }
 
     /**
-     * @param args the command line arguments
+     @param args the command line arguments
      */
-    public static void main(String args[]) {
-        try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+    public static void main(String args[])
+    {
+        try
+        {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels())
+            {
+                if ("Nimbus".equals(info.getName()))
+                {
                     UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
+        }
+        catch (ClassNotFoundException ex)
+        {
             java.util.logging.Logger.getLogger(SportsClubManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
+        }
+        catch (InstantiationException ex)
+        {
             java.util.logging.Logger.getLogger(SportsClubManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        }
+        catch (IllegalAccessException ex)
+        {
             java.util.logging.Logger.getLogger(SportsClubManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
+        }
+        catch (UnsupportedLookAndFeelException ex)
+        {
             java.util.logging.Logger.getLogger(SportsClubManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
+            public void run()
+            {
+                try
+                {
                     Registry r = LocateRegistry.getRegistry("localhost", 1099);
-                    IRmiServiceFactory client = (IRmiServiceFactory) r.lookup("Factory");
+                    IRmiServiceFactory client = (IRmiServiceFactory) r.lookup("CommunicationFactory");
                     SportsClubManager manager = new SportsClubManager(null, new RmiServiceClient(client));
                     manager.setVisible(true);
-                } catch (CommunicationProblemException ex) {
+                }
+                catch (CommunicationProblemException | NotBoundException ex)
+                {
                     Logger.getLogger(SportsClubManager.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (NotBoundException ex) {
+                }
+                catch (AccessException ex)
+                {
                     Logger.getLogger(SportsClubManager.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (AccessException ex) {
-                    Logger.getLogger(SportsClubManager.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (RemoteException ex) {
+                }
+                catch (RemoteException ex)
+                {
                     Logger.getLogger(SportsClubManager.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
