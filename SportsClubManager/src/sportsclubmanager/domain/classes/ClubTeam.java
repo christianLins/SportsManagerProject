@@ -18,10 +18,6 @@ public class ClubTeam
         implements Serializable, IClubTeam
 {
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @Column(name = "idTeam")
-    private Integer idTeam;
     @ManyToMany(mappedBy = "clubTeamList")
     private List<Department> departmentList;
     @JoinTable(name = "Team_has_Trainer", joinColumns =
@@ -145,7 +141,7 @@ public class ClubTeam
     public int hashCode()
     {
         int hash = 0;
-        hash += (idTeam != null ? idTeam.hashCode() : 0);
+        hash += (super.getId() != null ? super.getId().hashCode() : 0);
         return hash;
     }
 
@@ -158,7 +154,7 @@ public class ClubTeam
             return false;
         }
         ClubTeam other = (ClubTeam) object;
-        if ((this.idTeam == null && other.idTeam != null) || (this.idTeam != null && !this.idTeam.equals(other.idTeam)))
+        if ((super.getId() == null && other.getId() != null) || (super.getId() != null && !super.getId().equals(other.getId())))
         {
             return false;
         }
@@ -166,14 +162,8 @@ public class ClubTeam
     }
 
     @Override
-    public String toString()
-    {
-        return "sportsclubmanager.domain.classes.ClubTeam[ idTeam=" + idTeam + " ]";
-    }
-
-    @Override
     public Integer getId()
     {
-        return this.idTeam;
+        return super.getId();
     }
 }
