@@ -4,13 +4,12 @@
  */
 package sportsclubmanager.controller;
 
-import sportsclubmanager.controller.contract.IdNotFoundException;
 import java.util.*;
 import java.util.logging.*;
-import sportsclubmanager.controller.contract.IController;
+import sportsclubmanager.controller.contract.*;
 import sportsclubmanager.domain.*;
-import sportsclubmanager.dto.classes.*;
-import sportsclubmanager.dto.contract.*;
+import sportsclubmanager.dto.classes.Trainer;
+import sportsclubmanager.dto.contract.ITrainer;
 
 /**
 
@@ -115,23 +114,24 @@ public class TrainerController
             Logger.getLogger(AddressController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     private sportsclubmanager.domain.classes.Trainer createDomain(ITrainer value)
             throws IdNotFoundException
     {
         sportsclubmanager.domain.classes.Trainer trainer = new sportsclubmanager.domain.classes.Trainer(value.getId());
-        
+
         List<Integer> clubTeams = value.getClubTeamList();
         List<Integer> permisssions = value.getPermisssionList();
-        
+
         LinkedList<sportsclubmanager.domain.contract.IClubTeam> teams = new LinkedList<>();
-        for(int id: clubTeams)
+        for (int id : clubTeams)
         {
             teams.add(new ClubTeamController().getDomainById(id));
         }
         trainer.setClubTeamList(teams);
-        
+
         LinkedList<sportsclubmanager.domain.contract.IPermission> p = new LinkedList<>();
-        
+
         return trainer;
     }
 }
