@@ -4,7 +4,6 @@
  */
 package sportsclubmanager.communication.rmi.server;
 
-import sportsclubmanager.controller.TeamController;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import sportsclubmanager.communication.rmi.contract.IRmiServiceFactory;

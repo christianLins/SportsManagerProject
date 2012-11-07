@@ -4,6 +4,8 @@
  */
 package sportsclubmanager.controller.contract;
 
+import java.io.Serializable;
+import java.rmi.Remote;
 import java.util.List;
 import sportsclubmanager.controller.IdNotFoundException;
 
@@ -11,7 +13,7 @@ import sportsclubmanager.controller.IdNotFoundException;
 
  @author Thomas
  */
-public interface IController<T>
+public interface IController<T> extends Serializable
 {
     T getById(Integer id) throws IdNotFoundException;
 

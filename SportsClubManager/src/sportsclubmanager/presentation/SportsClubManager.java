@@ -2,6 +2,13 @@ package sportsclubmanager.presentation;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.AccessException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JMenu;
@@ -13,6 +20,9 @@ import javax.swing.LayoutStyle;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
+import sportsclubmanager.communication.rmi.client.CommunicationProblemException;
+import sportsclubmanager.communication.rmi.client.RmiServiceClient;
+import sportsclubmanager.communication.rmi.contract.IRmiServiceFactory;
 import sportsclubmanager.presentation.basics.AbstractForm;
 import sportsclubmanager.presentation.forms.competition.AddCompetitionResultsForm;
 import sportsclubmanager.presentation.forms.competition.ChangeCompetitionTeam;
@@ -43,9 +53,11 @@ public class SportsClubManager extends AbstractForm {
     private JSplitPane tabMatch;
     private JSplitPane tabMember;
     private JTabbedPane tabPane;
+    private RmiServiceClient rmiClient;
 
-    public SportsClubManager(AbstractForm form) {
+    public SportsClubManager(AbstractForm form, RmiServiceClient rmiClient) {
         super(form);
+        this.rmiClient = rmiClient;
         this.setTitle("SportsClubManager");
         this.setExtendedState(this.getExtendedState() | MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -79,7 +91,7 @@ public class SportsClubManager extends AbstractForm {
         btnMember = new JButton("Member");
 
         paneMemberMain = new JPanel();
-       
+
         paneMemberNavi.setMinimumSize(new java.awt.Dimension(140, 549));
         paneMemberNavi.setPreferredSize(new java.awt.Dimension(140, 549));
         paneMemberNavi.setRequestFocusEnabled(false);
@@ -234,7 +246,7 @@ public class SportsClubManager extends AbstractForm {
     //set SearchMember as Main
     private void displaySearchMain() {
         paneMemberMain.removeAll();
-        paneMemberMain = new SearchMemberForm(this).paneSearch;
+        paneMemberMain = new SearchMemberForm(this, rmiClient).paneSearch;
 
         tabMember.setRightComponent(paneMemberMain);
         tabMember.validate();
@@ -243,13 +255,13 @@ public class SportsClubManager extends AbstractForm {
 
     public void displayAddMember() {
         paneMemberMain.removeAll();
-        paneMemberMain = new NewMemberForm(this).panel;
+        paneMemberMain = new NewMemberForm(this, rmiClient).panel;
 
         tabMember.setRightComponent(paneMemberMain);
         tabMember.validate();
         tabMember.repaint();
     }
-    
+
     private void btnShowResultActionPerformed(java.awt.event.ActionEvent evt) {
         paneMatchMain.removeAll();
         paneMatchMain = new ShowCompetitionForm(null).paneShowInfo;
@@ -311,7 +323,20 @@ public class SportsClubManager extends AbstractForm {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SportsClubManager(null).setVisible(true);
+                try {
+                    Registry r = LocateRegistry.getRegistry("localhost", 1099);
+                    IRmiServiceFactory client = (IRmiServiceFactory) r.lookup("Factory");
+                    SportsClubManager manager = new SportsClubManager(null, new RmiServiceClient(client));
+                    manager.setVisible(true);
+                } catch (CommunicationProblemException ex) {
+                    Logger.getLogger(SportsClubManager.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (NotBoundException ex) {
+                    Logger.getLogger(SportsClubManager.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (AccessException ex) {
+                    Logger.getLogger(SportsClubManager.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (RemoteException ex) {
+                    Logger.getLogger(SportsClubManager.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

@@ -4,7 +4,6 @@
  */
 package sportsclubmanager.communication.rmi.client;
 
-import java.net.MalformedURLException;
 import java.rmi.*;
 import sportsclubmanager.communication.rmi.contract.IRmiServiceFactory;
 import sportsclubmanager.controller.contract.IController;
@@ -17,44 +16,15 @@ import sportsclubmanager.dto.contract.*;
  */
 public class RmiServiceClient
 {
-    private final String host;
-    private final int port;
     private IRmiServiceFactory factory;
 
-    /**
-     instantiate a new rmi-service-client by passing host and port of the server
-
-     @param host
-     @param port
-
-     @throws CommunicationProblemException (invalid host/port)
-     */
-    public RmiServiceClient(String host, int port)
+    public RmiServiceClient(IRmiServiceFactory factory)
             throws CommunicationProblemException
     {
-        if (host == null || port == 0)
-        {
-            throw new NullPointerException();
-        }
-        this.host = host;
-        this.port = port;
-        initConnection();
+            this.factory = factory;
     }
 
-    private void initConnection()
-            throws CommunicationProblemException
-    {
-        try
-        {
-            factory = (IRmiServiceFactory) Naming.lookup("rmi://" + host + ":" + port + "/RmiSportsClubManagerServiceFactory");
-        }
-        catch (RemoteException | MalformedURLException | NotBoundException e)
-        {
-            throw new CommunicationProblemException("Connection could not be established", e);
-        }
-    }
-
-    public IController<IAddress> getCompetitionManager()
+    public IController<IAddress> getAddressManager()
             throws CommunicationProblemException
     {
         try

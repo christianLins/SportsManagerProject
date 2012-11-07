@@ -2,10 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package sportsclubmanager.communication.rmi.server;
+package sportsclubmanager.controller;
 
 import java.util.*;
-import sportsclubmanager.controller.*;
 import sportsclubmanager.controller.contract.*;
 import sportsclubmanager.dto.contract.*;
 
@@ -13,7 +12,7 @@ import sportsclubmanager.dto.contract.*;
 
  @author Thomas
  */
-class TypeOfSportController
+public class TypeOfSportController
       implements IController<ITypeOfSport>
 {
   private static TypeOfSportController controller;

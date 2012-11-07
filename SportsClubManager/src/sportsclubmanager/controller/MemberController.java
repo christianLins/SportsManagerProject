@@ -4,6 +4,7 @@
  */
 package sportsclubmanager.controller;
 
+import java.io.Serializable;
 import java.util.*;
 import sportsclubmanager.controller.contract.IController;
 import sportsclubmanager.domain.DomainFacade;

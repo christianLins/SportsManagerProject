@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -13,15 +15,12 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
-import sportsclubmanager.controller.AddressController;
-import sportsclubmanager.controller.CountryController;
-import sportsclubmanager.controller.DepartmentController;
-import sportsclubmanager.controller.DepartmentHeadController;
-import sportsclubmanager.controller.MemberController;
-import sportsclubmanager.controller.PlayerController;
-import sportsclubmanager.controller.TeamController;
+import sportsclubmanager.communication.rmi.client.CommunicationProblemException;
+import sportsclubmanager.communication.rmi.client.RmiServiceClient;
 import sportsclubmanager.controller.contract.IController;
+import sportsclubmanager.dto.contract.IRole;
 import sportsclubmanager.dto.contract.IAddress;
+import sportsclubmanager.dto.contract.IClubTeam;
 import sportsclubmanager.dto.contract.ICountry;
 import sportsclubmanager.dto.contract.IDepartment;
 import sportsclubmanager.dto.contract.IDepartmentHead;
@@ -85,7 +84,7 @@ public class NewMemberForm extends AbstractMainForm {
     IController<IPlayer> playerCtrl;
     IController<IDepartmentHead> depHeadCtrl;
     IController<IDepartment> depCtrl;
-    IController<ITeam> teamCtrl;
+    IController<IClubTeam> clubTeamCtrl;
     IMember m;
     IAddress address;
     ICountry country;
@@ -93,32 +92,37 @@ public class NewMemberForm extends AbstractMainForm {
     IDepartment department;
     ITeam team;
 
+    RmiServiceClient rmiClient;
     // End of variables declaration
     /**
      * Creates new form NewMemb
      */
-    public NewMemberForm(AbstractForm form) {
+    public NewMemberForm(AbstractForm form, RmiServiceClient rmiClient) {
         super(form);
+        this.rmiClient = rmiClient;
         initComponents();
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
-
-
-        memberCtrl = MemberController.getInstance();
-        addressCtrl = AddressController.getInstance();
-        countryCtrl = CountryController.getInstance();
-        playerCtrl = PlayerController.getInstance();
-        depHeadCtrl = DepartmentHeadController.getInstance();
-        depCtrl = DepartmentController.getInstance();
-        teamCtrl = TeamController.getInstance();
+        try {
+            memberCtrl = rmiClient.getMemberManager();
+        
+        addressCtrl = rmiClient.getAddressManager();
+        countryCtrl = rmiClient.getCountryManager();
+        playerCtrl = rmiClient.getPlayerManager();
+        depHeadCtrl = rmiClient.getDepartmentHeadManager();
+        depCtrl = rmiClient.getDepartmentManager();
+        clubTeamCtrl = rmiClient.getClubTeamManager();
         team = null;
         m = null;
         address = null;
         country = null;
         depHead = null;
         department = null;
+        } catch (CommunicationProblemException ex) {
+            Logger.getLogger(NewMemberForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         panel = new JPanel();
         panePersonData = new JPanel();
@@ -444,6 +448,7 @@ public class NewMemberForm extends AbstractMainForm {
         }
         m.setGender(gender);
 
+        List<IRole> roleList = new LinkedList<>();
         List<Integer> roles = new LinkedList<Integer>();
         if (radioAdmin.isSelected()) {
             roles.add(1);
@@ -470,31 +475,44 @@ public class NewMemberForm extends AbstractMainForm {
     }
 
     private String[] getDepartments() {
-//        DepartmentHead depHead = new DepartmentHead();
-//        Object[] list = depHead.getDepartmentList().toArray();            
-        String[] deps = {"Department 1", "Department 2"};
+        List<IDepartment> depList = depCtrl.getAll();
+        String [] list = new String[depList.size()];
 
-//        for(int i = 0; i < list.length; i++){
-//            deps[i] = list[i].toString();
-//        }       
-        return deps;
+        for(int i = 0; i < list.length; i++){
+            list[i] = depList.get(i).getName();
+        }       
+        return list;
     }
 
     private String[] getTeams() {
-//        Team depHead = new Team();
-//        Object[] list = depHead.getDepartmentList().toArray();            
-        String[] teams = {"Team 1", "Team 2"};
+        List<IClubTeam> teamList = clubTeamCtrl.getAll();
+        String[] list = new String[teamList.size()];
 
-//        for(int i = 0; i < list.length; i++){
-//            deps[i] = list[i].toString();
-//        }       
-        return teams;
+        for(int i = 0; i < list.length; i++){
+            list[i] = teamList.get(i).getName();
+        }       
+        return list;
     }
 
     private String[] getTeams(String name) {
+        List<IDepartment> deplist = depCtrl.getAll();
+        List<Integer> clubteams = null;   
+        
+        
+        for(int i = 0; i < deplist.size(); i ++){
+            if(deplist.get(i).getName().equals(name)){
+                IDepartment dep = deplist.get(i);
+                clubteams = dep.getClubTeamList();                
+            }
+        }
+        String [] teams = new String[clubteams.size()];
+        
+        for(int x = 0; x < clubteams.size(); x++){
+            
+        }
 //        Team depHead = new Team();
 //        Object[] list = depHead.getDepartmentList().toArray();            
-        String[] teams = {"Team 1", "Team 2"};
+       
 
 //        for(int i = 0; i < list.length; i++){
 //            deps[i] = list[i].toString();
@@ -503,10 +521,10 @@ public class NewMemberForm extends AbstractMainForm {
     }
 
     private ITeam getSelectedTeam(String name) {
-        List<ITeam> teamList = teamCtrl.getAll();
-        ITeam selTeam = null;
+        List<IClubTeam> teamList = clubTeamCtrl.getAll();
+        IClubTeam selTeam = null;
 
-        for (ITeam t : teamList) {
+        for (IClubTeam t : teamList) {
             if (t.getName().equals(name)) {
                 selTeam = t;
             }
