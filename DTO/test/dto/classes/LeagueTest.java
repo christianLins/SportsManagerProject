@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package sportsclubmanager.dto.classes;
+package dto.classes;
 
 import dto.classes.League;
 import java.util.*;
