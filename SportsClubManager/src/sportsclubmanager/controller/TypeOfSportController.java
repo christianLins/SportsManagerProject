@@ -119,7 +119,11 @@ public class TypeOfSportController
         LinkedList<sportsclubmanager.domain.contract.IPlayer> list = new LinkedList<>();
         for (Integer id : value.getPlayerList())
         {
+<<<<<<< HEAD
             list.add(new PlayerController().getDomainById(id));
+=======
+            list.add(new PlayerController().getDomainByID(id));
+>>>>>>> fummeln x2
         }
         typeofsport.setPlayerList(list);
 
