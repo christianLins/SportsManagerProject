@@ -2,23 +2,23 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.controller;
+package dto.mapper;
 
-import java.util.*;
-import java.util.logging.*;
 import domain.*;
 import dto.classes.Country;
 import dto.contract.ICountry;
-import dto.controller.contract.*;
+import dto.mapper.contract.*;
+import java.util.*;
+import java.util.logging.*;
 
 /**
 
  @author Thomas
  */
-public class CountryController
-        implements IController<ICountry>
+public class CountryMapper
+        implements IMapper<ICountry>
 {
-    private static CountryController controller;
+    private static CountryMapper controller;
 
      domain.contract.ICountry getDomainById(int id)
             throws IdNotFoundException
@@ -34,15 +34,15 @@ public class CountryController
         throw new IdNotFoundException();
     }
 
-    public CountryController()
+    public CountryMapper()
     {
     }
 
-    public static IController<ICountry> getInstance()
+    public static IMapper<ICountry> getInstance()
     {
         if (controller == null)
         {
-            controller = new CountryController();
+            controller = new CountryMapper();
         }
 
         return controller;
@@ -87,7 +87,7 @@ public class CountryController
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
-            Logger.getLogger(CountryController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CountryMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return 0;
@@ -104,7 +104,7 @@ public class CountryController
         }
         catch (IdNotFoundException | CouldNotDeleteException ex)
         {
-            Logger.getLogger(CountryController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CountryMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -2,33 +2,32 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.controller;
+package dto.mapper;
 
-import java.util.*;
-import java.util.logging.*;
 import domain.*;
 import dto.classes.Address;
 import dto.contract.IAddress;
-import dto.controller.contract.*;
+import dto.mapper.contract.*;
+import java.util.*;
+import java.util.logging.*;
 
 /**
-
  @author Thomas
  */
-public class AddressController
-        implements IController<IAddress>
+public class AddressMapper
+        implements IMapper<IAddress>
 {
-    private static AddressController controller;
+    private static AddressMapper controller;
 
-    AddressController()
+    AddressMapper()
     {
     }
 
-    public static IController<IAddress> getInstance()
+    public static IMapper<IAddress> getInstance()
     {
         if (controller == null)
         {
-            controller = new AddressController();
+            controller = new AddressMapper();
         }
 
         return controller;
@@ -87,7 +86,7 @@ public class AddressController
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
-            Logger.getLogger(AddressController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddressMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return 0;
@@ -104,7 +103,7 @@ public class AddressController
         }
         catch (IdNotFoundException | CouldNotDeleteException ex)
         {
-            Logger.getLogger(AddressController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddressMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -113,7 +112,7 @@ public class AddressController
     {
         domain.classes.Address address = new domain.classes.Address(value.getId());
 
-        address.setCountry(new CountryController().getDomainById(value.getCountry()));
+        address.setCountry(new CountryMapper().getDomainById(value.getCountry()));
         address.setPostalCode(value.getPostalCode());
         address.setStreet(value.getStreet());
         address.setStreetNumber(value.getStreetNumber());

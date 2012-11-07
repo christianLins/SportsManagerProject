@@ -2,33 +2,33 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.controller;
+package dto.mapper;
 
 import java.util.*;
 import java.util.logging.*;
 import domain.*;
 import dto.classes.ClubTeam;
 import dto.contract.IClubTeam;
-import dto.controller.contract.*;
+import dto.mapper.contract.*;
 
 /**
 
  @author Thomas
  */
-public class ClubTeamController
-        implements IController<IClubTeam>
+public class ClubTeamMapper
+        implements IMapper<IClubTeam>
 {
-    private static ClubTeamController controller;
+    private static ClubTeamMapper controller;
 
-    ClubTeamController()
+    ClubTeamMapper()
     {
     }
 
-    public static IController<IClubTeam> getInstance()
+    public static IMapper<IClubTeam> getInstance()
     {
         if (controller == null)
         {
-            controller = new ClubTeamController();
+            controller = new ClubTeamMapper();
         }
 
         return controller;
@@ -84,7 +84,7 @@ public class ClubTeamController
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
-            Logger.getLogger(ClubTeamController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClubTeamMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return 0;
@@ -101,7 +101,7 @@ public class ClubTeamController
         }
         catch (IdNotFoundException | CouldNotDeleteException ex)
         {
-            Logger.getLogger(ClubTeamController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClubTeamMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -115,17 +115,17 @@ public class ClubTeamController
 
         for (int d : value.getDepartmentList())
         {
-            departmentList.add(new DepartmentController().getDomainById(d));
+            departmentList.add(new DepartmentMapper().getDomainById(d));
         }
 
         for (int d : value.getPlayerList())
         {
-            teamhasPlayerList.add(new PlayerController().getDomainById(d));
+            teamhasPlayerList.add(new PlayerMapper().getDomainById(d));
         }
 
         for (int d : value.getTrainerList())
         {
-            trainerList.add(new TrainerController().getDomainById(d));
+            trainerList.add(new TrainerMapper().getDomainById(d));
         }
 
         clubTeam.setDepartmentList(departmentList);

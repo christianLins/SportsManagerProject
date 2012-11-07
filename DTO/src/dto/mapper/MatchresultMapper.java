@@ -2,33 +2,33 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.controller;
+package dto.mapper;
 
 import java.util.*;
 import java.util.logging.*;
 import domain.*;
 import dto.classes.Matchresult;
 import dto.contract.IMatchresult;
-import dto.controller.contract.*;
+import dto.mapper.contract.*;
 
 /**
 
  @author Thomas
  */
- public class MatchresultController
-        implements IController<IMatchresult>
+ public class MatchresultMapper
+        implements IMapper<IMatchresult>
 {
-    private static MatchresultController controller;
+    private static MatchresultMapper controller;
 
-     MatchresultController()
+     MatchresultMapper()
     {
     }
 
-    public static IController<IMatchresult> getInstance()
+    public static IMapper<IMatchresult> getInstance()
     {
         if (controller == null)
         {
-            controller = new MatchresultController();
+            controller = new MatchresultMapper();
         }
 
         return controller;
@@ -87,7 +87,7 @@ import dto.controller.contract.*;
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
-            Logger.getLogger(MatchresultController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MatchresultMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return 0;
@@ -104,7 +104,7 @@ import dto.controller.contract.*;
         }
         catch (IdNotFoundException | CouldNotDeleteException ex)
         {
-            Logger.getLogger(MatchresultController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MatchresultMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

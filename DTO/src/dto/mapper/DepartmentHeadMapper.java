@@ -2,33 +2,33 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.controller;
+package dto.mapper;
 
 import java.util.*;
 import java.util.logging.*;
 import domain.*;
 import dto.classes.DepartmentHead;
 import dto.contract.IDepartmentHead;
-import dto.controller.contract.*;
+import dto.mapper.contract.*;
 
 /**
 
  @author Thomas
  */
- public class DepartmentHeadController
-        implements IController<IDepartmentHead>
+ public class DepartmentHeadMapper
+        implements IMapper<IDepartmentHead>
 {
-    private static DepartmentHeadController controller;
+    private static DepartmentHeadMapper controller;
 
-     DepartmentHeadController()
+     DepartmentHeadMapper()
     {
     }
 
-    public static IController<IDepartmentHead> getInstance()
+    public static IMapper<IDepartmentHead> getInstance()
     {
         if (controller == null)
         {
-            controller = new DepartmentHeadController();
+            controller = new DepartmentHeadMapper();
         }
 
         return controller;
@@ -87,7 +87,7 @@ import dto.controller.contract.*;
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
-            Logger.getLogger(DepartmentHeadController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DepartmentHeadMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return 0;
@@ -104,7 +104,7 @@ import dto.controller.contract.*;
         }
         catch (IdNotFoundException | CouldNotDeleteException ex)
         {
-            Logger.getLogger(DepartmentHeadController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DepartmentHeadMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -118,12 +118,12 @@ import dto.controller.contract.*;
 
         for (int i : value.getDepartmentList())
         {
-            departmentList.add(new DepartmentController().getDomainById(i));
+            departmentList.add(new DepartmentMapper().getDomainById(i));
         }
 
         for (int i : value.getPermisssionList())
         {
-            permissionList.add(new PermissionController().getDomainById(i));
+            permissionList.add(new PermissionMapper().getDomainById(i));
         }
 
         departmentHead.setDepartmentList(departmentList);

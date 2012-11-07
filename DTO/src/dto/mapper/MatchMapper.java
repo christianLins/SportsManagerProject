@@ -2,33 +2,33 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.controller;
+package dto.mapper;
 
 import java.util.*;
 import java.util.logging.*;
 import domain.*;
 import dto.classes.Match;
 import dto.contract.IMatch;
-import dto.controller.contract.*;
+import dto.mapper.contract.*;
 
 /**
 
  @author Thomas
  */
- public class MatchController
-        implements IController<IMatch>
+ public class MatchMapper
+        implements IMapper<IMatch>
 {
-    private static MatchController controller;
+    private static MatchMapper controller;
 
-     MatchController()
+     MatchMapper()
     {
     }
 
-    public static IController<IMatch> getInstance()
+    public static IMapper<IMatch> getInstance()
     {
         if (controller == null)
         {
-            controller = new MatchController();
+            controller = new MatchMapper();
         }
 
         return controller;
@@ -84,7 +84,7 @@ import dto.controller.contract.*;
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
-            Logger.getLogger(MatchController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MatchMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return 0;
@@ -101,7 +101,7 @@ import dto.controller.contract.*;
         }
         catch (IdNotFoundException | CouldNotDeleteException ex)
         {
-            Logger.getLogger(MatchController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MatchMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -110,13 +110,13 @@ import dto.controller.contract.*;
     {
         domain.classes.Match match = new domain.classes.Match(value.getId());
 
-        match.setCompetition(new CompetitionController().getDomainById(value.getCompetition()));
+        match.setCompetition(new CompetitionMapper().getDomainById(value.getCompetition()));
         match.setDateFrom(value.getDateFrom());
         match.setDateTo(value.getDateTo());
 
-        match.setForeignteam(new TeamController().getDomainById(value.getForeignteam()));
-        match.setHometeam(new TeamController().getDomainById(value.getHometeam()));
-        match.setMatchresult(new MatchresultController().getDomainById(value.getMatchresult()));
+        match.setForeignteam(new TeamMapper().getDomainById(value.getForeignteam()));
+        match.setHometeam(new TeamMapper().getDomainById(value.getHometeam()));
+        match.setMatchresult(new MatchresultMapper().getDomainById(value.getMatchresult()));
 
         return match;
     }

@@ -2,33 +2,33 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.controller;
+package dto.mapper;
 
-import java.util.*;
-import java.util.logging.*;
 import domain.*;
 import dto.classes.Competition;
 import dto.contract.ICompetition;
-import dto.controller.contract.*;
+import dto.mapper.contract.*;
+import java.util.*;
+import java.util.logging.*;
 
 /**
 
  @author Lins Christian (christian.lins87@gmail.com)
  */
- public class CompetitionController
-        implements IController<ICompetition>
+ public class CompetitionMapper
+        implements IMapper<ICompetition>
 {
-    private static CompetitionController controller;
+    private static CompetitionMapper controller;
 
-     CompetitionController()
+     CompetitionMapper()
     {
     }
 
-    public static IController<ICompetition> getInstance()
+    public static IMapper<ICompetition> getInstance()
     {
         if (controller == null)
         {
-            controller = new CompetitionController();
+            controller = new CompetitionMapper();
         }
 
         return controller;
@@ -84,7 +84,7 @@ import dto.controller.contract.*;
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
-            Logger.getLogger(CompetitionController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CompetitionMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return 0;
@@ -101,7 +101,7 @@ import dto.controller.contract.*;
         }
         catch (IdNotFoundException | CouldNotDeleteException ex)
         {
-            Logger.getLogger(CompetitionController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CompetitionMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -119,12 +119,12 @@ import dto.controller.contract.*;
 
         for (int i : value.getMatchList())
         {
-            matchList.add(new MatchController().getDomainById(i));
+            matchList.add(new MatchMapper().getDomainById(i));
         }
 
         for (int i : value.getTeamList())
         {
-            teamList.add(new TeamController().getDomainById(i));
+            teamList.add(new TeamMapper().getDomainById(i));
         }
 
         competition.setMatchList(matchList);

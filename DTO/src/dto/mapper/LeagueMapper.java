@@ -2,12 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.controller;
+package dto.mapper;
 
-import dto.controller.contract.IdNotFoundException;
+import dto.mapper.contract.IdNotFoundException;
 import java.util.*;
 import java.util.logging.*;
-import dto.controller.contract.IController;
+import dto.mapper.contract.IMapper;
 import domain.*;
 import dto.classes.*;
 import dto.contract.*;
@@ -16,20 +16,20 @@ import dto.contract.*;
 
  @author Thomas
  */
-public class LeagueController
-        implements IController<ILeague>
+public class LeagueMapper
+        implements IMapper<ILeague>
 {
-    private static LeagueController controller;
+    private static LeagueMapper controller;
 
-     LeagueController()
+     LeagueMapper()
     {
     }
 
-    public static IController<ILeague> getInstance()
+    public static IMapper<ILeague> getInstance()
     {
         if (controller == null)
         {
-            controller = new LeagueController();
+            controller = new LeagueMapper();
         }
 
         return controller;
@@ -85,7 +85,7 @@ public class LeagueController
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
-            Logger.getLogger(LeagueController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LeagueMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return 0;
@@ -102,7 +102,7 @@ public class LeagueController
         }
         catch (IdNotFoundException | CouldNotDeleteException ex)
         {
-            Logger.getLogger(LeagueController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LeagueMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -118,7 +118,7 @@ public class LeagueController
 
         for (int i : value.getTeamList())
         {
-            teamList.add(new TeamController().getDomainById(i));
+            teamList.add(new TeamMapper().getDomainById(i));
         }
 
         league.setTeamList(teamList);

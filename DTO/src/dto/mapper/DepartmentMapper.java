@@ -2,33 +2,33 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.controller;
+package dto.mapper;
 
 import java.util.*;
 import java.util.logging.*;
 import domain.*;
 import dto.classes.Department;
 import dto.contract.IDepartment;
-import dto.controller.contract.*;
+import dto.mapper.contract.*;
 
 /**
 
  @author Thomas
  */
-public class DepartmentController
-        implements IController<IDepartment>
+public class DepartmentMapper
+        implements IMapper<IDepartment>
 {
-    private static DepartmentController controller;
+    private static DepartmentMapper controller;
 
-     DepartmentController()
+     DepartmentMapper()
     {
     }
 
-    public static IController<IDepartment> getInstance()
+    public static IMapper<IDepartment> getInstance()
     {
         if (controller == null)
         {
-            controller = new DepartmentController();
+            controller = new DepartmentMapper();
         }
 
         return controller;
@@ -84,7 +84,7 @@ public class DepartmentController
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
-            Logger.getLogger(DepartmentController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DepartmentMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return 0;
@@ -101,7 +101,7 @@ public class DepartmentController
         }
         catch (IdNotFoundException | CouldNotDeleteException ex)
         {
-            Logger.getLogger(DepartmentController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DepartmentMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -110,7 +110,7 @@ public class DepartmentController
     {
         domain.classes.Department department = new domain.classes.Department(value.getId());
 
-        department.setDepartmentHead(new DepartmentHeadController().getDomainById(value.getDepartmentHead()));
+        department.setDepartmentHead(new DepartmentHeadMapper().getDomainById(value.getDepartmentHead()));
         department.setDescription(value.getDescription());
         department.setName(value.getName());
 
@@ -119,12 +119,12 @@ public class DepartmentController
 
         for (int i : value.getClubTeamList())
         {
-            clubTeamList.add(new ClubTeamController().getDomainById(i));
+            clubTeamList.add(new ClubTeamMapper().getDomainById(i));
         }
 
         for (int i : value.getTypeOfSportList())
         {
-            departmenthasTypeOfSportList.add(new TypeOfSportController().getDomainById(i));
+            departmenthasTypeOfSportList.add(new TypeOfSportMapper().getDomainById(i));
         }
 
         department.setClubTeamList(clubTeamList);
