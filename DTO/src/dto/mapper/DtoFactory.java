@@ -2,11 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.controller;
+package dto.mapper;
 
-import java.rmi.*;
 import dto.contract.*;
-import dto.controller.contract.*;
+import dto.mapper.contract.IMapper;
+import java.rmi.RemoteException;
 
 /**
 
@@ -14,105 +14,105 @@ import dto.controller.contract.*;
  */
 public class DtoFactory
 {
-    public static IController<IMember> getMemberController()
+    public static IMapper<IMember> getMemberMapper()
             throws RemoteException
     {
-        return MemberController.getInstance();
+        return MemberMapper.getInstance();
     }
 
-    public static IController<ICompetition> getCompetitionController()
+    public static IMapper<ICompetition> getCompetitionMapper()
             throws RemoteException
     {
-        return CompetitionController.getInstance();
+        return CompetitionMapper.getInstance();
     }
 
-    public static IController<ICompetition> getCompetitionManager()
+    public static IMapper<ICompetition> getCompetitionManager()
             throws RemoteException
     {
-        return CompetitionController.getInstance();
+        return CompetitionMapper.getInstance();
     }
 
-    public static IController<IMember> getMemberManager()
+    public static IMapper<IMember> getMemberManager()
             throws RemoteException
     {
-        return MemberController.getInstance();
+        return MemberMapper.getInstance();
     }
 
-    public static IController<IAddress> getAddressManager()
+    public static IMapper<IAddress> getAddressManager()
             throws RemoteException
     {
-        return AddressController.getInstance();
+        return AddressMapper.getInstance();
     }
 
-    public static IController<IClubTeam> getClubTeamManager()
+    public static IMapper<IClubTeam> getClubTeamManager()
             throws RemoteException
     {
-        return ClubTeamController.getInstance();
+        return ClubTeamMapper.getInstance();
     }
 
-    public static IController<ICountry> getCountryManager()
+    public static IMapper<ICountry> getCountryManager()
             throws RemoteException
     {
-        return CountryController.getInstance();
+        return CountryMapper.getInstance();
     }
 
-    public static IController<IDepartment> getDepartmentManager()
+    public static IMapper<IDepartment> getDepartmentManager()
             throws RemoteException
     {
-        return DepartmentController.getInstance();
+        return DepartmentMapper.getInstance();
     }
 
-    public static IController<ITeam> getTeamManager()
+    public static IMapper<ITeam> getTeamManager()
             throws RemoteException
     {
-        return TeamController.getInstance();
+        return TeamMapper.getInstance();
     }
 
-    public static IController<ITypeOfSport> getTypeOfSportManager()
+    public static IMapper<ITypeOfSport> getTypeOfSportManager()
             throws RemoteException
     {
-        return TypeOfSportController.getInstance();
+        return TypeOfSportMapper.getInstance();
     }
 
-    public static IController<ITrainer> getTrainerManager()
+    public static IMapper<ITrainer> getTrainerManager()
             throws RemoteException
     {
-        return TrainerController.getInstance();
+        return TrainerMapper.getInstance();
     }
 
-    public static IController<IDepartmentHead> getDepartmentHeadManager()
+    public static IMapper<IDepartmentHead> getDepartmentHeadManager()
             throws RemoteException
     {
-        return DepartmentHeadController.getInstance();
+        return DepartmentHeadMapper.getInstance();
     }
 
-    public static IController<ILeague> getLeagueManager()
+    public static IMapper<ILeague> getLeagueManager()
             throws RemoteException
     {
-        return LeagueController.getInstance();
+        return LeagueMapper.getInstance();
     }
 
-    public static IController<IPermission> getPermissionManager()
+    public static IMapper<IPermission> getPermissionManager()
             throws RemoteException
     {
-        return PermissionController.getInstance();
+        return PermissionMapper.getInstance();
     }
 
-    public static IController<IPlayer> getPlayerManager()
+    public static IMapper<IPlayer> getPlayerManager()
             throws RemoteException
     {
-        return PlayerController.getInstance();
+        return PlayerMapper.getInstance();
     }
 
-    public static IController<IMatchresult> getMatchresultManager()
+    public static IMapper<IMatchresult> getMatchresultManager()
             throws RemoteException
     {
-        return MatchresultController.getInstance();
+        return MatchresultMapper.getInstance();
     }
 
-    public static IController<IMatch> getMatchManager()
+    public static IMapper<IMatch> getMatchManager()
             throws RemoteException
     {
-        return MatchController.getInstance();
+        return MatchMapper.getInstance();
     }
 }
