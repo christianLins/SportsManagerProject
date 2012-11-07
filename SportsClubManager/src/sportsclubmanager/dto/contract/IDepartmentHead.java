@@ -11,7 +11,7 @@ import java.util.List;
  @author Thomas
  */
 public interface IDepartmentHead
-        extends IDto
+        extends IDto, IRole
 {
     List<Integer> getDepartmentList();
 

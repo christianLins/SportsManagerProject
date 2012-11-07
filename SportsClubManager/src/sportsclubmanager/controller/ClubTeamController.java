@@ -74,39 +74,64 @@ public class ClubTeamController
     }
 
     @Override
-    public void set(IClubTeam value)
+    public Integer set(IClubTeam value)
     {
         try
         {
-            sportsclubmanager.domain.classes.ClubTeam clubTeam = new sportsclubmanager.domain.classes.ClubTeam();
+            sportsclubmanager.domain.classes.ClubTeam clubTeam = createDomain(value);
 
-            List<sportsclubmanager.domain.contract.IDepartment> departmentList = new LinkedList<>();
-            for (int i : value.getDepartmentList())
-            {
-                departmentList.add(new DepartmentController().getDomainById(i));
-            }
-
-            List<sportsclubmanager.domain.contract.IPlayer> teamhasPlayerList = new LinkedList<>();
-            for (int i : value.getPlayerList())
-            {
-                teamhasPlayerList.add(new PlayerController().getDomainById(i));
-            }
-
-            List<sportsclubmanager.domain.contract.ITrainer> trainerList = new LinkedList<>();
-            for (int i : value.getTrainerList())
-            {
-                trainerList.add(new TrainerController().getDomainById(i));
-            }
-
-            clubTeam.setDepartmentList(departmentList);
-            clubTeam.setPlayerList(teamhasPlayerList);
-            clubTeam.setTrainerList(trainerList);
-
-            DomainFacade.set(clubTeam);
+            return DomainFacade.set(clubTeam);
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
-            Logger.getLogger(AddressController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClubTeamController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        return 0;
+    }
+
+    @Override
+    public void delete(IClubTeam value)
+    {
+        try
+        {
+            sportsclubmanager.domain.classes.ClubTeam clubTeam = createDomain(value);
+
+            DomainFacade.delete(clubTeam);
+        }
+        catch (IdNotFoundException | CouldNotDeleteException ex)
+        {
+            Logger.getLogger(ClubTeamController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private sportsclubmanager.domain.classes.ClubTeam createDomain(IClubTeam value)
+            throws IdNotFoundException
+    {
+        sportsclubmanager.domain.classes.ClubTeam clubTeam = new sportsclubmanager.domain.classes.ClubTeam(value.getId());
+        List<sportsclubmanager.domain.contract.IDepartment> departmentList = new LinkedList<>();
+        List<sportsclubmanager.domain.contract.IPlayer> teamhasPlayerList = new LinkedList<>();
+        List<sportsclubmanager.domain.contract.ITrainer> trainerList = new LinkedList<>();
+
+        for (int d : value.getDepartmentList())
+        {
+            departmentList.add(new DepartmentController().getDomainById(d));
+        }
+
+        for (int d : value.getPlayerList())
+        {
+            teamhasPlayerList.add(new PlayerController().getDomainById(d));
+        }
+
+        for (int d : value.getTrainerList())
+        {
+            trainerList.add(new TrainerController().getDomainById(d));
+        }
+
+        clubTeam.setDepartmentList(departmentList);
+        clubTeam.setPlayerList(teamhasPlayerList);
+        clubTeam.setTrainerList(trainerList);
+
+        return clubTeam;
     }
 }

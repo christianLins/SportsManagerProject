@@ -25,6 +25,11 @@ public class DepartmentHead
     {
     }
 
+    public DepartmentHead(int id)
+    {
+        super(id);
+    }
+
     @XmlTransient
     @Override
     public List<IDepartment> getDepartmentList()

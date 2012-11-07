@@ -5,6 +5,7 @@
 package sportsclubmanager.controller;
 
 import java.util.*;
+import java.util.logging.*;
 import sportsclubmanager.controller.contract.IController;
 import sportsclubmanager.domain.*;
 import sportsclubmanager.dto.classes.*;
@@ -19,7 +20,7 @@ public class DepartmentHeadController
 {
     private static DepartmentHeadController controller;
 
-    private DepartmentHeadController()
+    public DepartmentHeadController()
     {
     }
 
@@ -33,8 +34,23 @@ public class DepartmentHeadController
         return controller;
     }
 
+    public sportsclubmanager.domain.contract.IDepartmentHead getDomainById(Integer id)
+            throws IdNotFoundException
+    {
+        for (sportsclubmanager.domain.contract.IDepartmentHead a : DomainFacade.getAll(sportsclubmanager.domain.contract.IDepartmentHead.class))
+        {
+            if (a.getId() == id)
+            {
+                return a;
+            }
+        }
+
+        throw new IdNotFoundException();
+    }
+
     @Override
-    public IDepartmentHead getById(Integer id)throws IdNotFoundException
+    public IDepartmentHead getById(Integer id)
+            throws IdNotFoundException
     {
         for (sportsclubmanager.domain.contract.IDepartmentHead a : DomainFacade.getAll(sportsclubmanager.domain.contract.IDepartmentHead.class))
         {
@@ -43,7 +59,7 @@ public class DepartmentHeadController
                 return DepartmentHead.copy(a);
             }
         }
-        
+
         throw new IdNotFoundException();
     }
 
@@ -61,8 +77,58 @@ public class DepartmentHeadController
     }
 
     @Override
-    public void set(IDepartmentHead value)
+    public Integer set(IDepartmentHead value)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try
+        {
+            sportsclubmanager.domain.classes.DepartmentHead departmentHead = createDomain(value);
+
+            return DomainFacade.set(departmentHead);
+        }
+        catch (IdNotFoundException | CouldNotSaveException ex)
+        {
+            Logger.getLogger(DepartmentHeadController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return 0;
+    }
+
+    @Override
+    public void delete(IDepartmentHead value)
+    {
+        try
+        {
+            sportsclubmanager.domain.classes.DepartmentHead departmentHead = createDomain(value);
+
+            DomainFacade.delete(departmentHead);
+        }
+        catch (IdNotFoundException | CouldNotDeleteException ex)
+        {
+            Logger.getLogger(DepartmentHeadController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private sportsclubmanager.domain.classes.DepartmentHead createDomain(IDepartmentHead value)
+            throws IdNotFoundException
+    {
+        sportsclubmanager.domain.classes.DepartmentHead departmentHead = new sportsclubmanager.domain.classes.DepartmentHead(value.getId());
+
+        List< sportsclubmanager.domain.contract.IDepartment> departmentList = new LinkedList<>();
+        List<sportsclubmanager.domain.contract.IPermission> permissionList = new LinkedList<>();
+
+        for (int i : value.getDepartmentList())
+        {
+            departmentList.add(new DepartmentController().getDomainById(i));
+        }
+
+        for (int i : value.getPermisssionList())
+        {
+            permissionList.add(new PermissionController().getDomainById(i));
+        }
+
+        departmentHead.setDepartmentList(departmentList);
+        departmentHead.setPermisssionList(permissionList);
+
+        return departmentHead;
     }
 }

@@ -77,7 +77,52 @@ public class CountryController
     }
 
     @Override
-    public void set(ICountry value)
+    public Integer set(ICountry value)
     {
+        try
+        {
+            sportsclubmanager.domain.classes.Country country = createDomain(value);
+
+            return DomainFacade.set(country);
+        }
+        catch (IdNotFoundException | CouldNotSaveException ex)
+        {
+            Logger.getLogger(CountryController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return 0;
+    }
+
+    @Override
+    public void delete(ICountry value)
+    {
+        try
+        {
+            sportsclubmanager.domain.classes.Country country = createDomain(value);
+
+            DomainFacade.delete(country);
+        }
+        catch (IdNotFoundException | CouldNotDeleteException ex)
+        {
+            Logger.getLogger(CountryController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private sportsclubmanager.domain.classes.Country createDomain(ICountry value)
+            throws IdNotFoundException
+    {
+        sportsclubmanager.domain.classes.Country country = new sportsclubmanager.domain.classes.Country(value.getId());
+
+        country.setAlpha2(value.getAlpha2());
+        country.setAlpha3(value.getAlpha3());
+        country.setDeutsch(value.getDeutsch());
+        country.setEspanol(value.getEspanol());
+        country.setFrancaise(value.getFrancaise());
+        country.setItaliano(value.getItaliano());
+        country.setName(value.getName());
+        country.setPortugues(value.getPortugues());
+        country.setTld(value.getTld());
+
+        return country;
     }
 }
