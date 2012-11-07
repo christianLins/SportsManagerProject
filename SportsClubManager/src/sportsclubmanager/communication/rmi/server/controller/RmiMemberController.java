@@ -7,8 +7,8 @@ package sportsclubmanager.communication.rmi.server.controller;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
-import sportsclubmanager.controller.MemberController;
-import sportsclubmanager.controller.contract.IdNotFoundException;
+import sportsclubmanager.dto.controller.MemberController;
+import sportsclubmanager.dto.controller.contract.IdNotFoundException;
 import sportsclubmanager.domain.contract.IMember;
 
 /**

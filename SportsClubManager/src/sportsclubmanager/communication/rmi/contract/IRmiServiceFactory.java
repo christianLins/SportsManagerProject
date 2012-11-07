@@ -5,7 +5,7 @@
 package sportsclubmanager.communication.rmi.contract;
 
 import java.rmi.*;
-import sportsclubmanager.controller.contract.IController;
+import sportsclubmanager.dto.controller.contract.IController;
 import sportsclubmanager.dto.contract.*;
 
 /**

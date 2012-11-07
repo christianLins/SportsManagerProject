@@ -7,13 +7,10 @@ package sportsclubmanager.communication.rmi.server;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import sportsclubmanager.communication.rmi.contract.IRmiServiceFactory;
-import sportsclubmanager.communication.rmi.server.controller.IRmiCompetitionController;
-import sportsclubmanager.communication.rmi.server.controller.IRmiMemberController;
-import sportsclubmanager.communication.rmi.server.controller.RmiCompetitionController;
-import sportsclubmanager.communication.rmi.server.controller.RmiMemberController;
-import sportsclubmanager.controller.*;
-import sportsclubmanager.controller.contract.IController;
+import sportsclubmanager.communication.rmi.server.controller.*;
 import sportsclubmanager.dto.contract.*;
+import sportsclubmanager.dto.controller.*;
+import sportsclubmanager.dto.controller.contract.IController;
 
 /**
  @author Lins Christian (christian.lins87@gmail.com)
