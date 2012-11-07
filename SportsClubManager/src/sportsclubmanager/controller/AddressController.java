@@ -8,7 +8,6 @@ import java.util.*;
 import java.util.logging.*;
 import sportsclubmanager.controller.contract.IController;
 import sportsclubmanager.domain.*;
-import sportsclubmanager.domain.contract.*;
 import sportsclubmanager.dto.classes.*;
 import sportsclubmanager.dto.contract.IAddress;
 
@@ -64,23 +63,48 @@ public class AddressController
     }
 
     @Override
-    public void set(IAddress value)
+    public Integer set(IAddress value)
     {
         try
         {
-            sportsclubmanager.domain.classes.Address address = new sportsclubmanager.domain.classes.Address(value.getId());
+            sportsclubmanager.domain.classes.Address address = createDomain(value);
 
-            address.setCountry(CountryController.getDomainById(value.getCountry()));
-            address.setPostalCode(value.getPostalCode());
-            address.setStreet(value.getStreet());
-            address.setStreetNumber(value.getStreetNumber());
-            address.setVillage(value.getVillage());
-
-            DomainFacade.set(address);
+            return DomainFacade.set(address);
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
             Logger.getLogger(AddressController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        return 0;
+    }
+
+    @Override
+    public void delete(IAddress value)
+    {
+        try
+        {
+            sportsclubmanager.domain.classes.Address address = createDomain(value);
+
+            DomainFacade.delete(address);
+        }
+        catch (IdNotFoundException | CouldNotDeleteException ex)
+        {
+            Logger.getLogger(AddressController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private sportsclubmanager.domain.classes.Address createDomain(IAddress value)
+            throws IdNotFoundException
+    {
+        sportsclubmanager.domain.classes.Address address = new sportsclubmanager.domain.classes.Address(value.getId());
+
+        address.setCountry(CountryController.getDomainById(value.getCountry()));
+        address.setPostalCode(value.getPostalCode());
+        address.setStreet(value.getStreet());
+        address.setStreetNumber(value.getStreetNumber());
+        address.setVillage(value.getVillage());
+
+        return address;
     }
 }
