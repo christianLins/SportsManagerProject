@@ -131,16 +131,13 @@ public class TrainerController
         trainer.setClubTeamList(teams);
 
         LinkedList<sportsclubmanager.domain.contract.IPermission> p = new LinkedList<>();
-<<<<<<< HEAD
 
-=======
-        for(int id : permisssions)
+        for (int id : permisssions)
         {
             p.add(new PermissionController().getDomainById(id));
         }
         trainer.setPermisssionList(p);
-        
->>>>>>> fummeln x2
+
         return trainer;
     }
 }
