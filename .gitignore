@@ -1,75 +1,73 @@
-/PipesAndFilters/nbproject/private/
-/PipesAndFilters/nbproject/project.properties
-/PipesAndFilters/build.xml
-/PipesAndFilters/dist/
-/PipesAndFilters/build/
-/PipesAndFilters/.gitignore
-/PipesAndFilters/nbproject/build-impl.xml
+PipesAndFilters/nbproject/private/
+PipesAndFilters/nbproject/project.properties
+PipesAndFilters/build.xml
+PipesAndFilters/dist/
+PipesAndFilters/build/
+PipesAndFilters/.gitignore
+PipesAndFilters/nbproject/build-impl.xml
 
-SportsClubManager/build/built-jar.properties
+DTO/nbproject/private/
+DTO/nbproject/private/private.properties
+DTO/dist/
+DTO/build/
+DTO/.gitignore
+DTO/nbproject/build-impl.xml
 
-/DTO/nbproject/private/
-/DTO/nbproject/private/private.properties
-/DTO/dist/
-/DTO/build/
-/DTO/.gitignore
-/DTO/nbproject/build-impl.xml
+CommunicationContract/nbproject/private/
+CommunicationContract/nbproject/private/private.properties
+CommunicationContract/dist/
+CommunicationContract/build/
+CommunicationContract/.gitignore
+CommunicationContract/nbproject/build-impl.xml
 
-/CommunicationContract/nbproject/private/
-/CommunicationContract/nbproject/private/private.properties
-/CommunicationContract/dist/
-/CommunicationContract/build/
-/CommunicationContract/.gitignore
-/CommunicationContract/nbproject/build-impl.xml
+DomainCore/nbproject/private/
+DomainCore/nbproject/private/private.properties
+DomainCore/dist/
+DomainCore/build/
+DomainCore/.gitignore
+DomainCore/nbproject/build-impl.xml
 
-/DomainCore/nbproject/private/
-/DomainCore/nbproject/private/private.properties
-/DomainCore/dist/
-/DomainCore/build/
-/DomainCore/.gitignore
-/DomainCore/nbproject/build-impl.xml
+Presentation/nbproject/private/
+Presentation/nbproject/private/private.properties
+Presentation/dist/
+Presentation/build/
+Presentation/.gitignore
+Presentation/nbproject/build-impl.xml
 
-/Presentation/nbproject/private/
-/Presentation/nbproject/private/private.properties
-/Presentation/dist/
-/Presentation/build/
-/Presentation/.gitignore
-/Presentation/nbproject/build-impl.xml
+RmiClient/nbproject/private/
+RmiClient/nbproject/private/private.properties
+RmiClient/dist/
+RmiClient/build/
+RmiClient/.gitignore
+RmiClient/nbproject/build-impl.xml
 
-/RmiClient/nbproject/private/
-/RmiClient/nbproject/private/private.properties
-/RmiClient/dist/
-/RmiClient/build/
-/RmiClient/.gitignore
-/RmiClient/nbproject/build-impl.xml
+RMIContract/nbproject/private/
+RMIContract/nbproject/private/private.properties
+RMIContract/dist/
+RMIContract/build/
+RMIContract/.gitignore
+RMIContract/nbproject/build-impl.xml
 
-/RMIContract/nbproject/private/
-/RMIContract/nbproject/private/private.properties
-/RMIContract/dist/
-/RMIContract/build/
-/RMIContract/.gitignore
-/RMIContract/nbproject/build-impl.xml
+RmiServer/nbproject/private/
+RmiServer/nbproject/private/private.properties
+RmiServer/dist/
+RmiServer/build/
+RmiServer/.gitignore
+RmiServer/nbproject/build-impl.xml
 
-/RmiServer/nbproject/private/
-/RmiServer/nbproject/private/private.properties
-/RmiServer/dist/
-/RmiServer/build/
-/RmiServer/.gitignore
-/RmiServer/nbproject/build-impl.xml
+Security/nbproject/private/
+Security/nbproject/private/private.properties/
+Security/dist/
+Security/build/
+Security/.gitignore
+Security/nbproject/build-impl.xml
 
-/Security/nbproject/private/
-/Security/nbproject/private/private.properties
-/Security/dist/
-/Security/build/
-/Security/.gitignore
-/Security/nbproject/build-impl.xml
-
-/UseCaseController/nbproject/private/
-/UseCaseController/nbproject/private/private.properties
-/UseCaseController/dist/
-/UseCaseController/build/
-/UseCaseController/.gitignore
-/UseCaseController/nbproject/build-impl.xml
+UseCaseController/nbproject/private/
+UseCaseController/nbproject/private/private.properties
+UseCaseController/dist/
+UseCaseController/build/
+UseCaseController/.gitignore
+UseCaseController/nbproject/build-impl.xml
 CommunicationContract/nbproject/private/private.properties
 
 CommunicationContract/nbproject/private/private.xml
@@ -93,3 +91,10 @@ RmiServer/nbproject/private/private.properties
 Security/nbproject/private/private.properties
 
 UseCaseController/nbproject/private/private.properties
+
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
