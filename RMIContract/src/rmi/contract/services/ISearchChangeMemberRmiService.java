@@ -11,7 +11,7 @@ import dto.contract.*;
  *
  * @author Lucia
  */
-public interface ISearchChangeMember {
+public interface ISearchChangeMemberRmiService extends ISearchChangeMember implements Remote{
     
     IMember getMember(String searchMember);
     IRole getRoles(Integer memberId);

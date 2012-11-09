@@ -12,7 +12,7 @@ import contract.ShowMatchObj;
  *
  * @author Lucia
  */
-public interface IShowCompetition {
+public interface IShowCompetitionRmiService extends IShowCompetition implements Remote{
     
     List<ICompetition> getCompetitions();
     List<IMatch> getMatchs(List<Integer> matches);

@@ -7,7 +7,7 @@ import dto.contract.*;
  *
  * @author Lucia
  */
-public interface INewMember {
+public interface INewMemberRmiServices extends INewMember implements Remote{
     
     void setNewMember(IMember member, IAddress address);
 
