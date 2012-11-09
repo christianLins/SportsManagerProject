@@ -1,5 +1,7 @@
 
 import rmi.client.RmiServiceClient;
+import services.ServiceClient;
+
 
 /*
  * To change this template, choose Tools | Templates
@@ -13,9 +15,8 @@ import rmi.client.RmiServiceClient;
 public class ServiceClientFactory
 {
     
-    public static ServiceClient getServiceClient() {
-        new RmiServiceClient();
-        return null;
+    public static  ServiceClient getServiceClient() {
+        return new RmiServiceClient();
     }
     
 }
