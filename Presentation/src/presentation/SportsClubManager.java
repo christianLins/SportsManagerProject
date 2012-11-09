@@ -19,7 +19,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 import rmi.client.CommunicationProblemException;
-import rmi.client.RmiServiceClient;
+import rmi.contract.RmiServiceClient;
 import presentation.basics.AbstractForm;
 import presentation.forms.competition.AddCompetitionResultsForm;
 import presentation.forms.competition.ChangeCompetitionTeam;

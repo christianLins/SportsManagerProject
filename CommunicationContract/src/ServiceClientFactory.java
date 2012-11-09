@@ -1,5 +1,5 @@
 
-import rmi.client.RmiServiceClient;
+import rmi.contract.RmiServiceClient;
 import services.ServiceClient;
 
 

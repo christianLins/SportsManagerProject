@@ -6,12 +6,13 @@ package rmi.contract.services;
 
 import java.util.List;
 import dto.contract.*;
+import java.rmi.Remote;
 
 /**
  *
  * @author Lucia
  */
-public interface IChangeCompetitionTeamRmiService extends IChangeCompetitionTeam implements Remote {
+public interface IChangeCompetitionTeamRmiService extends Remote {
     
     List<ICompetition> getCompetition() ;
     List<IClubTeam> getClubTeams(List<Integer> Teams);
