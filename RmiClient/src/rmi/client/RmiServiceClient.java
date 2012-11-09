@@ -5,7 +5,6 @@
 package rmi.client;
 
 import java.rmi.RemoteException;
-import rmi.contract.IRmiServiceFactory;
 import dto.controller.contract.IController;
 import dto.contract.*;
 

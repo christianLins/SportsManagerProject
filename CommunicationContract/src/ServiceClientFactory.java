@@ -15,7 +15,7 @@ public class ServiceClientFactory
     
     public static ServiceClient getServiceClient() {
         new RmiServiceClient();
-        return nulL;
+        return null;
     }
     
 }
