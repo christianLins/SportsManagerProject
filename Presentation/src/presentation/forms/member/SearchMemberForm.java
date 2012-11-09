@@ -25,10 +25,10 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import rmi.client.CommunicationProblemException;
-import rmi.client.RmiServiceClient;
-import dto.controller.contract.IdNotFoundException;
-import dto.controller.contract.IController;
+//import rmi.client.CommunicationProblemException;
+//import rmi.client.RmiServiceClient;
+import dto.mapper.contract.IdNotFoundException;
+import dto.mapper.contract.IMapper;
 import dto.contract.IDepartment;
 import dto.contract.IDepartmentHead;
 import dto.contract.ICountry;
@@ -96,14 +96,14 @@ public class SearchMemberForm extends AbstractMainForm {
     
     //Controler and contract
     RmiServiceClient rmiClient;    
-    IController<IMember> memberCtrl;
-    IController<IAddress> addressCtrl;
-    IController<ICountry> countryCtrl;
-    IController<IPlayer> playerCtrl;
-    IController<IDepartmentHead> depHeadCtrl;
-    IController<IDepartment> depCtrl;
-    IController<IClubTeam> clubCtrl;
-    IController<ITypeOfSport> tosCtrl;
+    IMapper<IMember> memberCtrl;
+    IMapper<IAddress> addressCtrl;
+    IMapper<ICountry> countryCtrl;
+    IMapper<IPlayer> playerCtrl;
+    IMapper<IDepartmentHead> depHeadCtrl;
+    IMapper<IDepartment> depCtrl;
+    IMapper<IClubTeam> clubCtrl;
+    IMapper<ITypeOfSport> tosCtrl;
     IMember m;
     IAddress address;
     ICountry country;

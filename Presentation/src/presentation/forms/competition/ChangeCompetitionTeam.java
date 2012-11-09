@@ -22,13 +22,11 @@ import javax.swing.JScrollPane;
 import javax.swing.LayoutStyle;
 import javax.swing.ListModel;
 import javax.swing.WindowConstants;
-import dto.controller.contract.IdNotFoundException;
-import dto.controller.contract.IController;
+import dto.mapper.contract.IdNotFoundException;
+import dto.mapper.contract.IMapper;
 import dto.contract.ICompetition;
 import dto.contract.IMember;
 import dto.contract.ITeam;
-import dto.controller.CompetitionController;
-import dto.controller.TeamController;
 import presentation.basics.AbstractForm;
 import presentation.basics.AbstractMainForm;
 
@@ -56,8 +54,8 @@ public class ChangeCompetitionTeam extends AbstractMainForm {
     
     private List<IMember> specialTeam;
     List<ITeam> teamList;
-    private IController<ICompetition> competitionCtrl;
-    private IController<ITeam> teamCtrl;
+    private IMapper<ICompetition> competitionCtrl;
+    private IMapper<ITeam> teamCtrl;
     String[] teamMembers;
     
     // End of variables declaration

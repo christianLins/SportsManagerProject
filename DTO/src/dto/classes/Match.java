@@ -3,10 +3,17 @@ package dto.classes;
 import java.io.Serializable;
 import java.util.*;
 import dto.contract.IMatch;
+import dto.contract.IMatchresult;
+import dto.contract.ITeam;
+import dto.mapper.DtoFactory;
+import dto.mapper.contract.IdNotFoundException;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Match
-        implements Serializable, IMatch
-{
+        implements Serializable, IMatch {
+
     private int id;
     private Date dateFrom;
     private Date dateTo;
@@ -15,32 +22,25 @@ public class Match
     private Integer foreignteam;
     private Integer hometeam;
 
-     Match()
-    {
+    Match() {
     }
 
-     Match(int id)
-    {
+    Match(int id) {
         this.id = id;
     }
 
     @Override
-    public Integer getId()
-    {
+    public Integer getId() {
         return id;
     }
     private static HashMap<domain.contract.IMatch, Match> matchs = new HashMap<>();
 
-    public static Match copy(domain.contract.IMatch match)
-    {
+    public static Match copy(domain.contract.IMatch match) {
         Match a;
 
-        if (matchs.containsKey(match))
-        {
+        if (matchs.containsKey(match)) {
             a = matchs.get(match);
-        }
-        else
-        {
+        } else {
             a = new Match();
 
             a.setDateFrom(match.getDateFrom());
@@ -57,74 +57,91 @@ public class Match
     }
 
     @Override
-    public Date getDateFrom()
-    {
+    public Date getDateFrom() {
         return dateFrom;
     }
 
     @Override
-    public void setDateFrom(Date dateFrom)
-    {
+    public void setDateFrom(Date dateFrom) {
         this.dateFrom = dateFrom;
     }
 
     @Override
-    public Date getDateTo()
-    {
+    public Date getDateTo() {
         return dateTo;
     }
 
     @Override
-    public void setDateTo(Date dateTo)
-    {
+    public void setDateTo(Date dateTo) {
         this.dateTo = dateTo;
     }
 
     @Override
-    public Integer getCompetition()
-    {
+    public Integer getCompetition() {
         return competition;
     }
 
     @Override
-    public void setCompetition(Integer competition)
-    {
+    public void setCompetition(Integer competition) {
         this.competition = competition;
     }
 
     @Override
-    public Integer getMatchresult()
-    {
-        return matchresult;
+    public IMatchresult getMatchresult() {
+        try {
+            try {
+                return DtoFactory.getMatchresultManager().getById(matchresult);
+            } catch (RemoteException ex) {
+                Logger.getLogger(Match.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (IdNotFoundException ex) {
+            Logger.getLogger(Match.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
     }
 
     @Override
-    public void setMatchresult(Integer matchresult)
-    {
+    public void setMatchresult(Integer matchresult) {
         this.matchresult = matchresult;
     }
 
     @Override
-    public Integer getForeignteam()
-    {
-        return foreignteam;
+    public ITeam getForeignteam() {
+        try {
+            try {
+                return DtoFactory.getTeamManager().getById(foreignteam);
+            } catch (IdNotFoundException ex) {
+                Logger.getLogger(Match.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(Match.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
     }
 
     @Override
-    public void setForeignteam(Integer foreignteam)
-    {
+    public void setForeignteam(Integer foreignteam) {
         this.foreignteam = foreignteam;
     }
 
     @Override
-    public Integer getHometeam()
-    {
-        return hometeam;
+    public ITeam getHometeam() {
+        try {
+            try {
+                return DtoFactory.getTeamManager().getById(hometeam);
+            } catch (IdNotFoundException ex) {
+                Logger.getLogger(Match.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(Match.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
-    public void setHometeam(Integer hometeam)
-    {
+    public void setHometeam(Integer hometeam) {
         this.hometeam = hometeam;
     }
 }

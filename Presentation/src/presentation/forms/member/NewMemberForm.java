@@ -1,7 +1,7 @@
 package presentation.forms.member;
 
 import dto.contract.*;
-import dto.controller.contract.IController;
+import dto.mapper.contract.IMapper;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
@@ -11,8 +11,7 @@ import java.util.logging.Logger;
 import javax.swing.*;
 import presentation.basics.AbstractForm;
 import presentation.basics.AbstractMainForm;
-import rmi.client.CommunicationProblemException;
-import rmi.client.RmiServiceClient;
+//import rmi.client.CommunicationProblemExs
 
 /**
  *
@@ -62,13 +61,13 @@ public class NewMemberForm extends AbstractMainForm {
     private JTextField txtfieldPhone;
     private JTextField txtfieldPostCode;
     //Controler and contract
-    IController<IMember> memberCtrl;
-    IController<IAddress> addressCtrl;
-    IController<ICountry> countryCtrl;
-    IController<IPlayer> playerCtrl;
-    IController<IDepartmentHead> depHeadCtrl;
-    IController<IDepartment> depCtrl;
-    IController<IClubTeam> clubTeamCtrl;
+    IMapper<IMember> memberCtrl;
+    IMapper<IAddress> addressCtrl;
+    IMapper<ICountry> countryCtrl;
+    IMapper<IPlayer> playerCtrl;
+    IMapper<IDepartmentHead> depHeadCtrl;
+    IMapper<IDepartment> depCtrl;
+    IMapper<IClubTeam> clubTeamCtrl;
     IMember m;
     IAddress address;
     ICountry country;
@@ -438,7 +437,7 @@ public class NewMemberForm extends AbstractMainForm {
         }
         m.setGender(gender);
 
-        IController<IPlayer> player = rmiClient.getPlayerManager();
+        IMapper<IPlayer> player = rmiClient.getPlayerManager();
         List<IPlayer> playList = player.getAll();
                 
                 

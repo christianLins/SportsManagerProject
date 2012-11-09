@@ -5,7 +5,7 @@
 package rmi.server.controller;
 
 import java.util.List;
-import dto.controller.contract.IdNotFoundException;
+import dto.mapper.contract.IdNotFoundException;
 import dto.contract.ICompetition;
 
 /**

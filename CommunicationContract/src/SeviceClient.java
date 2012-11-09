@@ -13,4 +13,11 @@ public interface SeviceClient
     
   // Use case controller schnittstellen definieren
     
+     IAddMatchResults getAddMatchResultsController();
+     IChangeCompetitionTeam getChangeCompetitionTeamController();
+     INewCompetition getNewCompetitionController();
+     INewMember getNewMemberController();
+     ISearchChangeMember getSearchChangeMemberController();
+     IShowCompetition getShowCompetitionController();
+    
 }

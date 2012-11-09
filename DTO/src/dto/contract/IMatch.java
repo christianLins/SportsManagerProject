@@ -19,11 +19,11 @@ public interface IMatch
 
     Date getDateTo();
 
-    Integer getForeignteam();
+    ITeam getForeignteam();
 
-    Integer getHometeam();
+    ITeam getHometeam();
 
-    Integer getMatchresult();
+    IMatchresult getMatchresult();
 
     void setCompetition(Integer competition);
 

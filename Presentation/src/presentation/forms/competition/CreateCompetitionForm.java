@@ -4,7 +4,7 @@ import dto.classes.Competition;
 import dto.contract.ICompetition;
 import dto.contract.IMatch;
 import dto.contract.ITeam;
-import dto.controller.contract.IController;
+import dto.mapper.contract.IMapper;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
@@ -16,8 +16,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import presentation.basics.AbstractForm;
 import presentation.basics.AbstractMainForm;
-import rmi.client.CommunicationProblemException;
-import rmi.client.RmiServiceClient;
 
 /**
  *
@@ -63,9 +61,9 @@ public class CreateCompetitionForm extends AbstractMainForm {
     private JTextField txtfieldTime;
     private JTextField txtfieldcity;
     private JTextField txtfieldplz;
-    IController<ICompetition> competitionCtrl;
-    IController<ITeam> teamCtrl;
-    IController<IMatch> matchCtrl;
+    IMapper<ICompetition> competitionCtrl;
+    IMapper<ITeam> teamCtrl;
+    IMapper<IMatch> matchCtrl;
     RmiServiceClient rmiClient;
     
     List<String> aTeam; 

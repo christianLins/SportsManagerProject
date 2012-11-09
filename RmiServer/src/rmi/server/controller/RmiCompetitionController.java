@@ -4,12 +4,13 @@
  */
 package rmi.server.controller;
 
+import dto.mapper.contract.IMapper;
+import dto.mapper.contract.IdNotFoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import dto.contract.ICompetition;
-import dto.controller.DtoFactory;
-import dto.controller.contract.*;
+import dto.mapper.DtoFactory;
 
 /**
 
@@ -20,13 +21,13 @@ public class RmiCompetitionController
         implements IRmiCompetitionController
 {
     private static RmiCompetitionController INSTANCE;
-    private IController<ICompetition> competitionController;
+    private IMapper<ICompetition> competitionController;
 
     private RmiCompetitionController()
             throws RemoteException
     {
         super();
-        competitionController = DtoFactory.getCompetitionController();
+        competitionController = DtoFactory.getCompetitionMapper();
     }
 
     public static IRmiCompetitionController getInstance()
