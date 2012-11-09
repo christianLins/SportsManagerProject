@@ -27,8 +27,6 @@ import dto.mapper.contract.IMapper;
 import dto.contract.ICompetition;
 import dto.contract.IMember;
 import dto.contract.ITeam;
-import dto.mapper.CompetitionController;
-import dto.mapper.TeamController;
 import presentation.basics.AbstractForm;
 import presentation.basics.AbstractMainForm;
 

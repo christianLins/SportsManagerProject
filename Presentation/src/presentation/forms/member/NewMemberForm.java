@@ -11,8 +11,7 @@ import java.util.logging.Logger;
 import javax.swing.*;
 import presentation.basics.AbstractForm;
 import presentation.basics.AbstractMainForm;
-import rmi.client.CommunicationProblemException;
-import rmi.client.RmiServiceClient;
+//import rmi.client.CommunicationProblemExs
 
 /**
  *

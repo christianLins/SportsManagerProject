@@ -16,8 +16,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import presentation.basics.AbstractForm;
 import presentation.basics.AbstractMainForm;
-import rmi.client.CommunicationProblemException;
-import rmi.client.RmiServiceClient;
 
 /**
  *
