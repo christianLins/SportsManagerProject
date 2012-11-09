@@ -114,9 +114,9 @@ import dto.mapper.contract.*;
         match.setDateFrom(value.getDateFrom());
         match.setDateTo(value.getDateTo());
 
-        match.setForeignteam(new TeamMapper().getDomainById(value.getForeignteam()));
-        match.setHometeam(new TeamMapper().getDomainById(value.getHometeam()));
-        match.setMatchresult(new MatchresultMapper().getDomainById(value.getMatchresult()));
+        match.setForeignteam(new TeamMapper().getDomainById(value.getForeignteam().getId()));
+        match.setHometeam(new TeamMapper().getDomainById(value.getHometeam().getId()));
+        match.setMatchresult(new MatchresultMapper().getDomainById(value.getMatchresult().getId()));
 
         return match;
     }
