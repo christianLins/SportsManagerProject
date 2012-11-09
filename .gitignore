@@ -98,3 +98,4 @@ UseCaseController/nbproject/private/private.properties
 *.jar
 *.war
 *.ear
+/PresentationService/nbproject/private/private.xml
