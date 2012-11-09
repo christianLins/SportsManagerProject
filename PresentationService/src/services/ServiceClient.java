@@ -16,12 +16,12 @@ import contract.*;
 public interface ServiceClient
 {
     
-    IAddMatchResults getAddMatchResultsService();
-    IChangeCompetitionTeam getChangeCompetitionTeamService();
-    INewCompetition getNewCompetitionService();
-    INewMember getNewMemberService();
-    ISearchChangeMember getSearchChangeMemberService();
-    IShowCompetition getShowCompetitionService();
+    IAddMatchResults getAddMatchResultsService() throws  ServiceNotAvailableException;
+    IChangeCompetitionTeam getChangeCompetitionTeamService() throws ServiceNotAvailableException;
+    INewCompetition getNewCompetitionService() throws ServiceNotAvailableException;
+    INewMember getNewMemberService() throws ServiceNotAvailableException;
+    ISearchChangeMember getSearchChangeMemberService() throws ServiceNotAvailableException;
+    IShowCompetition getShowCompetitionService() throws ServiceNotAvailableException;
     
     
 }

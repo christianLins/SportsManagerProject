@@ -16,6 +16,8 @@ public interface IChangeCompetitionTeam {
     List<ICompetition> getCompetition();
     List<IClubTeam> getClubTeams(List<Integer> Teams);
     void setCompetitonTeam(ICompetition competition, IClubTeam oldTeam, IClubTeam newTeam);
+
+    public List<IClubTeam> getClubTeams();
     
     
 }

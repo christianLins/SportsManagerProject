@@ -11,6 +11,17 @@ import java.util.List;
  * @author EnjoX
  */
 public class SearchChangeMember implements ISearchChangeMember{
+    
+    private static SearchChangeMember INSTANCE;
+    
+    private SearchChangeMember() {
+        
+    }
+    
+    public static ISearchChangeMember getInstance() {
+        if(INSTANCE == null) INSTANCE = new SearchChangeMember();
+        return INSTANCE;
+    }
 
     @Override
     public IMember getMember(String searchMember) {

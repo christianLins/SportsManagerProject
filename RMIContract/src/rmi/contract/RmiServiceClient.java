@@ -5,9 +5,8 @@
 package rmi.contract;
 
 import java.rmi.RemoteException;
-import dto.contract.*;
 import java.rmi.Remote;
-import services.ServiceClient;
+import rmi.contract.services.*;
 
 /**
  this class provides the server-side services via rmi
@@ -16,13 +15,11 @@ import services.ServiceClient;
  */
 public interface RmiServiceClient extends Remote
 {
-   
-
-    public contract.IAddMatchResults getAddMatchResultsService()throws RemoteException;
-    public contract.IChangeCompetitionTeam getChangeCompetitionTeamService()throws RemoteException;
-    public contract.INewCompetition getNewCompetitionService()throws RemoteException;
-    public contract.INewMember getNewMemberService()throws RemoteException;
-    public contract.ISearchChangeMember getSearchChangeMemberService()throws RemoteException;
-    public contract.IShowCompetition getShowCompetitionService()throws RemoteException;
+    public IAddMatchResultsRmiService getAddMatchResultsService()throws RemoteException;
+    public IChangeCompetitionTeamRmiService getChangeCompetitionTeamService()throws RemoteException;
+    public INewCompetitionRmiService getNewCompetitionService()throws RemoteException;
+    public INewMemberRmiService getNewMemberService()throws RemoteException;
+    public ISearchChangeMemberRmiService getSearchChangeMemberService()throws RemoteException;
+    public IShowCompetitionRmiService getShowCompetitionService()throws RemoteException;
 
 }

@@ -23,12 +23,11 @@ import java.util.logging.Logger;
  */
 public class AddMatchResults implements IAddMatchResults {
 
-    AddMatchResults singleton = null;
+    private static AddMatchResults  singleton = null;
     DtoFactory access;
-
     private AddMatchResults() {};
     
-    public AddMatchResults getInstance() {
+    public static AddMatchResults getInstance() {
         if (singleton == null) {
             singleton = new AddMatchResults();
         }

@@ -12,6 +12,16 @@ import java.util.List;
  * @author EnjoX
  */
 public class ChangeCompetitionTeam implements IChangeCompetitionTeam{
+    private static IChangeCompetitionTeam INSTANCE;
+    
+    private ChangeCompetitionTeam() {
+        
+    }
+    
+    public static IChangeCompetitionTeam getInstance() {
+        if(INSTANCE == null) INSTANCE = new ChangeCompetitionTeam();
+        return INSTANCE;
+    }
 
     @Override
     public List<ICompetition> getCompetition() {
@@ -25,6 +35,12 @@ public class ChangeCompetitionTeam implements IChangeCompetitionTeam{
 
     @Override
     public void setCompetitonTeam(ICompetition competition, IClubTeam oldTeam, IClubTeam newTeam) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<IClubTeam> getClubTeams()
+    {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     

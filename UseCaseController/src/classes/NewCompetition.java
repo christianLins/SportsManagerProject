@@ -13,6 +13,12 @@ import java.util.List;
  * @author EnjoX
  */
 public class NewCompetition implements INewCompetition{
+    private static INewCompetition INSTANCE;
+    
+    public static INewCompetition getInstance() {
+        if(INSTANCE == null) INSTANCE = new NewCompetition();
+        return INSTANCE;
+    }
 
     @Override
     public void setCompetition(ICompetition competition, IMember member) {

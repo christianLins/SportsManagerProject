@@ -4,7 +4,6 @@
  */
 package rmi.contract.services;
 
-import contract.IAddMatchResults;
 import java.util.List;
 import dto.contract.*;
 import java.rmi.Remote;

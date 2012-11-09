@@ -10,7 +10,20 @@ import java.util.List;
  *
  * @author EnjoX
  */
-public class NewMember implements INewMember{
+public class NewMember implements INewMember{ 
+    
+    private static INewMember INSTANCE;
+    
+    private NewMember()  {
+        
+    }
+    
+    public static INewMember getInstance() {
+        if(INSTANCE == null) INSTANCE = new NewMember();
+        return INSTANCE;
+    }
+            
+            
 
     @Override
     public void setNewMember(IMember member, IAddress address) {

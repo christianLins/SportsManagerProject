@@ -14,6 +14,17 @@ import java.util.List;
  * @author EnjoX
  */
 public class ShowCompetition implements IShowCompetition{
+    
+    private static ShowCompetition INSTANCE;
+    
+    private ShowCompetition() {
+        
+    }
+    
+    public static IShowCompetition getInstance() {
+        if(INSTANCE == null) INSTANCE = new ShowCompetition();
+        return INSTANCE;
+    }
 
     @Override
     public List<ICompetition> getCompetitions() {

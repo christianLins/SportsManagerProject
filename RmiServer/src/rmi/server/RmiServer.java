@@ -12,6 +12,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import rmi.contract.RmiServiceClient;
 
 /**
  * runnable rmi-server
@@ -54,7 +55,7 @@ public class RmiServer
             System.setProperty("java.rmi.server.codebase", "file://" + cb);
 
 
-            RmiServiceFactoryImpl rmiServiceFactory = new RmiServiceFactoryImpl();
+            RmiServiceClient rmiServiceFactory = new RmiServiceClientFactory();
             Naming.rebind("rmi://localhost:" + port + "/CommunicationFactory", rmiServiceFactory);
             isRunning = true;
             System.out.println("rmi server is running on port " + port);
@@ -72,25 +73,5 @@ public class RmiServer
         return isRunning;
     }
 
-    public static void main(String args[]) throws IOException {
-
-        try {
-            LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
-            Registry registry = LocateRegistry.getRegistry();
-
-            RmiServiceFactoryImpl rObj = new RmiServiceFactoryImpl();
-
-            Naming.rebind("rmi://localhost:1099/Factory", rObj);
-
-            System.out.print("Server is ready to listen on ");
-            System.out.println(InetAddress.getLocalHost().getHostName());
-
-        } catch (java.net.UnknownHostException ex) {
-            Logger.getLogger(RmiServiceFactoryImpl.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (AccessException ex) {
-            Logger.getLogger(RmiServiceFactoryImpl.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (RemoteException ex) {
-            Logger.getLogger(RmiServiceFactoryImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+   
 }

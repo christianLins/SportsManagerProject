@@ -18,8 +18,6 @@ import javax.swing.LayoutStyle;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
-import rmi.client.CommunicationProblemException;
-import rmi.contract.RmiServiceClient;
 import presentation.basics.AbstractForm;
 import presentation.forms.competition.AddCompetitionResultsForm;
 import presentation.forms.competition.ChangeCompetitionTeam;
@@ -27,7 +25,7 @@ import presentation.forms.competition.CreateCompetitionForm;
 import presentation.forms.competition.ShowCompetitionForm;
 import presentation.forms.member.NewMemberForm;
 import presentation.forms.member.SearchMemberForm;
-import rmi.contract.IRmiServiceFactory;
+import services.ServiceClient;
 
 /**
 
@@ -52,9 +50,9 @@ public class SportsClubManager
     private JSplitPane tabMatch;
     private JSplitPane tabMember;
     private JTabbedPane tabPane;
-    private RmiServiceClient rmiClient;
+    private ServiceClient rmiClient;
 
-    public SportsClubManager(AbstractForm form, RmiServiceClient rmiClient)
+    public SportsClubManager(AbstractForm form, ServiceClient rmiClient)
     {
         super(form);
         this.rmiClient = rmiClient;
@@ -352,22 +350,10 @@ public class SportsClubManager
         {
             public void run()
             {
-                try
-                {
-                    Registry r = LocateRegistry.getRegistry("localhost", 1099);
-                    IRmiServiceFactory client = (IRmiServiceFactory) r.lookup("CommunicationFactory");
-                    SportsClubManager manager = new SportsClubManager(null, new RmiServiceClient(client));
-                    manager.setVisible(true);
-                }
-                catch (CommunicationProblemException | NotBoundException ex)
-                {
-                }
-                catch (AccessException ex)
-                {
-                }
-                catch (RemoteException ex)
-                {
-                }
+                
+                SportsClubManager manager = new SportsClubManager(null, serviceClientFactories.ServiceClientFactory.getRmiServiceClient("localhost", 1099));
+                manager.setVisible(true);
+                
             }
         });
     }

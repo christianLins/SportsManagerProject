@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 *** GENERATED FROM project.xml - DO NOT EDIT  ***
@@ -2523,4 +2522,4 @@ is divided into following sections:
         </ant>
     </target>
 </project>
->>>>>>> 9bddcdca290ba3efe935fd6ee45cd90b352a873f
+

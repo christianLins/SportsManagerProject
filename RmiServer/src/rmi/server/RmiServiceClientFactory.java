@@ -4,10 +4,13 @@
  */
 package rmi.server;
 
+import classes.AddMatchResults;
 import contract.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import rmi.contract.RmiServiceClient;
+import rmi.contract.services.*;
+import rmi.server.controller.*;
 
 /**
  *
@@ -21,39 +24,41 @@ public class RmiServiceClientFactory extends UnicastRemoteObject implements RmiS
     }
 
     @Override
-    public IAddMatchResults getAddMatchResultsService() throws RemoteException
+    public rmi.contract.services.IAddMatchResultsRmiService getAddMatchResultsService() throws RemoteException
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+       return new AddMatchResultsRmiService();
     }
 
     @Override
-    public IChangeCompetitionTeam getChangeCompetitionTeamService() throws RemoteException
+    public IChangeCompetitionTeamRmiService getChangeCompetitionTeamService() throws RemoteException
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new ChangeCompetitionTeamRmiService();
     }
 
     @Override
-    public INewCompetition getNewCompetitionService() throws RemoteException
+    public INewCompetitionRmiService getNewCompetitionService() throws RemoteException
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new NewCompetitionRmiService();
     }
 
     @Override
-    public INewMember getNewMemberService() throws RemoteException
+    public INewMemberRmiService getNewMemberService() throws RemoteException
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new NewMemberRmiService();
     }
 
     @Override
-    public ISearchChangeMember getSearchChangeMemberService() throws RemoteException
+    public ISearchChangeMemberRmiService getSearchChangeMemberService() throws RemoteException
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new SearchChangeMemberRmiService();
     }
 
     @Override
-    public IShowCompetition getShowCompetitionService() throws RemoteException
+    public IShowCompetitionRmiService getShowCompetitionService() throws RemoteException
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new ShowCompetitionRmiService();
     }
+
+ 
     
 }
