@@ -13,10 +13,13 @@ import dto.contract.*;
  */
 public interface ISearchChangeMember {
     
-    IMember getMember(String searchMember);
+    
+    List<IMember> getMatchingMembers(String searchInput);   //find all members, matching the searched value 
+    IMember getMember(/*old :String searchMember*/ Integer id); //best if MemberID could be used!?
     IRole getRoles(Integer memberId);
     IDepartment getDepartment(Integer memberId);
     IAddress getAddress(Integer addressId);
+    ICountry getCountry(Integer countryID);     //new added
     List<IDepartment> getDepartments();  
     List<IClubTeam> getClubTeams(List<Integer> clubTeams);
     

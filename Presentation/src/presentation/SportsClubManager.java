@@ -7,6 +7,8 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JMenu;
@@ -26,6 +28,7 @@ import presentation.forms.competition.ShowCompetitionForm;
 import presentation.forms.member.NewMemberForm;
 import presentation.forms.member.SearchMemberForm;
 import services.ServiceClient;
+import services.ServiceNotAvailableException;
 
 /**
 
@@ -122,7 +125,11 @@ public class SportsClubManager
             @Override
             public void actionPerformed(ActionEvent evt)
             {
-                displaySearchMain();
+                try {
+                    displaySearchMain();
+                } catch (ServiceNotAvailableException ex) {
+                    Logger.getLogger(SportsClubManager.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 
@@ -255,7 +262,7 @@ public class SportsClubManager
     }// </editor-fold>
 
     //set SearchMember as Main
-    private void displaySearchMain()
+    private void displaySearchMain() throws ServiceNotAvailableException
     {
         paneMemberMain.removeAll();
         paneMemberMain = new SearchMemberForm(this, rmiClient).paneSearch;

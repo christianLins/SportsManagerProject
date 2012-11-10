@@ -22,9 +22,14 @@ public class SearchChangeMember implements ISearchChangeMember{
         if(INSTANCE == null) INSTANCE = new SearchChangeMember();
         return INSTANCE;
     }
+    
+    @Override
+    public List<IMember> getMatchingMembers(String searchInput) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
     @Override
-    public IMember getMember(String searchMember) {
+    public IMember getMember(Integer id) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -44,6 +49,11 @@ public class SearchChangeMember implements ISearchChangeMember{
     }
 
     @Override
+    public ICountry getCountry(Integer countryID) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    @Override
     public List<IDepartment> getDepartments() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -61,6 +71,6 @@ public class SearchChangeMember implements ISearchChangeMember{
     @Override
     public void setNewMember(IMember member, IAddress address, IDepartment department, IClubTeam clubTeam, IRole role) {
         throw new UnsupportedOperationException("Not supported yet.");
-    }
+    }    
     
 }
