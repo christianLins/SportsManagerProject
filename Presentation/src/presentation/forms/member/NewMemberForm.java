@@ -1,9 +1,13 @@
 package presentation.forms.member;
 
+import contract.INewMember;
+import dto.classes.Address;
+import dto.classes.Member;
 import dto.contract.*;
 import dto.mapper.contract.IMapper;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -11,6 +15,8 @@ import java.util.logging.Logger;
 import javax.swing.*;
 import presentation.basics.AbstractForm;
 import presentation.basics.AbstractMainForm;
+import services.ServiceClient;
+import services.ServiceNotAvailableException;
 //import rmi.client.CommunicationProblemExs
 
 /**
@@ -60,52 +66,30 @@ public class NewMemberForm extends AbstractMainForm {
     private JTextField txtfieldMail;
     private JTextField txtfieldPhone;
     private JTextField txtfieldPostCode;
+    
     //Controler and contract
-    IMapper<IMember> memberCtrl;
-    IMapper<IAddress> addressCtrl;
-    IMapper<ICountry> countryCtrl;
-    IMapper<IPlayer> playerCtrl;
-    IMapper<IDepartmentHead> depHeadCtrl;
-    IMapper<IDepartment> depCtrl;
-    IMapper<IClubTeam> clubTeamCtrl;
-    IMember m;
+    ServiceClient client;
+    INewMember controller;
+    IMember member;
+    IRole role;
+    IDepartment department;
     IAddress address;
     ICountry country;
-    IDepartmentHead depHead;
-    IDepartment department;
-    ITeam team;
+    IClubTeam clubTeam;
 
-    RmiServiceClient rmiClient;
     // End of variables declaration
     /**
      * Creates new form NewMemb
      */
-    public NewMemberForm(AbstractForm form, RmiServiceClient rmiClient) {
+    public NewMemberForm(AbstractForm form, ServiceClient client) throws ServiceNotAvailableException {
         super(form);
-        this.rmiClient = rmiClient;
+        this.client = client;
+        controller = this.client.getNewMemberService();
         initComponents();
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
-        try {
-            memberCtrl = rmiClient.getMemberManager();
-        
-        addressCtrl = rmiClient.getAddressManager();
-        countryCtrl = rmiClient.getCountryManager();
-        playerCtrl = rmiClient.getPlayerManager();
-        depHeadCtrl = rmiClient.getDepartmentHeadManager();
-        depCtrl = rmiClient.getDepartmentManager();
-        clubTeamCtrl = rmiClient.getClubTeamManager();
-        team = null;
-        m = null;
-        address = null;
-        country = null;
-        depHead = null;
-        department = null;
-        } catch (CommunicationProblemException ex) {
-            Logger.getLogger(NewMemberForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
         panel = new JPanel();
         panePersonData = new JPanel();
@@ -152,7 +136,6 @@ public class NewMemberForm extends AbstractMainForm {
         setTitle("Member Data");
         setMinimumSize(new java.awt.Dimension(848, 549));
         setPreferredSize(new java.awt.Dimension(848, 549));
-
 
         panePersonData.setBorder(javax.swing.BorderFactory.createTitledBorder("Person Data"));
 
@@ -278,24 +261,27 @@ public class NewMemberForm extends AbstractMainForm {
         radioIceHockey.setText("IceHockey");
 
         lblDepartment.setText("Department");
-        String[] comboDeps = getDepartments();
-        comboDepartment.setModel(new DefaultComboBoxModel(comboDeps));
+        comboDepartment.setModel(new DefaultComboBoxModel(getComboDepartment()));
         comboDepartment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //get teams from department and set selectable teams for combobox 
-                comboTeam.setModel(new DefaultComboBoxModel(getTeams(comboDepartment.getSelectedItem().toString())));
+                comboDepartmentActionPerformed(evt);
             }
         });
 
-//        String [] comboTeams = getTeams();
-//        comboTeam.setModel(new DefaultComboBoxModel(comboTeams/*new String[] { "Item 1", "Item 2" }*/));
+        lblTeam.setText("Team");
+        comboTeam.setModel(new DefaultComboBoxModel(getComboTeam()));
+        comboTeam.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                comboTeamActionPerformed(e);
+            }
+        });
+
         lblRole.setText("Role");
 
         radioAdmin.setText("Administrator");
         radioTrainer.setText("Trainer");
         radioPlayer.setText("Player");
-
-        lblTeam.setText("Team");
 
 
         javax.swing.GroupLayout paneMembershipDataLayout = new javax.swing.GroupLayout(paneMembershipData);
@@ -365,17 +351,7 @@ public class NewMemberForm extends AbstractMainForm {
         btnSaveMember.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (validInput()) {
-                    try {
-                        setMemberData();
-                        //TODO add some success message
-                    } catch (CommunicationProblemException ex) {
-                        Logger.getLogger(NewMemberForm.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                else{
-                    JOptionPane.showMessageDialog(parent, "Please fill in all text fields!");
-                }
+                saveMemberActionPerformed(e);
             }
         });
 
@@ -415,170 +391,140 @@ public class NewMemberForm extends AbstractMainForm {
         pack();
     }// </editor-fold>
 
-    private void setMemberData() throws CommunicationProblemException {
-        m.setPrename(txtfieldFName.getText());
-        m.setLastname(txtfieldLName.getText());
-        m.setDateOfBirth(dateChooserBirth.getDate());
-        m.setMemberFrom(dateChooserEntry.getDate());
-        m.setTelephonenumber(txtfieldPhone.getText());
-        m.setEmailAddress(txtfieldMail.getText());
-        
+    private void setMemberData() {
+        member.setPrename(txtfieldFName.getText());
+        member.setLastname(txtfieldLName.getText());
+        member.setDateOfBirth(dateChooserBirth.getDate());
+        member.setMemberFrom(dateChooserEntry.getDate());
+        member.setTelephonenumber(txtfieldPhone.getText());
+        member.setEmailAddress(txtfieldMail.getText());
+
         address.setStreet(txtfieldAddress.getText());
         address.setPostalCode(Integer.parseInt(txtfieldPostCode.getText()));
         address.setVillage(txtfieldCity.getText());
-        m.setAddress(address.getId());
-        
+        // member.setAddress(address.getId());
+
+
         country.setName(txtfieldCountry.getText());
-        m.setNationality(country.getId());
-        
-        boolean gender = false;
+        member.setNationality(country.getId());
+
         if (radioFemale.isSelected()) {
-            gender = true;
+            member.setGender(true);
+        } else {
+            member.setGender(false);
         }
-        m.setGender(gender);
 
-        IMapper<IPlayer> player = rmiClient.getPlayerManager();
-        List<IPlayer> playList = player.getAll();
-                
-                
-                
-                
-        
-        List<IRole> roleList = new LinkedList<>();
-        List<Integer> roles = new LinkedList<Integer>();
-        if (radioAdmin.isSelected()) {
-            roles.add(1);
-        }
-        if (radioTrainer.isSelected()) {
-            roles.add(2);
-        }
-        if (radioPlayer.isSelected()) {
-            roles.add(3);
-        }
-        m.setRoleList(roles);
 
-        department = getSelectedDepartment(comboDepartment.getSelectedItem().toString());
-        team = getSelectedTeam(comboTeam.getSelectedItem().toString());
+        //TODO: which case only member and address necessary?!
+        //role list necessary?
 
-        List<String> types = getSportTypes();
-        
-        
-        //TODO add department, type of sports, team
-    }
+        if (!radioAdmin.isSelected() && !radioTrainer.isSelected() && !radioPlayer.isSelected()) {
+            controller.setNewMember(member, address);
+        } else {
 
-    private void comboTeamActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private String[] getDepartments() {
-        List<IDepartment> depList = depCtrl.getAll();
-        String [] list = new String[depList.size()];
-
-        for(int i = 0; i < list.length; i++){
-            list[i] = depList.get(i).getName();
-        }       
-        return list;
-    }
-
-    private String[] getTeams() {
-        List<IClubTeam> teamList = clubTeamCtrl.getAll();
-        String[] list = new String[teamList.size()];
-
-        for(int i = 0; i < list.length; i++){
-            list[i] = teamList.get(i).getName();
-        }       
-        return list;
-    }
-
-    private String[] getTeams(String name) {
-        List<IDepartment> deplist = depCtrl.getAll();
-        List<Integer> clubteams = null;   
-        
-        
-        for(int i = 0; i < deplist.size(); i ++){
-            if(deplist.get(i).getName().equals(name)){
-                IDepartment dep = deplist.get(i);
-                clubteams = dep.getClubTeamList();                
+            List<Integer> roles = new LinkedList<>();
+            if (radioAdmin.isSelected()) {
+                roles.add(1);
             }
-        }
-        String [] teams = new String[clubteams.size()];
-        
-        for(int x = 0; x < clubteams.size(); x++){
+            if (radioTrainer.isSelected()) {
+                roles.add(2);                
+            }
+            if (radioPlayer.isSelected()) {
+                roles.add(3);
+            }
+            role.setPermisssionList(roles);
+            member.setRoleList(roles);
             
+            setSelectedDepartment();
+            setSelectedTeam();
+            
+            controller.setNewMember(member, address, department, clubTeam, role);
         }
-//        Team depHead = new Team();
-//        Object[] list = depHead.getDepartmentList().toArray();            
-       
-
-//        for(int i = 0; i < list.length; i++){
-//            deps[i] = list[i].toString();
-//        }       
-        return teams;
     }
 
-    private ITeam getSelectedTeam(String name) {
-        List<IClubTeam> teamList = clubTeamCtrl.getAll();
-        IClubTeam selTeam = null;
+    private void comboDepartmentActionPerformed(ActionEvent evt) {
+        //get teams from department and set selectable teams for combobox
+        setSelectedDepartment();
+        comboTeam.setModel(new DefaultComboBoxModel(getComboTeam()));
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 
-        for (IClubTeam t : teamList) {
-            if (t.getName().equals(name)) {
-                selTeam = t;
+    private void comboTeamActionPerformed(ActionEvent evt) {
+        setSelectedTeam();
+    }
+
+    private void saveMemberActionPerformed(ActionEvent evt) {
+        if (validInput()) {
+            setMemberData();
+            //TODO add some success message                    
+        } else {
+            JOptionPane.showMessageDialog(parent, "Please fill in all text fields!");
+        }
+    }
+
+    private String[] getComboDepartment() {
+        List<IDepartment> depList = controller.getDepartments();
+        String[] depArray = new String[depList.size()];
+        
+        for(int i = 0; i < depList.size(); i++){
+            depArray[i] = depList.get(i).getName();
+        }
+      
+        return depArray;
+    }
+
+    private String[] getComboTeam() {
+        if (department != null) {
+            List<Integer> cTeamInt = department.getClubTeamList();
+            List<IClubTeam> cTeamList = controller.getClubTeams(cTeamInt);
+            Iterator<IClubTeam> cTeamIterator = cTeamList.iterator();
+            String[] cTeamArray = new String[cTeamList.size()];
+
+            for (int i = 0; cTeamIterator.hasNext(); i++) {
+                cTeamArray[i] = cTeamIterator.next().getName();
+            }
+            return cTeamArray;
+        } else {            
+            return new String[]{"Team"};
+        }
+    }
+
+    private void setSelectedTeam() {
+        String selName = comboTeam.getSelectedItem().toString();
+        List<Integer> cTeamInt = department.getClubTeamList();
+        List<IClubTeam> cTeamList = controller.getClubTeams(cTeamInt);
+                
+        for (IClubTeam t : cTeamList) {
+            if (t.getName().equals(selName)) {
+                clubTeam = t;
             }
         }
-        return selTeam;
     }
 
-    private IDepartment getSelectedDepartment(String name) {
-        List<IDepartment> depList = depCtrl.getAll();
-        IDepartment selDepartment = null;
-
-        for (IDepartment d : depList) {
-            if (d.getName().equals(name)) {
-                selDepartment = d;
+    private void setSelectedDepartment() {
+        String selName = comboDepartment.getSelectedItem().toString();
+        List<IDepartment> depList = controller.getDepartments();
+        
+        for(IDepartment d : depList){
+            if(d.getName().equals(selName)){
+                department = d;
             }
         }
-        return selDepartment;
     }
-    
-    private boolean validInput(){
+
+    private boolean validInput() {
         boolean success = true;
-        
-        if (txtfieldFName.getText().isEmpty()) {
-            success = false;            
-        }
-        else if(txtfieldLName.getText().isEmpty()){
-            success = false;
-        }
-        else if(txtfieldCity.getText().isEmpty()){
-            success = false;
-        }
-        else if(dateChooserBirth.getDate() == null){
-            success = false;
-        }
-        else if(comboTeam.getSelectedItem() == null){
-            success = false;
-        }        
-        
-        return success;
-    }
 
-    private List<String> getSportTypes() {
-        List<String> types = new LinkedList<>();
-        
-        if(radioFootball.isSelected()){
-            types.add("Football");
-        }
-        if(radioHandball.isSelected()){
-            types.add("Handball");
-        }
-        if(radioVolleyball.isSelected()){
-            types.add("Volleyball");
-        }
-        if(radioIceHockey.isSelected()){
-            types.add("IceHockey");
-        }
-        
-        return types;
-   
+        if (txtfieldFName.getText().isEmpty()) {
+            success = false;
+        } else if (txtfieldLName.getText().isEmpty()) {
+            success = false;
+        } else if (txtfieldCity.getText().isEmpty()) {
+            success = false;
+        } else if (dateChooserBirth.getDate() == null) {
+            success = false;
+        } 
+
+        return success;
     }
 }

@@ -23,12 +23,11 @@ import javax.swing.LayoutStyle;
 import javax.swing.ListModel;
 import javax.swing.WindowConstants;
 import dto.mapper.contract.IdNotFoundException;
-import dto.mapper.contract.IMapper;
 import dto.contract.ICompetition;
 import dto.contract.IMember;
-import dto.contract.ITeam;
 import presentation.basics.AbstractForm;
 import presentation.basics.AbstractMainForm;
+import services.ServiceClient;
 
 /**
  *
@@ -52,15 +51,18 @@ public class ChangeCompetitionTeam extends AbstractMainForm {
     private JScrollPane scrollCompTeam;
     private JScrollPane scrollTeam;
     
-    private List<IMember> specialTeam;
-    List<ITeam> teamList;
-    private IMapper<ICompetition> competitionCtrl;
-    private IMapper<ITeam> teamCtrl;
-    String[] teamMembers;
+//    private List<IMember> specialTeam;
+//    List<ITeam> teamList;
+//    private IMapper<ICompetition> competitionCtrl;
+//    private IMapper<ITeam> teamCtrl;
+//    String[] teamMembers;
+    
+    ServiceClient client;
     
     // End of variables declaration
-    public ChangeCompetitionTeam(AbstractForm form) {
+    public ChangeCompetitionTeam(AbstractForm form, ServiceClient client) {
         super(form);
+        this.client = client;
         initComponents();
     }
 
@@ -80,11 +82,6 @@ public class ChangeCompetitionTeam extends AbstractMainForm {
         jLabel1 = new JLabel();
         btnRemove = new JButton();
         btnSave = new JButton();
-        specialTeam = new LinkedList<>();
-        teamMembers = null;
-
-        competitionCtrl = CompetitionController.getInstance();
-        teamCtrl = TeamController.getInstance();
         
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(845, 549));

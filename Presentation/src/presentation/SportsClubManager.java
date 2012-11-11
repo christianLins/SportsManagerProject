@@ -1,12 +1,9 @@
 package presentation;
 
+import dto.contract.IMember;
+import dto.mapper.contract.IMapper;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.rmi.AccessException;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.GroupLayout;
@@ -54,11 +51,12 @@ public class SportsClubManager
     private JSplitPane tabMember;
     private JTabbedPane tabPane;
     private ServiceClient rmiClient;
+    private IMapper<IMember> loggedIn;
 
     public SportsClubManager(AbstractForm form, ServiceClient rmiClient)
     {
         super(form);
-        this.rmiClient = rmiClient;
+        this.rmiClient = rmiClient;        
         this.setTitle("SportsClubManager");
         this.setExtendedState(this.getExtendedState() | MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -138,7 +136,11 @@ public class SportsClubManager
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                displayAddMember();
+                try {
+                    displayAddMember();
+                } catch (ServiceNotAvailableException ex) {
+                    Logger.getLogger(SportsClubManager.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 
@@ -186,7 +188,11 @@ public class SportsClubManager
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                btnCreateCompetActionPerformed(evt);
+                try {
+                    btnCreateCompetActionPerformed(evt);
+                } catch (ServiceNotAvailableException ex) {
+                    Logger.getLogger(SportsClubManager.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 
@@ -272,7 +278,7 @@ public class SportsClubManager
         tabMember.repaint();
     }
 
-    public void displayAddMember()
+    public void displayAddMember() throws ServiceNotAvailableException
     {
         paneMemberMain.removeAll();
         paneMemberMain = new NewMemberForm(this, rmiClient).panel;
@@ -302,7 +308,7 @@ public class SportsClubManager
         tabMatch.repaint();
     }
 
-    private void btnCreateCompetActionPerformed(ActionEvent evt)
+    private void btnCreateCompetActionPerformed(ActionEvent evt) throws ServiceNotAvailableException
     {
         paneMatchMain.removeAll();
         paneMatchMain = new CreateCompetitionForm(null, rmiClient).panel;
@@ -315,11 +321,15 @@ public class SportsClubManager
     private void btnChangeTeamActionPerformed(ActionEvent evt)
     {
         paneMatchMain.removeAll();
-        paneMatchMain = new ChangeCompetitionTeam(null).panelChangeTeam;
+        paneMatchMain = new ChangeCompetitionTeam(null, rmiClient).panelChangeTeam;
 
         tabMatch.setRightComponent(paneMatchMain);
         tabMatch.validate();
         tabMatch.repaint();
+    }
+    
+    public IMapper<IMember> getLoggedInUser(){
+        return loggedIn;
     }
 
     /**

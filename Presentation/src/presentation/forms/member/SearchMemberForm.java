@@ -30,7 +30,6 @@ import dto.contract.IAddress;
 import dto.contract.IClubTeam;
 import dto.contract.IMember;
 import dto.contract.IRole;
-import dto.contract.ITypeOfSport;
 import java.util.Iterator;
 import presentation.basics.AbstractForm;
 import presentation.basics.AbstractMainForm;
@@ -97,6 +96,7 @@ public class SearchMemberForm extends AbstractMainForm {
     IDepartment department;
     IAddress address;
     ICountry country;
+    IClubTeam clubTeam;
 
     // End of variables declaration    
 
@@ -499,8 +499,7 @@ public class SearchMemberForm extends AbstractMainForm {
     private void applyActionPerformed(ActionEvent e) {
         if (dataExists != false) {
             updateMemberData();
-            memberCtrl.set(m);
-            //Throw exception in case of an error !!!!!
+            //TODO: Throw exception in case of an error !!!!!
 
         } else {
             JOptionPane.showMessageDialog(parent, "There is no data to change!");
@@ -508,25 +507,21 @@ public class SearchMemberForm extends AbstractMainForm {
     }
 
     private void comboTeamActionPerformed(java.awt.event.ActionEvent evt) {
-        String name = comboTeam.getSelectedItem().toString();
-        List<IClubTeam> clublist = clubCtrl.getAll();
-
-        for (IClubTeam c : clublist) {
-            if (c.getName().equals(name)) {
-                club = c;
-            }
-        }
+        String name = comboTeam.getSelectedItem().toString();         
+        
+        setClubTeam(name);
     }
 
     private void comboDepartmentActionPerformed(ActionEvent evt) {
         String name = comboDepartment.getSelectedItem().toString();
-        List<IDepartment> deplist = depCtrl.getAll();
-
-        for (IDepartment d : deplist) {
-            if (d.getName().equals(name)) {
-                department = d;
+        List<IDepartment> depList = controller.getDepartments();
+                
+        for(int i = 0; i < depList.size(); i++){
+            if(depList.get(i).getName().equals(name)){
+                department = depList.get(i);
             }
         }
+        comboTeam.setModel(new DefaultComboBoxModel(getComboTeam()));
     }
 
     private void genderActionPerformed(ActionEvent evt) {
@@ -543,37 +538,6 @@ public class SearchMemberForm extends AbstractMainForm {
                 radioFemale.setEnabled(true);
             }
         }
-    }
-
-    private List<IMember> findMember(String name) {
-        List<IMember> result = new LinkedList<>();
-        List<IMember> memberList = memberCtrl.getAll();
-
-        for (IMember m : memberList) {
-            if (m.getPrename().equals(name) || m.getLastname().equals(name)) {
-                result.add(m);
-            }
-        }
-        return result;
-    }
-
-    private List<Integer> findSports() {
-        List<ITypeOfSport> tosList = tosCtrl.getAll();
-        List<Integer> sports = new LinkedList<>();
-        List<Integer> roles = m.getRoleList();
-
-        if (radioFootball.isSelected()) {
-            // roles.
-        }
-        if (radioHandball.isSelected()) {
-        }
-        if (radioIceHockey.isSelected()) {
-        }
-        if (radioVolleyball.isSelected()) {
-        }
-
-        return sports;
-
     }
 
     private void updateDetailPane() {
@@ -628,41 +592,48 @@ public class SearchMemberForm extends AbstractMainForm {
     }
 
     private void updateMemberData() {
-        m.setPrename(txtfieldFName.getText());
-        m.setLastname(txtfieldLName.getText());
-        m.setDateOfBirth(dateBirthday.getDate());
-        m.setMemberFrom(dateEntry.getDate());
-        m.setTelephonenumber(txtfieldPhone.getText());
-        m.setEmailAddress(txtfieldMail.getText());
-        m.setId(Integer.parseInt(txtfieldMemberNr.getText()));
+        
+        member.setPrename(txtfieldFName.getText());
+        member.setLastname(txtfieldLName.getText());
+        member.setDateOfBirth(dateBirthday.getDate());
+        member.setMemberFrom(dateEntry.getDate());
+        member.setTelephonenumber(txtfieldPhone.getText());
+        member.setEmailAddress(txtfieldMail.getText());
+        //member.setId(Integer.parseInt(txtfieldMemberNr.getText()));
 
         address.setStreet(txtfieldAddress.getText());
         address.setPostalCode(Integer.parseInt(txtfieldPostCode.getText()));
         address.setVillage(txtfieldCity.getText());
         country.setName(txtfieldCountry.getText());
-
+        member.setNationality(country.getId()); 
 
         if (radioFemale.isSelected()) {
-            m.setGender(true);
-        } else {
-            m.setGender(false);
+            member.setGender(true);
+        }
+        else{        
+            member.setGender(false);
         }
 
-        //TODO: make this work
-        List<Integer> role = new LinkedList<>();
-
+        //TODO: what if Player role is selected new 
+        //TODO: check if correct handling of permissions/roles
+        List <Integer> permList;
+        permList = role.getPermisssionList();
+        
         if (radioAdmin.isSelected()) {
-        } else if (radioTrainer.isSelected()) {
-        } else if (radioPlayer.isSelected()) {
+            permList.add(1);
         }
-        m.setRoleList(role);
-
-        List<Integer> sports = findSports();
-
-        //add list with type of sports
-
-        //TODO: add "club" to team
-        //TODO: add "department" to departmetn
+        else if (radioTrainer.isSelected()) {
+            permList.add(2);
+        }
+        else if (radioPlayer.isSelected()) {
+            permList.add(3);
+        }
+        role.setPermisssionList(permList);
+        
+        //make sure clubTeam is set right
+        setClubTeam(comboTeam.getSelectedItem().toString());
+                        
+        controller.setNewMember(member, address, department, clubTeam, role);
     }
 
     //List<IDepartment>
@@ -708,5 +679,16 @@ public class SearchMemberForm extends AbstractMainForm {
         } else {
             return new String[]{"Team"};
         }
+    }
+
+    private void setClubTeam(String name) {
+        List<Integer> cTeamInt = department.getClubTeamList();
+        List<IClubTeam> cTeamList = controller.getClubTeams(cTeamInt);
+        
+        for(int i = 0; i <cTeamList.size(); i++){
+            if(cTeamList.get(i).getName().equals(name)){
+                clubTeam = cTeamList.get(i);
+            }
+        }   
     }
 }
