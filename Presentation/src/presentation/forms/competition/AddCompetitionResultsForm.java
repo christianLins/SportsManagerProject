@@ -8,6 +8,7 @@ import contract.IAddMatchResults;
 import dto.contract.ICompetition;
 import dto.contract.IMatch;
 import dto.contract.IMatchresult;
+import dto.contract.IMember;
 import dto.contract.ITeam;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -61,14 +62,16 @@ public class AddCompetitionResultsForm extends AbstractMainForm {
     List<ITeam> teamList;
     List<IMatch> matchList;
     IMatch match;
+    IMember user;
     // End of variables declaration
 
     /**
      * Creates new form AddMatchResultsForm
      */
-    public AddCompetitionResultsForm(AbstractForm form, ServiceClient client) throws ServiceNotAvailableException {
+    public AddCompetitionResultsForm(AbstractForm form, ServiceClient client, IMember user) throws ServiceNotAvailableException {
         super(form);
         this.client = client;
+        this.user = user;
         controller = this.client.getAddMatchResultsService();
         initComponents();
     }

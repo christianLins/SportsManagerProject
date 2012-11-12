@@ -92,6 +92,7 @@ public class SearchMemberForm extends AbstractMainForm {
     ServiceClient client;
     ISearchChangeMember controller;
     IMember member;
+    IMember user;
     IRole role;
     IDepartment department;
     IAddress address;
@@ -100,9 +101,10 @@ public class SearchMemberForm extends AbstractMainForm {
 
     // End of variables declaration    
 
-    public SearchMemberForm(AbstractForm form, ServiceClient client) throws ServiceNotAvailableException {
+    public SearchMemberForm(AbstractForm form, ServiceClient client, IMember user) throws ServiceNotAvailableException {
         super(form);
         this.client = client;
+        this.user = user;
         controller = this.client.getSearchChangeMemberService();
 
         initComponents();

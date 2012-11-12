@@ -47,14 +47,16 @@ public class ShowCompetitionForm extends AbstractMainForm {
     List<IClubTeam> clubTeams;
     List<IMatch> compMatches;
     IClubTeam cTeam;
+    IMember user; 
     // End of variables declaration
 
     /**
      * Creates new form ShowCompetitionForm
      */
-    public ShowCompetitionForm(AbstractForm form, ServiceClient client) throws ServiceNotAvailableException {
+    public ShowCompetitionForm(AbstractForm form, ServiceClient client, IMember user) throws ServiceNotAvailableException {
         super(form);
         this.client = client;
+        this.user = user;
         controller = this.client.getShowCompetitionService();
         initComponents();
     }

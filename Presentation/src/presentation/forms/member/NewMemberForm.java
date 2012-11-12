@@ -71,6 +71,7 @@ public class NewMemberForm extends AbstractMainForm {
     ServiceClient client;
     INewMember controller;
     IMember member;
+    IMember user;
     IRole role;
     IDepartment department;
     IAddress address;
@@ -81,9 +82,10 @@ public class NewMemberForm extends AbstractMainForm {
     /**
      * Creates new form NewMemb
      */
-    public NewMemberForm(AbstractForm form, ServiceClient client) throws ServiceNotAvailableException {
+    public NewMemberForm(AbstractForm form, ServiceClient client, IMember user) throws ServiceNotAvailableException {
         super(form);
         this.client = client;
+        this.user = user;
         controller = this.client.getNewMemberService();
         initComponents();
     }
