@@ -10,6 +10,7 @@ import dto.contract.IMatch;
 import dto.contract.IMatchresult;
 import dto.contract.ITeam;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import rmi.contract.services.IAddMatchResultsRmiService;
 
@@ -17,8 +18,12 @@ import rmi.contract.services.IAddMatchResultsRmiService;
  *
  * @author Lins Christian (christian.lins87@gmail.com)
  */
-public class AddMatchResultsRmiService implements IAddMatchResultsRmiService
+public class AddMatchResultsRmiService extends UnicastRemoteObject implements IAddMatchResultsRmiService
 {
+    
+    public AddMatchResultsRmiService() throws RemoteException {
+        super();
+    }
     
 
     @Override

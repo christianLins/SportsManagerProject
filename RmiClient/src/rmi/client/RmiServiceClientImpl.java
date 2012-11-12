@@ -68,6 +68,7 @@ public class RmiServiceClientImpl implements ServiceClient
         }
         catch (RemoteException ex)
         {
+            ex.printStackTrace();
             throw new ServiceNotAvailableException("Service AddMatchResults not available", ex);
         }
     }

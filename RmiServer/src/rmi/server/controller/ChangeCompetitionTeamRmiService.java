@@ -7,6 +7,8 @@ package rmi.server.controller;
 import classes.ChangeCompetitionTeam;
 import dto.contract.IClubTeam;
 import dto.contract.ICompetition;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import rmi.contract.services.IChangeCompetitionTeamRmiService;
 
@@ -14,8 +16,11 @@ import rmi.contract.services.IChangeCompetitionTeamRmiService;
  *
  * @author Lins Christian (christian.lins87@gmail.com)
  */
-public class ChangeCompetitionTeamRmiService implements IChangeCompetitionTeamRmiService
+public class ChangeCompetitionTeamRmiService extends UnicastRemoteObject implements IChangeCompetitionTeamRmiService
 {
+    public ChangeCompetitionTeamRmiService() throws RemoteException {
+        super();
+    }
 
     @Override
     public List<ICompetition> getCompetition()

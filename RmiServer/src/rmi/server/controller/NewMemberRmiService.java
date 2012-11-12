@@ -7,6 +7,7 @@ package rmi.server.controller;
 import classes.NewMember;
 import dto.contract.*;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import rmi.contract.services.INewMemberRmiService;
 
@@ -14,9 +15,13 @@ import rmi.contract.services.INewMemberRmiService;
  *
  * @author Lins Christian (christian.lins87@gmail.com)
  */
-public class NewMemberRmiService implements INewMemberRmiService
+public class NewMemberRmiService extends UnicastRemoteObject implements INewMemberRmiService
 {
 
+    public NewMemberRmiService() throws RemoteException {
+        super();
+    }
+    
     @Override
     public void setNewMember(IMember member, IAddress address) throws RemoteException
     {

@@ -9,6 +9,7 @@ import dto.contract.ICompetition;
 import dto.contract.IMember;
 import dto.contract.ITeam;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import rmi.contract.services.INewCompetitionRmiService;
 
@@ -16,9 +17,13 @@ import rmi.contract.services.INewCompetitionRmiService;
  *
  * @author Lins Christian (christian.lins87@gmail.com)
  */
-public class NewCompetitionRmiService implements INewCompetitionRmiService
+public class NewCompetitionRmiService extends UnicastRemoteObject implements INewCompetitionRmiService
 {
 
+    public NewCompetitionRmiService() throws RemoteException {
+        super();
+    }
+    
     @Override
     public void setCompetition(ICompetition competition, IMember member) throws RemoteException
     {

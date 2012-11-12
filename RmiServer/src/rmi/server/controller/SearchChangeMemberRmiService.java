@@ -7,6 +7,7 @@ package rmi.server.controller;
 import classes.SearchChangeMember;
 import dto.contract.*;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import rmi.contract.services.ISearchChangeMemberRmiService;
 
@@ -14,8 +15,12 @@ import rmi.contract.services.ISearchChangeMemberRmiService;
  *
  * @author Lins Christian (christian.lins87@gmail.com)
  */
-public class SearchChangeMemberRmiService implements ISearchChangeMemberRmiService
+public class SearchChangeMemberRmiService extends UnicastRemoteObject implements ISearchChangeMemberRmiService
 {
+    
+    public SearchChangeMemberRmiService() throws RemoteException {
+        super();
+    }
 
     @Override
     public IRole getRoles(Integer memberId)

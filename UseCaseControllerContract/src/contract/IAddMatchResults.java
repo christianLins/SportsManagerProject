@@ -4,8 +4,11 @@
  */
 package contract;
 
+import dto.contract.ICompetition;
+import dto.contract.IMatch;
+import dto.contract.IMatchresult;
+import dto.contract.ITeam;
 import java.util.List;
-import dto.contract.*;
 
 /**
  *
@@ -15,8 +18,7 @@ public interface IAddMatchResults {
     
     List<ICompetition> getCompetitionList();
     List<ITeam> getTeamList(List<Integer> team);
-    List<IMatch> getMatchList(List<Integer> match);
-    
+    List<IMatch> getMatchList(List<Integer> match);    
     void setMatchResult(IMatch match, IMatchresult matchresult);
     
     
