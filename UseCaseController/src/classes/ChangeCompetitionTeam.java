@@ -86,7 +86,8 @@ public class ChangeCompetitionTeam implements IChangeCompetitionTeam{
 
     @Override
     public IClubTeam getCompetitionTeam(IClubTeam team) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //Sry han kA meh was i do tu muss ^^
+        return team;
     }
 
     @Override

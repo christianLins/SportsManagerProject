@@ -26,7 +26,13 @@ public class NewCompetition implements INewCompetition{
 
     @Override
     public void setCompetition(ICompetition competition, IMember member) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try {
+            //hier überprüfung des Member !!!
+            
+            DtoFactory.getCompetitionManager().set(competition);
+        } catch (RemoteException ex) {
+            Logger.getLogger(NewCompetition.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
