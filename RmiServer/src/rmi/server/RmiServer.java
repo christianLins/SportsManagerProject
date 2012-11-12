@@ -60,7 +60,8 @@ public class RmiServer
             isRunning = true;
             System.out.println("rmi server is running on port " + port);
         } catch (RemoteException | MalformedURLException ex) {
-            // throw new RmiServerException(ex);
+            System.out.println("RMI Server has problemes during start up");
+            ex.printStackTrace();
         }
     }
 
