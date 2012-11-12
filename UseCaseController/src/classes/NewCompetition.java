@@ -7,7 +7,11 @@ import contract.*;
 import dto.contract.ICompetition;
 import dto.contract.IMember;
 import dto.contract.ITeam;
+import dto.mapper.DtoFactory;
+import java.rmi.RemoteException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author EnjoX
@@ -27,7 +31,12 @@ public class NewCompetition implements INewCompetition{
 
     @Override
     public List<ITeam> getTeams() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try {
+            return DtoFactory.getTeamManager().getAll();
+        } catch (RemoteException ex) {
+            Logger.getLogger(NewCompetition.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
     
 }
