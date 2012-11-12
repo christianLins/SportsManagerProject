@@ -28,6 +28,7 @@ import dto.contract.IDepartment;
 import dto.contract.ICountry;
 import dto.contract.IAddress;
 import dto.contract.IClubTeam;
+import dto.contract.IDepartmentHead;
 import dto.contract.IMember;
 import dto.contract.IRole;
 import java.util.Iterator;
