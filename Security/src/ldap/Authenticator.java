@@ -4,10 +4,10 @@
  */
 package ldap;
 
-import ldap.contract.IAuthenticator;
 import java.util.*;
 import javax.naming.*;
-import ldap.contract.IUserData;
+import ldap.contract.IAuthenticator;
+import dto.contract.IUserData;
 
 /**
 
@@ -16,6 +16,10 @@ import ldap.contract.IUserData;
 public class Authenticator implements IAuthenticator
 {
     private HashMap<Integer, Date> currentConnections = new HashMap<>();
+
+    public Authenticator()
+    {
+    }
 
     @Override
     public boolean auth(IUserData userData)

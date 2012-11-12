@@ -4,7 +4,7 @@
  */
 package ldap.contract;
 
-import ldap.contract.IUserData;
+import dto.contract.IUserData;
 
 /**
 
