@@ -41,18 +41,12 @@ public class RmiServiceClientImpl implements ServiceClient
 
     private void init() throws CommunicationProblemException
     {
-        System.setProperty("java.security.policy", "./policy");
-        File f = new File("./testfile.txt");
-        try
-        {
-            FileWriter wr = new FileWriter(f);
-            System.out.println("file written");
-        }
-        catch (IOException ex)
-        {
-            Logger.getLogger(RmiServiceClientImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.setSecurityManager(new RMISecurityManager());
+//        String setProperty = System.setProperty("java.security.policy", "./client.policy");
+//        
+//        if (System.getSecurityManager() == null) {
+//            System.setSecurityManager(new RMISecurityManager());
+//        } 
+        
         try
         {
             

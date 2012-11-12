@@ -6,6 +6,7 @@ package rmi.server.controller;
 
 import classes.SearchChangeMember;
 import dto.contract.*;
+import java.rmi.RemoteException;
 import java.util.List;
 import rmi.contract.services.ISearchChangeMemberRmiService;
 
@@ -15,12 +16,6 @@ import rmi.contract.services.ISearchChangeMemberRmiService;
  */
 public class SearchChangeMemberRmiService implements ISearchChangeMemberRmiService
 {
-
-    @Override
-    public IMember getMember(String searchMember)
-    {
-        return SearchChangeMember.getInstance().getMember(searchMember);
-    }
 
     @Override
     public IRole getRoles(Integer memberId)
@@ -62,6 +57,12 @@ public class SearchChangeMemberRmiService implements ISearchChangeMemberRmiServi
     public void setNewMember(IMember member, IAddress address, IDepartment department, IClubTeam clubTeam, IRole role)
     {
         SearchChangeMember.getInstance().setNewMember(member, address, department, clubTeam, role);
+    }
+
+    @Override
+    public IMember getMember(int searchMember) throws RemoteException
+    {
+       return SearchChangeMember.getInstance().getMember(searchMember);
     }
     
 }

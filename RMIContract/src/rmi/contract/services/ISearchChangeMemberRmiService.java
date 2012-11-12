@@ -15,7 +15,7 @@ import java.rmi.RemoteException;
  */
 public interface ISearchChangeMemberRmiService extends Remote{
     
-    IMember getMember(String searchMember) throws RemoteException;
+    IMember getMember(int searchMember) throws RemoteException;
     IRole getRoles(Integer memberId) throws RemoteException;
     IDepartment getDepartment(Integer memberId) throws RemoteException;
     IAddress getAddress(Integer addressId) throws RemoteException;

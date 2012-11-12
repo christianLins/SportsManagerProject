@@ -42,7 +42,7 @@ public class ShowCompetitionRmiService implements IShowCompetitionRmiService
     @Override
     public IPlayer getPlayer(IClubTeam team) throws RemoteException
     {
-        return ShowCompetition.getInstance().getPlayer(team);
+        return (IPlayer) ShowCompetition.getInstance().getPlayer(team);
     }
     
 }

@@ -42,8 +42,11 @@ public class ShowCompetition implements IShowCompetition{
     }
 
     @Override
-    public IPlayer getPlayer(IClubTeam team) {
+    public List<IPlayer> getPlayer(IClubTeam team)
+    {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+   
     
 }

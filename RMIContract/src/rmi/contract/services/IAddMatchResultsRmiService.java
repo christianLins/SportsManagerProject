@@ -4,10 +4,13 @@
  */
 package rmi.contract.services;
 
-import java.util.List;
-import dto.contract.*;
+import dto.contract.ICompetition;
+import dto.contract.IMatch;
+import dto.contract.IMatchresult;
+import dto.contract.ITeam;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.List;
 
 /**
  *
