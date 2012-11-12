@@ -6,6 +6,7 @@ package classes;
 import contract.*;
 import dto.contract.IClubTeam;
 import dto.contract.ICompetition;
+import dto.contract.IPlayer;
 import java.util.List;
 /**
  *
@@ -41,6 +42,16 @@ public class ChangeCompetitionTeam implements IChangeCompetitionTeam{
     @Override
     public List<IClubTeam> getClubTeams()
     {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public IClubTeam getCompetitionTeam(IClubTeam team) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<IPlayer> getPlayers(List<Integer> players) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     

@@ -5,10 +5,8 @@
 package rmi.server.controller;
 
 import classes.SearchChangeMember;
-import contract.ISearchChangeMember;
 import dto.contract.*;
 import java.util.List;
-import rmi.contract.services.INewMemberRmiService;
 import rmi.contract.services.ISearchChangeMemberRmiService;
 
 /**

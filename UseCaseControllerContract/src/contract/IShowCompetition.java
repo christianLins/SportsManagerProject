@@ -6,7 +6,6 @@ package contract;
 
 import java.util.List;
 import dto.contract.*;
-import contract.ShowMatchObj;
 
 /**
  *
@@ -17,7 +16,7 @@ public interface IShowCompetition {
     List<ICompetition> getCompetitions();
     List<IMatch> getMatchs(List<Integer> matches);
     List<ShowMatchObj> getTeams(List<Integer> matches);
-    IPlayer getPlayer(IClubTeam team);
+    List<IPlayer> getPlayer(IClubTeam team);
     
     
 }
