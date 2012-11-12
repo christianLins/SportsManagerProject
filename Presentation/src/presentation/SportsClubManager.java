@@ -51,12 +51,13 @@ public class SportsClubManager
     private JSplitPane tabMember;
     private JTabbedPane tabPane;
     private ServiceClient rmiClient;
-    private IMapper<IMember> loggedIn;
+    private static IMember user;
 
-    public SportsClubManager(AbstractForm form, ServiceClient rmiClient)
+    public SportsClubManager(AbstractForm form, ServiceClient rmiClient, IMember user)
     {
         super(form);
         this.rmiClient = rmiClient;        
+        this.user = user;
         this.setTitle("SportsClubManager");
         this.setExtendedState(this.getExtendedState() | MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -283,7 +284,7 @@ public class SportsClubManager
     private void displaySearchMain() throws ServiceNotAvailableException
     {
         paneMemberMain.removeAll();
-        paneMemberMain = new SearchMemberForm(this, rmiClient).paneSearch;
+        paneMemberMain = new SearchMemberForm(this, rmiClient, user).paneSearch;
 
         tabMember.setRightComponent(paneMemberMain);
         tabMember.validate();
@@ -293,7 +294,7 @@ public class SportsClubManager
     public void displayAddMember() throws ServiceNotAvailableException
     {
         paneMemberMain.removeAll();
-        paneMemberMain = new NewMemberForm(this, rmiClient).panel;
+        paneMemberMain = new NewMemberForm(this, rmiClient, user).panel;
 
         tabMember.setRightComponent(paneMemberMain);
         tabMember.validate();
@@ -303,7 +304,7 @@ public class SportsClubManager
     private void btnShowResultActionPerformed(java.awt.event.ActionEvent evt) throws ServiceNotAvailableException
     {
         paneMatchMain.removeAll();
-        paneMatchMain = new ShowCompetitionForm(null, rmiClient).paneShowInfo;
+        paneMatchMain = new ShowCompetitionForm(null, rmiClient, user).paneShowInfo;
 
         tabMatch.setRightComponent(paneMatchMain);
         tabMatch.validate();
@@ -313,7 +314,7 @@ public class SportsClubManager
     private void btnAddResultActionPerformed(java.awt.event.ActionEvent evt) throws ServiceNotAvailableException
     {
         paneMatchMain.removeAll();
-        paneMatchMain = new AddCompetitionResultsForm(null, rmiClient).paneMatchResults;
+        paneMatchMain = new AddCompetitionResultsForm(null, rmiClient, user).paneMatchResults;
 
         tabMatch.setRightComponent(paneMatchMain);
         tabMatch.validate();
@@ -323,7 +324,7 @@ public class SportsClubManager
     private void btnCreateCompetActionPerformed(ActionEvent evt) throws ServiceNotAvailableException
     {
         paneMatchMain.removeAll();
-        paneMatchMain = new CreateCompetitionForm(null, rmiClient).panel;
+        paneMatchMain = new CreateCompetitionForm(null, rmiClient, user).panel;
 
         tabMatch.setRightComponent(paneMatchMain);
         tabMatch.validate();
@@ -333,15 +334,15 @@ public class SportsClubManager
     private void btnChangeTeamActionPerformed(ActionEvent evt) throws ServiceNotAvailableException
     {
         paneMatchMain.removeAll();
-        paneMatchMain = new ChangeCompetitionTeam(null, rmiClient).panelChangeTeam;
+        paneMatchMain = new ChangeCompetitionTeam(null, rmiClient, user).panelChangeTeam;
 
         tabMatch.setRightComponent(paneMatchMain);
         tabMatch.validate();
         tabMatch.repaint();
     }
     
-    public IMapper<IMember> getLoggedInUser(){
-        return loggedIn;
+    public IMember getLoggedInUser(){
+        return user;
     }
 
     /**
@@ -380,7 +381,7 @@ public class SportsClubManager
             public void run()
             {
                 
-                SportsClubManager manager = new SportsClubManager(null, serviceClientFactories.ServiceClientFactory.getRmiServiceClient("localhost", 1099));
+                SportsClubManager manager = new SportsClubManager(null, serviceClientFactories.ServiceClientFactory.getRmiServiceClient("localhost", 1099), user);
                 manager.setVisible(true);
                 
             }

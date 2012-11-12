@@ -71,18 +71,15 @@ public class CreateCompetitionForm extends AbstractMainForm {
     INewCompetition controller;
     ICompetition competition;
     List<IMatch> match;
-    IMember loggedIn;
-//    IMapper<ICompetition> competitionCtrl;
-//    IMapper<ITeam> teamCtrl;
-//    IMapper<IMatch> matchCtrl;
+    IMember user;
     List<String> aTeam;
     List<String> bTeam;
     // End of variables declaration
 
-    public CreateCompetitionForm(AbstractForm parent, ServiceClient client) throws ServiceNotAvailableException {
+    public CreateCompetitionForm(AbstractForm parent, ServiceClient client, IMember user) throws ServiceNotAvailableException {
         super(parent);
         this.client = client;
-        // this.loggedIn = client.getUser();
+        this.user = this.user;
         controller = this.client.getNewCompetitionService();
         initComponents();
     }
@@ -447,7 +444,7 @@ public class CreateCompetitionForm extends AbstractMainForm {
         }        
         competition.setMatchList(matchInt);
         
-        controller.setCompetition(competition, loggedIn);
+        controller.setCompetition(competition, user);
     }
 
     private void setMatchTeamList() {

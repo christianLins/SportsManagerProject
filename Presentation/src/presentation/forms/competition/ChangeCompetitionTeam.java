@@ -54,11 +54,7 @@ public class ChangeCompetitionTeam extends AbstractMainForm {
     public JPanel panelChangeTeam;
     private JScrollPane scrollCompTeam;
     private JScrollPane scrollTeam;
-//    private List<IMember> specialTeam;
-//    List<ITeam> teamList;
-//    private IMapper<ICompetition> competitionCtrl;
-//    private IMapper<ITeam> teamCtrl;
-//    String[] teamMembers;
+    IMember user;
     ServiceClient client;
     IChangeCompetitionTeam controller;
     ICompetition competition;
@@ -69,9 +65,10 @@ public class ChangeCompetitionTeam extends AbstractMainForm {
     List<IPlayer> newTeam;
 
     // End of variables declaration
-    public ChangeCompetitionTeam(AbstractForm form, ServiceClient client) throws ServiceNotAvailableException {
+    public ChangeCompetitionTeam(AbstractForm form, ServiceClient client, IMember user) throws ServiceNotAvailableException {
         super(form);
         this.client = client;
+        this.user = user;
         controller = this.client.getChangeCompetitionTeamService();
         initComponents();
     }
