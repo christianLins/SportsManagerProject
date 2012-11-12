@@ -74,7 +74,7 @@ public class CreateCompetitionForm extends AbstractMainForm {
     public CreateCompetitionForm(AbstractForm parent, ServiceClient client, IMember user) throws ServiceNotAvailableException {
         super(parent);
         this.client = client;
-        this.user = this.user;
+        this.user = user;
         controller = this.client.getNewCompetitionService();
         initComponents();
     }
@@ -132,10 +132,12 @@ public class CreateCompetitionForm extends AbstractMainForm {
             //get a list with all the teams
             String[] teams = getTeamsList();
 
+            @Override
             public int getSize() {
                 return teams.length;
             }
 
+            @Override
             public Object getElementAt(int i) {
                 return teams[i];
             }
