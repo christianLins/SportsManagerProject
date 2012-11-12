@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentation.forms.competition;
 
 import contract.IAddMatchResults;
@@ -13,7 +9,6 @@ import dto.contract.ITeam;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import javax.print.DocFlavor;
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
@@ -287,10 +282,12 @@ public class AddCompetitionResultsForm extends AbstractMainForm {
         listMatches.setModel(new AbstractListModel() {
             String[] strings = array;
 
+            @Override
             public int getSize() {
                 return strings.length;
             }
 
+            @Override
             public Object getElementAt(int i) {
                 return strings[i];
             }
@@ -307,9 +304,11 @@ public class AddCompetitionResultsForm extends AbstractMainForm {
 
         listMatches.setModel(new AbstractListModel() {
             String[] strings = array;
+            @Override
             public int getSize() {
                 return strings.length;
             }
+            @Override
             public Object getElementAt(int i) {
                 return strings[i];
             }
@@ -327,10 +326,12 @@ public class AddCompetitionResultsForm extends AbstractMainForm {
         listTeams.setModel(new AbstractListModel() {
             String[] strings = array;
 
+            @Override
             public int getSize() {
                 return strings.length;
             }
 
+            @Override
             public Object getElementAt(int i) {
                 return strings[i];
             }

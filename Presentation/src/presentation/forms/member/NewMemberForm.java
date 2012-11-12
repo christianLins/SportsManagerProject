@@ -1,17 +1,12 @@
 package presentation.forms.member;
 
 import contract.INewMember;
-import dto.classes.Address;
-import dto.classes.Member;
 import dto.contract.*;
-import dto.mapper.contract.IMapper;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 import presentation.basics.AbstractForm;
 import presentation.basics.AbstractMainForm;

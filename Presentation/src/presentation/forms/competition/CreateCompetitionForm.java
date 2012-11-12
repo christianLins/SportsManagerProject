@@ -2,19 +2,14 @@ package presentation.forms.competition;
 
 import contract.INewCompetition;
 import dto.classes.Competition;
-import dto.classes.Match;
 import dto.contract.ICompetition;
 import dto.contract.IMatch;
 import dto.contract.IMember;
 import dto.contract.ITeam;
-import dto.mapper.contract.IMapper;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -366,6 +361,7 @@ public class CreateCompetitionForm extends AbstractMainForm {
 
         btnCreate.setText("Create Competition");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createCompetitionActionPerformed(evt);
             }
@@ -428,7 +424,7 @@ public class CreateCompetitionForm extends AbstractMainForm {
         setMatchTeamList();
 
         competition = new Competition();
-        // competition.setID();
+        //TODO: ID competition.setID();
         competition.setDateFrom(dateDate.getDate());
 //      TODO:  competition.setDateTo(null);
         competition.setPayment(Double.parseDouble(txtfieldFee.getText()));
@@ -451,10 +447,12 @@ public class CreateCompetitionForm extends AbstractMainForm {
         listSelectMatch.setModel(new AbstractListModel() {
             String[] strings = (String[]) listSelectTeams.getSelectedValues();
 
+            @Override
             public int getSize() {
                 return strings.length;
             }
 
+            @Override
             public Object getElementAt(int i) {
                 return strings[i];
             }
@@ -535,10 +533,12 @@ public class CreateCompetitionForm extends AbstractMainForm {
         listTeamA.setModel(new AbstractListModel() {
             String[] strings = getATeams();
 
+            @Override
             public int getSize() {
                 return strings.length;
             }
 
+            @Override
             public Object getElementAt(int i) {
                 return strings[i];
             }
@@ -550,10 +550,12 @@ public class CreateCompetitionForm extends AbstractMainForm {
         listTeamB.setModel(new AbstractListModel() {
             String[] strings = getBTeams();
 
+            @Override
             public int getSize() {
                 return strings.length;
             }
 
+            @Override
             public Object getElementAt(int i) {
                 return strings[i];
             }
