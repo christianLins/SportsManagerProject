@@ -7,6 +7,7 @@ package rmi.contract.services;
 import java.util.List;
 import dto.contract.*;
 import contract.ShowMatchObj;
+import java.io.Serializable;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -14,7 +15,7 @@ import java.rmi.RemoteException;
  *
  * @author Lucia
  */
-public interface IShowCompetitionRmiService extends Remote{
+public interface IShowCompetitionRmiService extends Serializable{
     
     List<ICompetition> getCompetitions() throws RemoteException;
     List<IMatch> getMatchs(List<Integer> matches) throws RemoteException;

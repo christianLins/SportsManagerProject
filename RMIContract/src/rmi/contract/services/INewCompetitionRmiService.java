@@ -7,6 +7,7 @@ package rmi.contract.services;
 import contract.INewCompetition;
 import java.util.List;
 import dto.contract.*;
+import java.io.Serializable;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -14,7 +15,7 @@ import java.rmi.RemoteException;
  *
  * @author Lucia
  */
-public interface INewCompetitionRmiService extends Remote {
+public interface INewCompetitionRmiService extends Serializable {
     
     void setCompetition(ICompetition competition, IMember member) throws RemoteException;
     List<ITeam> getTeams()  throws RemoteException;

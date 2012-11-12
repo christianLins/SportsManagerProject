@@ -6,6 +6,7 @@ package rmi.contract.services;
 
 import java.util.List;
 import dto.contract.*;
+import java.io.Serializable;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -13,7 +14,7 @@ import java.rmi.RemoteException;
  *
  * @author Lucia
  */
-public interface ISearchChangeMemberRmiService extends Remote{
+public interface ISearchChangeMemberRmiService extends Serializable{
     
     IMember getMember(int searchMember) throws RemoteException;
     IRole getRoles(Integer memberId) throws RemoteException;
