@@ -76,13 +76,18 @@ public class NewMember implements INewMember{
     public void setNewMember(IMember member, IAddress address, IDepartment department, IClubTeam clubTeam, IRole role) {
         try
         {
-            
+            //Muss noch geändert werden!!!!
+            //Integer roleId = DtoFactory.getRoleManager().set(role);
             Integer adressId = DtoFactory.getAddressManager().set(address);
-            Integer departmentId = DtoFactory.getDepartmentManager().set(department);
-            Integer clubTeamId = DtoFactory.getClubTeamManager().set(clubTeam);
+            //Integer departmentId = DtoFactory.getDepartmentManager().set(department);
+            //Integer clubTeamId = DtoFactory.getClubTeamManager().set(clubTeam);
+            
             
             member.setAddress(adressId);
             DtoFactory.getMemberManager().set(member);
+            //clubTeam.setPlayerList();
+                    //clubTeam.getPlayerList().
+            //DtoFactory.getClubTeamManager().set();
         }
         catch(RemoteException ex)
         {

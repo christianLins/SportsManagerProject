@@ -7,6 +7,7 @@ package classes;
 import contract.*;
 import dto.contract.IClubTeam;
 import dto.contract.ICompetition;
+import dto.contract.IPlayer;
 import dto.mapper.DtoFactory;
 import dto.mapper.contract.IdNotFoundException;
 import java.rmi.RemoteException;
@@ -75,7 +76,12 @@ public class ChangeCompetitionTeam implements IChangeCompetitionTeam{
     @Override
     public List<IClubTeam> getClubTeams()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try {
+            return DtoFactory.getClubTeamManager().getAll();
+        } catch (RemoteException ex) {
+            Logger.getLogger(ChangeCompetitionTeam.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
@@ -85,6 +91,19 @@ public class ChangeCompetitionTeam implements IChangeCompetitionTeam{
 
     @Override
     public List<IPlayer> getPlayers(List<Integer> players) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        List<IPlayer> playerList = new ArrayList<>();
+        
+        try
+        {
+            for(Integer player : players)
+            {
+                playerList.add(DtoFactory.getPlayerManager().getById(player));
+            }
+        }
+        catch(RemoteException | IdNotFoundException ex)
+        {
+            Logger.getLogger(ChangeCompetitionTeam.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           return playerList;     
     }
 }

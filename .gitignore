@@ -100,3 +100,7 @@ UseCaseController/nbproject/private/private.properties
 *.ear
 /PresentationService/nbproject/private/private.xml
 /CommunicationContract/nbproject/private/org-nbheaven-sqe-core-java/CompileOnSaveHelper/0910581A/ServiceClientFactory.class
+/UseCaseControllerContract/build/
+/UseCaseControllerContract/dist/
+/PresentationService/build/
+/PresentationService/dist/

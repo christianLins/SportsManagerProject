@@ -58,15 +58,11 @@ public class ShowCompetition implements IShowCompetition{
 
     @Override
     public List<ShowMatchObj> getTeams(List<Integer> matches) {
+        //return nicht mehr nötig da match in DTO geändert wurde!!
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-<<<<<<< HEAD
-    public List<IPlayer> getPlayer(IClubTeam team)
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-=======
     public List<IPlayer> getPlayer(IClubTeam team) {
         List<IPlayer> playerList = new ArrayList<>();
         
@@ -82,7 +78,7 @@ public class ShowCompetition implements IShowCompetition{
             
         }
         return playerList;
->>>>>>> noch falsch aber muss updaten
+
     }
 
    
