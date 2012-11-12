@@ -167,7 +167,11 @@ public class SportsClubManager
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                btnShowResultActionPerformed(evt);
+                try {
+                    btnShowResultActionPerformed(evt);
+                } catch (ServiceNotAvailableException ex) {
+                    Logger.getLogger(SportsClubManager.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 
@@ -178,7 +182,11 @@ public class SportsClubManager
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                btnAddResultActionPerformed(evt);
+                try {
+                    btnAddResultActionPerformed(evt);
+                } catch (ServiceNotAvailableException ex) {
+                    Logger.getLogger(SportsClubManager.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 
@@ -203,7 +211,11 @@ public class SportsClubManager
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                btnChangeTeamActionPerformed(evt);
+                try {
+                    btnChangeTeamActionPerformed(evt);
+                } catch (ServiceNotAvailableException ex) {
+                    Logger.getLogger(SportsClubManager.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 
@@ -288,20 +300,20 @@ public class SportsClubManager
         tabMember.repaint();
     }
 
-    private void btnShowResultActionPerformed(java.awt.event.ActionEvent evt)
+    private void btnShowResultActionPerformed(java.awt.event.ActionEvent evt) throws ServiceNotAvailableException
     {
         paneMatchMain.removeAll();
-        paneMatchMain = new ShowCompetitionForm(null).paneShowInfo;
+        paneMatchMain = new ShowCompetitionForm(null, rmiClient).paneShowInfo;
 
         tabMatch.setRightComponent(paneMatchMain);
         tabMatch.validate();
         tabMatch.repaint();
     }
 
-    private void btnAddResultActionPerformed(java.awt.event.ActionEvent evt)
+    private void btnAddResultActionPerformed(java.awt.event.ActionEvent evt) throws ServiceNotAvailableException
     {
         paneMatchMain.removeAll();
-        paneMatchMain = new AddCompetitionResultsForm(null).paneMatchResults;
+        paneMatchMain = new AddCompetitionResultsForm(null, rmiClient).paneMatchResults;
 
         tabMatch.setRightComponent(paneMatchMain);
         tabMatch.validate();
@@ -318,7 +330,7 @@ public class SportsClubManager
         tabMatch.repaint();
     }
 
-    private void btnChangeTeamActionPerformed(ActionEvent evt)
+    private void btnChangeTeamActionPerformed(ActionEvent evt) throws ServiceNotAvailableException
     {
         paneMatchMain.removeAll();
         paneMatchMain = new ChangeCompetitionTeam(null, rmiClient).panelChangeTeam;
