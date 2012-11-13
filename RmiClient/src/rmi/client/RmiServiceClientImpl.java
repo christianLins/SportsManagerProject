@@ -15,7 +15,9 @@ import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import rmi.client.mapper.AddMatchResultsServiceMapper;
 import rmi.contract.RmiServiceClient;
+import rmi.contract.services.IAddMatchResultsRmiService;
 import services.ServiceClient;
 import services.ServiceNotAvailableException;
 
@@ -64,7 +66,9 @@ public class RmiServiceClientImpl implements ServiceClient
     {
         try
         {
-            return (IAddMatchResults) rmiServiceClient.getAddMatchResultsService();
+            IAddMatchResultsRmiService rmiService = rmiServiceClient.getAddMatchResultsService();
+            AddMatchResultsServiceMapper map = new AddMatchResultsServiceMapper();
+            return map.getService(rmiService);
         }
         catch (RemoteException ex)
         {
