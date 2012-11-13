@@ -4,13 +4,10 @@
  */
 package rmi.server.controller;
 
-import classes.AddMatchResults;
 import classes.LoginController;
 import dto.contract.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.List;
-import rmi.contract.services.IAddMatchResultsRmiService;
 import rmi.contract.services.ILoginRmiService;
 
 /**

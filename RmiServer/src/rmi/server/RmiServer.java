@@ -5,11 +5,7 @@
 package rmi.server;
 
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.MalformedURLException;
 import java.rmi.*;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import rmi.contract.RmiServiceClient;
@@ -22,8 +18,8 @@ import rmi.contract.RmiServiceClient;
  * @author Lins Christian (christian.lins87@gmail.com)
  */
 public class RmiServer
-        implements Runnable {
-
+        implements Runnable
+{
     private final int port;
     private boolean isRunning;
 
@@ -32,7 +28,8 @@ public class RmiServer
      *
      * @param port where server runs locally
      */
-    public RmiServer(int port) {
+    public RmiServer(int port)
+    {
         this.port = port;
     }
 
@@ -45,25 +42,31 @@ public class RmiServer
      * <code>
      */
     @Override
-    public void run() {
-        try {
+    public void run()
+    {
+        try
+        {
             // start rmiregistry
-            LocateRegistry.createRegistry(port);
-
+            //LocateRegistry.createRegistry(port);
+            Runtime.getRuntime().exec("rmiregistry");
             // set the codebase
-            String cb = RmiServer.class.getProtectionDomain().getCodeSource().getLocation().getFile();
+            String cb = "file://" + RmiServer.class.getProtectionDomain().getCodeSource().getLocation().getFile();
             cb += " ";
-            cb = RmiServiceClient.class.getProtectionDomain().getCodeSource().getLocation().getFile();
-            System.setProperty("java.rmi.server.codebase", "file://" + cb);
+            cb += "file://" + RmiServiceClient.class.getProtectionDomain().getCodeSource().getLocation().getFile();
+            cb += " file://" + dto.contract.IAddress.class.getProtectionDomain().getCodeSource().getLocation().getFile();
+            System.setProperty("java.rmi.server.codebase", cb);
 
+            System.setSecurityManager(new SecurityManager());
+            System.setProperty("java.security.policy", "./client.policy");
 
             RmiServiceClient rmiServiceFactory = new RmiServiceClientFactory();
             Naming.rebind("rmi://localhost:" + port + "/CommunicationFactory", rmiServiceFactory);
             isRunning = true;
             System.out.println("rmi server is running on port " + port);
-        } catch (RemoteException | MalformedURLException ex) {
-            System.out.println("RMI Server has problemes during start up");
-            ex.printStackTrace();
+        }
+        catch (IOException ex)
+        {
+            Logger.getLogger(RmiServer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -72,9 +75,8 @@ public class RmiServer
      *
      * @return
      */
-    public boolean isRunning() {
+    public boolean isRunning()
+    {
         return isRunning;
     }
-
-   
 }

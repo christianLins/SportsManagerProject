@@ -4,11 +4,13 @@
  */
 package dto.contract;
 
+import java.io.Serializable;
+
 /**
 
  @author Thomas
  */
-public interface IDto
+public interface IDto extends Serializable
 {
           Integer getId();
 }

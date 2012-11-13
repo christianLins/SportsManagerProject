@@ -4,23 +4,16 @@
  */
 package rmi.client;
 
-import services.CommunicationProblemException;
-import rmi.client.mapper.SearchChangeMemberServiceMapper;
-import rmi.client.mapper.NewMemberServiceMapper;
 import contract.*;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import rmi.client.mapper.*;
 import rmi.contract.RmiServiceClient;
 import rmi.contract.services.*;
+import services.CommunicationProblemException;
 import services.ServiceClient;
 import services.ServiceNotAvailableException;
 
@@ -42,8 +35,8 @@ public class RmiServiceClientImpl implements ServiceClient {
 
 
     private void init() throws CommunicationProblemException {
-        System.setProperty("java.security.policy", "./client.policy");
-        System.setSecurityManager(new RMISecurityManager());
+//        System.setProperty("java.security.policy", "./client.policy");
+//        System.setSecurityManager(new RMISecurityManager());
         try {
             rmiServiceClient = (RmiServiceClient) Naming.lookup("rmi://" + host + ":" + port + "/CommunicationFactory");
         } catch (NotBoundException | MalformedURLException | RemoteException ex) {
