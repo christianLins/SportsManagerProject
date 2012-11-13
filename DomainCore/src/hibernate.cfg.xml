@@ -8,21 +8,21 @@
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">stella58nera</property>
     <property name="hibernate.current_session_context_class">org.hibernate.context.ThreadLocalSessionContext</property>
-    <mapping class="sportsclubmanager.domain.classes.Address"/>
-    <mapping class="sportsclubmanager.domain.classes.ClubTeam"/>
-    <mapping class="sportsclubmanager.domain.classes.Competition"/>
-    <mapping class="sportsclubmanager.domain.classes.Country"/>
-    <mapping class="sportsclubmanager.domain.classes.Department"/>
-    <mapping class="sportsclubmanager.domain.classes.DepartmentHead"/>
-    <mapping class="sportsclubmanager.domain.classes.League"/>
-    <mapping class="sportsclubmanager.domain.classes.Match"/>
-    <mapping class="sportsclubmanager.domain.classes.Matchresult"/>
-    <mapping class="sportsclubmanager.domain.classes.Member"/>
-    <mapping class="sportsclubmanager.domain.classes.Permission"/>
-    <mapping class="sportsclubmanager.domain.classes.Player"/>
-    <mapping class="sportsclubmanager.domain.classes.Role"/>
-    <mapping class="sportsclubmanager.domain.classes.Team"/>
-    <mapping class="sportsclubmanager.domain.classes.Trainer"/>
-    <mapping class="sportsclubmanager.domain.classes.TypeOfSport"/>
+    <mapping class="domain.classes.Address"/>
+    <mapping class="domain.classes.ClubTeam"/>
+    <mapping class="domain.classes.Competition"/>
+    <mapping class="domain.classes.Country"/>
+    <mapping class="domain.classes.Department"/>
+    <mapping class="domain.classes.DepartmentHead"/>
+    <mapping class="domain.classes.League"/>
+    <mapping class="domain.classes.Match"/>
+    <mapping class="domain.classes.Matchresult"/>
+    <mapping class="domain.classes.Member"/>
+    <mapping class="domain.classes.Permission"/>
+    <mapping class="domain.classes.Player"/>
+    <mapping class="domain.classes.Role"/>
+    <mapping class="domain.classes.Team"/>
+    <mapping class="domain.classes.Trainer"/>
+    <mapping class="domain.classes.TypeOfSport"/>
   </session-factory>
 </hibernate-configuration>
