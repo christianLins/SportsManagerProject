@@ -23,6 +23,6 @@ public interface ServiceClient
     INewMember getNewMemberService() throws ServiceNotAvailableException;
     ISearchChangeMember getSearchChangeMemberService() throws ServiceNotAvailableException;
     IShowCompetition getShowCompetitionService() throws ServiceNotAvailableException;
-    
+    ILogin getLoginService()throws ServiceNotAvailableException;
     
 }

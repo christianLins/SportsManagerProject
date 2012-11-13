@@ -1,15 +1,11 @@
 package presentation.forms.competition;
 
-import com.sun.jndi.cosnaming.CNCtx;
 import contract.IChangeCompetitionTeam;
-import dto.classes.ClubTeam;
 import dto.contract.IClubTeam;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
@@ -22,12 +18,9 @@ import javax.swing.JScrollPane;
 import javax.swing.LayoutStyle;
 import javax.swing.ListModel;
 import javax.swing.WindowConstants;
-import dto.mapper.contract.IdNotFoundException;
 import dto.contract.ICompetition;
 import dto.contract.IMember;
 import dto.contract.IPlayer;
-import dto.contract.ITeam;
-import javax.swing.DefaultListModel;
 import presentation.basics.AbstractForm;
 import presentation.basics.AbstractMainForm;
 import services.ServiceClient;
@@ -267,10 +260,12 @@ public class ChangeCompetitionTeam extends AbstractMainForm {
         listTeam.setModel(new AbstractListModel() {
             String[] strings = players;
 
+            @Override
             public int getSize() {
                 return strings.length;
             }
 
+            @Override
             public Object getElementAt(int i) {
                 return strings[i];
             }
@@ -287,10 +282,12 @@ public class ChangeCompetitionTeam extends AbstractMainForm {
         listCompTeam.setModel(new AbstractListModel() {
             String[] strings = topTeam;
 
+            @Override
             public int getSize() {
                 return strings.length;
             }
 
+            @Override
             public Object getElementAt(int i) {
                 return strings[i];
             }
@@ -355,21 +352,21 @@ public class ChangeCompetitionTeam extends AbstractMainForm {
             newTeam.remove((IPlayer) cTeamSel[i]);  //remove from new team list
         }
 
-        Object[] newTeam = tmpTeam.toArray();
+        Object[] nTeam = tmpTeam.toArray();
 
-        listCompTeam.setListData(newTeam);
+        listCompTeam.setListData(nTeam);
         listTeam.setListData(origTeam);
     }
 
     private String[] getCompetitionList() {
         List<ICompetition> compList = controller.getCompetition();
-        String[] competition = new String[compList.size()];
+        String[] compArray = new String[compList.size()];
 
         for (int i = 0; i < compList.size(); i++) {
             //TODO: check how to name it
-            competition[i] = compList.get(i).toString();
+            compArray[i] = compList.get(i).toString();
         }
-        return competition;
+        return compArray;
     }
 
     private String[] getTeamList() {

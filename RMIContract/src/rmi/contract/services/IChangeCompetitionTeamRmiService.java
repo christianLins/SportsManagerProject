@@ -4,16 +4,15 @@
  */
 package rmi.contract.services;
 
-import java.util.List;
 import dto.contract.*;
-import java.io.Serializable;
 import java.rmi.Remote;
+import java.util.List;
 
 /**
  *
  * @author Lucia
  */
-public interface IChangeCompetitionTeamRmiService extends Serializable {
+public interface IChangeCompetitionTeamRmiService extends Remote {
     
     List<ICompetition> getCompetition() ;
     List<IClubTeam> getClubTeams(List<Integer> Teams);
