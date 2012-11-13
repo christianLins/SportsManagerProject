@@ -12,15 +12,15 @@ import dto.contract.IDepartment;
 import dto.mapper.contract.*;
 
 /**
-
- @author Thomas
+ *
+ * @author Thomas
  */
 public class DepartmentMapper
         implements IMapper<IDepartment>
 {
     private static DepartmentMapper controller;
 
-     DepartmentMapper()
+    DepartmentMapper()
     {
     }
 
@@ -37,19 +37,23 @@ public class DepartmentMapper
     public domain.contract.IDepartment getDomainById(Integer id)
             throws IdNotFoundException
     {
-        for (domain.contract.IDepartment a : DomainFacade.getAll(domain.contract.IDepartment.class))
+        try
         {
+            domain.contract.IDepartment a = DomainFacade.getInstance().getByID(domain.contract.IDepartment.class, id);
             return a;
         }
+        catch (Exception ex)
+        {
 
-        throw new IdNotFoundException();
+            throw new IdNotFoundException();
+        }
     }
 
     @Override
     public IDepartment getById(Integer id)
             throws IdNotFoundException
     {
-        for (domain.contract.IDepartment a : DomainFacade.getAll(domain.contract.IDepartment.class))
+        for (domain.contract.IDepartment a : DomainFacade.getInstance().getAll(domain.contract.IDepartment.class))
         {
             if (a.getId() == id)
             {
@@ -65,7 +69,7 @@ public class DepartmentMapper
     {
         List<IDepartment> result = new LinkedList<>();
 
-        for (domain.contract.IDepartment a : DomainFacade.getAll(domain.contract.IDepartment.class))
+        for (domain.contract.IDepartment a : DomainFacade.getInstance().getAll(domain.contract.IDepartment.class))
         {
             result.add(Department.copy(a));
         }
@@ -80,7 +84,7 @@ public class DepartmentMapper
         {
             domain.classes.Department department = createDomain(value);
 
-            return DomainFacade.set(department);
+            return DomainFacade.getInstance().set(department);
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
@@ -97,7 +101,7 @@ public class DepartmentMapper
         {
             domain.classes.Department department = createDomain(value);
 
-            DomainFacade.delete(department);
+            DomainFacade.getInstance().delete(department);
         }
         catch (IdNotFoundException | CouldNotDeleteException ex)
         {

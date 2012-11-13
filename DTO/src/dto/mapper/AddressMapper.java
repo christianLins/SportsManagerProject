@@ -12,7 +12,7 @@ import java.util.*;
 import java.util.logging.*;
 
 /**
- @author Thomas
+ * @author Thomas
  */
 public class AddressMapper
         implements IMapper<IAddress>
@@ -36,30 +36,30 @@ public class AddressMapper
     public domain.contract.IAddress getDomainById(Integer id)
             throws IdNotFoundException
     {
-        for (domain.contract.IAddress a : DomainFacade.getAll(domain.contract.IAddress.class))
+        try
         {
-            if (a.getId() == id)
-            {
-                return a;
-            }
+            return DomainFacade.getInstance().getByID(domain.contract.IAddress.class, id);
         }
-
-        throw new IdNotFoundException();
+        catch (Exception ex)
+        {
+            throw new IdNotFoundException();
+        }
     }
 
     @Override
     public IAddress getById(Integer id)
             throws IdNotFoundException
     {
-        for (domain.contract.IAddress a : DomainFacade.getAll(domain.contract.IAddress.class))
+        try
         {
-            if (a.getId() == id)
-            {
-                return Address.copy(a);
-            }
+            domain.contract.IAddress a = DomainFacade.getInstance().getByID(domain.contract.IAddress.class, id);
+            return Address.copy(a);
         }
+        catch (Exception ex)
+        {
 
-        throw new IdNotFoundException();
+            throw new IdNotFoundException();
+        }
     }
 
     @Override
@@ -67,7 +67,7 @@ public class AddressMapper
     {
         List<IAddress> result = new LinkedList<>();
 
-        for (domain.contract.IAddress a : DomainFacade.getAll(domain.contract.IAddress.class))
+        for (domain.contract.IAddress a : DomainFacade.getInstance().getAll(domain.contract.IAddress.class))
         {
             result.add(Address.copy(a));
         }
@@ -82,7 +82,7 @@ public class AddressMapper
         {
             domain.classes.Address address = createDomain(value);
 
-            return DomainFacade.set(address);
+            return DomainFacade.getInstance().set(address);
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
@@ -99,7 +99,7 @@ public class AddressMapper
         {
             domain.classes.Address address = createDomain(value);
 
-            DomainFacade.delete(address);
+            DomainFacade.getInstance().delete(address);
         }
         catch (IdNotFoundException | CouldNotDeleteException ex)
         {

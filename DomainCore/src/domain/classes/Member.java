@@ -21,7 +21,7 @@ public class Member
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idMember")
-    private Integer idMember;
+    private Integer id;
     @Basic(optional = false)
     @Column(name = "Prename")
     private String prename;
@@ -45,10 +45,10 @@ public class Member
     private String emailAddress;
     @Column(name = "Gender")
     private Boolean gender;
-    @JoinColumn(name = "Nationality", referencedColumnName = "idCountry")
+    @JoinColumn(name = "Nationality", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Country nationality;
-    @JoinColumn(name = "Address", referencedColumnName = "idAddress")
+    @JoinColumn(name = "Address", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Address address;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "memberidMember")
@@ -58,14 +58,14 @@ public class Member
     {
     }
 
-    public Member(Integer idMember)
+    public Member(Integer id)
     {
-        this.idMember = idMember;
+        this.id = id;
     }
 
-    public Member(Integer idMember, String prename, String lastname, Date dateOfBirth, Date memberFrom)
+    public Member(Integer id, String prename, String lastname, Date dateOfBirth, Date memberFrom)
     {
-        this.idMember = idMember;
+        this.id = id;
         this.prename = prename;
         this.lastname = lastname;
         this.dateOfBirth = dateOfBirth;
@@ -75,19 +75,19 @@ public class Member
     @Override
     public Integer getId()
     {
-        return idMember;
+        return id;
     }
 
     @Override
     public Integer getIdMember()
     {
-        return idMember;
+        return id;
     }
 
     @Override
-    public void setIdMember(Integer idMember)
+    public void setIdMember(Integer id)
     {
-        this.idMember = idMember;
+        this.id = id;
     }
 
     @Override
@@ -241,7 +241,7 @@ public class Member
     public int hashCode()
     {
         int hash = 0;
-        hash += (idMember != null ? idMember.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -254,7 +254,7 @@ public class Member
             return false;
         }
         Member other = (Member) object;
-        if ((this.idMember == null && other.idMember != null) || (this.idMember != null && !this.idMember.equals(other.idMember)))
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)))
         {
             return false;
         }
@@ -264,6 +264,6 @@ public class Member
     @Override
     public String toString()
     {
-        return "sportsclubmanager.domain.classes.Member1[ idMember=" + idMember + " ]";
+        return "sportsclubmanager.domain.classes.Member1[ id=" + id + " ]";
     }
 }

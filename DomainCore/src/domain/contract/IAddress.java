@@ -8,8 +8,7 @@ package domain.contract;
 
  @author Thomas
  */
-public interface IAddress
-        extends IDomain
+public interface IAddress extends IDomain
 {
     ICountry getCountry();
 

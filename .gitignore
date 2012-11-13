@@ -104,3 +104,6 @@ UseCaseController/nbproject/private/private.properties
 /UseCaseControllerContract/dist/
 /PresentationService/build/
 /PresentationService/dist/
+DTO/nbproject/private/private.xml
+
+UseCaseControllerContract/nbproject/private/private.xml

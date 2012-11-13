@@ -1,10 +1,10 @@
 package domain.classes;
 
+import domain.contract.*;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
-import domain.contract.*;
 
 /**
 
@@ -21,7 +21,7 @@ public class Competition
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idCompetition")
-    private Integer idCompetition;
+    private Integer id;
     @Basic(optional = false)
     @Column(name = "DateFrom")
     @Temporal(TemporalType.DATE)
@@ -50,24 +50,24 @@ public class Competition
 
     public Competition(Integer idCompetition)
     {
-        this.idCompetition = idCompetition;
+        this.id = idCompetition;
     }
 
     public Competition(Integer idCompetition, Date dateFrom)
     {
-        this.idCompetition = idCompetition;
+        this.id = idCompetition;
         this.dateFrom = dateFrom;
     }
 
     @Override
     public Integer getId()
     {
-        return idCompetition;
+        return id;
     }
 
     public void setId(Integer idCompetition)
     {
-        this.idCompetition = idCompetition;
+        this.id = idCompetition;
     }
 
     @Override
@@ -163,30 +163,28 @@ public class Competition
     @Override
     public int hashCode()
     {
-        int hash = 0;
-        hash += (idCompetition != null ? idCompetition.hashCode() : 0);
+        int hash = 5;
+        hash = 11 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object)
+    public boolean equals(Object obj)
     {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Competition))
+        if (obj == null)
         {
             return false;
         }
-        Competition other = (Competition) object;
-        if ((this.idCompetition == null && other.idCompetition != null) || (this.idCompetition != null && !this.idCompetition.equals(other.idCompetition)))
+        if (getClass() != obj.getClass())
+        {
+            return false;
+        }
+        final Competition other = (Competition) obj;
+        if (!Objects.equals(this.id, other.id))
         {
             return false;
         }
         return true;
     }
-
-    @Override
-    public String toString()
-    {
-        return "sportsclubmanager.domain.classes.Competition[ idCompetition=" + idCompetition + " ]";
-    }
+    
 }

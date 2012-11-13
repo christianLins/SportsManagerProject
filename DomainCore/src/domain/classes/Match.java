@@ -19,7 +19,7 @@ public class Match implements Serializable, IMatch {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idMatch")
-    private Integer idMatch;
+    private Integer id;
     @Basic(optional = false)
     @Column(name = "DateFrom")
     @Temporal(TemporalType.DATE)
@@ -30,7 +30,7 @@ public class Match implements Serializable, IMatch {
     @JoinColumn(name = "Competition", referencedColumnName = "idCompetition")
     @ManyToOne(optional = false)
     private Competition competition;
-    @JoinColumn(name = "Matchresult", referencedColumnName = "idMatchresult")
+    @JoinColumn(name = "Matchresult", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Matchresult matchresult;
     @JoinColumn(name = "Foreignteam", referencedColumnName = "idTeam")
@@ -44,25 +44,25 @@ public class Match implements Serializable, IMatch {
     {
     }
 
-    public Match(Integer idMatch)
+    public Match(Integer id)
     {
-        this.idMatch = idMatch;
+        this.id = id;
     }
 
-    public Match(Integer idMatch, Date dateFrom)
+    public Match(Integer id, Date dateFrom)
     {
-        this.idMatch = idMatch;
+        this.id = id;
         this.dateFrom = dateFrom;
     }
 
     public Integer getId()
     {
-        return idMatch;
+        return id;
     }
 
-    public void setId(Integer idMatch)
+    public void setId(Integer id)
     {
-        this.idMatch = idMatch;
+        this.id = id;
     }
 
     @Override
@@ -141,7 +141,7 @@ public class Match implements Serializable, IMatch {
     public int hashCode()
     {
         int hash = 0;
-        hash += (idMatch != null ? idMatch.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -154,7 +154,7 @@ public class Match implements Serializable, IMatch {
             return false;
         }
         Match other = (Match) object;
-        if ((this.idMatch == null && other.idMatch != null) || (this.idMatch != null && !this.idMatch.equals(other.idMatch)))
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)))
         {
             return false;
         }
@@ -164,7 +164,7 @@ public class Match implements Serializable, IMatch {
     @Override
     public String toString()
     {
-        return "sportsclubmanager.domain.classes.Match[ idMatch=" + idMatch + " ]";
+        return "sportsclubmanager.domain.classes.Match[ id=" + id + " ]";
     }
 
 }

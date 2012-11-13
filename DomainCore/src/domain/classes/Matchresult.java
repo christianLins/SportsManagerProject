@@ -21,7 +21,7 @@ public class Matchresult
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idMatchresult")
-    private Integer idMatchresult;
+    private Integer id;
     @Basic(optional = false)
     @Column(name = "PointsHometeam")
     private double pointsHometeam;
@@ -35,26 +35,26 @@ public class Matchresult
     {
     }
 
-    public Matchresult(Integer idMatchresult)
+    public Matchresult(Integer id)
     {
-        this.idMatchresult = idMatchresult;
+        this.id = id;
     }
 
-    public Matchresult(Integer idMatchresult, double pointsHometeam, double pointsForeignteam)
+    public Matchresult(Integer id, double pointsHometeam, double pointsForeignteam)
     {
-        this.idMatchresult = idMatchresult;
+        this.id = id;
         this.pointsHometeam = pointsHometeam;
         this.pointsForeignteam = pointsForeignteam;
     }
 
     public Integer getId()
     {
-        return idMatchresult;
+        return id;
     }
 
-    public void setId(Integer idMatchresult)
+    public void setId(Integer id)
     {
-        this.idMatchresult = idMatchresult;
+        this.id = id;
     }
 
     @Override
@@ -96,7 +96,7 @@ public class Matchresult
     public int hashCode()
     {
         int hash = 0;
-        hash += (idMatchresult != null ? idMatchresult.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -109,7 +109,7 @@ public class Matchresult
             return false;
         }
         Matchresult other = (Matchresult) object;
-        if ((this.idMatchresult == null && other.idMatchresult != null) || (this.idMatchresult != null && !this.idMatchresult.equals(other.idMatchresult)))
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)))
         {
             return false;
         }
@@ -119,6 +119,6 @@ public class Matchresult
     @Override
     public String toString()
     {
-        return "sportsclubmanager.domain.classes.Matchresult[ idMatchresult=" + idMatchresult + " ]";
+        return "sportsclubmanager.domain.classes.Matchresult[ id=" + id + " ]";
     }
 }

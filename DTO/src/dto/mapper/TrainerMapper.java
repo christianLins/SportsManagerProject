@@ -12,15 +12,15 @@ import dto.contract.ITrainer;
 import dto.mapper.contract.*;
 
 /**
-
- @author Thomas
+ *
+ * @author Thomas
  */
- public class TrainerMapper
+public class TrainerMapper
         implements IMapper<ITrainer>
 {
     private static TrainerMapper controller;
 
-     TrainerMapper()
+    TrainerMapper()
     {
     }
 
@@ -37,27 +37,30 @@ import dto.mapper.contract.*;
     public domain.contract.ITrainer getDomainById(Integer id)
             throws IdNotFoundException
     {
-        for (domain.contract.ITrainer a : DomainFacade.getAll(domain.contract.ITrainer.class))
+        try
         {
+            domain.contract.ITrainer a = DomainFacade.getInstance().getByID(domain.contract.ITrainer.class, id);
             return a;
         }
-
-        throw new IdNotFoundException();
+        catch (Exception ex)
+        {
+            throw new IdNotFoundException();
+        }
     }
 
     @Override
     public ITrainer getById(Integer id)
             throws IdNotFoundException
     {
-        for (domain.contract.ITrainer a : DomainFacade.getAll(domain.contract.ITrainer.class))
+        try
         {
-            if (a.getId() == id)
-            {
-                return Trainer.copy(a);
-            }
+            domain.contract.ITrainer a = DomainFacade.getInstance().getByID(domain.contract.ITrainer.class, id);
+            return Trainer.copy(a);
         }
-
-        throw new IdNotFoundException();
+        catch (Exception ex)
+        {
+            throw new IdNotFoundException();
+        }
     }
 
     @Override
@@ -65,7 +68,7 @@ import dto.mapper.contract.*;
     {
         List<ITrainer> result = new LinkedList<>();
 
-        for (domain.contract.ITrainer a : DomainFacade.getAll(domain.contract.ITrainer.class))
+        for (domain.contract.ITrainer a : DomainFacade.getInstance().getAll(domain.contract.ITrainer.class))
         {
             result.add(Trainer.copy(a));
         }
@@ -88,7 +91,7 @@ import dto.mapper.contract.*;
             }
             trainer.setClubTeamList(clubTeamList);
 
-            returnv = DomainFacade.set(trainer);
+            returnv = DomainFacade.getInstance().set(trainer);
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
@@ -107,7 +110,7 @@ import dto.mapper.contract.*;
         {
             domain.classes.Trainer typeofsport = createDomain(value);
 
-            DomainFacade.delete(typeofsport);
+            DomainFacade.getInstance().delete(typeofsport);
         }
         catch (IdNotFoundException | CouldNotDeleteException ex)
         {

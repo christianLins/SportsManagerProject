@@ -33,9 +33,9 @@ public class TypeOfSportTest
             EasyMock.expect(expected.getName()).andReturn("Testname");
             EasyMock.expect(expected.getDescription()).andReturn("Testdescription");
 
-            DomainFacade.set(expected);
+            DomainFacade.getInstance().set(expected);
 
-            List<ITypeOfSport> actuals = DomainFacade.getAll(ITypeOfSport.class);
+            List<ITypeOfSport> actuals = DomainFacade.getInstance().getAll(ITypeOfSport.class);
             ITypeOfSport actual = actuals.get(0);
 
             Assert.assertEquals(1, actuals.size());
@@ -58,10 +58,10 @@ public class TypeOfSportTest
             EasyMock.expect(expected.getName()).andReturn("Testname");
             EasyMock.expect(expected.getDescription()).andReturn("Testdescription");
 
-            DomainFacade.set(expected);
-            DomainFacade.delete(expected);
+            DomainFacade.getInstance().set(expected);
+            DomainFacade.getInstance().delete(expected);
 
-            List<ITypeOfSport> actuals = DomainFacade.getAll(ITypeOfSport.class);
+            List<ITypeOfSport> actuals = DomainFacade.getInstance().getAll(ITypeOfSport.class);
 
             Assert.assertEquals(0, actuals.size());
         }
@@ -90,7 +90,7 @@ public class TypeOfSportTest
                 EasyMock.expect(expected.getDescription()).andReturn("Testdescription" + i);
 
                 expecteds.add(expected);
-                DomainFacade.set(expected);
+                DomainFacade.getInstance().set(expected);
             }
             catch (CouldNotSaveException ex)
             {
@@ -98,7 +98,7 @@ public class TypeOfSportTest
             }
         }
 
-        List<ITypeOfSport> actuals = DomainFacade.getAll(ITypeOfSport.class);
+        List<ITypeOfSport> actuals = DomainFacade.getInstance().getAll(ITypeOfSport.class);
 
         Assert.assertEquals(expecteds.size(), actuals.size());
 

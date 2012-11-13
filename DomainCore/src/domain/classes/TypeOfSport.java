@@ -21,7 +21,7 @@ public class TypeOfSport
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idTypeOfSport")
-    private Integer idTypeOfSport;
+    private Integer id;
     @Basic(optional = false)
     @Column(name = "Name")
     private String name;
@@ -29,7 +29,7 @@ public class TypeOfSport
     private String description;
     @JoinTable(name = "Player_has_TypeOfSport", joinColumns =
     {
-        @JoinColumn(name = "TypeOfSport_idTypeOfSport", referencedColumnName = "idTypeOfSport")
+        @JoinColumn(name = "TypeOfSport_idTypeOfSport", referencedColumnName = "id")
     }, inverseJoinColumns =
     {
         @JoinColumn(name = "Player_Role_idRole", referencedColumnName = "idRole")
@@ -49,25 +49,25 @@ public class TypeOfSport
         this.description = typeOfSport.getDescription();
     }
 
-    public TypeOfSport(Integer idTypeOfSport)
+    public TypeOfSport(Integer id)
     {
-        this.idTypeOfSport = idTypeOfSport;
+        this.id = id;
     }
 
-    public TypeOfSport(Integer idTypeOfSport, String name)
+    public TypeOfSport(Integer id, String name)
     {
-        this.idTypeOfSport = idTypeOfSport;
+        this.id = id;
         this.name = name;
     }
 
     public Integer getId()
     {
-        return idTypeOfSport;
+        return id;
     }
 
-    public void setId(Integer idTypeOfSport)
+    public void setId(Integer id)
     {
-        this.idTypeOfSport = idTypeOfSport;
+        this.id = id;
     }
 
     @Override
@@ -146,7 +146,7 @@ public class TypeOfSport
     public int hashCode()
     {
         int hash = 0;
-        hash += (idTypeOfSport != null ? idTypeOfSport.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -159,7 +159,7 @@ public class TypeOfSport
             return false;
         }
         TypeOfSport other = (TypeOfSport) object;
-        if ((this.idTypeOfSport == null && other.idTypeOfSport != null) || (this.idTypeOfSport != null && !this.idTypeOfSport.equals(other.idTypeOfSport)))
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)))
         {
             return false;
         }
@@ -169,6 +169,6 @@ public class TypeOfSport
     @Override
     public String toString()
     {
-        return "sportsclubmanager.domain.classes.TypeOfSport[ idTypeOfSport=" + idTypeOfSport + " ]";
+        return "sportsclubmanager.domain.classes.TypeOfSport[ id=" + id + " ]";
     }
 }

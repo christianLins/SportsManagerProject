@@ -12,26 +12,27 @@ import java.util.*;
 import java.util.logging.*;
 
 /**
-
- @author Thomas
+ *
+ * @author Thomas
  */
 public class CountryMapper
         implements IMapper<ICountry>
 {
     private static CountryMapper controller;
 
-     domain.contract.ICountry getDomainById(int id)
+    domain.contract.ICountry getDomainById(int id)
             throws IdNotFoundException
     {
-        for (domain.contract.ICountry a : DomainFacade.getAll(domain.contract.ICountry.class))
+        try
         {
-            if (a.getId() == id)
-            {
-                return a;
-            }
+            domain.contract.ICountry a = DomainFacade.getInstance().getByID(domain.contract.ICountry.class, id);
+            return a;
         }
+        catch (Exception ex)
+        {
 
-        throw new IdNotFoundException();
+            throw new IdNotFoundException();
+        }
     }
 
     public CountryMapper()
@@ -52,15 +53,17 @@ public class CountryMapper
     public ICountry getById(Integer id)
             throws IdNotFoundException
     {
-        for (domain.contract.ICountry a : DomainFacade.getAll(domain.contract.ICountry.class))
+        try
         {
-            if (a.getId() == id)
-            {
-                return Country.copy(a);
-            }
-        }
+            domain.contract.ICountry a = DomainFacade.getInstance().getByID(domain.contract.ICountry.class, id);
+            return Country.copy(a);
 
-        throw new IdNotFoundException();
+        }
+        catch (Exception ex)
+        {
+
+            throw new IdNotFoundException();
+        }
     }
 
     @Override
@@ -68,7 +71,7 @@ public class CountryMapper
     {
         List<ICountry> result = new LinkedList<>();
 
-        for (domain.contract.ICountry a : DomainFacade.getAll(domain.contract.ICountry.class))
+        for (domain.contract.ICountry a : DomainFacade.getInstance().getAll(domain.contract.ICountry.class))
         {
             result.add(Country.copy(a));
         }
@@ -83,7 +86,7 @@ public class CountryMapper
         {
             domain.classes.Country country = createDomain(value);
 
-            return DomainFacade.set(country);
+            return DomainFacade.getInstance().set(country);
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
@@ -100,7 +103,7 @@ public class CountryMapper
         {
             domain.classes.Country country = createDomain(value);
 
-            DomainFacade.delete(country);
+            DomainFacade.getInstance().delete(country);
         }
         catch (IdNotFoundException | CouldNotDeleteException ex)
         {

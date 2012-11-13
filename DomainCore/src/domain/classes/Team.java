@@ -25,7 +25,7 @@ public class Team
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idTeam")
-    private Integer idTeam;
+    private Integer id;
     @Basic(optional = false)
     @Column(name = "Name")
     private String name;
@@ -37,7 +37,7 @@ public class Team
     private List<Match> matchList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hometeam")
     private List<Match> matchList1;
-    @JoinColumn(name = "League", referencedColumnName = "idLeague")
+    @JoinColumn(name = "League", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private League league;
 
@@ -45,26 +45,26 @@ public class Team
     {
     }
 
-    public Team(Integer idTeam)
+    public Team(Integer id)
     {
-        this.idTeam = idTeam;
+        this.id = id;
     }
 
-    public Team(Integer idTeam, String name)
+    public Team(Integer id, String name)
     {
-        this.idTeam = idTeam;
+        this.id = id;
         this.name = name;
     }
 
     @Override
     public Integer getId()
     {
-        return idTeam;
+        return id;
     }
 
-    public void setId(Integer idTeam)
+    public void setId(Integer id)
     {
-        this.idTeam = idTeam;
+        this.id = id;
     }
 
     @Override
@@ -171,7 +171,7 @@ public class Team
     public int hashCode()
     {
         int hash = 0;
-        hash += (idTeam != null ? idTeam.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -184,7 +184,7 @@ public class Team
             return false;
         }
         Team other = (Team) object;
-        if ((this.idTeam == null && other.idTeam != null) || (this.idTeam != null && !this.idTeam.equals(other.idTeam)))
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)))
         {
             return false;
         }
@@ -194,6 +194,6 @@ public class Team
     @Override
     public String toString()
     {
-        return "sportsclubmanager.domain.classes.Team[ idTeam=" + idTeam + " ]";
+        return "sportsclubmanager.domain.classes.Team[ id=" + id + " ]";
     }
 }

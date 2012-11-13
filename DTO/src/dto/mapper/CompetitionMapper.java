@@ -12,15 +12,15 @@ import java.util.*;
 import java.util.logging.*;
 
 /**
-
- @author Lins Christian (christian.lins87@gmail.com)
+ *
+ * @author Lins Christian (christian.lins87@gmail.com)
  */
- public class CompetitionMapper
+public class CompetitionMapper
         implements IMapper<ICompetition>
 {
     private static CompetitionMapper controller;
 
-     CompetitionMapper()
+    CompetitionMapper()
     {
     }
 
@@ -37,27 +37,32 @@ import java.util.logging.*;
     public domain.contract.ICompetition getDomainById(Integer id)
             throws IdNotFoundException
     {
-        for (domain.contract.ICompetition a : DomainFacade.getAll(domain.contract.ICompetition.class))
+        try
         {
+            domain.contract.ICompetition a = DomainFacade.getInstance().getByID(domain.contract.ICompetition.class, id);
             return a;
         }
+        catch (Exception ex)
+        {
 
-        throw new IdNotFoundException();
+            throw new IdNotFoundException();
+        }
     }
 
     @Override
     public ICompetition getById(Integer id)
             throws IdNotFoundException
     {
-        for (domain.contract.ICompetition a : DomainFacade.getAll(domain.contract.ICompetition.class))
+        try
         {
-            if (a.getId() == id)
-            {
-                return Competition.copy(a);
-            }
+            domain.contract.ICompetition a = DomainFacade.getInstance().getByID(domain.contract.ICompetition.class, id);
+            return Competition.copy(a);
         }
+        catch (Exception ex)
+        {
 
-        throw new IdNotFoundException();
+            throw new IdNotFoundException();
+        }
     }
 
     @Override
@@ -65,7 +70,7 @@ import java.util.logging.*;
     {
         List<ICompetition> result = new LinkedList<>();
 
-        for (domain.contract.ICompetition a : DomainFacade.getAll(domain.contract.ICompetition.class))
+        for (domain.contract.ICompetition a : DomainFacade.getInstance().getAll(domain.contract.ICompetition.class))
         {
             result.add(Competition.copy(a));
         }
@@ -80,7 +85,7 @@ import java.util.logging.*;
         {
             domain.classes.Competition competition = createDomain(value);
 
-            return DomainFacade.set(competition);
+            return DomainFacade.getInstance().set(competition);
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
@@ -97,7 +102,7 @@ import java.util.logging.*;
         {
             domain.classes.Competition competition = createDomain(value);
 
-            DomainFacade.delete(competition);
+            DomainFacade.getInstance().delete(competition);
         }
         catch (IdNotFoundException | CouldNotDeleteException ex)
         {

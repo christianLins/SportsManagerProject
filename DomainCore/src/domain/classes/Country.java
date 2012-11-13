@@ -21,7 +21,7 @@ public class Country
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idCountry")
-    private Integer idCountry;
+    private Integer id;
     @Basic(optional = false)
     @Column(name = "Name")
     private String name;
@@ -63,25 +63,25 @@ public class Country
         this.portugues = portugues;
     }
 
-    public Country(Integer idCountry)
+    public Country(Integer id)
     {
-        this.idCountry = idCountry;
+        this.id = id;
     }
 
-    public Country(Integer idCountry, String name)
+    public Country(Integer id, String name)
     {
-        this.idCountry = idCountry;
+        this.id = id;
         this.name = name;
     }
 
     public Integer getId()
     {
-        return idCountry;
+        return id;
     }
 
-    public void setId(Integer idCountry)
+    public void setId(Integer id)
     {
-        this.idCountry = idCountry;
+        this.id = id;
     }
 
     public String getName()
@@ -206,7 +206,7 @@ public class Country
     public int hashCode()
     {
         int hash = 0;
-        hash += (idCountry != null ? idCountry.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -219,7 +219,7 @@ public class Country
             return false;
         }
         Country other = (Country) object;
-        if ((this.idCountry == null && other.idCountry != null) || (this.idCountry != null && !this.idCountry.equals(other.idCountry)))
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)))
         {
             return false;
         }
@@ -229,6 +229,6 @@ public class Country
     @Override
     public String toString()
     {
-        return "sportsclubmanager.domain.classes.Country[ idCountry=" + idCountry + " ]";
+        return "sportsclubmanager.domain.classes.Country[ id=" + id + " ]";
     }
 }

@@ -16,15 +16,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
-
- @author Thomas
+ *
+ * @author Thomas
  */
- public class TeamMapper
+public class TeamMapper
         implements IMapper<ITeam>
 {
     private static TeamMapper controller;
 
-     TeamMapper()
+    TeamMapper()
     {
     }
 
@@ -41,30 +41,31 @@ import java.util.logging.Logger;
     public domain.contract.ITeam getDomainById(Integer id)
             throws IdNotFoundException
     {
-        for (domain.contract.ITeam a : DomainFacade.getAll(domain.contract.ITeam.class))
+        try
         {
-            if (a.getId() == id)
-            {
-                return a;
-            }
+            domain.contract.ITeam a = DomainFacade.getInstance().getByID(domain.contract.ITeam.class, id);
+            return a;
         }
-
-        throw new IdNotFoundException();
+        catch (Exception ex)
+        {
+            throw new IdNotFoundException();
+        }
     }
 
     @Override
     public ITeam getById(Integer id)
             throws IdNotFoundException
     {
-        for (domain.contract.ITeam a : DomainFacade.getAll(domain.contract.ITeam.class))
+        try
         {
-            if (a.getId() == id)
-            {
-                return Team.copy(a);
-            }
+            domain.contract.ITeam a = DomainFacade.getInstance().getByID(domain.contract.ITeam.class, id);
+            return Team.copy(a);
         }
+        catch (Exception ex)
+        {
 
-        throw new IdNotFoundException();
+            throw new IdNotFoundException();
+        }
     }
 
     @Override
@@ -72,7 +73,7 @@ import java.util.logging.Logger;
     {
         List<ITeam> result = new LinkedList<>();
 
-        for (domain.contract.ITeam a : DomainFacade.getAll(domain.contract.ITeam.class))
+        for (domain.contract.ITeam a : DomainFacade.getInstance().getAll(domain.contract.ITeam.class))
         {
             result.add(Team.copy(a));
         }
@@ -88,7 +89,7 @@ import java.util.logging.Logger;
         {
             domain.classes.Team team = createDomain(value);
 
-            rv = DomainFacade.set(team);
+            rv = DomainFacade.getInstance().set(team);
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
@@ -105,28 +106,28 @@ import java.util.logging.Logger;
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
+
     private domain.classes.Team createDomain(ITeam value)
             throws IdNotFoundException
     {
         domain.classes.Team team = new domain.classes.Team(value.getId());
-        
+
         List<Integer> competitions = value.getCompetitionList();
         List<Integer> matches = value.getMatchList();
-        
+
         team.setDescription(value.getDescription());
         team.setName(value.getName());
         team.setLeague(new LeagueMapper().getDomainById(value.getLeague()));
-        
-        LinkedList<domain.contract.ICompetition>  c = new LinkedList<>();
-        for(int id:competitions)
+
+        LinkedList<domain.contract.ICompetition> c = new LinkedList<>();
+        for (int id : competitions)
         {
             c.add(new CompetitionMapper().getDomainById(id));
         }
         team.setCompetitionList(c);
-        
+
         LinkedList<domain.contract.IMatch> m = new LinkedList<>();
-        for(int id:matches)
+        for (int id : matches)
         {
             m.add(new MatchMapper().getDomainById(id));
         }

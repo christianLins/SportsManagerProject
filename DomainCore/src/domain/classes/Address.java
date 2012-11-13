@@ -22,7 +22,7 @@ public class Address
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idAddress")
-    private Integer idAddress;
+    private Integer id;
     @Basic(optional = false)
     @Column(name = "Street")
     private String street;
@@ -45,9 +45,9 @@ public class Address
     {
     }
 
-    public Address(Integer idAddress)
+    public Address(Integer id)
     {
-        this.idAddress = idAddress;
+        this.id = id;
     }
 
     public Address(String street, int streetNumber, String village, int postalCode, Country country)
@@ -59,9 +59,9 @@ public class Address
         this.country = country;
     }
 
-    public Address(Integer idAddress, String street, int streetNumber, String village, int postalCode)
+    public Address(Integer id, String street, int streetNumber, String village, int postalCode)
     {
-        this.idAddress = idAddress;
+        this.id = id;
         this.street = street;
         this.streetNumber = streetNumber;
         this.village = village;
@@ -70,12 +70,12 @@ public class Address
 
     public Integer getId()
     {
-        return idAddress;
+        return id;
     }
 
-    public void setId(Integer idAddress)
+    public void setId(Integer id)
     {
-        this.idAddress = idAddress;
+        this.id = id;
     }
 
     @Override
@@ -153,7 +153,7 @@ public class Address
     public int hashCode()
     {
         int hash = 0;
-        hash += (idAddress != null ? idAddress.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -166,7 +166,7 @@ public class Address
             return false;
         }
         Address other = (Address) object;
-        if ((this.idAddress == null && other.idAddress != null) || (this.idAddress != null && !this.idAddress.equals(other.idAddress)))
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)))
         {
             return false;
         }
@@ -176,6 +176,6 @@ public class Address
     @Override
     public String toString()
     {
-        return "sportsclubmanager.domain.classes.Address[ idAddress=" + idAddress + " ]";
+        return "sportsclubmanager.domain.classes.Address[ id=" + id + " ]";
     }
 }

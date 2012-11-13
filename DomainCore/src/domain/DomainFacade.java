@@ -15,21 +15,37 @@ import org.hibernate.criterion.Restrictions;
 import utils.HibernateUtil;
 
 /**
-
- @author Markus Mohanty <markus.mo at gmx.net>
+ *
+ * @author Markus Mohanty <markus.mo at gmx.net>
  */
 public class DomainFacade
 {
-    /**
-     returns all competitions in a time span
+    public static DomainFacade instance;
+    public static Session session;
 
-     @param from start of time span
-     @param to end of time span
-     @return all competitions between a timespan given
-     */
-    public static ArrayList<Competition> getCompetitionsByDate(Date from, Date to)
+    private DomainFacade()
     {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
+    }
+
+    public static DomainFacade getInstance()
+    {
+        if (instance == null)
+        {
+            instance = new DomainFacade();
+        }
+        return instance;
+    }
+
+    /**
+     * returns all competitions in a time span
+     *
+     * @param from start of time span
+     * @param to end of time span
+     * @return all competitions between a timespan given
+     */
+    public ArrayList<Competition> getCompetitionsByDate(Date from, Date to)
+    {
         session.beginTransaction();
         Query query = session.createQuery("from Competition where dateFrom >= :from and dateTo <= :to");
         query.setParameter("from", from);
@@ -38,14 +54,13 @@ public class DomainFacade
     }
 
     /**
-     returns a the department of a type of sport
-
-     @param sport the sport the department belongs to
-     @return the department of the sport
+     * returns a the department of a type of sport
+     *
+     * @param sport the sport the department belongs to
+     * @return the department of the sport
      */
-    public static Department getDepartmentsBySport(TypeOfSport sport)
+    public Department getDepartmentsBySport(TypeOfSport sport)
     {
-//        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 //        session.beginTransaction();
 //        Query query = session.createQuery("from DepartmenthasTypeOfSport where typeOfSport = :sport");
 //        query.setParameter("sport", sport);
@@ -55,14 +70,13 @@ public class DomainFacade
     }
 
     /**
-     returns all matches of a competition
-
-     @param competition the competition the matches are in
-     @return all matches of the competition given
+     * returns all matches of a competition
+     *
+     * @param competition the competition the matches are in
+     * @return all matches of the competition given
      */
-    public static ArrayList<Match> getMatchesByCompetition(Competition competition)
+    public ArrayList<Match> getMatchesByCompetition(Competition competition)
     {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         Query query = session.createQuery("from Match where competition = :competition");
         query.setParameter("competition", competition);
@@ -70,41 +84,56 @@ public class DomainFacade
     }
 
     /**
-     returns a member with the firstname and lastname
-
-     @param firstname the firstname of the member
-     @param lastname the lastname of the member
-     @return a member with the firstname and lastname given
+     * returns a member with the firstname and lastname
+     *
+     * @param firstname the firstname of the member
+     * @param lastname the lastname of the member
+     * @return a member with the firstname and lastname given
      */
-    public static Member getMemberByName(String firstname, String lastname)
+    public Member getMemberByName(String firstname, String lastname)
     {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         Query query = session.createQuery("from Member1 where prename = :firstname and lastname = :lastname");
         return (Member) query.uniqueResult();
     }
 
     /**
-     returns a object out of the database by its class with a specific name
-
-     @param <T> the type of class
-     @param clazz the class
-     @param name name of the object
-     @return a object with a name given
+     * returns a object out of the database by its class with a specific name
+     *
+     * @param <T> the type of class
+     * @param clazz the class
+     * @param name name of the object
+     * @return a object with a name given
      */
-    public static <T> T getByName(Class<T> clazz, String name)
+    public <T> T getByName(Class<T> clazz, String name)
     {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
+        Transaction t = session.beginTransaction();
         return (T) session.createCriteria(clazz).add(Restrictions.eq("name", name)).uniqueResult();
     }
 
-    public static <T extends IDomain> Integer set(T expected)
+    public <T> T getByID(Class<T> clazz, Integer id)
+    {
+        try{
+        session.beginTransaction();
+        return (T) session.createCriteria(clazz).add(Restrictions.eq("id", id));}
+        catch(HibernateException ex)
+        {
+            throw ex;
+        }
+    }
+    
+    /**
+     * Saves a domain object
+     * @param <T> the class to be saved
+     * @param expected the class instance to be saved
+     * @return the id of the saved object
+     * @throws CouldNotSaveException 
+     */
+    public <T extends IDomain> Integer set(T expected)
             throws CouldNotSaveException
     {
         try
         {
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction t = session.beginTransaction();
             session.saveOrUpdate(expected);
             t.commit();
@@ -117,12 +146,17 @@ public class DomainFacade
         }
     }
 
-    public static <T> void delete(T expected)
+    /**
+     * deletes a line in the database
+     * @param <T> the table to be deleted from
+     * @param expected the object to be deleted
+     * @throws CouldNotDeleteException 
+     */
+    public <T> void delete(T expected)
             throws CouldNotDeleteException
     {
         try
         {
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction t = session.beginTransaction();
             session.delete(expected);
             t.commit();
@@ -133,9 +167,14 @@ public class DomainFacade
         }
     }
 
-    public static <T> List<T> getAll(Class<T> clazz)
+    /**
+     * gets all entries of a table
+     * @param <T> the class of the table
+     * @param clazz the class instance of the table, i.e. Table.class
+     * @return a list of entries
+     */
+    public <T extends IDomain> List<T> getAll(Class<T> clazz)
     {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         return (List<T>) session.createCriteria(clazz).list();
     }

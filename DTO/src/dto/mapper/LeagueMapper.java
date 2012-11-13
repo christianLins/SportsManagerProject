@@ -13,15 +13,15 @@ import dto.classes.*;
 import dto.contract.*;
 
 /**
-
- @author Thomas
+ *
+ * @author Thomas
  */
 public class LeagueMapper
         implements IMapper<ILeague>
 {
     private static LeagueMapper controller;
 
-     LeagueMapper()
+    LeagueMapper()
     {
     }
 
@@ -38,27 +38,31 @@ public class LeagueMapper
     public domain.contract.ILeague getDomainById(Integer id)
             throws IdNotFoundException
     {
-        for (domain.contract.ILeague a : DomainFacade.getAll(domain.contract.ILeague.class))
+        try
         {
+            domain.contract.ILeague a = DomainFacade.getInstance().getByID(domain.contract.ILeague.class, id);
             return a;
         }
+        catch (Exception ex)
+        {
 
-        throw new IdNotFoundException();
+            throw new IdNotFoundException();
+        }
     }
 
     @Override
     public ILeague getById(Integer id)
             throws IdNotFoundException
     {
-        for (domain.contract.ILeague a : DomainFacade.getAll(domain.contract.ILeague.class))
+        try
         {
-            if (a.getId() == id)
-            {
-                return League.copy(a);
-            }
+            domain.contract.ILeague a = DomainFacade.getInstance().getByID(domain.contract.ILeague.class, id);
+            return League.copy(a);
         }
-
-        throw new IdNotFoundException();
+        catch (Exception ex)
+        {
+            throw new IdNotFoundException();
+        }
     }
 
     @Override
@@ -66,7 +70,7 @@ public class LeagueMapper
     {
         List<ILeague> result = new LinkedList<>();
 
-        for (domain.contract.ILeague a : DomainFacade.getAll(domain.contract.ILeague.class))
+        for (domain.contract.ILeague a : DomainFacade.getInstance().getAll(domain.contract.ILeague.class))
         {
             result.add(League.copy(a));
         }
@@ -81,7 +85,7 @@ public class LeagueMapper
         {
             domain.classes.League league = createDomain(value);
 
-            return DomainFacade.set(league);
+            return DomainFacade.getInstance().set(league);
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
@@ -98,7 +102,7 @@ public class LeagueMapper
         {
             domain.classes.League league = createDomain(value);
 
-            DomainFacade.delete(league);
+            DomainFacade.getInstance().delete(league);
         }
         catch (IdNotFoundException | CouldNotDeleteException ex)
         {

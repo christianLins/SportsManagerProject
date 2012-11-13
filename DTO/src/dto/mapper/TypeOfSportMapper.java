@@ -12,15 +12,15 @@ import java.util.*;
 import java.util.logging.*;
 
 /**
-
- @author Thomas
+ *
+ * @author Thomas
  */
- public class TypeOfSportMapper
+public class TypeOfSportMapper
         implements IMapper<ITypeOfSport>
 {
     private static TypeOfSportMapper controller;
 
-     TypeOfSportMapper()
+    TypeOfSportMapper()
     {
     }
 
@@ -37,30 +37,30 @@ import java.util.logging.*;
     public domain.contract.ITypeOfSport getDomainById(Integer id)
             throws IdNotFoundException
     {
-        for (domain.contract.ITypeOfSport a : DomainFacade.getAll(domain.contract.ITypeOfSport.class))
+        try
         {
-            if (a.getId() == id)
-            {
-                return a;
-            }
+            domain.contract.ITypeOfSport a = DomainFacade.getInstance().getByID(domain.contract.ITypeOfSport.class, id);
+            return a;
         }
-
-        throw new IdNotFoundException();
+        catch (Exception ex)
+        {
+            throw new IdNotFoundException();
+        }
     }
 
     @Override
     public ITypeOfSport getById(Integer id)
             throws IdNotFoundException
     {
-        for (domain.contract.ITypeOfSport a : DomainFacade.getAll(domain.contract.ITypeOfSport.class))
+        try
         {
-            if (a.getId() == id)
-            {
-                return TypeOfSport.copy(a);
-            }
+            domain.contract.ITypeOfSport a = DomainFacade.getInstance().getByID(domain.contract.ITypeOfSport.class, id);
+            return TypeOfSport.copy(a);
         }
-
-        throw new IdNotFoundException();
+        catch (Exception ex)
+        {
+            throw new IdNotFoundException();
+        }
     }
 
     @Override
@@ -68,7 +68,7 @@ import java.util.logging.*;
     {
         List<ITypeOfSport> result = new LinkedList<>();
 
-        for (domain.contract.ITypeOfSport a : DomainFacade.getAll(domain.contract.ITypeOfSport.class))
+        for (domain.contract.ITypeOfSport a : DomainFacade.getInstance().getAll(domain.contract.ITypeOfSport.class))
         {
             result.add(TypeOfSport.copy(a));
         }
@@ -83,7 +83,7 @@ import java.util.logging.*;
         {
             domain.classes.TypeOfSport typeofsport = createDomain(value);
 
-            return DomainFacade.set(typeofsport);
+            return DomainFacade.getInstance().set(typeofsport);
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
@@ -100,7 +100,7 @@ import java.util.logging.*;
         {
             domain.classes.TypeOfSport typeofsport = createDomain(value);
 
-            DomainFacade.delete(typeofsport);
+            DomainFacade.getInstance().delete(typeofsport);
         }
         catch (IdNotFoundException | CouldNotDeleteException ex)
         {

@@ -21,17 +21,17 @@ public class Role
     @Id
     @Basic(optional = false)
     @Column(name = "idRole")
-    private Integer idRole;
+    private Integer id;
     @JoinTable(name = "Role_has_Permisssion", joinColumns =
     {
-        @JoinColumn(name = "Role_idRole", referencedColumnName = "idRole")
+        @JoinColumn(name = "Role_idRole", referencedColumnName = "id")
     }, inverseJoinColumns =
     {
-        @JoinColumn(name = "Permisssion_idPermisssion", referencedColumnName = "idPermisssion")
+        @JoinColumn(name = "Permisssion_idPermisssion", referencedColumnName = "id")
     })
     @ManyToMany
     private List<Permission> permisssionList;
-    @JoinColumn(name = "Member_idMember", referencedColumnName = "idMember")
+    @JoinColumn(name = "Member_idMember", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Member memberidMember;
 
@@ -39,19 +39,19 @@ public class Role
     {
     }
 
-    public Role(Integer idRole)
+    public Role(Integer id)
     {
-        this.idRole = idRole;
+        this.id = id;
     }
 
     public Integer getId()
     {
-        return idRole;
+        return id;
     }
 
-    public void setId(Integer idRole)
+    public void setId(Integer id)
     {
-        this.idRole = idRole;
+        this.id = id;
     }
 
     @XmlTransient
@@ -95,7 +95,7 @@ public class Role
     public int hashCode()
     {
         int hash = 0;
-        hash += (idRole != null ? idRole.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -108,7 +108,7 @@ public class Role
             return false;
         }
         Role other = (Role) object;
-        if ((this.idRole == null && other.idRole != null) || (this.idRole != null && !this.idRole.equals(other.idRole)))
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)))
         {
             return false;
         }
@@ -118,6 +118,6 @@ public class Role
     @Override
     public String toString()
     {
-        return "sportsclubmanager.domain.classes.Role[ idRole=" + idRole + " ]";
+        return "sportsclubmanager.domain.classes.Role[ id=" + id + " ]";
     }
 }

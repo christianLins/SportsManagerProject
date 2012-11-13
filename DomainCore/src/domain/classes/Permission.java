@@ -20,7 +20,7 @@ public class Permission
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idPermisssion")
-    private Integer idPermission;
+    private Integer id;
     @Basic(optional = false)
     @Column(name = "Name")
     private String name;
@@ -31,25 +31,25 @@ public class Permission
     {
     }
 
-    public Permission(Integer idPermission)
+    public Permission(Integer id)
     {
-        this.idPermission = idPermission;
+        this.id = id;
     }
 
-    public Permission(Integer idPermission, String name)
+    public Permission(Integer id, String name)
     {
-        this.idPermission = idPermission;
+        this.id = id;
         this.name = name;
     }
 
     public Integer getId()
     {
-        return idPermission;
+        return id;
     }
 
-    public void setId(Integer idPermission)
+    public void setId(Integer id)
     {
-        this.idPermission = idPermission;
+        this.id = id;
     }
 
     @Override
@@ -80,7 +80,7 @@ public class Permission
     public int hashCode()
     {
         int hash = 0;
-        hash += (idPermission != null ? idPermission.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -93,7 +93,7 @@ public class Permission
             return false;
         }
         Permission other = (Permission) object;
-        if ((this.idPermission == null && other.idPermission != null) || (this.idPermission != null && !this.idPermission.equals(other.idPermission)))
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)))
         {
             return false;
         }
@@ -103,6 +103,6 @@ public class Permission
     @Override
     public String toString()
     {
-        return "sportsclubmanager.domain.classes.Permission[ idPermission=" + idPermission + " ]";
+        return "sportsclubmanager.domain.classes.Permission[ id=" + id + " ]";
     }
 }

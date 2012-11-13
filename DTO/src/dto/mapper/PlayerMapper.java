@@ -14,15 +14,15 @@ import dto.classes.*;
 import dto.contract.*;
 
 /**
-
- @author Thomas
+ *
+ * @author Thomas
  */
- public class PlayerMapper
+public class PlayerMapper
         implements IMapper<IPlayer>
 {
     private static PlayerMapper controller;
 
-     PlayerMapper()
+    PlayerMapper()
     {
     }
 
@@ -39,27 +39,32 @@ import dto.contract.*;
     public domain.contract.IPlayer getDomainById(Integer id)
             throws IdNotFoundException
     {
-        for (domain.contract.IPlayer a : DomainFacade.getAll(domain.contract.IPlayer.class))
+        try
         {
+            domain.contract.IPlayer a = DomainFacade.getInstance().getByID(domain.contract.IPlayer.class, id);
             return a;
         }
+        catch (Exception ex)
+        {
 
-        throw new IdNotFoundException();
+            throw new IdNotFoundException();
+        }
     }
 
     @Override
     public IPlayer getById(Integer id)
             throws IdNotFoundException
     {
-        for (domain.contract.IPlayer a : DomainFacade.getAll(domain.contract.IPlayer.class))
+        try
         {
-            if (a.getId() == id)
-            {
-                return Player.copy(a);
-            }
+            domain.contract.IPlayer a = DomainFacade.getInstance().getByID(domain.contract.IPlayer.class, id);
+            return Player.copy(a);
         }
+        catch (Exception ex)
+        {
 
-        throw new IdNotFoundException();
+            throw new IdNotFoundException();
+        }
     }
 
     @Override
@@ -67,7 +72,7 @@ import dto.contract.*;
     {
         List<IPlayer> result = new LinkedList<>();
 
-        for (domain.contract.IPlayer a : DomainFacade.getAll(domain.contract.IPlayer.class))
+        for (domain.contract.IPlayer a : DomainFacade.getInstance().getAll(domain.contract.IPlayer.class))
         {
             result.add(Player.copy(a));
         }
@@ -81,9 +86,9 @@ import dto.contract.*;
         Integer rv = 0;
         try
         {
-            
+
             domain.classes.Player p = createDomain(value);
-            rv = DomainFacade.set(p);
+            rv = DomainFacade.getInstance().set(p);
         }
         catch (IdNotFoundException ex)
         {
@@ -91,32 +96,32 @@ import dto.contract.*;
         }
         finally
         {
-            return  rv;
+            return rv;
         }
     }
-    
+
     private domain.classes.Player createDomain(IPlayer value)
             throws IdNotFoundException
     {
         domain.classes.Player player = new domain.classes.Player(value.getId());
-        
+
         List<Integer> permissionList = value.getPermisssionList();
         List<Integer> typeOfSportList = value.getTypeOfSportList();
-        
+
         LinkedList<domain.contract.IPermission> p = new LinkedList<>();
-        for(int id : permissionList)
+        for (int id : permissionList)
         {
             p.add(new PermissionMapper().getDomainById(id));
         }
         player.setPermisssionList(p);
-        
+
         LinkedList<domain.contract.ITypeOfSport> typeOfSports = new LinkedList<>();
-        for(int id : typeOfSportList)
+        for (int id : typeOfSportList)
         {
             typeOfSports.add(new TypeOfSportMapper().getDomainById(id));
         }
         player.setTypeOfSportList(typeOfSports);
-        
+
         return player;
     }
 
@@ -126,7 +131,7 @@ import dto.contract.*;
         try
         {
             domain.classes.Player p = createDomain(value);
-            DomainFacade.delete(p);
+            DomainFacade.getInstance().delete(p);
         }
         catch (IdNotFoundException | CouldNotDeleteException ex)
         {

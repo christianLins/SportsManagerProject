@@ -12,8 +12,8 @@ import dto.contract.IClubTeam;
 import dto.mapper.contract.*;
 
 /**
-
- @author Thomas
+ *
+ * @author Thomas
  */
 public class ClubTeamMapper
         implements IMapper<IClubTeam>
@@ -37,27 +37,32 @@ public class ClubTeamMapper
     public domain.contract.IClubTeam getDomainById(Integer id)
             throws IdNotFoundException
     {
-        for (domain.contract.IClubTeam a : DomainFacade.getAll(domain.contract.IClubTeam.class))
+        try
         {
+            domain.contract.IClubTeam a = DomainFacade.getInstance().getByID(domain.contract.IClubTeam.class, id);
             return a;
         }
+        catch (Exception ex)
+        {
 
-        throw new IdNotFoundException();
+            throw new IdNotFoundException();
+        }
     }
 
     @Override
     public IClubTeam getById(Integer id)
             throws IdNotFoundException
     {
-        for (domain.contract.IClubTeam a : DomainFacade.getAll(domain.contract.IClubTeam.class))
+        try
         {
-            if (a.getId() == id)
-            {
-                return ClubTeam.copy(a);
-            }
+            domain.contract.IClubTeam a = DomainFacade.getInstance().getByID(domain.contract.IClubTeam.class, id);
+            return ClubTeam.copy(a);
         }
+        catch (Exception ex)
+        {
 
-        throw new IdNotFoundException();
+            throw new IdNotFoundException();
+        }
     }
 
     @Override
@@ -65,7 +70,7 @@ public class ClubTeamMapper
     {
         List<IClubTeam> result = new LinkedList<>();
 
-        for (domain.contract.IClubTeam a : DomainFacade.getAll(domain.contract.IClubTeam.class))
+        for (domain.contract.IClubTeam a : DomainFacade.getInstance().getAll(domain.contract.IClubTeam.class))
         {
             result.add(ClubTeam.copy(a));
         }
@@ -80,7 +85,7 @@ public class ClubTeamMapper
         {
             domain.classes.ClubTeam clubTeam = createDomain(value);
 
-            return DomainFacade.set(clubTeam);
+            return DomainFacade.getInstance().set(clubTeam);
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
@@ -97,7 +102,7 @@ public class ClubTeamMapper
         {
             domain.classes.ClubTeam clubTeam = createDomain(value);
 
-            DomainFacade.delete(clubTeam);
+            DomainFacade.getInstance().delete(clubTeam);
         }
         catch (IdNotFoundException | CouldNotDeleteException ex)
         {

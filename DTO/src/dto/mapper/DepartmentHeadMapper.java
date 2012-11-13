@@ -12,15 +12,15 @@ import dto.contract.IDepartmentHead;
 import dto.mapper.contract.*;
 
 /**
-
- @author Thomas
+ *
+ * @author Thomas
  */
- public class DepartmentHeadMapper
+public class DepartmentHeadMapper
         implements IMapper<IDepartmentHead>
 {
     private static DepartmentHeadMapper controller;
 
-     DepartmentHeadMapper()
+    DepartmentHeadMapper()
     {
     }
 
@@ -37,22 +37,23 @@ import dto.mapper.contract.*;
     public domain.contract.IDepartmentHead getDomainById(Integer id)
             throws IdNotFoundException
     {
-        for (domain.contract.IDepartmentHead a : DomainFacade.getAll(domain.contract.IDepartmentHead.class))
+        try
         {
-            if (a.getId() == id)
-            {
-                return a;
-            }
+            domain.contract.IDepartmentHead a = DomainFacade.getInstance().getByID(domain.contract.IDepartmentHead.class, id);
+            return a;
         }
+        catch (Exception ex)
+        {
 
-        throw new IdNotFoundException();
+            throw new IdNotFoundException();
+        }
     }
 
     @Override
     public IDepartmentHead getById(Integer id)
             throws IdNotFoundException
     {
-        for (domain.contract.IDepartmentHead a : DomainFacade.getAll(domain.contract.IDepartmentHead.class))
+        for (domain.contract.IDepartmentHead a : DomainFacade.getInstance().getAll(domain.contract.IDepartmentHead.class))
         {
             if (a.getId() == id)
             {
@@ -68,7 +69,7 @@ import dto.mapper.contract.*;
     {
         List<IDepartmentHead> result = new LinkedList<>();
 
-        for (domain.contract.IDepartmentHead a : DomainFacade.getAll(domain.contract.IDepartmentHead.class))
+        for (domain.contract.IDepartmentHead a : DomainFacade.getInstance().getAll(domain.contract.IDepartmentHead.class))
         {
             result.add(DepartmentHead.copy(a));
         }
@@ -83,7 +84,7 @@ import dto.mapper.contract.*;
         {
             domain.classes.DepartmentHead departmentHead = createDomain(value);
 
-            return DomainFacade.set(departmentHead);
+            return DomainFacade.getInstance().set(departmentHead);
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
@@ -100,7 +101,7 @@ import dto.mapper.contract.*;
         {
             domain.classes.DepartmentHead departmentHead = createDomain(value);
 
-            DomainFacade.delete(departmentHead);
+            DomainFacade.getInstance().delete(departmentHead);
         }
         catch (IdNotFoundException | CouldNotDeleteException ex)
         {

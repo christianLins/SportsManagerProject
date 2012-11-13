@@ -12,8 +12,8 @@ import dto.contract.IMember;
 import dto.mapper.contract.*;
 
 /**
-
- @author Lins Christian (christian.lins87@gmail.com)
+ *
+ * @author Lins Christian (christian.lins87@gmail.com)
  */
 public class MemberMapper
         implements IMapper<IMember>
@@ -37,30 +37,33 @@ public class MemberMapper
     public domain.contract.IMember getDomainById(Integer id)
             throws IdNotFoundException
     {
-        for (domain.contract.IMember a : DomainFacade.getAll(domain.contract.IMember.class))
+        try
         {
-            if (a.getIdMember() == id)
-            {
-                return a;
-            }
-        }
+            domain.contract.IMember a = DomainFacade.getInstance().getByID(domain.contract.IMember.class, id);
+            return a;
 
-        throw new IdNotFoundException();
+        }
+        catch (Exception ex)
+        {
+
+            throw new IdNotFoundException();
+        }
     }
 
     @Override
     public IMember getById(Integer id)
             throws IdNotFoundException
     {
-        for (domain.contract.IMember a : DomainFacade.getAll(domain.contract.IMember.class))
+        try
         {
-            if (a.getIdMember() == id)
-            {
-                return Member.copy(a);
-            }
+            domain.contract.IMember a = DomainFacade.getInstance().getByID(domain.contract.IMember.class, id);
+            return Member.copy(a);
         }
+        catch (Exception ex)
+        {
 
-        throw new IdNotFoundException();
+            throw new IdNotFoundException();
+        }
     }
 
     @Override
@@ -68,7 +71,7 @@ public class MemberMapper
     {
         List<IMember> result = new LinkedList<>();
 
-        for (domain.contract.IMember a : DomainFacade.getAll(domain.contract.IMember.class))
+        for (domain.contract.IMember a : DomainFacade.getInstance().getAll(domain.contract.IMember.class))
         {
             result.add(Member.copy(a));
         }
@@ -83,7 +86,7 @@ public class MemberMapper
         {
             domain.classes.Member member = createDomain(value);
 
-            return DomainFacade.set(member);
+            return DomainFacade.getInstance().set(member);
         }
         catch (IdNotFoundException | CouldNotSaveException ex)
         {
@@ -100,7 +103,7 @@ public class MemberMapper
         {
             domain.classes.Member member = createDomain(value);
 
-            DomainFacade.delete(member);
+            DomainFacade.getInstance().delete(member);
         }
         catch (IdNotFoundException | CouldNotDeleteException ex)
         {

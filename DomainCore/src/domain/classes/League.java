@@ -21,7 +21,7 @@ public class League
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idLeague")
-    private Integer idLeague;
+    private Integer id;
     @Basic(optional = false)
     @Column(name = "Name")
     private String name;
@@ -34,25 +34,25 @@ public class League
     {
     }
 
-    public League(Integer idLeague)
+    public League(Integer id)
     {
-        this.idLeague = idLeague;
+        this.id = id;
     }
 
-    public League(Integer idLeague, String name)
+    public League(Integer id, String name)
     {
-        this.idLeague = idLeague;
+        this.id = id;
         this.name = name;
     }
 
     public Integer getId()
     {
-        return idLeague;
+        return id;
     }
 
-    public void setId(Integer idLeague)
+    public void setId(Integer id)
     {
-        this.idLeague = idLeague;
+        this.id = id;
     }
 
     @Override
@@ -110,7 +110,7 @@ public class League
     public int hashCode()
     {
         int hash = 0;
-        hash += (idLeague != null ? idLeague.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -123,7 +123,7 @@ public class League
             return false;
         }
         League other = (League) object;
-        if ((this.idLeague == null && other.idLeague != null) || (this.idLeague != null && !this.idLeague.equals(other.idLeague)))
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)))
         {
             return false;
         }
@@ -133,6 +133,6 @@ public class League
     @Override
     public String toString()
     {
-        return "sportsclubmanager.domain.classes.League[ idLeague=" + idLeague + " ]";
+        return "sportsclubmanager.domain.classes.League[ id=" + id + " ]";
     }
 }
