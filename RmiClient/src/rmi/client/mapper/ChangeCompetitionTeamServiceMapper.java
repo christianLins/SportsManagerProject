@@ -8,7 +8,10 @@ import contract.IChangeCompetitionTeam;
 import dto.contract.IClubTeam;
 import dto.contract.ICompetition;
 import dto.contract.IPlayer;
+import java.rmi.RemoteException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import rmi.contract.services.IAddMatchResultsRmiService;
 import rmi.contract.services.IChangeCompetitionTeamRmiService;
 
@@ -27,7 +30,7 @@ public class ChangeCompetitionTeamServiceMapper implements RmiServiceToServiceMa
         return n;  
     }
     
-    class ChangeCompetitionTeam implements IChangeCompetitionTeam {
+    private static class ChangeCompetitionTeam implements IChangeCompetitionTeam {
         
         private IChangeCompetitionTeamRmiService service;
         
@@ -39,37 +42,84 @@ public class ChangeCompetitionTeamServiceMapper implements RmiServiceToServiceMa
         @Override
         public List<ICompetition> getCompetition()
         {
-            return service.getCompetition();
+            try
+            {
+                return service.getCompetition();
+            }
+            catch (RemoteException ex)
+            {
+                Logger.getLogger(ChangeCompetitionTeamServiceMapper.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return null;
         }
 
         @Override
         public List<IClubTeam> getClubTeams(List<Integer> Teams)
         {
-            return service.getClubTeams(Teams);
+            try
+            {
+                return service.getClubTeams(Teams);
+            }
+            catch (RemoteException ex)
+            {
+                Logger.getLogger(ChangeCompetitionTeamServiceMapper.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return null;
         }
 
         @Override
         public IClubTeam getCompetitionTeam(IClubTeam team)
         {
-            throw new UnsupportedOperationException("Not supported yet.");
+            try
+            {
+                return service.getCompetitionTeam(team);
+            }
+            catch (RemoteException ex)
+            {
+                Logger.getLogger(ChangeCompetitionTeamServiceMapper.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return null;
         }
 
         @Override
         public List<IPlayer> getPlayers(List<Integer> players)
         {
-            throw new UnsupportedOperationException("Not supported yet.");
+            try
+            {
+                return service.getPlayers(players);
+            }
+            catch (RemoteException ex)
+            {
+                Logger.getLogger(ChangeCompetitionTeamServiceMapper.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return null;
         }
 
         @Override
         public void setCompetitonTeam(ICompetition competition, IClubTeam oldTeam, IClubTeam newTeam)
         {
-            service.setCompetitonTeam(competition, oldTeam, newTeam);
+            try
+            {
+                service.setCompetitonTeam(competition, oldTeam, newTeam);
+            }
+            catch (RemoteException ex)
+            {
+                Logger.getLogger(ChangeCompetitionTeamServiceMapper.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         @Override
         public List<IClubTeam> getClubTeams()
         {
-            return service.getClubTeams(null);
+            try
+            {
+                return service.getClubTeams(null);
+            }
+            catch (RemoteException ex)
+            {
+                Logger.getLogger(ChangeCompetitionTeamServiceMapper.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return null;
         }
         
         

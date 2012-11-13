@@ -25,5 +25,8 @@ public interface ISearchChangeMemberRmiService extends Remote{
     void setNewMember(IMember member, IAddress address) throws RemoteException;
     void setNewMember(IMember member, IAddress address, IDepartment department, IClubTeam clubTeam, IRole role) throws RemoteException;
     
+    List<IMember> getMatchingMembers(String searchInput);   //find all members, matching the searched value 
+    ICountry getCountry(Integer countryID);     //new added
+    
     
 }

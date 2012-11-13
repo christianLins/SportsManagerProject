@@ -69,5 +69,17 @@ public class SearchChangeMemberRmiService extends UnicastRemoteObject implements
     {
        return SearchChangeMember.getInstance().getMember(searchMember);
     }
+
+    @Override
+    public List<IMember> getMatchingMembers(String searchInput)
+    {
+        return SearchChangeMember.getInstance().getMatchingMembers(searchInput);
+    }
+
+    @Override
+    public ICountry getCountry(Integer countryID)
+    {
+        return SearchChangeMember.getInstance().getCountry(countryID);
+    }
     
 }

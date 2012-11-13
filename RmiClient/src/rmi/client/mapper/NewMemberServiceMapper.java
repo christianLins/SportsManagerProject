@@ -27,7 +27,7 @@ public class NewMemberServiceMapper implements RmiServiceToServiceMapper<INewMem
         return n;  
     }
     
-    class NewMember implements INewMember {
+    private static class NewMember implements INewMember {
         
         private INewMemberRmiService service;
         

@@ -29,7 +29,7 @@ public class NewCompetitionServiceMapper implements RmiServiceToServiceMapper<IN
         return n;  
     }
     
-    class NewCompetition implements INewCompetition {
+    private static class NewCompetition implements INewCompetition {
         
         private INewCompetitionRmiService service;
         

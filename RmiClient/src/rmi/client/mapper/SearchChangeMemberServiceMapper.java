@@ -27,7 +27,7 @@ public class SearchChangeMemberServiceMapper implements RmiServiceToServiceMappe
         return n;  
     }
     
-    class SearchChangeMember implements ISearchChangeMember {
+    private static class SearchChangeMember implements ISearchChangeMember {
         
         private ISearchChangeMemberRmiService service;
         

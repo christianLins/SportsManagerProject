@@ -7,6 +7,7 @@ package rmi.server.controller;
 import classes.ChangeCompetitionTeam;
 import dto.contract.IClubTeam;
 import dto.contract.ICompetition;
+import dto.contract.IPlayer;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
@@ -38,6 +39,18 @@ public class ChangeCompetitionTeamRmiService extends UnicastRemoteObject impleme
     public void setCompetitonTeam(ICompetition competition, IClubTeam oldTeam, IClubTeam newTeam)
     {
         ChangeCompetitionTeam.getInstance().setCompetitonTeam(competition, oldTeam, newTeam);
+    }
+
+    @Override
+    public IClubTeam getCompetitionTeam(IClubTeam team) throws RemoteException
+    {
+        return ChangeCompetitionTeam.getInstance().getCompetitionTeam(team);
+    }
+
+    @Override
+    public List<IPlayer> getPlayers(List<Integer> players) throws RemoteException
+    {
+        return ChangeCompetitionTeam.getInstance().getPlayers(players);
     }
     
 }

@@ -26,11 +26,8 @@ public class Test
         try
         {
             services.ServiceClient client = ServiceClientFactory.getRmiServiceClient("localhost", 1099);
-            System.out.println("hallo rmi1");
             addMatchResultsService = client.getAddMatchResultsService();
-            System.out.println("hallo rmi2");
             addMatchResultsService.getCompetitionList();
-            System.out.println("hallo rmi3");
         }
         catch (CommunicationProblemException ex)
         {

@@ -32,7 +32,7 @@ public class ShowCompetitionServiceMapper implements RmiServiceToServiceMapper<I
         return n;  
     }
     
-    class ShowCompetition implements IShowCompetition {
+    private static class ShowCompetition implements IShowCompetition {
         
         private IShowCompetitionRmiService service;
         
@@ -86,7 +86,15 @@ public class ShowCompetitionServiceMapper implements RmiServiceToServiceMapper<I
         @Override
         public List<IPlayer> getPlayer(IClubTeam team)
         {
-            throw new UnsupportedOperationException("Not supported yet.");
+            try
+            {
+                return service.getPlayer(team);
+            }
+            catch (RemoteException ex)
+            {
+                Logger.getLogger(ShowCompetitionServiceMapper.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return null;
         }
         
         

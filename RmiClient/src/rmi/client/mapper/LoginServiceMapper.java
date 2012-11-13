@@ -27,7 +27,7 @@ public class LoginServiceMapper implements RmiServiceToServiceMapper<ILoginRmiSe
         return n;  
     }
     
-    class Login implements ILogin {
+    private static class Login implements ILogin {
         
          private ILoginRmiService service;
         
