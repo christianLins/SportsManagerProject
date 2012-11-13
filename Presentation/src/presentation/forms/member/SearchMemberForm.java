@@ -30,7 +30,9 @@ import dto.contract.IAddress;
 import dto.contract.IClubTeam;
 import dto.contract.IDepartmentHead;
 import dto.contract.IMember;
+import dto.contract.IPlayer;
 import dto.contract.IRole;
+import dto.contract.ITrainer;
 import java.util.Iterator;
 import presentation.basics.AbstractForm;
 import presentation.basics.AbstractMainForm;
@@ -43,7 +45,7 @@ import services.ServiceNotAvailableException;
  */
 public class SearchMemberForm extends AbstractMainForm {
 
-    // Variables declaration - do not modify
+   // Variables declaration - do not modify
     private JButton btnApplyChange;
     private JButton btnSearch;
     private JComboBox comboDepartment;
@@ -94,14 +96,13 @@ public class SearchMemberForm extends AbstractMainForm {
     ISearchChangeMember controller;
     IMember member;
     IMember user;
-    IRole role;
+    List<IRole> roles;
     IDepartment department;
     IAddress address;
     ICountry country;
     IClubTeam clubTeam;
 
     // End of variables declaration    
-
     public SearchMemberForm(AbstractForm form, ServiceClient client, IMember user) throws ServiceNotAvailableException {
         super(form);
         this.client = client;
@@ -161,7 +162,7 @@ public class SearchMemberForm extends AbstractMainForm {
         txtfieldMemberNr = new JTextField();
         btnApplyChange = new JButton();
 
-        
+
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(848, 549));
 
@@ -510,17 +511,17 @@ public class SearchMemberForm extends AbstractMainForm {
     }
 
     private void comboTeamActionPerformed(java.awt.event.ActionEvent evt) {
-        String name = comboTeam.getSelectedItem().toString();         
-        
+        String name = comboTeam.getSelectedItem().toString();
+
         setClubTeam(name);
     }
 
     private void comboDepartmentActionPerformed(ActionEvent evt) {
         String name = comboDepartment.getSelectedItem().toString();
         List<IDepartment> depList = controller.getDepartments();
-                
-        for(int i = 0; i < depList.size(); i++){
-            if(depList.get(i).getName().equals(name)){
+
+        for (int i = 0; i < depList.size(); i++) {
+            if (depList.get(i).getName().equals(name)) {
                 department = depList.get(i);
             }
         }
@@ -572,18 +573,17 @@ public class SearchMemberForm extends AbstractMainForm {
         dateEntry.setDate(member.getMemberFrom());
         dateBirthday.setDate(member.getDateOfBirth());
 
-        role = controller.getRoles(member.getId());
-
-        if (role.equals(1)) {
-            radioAdmin.setSelected(true);
-        }
-        if (role.equals(2)) {
-            radioTrainer.setSelected(true);
-        }
-        if (role.equals(3)) {
-            radioPlayer.setSelected(true);
-            //PLAYER -> SPORTS
-            //TODO: add sports                
+        roles = controller.getRoles(member.getId());
+        for (IRole role : roles) {
+            if (role.getClass().isInstance(IDepartmentHead.class)) {
+                radioAdmin.setSelected(true);
+            }
+            if (role.getClass().isInstance(ITrainer.class)) {
+                radioTrainer.setSelected(true);
+            }
+            if (role.getClass().isInstance(IPlayer.class)) {
+                radioPlayer.setSelected(true);
+            }
         }
 
         department = controller.getDepartment(member.getId());
@@ -591,11 +591,12 @@ public class SearchMemberForm extends AbstractMainForm {
         comboDepartment.getModel().setSelectedItem(department.getName());
 
         comboTeam.setModel(new DefaultComboBoxModel(getComboTeam()));
+
         //focus auf team dessen member momentan teil ist
     }
 
     private void updateMemberData() {
-        
+
         member.setPrename(txtfieldFName.getText());
         member.setLastname(txtfieldLName.getText());
         member.setDateOfBirth(dateBirthday.getDate());
@@ -608,35 +609,41 @@ public class SearchMemberForm extends AbstractMainForm {
         address.setPostalCode(Integer.parseInt(txtfieldPostCode.getText()));
         address.setVillage(txtfieldCity.getText());
         country.setName(txtfieldCountry.getText());
-        member.setNationality(country.getId()); 
+        member.setNationality(country.getId());
 
         if (radioFemale.isSelected()) {
             member.setGender(true);
-        }
-        else{        
+        } else {
             member.setGender(false);
         }
 
-        //TODO: what if Player role is selected new 
-        //TODO: check if correct handling of permissions/roles
-        List <Integer> permList;
-        permList = role.getPermisssionList();
+        department = getSelectedDepartment();
         
-        if (radioAdmin.isSelected()) {
-            permList.add(1);
+        //get selected roles
+        if (radioAdmin.isSelected()) { 
+            IDepartmentHead depHead = null;
+            roles.add(depHead);        
         }
-        else if (radioTrainer.isSelected()) {
-            permList.add(2);
+        if (radioTrainer.isSelected()) {
+            ITrainer trainer = null;
+            roles.add(trainer);            
         }
-        else if (radioPlayer.isSelected()) {
-            permList.add(3);
+        if (radioPlayer.isSelected()) {
+            IPlayer player =null;
+            roles.add(player);            
         }
-        role.setPermisssionList(permList);
+        
+        List<Integer> roleInt = new LinkedList<>();
+        for(IRole role: roles){
+            roleInt.add(role.getId());
+        }        
+        member.setRoleList(roleInt);
+
         
         //make sure clubTeam is set right
         setClubTeam(comboTeam.getSelectedItem().toString());
-                        
-        controller.setNewMember(member, address, department, clubTeam, role);
+
+        controller.setNewMember(member, address, department, clubTeam, roles.get(roles.size()-1));
     }
 
     //List<IDepartment>
@@ -687,11 +694,25 @@ public class SearchMemberForm extends AbstractMainForm {
     private void setClubTeam(String name) {
         List<Integer> cTeamInt = department.getClubTeamList();
         List<IClubTeam> cTeamList = controller.getClubTeams(cTeamInt);
-        
-        for(int i = 0; i <cTeamList.size(); i++){
-            if(cTeamList.get(i).getName().equals(name)){
+
+        for (int i = 0; i < cTeamList.size(); i++) {
+            if (cTeamList.get(i).getName().equals(name)) {
                 clubTeam = cTeamList.get(i);
             }
-        }   
+        }
+    }
+
+    private IDepartment getSelectedDepartment() {
+        String name = comboDepartment.getSelectedItem().toString();        
+        List<IDepartment> departList = controller.getDepartments();
+        IDepartment selDepartment = null;
+        
+        for(IDepartment d : departList){
+            if(d.getName().equals(name)){
+                selDepartment = d;
+                break;
+            }
+        }
+        return selDepartment;
     }
 }
