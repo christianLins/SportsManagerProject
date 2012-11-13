@@ -60,7 +60,7 @@ public class RmiServiceClientFactory extends UnicastRemoteObject implements RmiS
     }
 
     @Override
-    public ILoginService getLoginService() throws RemoteException {
+    public ILoginRmiService getLoginService() throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

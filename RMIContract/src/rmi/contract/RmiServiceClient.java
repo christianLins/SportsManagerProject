@@ -27,5 +27,5 @@ public interface RmiServiceClient extends Remote {
 
     public IShowCompetitionRmiService getShowCompetitionService() throws RemoteException;
 
-    ILoginService getLoginService() throws RemoteException;
+    ILoginRmiService getLoginService() throws RemoteException;
 }
