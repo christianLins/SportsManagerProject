@@ -93,7 +93,7 @@ Security/nbproject/private/private.properties
 UseCaseController/nbproject/private/private.properties
 
 *.class
-
+*.xml
 # Package Files #
 *.jar
 *.war
