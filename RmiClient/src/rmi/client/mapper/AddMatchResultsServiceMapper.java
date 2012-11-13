@@ -31,7 +31,7 @@ public class AddMatchResultsServiceMapper implements RmiServiceToServiceMapper<I
     }
     
     
-    class AddMatchResults implements IAddMatchResults{
+    private static class AddMatchResults implements IAddMatchResults{
         
         private IAddMatchResultsRmiService service;
         

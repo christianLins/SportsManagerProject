@@ -4,6 +4,8 @@
  */
 package rmi.client;
 
+import rmi.client.mapper.SearchChangeMemberServiceMapper;
+import rmi.client.mapper.NewMemberServiceMapper;
 import contract.*;
 import java.io.File;
 import java.io.FileWriter;
@@ -15,10 +17,9 @@ import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import rmi.client.mapper.AddMatchResultsServiceMapper;
+import rmi.client.mapper.*;
 import rmi.contract.RmiServiceClient;
-import rmi.contract.services.IAddMatchResultsRmiService;
-import rmi.contract.services.ILoginService;
+import rmi.contract.services.*;
 import services.ServiceClient;
 import services.ServiceNotAvailableException;
 
@@ -40,14 +41,8 @@ public class RmiServiceClientImpl implements ServiceClient {
 
 
     private void init() throws CommunicationProblemException {
-        System.setProperty("java.security.policy", "./policy");
-        File f = new File("./testfile.txt");
-        try {
-            FileWriter wr = new FileWriter(f);
-            System.out.println("file written");
-        } catch (IOException ex) {
-            Logger.getLogger(RmiServiceClientImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        System.setProperty("java.security.policy", "./client.policy");
+        File f = new File("./testFile");
         System.setSecurityManager(new RMISecurityManager());
         try {
             rmiServiceClient = (RmiServiceClient) Naming.lookup("rmi://" + host + ":" + port + "/CommunicationFactory");
@@ -76,7 +71,9 @@ public class RmiServiceClientImpl implements ServiceClient {
     @Override
     public IChangeCompetitionTeam getChangeCompetitionTeamService() throws ServiceNotAvailableException {
         try {
-            return (IChangeCompetitionTeam) rmiServiceClient.getChangeCompetitionTeamService();
+            IChangeCompetitionTeamRmiService rmiService = rmiServiceClient.getChangeCompetitionTeamService();
+            ChangeCompetitionTeamServiceMapper map = new ChangeCompetitionTeamServiceMapper();
+            return map.getService(rmiService);
         } catch (RemoteException ex) {
             throw new ServiceNotAvailableException("Service ChangeCompetitionTeam not available", ex);
         }
@@ -85,7 +82,9 @@ public class RmiServiceClientImpl implements ServiceClient {
     @Override
     public INewCompetition getNewCompetitionService() throws ServiceNotAvailableException {
         try {
-            return (INewCompetition) rmiServiceClient.getNewCompetitionService();
+            INewCompetitionRmiService rmiService = rmiServiceClient.getNewCompetitionService();
+            NewCompetitionServiceMapper map = new NewCompetitionServiceMapper();
+            return map.getService(rmiService);
         } catch (RemoteException ex) {
             throw new ServiceNotAvailableException("Service NewCompetitionService not available", ex);
         }
@@ -94,7 +93,9 @@ public class RmiServiceClientImpl implements ServiceClient {
     @Override
     public INewMember getNewMemberService() throws ServiceNotAvailableException {
         try {
-            return (INewMember) rmiServiceClient.getNewMemberService();
+            INewMemberRmiService rmiService = rmiServiceClient.getNewMemberService();
+            NewMemberServiceMapper map = new NewMemberServiceMapper();
+            return map.getService(rmiService);
         } catch (RemoteException ex) {
             throw new ServiceNotAvailableException("Service NewMemberService not available", ex);
         }
@@ -103,7 +104,9 @@ public class RmiServiceClientImpl implements ServiceClient {
     @Override
     public ISearchChangeMember getSearchChangeMemberService() throws ServiceNotAvailableException {
         try {
-            return (ISearchChangeMember) rmiServiceClient.getSearchChangeMemberService();
+            ISearchChangeMemberRmiService rmiService = rmiServiceClient.getSearchChangeMemberService();
+            SearchChangeMemberServiceMapper map = new SearchChangeMemberServiceMapper();
+            return map.getService(rmiService);
         } catch (RemoteException ex) {
             throw new ServiceNotAvailableException("Service SearchChangeMember not available", ex);
         }
@@ -112,7 +115,9 @@ public class RmiServiceClientImpl implements ServiceClient {
     @Override
     public IShowCompetition getShowCompetitionService() throws ServiceNotAvailableException {
         try {
-            return (IShowCompetition) rmiServiceClient.getShowCompetitionService();
+            IShowCompetitionRmiService rmiService = rmiServiceClient.getShowCompetitionService();
+            ShowCompetitionServiceMapper map = new ShowCompetitionServiceMapper();
+            return map.getService(rmiService);
         } catch (RemoteException ex) {
             throw new ServiceNotAvailableException("Service ShowCompetition not available", ex);
         }
@@ -121,7 +126,9 @@ public class RmiServiceClientImpl implements ServiceClient {
     @Override
     public ILogin getLoginService() throws ServiceNotAvailableException {
         try {
-            return (ILogin) rmiServiceClient.getLoginService();
+            ILoginRmiService rmiService = rmiServiceClient.getLoginService();
+            LoginServiceMapper map = new LoginServiceMapper();
+            return map.getService(rmiService);
         } catch (RemoteException ex) {
             throw new ServiceNotAvailableException("Service Login not available", ex);
         }

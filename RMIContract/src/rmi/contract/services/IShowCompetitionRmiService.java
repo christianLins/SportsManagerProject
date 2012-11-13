@@ -19,7 +19,7 @@ public interface IShowCompetitionRmiService extends Remote{
     List<ICompetition> getCompetitions() throws RemoteException;
     List<IMatch> getMatchs(List<Integer> matches) throws RemoteException;
     List<ShowMatchObj> getTeams(List<Integer> matches) throws RemoteException;
-    IPlayer getPlayer(IClubTeam team) throws RemoteException;
+     List<IPlayer> getPlayer(IClubTeam team) throws RemoteException;
     
     
 }

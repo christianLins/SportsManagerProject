@@ -20,6 +20,12 @@ public class DtoFactory
         return MemberMapper.getInstance();
     }
 
+    public static IMapper<IRole> getRoleMapper()
+            throws RemoteException
+    {
+        return RoleMapper.getInstance();
+    }
+
     public static IMapper<ICompetition> getCompetitionMapper()
             throws RemoteException
     {

@@ -44,10 +44,12 @@ public class ShowCompetitionRmiService extends UnicastRemoteObject implements IS
         return ShowCompetition.getInstance().getTeams(matches);
     }
 
+   
+
     @Override
-    public IPlayer getPlayer(IClubTeam team) throws RemoteException
+    public List<IPlayer> getPlayer(IClubTeam team) throws RemoteException
     {
-        return (IPlayer) ShowCompetition.getInstance().getPlayer(team);
+        return ShowCompetition.getInstance().getPlayer(team);
     }
     
 }
