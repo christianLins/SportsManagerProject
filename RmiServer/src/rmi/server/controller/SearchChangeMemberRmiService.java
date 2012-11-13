@@ -23,7 +23,7 @@ public class SearchChangeMemberRmiService extends UnicastRemoteObject implements
     }
 
     @Override
-    public IRole getRoles(Integer memberId)
+    public List<IRole> getRoles(Integer memberId)
     {
         return SearchChangeMember.getInstance().getRoles(memberId);
     }

@@ -17,11 +17,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import rmi.client.mapper.AddMatchResultsServiceMapper;
 import rmi.contract.RmiServiceClient;
-<<<<<<< HEAD
 import rmi.contract.services.IAddMatchResultsRmiService;
-=======
 import rmi.contract.services.ILoginService;
->>>>>>> 7c5b868728f665df950cc446e289868f28b70e55
 import services.ServiceClient;
 import services.ServiceNotAvailableException;
 
@@ -61,7 +58,6 @@ public class RmiServiceClientImpl implements ServiceClient {
     }
 
     @Override
-<<<<<<< HEAD
     public IAddMatchResults getAddMatchResultsService() throws ServiceNotAvailableException
     {
         try
@@ -73,13 +69,6 @@ public class RmiServiceClientImpl implements ServiceClient {
         catch (RemoteException ex)
         {
             ex.printStackTrace();
-=======
-    public IAddMatchResults getAddMatchResultsService() throws ServiceNotAvailableException {
-        try {
-            return (IAddMatchResults) rmiServiceClient.getAddMatchResultsService();
-
-        } catch (RemoteException ex) {
->>>>>>> 7c5b868728f665df950cc446e289868f28b70e55
             throw new ServiceNotAvailableException("Service AddMatchResults not available", ex);
         }
     }
