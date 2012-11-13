@@ -20,8 +20,8 @@ import utils.HibernateUtil;
  */
 public class DomainFacade
 {
-    public static DomainFacade instance;
-    public static Session session;
+    private static DomainFacade instance;
+    private static Session session;
 
     private DomainFacade()
     {
