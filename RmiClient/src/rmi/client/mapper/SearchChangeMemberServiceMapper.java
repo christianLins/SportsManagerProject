@@ -39,7 +39,15 @@ public class SearchChangeMemberServiceMapper implements RmiServiceToServiceMappe
         @Override
         public List<IMember> getMatchingMembers(String searchInput)
         {
-            throw new UnsupportedOperationException("Not supported yet.");
+            try
+            {
+                return service.getMatchingMembers(searchInput);
+            }
+            catch (RemoteException ex)
+            {
+                Logger.getLogger(SearchChangeMemberServiceMapper.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return  null;
         }
 
         @Override
@@ -101,7 +109,15 @@ public class SearchChangeMemberServiceMapper implements RmiServiceToServiceMappe
         @Override
         public ICountry getCountry(Integer countryID)
         {
-            throw new UnsupportedOperationException("Not supported yet.");
+            try
+            {
+                return service.getCountry(countryID);
+            }
+            catch (RemoteException ex)
+            {
+                Logger.getLogger(SearchChangeMemberServiceMapper.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return null;
         }
 
         @Override

@@ -4,9 +4,15 @@
  */
 package rmitest;
 
-import contract.IAddMatchResults;
+import contract.*;
+import dto.contract.ICompetition;
+import dto.contract.IDepartment;
+import dto.contract.ITeam;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import ldap.UserData;
+import org.w3c.dom.UserDataHandler;
 import rmi.client.CommunicationProblemException;
 import serviceClientFactories.ServiceClientFactory;
 import services.ServiceNotAvailableException;
@@ -26,8 +32,16 @@ public class Test
         try
         {
             services.ServiceClient client = ServiceClientFactory.getRmiServiceClient("localhost", 1099);
-            addMatchResultsService = client.getAddMatchResultsService();
-            addMatchResultsService.getCompetitionList();
+//            IShowCompetition showCompetitionService = client.getShowCompetitionService();
+//            List<ICompetition> competitions = showCompetitionService.getCompetitions();
+            //            UserData dat = new UserData("cli1929", "mongobongo");
+            //            ILogin loginService = client.getLoginService();
+            //            loginService.getMemberByUserData(dat);
+//            INewCompetition newCompetitionService = client.getNewCompetitionService();
+//            List<ITeam> teams = newCompetitionService.getTeams();
+            ISearchChangeMember searchChangeMemberService = client.getSearchChangeMemberService();
+            List<IDepartment> departments = searchChangeMemberService.getDepartments();
+            
         }
         catch (CommunicationProblemException ex)
         {
