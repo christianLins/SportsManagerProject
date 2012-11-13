@@ -30,6 +30,7 @@ import presentation.forms.competition.CreateCompetitionForm;
 import presentation.forms.competition.ShowCompetitionForm;
 import presentation.forms.member.NewMemberForm;
 import presentation.forms.member.SearchMemberForm;
+import services.CommunicationProblemException;
 import services.ServiceClient;
 import services.ServiceNotAvailableException;
 
@@ -366,11 +367,20 @@ public class SportsClubManager
                                 try {
                                     JOptionPane.showMessageDialog(null, "Access granted!");
 
-                                    ServiceClient client = serviceClientFactories.ServiceClientFactory.getRmiServiceClient("localhost", 1099);
-                                    ILogin loginService = client.getLoginService();
-                                    IMember user = loginService.getMemberByUserData(userData);
-                                    SportsClubManager manager = new SportsClubManager(null, client, user);
-                                    manager.setVisible(true);
+                                    ServiceClient client;
+                                    try
+                                    {
+                                        client = serviceClientFactories.ServiceClientFactory.getRmiServiceClient("localhost", 1099);
+                                        ILogin loginService = client.getLoginService();
+                                        IMember user = loginService.getMemberByUserData(userData);
+                                        SportsClubManager manager = new SportsClubManager(null, client, user);
+                                        manager.setVisible(true);
+                                    }
+                                    catch (CommunicationProblemException ex)
+                                    {
+                                        Logger.getLogger(SportsClubManager.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                                   
                                 } catch (ServiceNotAvailableException ex) {
                                     Logger.getLogger(SportsClubManager.class.getName()).log(Level.SEVERE, null, ex);
                                 }

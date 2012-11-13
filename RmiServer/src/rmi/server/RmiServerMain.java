@@ -10,7 +10,7 @@ package rmi.server;
  *
  * @author Markus Mohanty <markus.mo at gmx.net>
  */
-public class SportsClubManager
+public class RmiServerMain
 {
     /**
      * @param args the command line arguments

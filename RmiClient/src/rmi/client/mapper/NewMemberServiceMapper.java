@@ -52,7 +52,15 @@ public class NewMemberServiceMapper implements RmiServiceToServiceMapper<INewMem
         @Override
         public List<IDepartment> getDepartments()
         {
-            return service.getDepartments();
+            try
+            {
+                return service.getDepartments();
+            }
+            catch (RemoteException ex)
+            {
+                Logger.getLogger(NewMemberServiceMapper.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return null;
         }
 
         @Override

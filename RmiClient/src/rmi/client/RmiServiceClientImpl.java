@@ -4,6 +4,7 @@
  */
 package rmi.client;
 
+import services.CommunicationProblemException;
 import rmi.client.mapper.SearchChangeMemberServiceMapper;
 import rmi.client.mapper.NewMemberServiceMapper;
 import contract.*;
@@ -42,7 +43,6 @@ public class RmiServiceClientImpl implements ServiceClient {
 
     private void init() throws CommunicationProblemException {
         System.setProperty("java.security.policy", "./client.policy");
-        File f = new File("./testFile");
         System.setSecurityManager(new RMISecurityManager());
         try {
             rmiServiceClient = (RmiServiceClient) Naming.lookup("rmi://" + host + ":" + port + "/CommunicationFactory");

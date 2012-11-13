@@ -52,6 +52,8 @@ public class RmiServer
 
             // set the codebase
             String cb = RmiServer.class.getProtectionDomain().getCodeSource().getLocation().getFile();
+            cb += " ";
+            cb = RmiServiceClient.class.getProtectionDomain().getCodeSource().getLocation().getFile();
             System.setProperty("java.rmi.server.codebase", "file://" + cb);
 
 

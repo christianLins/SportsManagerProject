@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import ldap.UserData;
 import org.w3c.dom.UserDataHandler;
-import rmi.client.CommunicationProblemException;
+import services.CommunicationProblemException;
 import serviceClientFactories.ServiceClientFactory;
 import services.ServiceNotAvailableException;
 

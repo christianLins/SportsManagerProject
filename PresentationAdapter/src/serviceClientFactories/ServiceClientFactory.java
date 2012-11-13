@@ -1,8 +1,8 @@
 package serviceClientFactories;
 
 
-import rmi.client.CommunicationProblemException;
 import rmi.client.RmiServiceClientImpl;
+import services.CommunicationProblemException;
 import services.ServiceClient;
 
 
