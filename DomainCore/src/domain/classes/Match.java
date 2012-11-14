@@ -30,7 +30,7 @@ public class Match implements Serializable, IMatch {
     @JoinColumn(name = "Competition", referencedColumnName = "idCompetition")
     @ManyToOne(optional = false)
     private Competition competition;
-    @JoinColumn(name = "Matchresult", referencedColumnName = "id")
+    @JoinColumn(name = "Matchresult", referencedColumnName = "idMatchresult")
     @ManyToOne(optional = false)
     private Matchresult matchresult;
     @JoinColumn(name = "Foreignteam", referencedColumnName = "idTeam")

@@ -29,7 +29,7 @@ public class TypeOfSport
     private String description;
     @JoinTable(name = "Player_has_TypeOfSport", joinColumns =
     {
-        @JoinColumn(name = "TypeOfSport_idTypeOfSport", referencedColumnName = "id")
+        @JoinColumn(name = "TypeOfSport_idTypeOfSport", referencedColumnName = "idTypeOfSport")
     }, inverseJoinColumns =
     {
         @JoinColumn(name = "Player_Role_idRole", referencedColumnName = "idRole")

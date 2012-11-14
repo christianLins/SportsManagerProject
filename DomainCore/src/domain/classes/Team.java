@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.*;
 @Entity
 @Table(name = "Team")
 @XmlRootElement
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Team
         implements Serializable, ITeam
 {
@@ -37,7 +37,7 @@ public class Team
     private List<Match> matchList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hometeam")
     private List<Match> matchList1;
-    @JoinColumn(name = "League", referencedColumnName = "id")
+    @JoinColumn(name = "League", referencedColumnName = "idLeague")
     @ManyToOne(optional = false)
     private League league;
 

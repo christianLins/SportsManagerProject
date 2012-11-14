@@ -37,7 +37,11 @@ public interface IMember extends IDomain
     List<IRole> getRoleList();
 
     String getTelephonenumber();
+    
+    String getUsername();
 
+    void setUsername(String username);
+    
     void setAddress(IAddress address);
 
     void setDateOfBirth(Date dateOfBirth);

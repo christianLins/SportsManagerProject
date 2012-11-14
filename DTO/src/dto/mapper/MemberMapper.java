@@ -66,6 +66,12 @@ public class MemberMapper
         }
     }
 
+    public IMember getMemberByUsername(String username)
+    {
+        domain.contract.IMember a = DomainFacade.getInstance().getMemberByUsername(username);
+        return Member.copy(a);
+    }
+    
     @Override
     public List<IMember> getAll()
     {

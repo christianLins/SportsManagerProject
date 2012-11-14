@@ -39,7 +39,7 @@ public class Member
             a.setGender(member.getGender());
             a.setNationality(member.getNationality().getId());
             a.setAddress(member.getAddress().getId());
-
+            a.setUsername(member.getUsername());
             for (domain.contract.IRole c : member.getRoleList())
             {
                 a.roleList.add(c.getId());
@@ -51,6 +51,7 @@ public class Member
     private Integer id;
     private String prename;
     private String lastname;
+    private String username;
     private Date dateOfBirth;
     private Date memberFrom;
     private Date memberTo;
@@ -203,5 +204,17 @@ public class Member
     public void setRoleList(List<Integer> roleList)
     {
         this.roleList = roleList;
+    }
+
+    @Override
+    public String getUsername()
+    {
+        return this.username;
+    }
+
+    @Override
+    public void setUsername(String username)
+    {
+        this.username = username;
     }
 }

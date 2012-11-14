@@ -24,14 +24,14 @@ public class Role
     private Integer id;
     @JoinTable(name = "Role_has_Permisssion", joinColumns =
     {
-        @JoinColumn(name = "Role_idRole", referencedColumnName = "id")
+        @JoinColumn(name = "Role_idRole", referencedColumnName = "idRole")
     }, inverseJoinColumns =
     {
-        @JoinColumn(name = "Permisssion_idPermisssion", referencedColumnName = "id")
+        @JoinColumn(name = "Permisssion_idPermisssion", referencedColumnName = "idPermission")
     })
     @ManyToMany
     private List<Permission> permisssionList;
-    @JoinColumn(name = "Member_idMember", referencedColumnName = "id")
+    @JoinColumn(name = "Member_idMember", referencedColumnName = "idMember")
     @ManyToOne(optional = false)
     private Member memberidMember;
 

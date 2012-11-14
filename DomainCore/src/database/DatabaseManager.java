@@ -43,7 +43,7 @@ public class DatabaseManager
 
     public static void restoreDefault()
     {
-        clearDatabase();
+       // clearDatabase();
 
         restoreTypeOfSport();
         restoreCountry();

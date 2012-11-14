@@ -25,7 +25,7 @@ public class DomainFacade
 
     private DomainFacade()
     {
-        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session = HibernateUtil.getSessionFactory().openSession();
     }
 
     public static DomainFacade getInstance()
@@ -53,6 +53,14 @@ public class DomainFacade
         return (ArrayList<Competition>) query.list();
     }
 
+    public Member getMemberByUsername(String username)
+    {
+        session.beginTransaction();
+        Query q = session.createQuery("from Member where Username = :Username");
+        q.setParameter("Username", username);
+        return (Member) q.uniqueResult();
+    }
+    
     /**
      * returns a the department of a type of sport
      *

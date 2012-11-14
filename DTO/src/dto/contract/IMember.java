@@ -36,7 +36,11 @@ public interface IMember
     List<Integer> getRoleList();
 
     String getTelephonenumber();
-
+    
+    String getUsername();
+    
+    void setUsername(String username);
+    
     void setAddress(Integer address);
 
     void setDateOfBirth(Date dateOfBirth);

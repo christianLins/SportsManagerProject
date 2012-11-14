@@ -28,6 +28,8 @@ public class Member
     @Basic(optional = false)
     @Column(name = "Lastname")
     private String lastname;
+    @Column(name = "Username")
+    private String username;
     @Basic(optional = false)
     @Column(name = "DateOfBirth")
     @Temporal(TemporalType.DATE)
@@ -45,10 +47,10 @@ public class Member
     private String emailAddress;
     @Column(name = "Gender")
     private Boolean gender;
-    @JoinColumn(name = "Nationality", referencedColumnName = "id")
+    @JoinColumn(name = "Nationality", referencedColumnName = "idCountry")
     @ManyToOne(optional = false)
     private Country nationality;
-    @JoinColumn(name = "Address", referencedColumnName = "id")
+    @JoinColumn(name = "Address", referencedColumnName = "idAddress")
     @ManyToOne(optional = false)
     private Address address;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "memberidMember")
@@ -265,5 +267,17 @@ public class Member
     public String toString()
     {
         return "sportsclubmanager.domain.classes.Member1[ id=" + id + " ]";
+    }
+
+    @Override
+    public String getUsername()
+    {
+        return this.username;
+    }
+
+    @Override
+    public void setUsername(String username)
+    {
+        this.username = username;
     }
 }

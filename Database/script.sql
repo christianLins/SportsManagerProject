@@ -59,6 +59,7 @@ CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Member` (
   `idMember` INT NOT NULL AUTO_INCREMENT ,
   `Prename` VARCHAR(45) NOT NULL ,
   `Lastname` VARCHAR(45) NOT NULL ,
+  `Username` VARCHAR(45) NOT NULL,
   `DateOfBirth` VARCHAR(45) NOT NULL ,
   `Address` INT NOT NULL ,
   `MemberFrom` DATE NOT NULL ,
