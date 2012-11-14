@@ -428,7 +428,8 @@ public class CreateCompetitionForm extends AbstractMainForm {
         competition = new Competition();
         //TODO: ID competition.setID();
         competition.setDateFrom(dateDate.getDate());
-//      TODO:  competition.setDateTo(null);
+        competition.setDateTo(dateDate.getDate());
+//      TODO: Set correct DATE TO competition.setDateTo(null);
         competition.setPayment(Double.parseDouble(txtfieldFee.getText()));
         competition.setTeamList(getSelectedTeams(listSelectTeams));
 
