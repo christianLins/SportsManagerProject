@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.rmi.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import ldap.UserData;
 import rmi.contract.RmiServiceClient;
 
 /**
@@ -54,11 +55,13 @@ public class RmiServer
             cb += " ";
             cb += "file://" + RmiServiceClient.class.getProtectionDomain().getCodeSource().getLocation().getFile();
             cb += " file://" + dto.contract.IAddress.class.getProtectionDomain().getCodeSource().getLocation().getFile();
+            cb += " file://" + UserData.class.getProtectionDomain().getCodeSource().getLocation().getFile();
             System.setProperty("java.rmi.server.codebase", cb);
 
-            System.setSecurityManager(new SecurityManager());
+            
             System.setProperty("java.security.policy", "./client.policy");
-
+            System.setSecurityManager(new SecurityManager());
+            
             RmiServiceClient rmiServiceFactory = new RmiServiceClientFactory();
             Naming.rebind("rmi://localhost:" + port + "/CommunicationFactory", rmiServiceFactory);
             isRunning = true;
