@@ -52,8 +52,7 @@ public class RmiServer
             Runtime.getRuntime().exec("rmiregistry");
             // set the codebase
             String cb = "file://" + RmiServer.class.getProtectionDomain().getCodeSource().getLocation().getFile();
-            cb += " ";
-            cb += "file://" + RmiServiceClient.class.getProtectionDomain().getCodeSource().getLocation().getFile();
+            cb += " file://" + RmiServiceClient.class.getProtectionDomain().getCodeSource().getLocation().getFile();
             cb += " file://" + dto.contract.IAddress.class.getProtectionDomain().getCodeSource().getLocation().getFile();
             cb += " file://" + UserData.class.getProtectionDomain().getCodeSource().getLocation().getFile();
             System.setProperty("java.rmi.server.codebase", cb);

@@ -28,7 +28,8 @@ public class LoginController implements ILogin
     @Override
     public IMember getMemberByUserData(IUserData userData)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return null;
+//        throw new UnsupportedOperationException("Not supported yet.");
     }
     
     
