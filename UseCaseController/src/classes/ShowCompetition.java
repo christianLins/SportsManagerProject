@@ -10,6 +10,7 @@ import dto.contract.IMatch;
 import dto.contract.IPlayer;
 import dto.mapper.DtoFactory;
 import dto.mapper.contract.IdNotFoundException;
+import dto.mapper.contract.NotFoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,10 @@ public class ShowCompetition implements IShowCompetition{
     }
     
     public static IShowCompetition getInstance() {
-        if(INSTANCE == null) INSTANCE = new ShowCompetition();
+        if(INSTANCE == null)
+        {
+            INSTANCE = new ShowCompetition();
+        }
         return INSTANCE;
     }
 
@@ -36,7 +40,7 @@ public class ShowCompetition implements IShowCompetition{
     public List<ICompetition> getCompetitions() {
         try {
             return DtoFactory.getCompetitionMapper().getAll();
-        } catch (RemoteException ex) {
+        } catch (RemoteException | NotFoundException ex) {
             Logger.getLogger(ShowCompetition.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }

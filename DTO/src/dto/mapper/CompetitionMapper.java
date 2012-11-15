@@ -66,16 +66,23 @@ public class CompetitionMapper
     }
 
     @Override
-    public List<ICompetition> getAll()
+    public List<ICompetition> getAll() throws NotFoundException
     {
-        List<ICompetition> result = new LinkedList<>();
-
-        for (domain.contract.ICompetition a : DomainFacade.getInstance().getAll(domain.contract.ICompetition.class))
+        try
         {
-            result.add(Competition.copy(a));
-        }
+            List<ICompetition> result = new LinkedList<>();
 
-        return result;
+            for (domain.contract.ICompetition a : DomainFacade.getInstance().getAll(domain.contract.ICompetition.class))
+            {
+                result.add(Competition.copy(a));
+            }
+
+            return result;
+        }
+        catch (CouldNotFetchException ex)
+        {
+            throw new NotFoundException(ex);
+        }
     }
 
     @Override

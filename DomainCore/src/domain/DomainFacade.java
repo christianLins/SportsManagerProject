@@ -40,27 +40,32 @@ public class DomainFacade
     /**
      * returns all competitions in a time span
      *
-     * @param from start of time span
+     * @param From start of time span
      * @param to end of time span
      * @return all competitions between a timespan given
      */
-    public ArrayList<Competition> getCompetitionsByDate(Date from, Date to)
+    public ArrayList<Competition> getCompetitionsByDate(Date From, Date to)
     {
         session.beginTransaction();
-        Query query = session.createQuery("from Competition where dateFrom >= :from and dateTo <= :to");
-        query.setParameter("from", from);
+        Query query = session.createQuery("From Competition where dateFrom >= :From and dateTo <= :to");
+        query.setParameter("From", From);
         query.setParameter("to", to);
         return (ArrayList<Competition>) query.list();
     }
 
-    public Member getMemberByUsername(String username)
+    public Member getMemberByUsername(String username) throws CouldNotFetchException
     {
+        try{
         session.beginTransaction();
-        Query q = session.createQuery("from Member where Username = :Username");
+        Query q = session.createQuery("From Member where Username = :Username");
         q.setParameter("Username", username);
         return (Member) q.uniqueResult();
+        }catch(HibernateException ex)
+        {
+            throw new CouldNotFetchException(ex.getMessage());
+        }
     }
-    
+
     /**
      * returns a the department of a type of sport
      *
@@ -69,12 +74,10 @@ public class DomainFacade
      */
     public Department getDepartmentsBySport(TypeOfSport sport)
     {
-//        session.beginTransaction();
-//        Query query = session.createQuery("from DepartmenthasTypeOfSport where typeOfSport = :sport");
-//        query.setParameter("sport", sport);
-//        DepartmenthasTypeOfSport temp = (DepartmenthasTypeOfSport) query.uniqueResult();
-//        return temp.getDepartmentidDepartment();
-        throw new NotYetImplementedException("new query to be written");
+        session.beginTransaction();
+        Query q = session.createQuery("From Department where typeOfSports = :sport");
+        q.setParameter("sport", sport);
+        return (Department) q.uniqueResult();
     }
 
     /**
@@ -86,7 +89,7 @@ public class DomainFacade
     public ArrayList<Match> getMatchesByCompetition(Competition competition)
     {
         session.beginTransaction();
-        Query query = session.createQuery("from Match where competition = :competition");
+        Query query = session.createQuery("From Match where competition = :competition");
         query.setParameter("competition", competition);
         return (ArrayList<Match>) query.list();
     }
@@ -101,7 +104,7 @@ public class DomainFacade
     public Member getMemberByName(String firstname, String lastname)
     {
         session.beginTransaction();
-        Query query = session.createQuery("from Member1 where prename = :firstname and lastname = :lastname");
+        Query query = session.createQuery("From Member1 where prename = :firstname and lastname = :lastname");
         return (Member) query.uniqueResult();
     }
 
@@ -115,27 +118,30 @@ public class DomainFacade
      */
     public <T> T getByName(Class<T> clazz, String name)
     {
-        Transaction t = session.beginTransaction();
+        session.beginTransaction();
         return (T) session.createCriteria(clazz).add(Restrictions.eq("name", name)).uniqueResult();
     }
 
-    public <T> T getByID(Class<T> clazz, Integer id)
+    public <T> T getByID(Class<T> clazz, Integer id) throws CouldNotFetchException
     {
-        try{
-        session.beginTransaction();
-        return (T) session.createCriteria(clazz).add(Restrictions.eq("id", id));}
-        catch(HibernateException ex)
+        try
         {
-            throw ex;
+            session.beginTransaction();
+            return (T) session.createCriteria(clazz).add(Restrictions.eq("id", id)).uniqueResult();
+        }
+        catch (HibernateException ex)
+        {
+            throw new CouldNotFetchException(ex.getMessage());
         }
     }
-    
+
     /**
      * Saves a domain object
+     *
      * @param <T> the class to be saved
      * @param expected the class instance to be saved
      * @return the id of the saved object
-     * @throws CouldNotSaveException 
+     * @throws CouldNotSaveException
      */
     public <T extends IDomain> Integer set(T expected)
             throws CouldNotSaveException
@@ -156,9 +162,10 @@ public class DomainFacade
 
     /**
      * deletes a line in the database
-     * @param <T> the table to be deleted from
+     *
+     * @param <T> the table to be deleted From
      * @param expected the object to be deleted
-     * @throws CouldNotDeleteException 
+     * @throws CouldNotDeleteException
      */
     public <T> void delete(T expected)
             throws CouldNotDeleteException
@@ -177,13 +184,21 @@ public class DomainFacade
 
     /**
      * gets all entries of a table
+     *
      * @param <T> the class of the table
      * @param clazz the class instance of the table, i.e. Table.class
      * @return a list of entries
      */
-    public <T extends IDomain> List<T> getAll(Class<T> clazz)
+    public <T extends IDomain> List<T> getAll(Class<T> clazz) throws CouldNotFetchException
     {
-        session.beginTransaction();
-        return (List<T>) session.createCriteria(clazz).list();
+        try
+        {
+            session.beginTransaction();
+            return (List<T>) session.createCriteria(clazz).list();
+        }
+        catch (HibernateException ex)
+        {
+            throw new CouldNotFetchException(ex.getMessage());
+        }
     }
 }

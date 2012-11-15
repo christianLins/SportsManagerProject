@@ -4,6 +4,7 @@
  */
 package dto.mapper;
 
+import dto.mapper.contract.NotFoundException;
 import domain.*;
 import dto.classes.Address;
 import dto.contract.IAddress;
@@ -63,16 +64,23 @@ public class AddressMapper
     }
 
     @Override
-    public List<IAddress> getAll()
+    public List<IAddress> getAll() throws NotFoundException
     {
-        List<IAddress> result = new LinkedList<>();
-
-        for (domain.contract.IAddress a : DomainFacade.getInstance().getAll(domain.contract.IAddress.class))
+        try
         {
-            result.add(Address.copy(a));
-        }
+            List<IAddress> result = new LinkedList<>();
 
-        return result;
+            for (domain.contract.IAddress a : DomainFacade.getInstance().getAll(domain.contract.IAddress.class))
+            {
+                result.add(Address.copy(a));
+            }
+
+            return result;
+        }
+        catch (CouldNotFetchException ex)
+        {
+            throw new NotFoundException(ex);
+        }
     }
 
     @Override

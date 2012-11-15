@@ -64,16 +64,23 @@ public class PermissionMapper
     }
 
     @Override
-    public List<IPermission> getAll()
+    public List<IPermission> getAll() throws NotFoundException
     {
-        List<IPermission> result = new LinkedList<>();
-
-        for (domain.contract.IPermission a : DomainFacade.getInstance().getAll(domain.contract.IPermission.class))
+        try
         {
-            result.add(Permission.copy(a));
-        }
+            List<IPermission> result = new LinkedList<>();
 
-        return result;
+            for (domain.contract.IPermission a : DomainFacade.getInstance().getAll(domain.contract.IPermission.class))
+            {
+                result.add(Permission.copy(a));
+            }
+
+            return result;
+        }
+        catch (CouldNotFetchException ex)
+        {
+            throw new NotFoundException(ex);
+        }
     }
 
     @Override

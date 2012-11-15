@@ -64,16 +64,23 @@ public class TypeOfSportMapper
     }
 
     @Override
-    public List<ITypeOfSport> getAll()
+    public List<ITypeOfSport> getAll() throws NotFoundException
     {
-        List<ITypeOfSport> result = new LinkedList<>();
-
-        for (domain.contract.ITypeOfSport a : DomainFacade.getInstance().getAll(domain.contract.ITypeOfSport.class))
+        try
         {
-            result.add(TypeOfSport.copy(a));
-        }
+            List<ITypeOfSport> result = new LinkedList<>();
 
-        return result;
+            for (domain.contract.ITypeOfSport a : DomainFacade.getInstance().getAll(domain.contract.ITypeOfSport.class))
+            {
+                result.add(TypeOfSport.copy(a));
+            }
+
+            return result;
+        }
+        catch (CouldNotFetchException ex)
+        {
+            throw new NotFoundException(ex);
+        }
     }
 
     @Override

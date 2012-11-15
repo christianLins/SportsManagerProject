@@ -1,6 +1,7 @@
 package presentation;
 
 import contract.ILogin;
+import contract.MemberNotFoundException;
 import dto.contract.IMember;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +20,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 import ldap.contract.IAuthenticator;
 import dto.contract.IUserData;
+import java.rmi.RemoteException;
 import javax.swing.JOptionPane;
 import ldap.presentation.*;
 import ldap.presentation.core.DialogResult;
@@ -375,6 +377,11 @@ public class SportsClubManager
                                         IMember user = loginService.getMemberByUserData(userData);
                                         SportsClubManager manager = new SportsClubManager(null, client, user);
                                         manager.setVisible(true);
+                                    }
+                                    catch (MemberNotFoundException ex)
+                                    {
+                                        JOptionPane.showInputDialog("User not found");
+                                        Logger.getLogger(SportsClubManager.class.getName()).log(Level.WARNING, null, ex);
                                     }
                                     catch (CommunicationProblemException ex)
                                     {

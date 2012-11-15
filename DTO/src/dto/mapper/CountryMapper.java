@@ -67,16 +67,23 @@ public class CountryMapper
     }
 
     @Override
-    public List<ICountry> getAll()
+    public List<ICountry> getAll() throws NotFoundException
     {
-        List<ICountry> result = new LinkedList<>();
-
-        for (domain.contract.ICountry a : DomainFacade.getInstance().getAll(domain.contract.ICountry.class))
+        try
         {
-            result.add(Country.copy(a));
-        }
+            List<ICountry> result = new LinkedList<>();
 
-        return result;
+            for (domain.contract.ICountry a : DomainFacade.getInstance().getAll(domain.contract.ICountry.class))
+            {
+                result.add(Country.copy(a));
+            }
+
+            return result;
+        }
+        catch (CouldNotFetchException ex)
+        {
+            throw new NotFoundException(ex);
+        }
     }
 
     @Override

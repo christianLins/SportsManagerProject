@@ -7,6 +7,8 @@ package dto.mapper;
 import dto.contract.*;
 import dto.mapper.contract.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
 
@@ -66,15 +68,22 @@ public class RoleMapper
     }
 
     @Override
-    public List<IRole> getAll()
+    public List<IRole> getAll() throws NotFoundException
     {
-        List<IRole> roles = new LinkedList<>();
+        try
+        {
+            List<IRole> roles = new LinkedList<>();
 
-        roles.addAll(TrainerMapper.getInstance().getAll());
-        roles.addAll(PlayerMapper.getInstance().getAll());
-        roles.addAll(DepartmentHeadMapper.getInstance().getAll());
+            roles.addAll(TrainerMapper.getInstance().getAll());
+            roles.addAll(PlayerMapper.getInstance().getAll());
+            roles.addAll(DepartmentHeadMapper.getInstance().getAll());
 
-        return roles;
+            return roles;
+        }
+        catch (NotFoundException ex)
+        {
+            throw new NotFoundException(ex);
+        }
     }
 
     @Override

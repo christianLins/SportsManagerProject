@@ -11,6 +11,7 @@ import dto.contract.IMatchresult;
 import dto.contract.ITeam;
 import dto.mapper.*;
 import dto.mapper.contract.IdNotFoundException;
+import dto.mapper.contract.NotFoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class AddMatchResults implements IAddMatchResults {
     public List<ICompetition> getCompetitionList() {
         try {
             return DtoFactory.getCompetitionMapper().getAll();
-        } catch (RemoteException ex) {
+        } catch (RemoteException | NotFoundException ex) {
             Logger.getLogger(AddMatchResults.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }

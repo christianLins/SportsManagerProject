@@ -4,12 +4,12 @@
  */
 package dto.mapper;
 
-import java.util.*;
-import java.util.logging.*;
 import domain.*;
 import dto.classes.DepartmentHead;
 import dto.contract.IDepartmentHead;
 import dto.mapper.contract.*;
+import java.util.*;
+import java.util.logging.*;
 
 /**
  *
@@ -53,28 +53,35 @@ public class DepartmentHeadMapper
     public IDepartmentHead getById(Integer id)
             throws IdNotFoundException
     {
-        for (domain.contract.IDepartmentHead a : DomainFacade.getInstance().getAll(domain.contract.IDepartmentHead.class))
+        try
         {
-            if (a.getId() == id)
-            {
-                return DepartmentHead.copy(a);
-            }
+            domain.contract.IDepartmentHead a = DomainFacade.getInstance().getByID(domain.contract.IDepartmentHead.class,id);
+            return DepartmentHead.copy(a);
         }
-
-        throw new IdNotFoundException();
+        catch (CouldNotFetchException ex)
+        {
+            throw new IdNotFoundException();
+        }
     }
 
     @Override
-    public List<IDepartmentHead> getAll()
+    public List<IDepartmentHead> getAll() throws NotFoundException
     {
-        List<IDepartmentHead> result = new LinkedList<>();
-
-        for (domain.contract.IDepartmentHead a : DomainFacade.getInstance().getAll(domain.contract.IDepartmentHead.class))
+        try
         {
-            result.add(DepartmentHead.copy(a));
-        }
+            List<IDepartmentHead> result = new LinkedList<>();
 
-        return result;
+            for (domain.contract.IDepartmentHead a : DomainFacade.getInstance().getAll(domain.contract.IDepartmentHead.class))
+            {
+                result.add(DepartmentHead.copy(a));
+            }
+
+            return result;
+        }
+        catch (CouldNotFetchException ex)
+        {
+            throw new NotFoundException(ex);
+        }
     }
 
     @Override

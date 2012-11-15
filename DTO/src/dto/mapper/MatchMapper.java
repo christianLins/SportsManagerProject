@@ -67,16 +67,23 @@ public class MatchMapper
     }
 
     @Override
-    public List<IMatch> getAll()
+    public List<IMatch> getAll() throws NotFoundException
     {
-        List<IMatch> result = new LinkedList<>();
-
-        for (domain.contract.IMatch a : DomainFacade.getInstance().getAll(domain.contract.IMatch.class))
+        try
         {
-            result.add(Match.copy(a));
-        }
+            List<IMatch> result = new LinkedList<>();
 
-        return result;
+            for (domain.contract.IMatch a : DomainFacade.getInstance().getAll(domain.contract.IMatch.class))
+            {
+                result.add(Match.copy(a));
+            }
+
+            return result;
+        }
+        catch (CouldNotFetchException ex)
+        {
+            throw new NotFoundException(ex);
+        }
     }
 
     @Override

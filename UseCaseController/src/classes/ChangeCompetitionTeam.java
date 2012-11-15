@@ -10,6 +10,7 @@ import dto.contract.ICompetition;
 import dto.contract.IPlayer;
 import dto.mapper.DtoFactory;
 import dto.mapper.contract.IdNotFoundException;
+import dto.mapper.contract.NotFoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,10 @@ public class ChangeCompetitionTeam implements IChangeCompetitionTeam{
     }
     
     public static IChangeCompetitionTeam getInstance() {
-        if(INSTANCE == null) INSTANCE = new ChangeCompetitionTeam();
+        if(INSTANCE == null)
+        {
+            INSTANCE = new ChangeCompetitionTeam();
+        }
         return INSTANCE;
     }
 
@@ -36,7 +40,7 @@ public class ChangeCompetitionTeam implements IChangeCompetitionTeam{
     public List<ICompetition> getCompetition() {
         try {
             return DtoFactory.getCompetitionMapper().getAll();
-        } catch (RemoteException ex) {
+        } catch (RemoteException | NotFoundException ex) {
             Logger.getLogger(ChangeCompetitionTeam.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
@@ -64,7 +68,9 @@ public class ChangeCompetitionTeam implements IChangeCompetitionTeam{
         for(Integer team : teamList)
         {
             if(team == oldTeam.getId())
+            {
                 team = newTeam.getId();
+            }
         }
         try {
             DtoFactory.getCompetitionManager().set(competition);
@@ -78,7 +84,7 @@ public class ChangeCompetitionTeam implements IChangeCompetitionTeam{
     {
         try {
             return DtoFactory.getClubTeamManager().getAll();
-        } catch (RemoteException ex) {
+        } catch (RemoteException | NotFoundException ex) {
             Logger.getLogger(ChangeCompetitionTeam.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;

@@ -53,28 +53,35 @@ public class DepartmentMapper
     public IDepartment getById(Integer id)
             throws IdNotFoundException
     {
-        for (domain.contract.IDepartment a : DomainFacade.getInstance().getAll(domain.contract.IDepartment.class))
+        try
         {
-            if (a.getId() == id)
-            {
-                return Department.copy(a);
-            }
+            domain.contract.IDepartment a = DomainFacade.getInstance().getByID(domain.contract.IDepartment.class,id);
+            return Department.copy(a);
         }
-
-        throw new IdNotFoundException();
+        catch (CouldNotFetchException ex)
+        {
+            throw new IdNotFoundException();
+        }
     }
 
     @Override
-    public List<IDepartment> getAll()
+    public List<IDepartment> getAll() throws NotFoundException
     {
-        List<IDepartment> result = new LinkedList<>();
-
-        for (domain.contract.IDepartment a : DomainFacade.getInstance().getAll(domain.contract.IDepartment.class))
+        try
         {
-            result.add(Department.copy(a));
-        }
+            List<IDepartment> result = new LinkedList<>();
 
-        return result;
+            for (domain.contract.IDepartment a : DomainFacade.getInstance().getAll(domain.contract.IDepartment.class))
+            {
+                result.add(Department.copy(a));
+            }
+
+            return result;
+        }
+        catch (CouldNotFetchException ex)
+        {
+            throw new NotFoundException(ex);
+        }
     }
 
     @Override
