@@ -20,7 +20,7 @@ import services.ServiceNotAvailableException;
  *
  * @author Lucia
  */
-public class ShowMatchInfo extends AbstractMainForm {
+public class ShowCompetition extends AbstractMainForm {
 
     ServiceClient client;
     IShowCompetition controller;
@@ -33,7 +33,7 @@ public class ShowMatchInfo extends AbstractMainForm {
     /**
      * Creates new form ShowMatchInfo
      */
-    public ShowMatchInfo(AbstractForm form, ServiceClient client, IMember user) throws ServiceNotAvailableException {
+    public ShowCompetition(AbstractForm form, ServiceClient client, IMember user) throws ServiceNotAvailableException {
         super(form);
         this.client = client;
         this.user = user;

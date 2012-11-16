@@ -19,7 +19,7 @@ import services.ServiceNotAvailableException;
  *
  * @author Lucia
  */
-public class MatchResultEntr1 extends AbstractMainForm {
+public class AddCompetitionResult extends AbstractMainForm {
 
     ServiceClient client;
     IAddMatchResults controller;
@@ -32,7 +32,7 @@ public class MatchResultEntr1 extends AbstractMainForm {
     /**
      * Creates new form MatchResultEntr
      */
-    public MatchResultEntr1(AbstractForm form, ServiceClient client, IMember user) throws ServiceNotAvailableException {
+    public AddCompetitionResult(AbstractForm form, ServiceClient client, IMember user) throws ServiceNotAvailableException {
         super(form);
         this.client = client;
         this.user = user;
