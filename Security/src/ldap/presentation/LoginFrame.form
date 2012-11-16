@@ -105,6 +105,7 @@
     <Component class="javax.swing.JButton" name="btnOK">
       <Properties>
         <Property name="text" type="java.lang.String" value="OK"/>
+        <Property name="selected" type="boolean" value="true"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOKActionPerformed"/>
@@ -128,6 +129,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="jPasswordField1">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jPasswordField1KeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblIP">
       <Properties>
@@ -136,7 +140,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtFieldIP">
       <Properties>
-        <Property name="text" type="java.lang.String" value="localhost"/>
+        <Property name="text" type="java.lang.String" value="169.254.228.35"/>
       </Properties>
     </Component>
   </SubComponents>

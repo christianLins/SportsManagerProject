@@ -5,6 +5,7 @@
 package ldap.presentation;
 
 import dto.contract.IUserData;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.LinkedList;
 import ldap.presentation.core.DialogResult;
@@ -51,6 +52,7 @@ public class LoginFrame
         jLabel2.setText("Password");
 
         btnOK.setText("OK");
+        btnOK.setSelected(true);
         btnOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOKActionPerformed(evt);
@@ -72,9 +74,15 @@ public class LoginFrame
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel3.setText("User Login");
 
+        jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPasswordField1KeyPressed(evt);
+            }
+        });
+
         lblIP.setText("Server IP");
 
-        txtFieldIP.setText("localhost");
+        txtFieldIP.setText("169.254.228.35");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -150,12 +158,24 @@ public class LoginFrame
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnOKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnOKKeyPressed
-        for (IDialogListener dialogLister : dialogListers) {
-            dialogLister.dialogClosed(DialogResult.Ok, this.getUserData());
-        }
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            for (IDialogListener dialogLister : dialogListers) {
+                dialogLister.dialogClosed(DialogResult.Ok, this.getUserData());
+            }
 
-        this.setVisible(false);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_btnOKKeyPressed
+
+    private void jPasswordField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            for (IDialogListener dialogLister : dialogListers) {
+                dialogLister.dialogClosed(DialogResult.Ok, this.getUserData());
+            }
+
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_jPasswordField1KeyPressed
 
     /**
      * @param args the command line arguments
