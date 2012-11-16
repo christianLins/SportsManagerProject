@@ -1,6 +1,7 @@
 package presentation;
 
 import contract.ILogin;
+import contract.MemberNotFoundException;
 import dto.contract.IMember;
 import dto.contract.IUserData;
 import java.util.logging.Level;
@@ -347,7 +348,7 @@ public class SCM_Overview extends AbstractForm {
 
                             IAuthenticator a = new ldap.Authenticator();
 
-                            if (a.auth(userData)) {
+                            while (a.auth(userData)) {
                                 try {
                                     JOptionPane.showMessageDialog(null, "Access granted!");
 
@@ -359,6 +360,9 @@ public class SCM_Overview extends AbstractForm {
                                         IMember user = loginService.getMemberByUserData(userData);
                                         SCM_Overview manager = new SCM_Overview(null, client, user);
                                         manager.setVisible(true);
+                                    } catch (MemberNotFoundException ex) {
+                                        JOptionPane.showMessageDialog(null, "Invalid user name");
+                                        //Logger.getLogger(SCM_Overview.class.getName()).log(Level.SEVERE, null, ex);
                                     }
                                     catch (CommunicationProblemException ex)
                                     {
@@ -368,9 +372,7 @@ public class SCM_Overview extends AbstractForm {
                                 } catch (ServiceNotAvailableException ex) {
                                     Logger.getLogger(SCM_Overview.class.getName()).log(Level.SEVERE, null, ex);
                                 }
-                            } else {
-                                JOptionPane.showMessageDialog(null, "Invalid user password!");
-                            }
+                            } 
                         }
                     }
                 });
