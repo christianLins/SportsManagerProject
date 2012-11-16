@@ -16,7 +16,7 @@ import java.util.logging.*;
  * @author Thomas
  */
 public class TypeOfSportMapper
-        implements IMapper<ITypeOfSport>
+        implements ITypeOfSportMapper
 {
     private static TypeOfSportMapper controller;
 

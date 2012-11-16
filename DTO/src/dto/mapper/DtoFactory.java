@@ -5,7 +5,7 @@
 package dto.mapper;
 
 import dto.contract.*;
-import dto.mapper.contract.IMapper;
+import dto.mapper.contract.*;
 import java.rmi.RemoteException;
 
 /**
@@ -74,7 +74,7 @@ public class DtoFactory
         return TeamMapper.getInstance();
     }
 
-    public static IMapper<ITypeOfSport> getTypeOfSportManager()
+    public static ITypeOfSportMapper getTypeOfSportManager()
             throws RemoteException
     {
         return TypeOfSportMapper.getInstance();
@@ -92,7 +92,7 @@ public class DtoFactory
         return DepartmentHeadMapper.getInstance();
     }
 
-    public static IMapper<ILeague> getLeagueManager()
+    public static ILeagueMapper getLeagueManager()
             throws RemoteException
     {
         return LeagueMapper.getInstance();

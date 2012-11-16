@@ -18,4 +18,6 @@ public interface IMatchresult
     void setPointsForeignteam(double pointsForeignteam);
 
     void setPointsHometeam(double pointsHometeam);
+
+    public boolean IsFinal();
 }
