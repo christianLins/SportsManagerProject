@@ -13,7 +13,8 @@ import dto.contract.IUserData;
 
  @author Thomas
  */
-public class Authenticator implements IAuthenticator
+public class Authenticator
+        implements IAuthenticator
 {
     private HashMap<Integer, Date> currentConnections = new HashMap<>();
 
@@ -52,6 +53,27 @@ public class Authenticator implements IAuthenticator
         }
         catch (NamingException ex)
         {
+            // Additional properties are taken from jndi.properties
+            Properties env2 = new Properties();
+            env2.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
+            env2.put(Context.PROVIDER_URL, "ldaps://ldap.fhv.at:636/dc=uclv,dc=net");
+            env2.put(Context.SECURITY_AUTHENTICATION, "simple");
+            env2.put(Context.SECURITY_PRINCIPAL, "uid=" + userData.getUsername() + ",ou=apps,dc=uclv,dc=net"); // specify the username
+            env2.put(Context.SECURITY_CREDENTIALS, userData.getPassword());
+
+            try
+            {
+                Context ctx2 = new InitialContext(env);
+                Date availableUntil2 = new Date();
+                availableUntil2.setTime(availableUntil2.getTime() + 15 * 60 * 1000);
+                currentConnections.put(hash, availableUntil2);
+                ctx2.close();
+                return true;
+            }
+            catch (NamingException ex2)
+            {
+            }
+            
             return false;
         }
     }

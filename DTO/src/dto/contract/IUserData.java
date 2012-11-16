@@ -22,4 +22,8 @@ public interface IUserData extends Serializable
      */
     String getUsername();
     
+    /**
+     * @return the serverip
+     */
+    String getIP();
 }
