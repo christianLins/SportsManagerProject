@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.*;
-import org.hibernate.cfg.NotYetImplementedException;
 import org.hibernate.criterion.Restrictions;
 import utils.HibernateUtil;
 
@@ -55,12 +54,14 @@ public class DomainFacade
 
     public Member getMemberByUsername(String username) throws CouldNotFetchException
     {
-        try{
-        session.beginTransaction();
-        Query q = session.createQuery("From Member where Username = :Username");
-        q.setParameter("Username", username);
-        return (Member) q.uniqueResult();
-        }catch(HibernateException ex)
+        try
+        {
+            session.beginTransaction();
+            Query q = session.createQuery("From Member where Username = :Username");
+            q.setParameter("Username", username);
+            return (Member) q.uniqueResult();
+        }
+        catch (HibernateException ex)
         {
             throw new CouldNotFetchException(ex.getMessage());
         }
@@ -195,6 +196,22 @@ public class DomainFacade
         {
             session.beginTransaction();
             return (List<T>) session.createCriteria(clazz).list();
+        }
+        catch (HibernateException ex)
+        {
+            throw new CouldNotFetchException(ex.getMessage());
+        }
+    }
+
+    public League getLeageByNameAndTypeOfSport(TypeOfSport t, String leaguename) throws CouldNotFetchException
+    {
+        try
+        {
+            session.beginTransaction();
+            Query q = session.createQuery("From League where sport = :t and name = :leaguename");
+            q.setParameter("t", t);
+            q.setParameter("leaguename", leaguename);
+            return (League) q.uniqueResult();
         }
         catch (HibernateException ex)
         {

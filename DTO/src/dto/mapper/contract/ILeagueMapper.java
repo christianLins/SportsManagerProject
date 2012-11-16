@@ -12,5 +12,5 @@ import dto.contract.*;
  */
 public interface ILeagueMapper extends IMapper<ILeague>
 {
-    public ILeague getByName(String league, ITypeOfSport typeOfSport);
+    public ILeague getByName(String league, ITypeOfSport typeOfSport) throws NotFoundException;
 }

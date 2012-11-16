@@ -139,8 +139,16 @@ public class LeagueMapper
     }
 
     @Override
-    public ILeague getByName(String league, ITypeOfSport typeOfSport)
+    public ILeague getByName(String league, ITypeOfSport typeOfSport) throws NotFoundException
     {
-        throw new UnsupportedOperationException("Select is missing :-D");
+        try
+        {
+            domain.classes.TypeOfSport sport = (domain.classes.TypeOfSport)TypeOfSportMapper.getInstance().getDomainById(typeOfSport.getId());
+            return League.copy(DomainFacade.getInstance().getLeageByNameAndTypeOfSport(sport,league));
+        }
+        catch (CouldNotFetchException | IdNotFoundException ex)
+        {
+            throw new NotFoundException(ex);
+        }
     }
 }
