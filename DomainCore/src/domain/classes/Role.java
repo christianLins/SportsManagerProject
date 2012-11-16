@@ -13,7 +13,7 @@ import domain.contract.*;
 @Entity
 @Table(name = "Role1")
 @XmlRootElement
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Role
         implements Serializable, IRole
 {
