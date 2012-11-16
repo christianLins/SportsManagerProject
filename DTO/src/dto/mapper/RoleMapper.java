@@ -7,8 +7,6 @@ package dto.mapper;
 import dto.contract.*;
 import dto.mapper.contract.*;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
 
