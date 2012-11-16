@@ -8,8 +8,7 @@ import database.DatabaseManager;
 import domain.*;
 import domain.contract.*;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.*;
 import org.easymock.EasyMock;
 import org.junit.*;
 
@@ -42,6 +41,10 @@ public class AddressTest
             Assert.assertEquals(1, actuals.size());
             Assert.assertEquals(expected.getStreet(), actual.getStreet());
         }
+        catch (CouldNotFetchException ex)
+        {
+            Logger.getLogger(AddressTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         catch (CouldNotSaveException ex)
         {
             Assert.fail("A exception is thrown");
@@ -58,11 +61,15 @@ public class AddressTest
             EasyMock.expect(expected.getStreet()).andReturn("Teststreet");
 
             DomainFacade.getInstance().set(expected);
-            DomainFacade.getInstance().getAll(expected);
+            DomainFacade.getInstance().getAll(IAddress.class);
 
             List<IAddress> actuals = DomainFacade.getInstance().getAll(IAddress.class);
 
             Assert.assertEquals(0, actuals.size());
+        }
+        catch (CouldNotFetchException ex)
+        {
+            Logger.getLogger(AddressTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         catch (CouldNotSaveException ex)
         {
@@ -73,40 +80,47 @@ public class AddressTest
     @Test
     public void GetAndSetMultipleTest()
     {
-        List<IAddress> expecteds = new LinkedList<>();
-
-        for (int i = 0; i < 2; i++)
+        try
         {
-            try
+            List<IAddress> expecteds = new LinkedList<>();
+
+            for (int i = 0; i < 2; i++)
             {
-                ICountry country = EasyMock.createMock(ICountry.class);
+                try
+                {
+                    ICountry country = EasyMock.createMock(ICountry.class);
 
-                IAddress expected = EasyMock.createMock(IAddress.class);
-                EasyMock.expect(expected.getCountry()).andReturn(country);
-                EasyMock.expect(expected.getPostalCode()).andReturn(new Random().nextInt());
-                EasyMock.expect(expected.getStreet()).andReturn("Teststreet" + i);
-                EasyMock.expect(expected.getStreetNumber()).andReturn(new Random().nextInt());
-                EasyMock.expect(expected.getVillage()).andReturn("Testvillage" + i);
+                    IAddress expected = EasyMock.createMock(IAddress.class);
+                    EasyMock.expect(expected.getCountry()).andReturn(country);
+                    EasyMock.expect(expected.getPostalCode()).andReturn(new Random().nextInt());
+                    EasyMock.expect(expected.getStreet()).andReturn("Teststreet" + i);
+                    EasyMock.expect(expected.getStreetNumber()).andReturn(new Random().nextInt());
+                    EasyMock.expect(expected.getVillage()).andReturn("Testvillage" + i);
 
-                expecteds.add(expected);
-                DomainFacade.getInstance().set(expected);
+                    expecteds.add(expected);
+                    DomainFacade.getInstance().set(expected);
+                }
+                catch (CouldNotSaveException ex)
+                {
+                    Assert.fail("A exception is thrown");
+                }
             }
-            catch (CouldNotSaveException ex)
+
+            List<IAddress> actuals = DomainFacade.getInstance().getAll(IAddress.class);
+
+            Assert.assertEquals(expecteds.size(), actuals.size());
+
+            for (int i = 0; i < expecteds.size(); i++)
             {
-                Assert.fail("A exception is thrown");
+                IAddress expected = expecteds.get(i);
+                IAddress actual = actuals.get(i);
+                Assert.assertEquals(expected.getStreet(), actual.getStreet());
+                Assert.assertEquals(expected.getVillage(), actual.getVillage());
             }
         }
-
-        List<IAddress> actuals = DomainFacade.getInstance().getAll(IAddress.class);
-
-        Assert.assertEquals(expecteds.size(), actuals.size());
-
-        for (int i = 0; i < expecteds.size(); i++)
+        catch (CouldNotFetchException ex)
         {
-            IAddress expected = expecteds.get(i);
-            IAddress actual = actuals.get(i);
-            Assert.assertEquals(expected.getStreet(), actual.getStreet());
-            Assert.assertEquals(expected.getVillage(), actual.getVillage());
+            Logger.getLogger(AddressTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

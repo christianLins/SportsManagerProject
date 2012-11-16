@@ -23,7 +23,7 @@ public class RmiServerMain
         // start rmi-server-thread --------------------------------------------
         RmiServer rmiServer = new RmiServer(1099);
         new Thread(rmiServer).start();
-        if (rmiServer.isRunning()) System.out.println("RMI Server is running");
+       // if (rmiServer.isRunning()) System.out.println("RMI Server is running");
         // --------------------------------------------------------------------
     }
 }
