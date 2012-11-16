@@ -6,7 +6,6 @@ import dto.contract.IMember;
 import dto.contract.IUserData;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 import ldap.contract.IAuthenticator;
@@ -14,10 +13,10 @@ import ldap.presentation.LoginFrame;
 import ldap.presentation.core.DialogResult;
 import ldap.presentation.core.IDialogListener;
 import presentation.basics.AbstractForm;
-import presentation.forms.competition.AddCompetitionResultsForm1;
-import presentation.forms.competition.ChangeCompetitionTeam1;
+import presentation.forms.competition.AddCompetitionResultsForm;
+import presentation.forms.competition.ChangeCompetitionTeamForm;
 import presentation.forms.competition.CreateCompetitionForm;
-import presentation.forms.competition.ShowCompetitionForm1;
+import presentation.forms.competition.ShowCompetitionForm;
 import presentation.forms.member.NewMemberForm;
 import presentation.forms.member.SearchMemberForm;
 import services.CommunicationProblemException;
@@ -246,7 +245,7 @@ public class SCM_Overview extends AbstractForm {
     private void btnShowCompetitionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowCompetitionActionPerformed
         try {
             paneCompMain.removeAll();
-            paneCompMain = new ShowCompetitionForm1(null, rmiClient, user).paneShowInfo;
+            paneCompMain = new ShowCompetitionForm(null, rmiClient, user).getPanel();
 
             tabMatch.setRightComponent(paneCompMain);
             tabMatch.validate();
@@ -259,7 +258,7 @@ public class SCM_Overview extends AbstractForm {
     private void btnAddResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddResultActionPerformed
         try {
             paneCompMain.removeAll();
-            paneCompMain = new AddCompetitionResultsForm1(null, rmiClient, user).paneMatchResults;
+            paneCompMain = new AddCompetitionResultsForm(null, rmiClient, user).getPanel();
 
             tabMatch.setRightComponent(paneCompMain);
             tabMatch.validate();
@@ -298,7 +297,7 @@ public class SCM_Overview extends AbstractForm {
     private void btnChangeTeamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeTeamActionPerformed
         try {
             paneCompMain.removeAll();
-            paneCompMain = new ChangeCompetitionTeam1(null, rmiClient, user).panelChangeTeam;
+            paneCompMain = new ChangeCompetitionTeamForm(null, rmiClient, user).getPanel();
 
             tabMatch.setRightComponent(paneCompMain);
             tabMatch.validate();

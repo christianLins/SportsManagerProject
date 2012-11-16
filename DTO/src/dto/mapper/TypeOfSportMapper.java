@@ -16,7 +16,7 @@ import java.util.logging.*;
  * @author Thomas
  */
 public class TypeOfSportMapper
-        implements IMapper<ITypeOfSport>
+        implements ITypeOfSportMapper
 {
     private static TypeOfSportMapper controller;
 
@@ -24,7 +24,7 @@ public class TypeOfSportMapper
     {
     }
 
-    public static IMapper<ITypeOfSport> getInstance()
+    public static TypeOfSportMapper getInstance()
     {
         if (controller == null)
         {
@@ -131,5 +131,11 @@ public class TypeOfSportMapper
         typeofsport.setPlayerList(list);
 
         return typeofsport;
+    }
+
+    @Override
+    public ITypeOfSport getByName(String name)
+    {
+        return TypeOfSport.copy(DomainFacade.getInstance().getByName(domain.classes.TypeOfSport.class,name));
     }
 }

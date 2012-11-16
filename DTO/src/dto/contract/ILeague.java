@@ -4,6 +4,7 @@
  */
 package dto.contract;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,4 +29,6 @@ public interface ILeague
     void setName(String name);
 
     void setTeamList(List<Integer> teamList);
+
+    public List<ICompetition> getCompetitionList(Date date);
 }

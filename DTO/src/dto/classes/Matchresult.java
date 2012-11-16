@@ -8,6 +8,7 @@ public class Matchresult
         implements Serializable, IMatchresult
 {
     private int id;
+    private boolean fin;
     private double pointsHometeam;
     private double pointsForeignteam;
 
@@ -70,5 +71,11 @@ public class Matchresult
     public Integer getId()
     {
         return id;
+    }
+
+    @Override
+    public boolean IsFinal()
+    {
+        return this.fin;
     }
 }

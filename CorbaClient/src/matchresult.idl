@@ -4,6 +4,7 @@ module corbaContract
     { 
         struct MatchresultCorba
         {
+            long Id;
             string Date;
             string hometeam;
             string foreignteam;

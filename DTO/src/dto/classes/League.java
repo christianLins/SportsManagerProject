@@ -1,8 +1,9 @@
 package dto.classes;
 
+import dto.contract.ICompetition;
+import dto.contract.ILeague;
 import java.io.Serializable;
 import java.util.*;
-import dto.contract.ILeague;
 
 public class League
         implements Serializable, ILeague
@@ -104,6 +105,12 @@ public class League
 
     @Override
     public void setCompetitions(List<Integer> competitions)
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<ICompetition> getCompetitionList(Date date)
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }

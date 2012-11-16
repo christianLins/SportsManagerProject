@@ -10,6 +10,10 @@ package domain.contract;
  */
 public interface IMatchresult extends IDomain
 {
+    boolean isFin();
+    
+    void setFin(boolean fin);
+    
     double getPointsForeignteam();
 
     double getPointsHometeam();

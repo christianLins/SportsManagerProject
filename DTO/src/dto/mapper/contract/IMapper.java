@@ -4,6 +4,7 @@
  */
 package dto.mapper.contract;
 
+import dto.contract.*;
 import java.io.Serializable;
 import java.util.List;
 

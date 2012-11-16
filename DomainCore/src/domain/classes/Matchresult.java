@@ -30,6 +30,8 @@ public class Matchresult
     private double pointsForeignteam;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "matchresult")
     private List<Match> matchList;
+    @Column(name="Final")
+    private boolean fin;
 
     public Matchresult()
     {
@@ -120,5 +122,17 @@ public class Matchresult
     public String toString()
     {
         return "sportsclubmanager.domain.classes.Matchresult[ id=" + id + " ]";
+    }
+
+    @Override
+    public boolean isFin()
+    {
+        return this.fin;
+    }
+
+    @Override
+    public void setFin(boolean fin)
+    {
+        this.fin = fin;
     }
 }

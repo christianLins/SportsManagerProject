@@ -4,21 +4,20 @@
  */
 package dto.mapper;
 
-import dto.mapper.contract.IdNotFoundException;
+import domain.*;
+import dto.classes.League;
+import dto.contract.ILeague;
+import dto.contract.ITypeOfSport;
+import dto.mapper.contract.*;
 import java.util.*;
 import java.util.logging.*;
-import dto.mapper.contract.IMapper;
-import domain.*;
-import dto.classes.*;
-import dto.contract.*;
-import dto.mapper.contract.NotFoundException;
 
 /**
- *
- * @author Thomas
+
+ @author Thomas
  */
 public class LeagueMapper
-        implements IMapper<ILeague>
+        implements ILeagueMapper
 {
     private static LeagueMapper controller;
 
@@ -26,7 +25,7 @@ public class LeagueMapper
     {
     }
 
-    public static IMapper<ILeague> getInstance()
+    public static LeagueMapper getInstance()
     {
         if (controller == null)
         {
@@ -67,7 +66,8 @@ public class LeagueMapper
     }
 
     @Override
-    public List<ILeague> getAll() throws NotFoundException
+    public List<ILeague> getAll()
+            throws NotFoundException
     {
         try
         {
@@ -136,5 +136,11 @@ public class LeagueMapper
         league.setTeamList(teamList);
 
         return league;
+    }
+
+    @Override
+    public ILeague getByName(String league, ITypeOfSport typeOfSport)
+    {
+        throw new UnsupportedOperationException("Select is missing :-D");
     }
 }
