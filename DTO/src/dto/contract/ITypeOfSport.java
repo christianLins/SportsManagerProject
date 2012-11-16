@@ -14,6 +14,10 @@ public interface ITypeOfSport
         extends IDto
 {
     String getName();
+    
+    List<Integer> getCompetitions();
+    
+    void setCompetitions(List<Integer> competitions);
 
     void setName(String name);
 

@@ -1,17 +1,17 @@
 package domain.classes;
 
+import domain.contract.*;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
-import domain.contract.*;
 
 /**
 
  @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
-@Table(name = "Role1")
+@Table(name = "Role")
 @XmlRootElement
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Role
@@ -22,18 +22,19 @@ public class Role
     @Basic(optional = false)
     @Column(name = "idRole")
     private Integer id;
+    @Column(name="Name")
+    private String name;
     @JoinTable(name = "Role_has_Permisssion", joinColumns =
     {
         @JoinColumn(name = "Role_idRole", referencedColumnName = "idRole")
     }, inverseJoinColumns =
     {
-        @JoinColumn(name = "Permisssion_idPermisssion", referencedColumnName = "idPermission")
+        @JoinColumn(name = "Permisssion_idPermisssion", referencedColumnName = "idPermisssion")
     })
     @ManyToMany
     private List<Permission> permisssionList;
-    @JoinColumn(name = "Member_idMember", referencedColumnName = "idMember")
-    @ManyToOne(optional = false)
-    private Member memberidMember;
+    @OneToMany(cascade= CascadeType.ALL,mappedBy="id")
+    private List<Member> members;
 
     public Role()
     {
@@ -44,6 +45,18 @@ public class Role
         this.id = id;
     }
 
+    @Override
+    public String getName()
+    {
+        return name;
+    }
+
+    @Override
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+    
     public Integer getId()
     {
         return id;
@@ -81,14 +94,28 @@ public class Role
         this.permisssionList = result;
     }
 
-    public Member getMemberidMember()
+    @Override
+    public List<IMember> getMembers()
     {
-        return memberidMember;
+        if(members == null)
+        {
+            this.members = new LinkedList<>();
+        }
+        List<IMember> mem = new LinkedList<>();
+        for(Member m:members)
+        {
+            mem.add(m);
+        }
+        return mem;
     }
 
-    public void setMemberidMember(Member memberidMember)
+    @Override
+    public void setMembers(List<IMember> members)
     {
-        this.memberidMember = memberidMember;
+        for(IMember m : members)
+        {
+            this.members.add((Member)m);
+        }
     }
 
     @Override

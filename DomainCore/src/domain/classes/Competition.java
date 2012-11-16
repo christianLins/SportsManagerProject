@@ -43,6 +43,10 @@ public class Competition
     private List<Team> teamList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "competition")
     private List<Match> matchList;
+    @ManyToOne
+    private League league;
+    @ManyToOne
+    private TypeOfSport sport;
 
     public Competition()
     {
@@ -57,6 +61,30 @@ public class Competition
     {
         this.id = idCompetition;
         this.dateFrom = dateFrom;
+    }
+
+    @Override
+    public ITypeOfSport getSport()
+    {
+        return sport;
+    }
+
+    @Override
+    public void setSport(ITypeOfSport sport)
+    {
+        this.sport = (TypeOfSport)sport;
+    }
+
+    @Override
+    public League getLeague()
+    {
+        return league;
+    }
+
+    @Override
+    public void setLeague(ILeague league)
+    {
+        this.league = (League)league;
     }
 
     @Override
@@ -186,5 +214,4 @@ public class Competition
         }
         return true;
     }
-    
 }

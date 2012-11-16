@@ -23,6 +23,14 @@ public interface ICompetition
     Double getPayment();
 
     List<Integer> getTeamList();
+    
+    Integer getLeague();
+    
+    Integer getSport();
+    
+    void setSport(Integer typeOfSport);
+    
+    void setLeague(Integer league);
 
     void setDateFrom(Date dateFrom);
 

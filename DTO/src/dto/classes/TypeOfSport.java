@@ -11,6 +11,7 @@ public class TypeOfSport
     private String name;
     private String description;
     private List<Integer> playerList = new LinkedList<>();
+    private List<Integer> competitions = new LinkedList<>();
 
     TypeOfSport(int id)
     {
@@ -31,6 +32,20 @@ public class TypeOfSport
             a = new TypeOfSport(typeOfSport.getId());
             a.setName(typeOfSport.getName());
             a.setDescription(typeOfSport.getDescription());
+            
+            List<Integer> pls = new LinkedList<>();
+            for(domain.contract.IPlayer p : typeOfSport.getPlayerList())
+            {
+                pls.add(p.getId());
+            }
+            a.setPlayerList(pls);
+            
+            List<Integer> comps = new LinkedList<>();
+            for(domain.contract.ICompetition c : typeOfSport.getCompetitions())
+            {
+                comps.add(c.getId());
+            }
+            a.setCompetitions(comps);
 
             typeOfSports.put(typeOfSport, a);
         }
@@ -82,5 +97,17 @@ public class TypeOfSport
     public Integer getId()
     {
         return id;
+    }
+
+    @Override
+    public List<Integer> getCompetitions()
+    {
+        return this.competitions;
+    }
+
+    @Override
+    public void setCompetitions(List<Integer> competitions)
+    {
+        this.competitions = competitions;
     }
 }

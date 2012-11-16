@@ -38,6 +38,8 @@ public class TypeOfSport
     private List<Player> playerList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeOfSports")
     private List<Department> departments;
+    @OneToMany(cascade= CascadeType.ALL, mappedBy="sport")
+    private List<Competition> competitions;
 
     public TypeOfSport()
     {
@@ -60,6 +62,31 @@ public class TypeOfSport
         this.name = name;
     }
 
+    @Override
+    public List<ICompetition> getCompetitions()
+    {
+        List<ICompetition> comps = new LinkedList<>();
+        for(Competition c : competitions)
+        {
+            comps.add(c);
+        }
+        return comps;
+    }
+
+    @Override
+    public void setCompetitions(List<ICompetition> competitions)
+    {
+        if(this.competitions == null)
+        {
+            this.competitions = new LinkedList<>();
+        }
+        for(ICompetition c : competitions)
+        {
+            this.competitions.add((Competition)c);
+        }
+    }
+
+    
     public Integer getId()
     {
         return id;

@@ -18,6 +18,10 @@ public interface ILeague
     String getName();
 
     List<Integer> getTeamList();
+    
+    List<Integer> getCompetitions();
+    
+    void setCompetitions(List<Integer> competitions);
 
     void setDescription(String description);
 

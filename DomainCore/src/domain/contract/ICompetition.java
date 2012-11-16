@@ -20,6 +20,14 @@ public interface ICompetition extends IDomain
     Double getPayment();
 
     List<ITeam> getTeamList();
+    
+    ILeague getLeague();
+    
+    ITypeOfSport getSport();
+    
+    void setSport(ITypeOfSport sport);
+    
+    void setLeague(ILeague league);
 
     void setDateFrom(Date dateFrom);
 

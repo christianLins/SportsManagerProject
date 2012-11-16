@@ -29,6 +29,8 @@ public class League
     private String description;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "league")
     private List<Team> teamList;
+    @OneToMany(cascade= CascadeType.ALL,mappedBy="league")
+    private List<Competition> competitions;
 
     public League()
     {
@@ -37,6 +39,23 @@ public class League
     public League(Integer id)
     {
         this.id = id;
+    }
+
+    @Override
+    public List<ICompetition> getCompetitions()
+    {
+        List<ICompetition> cl = new LinkedList<>();
+        for(Competition c : competitions)
+        {
+            cl.add(c);
+        }
+        return cl;
+    }
+
+    @Override
+    public void setCompetitions(List<Competition> competitions)
+    {
+        this.competitions = competitions;
     }
 
     public League(Integer id, String name)

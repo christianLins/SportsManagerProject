@@ -12,6 +12,14 @@ import java.util.List;
 public interface IRole extends IDomain
 {
     List<IPermission> getPermisssionList();
+    
+    List<IMember> getMembers();
+    
+    String getName();
+    
+    void setName(String name);
+    
+    void setMembers(List<IMember> members);
 
     void setPermisssionList(List<IPermission> permisssionList);
 }

@@ -13,6 +13,14 @@ public interface IRole
         extends IDto
 {
     List<Integer> getPermisssionList();
+    
+    List<Integer> getMembers();
+    
+    String getName();
+    
+    void setName(String name);
+    
+    void setMembers(List<Integer> members);
 
     void setPermisssionList(List<Integer> permisssionList);
 }

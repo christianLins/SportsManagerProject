@@ -11,6 +11,7 @@ public class League
     private String name;
     private String description;
     private List<Integer> teamList = new LinkedList<>();
+    private List<Integer> competitions = new LinkedList<>();
 
      League()
     {
@@ -43,6 +44,11 @@ public class League
             a.setName(league.getName());
             a.setDescription(league.getDescription());
 
+            for(domain.contract.ICompetition c : league.getCompetitions())
+            {
+                a.competitions.add(c.getId());
+            }
+            
             for (domain.contract.ITeam d : league.getTeamList())
             {
                 a.teamList.add(d.getId());
@@ -88,5 +94,17 @@ public class League
     public void setTeamList(List<Integer> teamList)
     {
         this.teamList = teamList;
+    }
+
+    @Override
+    public List<Integer> getCompetitions()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setCompetitions(List<Integer> competitions)
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

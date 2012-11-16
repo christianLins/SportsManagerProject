@@ -11,6 +11,8 @@ public class Competition
     private Date dateFrom;
     private Date dateTo;
     private Double payment;
+    private Integer league;
+    private Integer sport;
     private List<Integer> teamList = new LinkedList<>();
     private List<Integer> matchList = new LinkedList<>();
 
@@ -39,7 +41,8 @@ public class Competition
             a.setDateFrom(competition.getDateFrom());
             a.setDateTo(competition.getDateTo());
             a.setPayment(competition.getPayment());
-
+            a.setLeague(competition.getLeague().getId());
+            a.setSport(competition.getSport().getId());
             for (domain.contract.ITeam d : competition.getTeamList())
             {
                 a.teamList.add(d.getId());
@@ -119,5 +122,29 @@ public class Competition
     public void setMatchList(List<Integer> matchList)
     {
         this.matchList = matchList;
+    }
+
+    @Override
+    public Integer getLeague()
+    {
+        return this.league;
+    }
+
+    @Override
+    public Integer getSport()
+    {
+        return this.sport;
+    }
+
+    @Override
+    public void setSport(Integer typeOfSport)
+    {
+        this.sport = typeOfSport;
+    }
+
+    @Override
+    public void setLeague(Integer league)
+    {
+        this.league = league;
     }
 }

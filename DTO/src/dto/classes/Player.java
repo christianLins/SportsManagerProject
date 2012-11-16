@@ -1,14 +1,15 @@
 package dto.classes;
 
+import dto.contract.IPlayer;
 import java.io.Serializable;
 import java.util.*;
-import dto.contract.IPlayer;
 
 public class Player
         extends Role
         implements Serializable, IPlayer
 {
     private List<Integer> typeOfSportList;
+    private List<Integer> members;
 
      Player()
     {
@@ -38,6 +39,13 @@ public class Player
             a = new Player(player);
 
             List<Integer> l = new LinkedList<>();
+            List<Integer> m = new LinkedList<>();
+            
+            for(domain.contract.IMember mem : player.getMembers())
+            {
+                m.add(mem.getId());
+            }
+            a.setMembers(m);
 
             for (domain.contract.ITypeOfSport t : player.getTypeOfSportList())
             {
@@ -61,5 +69,17 @@ public class Player
     public void setTypeOfSportList(List<Integer> typeOfSportList)
     {
         this.typeOfSportList = typeOfSportList;
+    }
+
+    @Override
+    public List<Integer> getMembers()
+    {
+        return this.members;
+    }
+
+    @Override
+    public void setMembers(List<Integer> members)
+    {
+        this.members = members;
     }
 }
