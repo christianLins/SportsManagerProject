@@ -24,7 +24,7 @@ import services.ServiceNotAvailableException;
  *
  * @author Lucia
  */
-public class ChangeCompetitionT extends AbstractMainForm {
+public class ChangeCompetitionTeamForm extends AbstractMainForm {
 
     IMember user;
     ServiceClient client;
@@ -39,7 +39,7 @@ public class ChangeCompetitionT extends AbstractMainForm {
     /**
      * Creates new form AddTeamMember
      */
-    public ChangeCompetitionT(AbstractForm form, ServiceClient client, IMember user) throws ServiceNotAvailableException {
+    public ChangeCompetitionTeamForm(AbstractForm form, ServiceClient client, IMember user) throws ServiceNotAvailableException {
         super(form);
         this.client = client;
         this.user = user;

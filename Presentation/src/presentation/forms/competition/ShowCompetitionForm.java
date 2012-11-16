@@ -20,7 +20,7 @@ import services.ServiceNotAvailableException;
  *
  * @author Lucia
  */
-public class ShowCompetition extends AbstractMainForm {
+public class ShowCompetitionForm extends AbstractMainForm {
 
     ServiceClient client;
     IShowCompetition controller;
@@ -33,7 +33,7 @@ public class ShowCompetition extends AbstractMainForm {
     /**
      * Creates new form ShowMatchInfo
      */
-    public ShowCompetition(AbstractForm form, ServiceClient client, IMember user) throws ServiceNotAvailableException {
+    public ShowCompetitionForm(AbstractForm form, ServiceClient client, IMember user) throws ServiceNotAvailableException {
         super(form);
         this.client = client;
         this.user = user;
@@ -239,7 +239,7 @@ public class ShowCompetition extends AbstractMainForm {
         return false;
     }
     
-    private JPanel getPanel(){
+    public JPanel getPanel(){
         return paneShowCompetition;
     }
     
