@@ -1,0 +1,26 @@
+module corbaContract
+{
+    module generated 
+    { 
+        struct MatchresultCorba
+        {
+            string Date;
+            string hometeam;
+            string foreignteam;
+            double pointsHometeam;
+            double pointsForeignteam;
+        };
+
+        struct MatchresultListCorba
+        {   
+            sequence<MatchresultCorba> matchresults;
+        };
+
+        interface MatchresultDataprovider
+        {
+            MatchresultListCorba getMatchresults(in string typeOfSport, in string league, in string competitiondate);
+
+            boolean isMatchresultFinal(in MatchresultCorba mtachresult); 
+        };
+    };
+ };
