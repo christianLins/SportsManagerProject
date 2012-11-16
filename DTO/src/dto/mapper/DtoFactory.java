@@ -9,7 +9,6 @@ import dto.mapper.contract.*;
 import java.rmi.RemoteException;
 
 /**
-
  @author Thomas
  */
 public class DtoFactory
