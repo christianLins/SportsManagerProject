@@ -33,7 +33,7 @@ import services.ServiceNotAvailableException;
  *
  * @author Lucia
  */
-public class AddCompetitionResultsForm extends AbstractMainForm {
+public class AddCompetitionResultsForm1 extends AbstractMainForm {
 
     // Variables declaration - do not modify
     private JButton btnAddResult;
@@ -63,7 +63,7 @@ public class AddCompetitionResultsForm extends AbstractMainForm {
     /**
      * Creates new form AddMatchResultsForm
      */
-    public AddCompetitionResultsForm(AbstractForm form, ServiceClient client, IMember user) throws ServiceNotAvailableException {
+    public AddCompetitionResultsForm1(AbstractForm form, ServiceClient client, IMember user) throws ServiceNotAvailableException {
         super(form);
         this.client = client;
         this.user = user;

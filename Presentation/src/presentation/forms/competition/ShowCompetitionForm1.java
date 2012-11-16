@@ -30,7 +30,7 @@ import services.ServiceNotAvailableException;
  *
  * @author Lucia
  */
-public class ShowCompetitionForm extends AbstractMainForm {
+public class ShowCompetitionForm1 extends AbstractMainForm {
 
     // Variables declaration - do not modify
     private JComboBox comboCompetition;
@@ -53,7 +53,7 @@ public class ShowCompetitionForm extends AbstractMainForm {
     /**
      * Creates new form ShowCompetitionForm
      */
-    public ShowCompetitionForm(AbstractForm form, ServiceClient client, IMember user) throws ServiceNotAvailableException {
+    public ShowCompetitionForm1(AbstractForm form, ServiceClient client, IMember user) throws ServiceNotAvailableException {
         super(form);
         this.client = client;
         this.user = user;

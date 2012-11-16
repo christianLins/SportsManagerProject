@@ -30,7 +30,7 @@ import services.ServiceNotAvailableException;
  *
  * @author Lucia
  */
-public class ChangeCompetitionTeam extends AbstractMainForm {
+public class ChangeCompetitionTeam1 extends AbstractMainForm {
 
     // Variables declaration - do not modify
     private JButton btnAdd;
@@ -58,7 +58,7 @@ public class ChangeCompetitionTeam extends AbstractMainForm {
     List<IPlayer> newTeam;
 
     // End of variables declaration
-    public ChangeCompetitionTeam(AbstractForm form, ServiceClient client, IMember user) throws ServiceNotAvailableException {
+    public ChangeCompetitionTeam1(AbstractForm form, ServiceClient client, IMember user) throws ServiceNotAvailableException {
         super(form);
         this.client = client;
         this.user = user;

@@ -14,10 +14,10 @@ import ldap.presentation.LoginFrame;
 import ldap.presentation.core.DialogResult;
 import ldap.presentation.core.IDialogListener;
 import presentation.basics.AbstractForm;
-import presentation.forms.competition.AddCompetitionResultsForm;
-import presentation.forms.competition.ChangeCompetitionTeam;
+import presentation.forms.competition.AddCompetitionResultsForm1;
+import presentation.forms.competition.ChangeCompetitionTeam1;
 import presentation.forms.competition.CreateCompetitionForm;
-import presentation.forms.competition.ShowCompetitionForm;
+import presentation.forms.competition.ShowCompetitionForm1;
 import presentation.forms.member.NewMemberForm;
 import presentation.forms.member.SearchMemberForm;
 import services.CommunicationProblemException;
@@ -246,7 +246,7 @@ public class SCM_Overview extends AbstractForm {
     private void btnShowCompetitionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowCompetitionActionPerformed
         try {
             paneCompMain.removeAll();
-            paneCompMain = new ShowCompetitionForm(null, rmiClient, user).paneShowInfo;
+            paneCompMain = new ShowCompetitionForm1(null, rmiClient, user).paneShowInfo;
 
             tabMatch.setRightComponent(paneCompMain);
             tabMatch.validate();
@@ -259,7 +259,7 @@ public class SCM_Overview extends AbstractForm {
     private void btnAddResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddResultActionPerformed
         try {
             paneCompMain.removeAll();
-            paneCompMain = new AddCompetitionResultsForm(null, rmiClient, user).paneMatchResults;
+            paneCompMain = new AddCompetitionResultsForm1(null, rmiClient, user).paneMatchResults;
 
             tabMatch.setRightComponent(paneCompMain);
             tabMatch.validate();
@@ -298,7 +298,7 @@ public class SCM_Overview extends AbstractForm {
     private void btnChangeTeamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeTeamActionPerformed
         try {
             paneCompMain.removeAll();
-            paneCompMain = new ChangeCompetitionTeam(null, rmiClient, user).panelChangeTeam;
+            paneCompMain = new ChangeCompetitionTeam1(null, rmiClient, user).panelChangeTeam;
 
             tabMatch.setRightComponent(paneCompMain);
             tabMatch.validate();
