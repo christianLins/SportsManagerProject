@@ -355,11 +355,12 @@ public class SCM_Overview extends AbstractForm {
                                     ServiceClient client;
                                     try
                                     {
-                                        client = serviceClientFactories.ServiceClientFactory.getRmiServiceClient("localhost", 1099);
+                                        client = serviceClientFactories.ServiceClientFactory.getRmiServiceClient(userData.getIP(), 1099);
                                         ILogin loginService = client.getLoginService();
                                         IMember user = loginService.getMemberByUserData(userData);
                                         SCM_Overview manager = new SCM_Overview(null, client, user);
                                         manager.setVisible(true);
+                                        break;
                                     } catch (MemberNotFoundException ex) {
                                         JOptionPane.showMessageDialog(null, "Invalid user name");
                                         //Logger.getLogger(SCM_Overview.class.getName()).log(Level.SEVERE, null, ex);
