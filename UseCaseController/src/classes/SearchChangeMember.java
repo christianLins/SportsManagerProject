@@ -8,6 +8,7 @@ import contract.*;
 import dto.contract.*;
 import dto.mapper.DtoFactory;
 import dto.mapper.contract.IdNotFoundException;
+import dto.mapper.contract.NotFoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,7 @@ public class SearchChangeMember implements ISearchChangeMember {
             for (IMember member : memberList) {
             }
             return memberList;
-        } catch (RemoteException ex) {
+        } catch (RemoteException | NotFoundException ex) {
             Logger.getLogger(SearchChangeMember.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
@@ -90,7 +91,7 @@ public class SearchChangeMember implements ISearchChangeMember {
             }
 
 
-        } catch (RemoteException | IdNotFoundException ex) {
+        } catch (RemoteException | IdNotFoundException | NotFoundException ex) {
             Logger.getLogger(SearchChangeMember.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
@@ -120,7 +121,7 @@ public class SearchChangeMember implements ISearchChangeMember {
     public List<IDepartment> getDepartments() {
         try {
             return DtoFactory.getDepartmentManager().getAll();
-        } catch (RemoteException ex) {
+        } catch (RemoteException | NotFoundException ex) {
             Logger.getLogger(SearchChangeMember.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;

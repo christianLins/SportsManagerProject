@@ -14,7 +14,7 @@ public interface IMapper<T> extends Serializable
 {
     T getById(Integer id) throws IdNotFoundException;
 
-    List<T> getAll();
+    List<T> getAll() throws NotFoundException;
 
     Integer set(T value);
     

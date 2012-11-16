@@ -1,10 +1,10 @@
 package domain.classes;
 
+import domain.contract.*;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
-import domain.contract.*;
 
 /**
 

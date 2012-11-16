@@ -1,5 +1,8 @@
 
 import database.DatabaseManager;
+import domain.CouldNotFetchException;
+import domain.DomainFacade;
+import domain.contract.IMember;
 
 /**
  *
@@ -12,7 +15,15 @@ public class HibernateMain {
      */
     public static void main(String[] args) 
     {
-        DatabaseManager.restoreDefault();
+        try
+        {
+            IMember m  = DomainFacade.getInstance().getMemberByUsername("mmo7528");
+            System.out.println(m.getUsername());
+        }
+        catch (CouldNotFetchException ex)
+        {
+            System.out.println(ex.getMessage());
+        }
     }
 
 }

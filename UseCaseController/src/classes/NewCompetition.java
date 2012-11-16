@@ -8,6 +8,7 @@ import dto.contract.ICompetition;
 import dto.contract.IMember;
 import dto.contract.ITeam;
 import dto.mapper.DtoFactory;
+import dto.mapper.contract.NotFoundException;
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.logging.Level;
@@ -20,7 +21,10 @@ public class NewCompetition implements INewCompetition{
     private static INewCompetition INSTANCE;
     
     public static INewCompetition getInstance() {
-        if(INSTANCE == null) INSTANCE = new NewCompetition();
+        if(INSTANCE == null)
+        {
+            INSTANCE = new NewCompetition();
+        }
         return INSTANCE;
     }
 
@@ -39,7 +43,7 @@ public class NewCompetition implements INewCompetition{
     public List<ITeam> getTeams() {
         try {
             return DtoFactory.getTeamManager().getAll();
-        } catch (RemoteException ex) {
+        } catch (RemoteException | NotFoundException ex) {
             Logger.getLogger(NewCompetition.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;

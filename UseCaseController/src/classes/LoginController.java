@@ -5,8 +5,13 @@
 package classes;
 
 import contract.ILogin;
+import contract.MemberNotFoundException;
 import dto.contract.IMember;
 import dto.contract.IUserData;
+import dto.mapper.DtoFactory;
+import dto.mapper.MemberMapper;
+import dto.mapper.contract.NotFoundException;
+import java.rmi.RemoteException;
 
 /**
  *
@@ -21,15 +26,25 @@ public class LoginController implements ILogin
     }
     
     public static ILogin getInstance() {
-        if(INSTANCE == null) INSTANCE = new LoginController();
+        if(INSTANCE == null)
+        {
+            INSTANCE = new LoginController();
+        }
         return INSTANCE;
     }
 
     @Override
-    public IMember getMemberByUserData(IUserData userData)
+    public IMember getMemberByUserData(IUserData userData) throws MemberNotFoundException
     {
-        return null;
-//        throw new UnsupportedOperationException("Not supported yet.");
+        try
+        {
+            MemberMapper m = (MemberMapper) DtoFactory.getMemberManager();
+            return m.getMemberByUsername(userData.getUsername());
+        }
+        catch (RemoteException | NotFoundException ex)
+        {
+            throw new MemberNotFoundException(ex);
+        }
     }
     
     

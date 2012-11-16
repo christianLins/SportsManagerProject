@@ -7,6 +7,7 @@ import contract.*;
 import dto.contract.*;
 import dto.mapper.DtoFactory;
 import dto.mapper.contract.IdNotFoundException;
+import dto.mapper.contract.NotFoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,10 @@ public class NewMember implements INewMember{
     }
     
     public static INewMember getInstance() {
-        if(INSTANCE == null) INSTANCE = new NewMember();
+        if(INSTANCE == null)
+        {
+            INSTANCE = new NewMember();
+        }
         return INSTANCE;
     }
             
@@ -49,7 +53,7 @@ public class NewMember implements INewMember{
     public List<IDepartment> getDepartments() {
         try {
             return DtoFactory.getDepartmentManager().getAll();
-        } catch (RemoteException ex) {
+        } catch (RemoteException | NotFoundException ex) {
             Logger.getLogger(NewMember.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;

@@ -5,9 +5,12 @@
 package rmi.server.controller;
 
 import classes.LoginController;
+import contract.MemberNotFoundException;
 import dto.contract.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import rmi.contract.services.ILoginRmiService;
 
 /**
@@ -24,7 +27,14 @@ public class LoginRmiService extends UnicastRemoteObject implements ILoginRmiSer
     @Override
     public IMember getMemberByUserData(IUserData userData) throws RemoteException
     {
-         return LoginController.getInstance().getMemberByUserData(userData );
+        try
+        {
+            return LoginController.getInstance().getMemberByUserData(userData );
+        }
+        catch (MemberNotFoundException ex)
+        {
+            throw new RemoteException(ex.getMessage());
+        }
     }
     
 

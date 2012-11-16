@@ -66,16 +66,23 @@ public class ClubTeamMapper
     }
 
     @Override
-    public List<IClubTeam> getAll()
+    public List<IClubTeam> getAll() throws NotFoundException
     {
-        List<IClubTeam> result = new LinkedList<>();
-
-        for (domain.contract.IClubTeam a : DomainFacade.getInstance().getAll(domain.contract.IClubTeam.class))
+        try
         {
-            result.add(ClubTeam.copy(a));
-        }
+            List<IClubTeam> result = new LinkedList<>();
 
-        return result;
+            for (domain.contract.IClubTeam a : DomainFacade.getInstance().getAll(domain.contract.IClubTeam.class))
+            {
+                result.add(ClubTeam.copy(a));
+            }
+
+            return result;
+        }
+        catch (CouldNotFetchException ex)
+        {
+            throw new NotFoundException(ex);
+        }
     }
 
     @Override

@@ -66,23 +66,35 @@ public class MemberMapper
         }
     }
 
-    public IMember getMemberByUsername(String username)
+    public IMember getMemberByUsername(String username) throws NotFoundException
     {
+        try{
         domain.contract.IMember a = DomainFacade.getInstance().getMemberByUsername(username);
         return Member.copy(a);
+        }catch(CouldNotFetchException ex)
+        {
+            throw new NotFoundException(ex);
+        }
     }
     
     @Override
-    public List<IMember> getAll()
+    public List<IMember> getAll() throws NotFoundException
     {
-        List<IMember> result = new LinkedList<>();
-
-        for (domain.contract.IMember a : DomainFacade.getInstance().getAll(domain.contract.IMember.class))
+        try
         {
-            result.add(Member.copy(a));
-        }
+            List<IMember> result = new LinkedList<>();
 
-        return result;
+            for (domain.contract.IMember a : DomainFacade.getInstance().getAll(domain.contract.IMember.class))
+            {
+                result.add(Member.copy(a));
+            }
+
+            return result;
+        }
+        catch (CouldNotFetchException ex)
+        {
+            throw new NotFoundException(ex);
+        }
     }
 
     @Override

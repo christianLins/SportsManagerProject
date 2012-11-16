@@ -12,6 +12,7 @@ import dto.mapper.contract.IMapper;
 import domain.*;
 import dto.classes.*;
 import dto.contract.*;
+import dto.mapper.contract.NotFoundException;
 
 /**
  *
@@ -68,16 +69,23 @@ public class PlayerMapper
     }
 
     @Override
-    public List<IPlayer> getAll()
+    public List<IPlayer> getAll() throws NotFoundException
     {
-        List<IPlayer> result = new LinkedList<>();
-
-        for (domain.contract.IPlayer a : DomainFacade.getInstance().getAll(domain.contract.IPlayer.class))
+        try
         {
-            result.add(Player.copy(a));
-        }
+            List<IPlayer> result = new LinkedList<>();
 
-        return result;
+            for (domain.contract.IPlayer a : DomainFacade.getInstance().getAll(domain.contract.IPlayer.class))
+            {
+                result.add(Player.copy(a));
+            }
+
+            return result;
+        }
+        catch (CouldNotFetchException ex)
+        {
+            throw new NotFoundException(ex);
+        }
     }
 
     @Override

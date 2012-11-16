@@ -64,16 +64,23 @@ public class TrainerMapper
     }
 
     @Override
-    public List<ITrainer> getAll()
+    public List<ITrainer> getAll() throws NotFoundException
     {
-        List<ITrainer> result = new LinkedList<>();
-
-        for (domain.contract.ITrainer a : DomainFacade.getInstance().getAll(domain.contract.ITrainer.class))
+        try
         {
-            result.add(Trainer.copy(a));
-        }
+            List<ITrainer> result = new LinkedList<>();
 
-        return result;
+            for (domain.contract.ITrainer a : DomainFacade.getInstance().getAll(domain.contract.ITrainer.class))
+            {
+                result.add(Trainer.copy(a));
+            }
+
+            return result;
+        }
+        catch (CouldNotFetchException ex)
+        {
+            throw new NotFoundException(ex);
+        }
     }
 
     @Override

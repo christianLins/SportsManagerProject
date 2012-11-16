@@ -11,6 +11,7 @@ import dto.mapper.contract.IMapper;
 import domain.*;
 import dto.classes.*;
 import dto.contract.*;
+import dto.mapper.contract.NotFoundException;
 
 /**
  *
@@ -66,16 +67,23 @@ public class LeagueMapper
     }
 
     @Override
-    public List<ILeague> getAll()
+    public List<ILeague> getAll() throws NotFoundException
     {
-        List<ILeague> result = new LinkedList<>();
-
-        for (domain.contract.ILeague a : DomainFacade.getInstance().getAll(domain.contract.ILeague.class))
+        try
         {
-            result.add(League.copy(a));
-        }
+            List<ILeague> result = new LinkedList<>();
 
-        return result;
+            for (domain.contract.ILeague a : DomainFacade.getInstance().getAll(domain.contract.ILeague.class))
+            {
+                result.add(League.copy(a));
+            }
+
+            return result;
+        }
+        catch (CouldNotFetchException ex)
+        {
+            throw new NotFoundException(ex);
+        }
     }
 
     @Override

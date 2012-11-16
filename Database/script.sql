@@ -60,7 +60,7 @@ CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Member` (
   `Prename` VARCHAR(45) NOT NULL ,
   `Lastname` VARCHAR(45) NOT NULL ,
   `Username` VARCHAR(45) NOT NULL,
-  `DateOfBirth` VARCHAR(45) NOT NULL ,
+  `DateOfBirth` DATE NOT NULL ,
   `Address` INT NOT NULL ,
   `MemberFrom` DATE NOT NULL ,
   `MemberTo` DATE NULL ,
