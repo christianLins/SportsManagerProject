@@ -15,7 +15,7 @@ public class LDAP
      */
     public static void main(String[] args)
     {
-        UserData userData = new UserData("Hallo", "test");
+        UserData userData = new UserData("Hallo", "test", "localhost");
 
         if (new Authenticator().auth(userData))
         {

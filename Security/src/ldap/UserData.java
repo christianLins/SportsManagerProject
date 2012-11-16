@@ -14,11 +14,21 @@ public class UserData
 {
     private String username;
     private String password;
+    private String ip;
 
-    public UserData(String username, String password)
+    public UserData(String username, String password, String ip)
     {
         this.username = username;
         this.password = password;
+        this.ip = ip;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 
     /**
@@ -53,5 +63,10 @@ public class UserData
     public void setPassword(String password)
     {
         this.password = password;
+    }
+
+    @Override
+    public String getIP() {
+        return ip;
     }
 }
