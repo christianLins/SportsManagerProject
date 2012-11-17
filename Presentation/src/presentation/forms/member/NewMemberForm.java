@@ -40,6 +40,7 @@ public class NewMemberForm extends AbstractMainForm {
     private List<ITypeOfSport> typeOfSports;
     private List<String> availableSports;
     private List<String> selectedSports;
+    private boolean adminPermission = false;
 
     /**
      * Creates new form NewMemb
@@ -48,6 +49,7 @@ public class NewMemberForm extends AbstractMainForm {
         super(form);
         this.client = client;
         this.user = user;
+        setPermission();
         this.selectedSports = new LinkedList<>();
         controller = this.client.getNewMemberService();
         initComponents();
@@ -318,6 +320,8 @@ public class NewMemberForm extends AbstractMainForm {
 
         jLabel1.setText("Sport(s)");
 
+        txtFieldSport.setEnabled(false);
+
         btnAddSports.setText("Add Sport(s)");
         btnAddSports.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -370,6 +374,14 @@ public class NewMemberForm extends AbstractMainForm {
                 .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDepartment)
                     .addComponent(comboDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblRole)
+                    .addComponent(radioAdmin)
+                    .addComponent(radioTrainer)
+                    .addComponent(radioPlayer)
+                    .addComponent(radioDeptHead)
+                    .addComponent(radioCaretaker))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -379,15 +391,7 @@ public class NewMemberForm extends AbstractMainForm {
                 .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboTeam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTeam))
-                .addGap(18, 18, 18)
-                .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblRole)
-                    .addComponent(radioAdmin)
-                    .addComponent(radioTrainer)
-                    .addComponent(radioPlayer)
-                    .addComponent(radioDeptHead)
-                    .addComponent(radioCaretaker))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addGap(71, 71, 71))
         );
 
         btnSaveMember.setText("Save Member");
@@ -648,6 +652,11 @@ public class NewMemberForm extends AbstractMainForm {
         }
 
         return success;
+    }    
+    
+    private void setPermission() {
+        
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     public JPanel getPanel() {
@@ -695,4 +704,5 @@ public class NewMemberForm extends AbstractMainForm {
     private javax.swing.JTextField txtfieldPhone;
     private javax.swing.JTextField txtfieldPostCode;
     // End of variables declaration//GEN-END:variables
+
 }
