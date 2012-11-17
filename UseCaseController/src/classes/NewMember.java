@@ -98,5 +98,10 @@ public class NewMember implements INewMember{
            Logger.getLogger(NewMember.class.getName()).log(Level.SEVERE, null, ex); 
         }
     }
+
+    @Override
+    public List<ITypeOfSport> getTypeOfSports(List<Integer> typOfSportsList) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     
 }

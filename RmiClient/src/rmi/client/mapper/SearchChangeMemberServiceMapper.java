@@ -172,6 +172,11 @@ public class SearchChangeMemberServiceMapper implements RmiServiceToServiceMappe
                 Logger.getLogger(SearchChangeMemberServiceMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+
+        @Override
+        public List<ITypeOfSport> getTypeOfSports(List<Integer> sportsList) {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
         
     }
     

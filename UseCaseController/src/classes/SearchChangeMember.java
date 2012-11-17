@@ -150,4 +150,9 @@ public class SearchChangeMember implements ISearchChangeMember {
     public void setNewMember(IMember member, IAddress address, IDepartment department, IClubTeam clubTeam, IRole role) {
         NewMember.getInstance().setNewMember(member, address, department, clubTeam, role);
     }
+
+    @Override
+    public List<ITypeOfSport> getTypeOfSports(List<Integer> sportsList) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

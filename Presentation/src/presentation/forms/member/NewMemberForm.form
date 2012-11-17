@@ -49,9 +49,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="panePersonData" max="32767" attributes="0"/>
                       <Component id="paneMembershipData" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="btnSaveMember" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="btnSaveMember" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -64,10 +64,10 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="panePersonData" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="paneMembershipData" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="paneMembershipData" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnSaveMember" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="63" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -321,6 +321,7 @@
                           <Component id="lblEntryDate" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblTeam" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblRole" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -340,8 +341,13 @@
                               <Component id="comboDepartment" pref="200" max="32767" attributes="0"/>
                           </Group>
                           <Component id="comboTeam" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="txtFieldSport" min="-2" pref="533" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnAddSports" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="365" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -358,12 +364,18 @@
                           <Component id="lblDepartment" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="comboDepartment" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtFieldSport" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnAddSports" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="comboTeam" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblTeam" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblRole" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="radioAdmin" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -372,7 +384,7 @@
                           <Component id="radioDeptHead" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="radioCaretaker" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="26" max="32767" attributes="0"/>
+                      <EmptySpace pref="62" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -458,6 +470,21 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioCaretakerActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Sport(s)"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtFieldSport">
+            </Component>
+            <Component class="javax.swing.JButton" name="btnAddSports">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Add Sport(s)"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddSportsActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

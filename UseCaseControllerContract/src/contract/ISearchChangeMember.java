@@ -22,6 +22,7 @@ public interface ISearchChangeMember {
     ICountry getCountry(Integer countryID);     //new added
     List<IDepartment> getDepartments();  
     List<IClubTeam> getClubTeams(List<Integer> clubTeams);
+    List<ITypeOfSport> getTypeOfSports(List<Integer> sportsList);
     
     void setNewMember(IMember member, IAddress address);
     void setNewMember(IMember member, IAddress address, IDepartment department, IClubTeam clubTeam, IRole role);

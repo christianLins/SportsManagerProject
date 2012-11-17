@@ -1,5 +1,7 @@
 package presentation.basics;
 
+import java.util.List;
+
 /**
  *
  * @author Lucia
@@ -22,5 +24,9 @@ public class AbstractMainForm extends AbstractForm {
 
     private void initControls(int x, int y) {
        // setSize(x, y);
+    }
+
+    public void setTxtFieldSports(List<String> selected) {
+        // handle in code
     }
 }

@@ -13,6 +13,7 @@ public interface INewMember {
 
     List<IDepartment> getDepartments();  
     List<IClubTeam> getClubTeams(List<Integer> clubTeams);
+    List<ITypeOfSport> getTypeOfSports(List<Integer> typOfSportsList);
     
     void setNewMember(IMember member, IAddress address, IDepartment department, IClubTeam clubTeam, IRole role);
     

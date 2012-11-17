@@ -89,6 +89,11 @@ public class NewMemberServiceMapper implements RmiServiceToServiceMapper<INewMem
                 Logger.getLogger(NewMemberServiceMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+
+        @Override
+        public List<ITypeOfSport> getTypeOfSports(List<Integer> typOfSportsList) {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
         
     }
     
