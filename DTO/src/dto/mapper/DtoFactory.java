@@ -13,6 +13,18 @@ import java.rmi.RemoteException;
  */
 public class DtoFactory
 {
+    public static IMapper<IAdmin> getAdminMapper()
+            throws RemoteException
+    {
+        return AdminMapper.getInstance();
+    }
+
+    public static IMapper<ICaretaker> getCaretakerMapper()
+            throws RemoteException
+    {
+        return CaretakerMapper.getInstance();
+    }
+
     public static IMapper<IMember> getMemberMapper()
             throws RemoteException
     {
@@ -31,91 +43,79 @@ public class DtoFactory
         return CompetitionMapper.getInstance();
     }
 
-    public static IMapper<ICompetition> getCompetitionManager()
-            throws RemoteException
-    {
-        return CompetitionMapper.getInstance();
-    }
-
-    public static IMapper<IMember> getMemberManager()
-            throws RemoteException
-    {
-        return MemberMapper.getInstance();
-    }
-
-    public static IMapper<IAddress> getAddressManager()
+    public static IMapper<IAddress> getAddressMapper()
             throws RemoteException
     {
         return AddressMapper.getInstance();
     }
 
-    public static IMapper<IClubTeam> getClubTeamManager()
+    public static IMapper<IClubTeam> getClubTeamMapper()
             throws RemoteException
     {
         return ClubTeamMapper.getInstance();
     }
 
-    public static IMapper<ICountry> getCountryManager()
+    public static IMapper<ICountry> getCountryMapper()
             throws RemoteException
     {
         return CountryMapper.getInstance();
     }
 
-    public static IMapper<IDepartment> getDepartmentManager()
+    public static IMapper<IDepartment> getDepartmentMapper()
             throws RemoteException
     {
         return DepartmentMapper.getInstance();
     }
 
-    public static IMapper<ITeam> getTeamManager()
+    public static IMapper<ITeam> getTeamMapper()
             throws RemoteException
     {
         return TeamMapper.getInstance();
     }
 
-    public static ITypeOfSportMapper getTypeOfSportManager()
+    public static ITypeOfSportMapper getTypeOfSportMapper()
             throws RemoteException
     {
         return TypeOfSportMapper.getInstance();
     }
 
-    public static IMapper<ITrainer> getTrainerManager()
+    public static IMapper<ITrainer> getTrainerMapper()
             throws RemoteException
     {
         return TrainerMapper.getInstance();
     }
 
-    public static IMapper<IDepartmentHead> getDepartmentHeadManager()
+    public static IMapper<IDepartmentHead> getDepartmentHeadMapper()
             throws RemoteException
     {
         return DepartmentHeadMapper.getInstance();
     }
 
-    public static ILeagueMapper getLeagueManager()
+    public static ILeagueMapper getLeagueMapper()
             throws RemoteException
     {
         return LeagueMapper.getInstance();
     }
 
-    public static IMapper<IPermission> getPermissionManager()
+    public static IMapper<IPermission> getPermissionMapper()
             throws RemoteException
     {
         return PermissionMapper.getInstance();
     }
 
-    public static IMapper<IPlayer> getPlayerManager()
+    public static IMapper<IPlayer> getPlayerMapper()
             throws RemoteException
     {
         return PlayerMapper.getInstance();
     }
 
-    public static IMapper<IMatchresult> getMatchresultManager()
+    public static IMapper<IMatchresult> getMatchresultMapper()
             throws RemoteException
     {
         return MatchresultMapper.getInstance();
     }
 
-    public static IMapper<IMatch> getMatchManager()
+    public static IMapper<IMatch> getMatchMapper()
             throws RemoteException
     {
         return MatchMapper.getInstance();

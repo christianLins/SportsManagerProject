@@ -90,7 +90,7 @@ public class Match
     public IMatchresult getMatchresult() {
         try {
             try {
-                return DtoFactory.getMatchresultManager().getById(matchresult);
+                return DtoFactory.getMatchresultMapper().getById(matchresult);
             } catch (RemoteException ex) {
                 Logger.getLogger(Match.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -110,7 +110,7 @@ public class Match
     public ITeam getForeignteam() {
         try {
             try {
-                return DtoFactory.getTeamManager().getById(foreignteam);
+                return DtoFactory.getTeamMapper().getById(foreignteam);
             } catch (IdNotFoundException ex) {
                 Logger.getLogger(Match.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -130,7 +130,7 @@ public class Match
     public ITeam getHometeam() {
         try {
             try {
-                return DtoFactory.getTeamManager().getById(hometeam);
+                return DtoFactory.getTeamMapper().getById(hometeam);
             } catch (IdNotFoundException ex) {
                 Logger.getLogger(Match.class.getName()).log(Level.SEVERE, null, ex);
             }
