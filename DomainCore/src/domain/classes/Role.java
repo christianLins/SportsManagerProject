@@ -27,10 +27,10 @@ public class Role
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "Role_has_Permission", joinColumns =
     {
-        @JoinColumn(name = "Role_idRole")
+        @JoinColumn(name = "Role_idRole",referencedColumnName="idRole")
     }, inverseJoinColumns =
     {
-        @JoinColumn(name = "Permission_idPermission")
+        @JoinColumn(name = "Permission_idPermission",referencedColumnName="idPermission")
     })
     private List<Permission> permissionList;
     @ManyToMany(mappedBy = "roleList")
