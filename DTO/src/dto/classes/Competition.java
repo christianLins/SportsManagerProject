@@ -1,8 +1,8 @@
 package dto.classes;
 
+import dto.contract.ICompetition;
 import java.io.Serializable;
 import java.util.*;
-import dto.contract.*;
 
 public class Competition
         implements Serializable, ICompetition
@@ -15,6 +15,9 @@ public class Competition
     private Integer sport;
     private List<Integer> teamList = new LinkedList<>();
     private List<Integer> matchList = new LinkedList<>();
+    private Integer address;
+    private String description;
+    private String name;
 
     public Competition()
     {
@@ -43,6 +46,10 @@ public class Competition
             a.setPayment(competition.getPayment());
             a.setLeague(competition.getLeague().getId());
             a.setSport(competition.getSport().getId());
+            a.setAddress(competition.getAddress().getId());
+            a.setName(competition.getName());
+            a.setDescription(competition.getDescription());
+
             for (domain.contract.ITeam d : competition.getTeamList())
             {
                 a.teamList.add(d.getId());
@@ -146,5 +153,41 @@ public class Competition
     public void setLeague(Integer league)
     {
         this.league = league;
+    }
+
+    @Override
+    public Integer getAddress()
+    {
+        return this.address;
+    }
+
+    @Override
+    public void setAddress(Integer address)
+    {
+        this.address = address;
+    }
+
+    @Override
+    public String getName()
+    {
+        return this.name;
+    }
+
+    @Override
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    @Override
+    public String getDescription()
+    {
+        return this.description;
+    }
+
+    @Override
+    public void setDescription(String description)
+    {
+        this.description = description;
     }
 }

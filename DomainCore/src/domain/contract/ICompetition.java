@@ -9,8 +9,15 @@ import java.util.*;
 /**
  @author Thomas
  */
-public interface ICompetition extends IDomain
+public interface ICompetition
+        extends IDomain
 {
+    String getName();
+
+    String getDescription();
+
+    IAddress getAddress();
+
     Date getDateFrom();
 
     Date getDateTo();
@@ -20,13 +27,19 @@ public interface ICompetition extends IDomain
     Double getPayment();
 
     List<ITeam> getTeamList();
-    
+
     ILeague getLeague();
-    
+
     ITypeOfSport getSport();
-    
+
+    void setName(String name);
+
+    void setDescription(String description);
+
+    void setAddress(IAddress address);
+
     void setSport(ITypeOfSport sport);
-    
+
     void setLeague(ILeague league);
 
     void setDateFrom(Date dateFrom);

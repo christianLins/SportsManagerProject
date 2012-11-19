@@ -23,13 +23,21 @@ public interface ICompetition
     Double getPayment();
 
     List<Integer> getTeamList();
-    
+
     Integer getLeague();
-    
+
     Integer getSport();
-    
+
+    Integer getAddress();
+
+    String getName();
+
+    String getDescription();
+
+    void setAddress(Integer address);
+
     void setSport(Integer typeOfSport);
-    
+
     void setLeague(Integer league);
 
     void setDateFrom(Date dateFrom);
@@ -41,4 +49,8 @@ public interface ICompetition
     void setPayment(Double payment);
 
     void setTeamList(List<Integer> teamList);
+
+    void setName(String name);
+
+    void setDescription(String description);
 }

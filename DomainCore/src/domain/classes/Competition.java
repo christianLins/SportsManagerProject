@@ -72,7 +72,7 @@ public class Competition
     @Override
     public void setSport(ITypeOfSport sport)
     {
-        this.sport = (TypeOfSport)sport;
+        this.sport = (TypeOfSport) sport;
     }
 
     @Override
@@ -84,7 +84,7 @@ public class Competition
     @Override
     public void setLeague(ILeague league)
     {
-        this.league = (League)league;
+        this.league = (League) league;
     }
 
     @Override
