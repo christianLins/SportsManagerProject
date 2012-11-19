@@ -7,8 +7,8 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
 /**
-
- @author Markus Mohanty <markus.mo at gmx.net>
+ *
+ * @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
 @Table(name = "Role")
@@ -22,18 +22,18 @@ public class Role
     @Basic(optional = false)
     @Column(name = "idRole")
     private Integer id;
-    @Column(name="Name")
+    @Column(name = "Name")
     private String name;
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "Role_has_Permisssion", joinColumns =
     {
-        @JoinColumn(name = "Role_idRole", referencedColumnName = "idRole")
+        @JoinColumn(name = "Role_idRole")
     }, inverseJoinColumns =
     {
-        @JoinColumn(name = "Permisssion_idPermisssion", referencedColumnName = "idPermisssion")
+        @JoinColumn(name = "Permisssion_idPermisssion")
     })
-    @ManyToMany
     private List<Permission> permisssionList;
-    @OneToMany(cascade= CascadeType.ALL,mappedBy="id")
+    @ManyToMany(mappedBy = "roleList")
     private List<Member> members;
 
     public Role()
@@ -56,7 +56,8 @@ public class Role
     {
         this.name = name;
     }
-    
+
+    @Override
     public Integer getId()
     {
         return id;
@@ -75,7 +76,7 @@ public class Role
 
         for (Permission d : permisssionList)
         {
-            result.add((IPermission)d);
+            result.add((IPermission) d);
         }
 
         return result;
@@ -97,12 +98,12 @@ public class Role
     @Override
     public List<IMember> getMembers()
     {
-        if(members == null)
+        if (members == null)
         {
             this.members = new LinkedList<>();
         }
         List<IMember> mem = new LinkedList<>();
-        for(Member m:members)
+        for (Member m : members)
         {
             mem.add(m);
         }
@@ -112,9 +113,9 @@ public class Role
     @Override
     public void setMembers(List<IMember> members)
     {
-        for(IMember m : members)
+        for (IMember m : members)
         {
-            this.members.add((Member)m);
+            this.members.add((Member) m);
         }
     }
 
@@ -140,11 +141,5 @@ public class Role
             return false;
         }
         return true;
-    }
-
-    @Override
-    public String toString()
-    {
-        return "sportsclubmanager.domain.classes.Role[ id=" + id + " ]";
     }
 }

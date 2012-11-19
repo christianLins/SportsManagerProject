@@ -2,12 +2,13 @@ package domain.classes;
 
 import domain.contract.IPermission;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
-
- @author Markus Mohanty <markus.mo at gmx.net>
+ *
+ * @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
 @Table(name = "Permisssion")
@@ -26,6 +27,8 @@ public class Permission
     private String name;
     @Column(name = "Description")
     private String description;
+    @ManyToMany(mappedBy = "permisssionList")
+    private List<Role> roles;
 
     public Permission()
     {
@@ -45,6 +48,16 @@ public class Permission
     public Integer getId()
     {
         return id;
+    }
+
+    public List<Role> getRoles()
+    {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles)
+    {
+        this.roles = roles;
     }
 
     public void setId(Integer id)

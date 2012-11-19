@@ -55,10 +55,10 @@ public class Member
     private Address address;
     @JoinTable(name="Member_has_Role",joinColumns=
     {
-        @JoinColumn(name="Member", referencedColumnName="idMember")
+        @JoinColumn(name="Member_idMember")
     },inverseJoinColumns=
     {
-        @JoinColumn(name="Role",referencedColumnName="idRole")
+        @JoinColumn(name="Role_idRole")
     })
     @ManyToMany
     private List<Role> roleList;
