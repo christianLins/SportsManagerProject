@@ -1,22 +1,15 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package dto.mapper;
 
-import dto.mapper.contract.IdNotFoundException;
-import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import dto.mapper.contract.IMapper;
 import domain.*;
-import dto.classes.*;
-import dto.contract.*;
-import dto.mapper.contract.NotFoundException;
+import dto.classes.Player;
+import dto.contract.IPlayer;
+import dto.mapper.contract.*;
+import java.util.*;
+import java.util.logging.*;
 
 /**
- *
- * @author Thomas
+
+ @author Thomas
  */
 public class PlayerMapper
         implements IMapper<IPlayer>
@@ -63,13 +56,13 @@ public class PlayerMapper
         }
         catch (Exception ex)
         {
-
             throw new IdNotFoundException();
         }
     }
 
     @Override
-    public List<IPlayer> getAll() throws NotFoundException
+    public List<IPlayer> getAll()
+            throws NotFoundException
     {
         try
         {

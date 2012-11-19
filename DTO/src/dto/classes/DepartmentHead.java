@@ -1,19 +1,14 @@
 package dto.classes;
 
+import dto.contract.IDepartmentHead;
 import java.io.Serializable;
 import java.util.*;
-import dto.contract.IDepartmentHead;
 
 public class DepartmentHead
         extends Role
         implements Serializable, IDepartmentHead
 {
     private List<Integer> departmentList = new LinkedList<>();
-
-     DepartmentHead(int id)
-    {
-        super(id);
-    }
     private static HashMap<domain.contract.IDepartmentHead, DepartmentHead> departmentHeads = new HashMap<>();
 
     public static DepartmentHead copy(domain.contract.IDepartmentHead departmentHead)
@@ -26,7 +21,7 @@ public class DepartmentHead
         }
         else
         {
-            a = new DepartmentHead(departmentHead.getId());
+            a = copy(departmentHead, new DepartmentHead());
 
             List<Integer> l = new LinkedList<>();
 
@@ -41,11 +36,6 @@ public class DepartmentHead
         }
 
         return a;
-    }
-
-    DepartmentHead()
-    {
-        super();
     }
 
     @Override

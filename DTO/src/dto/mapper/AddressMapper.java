@@ -4,7 +4,6 @@
  */
 package dto.mapper;
 
-import dto.mapper.contract.NotFoundException;
 import domain.*;
 import dto.classes.Address;
 import dto.contract.IAddress;

@@ -10,11 +10,6 @@ public class Trainer
 {
     private List<Integer> clubTeamList = new LinkedList<>();
     private List<Integer> typeOfSportList = new LinkedList<>();
-
-    Trainer(int id)
-    {
-        super(id);
-    }
     private static HashMap<domain.contract.ITrainer, Trainer> trainers = new HashMap<>();
 
     public static Trainer copy(domain.contract.ITrainer trainer)
@@ -27,7 +22,7 @@ public class Trainer
         }
         else
         {
-            a = new Trainer(trainer.getId());
+            a = copy(trainer, new Trainer());
 
             List<Integer> clubTeamList = new LinkedList<>();
 
@@ -50,10 +45,6 @@ public class Trainer
         }
 
         return a;
-    }
-
-    Trainer()
-    {
     }
 
     @Override

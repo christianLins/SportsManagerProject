@@ -4,23 +4,16 @@
  */
 package dto.mapper;
 
-import domain.CouldNotFetchException;
-import domain.CouldNotSaveException;
-import domain.DomainFacade;
+import domain.*;
 import dto.classes.Team;
 import dto.contract.ITeam;
-import dto.mapper.contract.IMapper;
-import dto.mapper.contract.IdNotFoundException;
-import dto.mapper.contract.NotFoundException;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.omg.CosNaming.NamingContextPackage.NotFound;
+import dto.mapper.contract.*;
+import java.util.*;
+import java.util.logging.*;
 
 /**
- *
- * @author Thomas
+
+ @author Thomas
  */
 public class TeamMapper
         implements IMapper<ITeam>
@@ -72,7 +65,8 @@ public class TeamMapper
     }
 
     @Override
-    public List<ITeam> getAll() throws NotFoundException
+    public List<ITeam> getAll()
+            throws NotFoundException
     {
         try
         {

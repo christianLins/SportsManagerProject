@@ -66,7 +66,8 @@ public class RoleMapper
     }
 
     @Override
-    public List<IRole> getAll() throws NotFoundException
+    public List<IRole> getAll()
+            throws NotFoundException
     {
         try
         {

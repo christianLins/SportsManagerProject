@@ -4,12 +4,12 @@
  */
 package dto.mapper;
 
-import java.util.*;
-import java.util.logging.*;
 import domain.*;
 import dto.classes.Permission;
 import dto.contract.IPermission;
 import dto.mapper.contract.*;
+import java.util.*;
+import java.util.logging.*;
 
 /**
  *

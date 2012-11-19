@@ -1,40 +1,47 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package dto.classes;
 
-import java.io.Serializable;
-import java.util.*;
 import dto.contract.IRole;
+import java.util.*;
 
-public class Role
-        implements Serializable, IRole
+/**
+
+ @author Thomas
+ */
+abstract class Role
+        implements IRole
 {
-    private int id;
+    private Integer id;
     private String name;
-    private List<Integer> permissionList = new LinkedList<>();
-    private List<Integer> members = new LinkedList<>();
+    private String description;
+    private List<Integer> permissionList;
+    private List<Integer> memberList;
 
-     Role()
+    public static <T extends Role> T copy(domain.contract.IRole domainRole, T role)
     {
-    }
+        role.setId(domainRole.getId());
+        role.setName(domainRole.getName());
+        role.setDescription(domainRole.getDesciption());
 
-     Role(int id)
-    {
-        this.id = id;
-    }
-
-     Role(domain.contract.IRole c)
-    {
-        this.id = c.getId();
-        this.name = c.getName();
-        
-        for(domain.contract.IMember m : c.getMembers())
+        List<Integer> perList = new LinkedList<>();
+        for (domain.contract.IPermission permission : domainRole.getPermisssionList())
         {
-            members.add(m.getId());
+            perList.add(permission.getId());
         }
+        role.setPermisssionList(perList);
 
-        for (domain.contract.IPermission d : c.getPermisssionList())
+        List<Integer> memList = new LinkedList<>();
+
+        for (domain.contract.IMember mem : domainRole.getMembers())
         {
-            permissionList.add(d.getId());
+            memList.add(mem.getId());
         }
+        role.setMembers(memList);
+
+        return role;
     }
 
     @Override
@@ -44,38 +51,55 @@ public class Role
     }
 
     @Override
-    public void setPermisssionList(List<Integer> permissionList)
-    {
-        this.permissionList = permissionList;
-    }
-
-    @Override
-    public Integer getId()
-    {
-        return id;
-    }
-
-    @Override
     public List<Integer> getMembers()
     {
-        return this.members;
-    }
-
-    @Override
-    public void setMembers(List<Integer> members)
-    {
-        this.members = members;
+        return memberList;
     }
 
     @Override
     public String getName()
     {
-        return this.name;
+        return name;
+    }
+
+    @Override
+    public String getDescription()
+    {
+        return description;
     }
 
     @Override
     public void setName(String name)
     {
         this.name = name;
+    }
+
+    @Override
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
+    @Override
+    public void setMembers(List<Integer> members)
+    {
+        memberList = members;
+    }
+
+    @Override
+    public void setPermisssionList(List<Integer> permisssionList)
+    {
+        this.permissionList = permisssionList;
+    }
+
+    public void setId(Integer id)
+    {
+        this.id = id;
+    }
+
+    @Override
+    public Integer getId()
+    {
+        return id;
     }
 }

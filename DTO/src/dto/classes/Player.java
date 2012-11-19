@@ -9,21 +9,7 @@ public class Player
         implements Serializable, IPlayer
 {
     private List<Integer> typeOfSportList;
-    private List<Integer> members;
-
-     Player()
-    {
-    }
-    
-     Player(int id)
-    {
-        super(id);
-    }
-
-    private Player(domain.contract.IRole role)
-    {
-        super(role);
-    }
+    private List<Integer> memberList;
     private static HashMap<domain.contract.IPlayer, Player> players = new HashMap<>();
 
     public static Player copy(domain.contract.IPlayer player)
@@ -36,16 +22,9 @@ public class Player
         }
         else
         {
-            a = new Player(player);
+            a = copy(player, new Player());
 
             List<Integer> l = new LinkedList<>();
-            List<Integer> m = new LinkedList<>();
-            
-            for(domain.contract.IMember mem : player.getMembers())
-            {
-                m.add(mem.getId());
-            }
-            a.setMembers(m);
 
             for (domain.contract.ITypeOfSport t : player.getTypeOfSportList())
             {
@@ -74,12 +53,12 @@ public class Player
     @Override
     public List<Integer> getMembers()
     {
-        return this.members;
+        return this.memberList;
     }
 
     @Override
     public void setMembers(List<Integer> members)
     {
-        this.members = members;
+        this.memberList = members;
     }
 }
