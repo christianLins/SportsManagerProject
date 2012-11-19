@@ -7,8 +7,8 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
 /**
-
- @author Markus Mohanty <markus.mo at gmx.net>
+ *
+ * @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
 @Table(name = "Competition")
@@ -47,6 +47,13 @@ public class Competition
     private League league;
     @ManyToOne
     private TypeOfSport sport;
+    @Column(name = "Name")
+    private String name;
+    @JoinColumn(name = "Address", referencedColumnName = "idAddress")
+    @ManyToOne(optional = false)
+    private Address address;
+    @Column(name = "Description")
+    private String description;
 
     public Competition()
     {
@@ -213,5 +220,41 @@ public class Competition
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String getName()
+    {
+        return this.name;
+    }
+
+    @Override
+    public String getDescription()
+    {
+        return this.description;
+    }
+
+    @Override
+    public IAddress getAddress()
+    {
+        return this.address;
+    }
+
+    @Override
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    @Override
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
+    @Override
+    public void setAddress(IAddress address)
+    {
+        this.address = (Address) address;
     }
 }

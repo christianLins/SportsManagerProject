@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
-@Table(name = "Permisssion")
+@Table(name = "Permission")
 @XmlRootElement
 public class Permission
         implements Serializable, IPermission
@@ -20,14 +20,14 @@ public class Permission
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idPermisssion")
+    @Column(name = "idPermission")
     private Integer id;
     @Basic(optional = false)
     @Column(name = "Name")
     private String name;
     @Column(name = "Description")
     private String description;
-    @ManyToMany(mappedBy = "permisssionList")
+    @ManyToMany(mappedBy = "permissionList")
     private List<Role> roles;
 
     public Permission()

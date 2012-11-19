@@ -7,8 +7,8 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
 /**
-
- @author Markus Mohanty <markus.mo at gmx.net>
+ *
+ * @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
 @Table(name = "TypeOfSport")
@@ -29,16 +29,26 @@ public class TypeOfSport
     private String description;
     @JoinTable(name = "Player_has_TypeOfSport", joinColumns =
     {
-        @JoinColumn(name = "TypeOfSport_idTypeOfSport", referencedColumnName = "idTypeOfSport")
+        @JoinColumn(name = "TypeOfSport_idTypeOfSport")
     }, inverseJoinColumns =
     {
-        @JoinColumn(name = "Player_Role_idRole", referencedColumnName = "idRole")
+        @JoinColumn(name = "Player_Role_idRole")
     })
     @ManyToMany
     private List<Player> playerList;
+    @JoinTable(name = "TypeOfSport_has_Trainer", joinColumns =
+    {
+        @JoinColumn(name = "TypeOfSport_idTypeOfSport")
+    },
+    inverseJoinColumns =
+    {
+        @JoinColumn(name = "Trainer_idTrainer")
+    })
+    @ManyToMany
+    private List<Trainer> trainerList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeOfSports")
     private List<Department> departments;
-    @OneToMany(cascade= CascadeType.ALL, mappedBy="sport")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sport")
     private List<Competition> competitions;
 
     public TypeOfSport()
@@ -66,7 +76,7 @@ public class TypeOfSport
     public List<ICompetition> getCompetitions()
     {
         List<ICompetition> comps = new LinkedList<>();
-        for(Competition c : competitions)
+        for (Competition c : competitions)
         {
             comps.add(c);
         }
@@ -76,17 +86,17 @@ public class TypeOfSport
     @Override
     public void setCompetitions(List<ICompetition> competitions)
     {
-        if(this.competitions == null)
+        if (this.competitions == null)
         {
             this.competitions = new LinkedList<>();
         }
-        for(ICompetition c : competitions)
+        for (ICompetition c : competitions)
         {
-            this.competitions.add((Competition)c);
+            this.competitions.add((Competition) c);
         }
     }
 
-    
+    @Override
     public Integer getId()
     {
         return id;
@@ -103,6 +113,7 @@ public class TypeOfSport
         return name;
     }
 
+    @Override
     public void setName(String name)
     {
         this.name = name;
@@ -114,12 +125,14 @@ public class TypeOfSport
         return description;
     }
 
+    @Override
     public void setDescription(String description)
     {
         this.description = description;
     }
 
     @XmlTransient
+    @Override
     public List<IPlayer> getPlayerList()
     {
         List<IPlayer> result = new LinkedList<>();
@@ -132,6 +145,7 @@ public class TypeOfSport
         return result;
     }
 
+    @Override
     public void setPlayerList(List<IPlayer> playerList)
     {
         List<Player> result = new LinkedList<>();
@@ -167,6 +181,16 @@ public class TypeOfSport
         }
 
         this.departments = result;
+    }
+
+    public List<Trainer> getTrainerList()
+    {
+        return trainerList;
+    }
+
+    public void setTrainerList(List<Trainer> trainerList)
+    {
+        this.trainerList = trainerList;
     }
 
     @Override

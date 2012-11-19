@@ -25,16 +25,18 @@ public class Role
     @Column(name = "Name")
     private String name;
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "Role_has_Permisssion", joinColumns =
+    @JoinTable(name = "Role_has_Permission", joinColumns =
     {
         @JoinColumn(name = "Role_idRole")
     }, inverseJoinColumns =
     {
-        @JoinColumn(name = "Permisssion_idPermisssion")
+        @JoinColumn(name = "Permission_idPermission")
     })
-    private List<Permission> permisssionList;
+    private List<Permission> permissionList;
     @ManyToMany(mappedBy = "roleList")
     private List<Member> members;
+    @Column(name="Description")
+    private String description;
 
     public Role()
     {
@@ -70,11 +72,11 @@ public class Role
 
     @XmlTransient
     @Override
-    public List<IPermission> getPermisssionList()
+    public List<IPermission> getPermissionList()
     {
         List<IPermission> result = new LinkedList<>();
 
-        for (Permission d : permisssionList)
+        for (Permission d : permissionList)
         {
             result.add((IPermission) d);
         }
@@ -83,7 +85,7 @@ public class Role
     }
 
     @Override
-    public void setPermisssionList(List<IPermission> permisssionList)
+    public void setPermissionList(List<IPermission> permisssionList)
     {
         List<Permission> result = new LinkedList<>();
 
@@ -92,7 +94,7 @@ public class Role
             result.add((Permission) d);
         }
 
-        this.permisssionList = result;
+        this.permissionList = result;
     }
 
     @Override
@@ -141,5 +143,17 @@ public class Role
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String getDesciption()
+    {
+        return this.description;
+    }
+
+    @Override
+    public void setDescription(String description)
+    {
+        this.description = description;
     }
 }

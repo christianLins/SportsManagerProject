@@ -147,7 +147,7 @@ public class TrainerMapper
         {
             p.add(new PermissionMapper().getDomainById(id));
         }
-        trainer.setPermisssionList(p);
+        trainer.setPermissionList(p);
 
         return trainer;
     }

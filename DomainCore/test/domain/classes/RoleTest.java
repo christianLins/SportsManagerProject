@@ -77,8 +77,8 @@ public class RoleTest
 
         List<IPermission> actual;
 
-        a.setPermisssionList(expected);
-        actual = a.getPermisssionList();
+        a.setPermissionList(expected);
+        actual = a.getPermissionList();
 
         Assert.assertArrayEquals(expected.toArray(), actual.toArray());
     }

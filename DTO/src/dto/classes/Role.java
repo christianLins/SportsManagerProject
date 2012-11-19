@@ -31,7 +31,7 @@ abstract class Role
         role.setDescription(domainRole.getDesciption());
 
         List<Integer> perList = new LinkedList<>();
-        for (domain.contract.IPermission permission : domainRole.getPermisssionList())
+        for (domain.contract.IPermission permission : domainRole.getPermissionList())
         {
             perList.add(permission.getId());
         }

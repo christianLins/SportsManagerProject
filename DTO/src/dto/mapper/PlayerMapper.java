@@ -114,7 +114,7 @@ public class PlayerMapper
         {
             p.add(new PermissionMapper().getDomainById(id));
         }
-        player.setPermisssionList(p);
+        player.setPermissionList(p);
 
         LinkedList<domain.contract.ITypeOfSport> typeOfSports = new LinkedList<>();
         for (int id : typeOfSportList)

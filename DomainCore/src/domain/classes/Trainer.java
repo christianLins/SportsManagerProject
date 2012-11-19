@@ -1,8 +1,8 @@
 package domain.classes;
 
 import domain.contract.IClubTeam;
-import domain.contract.IPermission;
 import domain.contract.ITrainer;
+import domain.contract.ITypeOfSport;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
@@ -22,6 +22,8 @@ public class Trainer
     private static final long serialVersionUID = 1L;
     @ManyToMany(mappedBy = "trainerList")
     private List<ClubTeam> clubTeamList;
+    @ManyToMany(mappedBy="trainerList")
+    private List<TypeOfSport> typeOfSportList;
 
     public Trainer()
     {
@@ -57,5 +59,25 @@ public class Trainer
         }
 
         this.clubTeamList = result;
+    }
+
+    @Override
+    public List<ITypeOfSport> getTypeOfSportList()
+    {
+        List<ITypeOfSport> l = new LinkedList<>();
+        for(TypeOfSport t : typeOfSportList)
+        {
+            l.add(t);
+        }
+        return l;
+    }
+
+    @Override
+    public void setTypeOfSportList(List<ITypeOfSport> typeOfSportList)
+    {
+        for(ITypeOfSport t : typeOfSportList)
+        {
+            this.typeOfSportList.add((TypeOfSport)t);
+        }
     }
 }

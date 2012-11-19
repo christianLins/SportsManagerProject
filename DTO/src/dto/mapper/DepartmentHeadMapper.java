@@ -135,7 +135,7 @@ public class DepartmentHeadMapper
         }
 
         departmentHead.setDepartmentList(departmentList);
-        departmentHead.setPermisssionList(permissionList);
+        departmentHead.setPermissionList(permissionList);
 
         return departmentHead;
     }

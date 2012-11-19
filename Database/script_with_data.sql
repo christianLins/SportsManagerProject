@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 16, 2012 at 06:16 PM
+-- Generation Time: Nov 19, 2012 at 01:31 PM
 -- Server version: 5.5.24
 -- PHP Version: 5.3.10-1ubuntu3.4
 
@@ -36,14 +36,51 @@ CREATE TABLE IF NOT EXISTS `Address` (
   PRIMARY KEY (`idAddress`),
   UNIQUE KEY `idAddress_UNIQUE` (`idAddress`),
   KEY `fk_Address_Country_idx` (`Country`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `Address`
 --
 
 INSERT INTO `Address` (`idAddress`, `Country`, `Street`, `StreetNumber`, `Village`, `PostalCode`) VALUES
-(1, 1, 'Haslach', 1, 'Dornbirn', 6850);
+(1, 1, 'Haslach', 1, 'Dornbirn', 6850),
+(2, 2, 'Nalco Nagar', 46, 'Bhubaneswar', 751009);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Admin`
+--
+
+CREATE TABLE IF NOT EXISTS `Admin` (
+  `Role_idRole` int(11) NOT NULL,
+  PRIMARY KEY (`Role_idRole`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Admin`
+--
+
+INSERT INTO `Admin` (`Role_idRole`) VALUES
+(1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Caretaker`
+--
+
+CREATE TABLE IF NOT EXISTS `Caretaker` (
+  `Role_idRole` int(11) NOT NULL,
+  PRIMARY KEY (`Role_idRole`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Caretaker`
+--
+
+INSERT INTO `Caretaker` (`Role_idRole`) VALUES
+(2);
 
 -- --------------------------------------------------------
 
@@ -76,17 +113,21 @@ CREATE TABLE IF NOT EXISTS `Competition` (
   `DateTo` date DEFAULT NULL,
   `Payment` double DEFAULT NULL,
   `League_idLeague` int(11) NOT NULL,
+  `Name` varchar(45) NOT NULL,
+  `Description` varchar(45) DEFAULT NULL,
+  `Address` int(11) NOT NULL,
   PRIMARY KEY (`idCompetition`),
   UNIQUE KEY `idCompetition_UNIQUE` (`idCompetition`),
-  KEY `fk_Competition_League1_idx` (`League_idLeague`)
+  KEY `fk_Competition_League1_idx` (`League_idLeague`),
+  KEY `fk_Competition_Address1_idx` (`Address`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `Competition`
 --
 
-INSERT INTO `Competition` (`idCompetition`, `DateFrom`, `DateTo`, `Payment`, `League_idLeague`) VALUES
-(1, '2013-11-05', '2014-11-11', 12, 1);
+INSERT INTO `Competition` (`idCompetition`, `DateFrom`, `DateTo`, `Payment`, `League_idLeague`, `Name`, `Description`, `Address`) VALUES
+(1, '2013-02-03', '2013-02-28', 1000000, 1, 'Sau teure Veranstaltung', 'Viel Prominenz kostet Geld', 2);
 
 -- --------------------------------------------------------
 
@@ -129,14 +170,15 @@ CREATE TABLE IF NOT EXISTS `Country` (
   `Portugues` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`idCountry`),
   UNIQUE KEY `idCountry_UNIQUE` (`idCountry`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `Country`
 --
 
 INSERT INTO `Country` (`idCountry`, `Name`, `Alpha3`, `Alpha2`, `TLD`, `Deutsch`, `Espanol`, `Francaise`, `Italiano`, `Portugues`) VALUES
-(1, 'Austria', 'AUT', 'AT', 'AUT', 'Österreich', 'Austria', 'Austria', 'Austria', 'Austria');
+(1, 'Österreich', 'AUT', 'AT', 'AUT', 'Österreich', 'Austria', 'Austria', 'Austria', 'Austria'),
+(2, 'Indien', 'IND', 'IN', 'IND', 'Indien', 'India', 'India', 'India', 'India');
 
 -- --------------------------------------------------------
 
@@ -157,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `Department` (
 --
 
 INSERT INTO `Department` (`idDepartment`, `Name`, `Description`) VALUES
-(1, 'Fußball', 'Fußball Department');
+(1, 'Fußball', 'Fußball');
 
 -- --------------------------------------------------------
 
@@ -176,7 +218,7 @@ CREATE TABLE IF NOT EXISTS `DepartmentHead` (
 --
 
 INSERT INTO `DepartmentHead` (`idDepartmentHead`) VALUES
-(0);
+(5);
 
 -- --------------------------------------------------------
 
@@ -191,6 +233,13 @@ CREATE TABLE IF NOT EXISTS `Department_has_Team` (
   KEY `fk_DepartmentTeam_Department1_idx` (`Department`),
   KEY `fk_DepartmentTeam_ClubTeam1_idx` (`Team`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Department_has_Team`
+--
+
+INSERT INTO `Department_has_Team` (`Department`, `Team`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -236,7 +285,7 @@ CREATE TABLE IF NOT EXISTS `League` (
 --
 
 INSERT INTO `League` (`idLeague`, `Name`, `Description`, `TypeOfSport_idTypeOfSport`) VALUES
-(1, 'Erste Liga', 'Erste Liga', 1);
+(1, 'Erste Liga', 'Die erste Liga', 1);
 
 -- --------------------------------------------------------
 
@@ -265,8 +314,8 @@ CREATE TABLE IF NOT EXISTS `Match` (
 --
 
 INSERT INTO `Match` (`idMatch`, `Hometeam`, `Foreignteam`, `Matchresult`, `Competition`, `DateFrom`, `DateTo`) VALUES
-(3, 1, 2, 1, 1, '2013-11-03', '2013-11-04'),
-(4, 2, 1, 2, 1, '2013-11-10', '2013-11-11');
+(3, 1, 2, 1, 1, '2013-02-06', '2013-02-07'),
+(4, 2, 1, 2, 1, '2013-02-13', '2013-02-14');
 
 -- --------------------------------------------------------
 
@@ -281,15 +330,17 @@ CREATE TABLE IF NOT EXISTS `Matchresult` (
   `Final` tinyint(1) NOT NULL,
   PRIMARY KEY (`idMatchresult`),
   UNIQUE KEY `idMatchresult_UNIQUE` (`idMatchresult`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `Matchresult`
 --
 
 INSERT INTO `Matchresult` (`idMatchresult`, `PointsHometeam`, `PointsForeignteam`, `Final`) VALUES
-(1, 2, 0, 0),
-(2, 0, 7, 1);
+(1, 0, 1, 0),
+(2, 0, 3, 0),
+(3, 1, 0, 1),
+(4, 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -315,18 +366,19 @@ CREATE TABLE IF NOT EXISTS `Member` (
   UNIQUE KEY `Username_UNIQUE` (`Username`),
   KEY `fk_Member_Address1_idx` (`Address`),
   KEY `fk_Member_Country1_idx` (`Nationality`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `Member`
 --
 
 INSERT INTO `Member` (`idMember`, `Prename`, `Lastname`, `DateOfBirth`, `Address`, `MemberFrom`, `MemberTo`, `Nationality`, `Telephonenumber`, `EmailAddress`, `Gender`, `Username`) VALUES
-(1, 'Markus', 'Mohanty', '1988-04-14', 1, '2006-11-06', NULL, 1, '06763239108', 'markus.mohanty@students.fhv.at', 1, 'mmo7528'),
-(2, 'Lucia', 'Amann', '1989-11-13', 1, '2008-11-10', NULL, 1, NULL, NULL, 0, 'lam1977'),
-(3, 'Thomas', 'Schwarz', '1988-01-29', 1, '2005-11-01', NULL, 1, NULL, NULL, NULL, 'tsc2526'),
-(4, 'Christian', 'Lins', '1987-08-09', 1, '2004-11-01', NULL, 1, NULL, NULL, NULL, 'cli1929'),
-(5, 'Dominik', 'Gregotsch', '1990-05-05', 1, '2005-11-08', NULL, 1, NULL, NULL, NULL, 'dgr9323');
+(1, 'Lucia', 'Amann', '1989-11-10', 2, '2002-11-04', NULL, 1, NULL, NULL, 1, 'lam1977'),
+(2, 'Markus', 'Mohanty', '1988-04-14', 1, '2007-11-01', NULL, 2, NULL, NULL, 0, 'mmo7528'),
+(3, 'Thomas', 'Schwarz', '1988-01-29', 1, '2006-11-05', NULL, 1, NULL, NULL, 0, 'tsc2526'),
+(4, 'Christian', 'Lins', '1987-08-09', 1, '2002-11-03', NULL, 1, NULL, NULL, 0, 'cli1929'),
+(5, 'Dominik', 'Gregotsch', '1990-05-05', 2, '2002-11-04', NULL, 2, NULL, NULL, 0, 'dgr9323'),
+(6, 'Thomas', 'Feilhauer', '1965-11-01', 1, '1990-11-06', NULL, 2, NULL, NULL, 0, 'tf-test');
 
 -- --------------------------------------------------------
 
@@ -347,34 +399,41 @@ CREATE TABLE IF NOT EXISTS `Member_has_Role` (
 --
 
 INSERT INTO `Member_has_Role` (`Member_idMember`, `Role_idRole`) VALUES
-(1, 0),
-(2, 0),
-(3, 0),
-(4, 0),
-(5, 0);
+(1, 1),
+(2, 1),
+(3, 1),
+(4, 1),
+(5, 1),
+(6, 1),
+(1, 3),
+(2, 3),
+(3, 3),
+(4, 3),
+(5, 3),
+(6, 3),
+(6, 5);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Permisssion`
+-- Table structure for table `Permission`
 --
 
-CREATE TABLE IF NOT EXISTS `Permisssion` (
-  `idPermisssion` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `Permission` (
+  `idPermission` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) NOT NULL,
   `Description` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idPermisssion`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+  PRIMARY KEY (`idPermission`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `Permisssion`
+-- Dumping data for table `Permission`
 --
 
-INSERT INTO `Permisssion` (`idPermisssion`, `Name`, `Description`) VALUES
-(1, 'change', 'change'),
-(2, 'insert', 'insert'),
-(3, 'delete', 'delete'),
-(4, 'show', 'show');
+INSERT INTO `Permission` (`idPermission`, `Name`, `Description`) VALUES
+(1, 'change', 'verändern'),
+(2, 'view', 'ansehen'),
+(3, 'delete', 'löschen');
 
 -- --------------------------------------------------------
 
@@ -392,7 +451,7 @@ CREATE TABLE IF NOT EXISTS `Player` (
 --
 
 INSERT INTO `Player` (`Role_idRole`) VALUES
-(0);
+(3);
 
 -- --------------------------------------------------------
 
@@ -413,7 +472,7 @@ CREATE TABLE IF NOT EXISTS `Player_has_TypeOfSport` (
 --
 
 INSERT INTO `Player_has_TypeOfSport` (`TypeOfSport_idTypeOfSport`, `Player_Role_idRole`) VALUES
-(1, 0);
+(1, 3);
 
 -- --------------------------------------------------------
 
@@ -422,42 +481,53 @@ INSERT INTO `Player_has_TypeOfSport` (`TypeOfSport_idTypeOfSport`, `Player_Role_
 --
 
 CREATE TABLE IF NOT EXISTS `Role` (
-  `idRole` int(11) NOT NULL,
+  `idRole` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) NOT NULL,
   `Description` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idRole`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `Role`
 --
 
 INSERT INTO `Role` (`idRole`, `Name`, `Description`) VALUES
-(0, 'admin', 'administrator');
+(1, 'Admin', 'Admin'),
+(2, 'Caretaker', 'The Waterboy'),
+(3, 'Fußballer', 'Fußballspieler'),
+(4, 'Fußballtrainer', 'Fußballtrainer'),
+(5, 'Departmenthead', 'Departmenthead');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Role_has_Permisssion`
+-- Table structure for table `Role_has_Permission`
 --
 
-CREATE TABLE IF NOT EXISTS `Role_has_Permisssion` (
+CREATE TABLE IF NOT EXISTS `Role_has_Permission` (
   `Role_idRole` int(11) NOT NULL,
-  `Permisssion_idPermisssion` int(11) NOT NULL,
-  PRIMARY KEY (`Role_idRole`,`Permisssion_idPermisssion`),
-  KEY `fk_Role_has_Permisssion_Permisssion1_idx` (`Permisssion_idPermisssion`),
+  `Permission_idPermission` int(11) NOT NULL,
+  PRIMARY KEY (`Role_idRole`,`Permission_idPermission`),
+  KEY `fk_Role_has_Permisssion_Permisssion1_idx` (`Permission_idPermission`),
   KEY `fk_Role_has_Permisssion_Role1_idx` (`Role_idRole`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Role_has_Permisssion`
+-- Dumping data for table `Role_has_Permission`
 --
 
-INSERT INTO `Role_has_Permisssion` (`Role_idRole`, `Permisssion_idPermisssion`) VALUES
-(0, 1),
-(0, 2),
-(0, 3),
-(0, 4);
+INSERT INTO `Role_has_Permission` (`Role_idRole`, `Permission_idPermission`) VALUES
+(1, 1),
+(4, 1),
+(5, 1),
+(1, 2),
+(2, 2),
+(3, 2),
+(4, 2),
+(5, 2),
+(1, 3),
+(4, 3),
+(5, 3);
 
 -- --------------------------------------------------------
 
@@ -480,8 +550,8 @@ CREATE TABLE IF NOT EXISTS `Team` (
 --
 
 INSERT INTO `Team` (`idTeam`, `Name`, `Description`, `League_idLeague`) VALUES
-(1, 'Das beste Team', 'Das allerbeste Team', 1),
-(2, 'Das andere Team', 'nicht im Club :-D', 1);
+(1, 'Das beste Team', 'Das allerbeste Team aller Zeiten', 1),
+(2, 'Ein Auswärtsteam', 'Das aller schlechteste Team', 1);
 
 -- --------------------------------------------------------
 
@@ -502,7 +572,7 @@ CREATE TABLE IF NOT EXISTS `Team_has_Player` (
 --
 
 INSERT INTO `Team_has_Player` (`Team`, `Player`) VALUES
-(1, 0);
+(1, 3);
 
 -- --------------------------------------------------------
 
@@ -523,7 +593,7 @@ CREATE TABLE IF NOT EXISTS `Team_has_Trainer` (
 --
 
 INSERT INTO `Team_has_Trainer` (`Team`, `Trainer`) VALUES
-(1, 0);
+(1, 4);
 
 -- --------------------------------------------------------
 
@@ -542,7 +612,7 @@ CREATE TABLE IF NOT EXISTS `Trainer` (
 --
 
 INSERT INTO `Trainer` (`idTrainer`) VALUES
-(0);
+(4);
 
 -- --------------------------------------------------------
 
@@ -563,7 +633,28 @@ CREATE TABLE IF NOT EXISTS `TypeOfSport` (
 --
 
 INSERT INTO `TypeOfSport` (`idTypeOfSport`, `Name`, `Description`) VALUES
-(1, 'Fußball', 'Ballsport der mit dem Fuß gespielt wird.');
+(1, 'Fußball', 'Ballsport, mit Fuß gespielt');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `TypeOfSport_has_Trainer`
+--
+
+CREATE TABLE IF NOT EXISTS `TypeOfSport_has_Trainer` (
+  `TypeOfSport_idTypeOfSport` int(11) NOT NULL,
+  `Trainer_idTrainer` int(11) NOT NULL,
+  PRIMARY KEY (`TypeOfSport_idTypeOfSport`,`Trainer_idTrainer`),
+  KEY `fk_TypeOfSport_has_Trainer_Trainer1_idx` (`Trainer_idTrainer`),
+  KEY `fk_TypeOfSport_has_Trainer_TypeOfSport1_idx` (`TypeOfSport_idTypeOfSport`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `TypeOfSport_has_Trainer`
+--
+
+INSERT INTO `TypeOfSport_has_Trainer` (`TypeOfSport_idTypeOfSport`, `Trainer_idTrainer`) VALUES
+(1, 4);
 
 --
 -- Constraints for dumped tables
@@ -576,6 +667,18 @@ ALTER TABLE `Address`
   ADD CONSTRAINT `fk_Address_Country0` FOREIGN KEY (`Country`) REFERENCES `Country` (`idCountry`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Constraints for table `Admin`
+--
+ALTER TABLE `Admin`
+  ADD CONSTRAINT `fk_Admin_Role1` FOREIGN KEY (`Role_idRole`) REFERENCES `Role` (`idRole`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `Caretaker`
+--
+ALTER TABLE `Caretaker`
+  ADD CONSTRAINT `fk_Caretaker_Role1` FOREIGN KEY (`Role_idRole`) REFERENCES `Role` (`idRole`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Constraints for table `ClubTeam`
 --
 ALTER TABLE `ClubTeam`
@@ -585,7 +688,8 @@ ALTER TABLE `ClubTeam`
 -- Constraints for table `Competition`
 --
 ALTER TABLE `Competition`
-  ADD CONSTRAINT `fk_Competition_League1` FOREIGN KEY (`League_idLeague`) REFERENCES `League` (`idLeague`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Competition_League1` FOREIGN KEY (`League_idLeague`) REFERENCES `League` (`idLeague`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Competition_Address1` FOREIGN KEY (`Address`) REFERENCES `Address` (`idAddress`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `Competition_has_Team`
@@ -657,11 +761,11 @@ ALTER TABLE `Player_has_TypeOfSport`
   ADD CONSTRAINT `fk_Player_has_TypeOfSport_Player1` FOREIGN KEY (`Player_Role_idRole`) REFERENCES `Player` (`Role_idRole`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `Role_has_Permisssion`
+-- Constraints for table `Role_has_Permission`
 --
-ALTER TABLE `Role_has_Permisssion`
+ALTER TABLE `Role_has_Permission`
   ADD CONSTRAINT `fk_Role_has_Permisssion_Role1` FOREIGN KEY (`Role_idRole`) REFERENCES `Role` (`idRole`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Role_has_Permisssion_Permisssion1` FOREIGN KEY (`Permisssion_idPermisssion`) REFERENCES `Permisssion` (`idPermisssion`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Role_has_Permisssion_Permisssion1` FOREIGN KEY (`Permission_idPermission`) REFERENCES `Permission` (`idPermission`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `Team`
@@ -688,6 +792,13 @@ ALTER TABLE `Team_has_Trainer`
 --
 ALTER TABLE `Trainer`
   ADD CONSTRAINT `fk_Trainer_Role10` FOREIGN KEY (`idTrainer`) REFERENCES `Role` (`idRole`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `TypeOfSport_has_Trainer`
+--
+ALTER TABLE `TypeOfSport_has_Trainer`
+  ADD CONSTRAINT `fk_TypeOfSport_has_Trainer_TypeOfSport1` FOREIGN KEY (`TypeOfSport_idTypeOfSport`) REFERENCES `TypeOfSport` (`idTypeOfSport`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_TypeOfSport_has_Trainer_Trainer1` FOREIGN KEY (`Trainer_idTrainer`) REFERENCES `Trainer` (`idTrainer`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
