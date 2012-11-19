@@ -198,24 +198,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `SportClubManagement`.`Team_has_Player`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `SportClubManagement`.`Team_has_Player` ;
-
-CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Team_has_Player` (
-  `Team` INT NOT NULL ,
-  `Player` INT NOT NULL ,
-  PRIMARY KEY (`Team`, `Player`) ,
-  INDEX `fk_Team_has_Member_ClubTeam1_idx` (`Team` ASC) ,
-  CONSTRAINT `fk_Team_has_Member_ClubTeam1`
-    FOREIGN KEY (`Team` )
-    REFERENCES `SportClubManagement`.`ClubTeam` (`idTeam` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `SportClubManagement`.`Player`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `SportClubManagement`.`Player` ;
@@ -576,6 +558,30 @@ CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Admin` (
   CONSTRAINT `fk_Admin_Role1`
     FOREIGN KEY (`Role_idRole` )
     REFERENCES `SportClubManagement`.`Role` (`idRole` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`Team_has_Player`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`Team_has_Player` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Team_has_Player` (
+  `ClubTeam_idTeam` INT NOT NULL ,
+  `Role_idRole` INT NOT NULL ,
+  PRIMARY KEY (`ClubTeam_idTeam`, `Role_idRole`) ,
+  INDEX `fk_ClubTeam_has_Player_Player1_idx` (`Role_idRole` ASC) ,
+  INDEX `fk_ClubTeam_has_Player_ClubTeam1_idx` (`ClubTeam_idTeam` ASC) ,
+  CONSTRAINT `fk_ClubTeam_has_Player_ClubTeam1`
+    FOREIGN KEY (`ClubTeam_idTeam` )
+    REFERENCES `SportClubManagement`.`ClubTeam` (`idTeam` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ClubTeam_has_Player_Player1`
+    FOREIGN KEY (`Role_idRole` )
+    REFERENCES `SportClubManagement`.`Player` (`Role_idRole` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
