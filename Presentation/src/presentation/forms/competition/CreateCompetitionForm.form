@@ -96,10 +96,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblTeams" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="151" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="139" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="lblMatchNr" min="-2" max="-2" attributes="0"/>
@@ -114,10 +114,10 @@
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="textfieldName" min="-2" pref="200" max="-2" attributes="0"/>
+                                          <Component id="txtfieldName" min="-2" pref="200" max="-2" attributes="0"/>
                                           <Component id="txtfieldLocation" min="-2" pref="200" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="dateDate" min="-2" pref="122" max="-2" attributes="0"/>
+                                              <Component id="dateDateFrom" min="-2" pref="122" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                                               <Component id="lblTime" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -145,14 +145,14 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace min="0" pref="112" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnConfirm" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="720" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -178,11 +178,11 @@
                                               <Component id="lblDate" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="1" attributes="0">
-                                              <Component id="textfieldName" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtfieldName" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="1" attributes="0">
                                                   <Component id="lblTime" alignment="1" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="dateDate" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="dateDateFrom" min="-2" max="-2" attributes="0"/>
                                                   <Component id="dateDateTo" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
@@ -303,12 +303,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtfieldLocationActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="textfieldName">
+            <Component class="javax.swing.JTextField" name="txtfieldName">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textfieldNameActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtfieldNameActionPerformed"/>
               </Events>
             </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="dateDate">
+            <Component class="com.toedter.calendar.JDateChooser" name="dateDateFrom">
             </Component>
             <Component class="javax.swing.JTextField" name="txtfieldplz">
             </Component>

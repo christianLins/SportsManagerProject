@@ -189,12 +189,14 @@ public class ShowCompetitionForm extends AbstractMainForm {
 
         if (findClubTeam(match) == true) {
             List<IPlayer> tmpPlayer = controller.getPlayer(cTeam);
+            int counter;
 
             for (int row = 0; row < tmpPlayer.size(); row++) {
-                IPlayer tmp = tmpPlayer.get(row);
-
-//                tableModel.setValueAt(tmp.getPrename(), row, 0);
-//                tableModel.setValueAt(tmp.getLastname(), row, 1);
+                counter = 0; 
+                
+                String[] fullname = tmpPlayer.get(row).getName().split(" ");
+                tableModel.setValueAt(fullname[counter], row, counter++);     // first name
+                tableModel.setValueAt(fullname[counter], row, counter);     // last name
             }
         }
         tableOurMembers.setModel(tableModel);
