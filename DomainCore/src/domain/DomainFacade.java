@@ -5,10 +5,8 @@
 package domain;
 
 import domain.classes.*;
-import domain.contract.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import domain.contract.IDomain;
+import java.util.*;
 import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 import utils.HibernateUtil;

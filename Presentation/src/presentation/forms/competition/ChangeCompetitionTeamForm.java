@@ -380,8 +380,7 @@ public class ChangeCompetitionTeamForm extends AbstractMainForm {
     public JPanel getPanel(){
         return panelChangeTeam;
     }
-    
-    
+        
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnRemove;

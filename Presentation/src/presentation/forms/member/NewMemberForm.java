@@ -636,7 +636,6 @@ public class NewMemberForm
         }
         else
         {
-
             List<Integer> roles = new LinkedList<>();
             if (radioAdmin.isSelected())
             {

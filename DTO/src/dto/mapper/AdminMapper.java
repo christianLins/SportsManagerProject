@@ -5,14 +5,13 @@
 package dto.mapper;
 
 import domain.*;
-import dto.classes.*;
-import dto.contract.*;
+import dto.classes.Admin;
+import dto.contract.IAdmin;
 import dto.mapper.contract.*;
 import java.util.*;
 import java.util.logging.*;
 
 /**
-
  @author Thomas
  */
 public class AdminMapper
