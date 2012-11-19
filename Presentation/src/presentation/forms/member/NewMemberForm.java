@@ -1,12 +1,19 @@
 package presentation.forms.member;
 
 import contract.INewMember;
+import dto.classes.Admin;
+import dto.classes.Caretaker;
+import dto.classes.DepartmentHead;
+import dto.classes.Player;
+import dto.classes.Trainer;
 import dto.contract.IAddress;
 import dto.contract.IClubTeam;
 import dto.contract.ICountry;
 import dto.contract.IDepartment;
 import dto.contract.IMember;
+import dto.contract.IPlayer;
 import dto.contract.IRole;
+import dto.contract.ITrainer;
 import dto.contract.ITypeOfSport;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -51,7 +58,10 @@ public class NewMemberForm
         super(form);
         this.client = client;
         this.user = user;
-        setPermission();
+        //adminPermission = user.hasPermission();
+        if(!adminPermission){
+            disableExtendedRadioSelection();
+        }
         this.selectedSports = new LinkedList<>();
         controller = this.client.getNewMemberService();
         initComponents();
@@ -533,6 +543,23 @@ public class NewMemberForm
         }
     }
 
+    private List<Integer> getSelectedSports()
+    {
+        List<Integer> tosIDs = new LinkedList<>();
+
+        for (ITypeOfSport tos : typeOfSports)
+        {
+            for (ITypeOfSport s : selectedSports)
+            {
+                if (s.equals(tos))
+                {
+                    tosIDs.add(tos.getId());
+                }
+            }
+        }
+        return tosIDs;
+    }
+    
     private String[] getComboTeam()
     {
         if (department != null)
@@ -629,33 +656,57 @@ public class NewMemberForm
 
         //TODO: which case only member and address necessary?!
         //role list necessary?
-
-        if (!radioAdmin.isSelected() && !radioTrainer.isSelected() && !radioPlayer.isSelected())
+        List<IRole> membersRoles = new LinkedList<>();
+        
+        if (adminPermission)
         {
-            controller.setNewMember(member, address);
-        }
-        else
-        {
-            List<Integer> roles = new LinkedList<>();
             if (radioAdmin.isSelected())
             {
-                roles.add(1);
+                membersRoles.add(new Admin());
+            }
+            if (radioCaretaker.isSelected())
+            {
+                membersRoles.add(new Caretaker());
+            }
+            if (radioDeptHead.isSelected())
+            {
+                membersRoles.add(new DepartmentHead());
             }
             if (radioTrainer.isSelected())
             {
-                roles.add(2);
+                ITrainer trainer = new Trainer();
+                membersRoles.add(trainer);
+                trainer.setTypeOfSportList(getSelectedSports());
             }
-            if (radioPlayer.isSelected())
-            {
-                roles.add(3);
-            }
-            role.setPermisssionList(roles);
-            member.setRoleList(roles);
+        }
 
+        if (radioPlayer.isSelected())
+        {
+            IPlayer player = new Player();
+            membersRoles.add(player);
+            player.setTypeOfSportList(getSelectedSports());
+        }
+
+        List<Integer> roleInt = new LinkedList<>();
+        for (IRole role : membersRoles)
+        {
+            roleInt.add(role.getId());
+        }
+        
+        member.setRoleList(roleInt);
+        
+
+        if (radioTrainer.isSelected() || radioPlayer.isSelected())
+        {
+            member.setRoleList(roleInt);            
             setSelectedDepartment();
             setSelectedTeam();
 
             controller.setNewMember(member, address, department, clubTeam, role);
+        }
+        else
+        {            
+            controller.setNewMember(member, address);
         }
     }
 
@@ -683,11 +734,14 @@ public class NewMemberForm
         return success;
     }
 
-    private void setPermission()
+    private void disableExtendedRadioSelection()
     {
-
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
+        radioAdmin.setEnabled(false);
+        radioCaretaker.setEnabled(false);
+        radioDeptHead.setEnabled(false);
+        radioTrainer.setEnabled(false);
+    }    
+    
 
     public JPanel getPanel()
     {
@@ -735,4 +789,5 @@ public class NewMemberForm
     private javax.swing.JTextField txtfieldPhone;
     private javax.swing.JTextField txtfieldPostCode;
     // End of variables declaration//GEN-END:variables
+
 }
