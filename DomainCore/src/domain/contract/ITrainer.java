@@ -10,9 +10,14 @@ import java.util.List;
 
  @author Thomas
  */
-public interface ITrainer extends IRole
+public interface ITrainer
+        extends IRole
 {
     List<IClubTeam> getClubTeamList();
 
     void setClubTeamList(List<IClubTeam> clubTeamList);
+
+    List<ITypeOfSport> getTypeOfSportList();
+
+    void setTypeOfSportList(List<ITypeOfSport> typeOfSportList);
 }

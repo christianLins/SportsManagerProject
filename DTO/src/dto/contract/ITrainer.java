@@ -16,4 +16,8 @@ public interface ITrainer
     List<Integer> getClubTeamList();
 
     void setClubTeamList(List<Integer> clubTeamList);
+
+    List<Integer> getTypeOfSportList();
+
+    void setTypeOfSportList(List<Integer> typeOfSportList);
 }

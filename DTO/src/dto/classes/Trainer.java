@@ -9,6 +9,7 @@ public class Trainer
         implements Serializable, ITrainer
 {
     private List<Integer> clubTeamList = new LinkedList<>();
+    private List<Integer> typeOfSportList = new LinkedList<>();
 
     Trainer(int id)
     {
@@ -28,14 +29,22 @@ public class Trainer
         {
             a = new Trainer(trainer.getId());
 
-            List<Integer> l = new LinkedList<>();
+            List<Integer> clubTeamList = new LinkedList<>();
 
             for (domain.contract.IClubTeam c : trainer.getClubTeamList())
             {
-                l.add(c.getId());
+                clubTeamList.add(c.getId());
             }
 
-            a.setClubTeamList(l);
+            a.setClubTeamList(clubTeamList);
+
+            List<Integer> typeOfSportList = new LinkedList<>();
+
+            for (domain.contract.ITypeOfSport t : trainer.getTypeOfSportList())
+            {
+                typeOfSportList.add(t.getId());
+            }
+            a.setTypeOfSportList(typeOfSportList);
 
             trainers.put(trainer, a);
         }
@@ -57,5 +66,17 @@ public class Trainer
     public void setClubTeamList(List<Integer> clubTeamList)
     {
         this.clubTeamList = clubTeamList;
+    }
+
+    @Override
+    public List<Integer> getTypeOfSportList()
+    {
+        return typeOfSportList;
+    }
+
+    @Override
+    public void setTypeOfSportList(List<Integer> typeOfSportList)
+    {
+        this.typeOfSportList = typeOfSportList;
     }
 }
