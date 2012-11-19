@@ -525,6 +525,62 @@ CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Member_has_Role` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`TypeOfSport_has_Trainer`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`TypeOfSport_has_Trainer` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`TypeOfSport_has_Trainer` (
+  `TypeOfSport_idTypeOfSport` INT NOT NULL ,
+  `Trainer_idTrainer` INT NOT NULL ,
+  PRIMARY KEY (`TypeOfSport_idTypeOfSport`, `Trainer_idTrainer`) ,
+  INDEX `fk_TypeOfSport_has_Trainer_Trainer1_idx` (`Trainer_idTrainer` ASC) ,
+  INDEX `fk_TypeOfSport_has_Trainer_TypeOfSport1_idx` (`TypeOfSport_idTypeOfSport` ASC) ,
+  CONSTRAINT `fk_TypeOfSport_has_Trainer_TypeOfSport1`
+    FOREIGN KEY (`TypeOfSport_idTypeOfSport` )
+    REFERENCES `SportClubManagement`.`TypeOfSport` (`idTypeOfSport` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_TypeOfSport_has_Trainer_Trainer1`
+    FOREIGN KEY (`Trainer_idTrainer` )
+    REFERENCES `SportClubManagement`.`Trainer` (`idTrainer` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`Caretaker`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`Caretaker` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Caretaker` (
+  `Role_idRole` INT NOT NULL ,
+  PRIMARY KEY (`Role_idRole`) ,
+  CONSTRAINT `fk_Caretaker_Role1`
+    FOREIGN KEY (`Role_idRole` )
+    REFERENCES `SportClubManagement`.`Role` (`idRole` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`Admin`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`Admin` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Admin` (
+  `Role_idRole` INT NOT NULL ,
+  PRIMARY KEY (`Role_idRole`) ,
+  CONSTRAINT `fk_Admin_Role1`
+    FOREIGN KEY (`Role_idRole` )
+    REFERENCES `SportClubManagement`.`Role` (`idRole` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
