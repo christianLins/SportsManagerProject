@@ -39,9 +39,9 @@ public class NewMember implements INewMember{
     public void setNewMember(IMember member, IAddress address) {
         try
         {
-            Integer adressId = DtoFactory.getAddressManager().set(address);
+            Integer adressId = DtoFactory.getAddressMapper().set(address);
             member.setAddress(adressId);
-            DtoFactory.getMemberManager().set(member);
+            DtoFactory.getMemberMapper().set(member);
         }
         catch(RemoteException ex)
         {
@@ -52,7 +52,7 @@ public class NewMember implements INewMember{
     @Override
     public List<IDepartment> getDepartments() {
         try {
-            return DtoFactory.getDepartmentManager().getAll();
+            return DtoFactory.getDepartmentMapper().getAll();
         } catch (RemoteException | NotFoundException ex) {
             Logger.getLogger(NewMember.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -66,7 +66,7 @@ public class NewMember implements INewMember{
         {
             for(Integer team : clubTeams)
             {
-                clubTeamList.add(DtoFactory.getClubTeamManager().getById(team));
+                clubTeamList.add(DtoFactory.getClubTeamMapper().getById(team));
             }
             
         }
@@ -81,17 +81,17 @@ public class NewMember implements INewMember{
         try
         {
             //Muss noch geändert werden!!!!
-            //Integer roleId = DtoFactory.getRoleManager().set(role);
-            Integer adressId = DtoFactory.getAddressManager().set(address);
-            //Integer departmentId = DtoFactory.getDepartmentManager().set(department);
-            //Integer clubTeamId = DtoFactory.getClubTeamManager().set(clubTeam);
+            //Integer roleId = DtoFactory.getRoleMapper().set(role);
+            Integer adressId = DtoFactory.getAddressMapper().set(address);
+            //Integer departmentId = DtoFactory.getDepartmentMapper().set(department);
+            //Integer clubTeamId = DtoFactory.getClubTeamMapper().set(clubTeam);
             
             
             member.setAddress(adressId);
-            DtoFactory.getMemberManager().set(member);
+            DtoFactory.getMemberMapper().set(member);
             //clubTeam.setPlayerList();
                     //clubTeam.getPlayerList().
-            //DtoFactory.getClubTeamManager().set();
+            //DtoFactory.getClubTeamMapper().set();
         }
         catch(RemoteException ex)
         {

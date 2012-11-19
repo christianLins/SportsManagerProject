@@ -36,7 +36,7 @@ public class SearchChangeMember implements ISearchChangeMember {
     @Override
     public List<IMember> getMatchingMembers(String searchInput) {
         try {
-            List<IMember> memberList = DtoFactory.getMemberManager().getAll();
+            List<IMember> memberList = DtoFactory.getMemberMapper().getAll();
             for (IMember member : memberList) {
             }
             return memberList;
@@ -49,7 +49,7 @@ public class SearchChangeMember implements ISearchChangeMember {
     @Override
     public IMember getMember(Integer id) {
         try {
-            return DtoFactory.getMemberManager().getById(id);
+            return DtoFactory.getMemberMapper().getById(id);
         } catch (RemoteException | IdNotFoundException ex) {
             Logger.getLogger(SearchChangeMember.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -58,12 +58,12 @@ public class SearchChangeMember implements ISearchChangeMember {
 
     @Override
     public List<IRole> getRoles(Integer memberId) {
-        //RoleManager
+        //RoleMapper
         List<IRole> roleList = new ArrayList<>();
         try {
-            IMember member = DtoFactory.getMemberManager().getById(memberId);
+            IMember member = DtoFactory.getMemberMapper().getById(memberId);
             for (Integer role : member.getRoleList()) {
-                //RoleManager
+                //RoleMapper
                 //roleList.add(null);
             }
         } catch (RemoteException | IdNotFoundException ex) {
@@ -76,11 +76,11 @@ public class SearchChangeMember implements ISearchChangeMember {
     public IDepartment getDepartment(Integer memberId) {
         try {
             //Auch nicht wirklich korrekt!!!!
-            List<IDepartment> depList = DtoFactory.getDepartmentManager().getAll();
+            List<IDepartment> depList = DtoFactory.getDepartmentMapper().getAll();
             for (IDepartment dep : depList) {
                 List<IClubTeam> clubList = new ArrayList<>();
                 for (Integer club : dep.getClubTeamList()) {
-                    clubList.add(DtoFactory.getClubTeamManager().getById(club));
+                    clubList.add(DtoFactory.getClubTeamMapper().getById(club));
                 }
 
                 for (IClubTeam team : clubList) {
@@ -100,7 +100,7 @@ public class SearchChangeMember implements ISearchChangeMember {
     @Override
     public IAddress getAddress(Integer addressId) {
         try {
-            return DtoFactory.getAddressManager().getById(addressId);
+            return DtoFactory.getAddressMapper().getById(addressId);
         } catch (RemoteException | IdNotFoundException ex) {
             Logger.getLogger(SearchChangeMember.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -110,7 +110,7 @@ public class SearchChangeMember implements ISearchChangeMember {
     @Override
     public ICountry getCountry(Integer countryID) {
         try {
-            DtoFactory.getCountryManager().getById(countryID);
+            DtoFactory.getCountryMapper().getById(countryID);
         } catch (RemoteException | IdNotFoundException ex) {
             Logger.getLogger(SearchChangeMember.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -120,7 +120,7 @@ public class SearchChangeMember implements ISearchChangeMember {
     @Override
     public List<IDepartment> getDepartments() {
         try {
-            return DtoFactory.getDepartmentManager().getAll();
+            return DtoFactory.getDepartmentMapper().getAll();
         } catch (RemoteException | NotFoundException ex) {
             Logger.getLogger(SearchChangeMember.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -132,7 +132,7 @@ public class SearchChangeMember implements ISearchChangeMember {
         List<IClubTeam> teamList = new ArrayList<>();
         try {
             for (Integer team : clubTeams) {
-                teamList.add(DtoFactory.getClubTeamManager().getById(team));
+                teamList.add(DtoFactory.getClubTeamMapper().getById(team));
             }
         } catch (RemoteException | IdNotFoundException ex) {
             Logger.getLogger(SearchChangeMember.class.getName()).log(Level.SEVERE, null, ex);

@@ -52,7 +52,7 @@ public class AddMatchResults implements IAddMatchResults {
         try {
             for (Integer id : team) {
 
-                teamList.add(DtoFactory.getTeamManager().getById(id));
+                teamList.add(DtoFactory.getTeamMapper().getById(id));
             }
         } catch (RemoteException | IdNotFoundException ex) {
             Logger.getLogger(AddMatchResults.class.getName()).log(Level.SEVERE, null, ex);
@@ -68,7 +68,7 @@ public class AddMatchResults implements IAddMatchResults {
 
         try {
             for (Integer id : match) {
-                matchList.add(DtoFactory.getMatchManager().getById(id));
+                matchList.add(DtoFactory.getMatchMapper().getById(id));
             }
         } catch (RemoteException | IdNotFoundException ex) {
             Logger.getLogger(AddMatchResults.class.getName()).log(Level.SEVERE, null, ex);
@@ -79,9 +79,9 @@ public class AddMatchResults implements IAddMatchResults {
     @Override
     public void setMatchResult(IMatch match, IMatchresult matchresult) {
         try {
-            Integer matchresultId = DtoFactory.getMatchresultManager().set(matchresult);
+            Integer matchresultId = DtoFactory.getMatchresultMapper().set(matchresult);
             match.setMatchresult(matchresultId);
-            DtoFactory.getMatchManager().set(match);
+            DtoFactory.getMatchMapper().set(match);
         } catch (RemoteException ex) {
             Logger.getLogger(AddMatchResults.class.getName()).log(Level.SEVERE, null, ex);
         }

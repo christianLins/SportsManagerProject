@@ -52,7 +52,7 @@ public class ShowCompetition implements IShowCompetition{
 
         try {
             for (Integer id : matches) {
-                matchList.add(DtoFactory.getMatchManager().getById(id));
+                matchList.add(DtoFactory.getMatchMapper().getById(id));
             }
         } catch (RemoteException | IdNotFoundException ex) {
             Logger.getLogger(ShowCompetition.class.getName()).log(Level.SEVERE, null, ex);
@@ -74,7 +74,7 @@ public class ShowCompetition implements IShowCompetition{
         {
             for(Integer playerID : team.getPlayerList())
             {
-                playerList.add(DtoFactory.getPlayerManager().getById(playerID));
+                playerList.add(DtoFactory.getPlayerMapper().getById(playerID));
             }
         }
         catch(RemoteException | IdNotFoundException ex)

@@ -52,7 +52,7 @@ public class ChangeCompetitionTeam implements IChangeCompetitionTeam{
 
         try {
             for (Integer teamId : Teams) {
-                clubTeamList.add(DtoFactory.getClubTeamManager().getById(teamId));
+                clubTeamList.add(DtoFactory.getClubTeamMapper().getById(teamId));
             }
         } catch (RemoteException | IdNotFoundException ex) {
             Logger.getLogger(ChangeCompetitionTeam.class.getName()).log(Level.SEVERE, null, ex);
@@ -73,7 +73,7 @@ public class ChangeCompetitionTeam implements IChangeCompetitionTeam{
             }
         }
         try {
-            DtoFactory.getCompetitionManager().set(competition);
+            DtoFactory.getCompetitionMapper().set(competition);
         } catch (RemoteException ex) {
             Logger.getLogger(ChangeCompetitionTeam.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -83,7 +83,7 @@ public class ChangeCompetitionTeam implements IChangeCompetitionTeam{
     public List<IClubTeam> getClubTeams()
     {
         try {
-            return DtoFactory.getClubTeamManager().getAll();
+            return DtoFactory.getClubTeamMapper().getAll();
         } catch (RemoteException | NotFoundException ex) {
             Logger.getLogger(ChangeCompetitionTeam.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -104,7 +104,7 @@ public class ChangeCompetitionTeam implements IChangeCompetitionTeam{
         {
             for(Integer player : players)
             {
-                playerList.add(DtoFactory.getPlayerManager().getById(player));
+                playerList.add(DtoFactory.getPlayerMapper().getById(player));
             }
         }
         catch(RemoteException | IdNotFoundException ex)

@@ -33,7 +33,7 @@ public class NewCompetition implements INewCompetition{
         try {
             //hier überprüfung des Member !!!
             
-            DtoFactory.getCompetitionManager().set(competition);
+            DtoFactory.getCompetitionMapper().set(competition);
         } catch (RemoteException ex) {
             Logger.getLogger(NewCompetition.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -42,7 +42,7 @@ public class NewCompetition implements INewCompetition{
     @Override
     public List<ITeam> getTeams() {
         try {
-            return DtoFactory.getTeamManager().getAll();
+            return DtoFactory.getTeamMapper().getAll();
         } catch (RemoteException | NotFoundException ex) {
             Logger.getLogger(NewCompetition.class.getName()).log(Level.SEVERE, null, ex);
         }

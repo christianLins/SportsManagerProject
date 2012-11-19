@@ -1,5 +1,6 @@
 package domain.classes;
 
+import domain.contract.ICaretaker;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -11,7 +12,16 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Caretaker")
 public class Caretaker extends Role
-implements Serializable {
+implements ICaretaker, Serializable {
     private static final long serialVersionUID = 1L;
+
+    public Caretaker()
+    {
+    }
+
+    public Caretaker(Integer id)
+    {
+        super(id);
+    }
 
 }

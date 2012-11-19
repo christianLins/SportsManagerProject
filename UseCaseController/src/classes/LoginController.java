@@ -38,7 +38,7 @@ public class LoginController implements ILogin
     {
         try
         {
-            MemberMapper m = (MemberMapper) DtoFactory.getMemberManager();
+            MemberMapper m = (MemberMapper) DtoFactory.getMemberMapper();
             return m.getMemberByUsername(userData.getUsername());
         }
         catch (RemoteException | NotFoundException ex)
