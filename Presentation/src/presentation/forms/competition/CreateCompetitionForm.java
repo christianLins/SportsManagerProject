@@ -5,7 +5,9 @@
 package presentation.forms.competition;
 
 import contract.INewCompetition;
+import dto.classes.Address;
 import dto.classes.Competition;
+import dto.classes.Country;
 import dto.contract.*;
 import java.util.*;
 import javax.swing.*;
@@ -64,8 +66,8 @@ public class CreateCompetitionForm
         lblCountry = new javax.swing.JLabel();
         lblPostCode = new javax.swing.JLabel();
         txtfieldLocation = new javax.swing.JTextField();
-        textfieldName = new javax.swing.JTextField();
-        dateDate = new com.toedter.calendar.JDateChooser();
+        txtfieldName = new javax.swing.JTextField();
+        dateDateFrom = new com.toedter.calendar.JDateChooser();
         txtfieldplz = new javax.swing.JTextField();
         txtfieldcity = new javax.swing.JTextField();
         txtfieldCountry = new javax.swing.JTextField();
@@ -132,9 +134,9 @@ public class CreateCompetitionForm
             }
         });
 
-        textfieldName.addActionListener(new java.awt.event.ActionListener() {
+        txtfieldName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textfieldNameActionPerformed(evt);
+                txtfieldNameActionPerformed(evt);
             }
         });
 
@@ -161,10 +163,10 @@ public class CreateCompetitionForm
                 .addContainerGap()
                 .addComponent(lblTeams)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(paneDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(paneDataLayout.createSequentialGroup()
-                        .addGap(51, 51, 51)
+                        .addGap(63, 63, 63)
                         .addGroup(paneDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(paneDataLayout.createSequentialGroup()
                                 .addComponent(lblMatchNr)
@@ -177,10 +179,10 @@ public class CreateCompetitionForm
                                     .addComponent(lblDate))
                                 .addGap(18, 18, 18)
                                 .addGroup(paneDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textfieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtfieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtfieldLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(paneDataLayout.createSequentialGroup()
-                                        .addComponent(dateDate, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(dateDateFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(36, 36, 36)
                                         .addComponent(lblTime)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -200,11 +202,11 @@ public class CreateCompetitionForm
                                         .addComponent(lblCity)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtfieldcity, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 112, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneDataLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(paneDataLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnConfirm)))
-                .addContainerGap())
+                .addGap(720, 720, 720))
         );
         paneDataLayout.setVerticalGroup(
             paneDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,11 +228,11 @@ public class CreateCompetitionForm
                                         .addGap(12, 12, 12)
                                         .addComponent(lblDate))
                                     .addGroup(paneDataLayout.createSequentialGroup()
-                                        .addComponent(textfieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtfieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(paneDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(lblTime)
-                                            .addComponent(dateDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(dateDateFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(dateDateTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(paneDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -424,9 +426,9 @@ public class CreateCompetitionForm
         // TODO add your handling code here:
     }//GEN-LAST:event_txtfieldLocationActionPerformed
 
-    private void textfieldNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfieldNameActionPerformed
+    private void txtfieldNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfieldNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textfieldNameActionPerformed
+    }//GEN-LAST:event_txtfieldNameActionPerformed
 
     private void txtfieldFeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfieldFeeActionPerformed
         // TODO add your handling code here:
@@ -468,7 +470,7 @@ public class CreateCompetitionForm
         }
         else
         {
-            //TODO: support latertxtfieldTeamA.setText(null);
+            //TODO: support later txtfieldTeamA.setText(null);
         }
     }//GEN-LAST:event_listSelectMatchValueChanged
 
@@ -484,20 +486,28 @@ public class CreateCompetitionForm
         setMatchTeamList();
 
         competition = new Competition();
-        competition.setDateFrom(dateDate.getDate());
-        competition.setDateTo(dateDate.getDate());
-//      TODO: Set correct DATE TO competition.setDateTo(null);
+        competition.setName(txtfieldName.getText());
+        competition.setDescription(txtfieldLocation.getText());
+        competition.setDateFrom(dateDateFrom.getDate());
+        competition.setDateTo(dateDateTo.getDate());
         competition.setPayment(Double.parseDouble(txtfieldFee.getText()));
-        competition.setTeamList(getSelectedTeams(listSelectTeams));
-
-        //TODO: Missing city, country, begegnungen
+        competition.setTeamList(getSelectedTeams(listSelectTeams));        
+        
+        //Set Competitions address
+        IAddress address = new Address();
+        address.setVillage(txtfieldcity.getText());
+        address.setPostalCode(Integer.parseInt(txtfieldplz.getText()));
+        ICountry country = new Country();
+        country.setName(txtfieldCountry.getText());
+        address.setCountry(country.getId());
+        
+        competition.setAddress(address.getId());
     }//GEN-LAST:event_btnConfirmActionPerformed
 
     private String[] getTeamsList()
     {
         List<ITeam> teamList = controller.getTeams();
         String[] list = new String[teamList.size()];
-
 
         for (int i = 0; i < list.length; i++)
         {
@@ -655,7 +665,7 @@ public class CreateCompetitionForm
     private javax.swing.JButton btnAddMatch;
     private javax.swing.JButton btnConfirm;
     private javax.swing.JButton btnCreate;
-    private com.toedter.calendar.JDateChooser dateDate;
+    private com.toedter.calendar.JDateChooser dateDateFrom;
     private com.toedter.calendar.JDateChooser dateDateTo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -681,10 +691,10 @@ public class CreateCompetitionForm
     private javax.swing.JPanel paneData;
     private javax.swing.JPanel paneSetMatches;
     private javax.swing.JPanel panel;
-    private javax.swing.JTextField textfieldName;
     private javax.swing.JTextField txtfieldCountry;
     private javax.swing.JTextField txtfieldFee;
     private javax.swing.JTextField txtfieldLocation;
+    private javax.swing.JTextField txtfieldName;
     private javax.swing.JTextField txtfieldTeamA;
     private javax.swing.JTextField txtfieldTeamB;
     private javax.swing.JTextField txtfieldcity;
