@@ -14,7 +14,7 @@ public class League
     private List<Integer> teamList = new LinkedList<>();
     private List<Integer> competitions = new LinkedList<>();
 
-     League()
+   public  League()
     {
     }
 

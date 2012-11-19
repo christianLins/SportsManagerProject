@@ -19,10 +19,6 @@ public class AddressMapper
 {
     private static AddressMapper controller;
 
-    AddressMapper()
-    {
-    }
-
     public static IMapper<IAddress> getInstance()
     {
         if (controller == null)
@@ -126,5 +122,11 @@ public class AddressMapper
         address.setVillage(value.getVillage());
 
         return address;
+    }
+
+    @Override
+    public IAddress getNew()
+    {
+        return new Address();
     }
 }

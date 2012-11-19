@@ -12,8 +12,8 @@ import dto.contract.IMatchresult;
 import dto.mapper.contract.*;
 
 /**
- *
- * @author Thomas
+
+ @author Thomas
  */
 public class MatchresultMapper
         implements IMapper<IMatchresult>
@@ -66,7 +66,8 @@ public class MatchresultMapper
     }
 
     @Override
-    public List<IMatchresult> getAll() throws NotFoundException
+    public List<IMatchresult> getAll()
+            throws NotFoundException
     {
         try
         {
@@ -126,5 +127,11 @@ public class MatchresultMapper
         matchresult.setPointsHometeam(value.getPointsHometeam());
 
         return matchresult;
+    }
+
+    @Override
+    public IMatchresult getNew()
+    {
+        return new Matchresult();
     }
 }

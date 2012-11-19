@@ -12,8 +12,8 @@ import dto.contract.IDepartment;
 import dto.mapper.contract.*;
 
 /**
- *
- * @author Thomas
+
+ @author Thomas
  */
 public class DepartmentMapper
         implements IMapper<IDepartment>
@@ -55,7 +55,7 @@ public class DepartmentMapper
     {
         try
         {
-            domain.contract.IDepartment a = DomainFacade.getInstance().getByID(domain.contract.IDepartment.class,id);
+            domain.contract.IDepartment a = DomainFacade.getInstance().getByID(domain.contract.IDepartment.class, id);
             return Department.copy(a);
         }
         catch (CouldNotFetchException ex)
@@ -65,7 +65,8 @@ public class DepartmentMapper
     }
 
     @Override
-    public List<IDepartment> getAll() throws NotFoundException
+    public List<IDepartment> getAll()
+            throws NotFoundException
     {
         try
         {
@@ -143,5 +144,11 @@ public class DepartmentMapper
 
 
         return department;
+    }
+
+    @Override
+    public IDepartment getNew()
+    {
+        return new Department();
     }
 }

@@ -20,6 +20,10 @@ abstract class Role
     private List<Integer> permissionList;
     private List<Integer> memberList;
 
+    public Role()
+    {
+    }
+
     public static <T extends Role> T copy(domain.contract.IRole domainRole, T role)
     {
         role.setId(domainRole.getId());
@@ -101,5 +105,11 @@ abstract class Role
     public Integer getId()
     {
         return id;
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.name;
     }
 }

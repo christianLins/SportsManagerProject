@@ -12,8 +12,8 @@ import java.util.*;
 import java.util.logging.*;
 
 /**
- *
- * @author Thomas
+
+ @author Thomas
  */
 public class CountryMapper
         implements IMapper<ICountry>
@@ -67,7 +67,8 @@ public class CountryMapper
     }
 
     @Override
-    public List<ICountry> getAll() throws NotFoundException
+    public List<ICountry> getAll()
+            throws NotFoundException
     {
         try
         {
@@ -134,5 +135,11 @@ public class CountryMapper
         country.setTld(value.getTld());
 
         return country;
+    }
+
+    @Override
+    public ICountry getNew()
+    {
+        return new Country();
     }
 }

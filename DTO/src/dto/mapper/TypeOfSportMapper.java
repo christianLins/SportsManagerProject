@@ -12,8 +12,8 @@ import java.util.*;
 import java.util.logging.*;
 
 /**
- *
- * @author Thomas
+
+ @author Thomas
  */
 public class TypeOfSportMapper
         implements ITypeOfSportMapper
@@ -64,7 +64,8 @@ public class TypeOfSportMapper
     }
 
     @Override
-    public List<ITypeOfSport> getAll() throws NotFoundException
+    public List<ITypeOfSport> getAll()
+            throws NotFoundException
     {
         try
         {
@@ -136,6 +137,12 @@ public class TypeOfSportMapper
     @Override
     public ITypeOfSport getByName(String name)
     {
-        return TypeOfSport.copy(DomainFacade.getInstance().getByName(domain.classes.TypeOfSport.class,name));
+        return TypeOfSport.copy(DomainFacade.getInstance().getByName(domain.classes.TypeOfSport.class, name));
+    }
+
+    @Override
+    public ITypeOfSport getNew()
+    {
+        return new TypeOfSport();
     }
 }

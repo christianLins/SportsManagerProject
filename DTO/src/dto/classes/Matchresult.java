@@ -12,7 +12,11 @@ public class Matchresult
     private double pointsHometeam;
     private double pointsForeignteam;
 
-     Matchresult(int id)
+    public Matchresult()
+    {
+    }
+
+    Matchresult(int id)
     {
         this.id = id;
     }
@@ -37,10 +41,6 @@ public class Matchresult
         }
 
         return a;
-    }
-
-    Matchresult()
-    {
     }
 
     @Override

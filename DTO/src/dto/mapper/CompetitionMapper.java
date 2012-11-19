@@ -12,8 +12,8 @@ import java.util.*;
 import java.util.logging.*;
 
 /**
- *
- * @author Lins Christian (christian.lins87@gmail.com)
+
+ @author Lins Christian (christian.lins87@gmail.com)
  */
 public class CompetitionMapper
         implements IMapper<ICompetition>
@@ -66,7 +66,8 @@ public class CompetitionMapper
     }
 
     @Override
-    public List<ICompetition> getAll() throws NotFoundException
+    public List<ICompetition> getAll()
+            throws NotFoundException
     {
         try
         {
@@ -144,5 +145,11 @@ public class CompetitionMapper
         competition.setTeamList(teamList);
 
         return competition;
+    }
+
+    @Override
+    public ICompetition getNew()
+    {
+        return new Competition();
     }
 }

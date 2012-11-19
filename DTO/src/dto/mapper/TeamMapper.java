@@ -138,4 +138,10 @@ public class TeamMapper
         team.setMatchList(m);
         return team;
     }
+
+    @Override
+    public ITeam getNew()
+    {
+        return new Team();
+    }
 }

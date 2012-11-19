@@ -15,7 +15,7 @@ public class Team
     private Integer league;
     private static HashMap<domain.contract.ITeam, Team> teams = new HashMap<>();
 
-     Team()
+    public Team()
     {
     }
 

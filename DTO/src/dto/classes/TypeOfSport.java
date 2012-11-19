@@ -1,8 +1,8 @@
 package dto.classes;
 
+import dto.contract.ITypeOfSport;
 import java.io.Serializable;
 import java.util.*;
-import dto.contract.ITypeOfSport;
 
 public class TypeOfSport
         implements Serializable, ITypeOfSport
@@ -12,6 +12,10 @@ public class TypeOfSport
     private String description;
     private List<Integer> playerList = new LinkedList<>();
     private List<Integer> competitions = new LinkedList<>();
+
+    public TypeOfSport()
+    {
+    }
 
     TypeOfSport(int id)
     {
@@ -32,16 +36,16 @@ public class TypeOfSport
             a = new TypeOfSport(typeOfSport.getId());
             a.setName(typeOfSport.getName());
             a.setDescription(typeOfSport.getDescription());
-            
+
             List<Integer> pls = new LinkedList<>();
-            for(domain.contract.IPlayer p : typeOfSport.getPlayerList())
+            for (domain.contract.IPlayer p : typeOfSport.getPlayerList())
             {
                 pls.add(p.getId());
             }
             a.setPlayerList(pls);
-            
+
             List<Integer> comps = new LinkedList<>();
-            for(domain.contract.ICompetition c : typeOfSport.getCompetitions())
+            for (domain.contract.ICompetition c : typeOfSport.getCompetitions())
             {
                 comps.add(c.getId());
             }
@@ -51,10 +55,6 @@ public class TypeOfSport
         }
 
         return a;
-    }
-
-    TypeOfSport()
-    {
     }
 
     @Override
@@ -109,5 +109,11 @@ public class TypeOfSport
     public void setCompetitions(List<Integer> competitions)
     {
         this.competitions = competitions;
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.name;
     }
 }

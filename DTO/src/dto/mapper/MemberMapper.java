@@ -4,12 +4,12 @@
  */
 package dto.mapper;
 
-import java.util.*;
-import java.util.logging.*;
 import domain.*;
 import dto.classes.Member;
 import dto.contract.IMember;
 import dto.mapper.contract.*;
+import java.util.*;
+import java.util.logging.*;
 
 /**
  *
@@ -157,5 +157,11 @@ public class MemberMapper
         member.setRoleList(roleList);
 
         return member;
+    }
+
+    @Override
+    public IMember getNew()
+    {
+       return new Member();
     }
 }

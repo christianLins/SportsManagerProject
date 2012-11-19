@@ -120,4 +120,10 @@ public class RoleMapper
             DepartmentHeadMapper.getInstance().delete((IDepartmentHead) value);
         }
     }
+
+    @Override
+    public IRole getNew()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

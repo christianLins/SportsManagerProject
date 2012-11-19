@@ -9,11 +9,7 @@ public class Member
 {
     private static HashMap<domain.contract.IMember, Member> members = new HashMap<>();
 
-    Member()
-    {
-        
-    }
-    
+   
     public static IMember copy(domain.contract.IMember member)
     {
         Member a;

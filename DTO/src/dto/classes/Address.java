@@ -15,7 +15,7 @@ public class Address
     private int country;
     private static HashMap<domain.contract.IAddress, Address> addresses = new HashMap<>();
 
-     Address(int id)
+    Address(int id)
     {
         this.id = id;
     }
@@ -44,7 +44,7 @@ public class Address
         return a;
     }
 
-    Address()
+    public Address()
     {
     }
 

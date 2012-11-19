@@ -12,7 +12,7 @@ public class ClubTeam
     private List<Integer> trainerList = new LinkedList<>();
     private List<Integer> playerList = new LinkedList<>();
 
-     ClubTeam()
+   public  ClubTeam()
     {
         super();
     }

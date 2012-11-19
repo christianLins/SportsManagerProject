@@ -139,4 +139,10 @@ public class PlayerMapper
             Logger.getLogger(PlayerMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    @Override
+    public IPlayer getNew()
+    {
+        return new Player();
+    }
 }

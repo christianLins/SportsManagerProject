@@ -14,11 +14,11 @@ public class Department
     private List<Integer> clubTeamList = new LinkedList<>();
     private List<Integer> typeOfSportList = new LinkedList<>();
 
-     Department()
+   public Department()
     {
     }
 
-     Department(int id)
+    Department(int id)
     {
         this.id = id;
     }
@@ -118,5 +118,11 @@ public class Department
     public void setDepartmentHead(Integer departmentHead)
     {
         this.departmentHead = departmentHead;
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.name;
     }
 }

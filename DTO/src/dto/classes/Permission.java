@@ -12,7 +12,11 @@ public class Permission
     private String description;
     private static HashMap<domain.contract.IPermission, Permission> competitions = new HashMap<>();
 
-     Permission(int id)
+    public Permission()
+    {
+    }
+
+    Permission(int id)
     {
         this.id = id;
     }

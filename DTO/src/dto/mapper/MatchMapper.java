@@ -4,16 +4,16 @@
  */
 package dto.mapper;
 
-import java.util.*;
-import java.util.logging.*;
 import domain.*;
 import dto.classes.Match;
 import dto.contract.IMatch;
 import dto.mapper.contract.*;
+import java.util.*;
+import java.util.logging.*;
 
 /**
- *
- * @author Thomas
+
+ @author Thomas
  */
 public class MatchMapper
         implements IMapper<IMatch>
@@ -67,7 +67,8 @@ public class MatchMapper
     }
 
     @Override
-    public List<IMatch> getAll() throws NotFoundException
+    public List<IMatch> getAll()
+            throws NotFoundException
     {
         try
         {
@@ -132,5 +133,11 @@ public class MatchMapper
         match.setMatchresult(new MatchresultMapper().getDomainById(value.getMatchresult().getId()));
 
         return match;
+    }
+
+    @Override
+    public IMatch getNew()
+    {
+        return new Match();
     }
 }

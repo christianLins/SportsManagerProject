@@ -12,8 +12,8 @@ import dto.contract.IClubTeam;
 import dto.mapper.contract.*;
 
 /**
- *
- * @author Thomas
+
+ @author Thomas
  */
 public class ClubTeamMapper
         implements IMapper<IClubTeam>
@@ -66,7 +66,8 @@ public class ClubTeamMapper
     }
 
     @Override
-    public List<IClubTeam> getAll() throws NotFoundException
+    public List<IClubTeam> getAll()
+            throws NotFoundException
     {
         try
         {
@@ -145,5 +146,11 @@ public class ClubTeamMapper
         clubTeam.setTrainerList(trainerList);
 
         return clubTeam;
+    }
+
+    @Override
+    public IClubTeam getNew()
+    {
+        return new ClubTeam();
     }
 }

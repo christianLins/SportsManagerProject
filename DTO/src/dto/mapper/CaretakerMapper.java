@@ -5,8 +5,8 @@
 package dto.mapper;
 
 import domain.*;
-import dto.classes.Caretaker;
-import dto.contract.ICaretaker;
+import dto.classes.*;
+import dto.contract.*;
 import dto.mapper.contract.*;
 import java.util.*;
 import java.util.logging.*;
@@ -142,5 +142,11 @@ public class CaretakerMapper
         caretaker.setDescription(value.getDescription());
 
         return caretaker;
+    }
+
+    @Override
+    public ICaretaker getNew()
+    {
+        return new Caretaker();
     }
 }

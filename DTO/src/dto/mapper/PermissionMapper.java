@@ -12,8 +12,8 @@ import java.util.*;
 import java.util.logging.*;
 
 /**
- *
- * @author Thomas
+
+ @author Thomas
  */
 public class PermissionMapper
         implements IMapper<IPermission>
@@ -64,7 +64,8 @@ public class PermissionMapper
     }
 
     @Override
-    public List<IPermission> getAll() throws NotFoundException
+    public List<IPermission> getAll()
+            throws NotFoundException
     {
         try
         {
@@ -124,5 +125,11 @@ public class PermissionMapper
         permission.setName(value.getName());
 
         return permission;
+    }
+
+    @Override
+    public IPermission getNew()
+    {
+        return new Permission();
     }
 }

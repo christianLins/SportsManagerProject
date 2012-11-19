@@ -12,8 +12,8 @@ import dto.contract.ITrainer;
 import dto.mapper.contract.*;
 
 /**
- *
- * @author Thomas
+
+ @author Thomas
  */
 public class TrainerMapper
         implements IMapper<ITrainer>
@@ -64,7 +64,8 @@ public class TrainerMapper
     }
 
     @Override
-    public List<ITrainer> getAll() throws NotFoundException
+    public List<ITrainer> getAll()
+            throws NotFoundException
     {
         try
         {
@@ -149,5 +150,11 @@ public class TrainerMapper
         trainer.setPermisssionList(p);
 
         return trainer;
+    }
+
+    @Override
+    public ITrainer getNew()
+    {
+        return new Trainer();
     }
 }

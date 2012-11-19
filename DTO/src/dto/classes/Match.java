@@ -22,7 +22,7 @@ public class Match
     private Integer foreignteam;
     private Integer hometeam;
 
-    Match() {
+   public Match() {
     }
 
     Match(int id) {

@@ -6,8 +6,7 @@ package dto.mapper;
 
 import domain.*;
 import dto.classes.League;
-import dto.contract.ILeague;
-import dto.contract.ITypeOfSport;
+import dto.contract.*;
 import dto.mapper.contract.*;
 import java.util.*;
 import java.util.logging.*;
@@ -139,16 +138,23 @@ public class LeagueMapper
     }
 
     @Override
-    public ILeague getByName(String league, ITypeOfSport typeOfSport) throws NotFoundException
+    public ILeague getByName(String league, ITypeOfSport typeOfSport)
+            throws NotFoundException
     {
         try
         {
-            domain.classes.TypeOfSport sport = (domain.classes.TypeOfSport)TypeOfSportMapper.getInstance().getDomainById(typeOfSport.getId());
-            return League.copy(DomainFacade.getInstance().getLeageByNameAndTypeOfSport(sport,league));
+            domain.classes.TypeOfSport sport = (domain.classes.TypeOfSport) TypeOfSportMapper.getInstance().getDomainById(typeOfSport.getId());
+            return League.copy(DomainFacade.getInstance().getLeageByNameAndTypeOfSport(sport, league));
         }
         catch (CouldNotFetchException | IdNotFoundException ex)
         {
             throw new NotFoundException(ex);
         }
+    }
+
+    @Override
+    public ILeague getNew()
+    {
+        return new League();
     }
 }

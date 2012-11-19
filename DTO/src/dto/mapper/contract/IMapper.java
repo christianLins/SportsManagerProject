@@ -12,6 +12,8 @@ import java.util.List;
  */
 public interface IMapper<T> extends Serializable
 {
+    T getNew();
+    
     T getById(Integer id) throws IdNotFoundException;
 
     List<T> getAll() throws NotFoundException;

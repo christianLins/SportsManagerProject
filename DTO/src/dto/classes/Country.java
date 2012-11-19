@@ -22,11 +22,11 @@ public class Country
     private String italiano;
     private String portugues;
 
-     Country()
+  public  Country()
     {
     }
 
-     Country(int id)
+    Country(int id)
     {
         this.id = id;
     }
@@ -65,7 +65,6 @@ public class Country
 
         return a;
     }
-
 
     @Override
     public String getName()
@@ -173,5 +172,11 @@ public class Country
     public void setPortugues(String portugues)
     {
         this.portugues = portugues;
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.getDeutsch();
     }
 }

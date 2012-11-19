@@ -139,4 +139,10 @@ public class DepartmentHeadMapper
 
         return departmentHead;
     }
+
+    @Override
+    public IDepartmentHead getNew()
+    {
+        return new DepartmentHead();
+    }
 }

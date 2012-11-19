@@ -14,6 +14,13 @@ public class Admin
         extends Role
         implements IAdmin
 {
+    public Admin()
+    {
+        super();
+
+        this.setName("Admin");
+        this.setDescription("Admin");
+    }
     private static HashMap<domain.contract.IAdmin, Admin> admins = new HashMap<>();
 
     public static Admin copy(domain.contract.IAdmin admin)

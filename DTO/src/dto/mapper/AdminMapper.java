@@ -126,4 +126,10 @@ public class AdminMapper
 
         return admin;
     }
+
+    @Override
+    public IAdmin getNew()
+    {
+        return new Admin();
+    }
 }
