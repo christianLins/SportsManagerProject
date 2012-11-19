@@ -137,42 +137,45 @@ public class MatchTest
     @Test
     public void matchresultTest()
     {
-        Match a = new Match();
-
-        Integer expected = 2;
-        Integer actual;
-
-        a.setMatchresult(expected);
-        actual = a.getMatchresult();
-
-        Assert.assertSame(expected, actual);
+        Assert.fail();
+//        Match a = new Match();
+//
+//        Integer expected = 2;
+//        Integer actual;
+//
+//        a.setMatchresult(expected);
+//        actual = a.getMatchresult();
+//
+//        Assert.assertSame(expected, actual);
     }
 
     @Test
     public void foreignteamTest()
     {
-        Match a = new Match();
-
-        Integer expected = 1;
-        Integer actual;
-
-        a.setForeignteam(expected);
-        actual = a.getForeignteam();
-
-        Assert.assertSame(expected, actual);
+        Assert.fail();
+//     Match a = new Match();
+//
+//        Integer expected = 1;
+//        Integer actual;
+//
+//        a.setForeignteam(expected);
+//        actual = a.getForeignteam();
+//
+//        Assert.assertSame(expected, actual);
     }
 
     @Test
     public void hometeamTest()
     {
-        Match a = new Match();
-
-        Integer expected = 1;
-        Integer actual;
-
-        a.setHometeam(expected);
-        actual = a.getHometeam();
-
-        Assert.assertSame(expected, actual);
+        Assert.fail();
+//        Match a = new Match();
+//
+//        Integer expected = 1;
+//        Integer actual;
+//
+//        a.setHometeam(expected);
+//        actual = a.getHometeam();
+//
+//        Assert.assertSame(expected, actual);
     }
 }
