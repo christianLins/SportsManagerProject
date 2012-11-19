@@ -149,7 +149,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `SportClubManagement`.`Role` ;
 
 CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Role` (
-  `idRole` INT NOT NULL ,
+  `idRole` INT NOT NULL AUTO_INCREMENT ,
   `Name` VARCHAR(45) NOT NULL ,
   `Description` VARCHAR(45) NULL ,
   PRIMARY KEY (`idRole`) )
