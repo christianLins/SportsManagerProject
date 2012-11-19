@@ -1,13 +1,10 @@
 package presentation.forms.member;
 
 import contract.ISearchChangeMember;
-import dto.classes.Admin;
+import dto.classes.*;
 import dto.contract.*;
-import dto.mapper.*;
 import java.awt.event.ActionEvent;
-import java.rmi.*;
 import java.util.*;
-import java.util.logging.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.TableModel;
@@ -33,10 +30,9 @@ public class SearchMemberForm
     IAddress address;
     ICountry country;
     IClubTeam clubTeam;
-    private SelectSportsHelper selectSportsHelper;
     private List<ITypeOfSport> typeOfSports;
-    private List<String> availableSports;
-    private List<String> selectedSports;
+    private List<ITypeOfSport> availableSports;
+    private List<ITypeOfSport> selectedSports;
 
     /**
      Creates new form SearchMemb
@@ -280,7 +276,7 @@ public class SearchMemberForm
 
         txtFieldSports.setEnabled(false);
 
-        btnAddSport.setText("Add more sports");
+        btnAddSport.setText("Select Sports");
         btnAddSport.setInheritsPopupMenu(true);
         btnAddSport.addActionListener(new java.awt.event.ActionListener()
         {
@@ -540,14 +536,8 @@ public class SearchMemberForm
                     tableModel.setValueAt(tmpMember.getPrename(), row, 1);
                     tableModel.setValueAt(tmpMember.getLastname(), row, 2);
                     tableModel.setValueAt(tmpMember.getDateOfBirth().toString(), row, 3);
-                    if (tmpMember.getGender() == true)
-                    {
-                        tableModel.setValueAt("female", row, 4);
-                    }
-                    else
-                    {
-                        tableModel.setValueAt("male", row, 4);
-                    }
+
+                    tableModel.setValueAt(tmpMember.getGender() ? "female" : "male", row, 4);
                 }
                 tabMember.setModel(tableModel);
             }
@@ -556,22 +546,22 @@ public class SearchMemberForm
 
     private void tableMemberValueChanged(ListSelectionEvent e)
     {
-        final int row = tabMember.getSelectedRow();
-        Integer id = (Integer) tabMember.getModel().getValueAt(row, 1);
+        Integer id = (Integer) tabMember.getModel().getValueAt(tabMember.getSelectedRow(), 1);
 
-        if (id != null)
+        if (id == null)
         {
-            member = controller.getMember(id);
-            updateDetailPane();
+            return;
         }
+
+        member = controller.getMember(id);
+        updateDetailPane();
     }
 
     private void btnApplyChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyChangeActionPerformed
-        if (dataExists != false)
+        if (dataExists)
         {
             updateMemberData();
             //TODO: Throw exception in case of an error !!!!!
-
         }
         else
         {
@@ -584,17 +574,7 @@ public class SearchMemberForm
     }//GEN-LAST:event_radioMaleActionPerformed
 
     private void comboDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboDepartmentActionPerformed
-        String name = comboDepartment.getSelectedItem().toString();
-        List<IDepartment> depList = controller.getDepartments();
-
-        for (int i = 0; i < depList.size(); i++)
-        {
-            if (depList.get(i).getName().equals(name))
-            {
-                department = depList.get(i);
-            }
-        }
-        setAvailableSports(department.getTypeOfSportList());
+        setAvailableSports(((IDepartment) comboDepartment.getSelectedItem()).getTypeOfSportList());
         comboTeam.setModel(new DefaultComboBoxModel(getComboTeam()));
     }//GEN-LAST:event_comboDepartmentActionPerformed
 
@@ -618,7 +598,7 @@ public class SearchMemberForm
         if (radioTrainer.isSelected() || radioPlayer.isSelected())
         {
             //open new frame which enables selection of more sports
-            selectSportsHelper = new SelectSportsHelper(availableSports, this);
+            SelectSportsHelper selectSportsHelper = new SelectSportsHelper(availableSports, selectedSports, this);
         }
         else
         {
@@ -627,61 +607,17 @@ public class SearchMemberForm
     }//GEN-LAST:event_btnAddSportActionPerformed
 
     @Override
-    public void setTxtFieldSports(List<String> selection)
+    public void setTxtFieldSports(List<ITypeOfSport> selection)
     {
-
-        //add existing entries to the selected values
-        if (!selectedSports.isEmpty())
-        {
-
-            for (String s1 : selectedSports)
-            {
-                for (String s2 : selection)
-                {
-                    if (s1.equals(s2))
-                    {
-                        selection.remove(s2);
-                    }
-                }
-            }
-        }
-        Iterator it = selection.iterator();
-        while (it.hasNext())
-        {
-            selectedSports.add(it.next().toString());
-        }
+        this.selectedSports = selection;
 
         StringBuilder sb = new StringBuilder(selectedSports.size());
-        for (String s : selectedSports)
+        for (ITypeOfSport s : selectedSports)
         {
             sb.append(s);
             sb.append(", ");
         }
-        sb.delete((sb.length() - 1), sb.length());    //TODO check if this works 
-
-        txtFieldSports.setText(sb.toString());
-
-    }
-
-    private void setTxtFieldSports()
-    {
-        selectedSports = new LinkedList<>();
-        selectedSports.add(availableSports.get(0));     // only for TESTING
-        // TODO make this work properly
-
-        String[] tmpArray = new String[selectedSports.size()];
-        for (int i = 0; i < tmpArray.length; i++)
-        {
-            tmpArray[i] = selectedSports.get(i);
-        }
-
-        StringBuilder sb = new StringBuilder(selectedSports.size());
-        for (String s : selectedSports)
-        {
-            sb.append(s);
-            sb.append(", ");
-        }
-        sb.delete((sb.length() - 1), sb.length());    //TODO check if this works 
+        sb.delete(sb.length() - 2, sb.length());    //TODO check if this works 
 
         txtFieldSports.setText(sb.toString());
     }
@@ -693,7 +629,7 @@ public class SearchMemberForm
 
         for (ITypeOfSport s : typeOfSports)
         {
-            availableSports.add(s.getName());
+            availableSports.add(s);
         }
     }
 
@@ -719,7 +655,7 @@ public class SearchMemberForm
             {
                 if ((tos.getId()).equals(i))
                 {
-                    selectedSports.add(tos.getName());
+                    selectedSports.add(tos);
                 }
             }
         }
@@ -731,9 +667,9 @@ public class SearchMemberForm
 
         for (ITypeOfSport tos : typeOfSports)
         {
-            for (String s : selectedSports)
+            for (ITypeOfSport s : selectedSports)
             {
-                if (s.equals(tos.getName()))
+                if (s.equals(tos))
                 {
                     tosIDs.add(tos.getId());
                 }
@@ -744,7 +680,6 @@ public class SearchMemberForm
 
     private void updateDetailPane()
     {
-
         dataExists = true;
         department = controller.getDepartment(member.getId());
         setAvailableSports(department.getTypeOfSportList());
@@ -790,21 +725,20 @@ public class SearchMemberForm
             {
                 radioTrainer.setSelected(true);
                 setSelectedSports(role);
+
+                setTxtFieldSports(controller.getTypeOfSports(((ITrainer) role).getTypeOfSportList()));
             }
             else if (role instanceof IPlayer)
             {
                 radioPlayer.setSelected(true);
                 setSelectedSports(role);
+
+                setTxtFieldSports(controller.getTypeOfSports(((IPlayer) role).getTypeOfSportList()));
             }
         }
 
         comboDepartment.setModel(new DefaultComboBoxModel(controller.getDepartments().toArray()));
         comboDepartment.getModel().setSelectedItem(department);
-        // comboDepartment.setModel(new DefaultComboBoxModel(getComboDepartment()));
-        // comboDepartment.getModel().setSelectedItem(department.getName());
-
-        //TODO add type of sports to member        
-        setTxtFieldSports();
 
         comboTeam.setModel(new DefaultComboBoxModel(getComboTeam()));
 
@@ -835,30 +769,23 @@ public class SearchMemberForm
         //get selected roles
         if (adminPermission)
         {
-            try
+            if (radioAdmin.isSelected())
             {
-                if (radioAdmin.isSelected())
-                {
-                    roles.add(DtoFactory.getAdminMapper().getNew());
-                }
-                if (radioCaretaker.isSelected())
-                {
-                    roles.add(DtoFactory.getCaretakerMapper().getNew());
-                }
-                if (radioDepHead.isSelected())
-                {
-                    roles.add(DtoFactory.getDepartmentHeadMapper().getNew());
-                }
-                if (radioTrainer.isSelected())
-                {
-                    ITrainer trainer = DtoFactory.getTrainerMapper().getNew();
-                    roles.add(trainer);
-                    trainer.setTypeOfSportList(getSelectedSports());
-                }
+                roles.add(new Admin());
             }
-            catch (RemoteException ex)
+            if (radioCaretaker.isSelected())
             {
-                Logger.getLogger(SearchMemberForm.class.getName()).log(Level.SEVERE, null, ex);
+                roles.add(new Caretaker());
+            }
+            if (radioDepHead.isSelected())
+            {
+                roles.add(new DepartmentHead());
+            }
+            if (radioTrainer.isSelected())
+            {
+                ITrainer trainer = new Trainer();
+                roles.add(trainer);
+                trainer.setTypeOfSportList(getSelectedSports());
             }
         }
 
@@ -876,72 +803,27 @@ public class SearchMemberForm
         }
         member.setRoleList(roleInt);
 
-
         //make sure clubTeam is set right
         setClubTeam(comboTeam.getSelectedItem().toString());
 
         controller.setNewMember(member, address, department, clubTeam, roles.get(roles.size() - 1));
     }
 
-//    //List<IDepartment>
-//    private List<String> getDepartments()
-//    {
-//        List<IDepartment> depList = controller.getDepartments();
-//        Iterator<IDepartment> depIterator = depList.iterator();
-//        List<String> depNames = new LinkedList<>();
-//
-//        while (depIterator.hasNext())
-//        {
-//            depNames.add(depIterator.next().getName());
-//        }
-//
-//        return depNames;
-//    }
-//
-//    //private IDepartment[] getComboDepartment() {
-//    private String[] getComboDepartment()
-//    {
-//        if (department != null)
-//        {
-//            List<String> departmentNames = new LinkedList<>();
-//
-//            for (IDepartment d : controller.getDepartments())
-//            {
-//               departmentNames.add(d.getName()); 
-//            }
-//
-//            return departmentNames.toArray(new String[10]);
-//        }
-//        else
-//        {
-//            return new String[]
-//                    {
-//                        "Department"
-//                    };
-//        }
-//    }
     private String[] getComboTeam()
     {
+        List<String> result = new LinkedList<>();
+
         if (department != null)
         {
             List<Integer> cTeamInt = department.getClubTeamList();
-            List<IClubTeam> cTeamList = controller.getClubTeams(cTeamInt);
-            Iterator<IClubTeam> cTeamIterator = cTeamList.iterator();
-            String[] cTeamArray = new String[cTeamList.size()];
 
-            for (int i = 0; cTeamIterator.hasNext(); i++)
+            for (IClubTeam c : controller.getClubTeams(cTeamInt))
             {
-                cTeamArray[i] = cTeamIterator.next().getName();
+                result.add(c.getName());
             }
-            return cTeamArray;
         }
-        else
-        {
-            return new String[]
-                    {
-                        "Team"
-                    };
-        }
+
+        return result.toArray(new String[10]);
     }
 
     private void setClubTeam(String name)
@@ -966,7 +848,7 @@ public class SearchMemberForm
         }
         else
         {
-            radioFemale.setEnabled(radioMale.isSelected());
+            radioFemale.setEnabled(!radioMale.isSelected());
         }
     }
 

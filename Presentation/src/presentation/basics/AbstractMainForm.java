@@ -1,32 +1,39 @@
 package presentation.basics;
 
+import dto.contract.ITypeOfSport;
 import java.util.List;
 
 /**
- *
- * @author Lucia
- */
-public class AbstractMainForm extends AbstractForm {
 
-    public AbstractMainForm() {
+ @author Lucia
+ */
+public class AbstractMainForm
+        extends AbstractForm
+{
+    public AbstractMainForm()
+    {
         this(null);
     }
 
-    public AbstractMainForm(AbstractForm parent) {
+    public AbstractMainForm(AbstractForm parent)
+    {
         super(parent);
         //initControls(891, 612);
     }
 
-    public AbstractMainForm(AbstractForm parent, int x, int y) {
+    public AbstractMainForm(AbstractForm parent, int x, int y)
+    {
         super(parent);
         //initControls(x, y);
     }
 
-    private void initControls(int x, int y) {
-       // setSize(x, y);
+    private void initControls(int x, int y)
+    {
+        // setSize(x, y);
     }
 
-    public void setTxtFieldSports(List<String> selected) {
+    public void setTxtFieldSports(List<ITypeOfSport> selected)
+    {
         // handle in code
     }
 }
