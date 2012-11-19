@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.*;
  * @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
-@Table(name = "Role")
+@Table(name = "MemberRole")
 @XmlRootElement
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Role
@@ -20,18 +20,18 @@ public class Role
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "idRole")
+    @Column(name = "id")
     private Integer id;
     @Column(name = "Name")
     private String name;
-    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "Role_has_Permission", joinColumns =
     {
-        @JoinColumn(name = "Role_idRole",referencedColumnName="idRole")
+        @JoinColumn(name = "Role_idRole",referencedColumnName="id")
     }, inverseJoinColumns =
     {
-        @JoinColumn(name = "Permission_idPermission",referencedColumnName="idPermission")
+        @JoinColumn(name = "Permission_idPermission",referencedColumnName="id")
     })
+    @ManyToMany(fetch= FetchType.LAZY)
     private List<Permission> permissionList;
     @ManyToMany(mappedBy = "roleList")
     private List<Member> members;

@@ -20,7 +20,7 @@ public class League
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idLeague")
+    @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
     @Column(name = "Name")

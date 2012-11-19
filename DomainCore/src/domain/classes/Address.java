@@ -21,7 +21,7 @@ public class Address
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idAddress")
+    @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
     @Column(name = "Street")
@@ -37,7 +37,7 @@ public class Address
     private int postalCode;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "address")
     private List<Member> member1List;
-    @JoinColumn(name = "Country", referencedColumnName = "idCountry")
+    @JoinColumn(name = "Country", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Country country;
 

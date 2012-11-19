@@ -24,7 +24,7 @@ public class Team
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idTeam")
+    @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
     @Column(name = "Name")
@@ -37,7 +37,7 @@ public class Team
     private List<Match> matchList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hometeam")
     private List<Match> matchList1;
-    @JoinColumn(name = "League", referencedColumnName = "idLeague")
+    @JoinColumn(name = "League", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private League league;
 

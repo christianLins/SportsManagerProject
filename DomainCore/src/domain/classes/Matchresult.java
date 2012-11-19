@@ -20,7 +20,7 @@ public class Matchresult
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idMatchresult")
+    @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
     @Column(name = "PointsHometeam")

@@ -22,20 +22,19 @@ public class ClubTeam
     private List<Department> departmentList;
     @JoinTable(name = "Team_has_Trainer", joinColumns =
     {
-        @JoinColumn(name = "Team", referencedColumnName = "idTeam")
+        @JoinColumn(name = "Team", referencedColumnName = "id")
     }, inverseJoinColumns =
     {
-        @JoinColumn(name = "Trainer", referencedColumnName = "idRole")
+        @JoinColumn(name = "Trainer", referencedColumnName = "id")
     })
     @ManyToMany
     private List<Trainer> trainerList;
-    //rebuild table to member connection not role connection
     @JoinTable(name = "Team_Has_Player", joinColumns =
     {
-        @JoinColumn(name = "Team", referencedColumnName = "idTeam")
+        @JoinColumn(name = "Team", referencedColumnName = "id")
     }, inverseJoinColumns =
     {
-        @JoinColumn(name = "Player", referencedColumnName = "idRole")
+        @JoinColumn(name = "Player", referencedColumnName = "id")
     })
     @ManyToMany
     private List<Player> players;

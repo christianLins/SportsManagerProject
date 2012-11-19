@@ -10,7 +10,7 @@ import javax.persistence.Table;
  * @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
-@Table(name = "Admin")
+@Table(name = "Administrator")
 public class Admin extends Role implements IAdmin, Serializable {
     private static final long serialVersionUID = 1L;
 

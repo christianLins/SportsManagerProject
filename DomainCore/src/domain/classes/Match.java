@@ -18,7 +18,7 @@ public class Match implements Serializable, IMatch {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idMatch")
+    @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
     @Column(name = "DateFrom")
@@ -27,16 +27,16 @@ public class Match implements Serializable, IMatch {
     @Column(name = "DateTo")
     @Temporal(TemporalType.DATE)
     private Date dateTo;
-    @JoinColumn(name = "Competition", referencedColumnName = "idCompetition")
+    @JoinColumn(name = "Competition", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Competition competition;
-    @JoinColumn(name = "Matchresult", referencedColumnName = "idMatchresult")
+    @JoinColumn(name = "Matchresult", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Matchresult matchresult;
-    @JoinColumn(name = "Foreignteam", referencedColumnName = "idTeam")
+    @JoinColumn(name = "Foreignteam", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Team foreignteam;
-    @JoinColumn(name = "Hometeam", referencedColumnName = "idTeam")
+    @JoinColumn(name = "Hometeam", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Team hometeam;
 

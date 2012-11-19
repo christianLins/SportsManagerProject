@@ -20,7 +20,7 @@ public class Member
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idMember")
+    @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
     @Column(name = "Prename")
@@ -47,20 +47,20 @@ public class Member
     private String emailAddress;
     @Column(name = "Gender")
     private Boolean gender;
-    @JoinColumn(name = "Nationality", referencedColumnName = "idCountry")
+    @JoinColumn(name = "Nationality", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Country nationality;
-    @JoinColumn(name = "Address", referencedColumnName = "idAddress")
+    @JoinColumn(name = "Address", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Address address;
     @JoinTable(name="Member_has_Role",joinColumns=
     {
-        @JoinColumn(name="Member_idMember",referencedColumnName="idMember")
+        @JoinColumn(name="Member_idMember",referencedColumnName="id")
     },inverseJoinColumns=
     {
-        @JoinColumn(name="Role_idRole",referencedColumnName="idRole")
+        @JoinColumn(name="Role_idRole",referencedColumnName="id")
     })
-    @ManyToMany
+    @ManyToMany(fetch= FetchType.LAZY)
     private List<Role> roleList;
 
     public Member()

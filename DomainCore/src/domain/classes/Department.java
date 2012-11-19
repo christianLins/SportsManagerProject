@@ -16,15 +16,15 @@ import domain.contract.*;
 public class Department
         implements Serializable, IDepartment
 {
-    @JoinColumn(name = "DepartmentHead", referencedColumnName = "idRole")
+    @JoinColumn(name = "DepartmentHead", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private DepartmentHead departmentHead;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idDepartment")
-    private Integer idDepartment;
+    @Column(name = "id")
+    private Integer id;
     @Basic(optional = false)
     @Column(name = "Name")
     private String name;
@@ -32,19 +32,19 @@ public class Department
     private String description;
     @JoinTable(name = "Department_has_Team", joinColumns =
     {
-        @JoinColumn(name = "Department", referencedColumnName = "idDepartment")
+        @JoinColumn(name = "Department", referencedColumnName = "id")
     }, inverseJoinColumns =
     {
-        @JoinColumn(name = "Team", referencedColumnName = "idTeam")
+        @JoinColumn(name = "Team", referencedColumnName = "id")
     })
     @ManyToMany
     private List<ClubTeam> clubTeamList;
     @JoinTable(name = "Department_has_TypeOfSport", joinColumns =
     {
-        @JoinColumn(name = "Department", referencedColumnName = "idDepartment")
+        @JoinColumn(name = "Department", referencedColumnName = "id")
     }, inverseJoinColumns =
     {
-        @JoinColumn(name = "TypeOfSport", referencedColumnName = "idTypeOfSport")
+        @JoinColumn(name = "TypeOfSport", referencedColumnName = "id")
     })
     @ManyToMany
     private List<TypeOfSport> typeOfSports;
@@ -55,12 +55,12 @@ public class Department
 
     public Department(Integer idDepartment)
     {
-        this.idDepartment = idDepartment;
+        this.id = idDepartment;
     }
 
     public Department(Integer idDepartment, String name)
     {
-        this.idDepartment = idDepartment;
+        this.id = idDepartment;
         this.name = name;
     }
 
@@ -84,14 +84,15 @@ public class Department
         }
     }
 
+    @Override
     public Integer getId()
     {
-        return idDepartment;
+        return id;
     }
 
     public void setId(Integer idDepartment)
     {
-        this.idDepartment = idDepartment;
+        this.id = idDepartment;
     }
 
     @Override
@@ -176,7 +177,7 @@ public class Department
     public int hashCode()
     {
         int hash = 0;
-        hash += (idDepartment != null ? idDepartment.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -189,7 +190,7 @@ public class Department
             return false;
         }
         Department other = (Department) object;
-        if ((this.idDepartment == null && other.idDepartment != null) || (this.idDepartment != null && !this.idDepartment.equals(other.idDepartment)))
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)))
         {
             return false;
         }
@@ -199,7 +200,7 @@ public class Department
     @Override
     public String toString()
     {
-        return "sportsclubmanager.domain.classes.Department[ idDepartment=" + idDepartment + " ]";
+        return "sportsclubmanager.domain.classes.Department[ idDepartment=" + id + " ]";
     }
 
     @Override

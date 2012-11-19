@@ -12,11 +12,11 @@ USE `SportClubManagement` ;
 DROP TABLE IF EXISTS `SportClubManagement`.`Department` ;
 
 CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Department` (
-  `idDepartment` INT NOT NULL AUTO_INCREMENT ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `Name` VARCHAR(45) NOT NULL ,
   `Description` VARCHAR(45) NULL ,
-  PRIMARY KEY (`idDepartment`) ,
-  UNIQUE INDEX `idDepartment_UNIQUE` (`idDepartment` ASC) )
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `idDepartment_UNIQUE` (`id` ASC) )
 ENGINE = InnoDB;
 
 
@@ -26,11 +26,11 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `SportClubManagement`.`TypeOfSport` ;
 
 CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`TypeOfSport` (
-  `idTypeOfSport` INT NOT NULL AUTO_INCREMENT ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `Name` VARCHAR(45) NOT NULL ,
   `Description` VARCHAR(45) NULL ,
-  PRIMARY KEY (`idTypeOfSport`) ,
-  UNIQUE INDEX `idTypeOfSport_UNIQUE` (`idTypeOfSport` ASC) )
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `idTypeOfSport_UNIQUE` (`id` ASC) )
 ENGINE = InnoDB;
 
 
@@ -40,21 +40,21 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `SportClubManagement`.`Department_has_TypeOfSport` ;
 
 CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Department_has_TypeOfSport` (
-  `idDepartmentTypeOfSport` INT NOT NULL AUTO_INCREMENT ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `TypeOfSport` INT NOT NULL ,
   `Department_idDepartment` INT NOT NULL ,
-  PRIMARY KEY (`idDepartmentTypeOfSport`) ,
-  UNIQUE INDEX `idDepartmentTypeOfSport_UNIQUE` (`idDepartmentTypeOfSport` ASC) ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `idDepartmentTypeOfSport_UNIQUE` (`id` ASC) ,
   INDEX `fk_DepartmentTypeOfSport_TypeOfSport1_idx` (`TypeOfSport` ASC) ,
   INDEX `fk_DepartmentTypeOfSport_Department1_idx` (`Department_idDepartment` ASC) ,
   CONSTRAINT `fk_DepartmentTypeOfSport_TypeOfSport1`
     FOREIGN KEY (`TypeOfSport` )
-    REFERENCES `SportClubManagement`.`TypeOfSport` (`idTypeOfSport` )
+    REFERENCES `SportClubManagement`.`TypeOfSport` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_DepartmentTypeOfSport_Department1`
     FOREIGN KEY (`Department_idDepartment` )
-    REFERENCES `SportClubManagement`.`Department` (`idDepartment` )
+    REFERENCES `SportClubManagement`.`Department` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -66,16 +66,16 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `SportClubManagement`.`League` ;
 
 CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`League` (
-  `idLeague` INT NOT NULL AUTO_INCREMENT ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `Name` VARCHAR(45) NOT NULL ,
   `Description` VARCHAR(45) NULL ,
   `TypeOfSport_idTypeOfSport` INT NOT NULL ,
-  PRIMARY KEY (`idLeague`) ,
-  UNIQUE INDEX `idLeague_UNIQUE` (`idLeague` ASC) ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `idLeague_UNIQUE` (`id` ASC) ,
   INDEX `fk_League_TypeOfSport1_idx` (`TypeOfSport_idTypeOfSport` ASC) ,
   CONSTRAINT `fk_League_TypeOfSport1`
     FOREIGN KEY (`TypeOfSport_idTypeOfSport` )
-    REFERENCES `SportClubManagement`.`TypeOfSport` (`idTypeOfSport` )
+    REFERENCES `SportClubManagement`.`TypeOfSport` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -87,16 +87,16 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `SportClubManagement`.`Team` ;
 
 CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Team` (
-  `idTeam` INT NOT NULL AUTO_INCREMENT ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `Name` VARCHAR(45) NOT NULL ,
   `Description` VARCHAR(45) NULL ,
   `League_idLeague` INT NOT NULL ,
-  PRIMARY KEY (`idTeam`) ,
-  UNIQUE INDEX `idTeam_UNIQUE` (`idTeam` ASC) ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `idTeam_UNIQUE` (`id` ASC) ,
   INDEX `fk_Team_League1_idx` (`League_idLeague` ASC) ,
   CONSTRAINT `fk_Team_League1`
     FOREIGN KEY (`League_idLeague` )
-    REFERENCES `SportClubManagement`.`League` (`idLeague` )
+    REFERENCES `SportClubManagement`.`League` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -108,12 +108,12 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `SportClubManagement`.`ClubTeam` ;
 
 CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`ClubTeam` (
-  `idTeam` INT NOT NULL ,
-  INDEX `fk_ClubTeam_Team1_idx` (`idTeam` ASC) ,
-  PRIMARY KEY (`idTeam`) ,
+  `id` INT NOT NULL ,
+  INDEX `fk_ClubTeam_Team1_idx` (`id` ASC) ,
+  PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_ClubTeam_Team1`
-    FOREIGN KEY (`idTeam` )
-    REFERENCES `SportClubManagement`.`Team` (`idTeam` )
+    FOREIGN KEY (`id` )
+    REFERENCES `SportClubManagement`.`Team` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -132,27 +132,27 @@ CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Department_has_Team` (
   INDEX `fk_DepartmentTeam_ClubTeam1_idx` (`Team` ASC) ,
   CONSTRAINT `fk_DepartmentTeam_Department1`
     FOREIGN KEY (`Department` )
-    REFERENCES `SportClubManagement`.`Department` (`idDepartment` )
+    REFERENCES `SportClubManagement`.`Department` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_DepartmentTeam_ClubTeam1`
     FOREIGN KEY (`Team` )
-    REFERENCES `SportClubManagement`.`ClubTeam` (`idTeam` )
+    REFERENCES `SportClubManagement`.`ClubTeam` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `SportClubManagement`.`Role`
+-- Table `SportClubManagement`.`MemberRole`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `SportClubManagement`.`Role` ;
+DROP TABLE IF EXISTS `SportClubManagement`.`MemberRole` ;
 
-CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Role` (
-  `idRole` INT NOT NULL AUTO_INCREMENT ,
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`MemberRole` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `Name` VARCHAR(45) NOT NULL ,
   `Description` VARCHAR(45) NULL ,
-  PRIMARY KEY (`idRole`) )
+  PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
 
@@ -162,12 +162,12 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `SportClubManagement`.`Trainer` ;
 
 CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Trainer` (
-  `idTrainer` INT NOT NULL ,
-  INDEX `fk_Trainer_Role1_idx` (`idTrainer` ASC) ,
-  PRIMARY KEY (`idTrainer`) ,
+  `id` INT NOT NULL ,
+  INDEX `fk_Trainer_Role1_idx` (`id` ASC) ,
+  PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_Trainer_Role10`
-    FOREIGN KEY (`idTrainer` )
-    REFERENCES `SportClubManagement`.`Role` (`idRole` )
+    FOREIGN KEY (`id` )
+    REFERENCES `SportClubManagement`.`MemberRole` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -186,12 +186,12 @@ CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Team_has_Trainer` (
   INDEX `fk_Team_has_Trainer_Trainer1_idx` (`Trainer` ASC) ,
   CONSTRAINT `fk_Team_has_Trainer_ClubTeam1`
     FOREIGN KEY (`Team` )
-    REFERENCES `SportClubManagement`.`ClubTeam` (`idTeam` )
+    REFERENCES `SportClubManagement`.`ClubTeam` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Team_has_Trainer_Trainer1`
     FOREIGN KEY (`Trainer` )
-    REFERENCES `SportClubManagement`.`Trainer` (`idTrainer` )
+    REFERENCES `SportClubManagement`.`Trainer` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -203,11 +203,11 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `SportClubManagement`.`Player` ;
 
 CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Player` (
-  `Role_idRole` INT NOT NULL ,
-  PRIMARY KEY (`Role_idRole`) ,
+  `id` INT NOT NULL ,
+  PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_Player_Role1`
-    FOREIGN KEY (`Role_idRole` )
-    REFERENCES `SportClubManagement`.`Role` (`idRole` )
+    FOREIGN KEY (`id` )
+    REFERENCES `SportClubManagement`.`MemberRole` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -226,12 +226,12 @@ CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Player_has_TypeOfSport` (
   INDEX `fk_Player_has_TypeOfSport_Player1_idx` (`Player_Role_idRole` ASC) ,
   CONSTRAINT `fk_Member_has_TypeOfSport_TypeOfSport1`
     FOREIGN KEY (`TypeOfSport_idTypeOfSport` )
-    REFERENCES `SportClubManagement`.`TypeOfSport` (`idTypeOfSport` )
+    REFERENCES `SportClubManagement`.`TypeOfSport` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Player_has_TypeOfSport_Player1`
     FOREIGN KEY (`Player_Role_idRole` )
-    REFERENCES `SportClubManagement`.`Player` (`Role_idRole` )
+    REFERENCES `SportClubManagement`.`Player` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -243,12 +243,12 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `SportClubManagement`.`Matchresult` ;
 
 CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Matchresult` (
-  `idMatchresult` INT NOT NULL AUTO_INCREMENT ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `PointsHometeam` DOUBLE NOT NULL ,
   `PointsForeignteam` DOUBLE NOT NULL ,
   `Final` TINYINT(1) NOT NULL ,
-  PRIMARY KEY (`idMatchresult`) ,
-  UNIQUE INDEX `idMatchresult_UNIQUE` (`idMatchresult` ASC) )
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `idMatchresult_UNIQUE` (`id` ASC) )
 ENGINE = InnoDB;
 
 
@@ -279,14 +279,14 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `SportClubManagement`.`Address` ;
 
 CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Address` (
-  `idAddress` INT NOT NULL AUTO_INCREMENT ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `Country` INT NOT NULL ,
   `Street` VARCHAR(45) NOT NULL ,
   `StreetNumber` INT NOT NULL ,
   `Village` VARCHAR(45) NOT NULL ,
   `PostalCode` INT NOT NULL ,
-  PRIMARY KEY (`idAddress`) ,
-  UNIQUE INDEX `idAddress_UNIQUE` (`idAddress` ASC) ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `idAddress_UNIQUE` (`id` ASC) ,
   INDEX `fk_Address_Country_idx` (`Country` ASC) ,
   CONSTRAINT `fk_Address_Country0`
     FOREIGN KEY (`Country` )
@@ -302,7 +302,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `SportClubManagement`.`Competition` ;
 
 CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Competition` (
-  `idCompetition` INT NOT NULL AUTO_INCREMENT ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `DateFrom` DATE NOT NULL ,
   `DateTo` DATE NULL ,
   `Payment` DOUBLE NULL ,
@@ -310,18 +310,18 @@ CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Competition` (
   `Name` VARCHAR(45) NOT NULL ,
   `Description` VARCHAR(45) NULL ,
   `Address` INT NOT NULL ,
-  PRIMARY KEY (`idCompetition`) ,
-  UNIQUE INDEX `idCompetition_UNIQUE` (`idCompetition` ASC) ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `idCompetition_UNIQUE` (`id` ASC) ,
   INDEX `fk_Competition_League1_idx` (`League_idLeague` ASC) ,
   INDEX `fk_Competition_Address1_idx` (`Address` ASC) ,
   CONSTRAINT `fk_Competition_League1`
     FOREIGN KEY (`League_idLeague` )
-    REFERENCES `SportClubManagement`.`League` (`idLeague` )
+    REFERENCES `SportClubManagement`.`League` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Competition_Address1`
     FOREIGN KEY (`Address` )
-    REFERENCES `SportClubManagement`.`Address` (`idAddress` )
+    REFERENCES `SportClubManagement`.`Address` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -333,37 +333,37 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `SportClubManagement`.`Match` ;
 
 CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Match` (
-  `idMatch` INT NOT NULL AUTO_INCREMENT ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `Hometeam` INT NOT NULL ,
   `Foreignteam` INT NOT NULL ,
   `Matchresult` INT NOT NULL ,
   `Competition` INT NOT NULL ,
   `DateFrom` DATE NOT NULL ,
   `DateTo` DATE NULL ,
-  PRIMARY KEY (`idMatch`) ,
-  UNIQUE INDEX `idMatch_UNIQUE` (`idMatch` ASC) ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `idMatch_UNIQUE` (`id` ASC) ,
   INDEX `fk_Match_Team1_idx` (`Hometeam` ASC) ,
   INDEX `fk_Match_Team2_idx` (`Foreignteam` ASC) ,
   INDEX `fk_Match_Matchresult1_idx` (`Matchresult` ASC) ,
   INDEX `fk_Match_Competition1_idx` (`Competition` ASC) ,
   CONSTRAINT `fk_Match_Team10`
     FOREIGN KEY (`Hometeam` )
-    REFERENCES `SportClubManagement`.`Team` (`idTeam` )
+    REFERENCES `SportClubManagement`.`Team` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Match_Team20`
     FOREIGN KEY (`Foreignteam` )
-    REFERENCES `SportClubManagement`.`Team` (`idTeam` )
+    REFERENCES `SportClubManagement`.`Team` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Match_Matchresult10`
     FOREIGN KEY (`Matchresult` )
-    REFERENCES `SportClubManagement`.`Matchresult` (`idMatchresult` )
+    REFERENCES `SportClubManagement`.`Matchresult` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Match_Competition10`
     FOREIGN KEY (`Competition` )
-    REFERENCES `SportClubManagement`.`Competition` (`idCompetition` )
+    REFERENCES `SportClubManagement`.`Competition` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -382,12 +382,12 @@ CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Competition_has_Team` (
   INDEX `fk_Competition_has_Team_Competition1_idx` (`Competition` ASC) ,
   CONSTRAINT `fk_Competition_has_Team_Competition10`
     FOREIGN KEY (`Competition` )
-    REFERENCES `SportClubManagement`.`Competition` (`idCompetition` )
+    REFERENCES `SportClubManagement`.`Competition` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Competition_has_Team_Team10`
     FOREIGN KEY (`Team` )
-    REFERENCES `SportClubManagement`.`Team` (`idTeam` )
+    REFERENCES `SportClubManagement`.`Team` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -399,12 +399,12 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `SportClubManagement`.`DepartmentHead` ;
 
 CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`DepartmentHead` (
-  `idDepartmentHead` INT NOT NULL ,
-  INDEX `fk_DepartmentHead_Role1_idx` (`idDepartmentHead` ASC) ,
-  PRIMARY KEY (`idDepartmentHead`) ,
+  `id` INT NOT NULL ,
+  INDEX `fk_DepartmentHead_Role1_idx` (`id` ASC) ,
+  PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_DepartmentHead_Role10`
-    FOREIGN KEY (`idDepartmentHead` )
-    REFERENCES `SportClubManagement`.`Role` (`idRole` )
+    FOREIGN KEY (`id` )
+    REFERENCES `SportClubManagement`.`MemberRole` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -416,7 +416,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `SportClubManagement`.`Member` ;
 
 CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Member` (
-  `idMember` INT NOT NULL AUTO_INCREMENT ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `Prename` VARCHAR(45) NOT NULL ,
   `Lastname` VARCHAR(45) NOT NULL ,
   `DateOfBirth` DATE NOT NULL ,
@@ -428,14 +428,14 @@ CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Member` (
   `EmailAddress` VARCHAR(45) NULL ,
   `Gender` TINYINT(1) NULL ,
   `Username` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`idMember`) ,
-  UNIQUE INDEX `idMember_UNIQUE` (`idMember` ASC) ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `idMember_UNIQUE` (`id` ASC) ,
   INDEX `fk_Member_Address1_idx` (`Address` ASC) ,
   INDEX `fk_Member_Country1_idx` (`Nationality` ASC) ,
   UNIQUE INDEX `Username_UNIQUE` (`Username` ASC) ,
   CONSTRAINT `fk_Member_Address10`
     FOREIGN KEY (`Address` )
-    REFERENCES `SportClubManagement`.`Address` (`idAddress` )
+    REFERENCES `SportClubManagement`.`Address` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Member_Country10`
@@ -452,10 +452,10 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `SportClubManagement`.`Permission` ;
 
 CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Permission` (
-  `idPermission` INT NOT NULL AUTO_INCREMENT ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `Name` VARCHAR(45) NOT NULL ,
   `Description` VARCHAR(45) NULL ,
-  PRIMARY KEY (`idPermission`) )
+  PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
 
@@ -472,12 +472,12 @@ CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Role_has_Permission` (
   INDEX `fk_Role_has_Permisssion_Role1_idx` (`Role_idRole` ASC) ,
   CONSTRAINT `fk_Role_has_Permisssion_Role1`
     FOREIGN KEY (`Role_idRole` )
-    REFERENCES `SportClubManagement`.`Role` (`idRole` )
+    REFERENCES `SportClubManagement`.`MemberRole` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Role_has_Permisssion_Permisssion1`
     FOREIGN KEY (`Permission_idPermission` )
-    REFERENCES `SportClubManagement`.`Permission` (`idPermission` )
+    REFERENCES `SportClubManagement`.`Permission` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -496,12 +496,12 @@ CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Member_has_Role` (
   INDEX `fk_Member_has_Role_Member1_idx` (`Member_idMember` ASC) ,
   CONSTRAINT `fk_Member_has_Role_Member1`
     FOREIGN KEY (`Member_idMember` )
-    REFERENCES `SportClubManagement`.`Member` (`idMember` )
+    REFERENCES `SportClubManagement`.`Member` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Member_has_Role_Role1`
     FOREIGN KEY (`Role_idRole` )
-    REFERENCES `SportClubManagement`.`Role` (`idRole` )
+    REFERENCES `SportClubManagement`.`MemberRole` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -520,12 +520,12 @@ CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`TypeOfSport_has_Trainer` (
   INDEX `fk_TypeOfSport_has_Trainer_TypeOfSport1_idx` (`TypeOfSport_idTypeOfSport` ASC) ,
   CONSTRAINT `fk_TypeOfSport_has_Trainer_TypeOfSport1`
     FOREIGN KEY (`TypeOfSport_idTypeOfSport` )
-    REFERENCES `SportClubManagement`.`TypeOfSport` (`idTypeOfSport` )
+    REFERENCES `SportClubManagement`.`TypeOfSport` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_TypeOfSport_has_Trainer_Trainer1`
     FOREIGN KEY (`Trainer_idTrainer` )
-    REFERENCES `SportClubManagement`.`Trainer` (`idTrainer` )
+    REFERENCES `SportClubManagement`.`Trainer` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -537,27 +537,27 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `SportClubManagement`.`Caretaker` ;
 
 CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Caretaker` (
-  `Role_idRole` INT NOT NULL ,
-  PRIMARY KEY (`Role_idRole`) ,
+  `id` INT NOT NULL ,
+  PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_Caretaker_Role1`
-    FOREIGN KEY (`Role_idRole` )
-    REFERENCES `SportClubManagement`.`Role` (`idRole` )
+    FOREIGN KEY (`id` )
+    REFERENCES `SportClubManagement`.`MemberRole` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `SportClubManagement`.`Admin`
+-- Table `SportClubManagement`.`Admininstrator`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `SportClubManagement`.`Admin` ;
+DROP TABLE IF EXISTS `SportClubManagement`.`Admininstrator` ;
 
-CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Admin` (
-  `Role_idRole` INT NOT NULL ,
-  PRIMARY KEY (`Role_idRole`) ,
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Admininstrator` (
+  `id` INT NOT NULL ,
+  PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_Admin_Role1`
-    FOREIGN KEY (`Role_idRole` )
-    REFERENCES `SportClubManagement`.`Role` (`idRole` )
+    FOREIGN KEY (`id` )
+    REFERENCES `SportClubManagement`.`MemberRole` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -576,12 +576,12 @@ CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Team_has_Player` (
   INDEX `fk_ClubTeam_has_Player_ClubTeam1_idx` (`ClubTeam_idTeam` ASC) ,
   CONSTRAINT `fk_ClubTeam_has_Player_ClubTeam1`
     FOREIGN KEY (`ClubTeam_idTeam` )
-    REFERENCES `SportClubManagement`.`ClubTeam` (`idTeam` )
+    REFERENCES `SportClubManagement`.`ClubTeam` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_ClubTeam_has_Player_Player1`
     FOREIGN KEY (`Role_idRole` )
-    REFERENCES `SportClubManagement`.`Player` (`Role_idRole` )
+    REFERENCES `SportClubManagement`.`Player` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

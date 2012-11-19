@@ -20,7 +20,7 @@ public class TypeOfSport
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idTypeOfSport")
+    @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
     @Column(name = "Name")
@@ -29,20 +29,20 @@ public class TypeOfSport
     private String description;
     @JoinTable(name = "Player_has_TypeOfSport", joinColumns =
     {
-        @JoinColumn(name = "TypeOfSport_idTypeOfSport")
+        @JoinColumn(name = "TypeOfSport_idTypeOfSport",referencedColumnName="id")
     }, inverseJoinColumns =
     {
-        @JoinColumn(name = "Player_Role_idRole")
+        @JoinColumn(name = "Player_Role_idRole",referencedColumnName="id")
     })
     @ManyToMany
     private List<Player> playerList;
     @JoinTable(name = "TypeOfSport_has_Trainer", joinColumns =
     {
-        @JoinColumn(name = "TypeOfSport_idTypeOfSport")
+        @JoinColumn(name = "TypeOfSport_idTypeOfSport",referencedColumnName="id")
     },
     inverseJoinColumns =
     {
-        @JoinColumn(name = "Trainer_idTrainer")
+        @JoinColumn(name = "Trainer_idTrainer",referencedColumnName="id")
     })
     @ManyToMany
     private List<Trainer> trainerList;

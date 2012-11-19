@@ -20,7 +20,7 @@ public class Competition
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idCompetition")
+    @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
     @Column(name = "DateFrom")
@@ -34,10 +34,10 @@ public class Competition
     private Double payment;
     @JoinTable(name = "Competition_has_Team", joinColumns =
     {
-        @JoinColumn(name = "Competition", referencedColumnName = "idCompetition")
+        @JoinColumn(name = "Competition", referencedColumnName = "id")
     }, inverseJoinColumns =
     {
-        @JoinColumn(name = "Team", referencedColumnName = "idTeam")
+        @JoinColumn(name = "Team", referencedColumnName = "id")
     })
     @ManyToMany
     private List<Team> teamList;
@@ -49,7 +49,7 @@ public class Competition
     private TypeOfSport sport;
     @Column(name = "Name")
     private String name;
-    @JoinColumn(name = "Address", referencedColumnName = "idAddress")
+    @JoinColumn(name = "Address", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Address address;
     @Column(name = "Description")
