@@ -15,7 +15,7 @@ public interface IDepartment
 {
     List<IClubTeam> getClubTeamList();
 
-    IDepartmentHead getDepartmentHead();
+    public IDepartmentHead getDepartmentHead();
 
     List<ITypeOfSport> getTypeOfSportList();
 
@@ -25,7 +25,7 @@ public interface IDepartment
 
     void setClubTeamList(List<IClubTeam> clubTeamList);
 
-    void setDepartmentHead(IDepartmentHead departmentHead);
+    public void setDepartmentHead(IDepartmentHead departmentHead);
 
     void setTypeOfSportList(List<ITypeOfSport> departmenthasTypeOfSportList);
 

@@ -7,6 +7,35 @@ CREATE SCHEMA IF NOT EXISTS `SportClubManagement` DEFAULT CHARACTER SET latin1 C
 USE `SportClubManagement` ;
 
 -- -----------------------------------------------------
+-- Table `SportClubManagement`.`MemberRole`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`MemberRole` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`MemberRole` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `Name` VARCHAR(45) NOT NULL ,
+  `Description` VARCHAR(45) NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SportClubManagement`.`DepartmentHead`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SportClubManagement`.`DepartmentHead` ;
+
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`DepartmentHead` (
+  `id` INT NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  CONSTRAINT `fk_DepartmentHead_MemberRole1`
+    FOREIGN KEY (`id` )
+    REFERENCES `SportClubManagement`.`MemberRole` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `SportClubManagement`.`Department`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `SportClubManagement`.`Department` ;
@@ -15,8 +44,15 @@ CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Department` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `Name` VARCHAR(45) NOT NULL ,
   `Description` VARCHAR(45) NULL ,
-  PRIMARY KEY (`id`) ,
-  UNIQUE INDEX `idDepartment_UNIQUE` (`id` ASC) )
+  `DepartmentHead_id` INT NOT NULL ,
+  PRIMARY KEY (`id`, `DepartmentHead_id`) ,
+  UNIQUE INDEX `idDepartment_UNIQUE` (`id` ASC) ,
+  INDEX `fk_Department_DepartmentHead1_idx` (`DepartmentHead_id` ASC) ,
+  CONSTRAINT `fk_Department_DepartmentHead1`
+    FOREIGN KEY (`DepartmentHead_id` )
+    REFERENCES `SportClubManagement`.`DepartmentHead` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -123,19 +159,6 @@ CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Department_has_Team` (
     REFERENCES `SportClubManagement`.`Team` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `SportClubManagement`.`MemberRole`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `SportClubManagement`.`MemberRole` ;
-
-CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`MemberRole` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `Name` VARCHAR(45) NOT NULL ,
-  `Description` VARCHAR(45) NULL ,
-  PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
 
@@ -389,22 +412,6 @@ CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Competition_has_Team` (
   CONSTRAINT `fk_Competition_has_Team_Team10`
     FOREIGN KEY (`Team` )
     REFERENCES `SportClubManagement`.`Team` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `SportClubManagement`.`DepartmentHead`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `SportClubManagement`.`DepartmentHead` ;
-
-CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`DepartmentHead` (
-  `id` INT NOT NULL ,
-  PRIMARY KEY (`id`) ,
-  CONSTRAINT `fk_DepartmentHead_MemberRole1`
-    FOREIGN KEY (`id` )
-    REFERENCES `SportClubManagement`.`MemberRole` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
