@@ -8,6 +8,7 @@ import corbaContract.generated.*;
 import dto.contract.*;
 import dto.mapper.DtoFactory;
 import dto.mapper.contract.IdNotFoundException;
+import dto.mapper.contract.NotFoundException;
 import java.rmi.RemoteException;
 import java.text.*;
 import java.util.*;
@@ -35,9 +36,9 @@ public class MatchresultDataproviderServant
         {
             List<MatchresultCorba> results = new LinkedList<>();
 
-            ITypeOfSport t = DtoFactory.getTypeOfSportManager().getByName(typeOfSport);
+            ITypeOfSport t = DtoFactory.getTypeOfSportMapper().getByName(typeOfSport);
 
-            ILeague l = DtoFactory.getLeagueManager().getByName(league, t);
+            ILeague l = DtoFactory.getLeagueMapper().getByName(league, t);
 
             Date date = DateFormat.getDateInstance().parse(competitiondate);
 
@@ -45,7 +46,7 @@ public class MatchresultDataproviderServant
             {
                 for (int matchId : competition.getMatchList())
                 {
-                    IMatch match = DtoFactory.getMatchManager().getById(matchId);
+                    IMatch match = DtoFactory.getMatchMapper().getById(matchId);
                     IMatchresult matchresult = match.getMatchresult();
 
                     results.add(new MatchresultCorba(matchresult.getId(), match.getDateFrom().toString(), match.getHometeam().getName(), match.getForeignteam().getName(), matchresult.getPointsHometeam(), matchresult.getPointsForeignteam()));
@@ -53,6 +54,10 @@ public class MatchresultDataproviderServant
             }
 
             return new MatchresultListCorba((MatchresultCorba[]) results.toArray());
+        }
+        catch (NotFoundException ex)
+        {
+            Logger.getLogger(MatchresultDataproviderServant.class.getName()).log(Level.SEVERE, null, ex);
         }
         catch (IdNotFoundException ex)
         {
@@ -75,15 +80,11 @@ public class MatchresultDataproviderServant
     {
         try
         {
-            IMatchresult m = DtoFactory.getMatchresultManager().getById(matchresult.Id);
+            IMatchresult m = DtoFactory.getMatchresultMapper().getById(matchresult.Id);
 
             return m.IsFinal();
         }
-        catch (IdNotFoundException ex)
-        {
-            Logger.getLogger(MatchresultDataproviderServant.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        catch (RemoteException ex)
+        catch (IdNotFoundException | RemoteException ex)
         {
             Logger.getLogger(MatchresultDataproviderServant.class.getName()).log(Level.SEVERE, null, ex);
         }

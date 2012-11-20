@@ -35,8 +35,8 @@ public class RmiServiceClientImpl implements ServiceClient {
 
 
     private void init() throws CommunicationProblemException {
-//        System.setProperty("java.security.policy", "./client.policy");
-//        System.setSecurityManager(new RMISecurityManager());
+        System.setProperty("java.security.policy", "./client.policy");
+        System.setSecurityManager(new RMISecurityManager());
         try {
             rmiServiceClient = (RmiServiceClient) Naming.lookup("rmi://" + host + ":" + port + "/CommunicationFactory");
         } catch (NotBoundException | MalformedURLException | RemoteException ex) {

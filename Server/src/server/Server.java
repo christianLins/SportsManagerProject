@@ -4,6 +4,12 @@
  */
 package server;
 
+import corbaserver.CorbaServer;
+import java.io.IOException;
+import ldap.UserData;
+import rmi.contract.RmiServiceClient;
+import rmi.server.RmiServer;
+
 /**
 
  @author Thomas
@@ -13,8 +19,14 @@ public class Server
     /**
      @param args the command line arguments
      */
-    public static void main(String[] args)
+    public static void main(String[] args) throws IOException
     {
-        // TODO code application logic here
+         // start rmi-server-thread 
+//        RmiServer rmiServer = new RmiServer(1099);
+//        new Thread(rmiServer).start();
+        
+        // start corba-server-thread
+        CorbaServer corbaServer = new CorbaServer();
+        new Thread(corbaServer).start();
     }
 }
