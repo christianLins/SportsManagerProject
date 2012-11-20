@@ -56,7 +56,6 @@ public class RmiServer
             cb += " file://" + dto.contract.IAddress.class.getProtectionDomain().getCodeSource().getLocation().getFile();
             cb += " file://" + UserData.class.getProtectionDomain().getCodeSource().getLocation().getFile();
             System.setProperty("java.rmi.server.codebase", cb);
-
             
             System.setProperty("java.security.policy", "./client.policy");
             System.setSecurityManager(new SecurityManager());
