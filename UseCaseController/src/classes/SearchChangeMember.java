@@ -38,6 +38,11 @@ public class SearchChangeMember implements ISearchChangeMember {
         try {
             List<IMember> memberList = DtoFactory.getMemberMapper().getAll();
             for (IMember member : memberList) {
+                if(member.getLastname().contains(searchInput) || member.getPrename().contains(searchInput)
+                        || member.getUsername().contains(searchInput))
+                {
+                    memberList.add(member);
+                }
             }
             return memberList;
         } catch (RemoteException | NotFoundException ex) {
@@ -63,8 +68,7 @@ public class SearchChangeMember implements ISearchChangeMember {
         try {
             IMember member = DtoFactory.getMemberMapper().getById(memberId);
             for (Integer role : member.getRoleList()) {
-                //RoleMapper
-                //roleList.add(null);
+                roleList.add(DtoFactory.getRoleMapper().getById(role));
             }
         } catch (RemoteException | IdNotFoundException ex) {
             Logger.getLogger(SearchChangeMember.class.getName()).log(Level.SEVERE, null, ex);
@@ -153,6 +157,15 @@ public class SearchChangeMember implements ISearchChangeMember {
 
     @Override
     public List<ITypeOfSport> getTypeOfSports(List<Integer> sportsList) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        List<ITypeOfSport> typeOfSportReturnList = new ArrayList<>();
+        try {
+            for (Integer sportID : sportsList) {
+                typeOfSportReturnList.add(DtoFactory.getTypeOfSportMapper().getById(sportID));
+
+            }
+        } catch (RemoteException | IdNotFoundException ex) {
+            Logger.getLogger(NewMember.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return typeOfSportReturnList;
     }
 }

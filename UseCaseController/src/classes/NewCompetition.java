@@ -5,6 +5,7 @@
 package classes;
 import contract.*;
 import dto.contract.ICompetition;
+import dto.contract.IDepartment;
 import dto.contract.IMember;
 import dto.contract.ITeam;
 import dto.mapper.DtoFactory;
@@ -30,13 +31,19 @@ public class NewCompetition implements INewCompetition{
 
     @Override
     public void setCompetition(ICompetition competition, IMember member) {
-        try {
-            //hier überprüfung des Member !!!
+        /*try {
+            Integer sportId = competition.getSport();
+            try {
+                List<IDepartment> departmentList = DtoFactory.getDepartmentMapper().getAll();
+                
+            } catch (NotFoundException ex) {
+                Logger.getLogger(NewCompetition.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             DtoFactory.getCompetitionMapper().set(competition);
         } catch (RemoteException ex) {
             Logger.getLogger(NewCompetition.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }
 
     @Override
