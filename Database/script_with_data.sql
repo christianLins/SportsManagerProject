@@ -222,21 +222,21 @@ INSERT INTO `Country` (`idCountry`, `Name`, `Alpha3`, `Alpha2`, `TLD`, `Deutsch`
 -- Table structure for table `Department`
 --
 
-CREATE TABLE IF NOT EXISTS `Department` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(45) NOT NULL,
-  `Description` varchar(45) DEFAULT NULL,
-  `DepartmentHead` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idDepartment_UNIQUE` (`id`),
-  UNIQUE KEY `DepartmentHead` (`DepartmentHead`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+CREATE  TABLE IF NOT EXISTS `SportClubManagement`.`Department` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `Name` VARCHAR(45) NOT NULL ,
+  `Description` VARCHAR(45) NULL ,
+  `DepartmentHead_id` INT NOT NULL ,
+  PRIMARY KEY (`id`, `DepartmentHead_id`) ,
+  UNIQUE INDEX `idDepartment_UNIQUE` (`id` ASC) ,
+  INDEX `fk_Department_DepartmentHead1_idx` (`DepartmentHead_id` ASC))
+ENGINE = InnoDB;
 
 --
 -- Dumping data for table `Department`
 --
 
-INSERT INTO `Department` (`id`, `Name`, `Description`, `DepartmentHead`) VALUES
+INSERT INTO `Department` (`id`, `Name`, `Description`, `DepartmentHead_id`) VALUES
 (1, 'Fußball Abteilung', 'Abteilung Fußball', 3);
 
 -- --------------------------------------------------------
@@ -703,7 +703,11 @@ ALTER TABLE `Competition_has_Team`
 -- Constraints for table `Department`
 --
 ALTER TABLE `Department`
-  ADD CONSTRAINT `Department_ibfk_1` FOREIGN KEY (`DepartmentHead`) REFERENCES `DepartmentHead` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ADD CONSTRAINT `fk_Department_DepartmentHead1`
+    FOREIGN KEY (`DepartmentHead_id` )
+    REFERENCES `SportClubManagement`.`DepartmentHead` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `DepartmentHead`
