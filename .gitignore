@@ -111,3 +111,16 @@ UseCaseControllerContract/nbproject/private/private.xml
 /CorbaServer/nbproject/private/
 /CorbaClient/nbproject/private/
 /Server/nbproject/private/
+CorbaServer/build/classes/.netbeans_automatic_build
+
+CorbaServer/build/classes/.netbeans_update_resources
+
+CorbaServer/build/classes/matchresult.idl
+
+CorbaServer/dist/README.TXT
+
+Server/build/classes/.netbeans_automatic_build
+
+Server/build/classes/.netbeans_update_resources
+
+Server/dist/README.TXT
