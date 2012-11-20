@@ -232,7 +232,7 @@ public class SCM_Overview extends AbstractForm {
     private void btnMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMemberActionPerformed
         try {
             paneMemberMain.removeAll();
-            paneMemberMain = new SearchMemberForm(this, rmiClient, user).getPanel();
+            paneMemberMain = new SearchMemberForm(null, rmiClient, user).getPanel();
 
             tabMember.setRightComponent(paneMemberMain);
             tabMember.validate();
@@ -271,7 +271,7 @@ public class SCM_Overview extends AbstractForm {
     private void btnNewMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewMemberActionPerformed
         try {
             paneMemberMain.removeAll();
-            paneMemberMain = new NewMemberForm(this, rmiClient, user).getPanel();
+            paneMemberMain = new NewMemberForm(null, rmiClient, user).getPanel();
 
             tabMember.setRightComponent(paneMemberMain);
             tabMember.validate();
