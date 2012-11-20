@@ -47,6 +47,8 @@ public class RmiServer
     {
         try
         {
+          
+            
             // start rmiregistry
             //LocateRegistry.createRegistry(port);
             Runtime.getRuntime().exec("rmiregistry");
@@ -57,9 +59,10 @@ public class RmiServer
             cb += " file://" + UserData.class.getProtectionDomain().getCodeSource().getLocation().getFile();
             System.setProperty("java.rmi.server.codebase", cb);
 
-            
             System.setProperty("java.security.policy", "./client.policy");
             System.setSecurityManager(new SecurityManager());
+           
+            
             
             RmiServiceClient rmiServiceFactory = new RmiServiceClientFactory();
             Naming.rebind("rmi://localhost:" + port + "/CommunicationFactory", rmiServiceFactory);
