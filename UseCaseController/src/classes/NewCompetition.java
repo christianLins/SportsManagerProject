@@ -31,19 +31,11 @@ public class NewCompetition implements INewCompetition{
 
     @Override
     public void setCompetition(ICompetition competition, IMember member) {
-        /*try {
-            Integer sportId = competition.getSport();
-            try {
-                List<IDepartment> departmentList = DtoFactory.getDepartmentMapper().getAll();
-                
-            } catch (NotFoundException ex) {
-                Logger.getLogger(NewCompetition.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
+        try { 
             DtoFactory.getCompetitionMapper().set(competition);
         } catch (RemoteException ex) {
             Logger.getLogger(NewCompetition.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
     }
 
     @Override
