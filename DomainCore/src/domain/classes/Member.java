@@ -1,17 +1,17 @@
 package domain.classes;
 
+import domain.contract.*;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
-import domain.contract.*;
 
 /**
 
  @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
-@Table(name = "Member")
+@Table(name = "ClubMember")
 @XmlRootElement
 public class Member
         implements Serializable, IMember

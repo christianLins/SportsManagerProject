@@ -1,10 +1,10 @@
 package domain.classes;
 
+import domain.contract.*;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
-import domain.contract.*;
 
 /**
 
@@ -12,12 +12,11 @@ import domain.contract.*;
  */
 @Entity
 @Table(name = "Player")
-@XmlRootElement
+@PrimaryKeyJoinColumn(name="id",referencedColumnName="id")
 public class Player
         extends Role
         implements Serializable, IPlayer
 {
-    private static final long serialVersionUID = 1L;
     @ManyToMany(mappedBy = "playerList")
     private List<TypeOfSport> typeOfSportList;
     @ManyToMany(mappedBy = "players")

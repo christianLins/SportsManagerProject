@@ -1,8 +1,10 @@
 
-import database.DatabaseManager;
 import domain.CouldNotFetchException;
 import domain.DomainFacade;
+import domain.classes.Role;
 import domain.contract.IMember;
+import domain.contract.IRole;
+import java.util.List;
 
 /**
  *
@@ -18,7 +20,7 @@ public class HibernateMain {
         try
         {
             IMember m  = DomainFacade.getInstance().getMemberByUsername("mmo7528");
-            System.out.println(m.getUsername());
+            List<IRole> roleList = m.getRoleList();
         }
         catch (CouldNotFetchException ex)
         {

@@ -4,15 +4,13 @@ import domain.contract.*;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
-import javax.xml.bind.annotation.*;
 
 /**
  *
  * @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
-@Table(name = "MemberRole")
-@XmlRootElement
+@Table(name ="MemberRole")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Role
         implements Serializable, IRole
@@ -24,6 +22,8 @@ public class Role
     private Integer id;
     @Column(name = "Name")
     private String name;
+    @Column(name="Description")
+    private String description;
     @JoinTable(name = "Role_has_Permission", joinColumns =
     {
         @JoinColumn(name = "Role_idRole",referencedColumnName="id")
@@ -33,10 +33,8 @@ public class Role
     })
     @ManyToMany(fetch= FetchType.LAZY)
     private List<Permission> permissionList;
-    @ManyToMany(mappedBy = "roleList")
+    @ManyToMany(mappedBy="roleList")
     private List<Member> members;
-    @Column(name="Description")
-    private String description;
 
     public Role()
     {
@@ -70,7 +68,6 @@ public class Role
         this.id = id;
     }
 
-    @XmlTransient
     @Override
     public List<IPermission> getPermissionList()
     {

@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.*;
  */
 @Entity
 @Table(name = "Trainer")
-@XmlRootElement
+@PrimaryKeyJoinColumn(name="id",referencedColumnName="id")
 public class Trainer
         extends Role
         implements Serializable, ITrainer

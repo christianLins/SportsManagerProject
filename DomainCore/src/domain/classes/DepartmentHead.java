@@ -1,10 +1,10 @@
 package domain.classes;
 
+import domain.contract.*;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
-import domain.contract.*;
 
 /**
 
@@ -12,7 +12,7 @@ import domain.contract.*;
  */
 @Entity
 @Table(name = "DepartmentHead")
-@XmlRootElement
+@PrimaryKeyJoinColumn(name="id",referencedColumnName="id")
 public class DepartmentHead
         extends Role
         implements Serializable, IDepartmentHead

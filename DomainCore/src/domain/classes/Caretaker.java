@@ -3,6 +3,7 @@ package domain.classes;
 import domain.contract.ICaretaker;
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -11,6 +12,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "Caretaker")
+@PrimaryKeyJoinColumn(name="id",referencedColumnName="id")
 public class Caretaker extends Role
 implements ICaretaker, Serializable {
     private static final long serialVersionUID = 1L;

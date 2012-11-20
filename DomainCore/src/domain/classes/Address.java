@@ -3,7 +3,6 @@ package domain.classes;
 import domain.contract.IAddress;
 import domain.contract.ICountry;
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
@@ -35,8 +34,6 @@ public class Address
     @Basic(optional = false)
     @Column(name = "PostalCode")
     private int postalCode;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "address")
-    private List<Member> member1List;
     @JoinColumn(name = "Country", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Country country;
@@ -124,17 +121,6 @@ public class Address
     public void setPostalCode(int postalCode)
     {
         this.postalCode = postalCode;
-    }
-
-    @XmlTransient
-    public List<Member> getMember1List()
-    {
-        return member1List;
-    }
-
-    public void setMember1List(List<Member> member1List)
-    {
-        this.member1List = member1List;
     }
 
     @Override

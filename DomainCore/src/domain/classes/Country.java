@@ -1,10 +1,9 @@
 package domain.classes;
 
+import domain.contract.ICountry;
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
-import domain.contract.ICountry;
 
 /**
 
@@ -19,8 +18,7 @@ public class Country
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name ="id")
     private Integer id;
     @Basic(optional = false)
     @Column(name = "Name")
@@ -41,10 +39,6 @@ public class Country
     private String italiano;
     @Column(name = "Portugues")
     private String portugues;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nationality")
-    private List<Member> member1List;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "country")
-    private List<Address> addressList;
 
     public Country()
     {
@@ -178,28 +172,6 @@ public class Country
     public void setPortugues(String portugues)
     {
         this.portugues = portugues;
-    }
-
-    @XmlTransient
-    public List<Member> getMember1List()
-    {
-        return member1List;
-    }
-
-    public void setMember1List(List<Member> member1List)
-    {
-        this.member1List = member1List;
-    }
-
-    @XmlTransient
-    public List<Address> getAddressList()
-    {
-        return addressList;
-    }
-
-    public void setAddressList(List<Address> addressList)
-    {
-        this.addressList = addressList;
     }
 
     @Override
