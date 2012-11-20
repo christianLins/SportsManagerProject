@@ -4,6 +4,9 @@
  */
 package server;
 
+import corbaserver.CorbaServer;
+import rmi.server.RmiServer;
+
 /**
 
  @author Thomas
@@ -15,6 +18,12 @@ public class Server
      */
     public static void main(String[] args)
     {
-        // TODO code application logic here
+         // start rmi-server-thread 
+        RmiServer rmiServer = new RmiServer(1099);
+        new Thread(rmiServer).start();
+        
+        // start corba-server-thread
+        CorbaServer corbaServer = new CorbaServer();
+        new Thread(corbaServer).start();
     }
 }
