@@ -17,7 +17,7 @@ public class DepartmentHead
         extends Role
         implements Serializable, IDepartmentHead
 {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departmentHead")
+    @OneToMany(mappedBy = "departmentHead")
     private List<Department> departmentList;
     private static final long serialVersionUID = 1L;
 

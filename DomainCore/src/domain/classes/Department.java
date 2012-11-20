@@ -1,14 +1,14 @@
 package domain.classes;
 
+import domain.contract.*;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
-import domain.contract.*;
 
 /**
-
- @author Markus Mohanty <markus.mo at gmx.net>
+ *
+ * @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
 @Table(name = "Department")
@@ -16,10 +16,8 @@ import domain.contract.*;
 public class Department
         implements Serializable, IDepartment
 {
-    @JoinColumn(name = "DepartmentHead", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @OneToMany(mappedBy="departmentList")
     private DepartmentHead departmentHead;
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -154,7 +152,7 @@ public class Department
 
         for (TypeOfSport d : typeOfSports)
         {
-            result.add((ITypeOfSport)d);
+            result.add((ITypeOfSport) d);
         }
 
         return result;
@@ -206,7 +204,7 @@ public class Department
     @Override
     public IDepartmentHead getDepartmentHead()
     {
-        return departmentHead;
+        return this.departmentHead;
     }
 
     @Override

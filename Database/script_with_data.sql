@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 20, 2012 at 05:18 PM
+-- Generation Time: Nov 20, 2012 at 06:36 PM
 -- Server version: 5.5.24
 -- PHP Version: 5.3.10-1ubuntu3.4
 
@@ -195,7 +195,7 @@ INSERT INTO `Competition_has_Team` (`Competition`, `Team`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `Country` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idCountry` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) NOT NULL,
   `Alpha3` varchar(100) DEFAULT NULL,
   `Alpha2` varchar(100) DEFAULT NULL,
@@ -205,15 +205,15 @@ CREATE TABLE IF NOT EXISTS `Country` (
   `Francaise` varchar(100) DEFAULT NULL,
   `Italiano` varchar(100) DEFAULT NULL,
   `Portugues` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idCountry_UNIQUE` (`id`)
+  PRIMARY KEY (`idCountry`),
+  UNIQUE KEY `idCountry_UNIQUE` (`idCountry`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `Country`
 --
 
-INSERT INTO `Country` (`id`, `Name`, `Alpha3`, `Alpha2`, `TLD`, `Deutsch`, `Espanol`, `Francaise`, `Italiano`, `Portugues`) VALUES
+INSERT INTO `Country` (`idCountry`, `Name`, `Alpha3`, `Alpha2`, `TLD`, `Deutsch`, `Espanol`, `Francaise`, `Italiano`, `Portugues`) VALUES
 (1, 'Austria', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -226,16 +226,18 @@ CREATE TABLE IF NOT EXISTS `Department` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) NOT NULL,
   `Description` varchar(45) DEFAULT NULL,
+  `DepartmentHead` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `idDepartment_UNIQUE` (`id`)
+  UNIQUE KEY `idDepartment_UNIQUE` (`id`),
+  UNIQUE KEY `DepartmentHead` (`DepartmentHead`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `Department`
 --
 
-INSERT INTO `Department` (`id`, `Name`, `Description`) VALUES
-(1, 'Fußball Abteilung', 'Abteilung Fußball');
+INSERT INTO `Department` (`id`, `Name`, `Description`, `DepartmentHead`) VALUES
+(1, 'Fußball Abteilung', 'Abteilung Fußball', 3);
 
 -- --------------------------------------------------------
 
@@ -656,7 +658,7 @@ INSERT INTO `TypeOfSport_has_Trainer` (`TypeOfSport_idTypeOfSport`, `Trainer_idT
 -- Constraints for table `Address`
 --
 ALTER TABLE `Address`
-  ADD CONSTRAINT `fk_Address_Country0` FOREIGN KEY (`Country`) REFERENCES `Country` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Address_Country0` FOREIGN KEY (`Country`) REFERENCES `Country` (`idCountry`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `Admininstrator`
@@ -675,7 +677,7 @@ ALTER TABLE `Caretaker`
 --
 ALTER TABLE `ClubMember`
   ADD CONSTRAINT `fk_Member_Address10` FOREIGN KEY (`Address`) REFERENCES `Address` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Member_Country10` FOREIGN KEY (`Nationality`) REFERENCES `Country` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Member_Country10` FOREIGN KEY (`Nationality`) REFERENCES `Country` (`idCountry`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `ClubTeam`
@@ -696,6 +698,12 @@ ALTER TABLE `Competition`
 ALTER TABLE `Competition_has_Team`
   ADD CONSTRAINT `fk_Competition_has_Team_Competition10` FOREIGN KEY (`Competition`) REFERENCES `Competition` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Competition_has_Team_Team10` FOREIGN KEY (`Team`) REFERENCES `Team` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `Department`
+--
+ALTER TABLE `Department`
+  ADD CONSTRAINT `Department_ibfk_1` FOREIGN KEY (`DepartmentHead`) REFERENCES `DepartmentHead` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `DepartmentHead`
