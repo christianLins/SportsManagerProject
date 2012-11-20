@@ -1,10 +1,10 @@
 package domain.classes;
 
+import domain.contract.*;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
-import domain.contract.*;
 
 /**
 
@@ -16,7 +16,6 @@ import domain.contract.*;
 public class League
         implements Serializable, ILeague
 {
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -27,9 +26,12 @@ public class League
     private String name;
     @Column(name = "Description")
     private String description;
+    @JoinColumn(name = "TypeOfSport_idTypeOfSport", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private TypeOfSport typeOfSport;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "league")
     private List<Team> teamList;
-    @OneToMany(cascade= CascadeType.ALL,mappedBy="league")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "league")
     private List<Competition> competitions;
 
     public League()
@@ -39,6 +41,16 @@ public class League
     public League(Integer id)
     {
         this.id = id;
+    }
+
+    public TypeOfSport getTypeOfSport()
+    {
+        return typeOfSport;
+    }
+
+    public void setTypeOfSport(TypeOfSport typeOfSport)
+    {
+        this.typeOfSport = typeOfSport;
     }
 
     @Override

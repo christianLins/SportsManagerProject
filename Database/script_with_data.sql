@@ -327,14 +327,14 @@ INSERT INTO `League` (`id`, `Name`, `Description`, `TypeOfSport_idTypeOfSport`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Match`
+-- Table structure for table `SportsGame`
 --
 
-CREATE TABLE IF NOT EXISTS `Match` (
+CREATE TABLE IF NOT EXISTS `SportsGame` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Hometeam` int(11) NOT NULL,
   `Foreignteam` int(11) NOT NULL,
-  `Matchresult` int(11) NOT NULL,
+  `SportsGameResult` int(11) NOT NULL,
   `Competition` int(11) NOT NULL,
   `DateFrom` date NOT NULL,
   `DateTo` date DEFAULT NULL,
@@ -342,25 +342,25 @@ CREATE TABLE IF NOT EXISTS `Match` (
   UNIQUE KEY `idMatch_UNIQUE` (`id`),
   KEY `fk_Match_Team1_idx` (`Hometeam`),
   KEY `fk_Match_Team2_idx` (`Foreignteam`),
-  KEY `fk_Match_Matchresult1_idx` (`Matchresult`),
+  KEY `fk_Match_Matchresult1_idx` (`SportsGameResult`),
   KEY `fk_Match_Competition1_idx` (`Competition`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `Match`
+-- Dumping data for table `SportsGame`
 --
 
-INSERT INTO `Match` (`id`, `Hometeam`, `Foreignteam`, `Matchresult`, `Competition`, `DateFrom`, `DateTo`) VALUES
+INSERT INTO `SportsGame` (`id`, `Hometeam`, `Foreignteam`, `SportsGameResult`, `Competition`, `DateFrom`, `DateTo`) VALUES
 (1, 1, 2, 1, 1, '2013-11-13', '2013-11-13'),
 (2, 2, 1, 2, 1, '2013-11-14', '2013-11-14');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Matchresult`
+-- Table structure for table `SportsGameResult`
 --
 
-CREATE TABLE IF NOT EXISTS `Matchresult` (
+CREATE TABLE IF NOT EXISTS `SportsGameResult` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `PointsHometeam` double NOT NULL,
   `PointsForeignteam` double NOT NULL,
@@ -370,10 +370,10 @@ CREATE TABLE IF NOT EXISTS `Matchresult` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `Matchresult`
+-- Dumping data for table `SportsGameResult`
 --
 
-INSERT INTO `Matchresult` (`id`, `PointsHometeam`, `PointsForeignteam`, `Final`) VALUES
+INSERT INTO `SportsGameResult` (`id`, `PointsHometeam`, `PointsForeignteam`, `Final`) VALUES
 (1, 0, 1, 1),
 (2, 1, 0, 1);
 
@@ -736,12 +736,12 @@ ALTER TABLE `League`
   ADD CONSTRAINT `fk_League_TypeOfSport1` FOREIGN KEY (`TypeOfSport_idTypeOfSport`) REFERENCES `TypeOfSport` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `Match`
+-- Constraints for table `SportsGame`
 --
-ALTER TABLE `Match`
+ALTER TABLE `SportsGame`
   ADD CONSTRAINT `fk_Match_Team10` FOREIGN KEY (`Hometeam`) REFERENCES `Team` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Match_Team20` FOREIGN KEY (`Foreignteam`) REFERENCES `Team` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Match_Matchresult10` FOREIGN KEY (`Matchresult`) REFERENCES `Matchresult` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Match_Matchresult10` FOREIGN KEY (`SportsGameResult`) REFERENCES `SportsGameResult` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Match_Competition10` FOREIGN KEY (`Competition`) REFERENCES `Competition` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --

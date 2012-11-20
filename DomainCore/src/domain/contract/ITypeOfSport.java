@@ -11,11 +11,7 @@ import java.util.List;
  @author Thomas
  */
 public interface ITypeOfSport extends IDomain
-{
-    List<ICompetition> getCompetitions();
-    
-    void setCompetitions(List<ICompetition> competitions);
-    
+{   
     String getName();
 
     void setName(String name);

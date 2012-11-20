@@ -40,7 +40,7 @@ public class Department
     private List<ClubTeam> clubTeamList;
     @JoinTable(name = "Department_has_TypeOfSport", joinColumns =
     {
-        @JoinColumn(name = "Department", referencedColumnName = "id")
+        @JoinColumn(name = "Department_idDepartment", referencedColumnName = "id")
     }, inverseJoinColumns =
     {
         @JoinColumn(name = "TypeOfSport", referencedColumnName = "id")

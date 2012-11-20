@@ -6,8 +6,6 @@ package server;
 
 import corbaserver.CorbaServer;
 import java.io.IOException;
-import ldap.UserData;
-import rmi.contract.RmiServiceClient;
 import rmi.server.RmiServer;
 
 /**
@@ -22,11 +20,11 @@ public class Server
     public static void main(String[] args) throws IOException
     {
          // start rmi-server-thread 
-//        RmiServer rmiServer = new RmiServer(1099);
-//        new Thread(rmiServer).start();
+        RmiServer rmiServer = new RmiServer(1099);
+        new Thread(rmiServer).start();
         
         // start corba-server-thread
-        CorbaServer corbaServer = new CorbaServer();
-        new Thread(corbaServer).start();
+//        CorbaServer corbaServer = new CorbaServer();
+//        new Thread(corbaServer).start();
     }
 }

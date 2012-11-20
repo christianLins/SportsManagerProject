@@ -19,10 +19,16 @@ public class Trainer
         extends Role
         implements Serializable, ITrainer
 {
-    private static final long serialVersionUID = 1L;
-    @ManyToMany(mappedBy = "trainerList")
+    @JoinTable(name = "Team_has_Trainer", joinColumns =
+    {
+        @JoinColumn(name = "Trainer", referencedColumnName = "id")
+    }, inverseJoinColumns =
+    {
+        @JoinColumn(name = "ClubTeam", referencedColumnName = "id")
+    })
+    @ManyToMany
     private List<ClubTeam> clubTeamList;
-    @ManyToMany(mappedBy="trainerList")
+    @ManyToMany(mappedBy = "trainerList")
     private List<TypeOfSport> typeOfSportList;
 
     public Trainer()

@@ -1,17 +1,17 @@
 package domain.classes;
 
+import domain.contract.*;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-import domain.contract.*;
 
 /**
  *
  * @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
-@Table(name = "Match")
+@Table(name = "SportsGame")
 @XmlRootElement
 public class Match implements Serializable, IMatch {
     private static final long serialVersionUID = 1L;
@@ -30,7 +30,7 @@ public class Match implements Serializable, IMatch {
     @JoinColumn(name = "Competition", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Competition competition;
-    @JoinColumn(name = "Matchresult", referencedColumnName = "id")
+    @JoinColumn(name = "SportsGameResult", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Matchresult matchresult;
     @JoinColumn(name = "Foreignteam", referencedColumnName = "id")

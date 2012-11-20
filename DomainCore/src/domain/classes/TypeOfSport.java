@@ -46,10 +46,6 @@ public class TypeOfSport
     })
     @ManyToMany
     private List<Trainer> trainerList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeOfSports")
-    private List<Department> departments;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sport")
-    private List<Competition> competitions;
 
     public TypeOfSport()
     {
@@ -70,30 +66,6 @@ public class TypeOfSport
     {
         this.id = id;
         this.name = name;
-    }
-
-    @Override
-    public List<ICompetition> getCompetitions()
-    {
-        List<ICompetition> comps = new LinkedList<>();
-        for (Competition c : competitions)
-        {
-            comps.add(c);
-        }
-        return comps;
-    }
-
-    @Override
-    public void setCompetitions(List<ICompetition> competitions)
-    {
-        if (this.competitions == null)
-        {
-            this.competitions = new LinkedList<>();
-        }
-        for (ICompetition c : competitions)
-        {
-            this.competitions.add((Competition) c);
-        }
     }
 
     @Override
@@ -156,31 +128,6 @@ public class TypeOfSport
         }
 
         this.playerList = result;
-    }
-
-    @XmlTransient
-    public List<IDepartment> getDepartments()
-    {
-        List<IDepartment> result = new LinkedList<>();
-
-        for (Department d : departments)
-        {
-            result.add(d);
-        }
-
-        return result;
-    }
-
-    public void setDepartments(List<IDepartment> departments)
-    {
-        List<Department> result = new LinkedList<>();
-
-        for (IDepartment d : departments)
-        {
-            result.add((Department) d);
-        }
-
-        this.departments = result;
     }
 
     public List<Trainer> getTrainerList()

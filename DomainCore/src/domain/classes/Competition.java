@@ -16,7 +16,6 @@ import javax.xml.bind.annotation.*;
 public class Competition
         implements Serializable, ICompetition
 {
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -32,6 +31,11 @@ public class Competition
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "Payment")
     private Double payment;
+    @Basic(optional = false)
+    @Column(name = "Name")
+    private String name;
+    @Column(name = "Description")
+    private String description;
     @JoinTable(name = "Competition_has_Team", joinColumns =
     {
         @JoinColumn(name = "Competition", referencedColumnName = "id")
@@ -43,17 +47,12 @@ public class Competition
     private List<Team> teamList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "competition")
     private List<Match> matchList;
-    @ManyToOne
-    private League league;
-    @ManyToOne
-    private TypeOfSport sport;
-    @Column(name = "Name")
-    private String name;
     @JoinColumn(name = "Address", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Address address;
-    @Column(name = "Description")
-    private String description;
+    @JoinColumn(name = "League_idLeague", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private League league;
 
     public Competition()
     {
@@ -73,13 +72,17 @@ public class Competition
     @Override
     public ITypeOfSport getSport()
     {
-        return sport;
+        return league.getTypeOfSport();
     }
 
     @Override
     public void setSport(ITypeOfSport sport)
     {
-        this.sport = (TypeOfSport) sport;
+        if(league == null)
+        {
+            this.league = new League();
+        }
+        this.league.setTypeOfSport((TypeOfSport)sport);
     }
 
     @Override

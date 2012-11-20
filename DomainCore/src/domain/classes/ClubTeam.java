@@ -17,27 +17,26 @@ public class ClubTeam
         extends Team
         implements Serializable, IClubTeam
 {
-    private static final long serialVersionUID = 1L;
-    @ManyToMany(mappedBy = "clubTeamList")
-    private List<Department> departmentList;
-    @JoinTable(name = "Team_has_Trainer", joinColumns =
+    @JoinTable(name = "Department_has_Team", joinColumns =
     {
         @JoinColumn(name = "Team", referencedColumnName = "id")
     }, inverseJoinColumns =
     {
-        @JoinColumn(name = "Trainer", referencedColumnName = "id")
+        @JoinColumn(name = "Department", referencedColumnName = "id")
     })
     @ManyToMany
-    private List<Trainer> trainerList;
-    @JoinTable(name = "Team_Has_Player", joinColumns =
+    private List<Department> departmentList;
+    @JoinTable(name = "Team_has_Player", joinColumns =
     {
-        @JoinColumn(name = "Team", referencedColumnName = "id")
+        @JoinColumn(name = "ClubTeam_idTeam", referencedColumnName = "id")
     }, inverseJoinColumns =
     {
-        @JoinColumn(name = "Player", referencedColumnName = "id")
+        @JoinColumn(name = "Player_idPlayer", referencedColumnName = "id")
     })
     @ManyToMany
     private List<Player> players;
+    @ManyToMany(mappedBy = "clubTeamList")
+    private List<Trainer> trainerList;
 
     public ClubTeam()
     {

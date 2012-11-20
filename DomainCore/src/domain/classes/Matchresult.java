@@ -1,17 +1,17 @@
 package domain.classes;
 
+import domain.contract.IMatchresult;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
-import domain.contract.IMatchresult;
 
 /**
 
  @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
-@Table(name = "Matchresult")
+@Table(name = "SportsGameResult")
 @XmlRootElement
 public class Matchresult
         implements Serializable, IMatchresult

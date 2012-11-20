@@ -37,7 +37,7 @@ public class Team
     private List<Match> matchList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hometeam")
     private List<Match> matchList1;
-    @JoinColumn(name = "League", referencedColumnName = "id")
+    @JoinColumn(name = "League_idLeague", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private League league;
 
