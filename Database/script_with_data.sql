@@ -195,7 +195,7 @@ INSERT INTO `Competition_has_Team` (`Competition`, `Team`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `Country` (
-  `idCountry` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) NOT NULL,
   `Alpha3` varchar(100) DEFAULT NULL,
   `Alpha2` varchar(100) DEFAULT NULL,
@@ -205,15 +205,15 @@ CREATE TABLE IF NOT EXISTS `Country` (
   `Francaise` varchar(100) DEFAULT NULL,
   `Italiano` varchar(100) DEFAULT NULL,
   `Portugues` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`idCountry`),
-  UNIQUE KEY `idCountry_UNIQUE` (`idCountry`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idCountry_UNIQUE` (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `Country`
 --
 
-INSERT INTO `Country` (`idCountry`, `Name`, `Alpha3`, `Alpha2`, `TLD`, `Deutsch`, `Espanol`, `Francaise`, `Italiano`, `Portugues`) VALUES
+INSERT INTO `Country` (`id`, `Name`, `Alpha3`, `Alpha2`, `TLD`, `Deutsch`, `Espanol`, `Francaise`, `Italiano`, `Portugues`) VALUES
 (1, 'Austria', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -658,7 +658,7 @@ INSERT INTO `TypeOfSport_has_Trainer` (`TypeOfSport_idTypeOfSport`, `Trainer_idT
 -- Constraints for table `Address`
 --
 ALTER TABLE `Address`
-  ADD CONSTRAINT `fk_Address_Country0` FOREIGN KEY (`Country`) REFERENCES `Country` (`idCountry`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Address_Country0` FOREIGN KEY (`Country`) REFERENCES `Country` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `Admininstrator`
@@ -677,7 +677,7 @@ ALTER TABLE `Caretaker`
 --
 ALTER TABLE `ClubMember`
   ADD CONSTRAINT `fk_Member_Address10` FOREIGN KEY (`Address`) REFERENCES `Address` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Member_Country10` FOREIGN KEY (`Nationality`) REFERENCES `Country` (`idCountry`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Member_Country10` FOREIGN KEY (`Nationality`) REFERENCES `Country` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `ClubTeam`
