@@ -1,20 +1,13 @@
 package presentation.forms.competition;
 
-import contract.IShowCompetition;
-import dto.contract.IClubTeam;
-import dto.contract.ICompetition;
-import dto.contract.IMatch;
-import dto.contract.IMember;
-import dto.contract.IPlayer;
+import contract.dto.*;
+import contract.useCaseController.IShowCompetition;
 import java.util.List;
 import javax.swing.JPanel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import javax.swing.event.*;
 import javax.swing.table.TableModel;
-import presentation.basics.AbstractForm;
-import presentation.basics.AbstractMainForm;
-import services.ServiceClient;
-import services.ServiceNotAvailableException;
+import presentation.basics.*;
+import services.*;
 
 /**
  *

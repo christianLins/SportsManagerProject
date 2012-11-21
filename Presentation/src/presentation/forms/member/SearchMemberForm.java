@@ -1,14 +1,14 @@
 package presentation.forms.member;
 
-import contract.ISearchChangeMember;
-import dto.classes.*;
-import dto.contract.*;
+import contract.dto.*;
+import contract.useCaseController.ISearchChangeMember;
 import java.awt.event.ActionEvent;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.TableModel;
 import presentation.basics.*;
+import presentation.forms.dto.*;
 import presentation.forms.helper.SelectSportsHelper;
 import services.*;
 

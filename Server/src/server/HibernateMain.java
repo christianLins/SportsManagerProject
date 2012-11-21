@@ -1,15 +1,9 @@
+package server;
 
-import domain.CouldNotFetchException;
-import domain.DomainFacade;
-import domain.classes.Department;
-import domain.classes.Role;
-import domain.contract.IDepartment;
-import domain.contract.IMember;
-import domain.contract.IRole;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import utils.HibernateTestDatabase;
+import contract.domain.CouldNotFetchException;
+import java.util.logging.*;
+import server.domain.DomainFacade;
+import server.utils.HibernateTestDatabase;
 
 /**
  *

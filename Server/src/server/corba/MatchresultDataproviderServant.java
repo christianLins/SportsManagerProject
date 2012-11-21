@@ -2,17 +2,22 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package corbaserver;
+package server.corba;
 
-import corbaContract.generated.*;
-import dto.contract.*;
-import dto.mapper.DtoFactory;
-import dto.mapper.contract.*;
+import contract.dto.mapper.IdNotFoundException;
+import contract.dto.mapper.NotFoundException;
+import contract.dto.ITypeOfSport;
+import contract.dto.ILeague;
+import contract.dto.IMatch;
+import contract.dto.ICompetition;
+import contract.dto.IMatchresult;
 import java.rmi.RemoteException;
 import java.text.*;
 import java.util.*;
 import java.util.logging.*;
 import org.omg.CORBA.ORB;
+import server.corba.generated.*;
+import server.dto.mapper.DtoFactory;
 
 /**
 

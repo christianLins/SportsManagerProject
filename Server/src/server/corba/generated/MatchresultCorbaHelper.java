@@ -1,4 +1,4 @@
-package corbaContract.generated;
+package server.corba.generated;
 
 
 /**
@@ -12,7 +12,7 @@ abstract public class MatchresultCorbaHelper
 {
   private static String  _id = "IDL:corbaContract/generated/MatchresultCorba:1.0";
 
-  public static void insert (org.omg.CORBA.Any a, corbaContract.generated.MatchresultCorba that)
+  public static void insert (org.omg.CORBA.Any a, server.corba.generated.MatchresultCorba that)
   {
     org.omg.CORBA.portable.OutputStream out = a.create_output_stream ();
     a.type (type ());
@@ -20,7 +20,7 @@ abstract public class MatchresultCorbaHelper
     a.read_value (out.create_input_stream (), type ());
   }
 
-  public static corbaContract.generated.MatchresultCorba extract (org.omg.CORBA.Any a)
+  public static server.corba.generated.MatchresultCorba extract (org.omg.CORBA.Any a)
   {
     return read (a.create_input_stream ());
   }
@@ -72,7 +72,7 @@ abstract public class MatchresultCorbaHelper
             "pointsForeignteam",
             _tcOf_members0,
             null);
-          __typeCode = org.omg.CORBA.ORB.init ().create_struct_tc (corbaContract.generated.MatchresultCorbaHelper.id (), "MatchresultCorba", _members0);
+          __typeCode = org.omg.CORBA.ORB.init ().create_struct_tc (server.corba.generated.MatchresultCorbaHelper.id (), "MatchresultCorba", _members0);
           __active = false;
         }
       }
@@ -85,9 +85,9 @@ abstract public class MatchresultCorbaHelper
     return _id;
   }
 
-  public static corbaContract.generated.MatchresultCorba read (org.omg.CORBA.portable.InputStream istream)
+  public static server.corba.generated.MatchresultCorba read (org.omg.CORBA.portable.InputStream istream)
   {
-    corbaContract.generated.MatchresultCorba value = new corbaContract.generated.MatchresultCorba ();
+        server.corba.generated.MatchresultCorba value = new server.corba.generated.MatchresultCorba ();
     value.Id = istream.read_long ();
     value.Date = istream.read_string ();
     value.hometeam = istream.read_string ();
@@ -97,7 +97,7 @@ abstract public class MatchresultCorbaHelper
     return value;
   }
 
-  public static void write (org.omg.CORBA.portable.OutputStream ostream, corbaContract.generated.MatchresultCorba value)
+  public static void write (org.omg.CORBA.portable.OutputStream ostream, server.corba.generated.MatchresultCorba value)
   {
     ostream.write_long (value.Id);
     ostream.write_string (value.Date);

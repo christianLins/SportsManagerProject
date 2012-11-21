@@ -1,4 +1,4 @@
-package corbaContract.generated;
+package server.corba.generated;
 
 /**
 * corbaContract/generated/MatchresultCorbaHolder.java .
@@ -9,30 +9,30 @@ package corbaContract.generated;
 
 public final class MatchresultCorbaHolder implements org.omg.CORBA.portable.Streamable
 {
-  public corbaContract.generated.MatchresultCorba value = null;
+  public server.corba.generated.MatchresultCorba value = null;
 
   public MatchresultCorbaHolder ()
   {
   }
 
-  public MatchresultCorbaHolder (corbaContract.generated.MatchresultCorba initialValue)
+  public MatchresultCorbaHolder (server.corba.generated.MatchresultCorba initialValue)
   {
     value = initialValue;
   }
 
   public void _read (org.omg.CORBA.portable.InputStream i)
   {
-    value = corbaContract.generated.MatchresultCorbaHelper.read (i);
+    value = server.corba.generated.MatchresultCorbaHelper.read (i);
   }
 
   public void _write (org.omg.CORBA.portable.OutputStream o)
   {
-    corbaContract.generated.MatchresultCorbaHelper.write (o, value);
+        server.corba.generated.MatchresultCorbaHelper.write (o, value);
   }
 
   public org.omg.CORBA.TypeCode _type ()
   {
-    return corbaContract.generated.MatchresultCorbaHelper.type ();
+    return server.corba.generated.MatchresultCorbaHelper.type ();
   }
 
 }

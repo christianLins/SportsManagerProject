@@ -2,9 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package corbaserver;
+package server.corba;
 
-import corbaContract.generated.*;
+import server.corba.generated.MatchresultDataprovider;
+import server.corba.generated.MatchresultDataproviderHelper;
 import java.io.*;
 import java.util.logging.*;
 import org.omg.CORBA.ORB;

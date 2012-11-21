@@ -2,24 +2,24 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package rmi.contract.services;
+package contract.rmi.services;
 
+import contract.dto.*;
+import java.rmi.*;
 import java.util.List;
-import dto.contract.*;
-import contract.ShowMatchObj;
-import java.rmi.Remote;
-import java.rmi.RemoteException;
 
 /**
- *
- * @author Lucia
+ @author Lucia
  */
-public interface IShowCompetitionRmiService extends Remote{
-    
-    List<ICompetition> getCompetitions() throws RemoteException;
-    List<IMatch> getMatchs(List<Integer> matches) throws RemoteException;
-    List<ShowMatchObj> getTeams(List<Integer> matches) throws RemoteException;
-     List<IPlayer> getPlayer(IClubTeam team) throws RemoteException;
-    
-    
+public interface IShowCompetitionRmiService
+        extends Remote
+{
+    List<ICompetition> getCompetitions()
+            throws RemoteException;
+
+    List<IMatch> getMatchs(List<Integer> matches)
+            throws RemoteException;
+
+    List<IPlayer> getPlayer(IClubTeam team)
+            throws RemoteException;
 }

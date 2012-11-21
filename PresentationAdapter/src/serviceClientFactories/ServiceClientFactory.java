@@ -1,25 +1,22 @@
 package serviceClientFactories;
 
-
 import rmi.client.RmiServiceClientImpl;
-import services.CommunicationProblemException;
-import services.ServiceClient;
+import services.*;
 
 
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
- *
- * @author Lins Christian (christian.lins87@gmail.com)
+
+ @author Lins Christian (christian.lins87@gmail.com)
  */
 public class ServiceClientFactory
 {
-    
-    public static  ServiceClient getRmiServiceClient(String host, int port) throws CommunicationProblemException {
+    public static ServiceClient getRmiServiceClient(String host, int port)
+            throws CommunicationProblemException
+    {
         return new RmiServiceClientImpl(host, port);
     }
-    
 }

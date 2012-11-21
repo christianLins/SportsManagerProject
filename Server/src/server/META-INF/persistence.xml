@@ -29,8 +29,8 @@
     <class>sportsclubmanager.domain.classes.Member</class>
     <class>sportsclubmanager.domain.classes.Permission</class>
     <class>sportsclubmanager.domain.classes.Address</class>
-    <class>domain.classes.Caretaker</class>
-    <class>domain.classes.Admin</class>
+    <class>server.domain.classes.Admin</class>
+    <class>server.domain.classes.Caretaker</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/SportClubManagement?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value=""/>

@@ -1,6 +1,6 @@
 package presentation.forms.helper;
 
-import dto.contract.ITypeOfSport;
+import contract.dto.ITypeOfSport;
 import java.util.*;
 import presentation.basics.AbstractMainForm;
 

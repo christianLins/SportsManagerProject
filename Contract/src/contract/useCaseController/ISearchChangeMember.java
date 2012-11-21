@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package contract;
+package contract.useCaseController;
 
-import dto.contract.*;
+import contract.dto.*;
 import java.util.List;
 
 /**
@@ -28,7 +28,7 @@ public interface ISearchChangeMember
     List<IDepartment> getDepartments();
 
     List<IClubTeam> getClubTeams(List<Integer> clubTeams);
-    
+
     List<IClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport);
 
     List<ITypeOfSport> getTypeOfSports(List<Integer> sportsList);

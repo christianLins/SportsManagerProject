@@ -4,37 +4,36 @@
  */
 package rmi.client.mapper;
 
-import contract.INewCompetition;
-import dto.contract.ICompetition;
-import dto.contract.IMember;
-import dto.contract.ITeam;
+import contract.dto.*;
+import contract.useCaseController.INewCompetition;
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import rmi.contract.services.INewCompetitionRmiService;
+import contract.rmi.services.INewCompetitionRmiService;
 
 /**
- *
- * @author Lins Christian (christian.lins87@gmail.com)
- */
-public class NewCompetitionServiceMapper implements RmiServiceToServiceMapper<INewCompetitionRmiService, INewCompetition>
-{
 
+ @author Lins Christian (christian.lins87@gmail.com)
+ */
+public class NewCompetitionServiceMapper
+        implements RmiServiceToServiceMapper<INewCompetitionRmiService, INewCompetition>
+{
     @Override
     public INewCompetition getService(INewCompetitionRmiService rmiService)
     {
         NewCompetition n = new NewCompetition();
         n.setService(rmiService);
-        return n;  
+        return n;
     }
-    
-    private static class NewCompetition implements INewCompetition {
-        
+
+    private static class NewCompetition
+            implements INewCompetition
+    {
         private INewCompetitionRmiService service;
-        
-        
-        public void setService(INewCompetitionRmiService service) {
+
+        public void setService(INewCompetitionRmiService service)
+        {
             this.service = service;
         }
 
@@ -64,8 +63,5 @@ public class NewCompetitionServiceMapper implements RmiServiceToServiceMapper<IN
             }
             return null;
         }
-        
-        
     }
-    
 }

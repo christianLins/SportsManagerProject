@@ -4,12 +4,12 @@
  */
 package rmi.client.mapper;
 
-import contract.*;
-import dto.contract.*;
+import contract.dto.*;
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.logging.*;
-import rmi.contract.services.IShowCompetitionRmiService;
+import contract.rmi.services.IShowCompetitionRmiService;
+import contract.useCaseController.IShowCompetition;
 
 /**
 
@@ -56,20 +56,6 @@ public class ShowCompetitionServiceMapper
             try
             {
                 return service.getMatchs(matches);
-            }
-            catch (RemoteException ex)
-            {
-                Logger.getLogger(ShowCompetitionServiceMapper.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            return null;
-        }
-
-        @Override
-        public List<ShowMatchObj> getTeams(List<Integer> matches)
-        {
-            try
-            {
-                return service.getTeams(matches);
             }
             catch (RemoteException ex)
             {
