@@ -49,7 +49,7 @@ public class DtoFactory
         return AddressMapper.getInstance();
     }
 
-    public static IMapper<IClubTeam> getClubTeamMapper()
+    public static IClubTeamMapper getClubTeamMapper()
             throws RemoteException
     {
         return ClubTeamMapper.getInstance();

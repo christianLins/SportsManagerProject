@@ -24,4 +24,5 @@ public interface ITypeOfSport
     List<Integer> getPlayerList();
 
     void setPlayerList(List<Integer> playerList);
+    
 }

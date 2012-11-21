@@ -128,3 +128,5 @@ Server/dist/README.TXT
 /Server/build/
 /PresentationAdapter/dist/
 /PresentationAdapter/build/
+/CorbaClient/dist/
+/CorbaClient/build/

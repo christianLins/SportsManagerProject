@@ -1,5 +1,6 @@
 package presentation.basics;
 
+import dto.contract.IClubTeam;
 import dto.contract.ITypeOfSport;
 import java.util.List;
 
@@ -35,5 +36,10 @@ public class AbstractMainForm
     public void setTxtFieldSports(List<ITypeOfSport> selected)
     {
         // handle in code
+    }
+    
+    public List<IClubTeam> getClubTeams(ITypeOfSport sport){
+        return null;
+        
     }
 }

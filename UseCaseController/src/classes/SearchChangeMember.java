@@ -6,11 +6,13 @@ package classes;
 
 import contract.ISearchChangeMember;
 import dto.contract.*;
+import dto.mapper.ClubTeamNotFoundException;
 import dto.mapper.DtoFactory;
 import dto.mapper.contract.*;
 import java.rmi.RemoteException;
 import java.util.*;
 import java.util.logging.*;
+import javax.net.ssl.SSLContext;
 
 /**
 
@@ -230,5 +232,16 @@ public class SearchChangeMember
     public IMember getSelectedMember()
     {
         return member;
+    }
+
+    @Override
+    public List<IClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport) { 
+        List<IClubTeam> cTeams = null;
+        try {
+            cTeams =  DtoFactory.getClubTeamMapper().getClubTeamsByTypeOfSport(sport);
+        } catch (RemoteException | ClubTeamNotFoundException ex) {
+            Logger.getLogger(SearchChangeMember.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cTeams;
     }
 }

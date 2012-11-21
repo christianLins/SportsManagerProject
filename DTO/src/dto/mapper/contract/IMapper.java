@@ -4,6 +4,8 @@
  */
 package dto.mapper.contract;
 
+import dto.contract.IClubTeam;
+import dto.contract.ITypeOfSport;
 import java.io.Serializable;
 import java.util.List;
 
@@ -21,4 +23,5 @@ public interface IMapper<T> extends Serializable
     Integer set(T value);
     
     void delete(T value);
+
 }
