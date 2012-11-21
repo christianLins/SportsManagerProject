@@ -10,6 +10,7 @@ import javax.swing.event.*;
 import javax.swing.table.TableModel;
 import presentation.basics.*;
 import presentation.forms.helper.SelectSportsHelper;
+import presentation.forms.helper.SelectTeamsHelper;
 import services.*;
 
 /**
@@ -31,6 +32,7 @@ public class SearchMemberForm
     private List<ITypeOfSport> typeOfSports;
     private List<ITypeOfSport> availableSports;
     private List<ITypeOfSport> selectedSports;
+    private List<IClubTeam> selectedTeams;
     private List<IMember> matchingMembers;
 
     /**
@@ -53,8 +55,7 @@ public class SearchMemberForm
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         paneSearch = new javax.swing.JPanel();
         txtfieldSearchMemb = new javax.swing.JTextField();
@@ -76,7 +77,6 @@ public class SearchMemberForm
         radioAdmin = new javax.swing.JRadioButton();
         radioTrainer = new javax.swing.JRadioButton();
         radioPlayer = new javax.swing.JRadioButton();
-        comboTeam = new javax.swing.JComboBox();
         lblLName = new javax.swing.JLabel();
         lblPostCode = new javax.swing.JLabel();
         lblCountry = new javax.swing.JLabel();
@@ -99,37 +99,33 @@ public class SearchMemberForm
         lblSport = new javax.swing.JLabel();
         txtFieldSports = new javax.swing.JTextField();
         btnAddSport = new javax.swing.JButton();
+        txtFieldTeam = new javax.swing.JTextField();
+        btnTeams = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(848, 549));
 
         btnSearch.setText("Search");
-        btnSearch.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
             }
         });
 
         tabMember.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Membership Nr.", "First Name", "Last Name", "Birth Date", "Gender"
             }
         ));
-        tabMember.getSelectionModel().addListSelectionListener(new ListSelectionListener()
-        {
+        tabMember.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
-            public void valueChanged(ListSelectionEvent e)
-            {
+            public void valueChanged(ListSelectionEvent e) {
                 tableMemberValueChanged(e);
             }
         });
@@ -150,19 +146,15 @@ public class SearchMemberForm
         lblGender.setText("Gender");
 
         radioFemale.setText("female");
-        radioFemale.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        radioFemale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radioFemaleActionPerformed(evt);
             }
         });
 
         radioMale.setText("male");
-        radioMale.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        radioMale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radioMaleActionPerformed(evt);
             }
         });
@@ -174,38 +166,23 @@ public class SearchMemberForm
         lblRole.setText("Role");
 
         radioAdmin.setText("Admin");
-        radioAdmin.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        radioAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radioAdminActionPerformed(evt);
             }
         });
 
         radioTrainer.setText("Trainer");
-        radioTrainer.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        radioTrainer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radioTrainerActionPerformed(evt);
             }
         });
 
         radioPlayer.setText("Player");
-        radioPlayer.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        radioPlayer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radioPlayerActionPerformed(evt);
-            }
-        });
-
-        comboTeam.setModel(new javax.swing.DefaultComboBoxModel(getComboTeam()));
-        comboTeam.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                comboTeamActionPerformed(evt);
             }
         });
 
@@ -217,10 +194,8 @@ public class SearchMemberForm
 
         lblMail.setText("Mail");
 
-        txtfieldPostCode.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        txtfieldPostCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtfieldPostCodeActionPerformed(evt);
             }
         });
@@ -232,28 +207,22 @@ public class SearchMemberForm
         txtfieldMemberNr.setEnabled(false);
 
         btnApplyChange.setText("Apply Changes");
-        btnApplyChange.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnApplyChange.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnApplyChangeActionPerformed(evt);
             }
         });
 
         radioCaretaker.setText("Caretaker");
-        radioCaretaker.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        radioCaretaker.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radioCaretakerActionPerformed(evt);
             }
         });
 
         radioDepHead.setText("Department Head");
-        radioDepHead.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        radioDepHead.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radioDepHeadActionPerformed(evt);
             }
         });
@@ -264,11 +233,18 @@ public class SearchMemberForm
 
         btnAddSport.setText("Select Sports");
         btnAddSport.setInheritsPopupMenu(true);
-        btnAddSport.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnAddSport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddSportActionPerformed(evt);
+            }
+        });
+
+        txtFieldTeam.setEnabled(false);
+
+        btnTeams.setText("Select Teams");
+        btnTeams.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTeamsActionPerformed(evt);
             }
         });
 
@@ -289,55 +265,55 @@ public class SearchMemberForm
                             .addComponent(lblEntryDate)
                             .addComponent(lblTeam)
                             .addComponent(lblSport))
-                        .addGap(26, 26, 26)
                         .addGroup(paneMemberDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboTeam, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(paneMemberDataLayout.createSequentialGroup()
-                                .addGroup(paneMemberDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGap(26, 26, 26)
+                                .addGroup(paneMemberDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(paneMemberDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(txtfieldCity, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtfieldFName, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtfieldAddress, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtfieldPhone, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(dateBirthday, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(dateEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(133, 133, 133)
+                                .addGroup(paneMemberDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblGender)
+                                    .addComponent(lblMail)
                                     .addGroup(paneMemberDataLayout.createSequentialGroup()
-                                        .addComponent(txtFieldSports, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnAddSport))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, paneMemberDataLayout.createSequentialGroup()
+                                        .addComponent(lblLName)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtfieldLName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneMemberDataLayout.createSequentialGroup()
                                         .addGroup(paneMemberDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(paneMemberDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(txtfieldCity, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(txtfieldFName, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(txtfieldAddress, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(txtfieldPhone, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(dateBirthday, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(dateEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(133, 133, 133)
-                                        .addGroup(paneMemberDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(lblGender)
-                                            .addComponent(lblMail)
                                             .addGroup(paneMemberDataLayout.createSequentialGroup()
-                                                .addComponent(lblLName)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(txtfieldLName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(lblPostCode)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneMemberDataLayout.createSequentialGroup()
-                                                .addGroup(paneMemberDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(paneMemberDataLayout.createSequentialGroup()
-                                                        .addComponent(lblPostCode)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneMemberDataLayout.createSequentialGroup()
-                                                        .addGap(0, 0, Short.MAX_VALUE)
-                                                        .addComponent(lblCountry)
-                                                        .addGap(21, 21, 21)))
-                                                .addGroup(paneMemberDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(txtfieldCountry, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                                    .addComponent(txtfieldPostCode)
-                                                    .addComponent(txtfieldMail)
-                                                    .addGroup(paneMemberDataLayout.createSequentialGroup()
-                                                        .addComponent(radioFemale)
-                                                        .addGap(10, 10, 10)
-                                                        .addComponent(radioMale))))
+                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                .addComponent(lblCountry)
+                                                .addGap(21, 21, 21)))
+                                        .addGroup(paneMemberDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtfieldCountry, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                            .addComponent(txtfieldPostCode)
+                                            .addComponent(txtfieldMail)
                                             .addGroup(paneMemberDataLayout.createSequentialGroup()
-                                                .addComponent(lblMemberNr)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(txtfieldMemberNr)))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                                .addComponent(btnApplyChange))))
+                                                .addComponent(radioFemale)
+                                                .addGap(10, 10, 10)
+                                                .addComponent(radioMale))))
+                                    .addGroup(paneMemberDataLayout.createSequentialGroup()
+                                        .addComponent(lblMemberNr)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtfieldMemberNr))))
+                            .addGroup(paneMemberDataLayout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addGroup(paneMemberDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtFieldSports, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                                    .addComponent(txtFieldTeam))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(paneMemberDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnTeams, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnAddSport)))))
                     .addGroup(paneMemberDataLayout.createSequentialGroup()
                         .addComponent(lblRole)
                         .addGap(58, 58, 58)
@@ -349,9 +325,11 @@ public class SearchMemberForm
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(radioTrainer)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(radioPlayer)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(radioPlayer)))
+                .addContainerGap(135, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneMemberDataLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnApplyChange))
         );
         paneMemberDataLayout.setVerticalGroup(
             paneMemberDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -421,11 +399,11 @@ public class SearchMemberForm
                     .addComponent(btnAddSport))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(paneMemberDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboTeam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTeam))
+                    .addComponent(lblTeam)
+                    .addComponent(txtFieldTeam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTeams))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnApplyChange)
-                .addContainerGap())
+                .addComponent(btnApplyChange))
         );
 
         javax.swing.GroupLayout paneSearchLayout = new javax.swing.GroupLayout(paneSearch);
@@ -454,7 +432,7 @@ public class SearchMemberForm
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(paneMemberData, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(paneMemberData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -474,13 +452,7 @@ public class SearchMemberForm
 
     private void txtfieldPostCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfieldPostCodeActionPerformed
     }//GEN-LAST:event_txtfieldPostCodeActionPerformed
-    
-    private void comboTeamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTeamActionPerformed
-        String name = comboTeam.getSelectedItem().toString();
 
-//        setClubTeam(name);
-    }//GEN-LAST:event_comboTeamActionPerformed
-    
     private void radioAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioAdminActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_radioAdminActionPerformed
@@ -571,8 +543,12 @@ public class SearchMemberForm
         {
             JOptionPane.showMessageDialog(parent, "Member is no player or trainer!");
         }
-    }//GEN-LAST:event_btnAddSportActionPerformed
-    
+    }
+
+    private void btnTeamsActionPerformed(java.awt.event.ActionEvent evt) {
+        SelectTeamsHelper selectTeamsHelper = new SelectTeamsHelper(selectedSports, this);
+    }
+
     @Override
     public void setTxtFieldSports(List<ITypeOfSport> selection)
     {
@@ -719,8 +695,10 @@ public class SearchMemberForm
                 setTxtFieldSports(controller.getTypeOfSports(((IPlayer) role).getTypeOfSportList()));
             }
         }
-        
-        comboTeam.setModel(new DefaultComboBoxModel());
+    
+        //comboTeam.setModel(new DefaultComboBoxModel());
+        selectedTeams = new LinkedList<IClubTeam>();
+
         //    comboTeam.setModel(new DefaultComboBoxModel(getComboTeam()));
 
         //focus auf team dessen selectedMember momentan teil ist
@@ -784,6 +762,7 @@ public class SearchMemberForm
             roleInt.add(role.getId());
         }
         selectedMember.setRoleList(roleInt);
+        
 
         //make sure clubTeam is set right
 //        setClubTeam(comboTeam.getSelectedItem().toString());
@@ -822,6 +801,12 @@ public class SearchMemberForm
 //        }
 //    }
 
+    
+    @Override
+    public List<IClubTeam> getClubTeams(ITypeOfSport sport){
+        return controller.getClubTeamsByTypeOfSport(sport);      
+    }
+    
     private void genderActionPerformed(ActionEvent evt)
     {
         if (evt.getSource() == radioFemale)
@@ -850,7 +835,7 @@ public class SearchMemberForm
     private javax.swing.JButton btnAddSport;
     private javax.swing.JButton btnApplyChange;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JComboBox comboTeam;
+    private javax.swing.JButton btnTeams;
     private com.toedter.calendar.JDateChooser dateBirthday;
     private com.toedter.calendar.JDateChooser dateEntry;
     private javax.swing.JScrollPane jScrollPane1;
@@ -880,6 +865,7 @@ public class SearchMemberForm
     private javax.swing.JRadioButton radioTrainer;
     private javax.swing.JTable tabMember;
     private javax.swing.JTextField txtFieldSports;
+    private javax.swing.JTextField txtFieldTeam;
     private javax.swing.JTextField txtfieldAddress;
     private javax.swing.JTextField txtfieldCity;
     private javax.swing.JTextField txtfieldCountry;
