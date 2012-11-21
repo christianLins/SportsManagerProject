@@ -2,14 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package database;
+package server.database;
 
-import domain.*;
-import domain.classes.*;
-import domain.contract.*;
+import contract.domain.*;
 import java.text.*;
 import java.util.*;
 import java.util.logging.*;
+import server.domain.DomainFacade;
+import server.domain.classes.*;
 
 /**
  @author Thomas

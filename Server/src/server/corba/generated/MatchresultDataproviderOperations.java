@@ -1,4 +1,4 @@
-package corbaContract.generated;
+package server.corba.generated;
 
 
 /**
@@ -10,6 +10,6 @@ package corbaContract.generated;
 
 public interface MatchresultDataproviderOperations 
 {
-  corbaContract.generated.MatchresultListCorba getMatchresults (String typeOfSport, String league, String competitiondate);
-  boolean isMatchresultFinal (corbaContract.generated.MatchresultCorba mtachresult);
+    server.corba.generated.MatchresultListCorba getMatchresults (String typeOfSport, String league, String competitiondate);
+  boolean isMatchresultFinal (server.corba.generated.MatchresultCorba mtachresult);
 } // interface MatchresultDataproviderOperations

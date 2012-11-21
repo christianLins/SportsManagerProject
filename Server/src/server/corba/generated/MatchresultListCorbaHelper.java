@@ -1,4 +1,4 @@
-package corbaContract.generated;
+package server.corba.generated;
 
 
 /**
@@ -12,7 +12,7 @@ abstract public class MatchresultListCorbaHelper
 {
   private static String  _id = "IDL:corbaContract/generated/MatchresultListCorba:1.0";
 
-  public static void insert (org.omg.CORBA.Any a, corbaContract.generated.MatchresultListCorba that)
+  public static void insert (org.omg.CORBA.Any a, server.corba.generated.MatchresultListCorba that)
   {
     org.omg.CORBA.portable.OutputStream out = a.create_output_stream ();
     a.type (type ());
@@ -20,7 +20,7 @@ abstract public class MatchresultListCorbaHelper
     a.read_value (out.create_input_stream (), type ());
   }
 
-  public static corbaContract.generated.MatchresultListCorba extract (org.omg.CORBA.Any a)
+  public static server.corba.generated.MatchresultListCorba extract (org.omg.CORBA.Any a)
   {
     return read (a.create_input_stream ());
   }
@@ -42,13 +42,13 @@ abstract public class MatchresultListCorbaHelper
           __active = true;
           org.omg.CORBA.StructMember[] _members0 = new org.omg.CORBA.StructMember [1];
           org.omg.CORBA.TypeCode _tcOf_members0 = null;
-          _tcOf_members0 = corbaContract.generated.MatchresultCorbaHelper.type ();
+          _tcOf_members0 = server.corba.generated.MatchresultCorbaHelper.type ();
           _tcOf_members0 = org.omg.CORBA.ORB.init ().create_sequence_tc (0, _tcOf_members0);
           _members0[0] = new org.omg.CORBA.StructMember (
             "matchresults",
             _tcOf_members0,
             null);
-          __typeCode = org.omg.CORBA.ORB.init ().create_struct_tc (corbaContract.generated.MatchresultListCorbaHelper.id (), "MatchresultListCorba", _members0);
+          __typeCode = org.omg.CORBA.ORB.init ().create_struct_tc (server.corba.generated.MatchresultListCorbaHelper.id (), "MatchresultListCorba", _members0);
           __active = false;
         }
       }
@@ -61,21 +61,21 @@ abstract public class MatchresultListCorbaHelper
     return _id;
   }
 
-  public static corbaContract.generated.MatchresultListCorba read (org.omg.CORBA.portable.InputStream istream)
+  public static server.corba.generated.MatchresultListCorba read (org.omg.CORBA.portable.InputStream istream)
   {
-    corbaContract.generated.MatchresultListCorba value = new corbaContract.generated.MatchresultListCorba ();
+        server.corba.generated.MatchresultListCorba value = new server.corba.generated.MatchresultListCorba ();
     int _len0 = istream.read_long ();
-    value.matchresults = new corbaContract.generated.MatchresultCorba[_len0];
+    value.matchresults = new server.corba.generated.MatchresultCorba[_len0];
     for (int _o1 = 0;_o1 < value.matchresults.length; ++_o1)
-      value.matchresults[_o1] = corbaContract.generated.MatchresultCorbaHelper.read (istream);
+      value.matchresults[_o1] = server.corba.generated.MatchresultCorbaHelper.read (istream);
     return value;
   }
 
-  public static void write (org.omg.CORBA.portable.OutputStream ostream, corbaContract.generated.MatchresultListCorba value)
+  public static void write (org.omg.CORBA.portable.OutputStream ostream, server.corba.generated.MatchresultListCorba value)
   {
     ostream.write_long (value.matchresults.length);
     for (int _i0 = 0;_i0 < value.matchresults.length; ++_i0)
-      corbaContract.generated.MatchresultCorbaHelper.write (ostream, value.matchresults[_i0]);
+        server.corba.generated.MatchresultCorbaHelper.write (ostream, value.matchresults[_i0]);
   }
 
 }

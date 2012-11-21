@@ -1,6 +1,6 @@
-package domain.classes;
+package server.domain.classes;
 
-import domain.contract.ICaretaker;
+import contract.domain.ICaretaker;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;

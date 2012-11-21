@@ -1,4 +1,4 @@
-package corbaContract.generated;
+package server.corba.generated;
 
 
 /**

@@ -1,4 +1,4 @@
-package corbaContract.generated;
+package server.corba.generated;
 
 
 /**
@@ -10,13 +10,13 @@ package corbaContract.generated;
 
 public final class MatchresultListCorba implements org.omg.CORBA.portable.IDLEntity
 {
-  public corbaContract.generated.MatchresultCorba matchresults[] = null;
+  public server.corba.generated.MatchresultCorba matchresults[] = null;
 
   public MatchresultListCorba ()
   {
   } // ctor
 
-  public MatchresultListCorba (corbaContract.generated.MatchresultCorba[] _matchresults)
+  public MatchresultListCorba (server.corba.generated.MatchresultCorba[] _matchresults)
   {
     matchresults = _matchresults;
   } // ctor

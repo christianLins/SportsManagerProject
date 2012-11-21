@@ -1,4 +1,4 @@
-module corbaContract
+module corba
 {
     module generated 
     { 

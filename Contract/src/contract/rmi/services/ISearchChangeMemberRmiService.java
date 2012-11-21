@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package rmi.contract.services;
+package contract.rmi.services;
 
-import dto.contract.*;
+import contract.dto.*;
 import java.rmi.*;
 import java.util.List;
 

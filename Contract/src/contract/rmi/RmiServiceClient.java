@@ -2,11 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package rmi.contract;
+package contract.rmi;
 
+import contract.rmi.services.INewCompetitionRmiService;
+import contract.rmi.services.IAddMatchResultsRmiService;
+import contract.rmi.services.IShowCompetitionRmiService;
+import contract.rmi.services.IChangeCompetitionTeamRmiService;
+import contract.rmi.services.ISearchChangeMemberRmiService;
+import contract.rmi.services.ILoginRmiService;
+import contract.rmi.services.INewMemberRmiService;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import rmi.contract.services.*;
 
 /**
  * this class provides the server-side services via rmi

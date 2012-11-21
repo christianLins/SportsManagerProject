@@ -1,9 +1,8 @@
-package rmi.contract.services;
+package contract.rmi.services;
 
+import contract.dto.*;
+import java.rmi.*;
 import java.util.List;
-import dto.contract.*;
-import java.rmi.Remote;
-import java.rmi.RemoteException;
 
 /**
  *

@@ -1,4 +1,4 @@
-package corbaContract.generated;
+package server.corba.generated;
 
 
 /**
@@ -8,10 +8,10 @@ package corbaContract.generated;
 * Freitag, 16. November 2012 16:53 Uhr MEZ
 */
 
-public class _MatchresultDataproviderStub extends org.omg.CORBA.portable.ObjectImpl implements corbaContract.generated.MatchresultDataprovider
+public class _MatchresultDataproviderStub extends org.omg.CORBA.portable.ObjectImpl implements server.corba.generated.MatchresultDataprovider
 {
 
-  public corbaContract.generated.MatchresultListCorba getMatchresults (String typeOfSport, String league, String competitiondate)
+  public server.corba.generated.MatchresultListCorba getMatchresults (String typeOfSport, String league, String competitiondate)
   {
             org.omg.CORBA.portable.InputStream $in = null;
             try {
@@ -20,7 +20,7 @@ public class _MatchresultDataproviderStub extends org.omg.CORBA.portable.ObjectI
                 $out.write_string (league);
                 $out.write_string (competitiondate);
                 $in = _invoke ($out);
-                corbaContract.generated.MatchresultListCorba $result = corbaContract.generated.MatchresultListCorbaHelper.read ($in);
+                server.corba.generated.MatchresultListCorba $result = server.corba.generated.MatchresultListCorbaHelper.read ($in);
                 return $result;
             } catch (org.omg.CORBA.portable.ApplicationException $ex) {
                 $in = $ex.getInputStream ();
@@ -33,12 +33,12 @@ public class _MatchresultDataproviderStub extends org.omg.CORBA.portable.ObjectI
             }
   } // getMatchresults
 
-  public boolean isMatchresultFinal (corbaContract.generated.MatchresultCorba mtachresult)
+  public boolean isMatchresultFinal (server.corba.generated.MatchresultCorba mtachresult)
   {
             org.omg.CORBA.portable.InputStream $in = null;
             try {
                 org.omg.CORBA.portable.OutputStream $out = _request ("isMatchresultFinal", true);
-                corbaContract.generated.MatchresultCorbaHelper.write ($out, mtachresult);
+                server.corba.generated.MatchresultCorbaHelper.write ($out, mtachresult);
                 $in = _invoke ($out);
                 boolean $result = $in.read_boolean ();
                 return $result;

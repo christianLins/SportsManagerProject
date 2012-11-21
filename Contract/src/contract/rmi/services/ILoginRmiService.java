@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package rmi.contract.services;
+package contract.rmi.services;
 
-import dto.contract.IMember;
-import dto.contract.IUserData;
+import contract.dto.IMember;
+import contract.dto.IUserData;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 

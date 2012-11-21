@@ -1,4 +1,4 @@
-package corbaContract.generated;
+package server.corba.generated;
 
 
 /**
@@ -9,7 +9,7 @@ package corbaContract.generated;
 */
 
 public abstract class MatchresultDataproviderPOA extends org.omg.PortableServer.Servant
- implements corbaContract.generated.MatchresultDataproviderOperations, org.omg.CORBA.portable.InvokeHandler
+ implements server.corba.generated.MatchresultDataproviderOperations, org.omg.CORBA.portable.InvokeHandler
 {
 
   // Constructors
@@ -37,16 +37,16 @@ public abstract class MatchresultDataproviderPOA extends org.omg.PortableServer.
          String typeOfSport = in.read_string ();
          String league = in.read_string ();
          String competitiondate = in.read_string ();
-         corbaContract.generated.MatchresultListCorba $result = null;
+            server.corba.generated.MatchresultListCorba $result = null;
          $result = this.getMatchresults (typeOfSport, league, competitiondate);
          out = $rh.createReply();
-         corbaContract.generated.MatchresultListCorbaHelper.write (out, $result);
+            server.corba.generated.MatchresultListCorbaHelper.write (out, $result);
          break;
        }
 
        case 1:  // corbaContract/generated/MatchresultDataprovider/isMatchresultFinal
        {
-         corbaContract.generated.MatchresultCorba mtachresult = corbaContract.generated.MatchresultCorbaHelper.read (in);
+            server.corba.generated.MatchresultCorba mtachresult = server.corba.generated.MatchresultCorbaHelper.read (in);
          boolean $result = false;
          $result = this.isMatchresultFinal (mtachresult);
          out = $rh.createReply();

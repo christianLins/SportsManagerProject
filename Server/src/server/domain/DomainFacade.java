@@ -2,15 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package domain;
+package server.domain;
 
-import domain.classes.*;
-import domain.contract.IDomain;
-import domain.contract.ITypeOfSport;
+import contract.domain.*;
 import java.util.*;
 import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
-import utils.HibernateUtil;
+import server.domain.classes.*;
+import server.utils.HibernateUtil;
 
 /**
  *

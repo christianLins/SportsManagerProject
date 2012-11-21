@@ -1,4 +1,4 @@
-package dto.mapper.contract;
+package contract.dto.mapper;
 
 /**
  *

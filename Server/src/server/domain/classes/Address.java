@@ -1,7 +1,7 @@
-package domain.classes;
+package server.domain.classes;
 
-import domain.contract.IAddress;
-import domain.contract.ICountry;
+import contract.domain.IAddress;
+import contract.domain.ICountry;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
