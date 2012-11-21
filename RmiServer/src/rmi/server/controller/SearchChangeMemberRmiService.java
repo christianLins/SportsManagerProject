@@ -12,13 +12,16 @@ import java.util.List;
 import rmi.contract.services.ISearchChangeMemberRmiService;
 
 /**
- *
- * @author Lins Christian (christian.lins87@gmail.com)
+
+ @author Lins Christian (christian.lins87@gmail.com)
  */
-public class SearchChangeMemberRmiService extends UnicastRemoteObject implements ISearchChangeMemberRmiService
+public class SearchChangeMemberRmiService
+        extends UnicastRemoteObject
+        implements ISearchChangeMemberRmiService
 {
-    
-    public SearchChangeMemberRmiService() throws RemoteException {
+    public SearchChangeMemberRmiService()
+            throws RemoteException
+    {
         super();
     }
 
@@ -65,9 +68,10 @@ public class SearchChangeMemberRmiService extends UnicastRemoteObject implements
     }
 
     @Override
-    public IMember getMember(int searchMember) throws RemoteException
+    public IMember getMember(int searchMember)
+            throws RemoteException
     {
-       return SearchChangeMember.getInstance().getMember(searchMember);
+        return SearchChangeMember.getInstance().getMember(searchMember);
     }
 
     @Override
@@ -81,5 +85,23 @@ public class SearchChangeMemberRmiService extends UnicastRemoteObject implements
     {
         return SearchChangeMember.getInstance().getCountry(countryID);
     }
-    
+
+    @Override
+    public List<ITypeOfSport> getTypeOfSports(List<Integer> sportsList)
+            throws RemoteException
+    {
+        return SearchChangeMember.getInstance().getTypeOfSports(sportsList);
+    }
+
+    @Override
+    public IMember getSelectedMember()
+    {
+        return SearchChangeMember.getInstance().getSelectedMember();
+    }
+
+    @Override
+    public void setSelectedMember(IMember selectedMember)
+    {
+        SearchChangeMember.getInstance().setSelectedMember(selectedMember);
+    }
 }

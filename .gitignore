@@ -126,3 +126,5 @@ Server/build/classes/.netbeans_update_resources
 Server/dist/README.TXT
 /CorbaServer/build/
 /Server/build/
+/PresentationAdapter/dist/
+/PresentationAdapter/build/

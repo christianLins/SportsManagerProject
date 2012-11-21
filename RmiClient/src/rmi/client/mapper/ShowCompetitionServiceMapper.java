@@ -4,40 +4,35 @@
  */
 package rmi.client.mapper;
 
-import contract.IShowCompetition;
-import contract.ShowMatchObj;
-import dto.contract.IClubTeam;
-import dto.contract.ICompetition;
-import dto.contract.IMatch;
-import dto.contract.IPlayer;
+import contract.*;
+import dto.contract.*;
 import java.rmi.RemoteException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.*;
 import rmi.contract.services.IShowCompetitionRmiService;
 
 /**
- *
- * @author Lins Christian (christian.lins87@gmail.com)
+
+ @author Lins Christian (christian.lins87@gmail.com)
  */
-public class ShowCompetitionServiceMapper implements RmiServiceToServiceMapper<IShowCompetitionRmiService, IShowCompetition>
+public class ShowCompetitionServiceMapper
+        implements RmiServiceToServiceMapper<IShowCompetitionRmiService, IShowCompetition>
 {
-
-
     @Override
     public IShowCompetition getService(IShowCompetitionRmiService rmiService)
-    {          
+    {
         ShowCompetition n = new ShowCompetition();
         n.setService(rmiService);
-        return n;  
+        return n;
     }
-    
-    private static class ShowCompetition implements IShowCompetition {
-        
+
+    private static class ShowCompetition
+            implements IShowCompetition
+    {
         private IShowCompetitionRmiService service;
-        
-        
-        public void setService(IShowCompetitionRmiService service) {
+
+        public void setService(IShowCompetitionRmiService service)
+        {
             this.service = service;
         }
 
@@ -96,7 +91,5 @@ public class ShowCompetitionServiceMapper implements RmiServiceToServiceMapper<I
             }
             return null;
         }
-        
-        
     }
 }

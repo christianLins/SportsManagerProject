@@ -25,7 +25,7 @@ public class DtoFactory
         return CaretakerMapper.getInstance();
     }
 
-    public static IMapper<IMember> getMemberMapper()
+    public static IMemberMapper getMemberMapper()
             throws RemoteException
     {
         return MemberMapper.getInstance();

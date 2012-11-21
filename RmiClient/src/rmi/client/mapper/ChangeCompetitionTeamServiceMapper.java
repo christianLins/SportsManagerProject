@@ -5,14 +5,10 @@
 package rmi.client.mapper;
 
 import contract.IChangeCompetitionTeam;
-import dto.contract.IClubTeam;
-import dto.contract.ICompetition;
-import dto.contract.IPlayer;
+import dto.contract.*;
 import java.rmi.RemoteException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import rmi.contract.services.IAddMatchResultsRmiService;
+import java.util.logging.*;
 import rmi.contract.services.IChangeCompetitionTeamRmiService;
 
 /**

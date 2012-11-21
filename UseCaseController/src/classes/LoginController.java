@@ -6,27 +6,30 @@ package classes;
 
 import contract.ILogin;
 import contract.MemberNotFoundException;
+import dto.classes.Member;
 import dto.contract.IMember;
 import dto.contract.IUserData;
 import dto.mapper.DtoFactory;
 import dto.mapper.MemberMapper;
-import dto.mapper.contract.NotFoundException;
+import dto.mapper.contract.*;
 import java.rmi.RemoteException;
 
 /**
- *
- * @author Lins Christian (christian.lins87@gmail.com)
+
+ @author Lins Christian (christian.lins87@gmail.com)
  */
-public class LoginController implements ILogin
+public class LoginController
+        implements ILogin
 {
     private static LoginController INSTANCE;
 
     private LoginController()
     {
     }
-    
-    public static ILogin getInstance() {
-        if(INSTANCE == null)
+
+    public static ILogin getInstance()
+    {
+        if (INSTANCE == null)
         {
             INSTANCE = new LoginController();
         }
@@ -34,11 +37,12 @@ public class LoginController implements ILogin
     }
 
     @Override
-    public IMember getMemberByUserData(IUserData userData) throws MemberNotFoundException
+    public IMember getMemberByUserData(IUserData userData)
+            throws MemberNotFoundException
     {
         try
         {
-            MemberMapper m = (MemberMapper) DtoFactory.getMemberMapper();
+            IMemberMapper m = DtoFactory.getMemberMapper();
             return m.getMemberByUsername(userData.getUsername());
         }
         catch (RemoteException | NotFoundException ex)
@@ -46,6 +50,4 @@ public class LoginController implements ILogin
             throw new MemberNotFoundException(ex);
         }
     }
-    
-    
 }
