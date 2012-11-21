@@ -4,16 +4,13 @@
  */
 package rmi.client.mapper;
 
-import contract.IAddMatchResults;
-import dto.contract.ICompetition;
-import dto.contract.IMatch;
-import dto.contract.IMatchresult;
-import dto.contract.ITeam;
+import contract.dto.*;
+import contract.useCaseController.IAddMatchResults;
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import rmi.contract.services.IAddMatchResultsRmiService;
+import contract.rmi.services.IAddMatchResultsRmiService;
 
 /**
  *

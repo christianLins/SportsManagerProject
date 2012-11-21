@@ -4,9 +4,9 @@
  */
 package server;
 
-import corbaserver.CorbaServer;
+import server.corba.CorbaServer;
 import java.io.IOException;
-import rmi.server.RmiServer;
+import server.rmi.RmiServer;
 
 /**
  @author Thomas

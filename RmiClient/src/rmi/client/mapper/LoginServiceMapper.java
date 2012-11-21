@@ -4,35 +4,35 @@
  */
 package rmi.client.mapper;
 
-import contract.ILogin;
-import dto.contract.IMember;
-import dto.contract.IUserData;
+import contract.dto.*;
+import contract.useCaseController.ILogin;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import rmi.contract.services.ILoginRmiService;
+import contract.rmi.services.ILoginRmiService;
 
 /**
- *
- * @author Lins Christian (christian.lins87@gmail.com)
- */
-public class LoginServiceMapper implements RmiServiceToServiceMapper<ILoginRmiService, ILogin>
-{
 
+ @author Lins Christian (christian.lins87@gmail.com)
+ */
+public class LoginServiceMapper
+        implements RmiServiceToServiceMapper<ILoginRmiService, ILogin>
+{
     @Override
     public ILogin getService(ILoginRmiService rmiService)
     {
         Login n = new Login();
         n.setService(rmiService);
-        return n;  
+        return n;
     }
-    
-    private static class Login implements ILogin {
-        
-         private ILoginRmiService service;
-        
-        
-        public void setService(ILoginRmiService service) {
+
+    private static class Login
+            implements ILogin
+    {
+        private ILoginRmiService service;
+
+        public void setService(ILoginRmiService service)
+        {
             this.service = service;
         }
 
@@ -49,7 +49,5 @@ public class LoginServiceMapper implements RmiServiceToServiceMapper<ILoginRmiSe
             }
             return null;
         }
-        
     }
-    
 }

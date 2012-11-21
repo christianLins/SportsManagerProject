@@ -4,11 +4,8 @@
  */
 package presentation.forms.competition;
 
-import contract.IChangeCompetitionTeam;
-import dto.contract.IClubTeam;
-import dto.contract.ICompetition;
-import dto.contract.IMember;
-import dto.contract.IPlayer;
+import contract.dto.*;
+import contract.useCaseController.IChangeCompetitionTeam;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.AbstractListModel;

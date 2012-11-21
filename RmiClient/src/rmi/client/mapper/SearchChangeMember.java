@@ -4,12 +4,12 @@
  */
 package rmi.client.mapper;
 
-import contract.ISearchChangeMember;
-import dto.contract.*;
+import contract.dto.*;
+import contract.useCaseController.ISearchChangeMember;
 import java.rmi.RemoteException;
 import java.util.*;
 import java.util.logging.*;
-import rmi.contract.services.ISearchChangeMemberRmiService;
+import contract.rmi.services.ISearchChangeMemberRmiService;
 
 /**
  @author Thomas
@@ -181,9 +181,12 @@ public class SearchChangeMember
     public IMember getSelectedMember()
     {
         IMember m = null;
-        try {
+        try
+        {
             m = service.getSelectedMember();
-        } catch (RemoteException ex) {
+        }
+        catch (RemoteException ex)
+        {
             Logger.getLogger(SearchChangeMember.class.getName()).log(Level.SEVERE, null, ex);
         }
         return m;
@@ -192,15 +195,19 @@ public class SearchChangeMember
     @Override
     public void setSelectedMember(IMember selectedMember)
     {
-        try {
+        try
+        {
             service.setSelectedMember(selectedMember);
-        } catch (RemoteException ex) {
+        }
+        catch (RemoteException ex)
+        {
             Logger.getLogger(SearchChangeMember.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @Override
-    public List<IClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport) {
+    public List<IClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport)
+    {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

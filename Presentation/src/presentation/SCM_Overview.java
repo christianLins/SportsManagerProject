@@ -1,12 +1,8 @@
 package presentation;
 
-import contract.*;
-import dto.contract.*;
+import contract.dto.IMember;
 import java.util.logging.*;
-import javax.swing.*;
-import ldap.contract.IAuthenticator;
-import ldap.presentation.LoginFrame;
-import ldap.presentation.core.*;
+import javax.swing.WindowConstants;
 import presentation.basics.AbstractForm;
 import presentation.forms.competition.*;
 import presentation.forms.member.*;
@@ -315,8 +311,6 @@ public class SCM_Overview
             Logger.getLogger(SCM_Overview.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnChangeTeamActionPerformed
-
-  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddResult;
     private javax.swing.JButton btnChangeTeam;
