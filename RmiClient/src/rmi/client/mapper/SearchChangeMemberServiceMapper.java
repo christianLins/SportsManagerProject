@@ -4,8 +4,8 @@
  */
 package rmi.client.mapper;
 
-import contract.ISearchChangeMember;
-import rmi.contract.services.ISearchChangeMemberRmiService;
+import contract.useCaseController.ISearchChangeMember;
+import contract.rmi.services.ISearchChangeMemberRmiService;
 
 /**
  *

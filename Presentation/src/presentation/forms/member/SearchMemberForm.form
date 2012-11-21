@@ -67,7 +67,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="105" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="paneMemberData" min="-2" pref="360" max="-2" attributes="0"/>
+                  <Component id="paneMemberData" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -167,69 +167,69 @@
                                   <Component id="lblTeam" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblSport" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="comboTeam" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Component id="txtFieldSports" min="-2" pref="476" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="btnAddSport" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="txtfieldCity" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtfieldFName" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtfieldAddress" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtfieldPhone" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                              <Component id="dateBirthday" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
                                           </Group>
+                                          <Component id="dateEntry" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="lblGender" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblMail" min="-2" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
+                                              <Component id="lblLName" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="txtfieldLName" min="-2" pref="200" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                                      <Component id="txtfieldCity" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="txtfieldFName" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="txtfieldAddress" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="txtfieldPhone" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                                      <Component id="dateBirthday" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Component id="dateEntry" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="lblGender" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="lblMail" min="-2" max="-2" attributes="0"/>
                                                   <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="lblLName" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                      <Component id="txtfieldLName" min="-2" pref="200" max="-2" attributes="0"/>
+                                                      <Component id="lblPostCode" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="32767" attributes="0"/>
                                                   </Group>
                                                   <Group type="102" alignment="1" attributes="0">
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Group type="102" alignment="0" attributes="0">
-                                                              <Component id="lblPostCode" min="-2" max="-2" attributes="0"/>
-                                                              <EmptySpace max="32767" attributes="0"/>
-                                                          </Group>
-                                                          <Group type="102" alignment="1" attributes="0">
-                                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                                              <Component id="lblCountry" min="-2" max="-2" attributes="0"/>
-                                                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                                                          </Group>
-                                                      </Group>
-                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                          <Component id="txtfieldCountry" pref="200" max="32767" attributes="0"/>
-                                                          <Component id="txtfieldPostCode" max="32767" attributes="0"/>
-                                                          <Component id="txtfieldMail" alignment="0" max="32767" attributes="0"/>
-                                                          <Group type="102" alignment="0" attributes="0">
-                                                              <Component id="radioFemale" min="-2" max="-2" attributes="0"/>
-                                                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                                              <Component id="radioMale" min="-2" max="-2" attributes="0"/>
-                                                          </Group>
-                                                      </Group>
+                                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                                      <Component id="lblCountry" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <Group type="102" attributes="0">
-                                                      <Component id="lblMemberNr" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                      <Component id="txtfieldMemberNr" max="32767" attributes="0"/>
+                                              </Group>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="txtfieldCountry" pref="200" max="32767" attributes="0"/>
+                                                  <Component id="txtfieldPostCode" max="32767" attributes="0"/>
+                                                  <Component id="txtfieldMail" alignment="0" max="32767" attributes="0"/>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="radioFemale" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                                      <Component id="radioMale" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
                                           </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="lblMemberNr" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="txtfieldMemberNr" max="32767" attributes="0"/>
+                                          </Group>
                                       </Group>
-                                      <EmptySpace pref="20" max="32767" attributes="0"/>
-                                      <Component id="btnApplyChange" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="txtFieldSports" pref="450" max="32767" attributes="0"/>
+                                          <Component id="txtFieldTeam" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="btnTeams" min="-2" pref="95" max="-2" attributes="0"/>
+                                          <Component id="btnAddSport" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
@@ -245,10 +245,13 @@
                               <Component id="radioTrainer" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="radioPlayer" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace pref="135" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="btnApplyChange" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -338,12 +341,12 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="comboTeam" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblTeam" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtFieldTeam" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnTeams" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnApplyChange" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -432,16 +435,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioPlayerActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="comboTeam">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new javax.swing.DefaultComboBoxModel(getComboTeam())" type="code"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboTeamActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblLName">
@@ -541,6 +534,19 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddSportActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtFieldTeam">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnTeams">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Select Teams"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTeamsActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

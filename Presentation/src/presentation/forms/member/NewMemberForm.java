@@ -1,31 +1,14 @@
 package presentation.forms.member;
 
-import contract.INewMember;
-import dto.classes.Admin;
-import dto.classes.Caretaker;
-import dto.classes.DepartmentHead;
-import dto.classes.Player;
-import dto.classes.Trainer;
-import dto.contract.IAddress;
-import dto.contract.IClubTeam;
-import dto.contract.ICountry;
-import dto.contract.IDepartment;
-import dto.contract.IMember;
-import dto.contract.IPlayer;
-import dto.contract.IRole;
-import dto.contract.ITrainer;
-import dto.contract.ITypeOfSport;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import presentation.basics.AbstractForm;
-import presentation.basics.AbstractMainForm;
+import presentation.forms.dto.Player;
+import contract.dto.*;
+import contract.useCaseController.INewMember;
+import java.util.*;
+import javax.swing.*;
+import presentation.basics.*;
+import presentation.forms.dto.*;
 import presentation.forms.helper.SelectSportsHelper;
-import services.ServiceClient;
-import services.ServiceNotAvailableException;
+import services.*;
 
 /**
 
@@ -56,15 +39,18 @@ public class NewMemberForm
             throws ServiceNotAvailableException
     {
         super(form);
+
+        initComponents();
+
         this.client = client;
         this.user = user;
         //adminPermission = user.hasPermission();
-        if(!adminPermission){
+        if (!adminPermission)
+        {
             disableExtendedRadioSelection();
         }
         this.selectedSports = new LinkedList<>();
         controller = this.client.getNewMemberService();
-        initComponents();
     }
 
     /**
@@ -518,15 +504,16 @@ public class NewMemberForm
 
     private String[] getComboDepartment()
     {
-        List<IDepartment> depList = controller.getDepartments();
-        String[] depArray = new String[depList.size()];
-
-        for (int i = 0; i < depList.size(); i++)
-        {
-            depArray[i] = depList.get(i).getName();
-        }
-
-        return depArray;
+        return new String[1];
+//        List<IDepartment> depList = controller.getDepartments();
+//        String[] depArray = new String[depList.size()];
+//
+//        for (int i = 0; i < depList.size(); i++)
+//        {
+//            depArray[i] = depList.get(i).getName();
+//        }
+//
+//        return depArray;
     }
 
     private void setSelectedDepartment()
@@ -559,7 +546,7 @@ public class NewMemberForm
         }
         return tosIDs;
     }
-    
+
     private String[] getComboTeam()
     {
         if (department != null)
@@ -657,7 +644,7 @@ public class NewMemberForm
         //TODO: which case only member and address necessary?!
         //role list necessary?
         List<IRole> membersRoles = new LinkedList<>();
-        
+
         if (adminPermission)
         {
             if (radioAdmin.isSelected())
@@ -692,20 +679,20 @@ public class NewMemberForm
         {
             roleInt.add(role.getId());
         }
-        
+
         member.setRoleList(roleInt);
-        
+
 
         if (radioTrainer.isSelected() || radioPlayer.isSelected())
         {
-            member.setRoleList(roleInt);            
+            member.setRoleList(roleInt);
             setSelectedDepartment();
             setSelectedTeam();
 
             controller.setNewMember(member, address, department, clubTeam, role);
         }
         else
-        {            
+        {
             controller.setNewMember(member, address);
         }
     }
@@ -740,8 +727,7 @@ public class NewMemberForm
         radioCaretaker.setEnabled(false);
         radioDeptHead.setEnabled(false);
         radioTrainer.setEnabled(false);
-    }    
-    
+    }
 
     public JPanel getPanel()
     {
@@ -789,5 +775,4 @@ public class NewMemberForm
     private javax.swing.JTextField txtfieldPhone;
     private javax.swing.JTextField txtfieldPostCode;
     // End of variables declaration//GEN-END:variables
-
 }

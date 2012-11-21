@@ -4,8 +4,8 @@
  */
 package presentation;
 
-import contract.*;
-import dto.contract.*;
+import contract.dto.*;
+import contract.useCaseController.*;
 import java.util.logging.*;
 import javax.swing.JOptionPane;
 import ldap.contract.IAuthenticator;
@@ -34,7 +34,7 @@ public class LoginDialogListener
             JOptionPane.showMessageDialog(null, "Access denied!");
             return;
         }
-        
+
         try
         {
             JOptionPane.showMessageDialog(null, "Access granted!");

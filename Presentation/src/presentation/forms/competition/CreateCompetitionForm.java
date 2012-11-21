@@ -4,18 +4,17 @@
  */
 package presentation.forms.competition;
 
-import contract.INewCompetition;
-import dto.classes.Address;
-import dto.classes.Competition;
-import dto.classes.Country;
-import dto.contract.*;
+import presentation.forms.dto.Competition;
+import presentation.forms.dto.Country;
+import presentation.forms.dto.Address;
+import contract.dto.*;
+import contract.useCaseController.INewCompetition;
 import java.util.*;
 import javax.swing.*;
 import presentation.basics.*;
 import services.*;
 
 /**
-
  @author Lucia
  */
 public class CreateCompetitionForm
@@ -491,8 +490,8 @@ public class CreateCompetitionForm
         competition.setDateFrom(dateDateFrom.getDate());
         competition.setDateTo(dateDateTo.getDate());
         competition.setPayment(Double.parseDouble(txtfieldFee.getText()));
-        competition.setTeamList(getSelectedTeams(listSelectTeams));        
-        
+        competition.setTeamList(getSelectedTeams(listSelectTeams));
+
         //Set Competitions address
         IAddress address = new Address();
         address.setVillage(txtfieldcity.getText());
@@ -500,7 +499,7 @@ public class CreateCompetitionForm
         ICountry country = new Country();
         country.setName(txtfieldCountry.getText());
         address.setCountry(country.getId());
-        
+
         competition.setAddress(address.getId());
     }//GEN-LAST:event_btnConfirmActionPerformed
 

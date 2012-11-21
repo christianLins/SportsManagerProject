@@ -4,35 +4,36 @@
  */
 package rmi.client.mapper;
 
-import contract.INewMember;
-import dto.contract.*;
+import contract.dto.*;
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import rmi.contract.services.INewMemberRmiService;
+import contract.rmi.services.INewMemberRmiService;
+import contract.useCaseController.INewMember;
 
 /**
- *
- * @author Lins Christian (christian.lins87@gmail.com)
- */
-public class NewMemberServiceMapper implements RmiServiceToServiceMapper<INewMemberRmiService, INewMember>
-{
 
+ @author Lins Christian (christian.lins87@gmail.com)
+ */
+public class NewMemberServiceMapper
+        implements RmiServiceToServiceMapper<INewMemberRmiService, INewMember>
+{
     public INewMember getService(INewMemberRmiService rmiService)
     {
-        
+
         NewMember n = new NewMember();
         n.setService(rmiService);
-        return n;  
+        return n;
     }
-    
-    private static class NewMember implements INewMember {
-        
+
+    private static class NewMember
+            implements INewMember
+    {
         private INewMemberRmiService service;
-        
-        
-        public void setService(INewMemberRmiService service) {
+
+        public void setService(INewMemberRmiService service)
+        {
             this.service = service;
         }
 
@@ -91,10 +92,9 @@ public class NewMemberServiceMapper implements RmiServiceToServiceMapper<INewMem
         }
 
         @Override
-        public List<ITypeOfSport> getTypeOfSports(List<Integer> typOfSportsList) {
+        public List<ITypeOfSport> getTypeOfSports(List<Integer> typOfSportsList)
+        {
             throw new UnsupportedOperationException("Not supported yet.");
         }
-        
     }
-    
 }

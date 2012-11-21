@@ -4,10 +4,10 @@
  */
 package ldap;
 
+import contract.dto.IUserData;
 import java.util.*;
 import javax.naming.*;
 import ldap.contract.IAuthenticator;
-import dto.contract.IUserData;
 
 /**
 
@@ -73,7 +73,7 @@ public class Authenticator
             catch (NamingException ex2)
             {
             }
-            
+
             return false;
         }
     }

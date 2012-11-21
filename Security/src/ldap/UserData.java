@@ -4,7 +4,7 @@
  */
 package ldap;
 
-import dto.contract.IUserData;
+import contract.dto.IUserData;
 
 /**
  @author Thomas
@@ -23,11 +23,13 @@ public class UserData
         this.ip = ip;
     }
 
-    public String getIp() {
+    public String getIp()
+    {
         return ip;
     }
 
-    public void setIp(String ip) {
+    public void setIp(String ip)
+    {
         this.ip = ip;
     }
 
@@ -66,7 +68,8 @@ public class UserData
     }
 
     @Override
-    public String getIP() {
+    public String getIP()
+    {
         return ip;
     }
 }
