@@ -2,9 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package domain.contract;
+package contract.domain;
 
-import domain.classes.Competition;
 import java.util.*;
 import javax.xml.bind.annotation.*;
 
@@ -22,7 +21,7 @@ public interface ILeague extends IDomain
     
     List<ICompetition> getCompetitions();
     
-    void setCompetitions(List<Competition> competitions);
+    void setCompetitions(List<ICompetition> competitions);
 
     void setDescription(String description);
 
