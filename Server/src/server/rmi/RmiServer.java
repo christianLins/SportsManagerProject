@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package rmi.server;
+package server.rmi;
 
 import java.io.IOException;
 import java.rmi.Naming;
 import java.util.logging.*;
 import ldap.UserData;
-import rmi.contract.RmiServiceClient;
+import contract.rmi.RmiServiceClient;
 
 /**
  runnable rmi-server
@@ -54,7 +54,7 @@ public class RmiServer
             String policy = RmiServer.class.getProtectionDomain().getClassLoader().getResource("client.policy").getFile();
             String cb = "file://" + RmiServer.class.getProtectionDomain().getCodeSource().getLocation().getFile();
             cb += " file://" + RmiServiceClient.class.getProtectionDomain().getCodeSource().getLocation().getFile();
-            cb += " file://" + dto.contract.IAddress.class.getProtectionDomain().getCodeSource().getLocation().getFile();
+            cb += " file://" + contract.dto.IAddress.class.getProtectionDomain().getCodeSource().getLocation().getFile();
             cb += " file://" + UserData.class.getProtectionDomain().getCodeSource().getLocation().getFile();
             System.setProperty("java.rmi.server.codebase", cb);
 

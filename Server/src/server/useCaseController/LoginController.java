@@ -2,20 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package classes;
+package server.useCaseController;
 
-import contract.ILogin;
-import contract.MemberNotFoundException;
-import dto.classes.Member;
-import dto.contract.IMember;
-import dto.contract.IUserData;
-import dto.mapper.DtoFactory;
-import dto.mapper.MemberMapper;
-import dto.mapper.contract.*;
+import contract.dto.*;
+import contract.dto.mapper.*;
+import contract.useCaseController.*;
 import java.rmi.RemoteException;
+import server.dto.mapper.DtoFactory;
 
 /**
-
  @author Lins Christian (christian.lins87@gmail.com)
  */
 public class LoginController

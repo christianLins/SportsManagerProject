@@ -2,34 +2,32 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package classes;
+package server.useCaseController;
 
-import contract.*;
-import dto.contract.IClubTeam;
-import dto.contract.ICompetition;
-import dto.contract.IPlayer;
-import dto.mapper.DtoFactory;
-import dto.mapper.contract.IdNotFoundException;
-import dto.mapper.contract.NotFoundException;
+import contract.dto.*;
+import contract.dto.mapper.*;
+import contract.useCaseController.IChangeCompetitionTeam;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.*;
+import java.util.logging.*;
+import server.dto.mapper.DtoFactory;
 
 /**
- *
- * @author EnjoX
+
+ @author EnjoX
  */
-public class ChangeCompetitionTeam implements IChangeCompetitionTeam{
+public class ChangeCompetitionTeam
+        implements IChangeCompetitionTeam
+{
     private static IChangeCompetitionTeam INSTANCE;
-    
-    private ChangeCompetitionTeam() {
-        
+
+    private ChangeCompetitionTeam()
+    {
     }
-    
-    public static IChangeCompetitionTeam getInstance() {
-        if(INSTANCE == null)
+
+    public static IChangeCompetitionTeam getInstance()
+    {
+        if (INSTANCE == null)
         {
             INSTANCE = new ChangeCompetitionTeam();
         }
@@ -37,24 +35,33 @@ public class ChangeCompetitionTeam implements IChangeCompetitionTeam{
     }
 
     @Override
-    public List<ICompetition> getCompetition() {
-        try {
+    public List<ICompetition> getCompetition()
+    {
+        try
+        {
             return DtoFactory.getCompetitionMapper().getAll();
-        } catch (RemoteException | NotFoundException ex) {
+        }
+        catch (RemoteException | NotFoundException ex)
+        {
             Logger.getLogger(ChangeCompetitionTeam.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
     @Override
-    public List<IClubTeam> getClubTeams(List<Integer> Teams) {
+    public List<IClubTeam> getClubTeams(List<Integer> Teams)
+    {
         List<IClubTeam> clubTeamList = new ArrayList<>();
 
-        try {
-            for (Integer teamId : Teams) {
+        try
+        {
+            for (Integer teamId : Teams)
+            {
                 clubTeamList.add(DtoFactory.getClubTeamMapper().getById(teamId));
             }
-        } catch (RemoteException | IdNotFoundException ex) {
+        }
+        catch (RemoteException | IdNotFoundException ex)
+        {
             Logger.getLogger(ChangeCompetitionTeam.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -62,19 +69,23 @@ public class ChangeCompetitionTeam implements IChangeCompetitionTeam{
     }
 
     @Override
-    public void setCompetitonTeam(ICompetition competition, IClubTeam oldTeam, IClubTeam newTeam) {
+    public void setCompetitonTeam(ICompetition competition, IClubTeam oldTeam, IClubTeam newTeam)
+    {
         List<Integer> teamList = competition.getTeamList();
-        
-        for(Integer team : teamList)
+
+        for (Integer team : teamList)
         {
-            if(team == oldTeam.getId())
+            if (team == oldTeam.getId())
             {
                 team = newTeam.getId();
             }
         }
-        try {
+        try
+        {
             DtoFactory.getCompetitionMapper().set(competition);
-        } catch (RemoteException ex) {
+        }
+        catch (RemoteException ex)
+        {
             Logger.getLogger(ChangeCompetitionTeam.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -82,35 +93,40 @@ public class ChangeCompetitionTeam implements IChangeCompetitionTeam{
     @Override
     public List<IClubTeam> getClubTeams()
     {
-        try {
+        try
+        {
             return DtoFactory.getClubTeamMapper().getAll();
-        } catch (RemoteException | NotFoundException ex) {
+        }
+        catch (RemoteException | NotFoundException ex)
+        {
             Logger.getLogger(ChangeCompetitionTeam.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
     @Override
-    public IClubTeam getCompetitionTeam(IClubTeam team) {
+    public IClubTeam getCompetitionTeam(IClubTeam team)
+    {
         //Sry han kA meh was i do tu muss ^^
         return team;
     }
 
     @Override
-    public List<IPlayer> getPlayers(List<Integer> players) {
+    public List<IPlayer> getPlayers(List<Integer> players)
+    {
         List<IPlayer> playerList = new ArrayList<>();
-        
+
         try
         {
-            for(Integer player : players)
+            for (Integer player : players)
             {
                 playerList.add(DtoFactory.getPlayerMapper().getById(player));
             }
         }
-        catch(RemoteException | IdNotFoundException ex)
+        catch (RemoteException | IdNotFoundException ex)
         {
             Logger.getLogger(ChangeCompetitionTeam.class.getName()).log(Level.SEVERE, null, ex);
         }
-           return playerList;     
+        return playerList;
     }
 }

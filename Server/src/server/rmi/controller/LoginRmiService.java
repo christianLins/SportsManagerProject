@@ -2,16 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package rmi.server.controller;
+package server.rmi.controller;
 
-import classes.LoginController;
-import contract.MemberNotFoundException;
-import dto.contract.*;
+import contract.dto.IUserData;
+import contract.dto.IMember;
+import server.useCaseController.LoginController;
+import contract.useCaseController.MemberNotFoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import rmi.contract.services.ILoginRmiService;
+import contract.rmi.services.ILoginRmiService;
 
 /**
  *

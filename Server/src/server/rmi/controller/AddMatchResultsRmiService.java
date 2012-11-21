@@ -2,17 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package rmi.server.controller;
+package server.rmi.controller;
 
-import classes.AddMatchResults;
-import dto.contract.ICompetition;
-import dto.contract.IMatch;
-import dto.contract.IMatchresult;
-import dto.contract.ITeam;
+import contract.dto.IMatch;
+import contract.dto.ICompetition;
+import contract.dto.ITeam;
+import contract.dto.IMatchresult;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
-import rmi.contract.services.IAddMatchResultsRmiService;
+import contract.rmi.services.IAddMatchResultsRmiService;
+import server.useCaseController.AddMatchResults;
 
 /**
  *

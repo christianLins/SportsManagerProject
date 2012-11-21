@@ -2,16 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package rmi.server.controller;
+package server.rmi.controller;
 
-import classes.ChangeCompetitionTeam;
-import dto.contract.IClubTeam;
-import dto.contract.ICompetition;
-import dto.contract.IPlayer;
+import contract.dto.*;
+import contract.rmi.services.IChangeCompetitionTeamRmiService;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
-import rmi.contract.services.IChangeCompetitionTeamRmiService;
+import server.useCaseController.ChangeCompetitionTeam;
 
 /**
  *

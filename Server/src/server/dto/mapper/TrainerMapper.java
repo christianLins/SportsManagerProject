@@ -2,14 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.mapper;
+package server.dto.mapper;
 
+import contract.domain.*;
+import contract.dto.ITrainer;
+import contract.dto.mapper.*;
 import java.util.*;
 import java.util.logging.*;
-import domain.*;
-import dto.classes.Trainer;
-import dto.contract.ITrainer;
-import dto.mapper.contract.*;
+import server.domain.DomainFacade;
+import server.dto.classes.Trainer;
 
 /**
 
@@ -34,12 +35,12 @@ public class TrainerMapper
         return controller;
     }
 
-    public domain.contract.ITrainer getDomainById(Integer id)
+    public contract.domain.ITrainer getDomainById(Integer id)
             throws IdNotFoundException
     {
         try
         {
-            domain.contract.ITrainer a = DomainFacade.getInstance().getByID(domain.contract.ITrainer.class, id);
+            contract.domain.ITrainer a = DomainFacade.getInstance().getByID(contract.domain.ITrainer.class, id);
             return a;
         }
         catch (Exception ex)
@@ -54,7 +55,7 @@ public class TrainerMapper
     {
         try
         {
-            domain.contract.ITrainer a = DomainFacade.getInstance().getByID(domain.contract.ITrainer.class, id);
+            contract.domain.ITrainer a = DomainFacade.getInstance().getByID(contract.domain.ITrainer.class, id);
             return Trainer.copy(a);
         }
         catch (Exception ex)
@@ -71,7 +72,7 @@ public class TrainerMapper
         {
             List<ITrainer> result = new LinkedList<>();
 
-            for (domain.contract.ITrainer a : DomainFacade.getInstance().getAll(domain.contract.ITrainer.class))
+            for (contract.domain.ITrainer a : DomainFacade.getInstance().getAll(contract.domain.ITrainer.class))
             {
                 result.add(Trainer.copy(a));
             }
@@ -90,9 +91,9 @@ public class TrainerMapper
         Integer returnv = 0;
         try
         {
-            domain.classes.Trainer trainer = new domain.classes.Trainer(value.getId());
+            server.domain.classes.Trainer trainer = new server.domain.classes.Trainer(value.getId());
 
-            List<domain.contract.IClubTeam> clubTeamList = new LinkedList<>();
+            List<contract.domain.IClubTeam> clubTeamList = new LinkedList<>();
             for (int i : value.getClubTeamList())
             {
                 clubTeamList.add(new ClubTeamMapper().getDomainById(i));
@@ -116,7 +117,7 @@ public class TrainerMapper
     {
         try
         {
-            domain.classes.Trainer typeofsport = createDomain(value);
+            server.domain.classes.Trainer typeofsport = createDomain(value);
 
             DomainFacade.getInstance().delete(typeofsport);
         }
@@ -126,22 +127,22 @@ public class TrainerMapper
         }
     }
 
-    private domain.classes.Trainer createDomain(ITrainer value)
+    private server.domain.classes.Trainer createDomain(ITrainer value)
             throws IdNotFoundException
     {
-        domain.classes.Trainer trainer = new domain.classes.Trainer(value.getId());
+        server.domain.classes.Trainer trainer = new server.domain.classes.Trainer(value.getId());
 
         List<Integer> clubTeams = value.getClubTeamList();
         List<Integer> permisssions = value.getPermisssionList();
 
-        LinkedList<domain.contract.IClubTeam> teams = new LinkedList<>();
+        LinkedList<contract.domain.IClubTeam> teams = new LinkedList<>();
         for (int id : clubTeams)
         {
             teams.add(new ClubTeamMapper().getDomainById(id));
         }
         trainer.setClubTeamList(teams);
 
-        LinkedList<domain.contract.IPermission> p = new LinkedList<>();
+        LinkedList<contract.domain.IPermission> p = new LinkedList<>();
 
         for (int id : permisssions)
         {

@@ -2,14 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package rmi.server.controller;
+package server.rmi.controller;
 
-import classes.NewMember;
-import dto.contract.*;
+import contract.dto.*;
+import contract.rmi.services.INewMemberRmiService;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
-import rmi.contract.services.INewMemberRmiService;
+import server.useCaseController.NewMember;
 
 /**
  *

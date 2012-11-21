@@ -2,15 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package rmi.server;
+package server.rmi;
 
-import classes.AddMatchResults;
-import contract.*;
+import contract.rmi.RmiServiceClient;
+import contract.rmi.services.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import rmi.contract.RmiServiceClient;
-import rmi.contract.services.*;
-import rmi.server.controller.*;
+import server.rmi.controller.*;
 
 /**
  *
@@ -24,7 +22,7 @@ public class RmiServiceClientFactory extends UnicastRemoteObject implements RmiS
     }
 
     @Override
-    public rmi.contract.services.IAddMatchResultsRmiService getAddMatchResultsService() throws RemoteException
+    public contract.rmi.services.IAddMatchResultsRmiService getAddMatchResultsService() throws RemoteException
     {
        return new AddMatchResultsRmiService();
     }

@@ -2,18 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package classes;
-import contract.*;
-import dto.contract.ICompetition;
-import dto.contract.IDepartment;
-import dto.contract.IMember;
-import dto.contract.ITeam;
-import dto.mapper.DtoFactory;
-import dto.mapper.contract.NotFoundException;
+package server.useCaseController;
+import contract.useCaseController.INewCompetition;
+import contract.dto.*;
+import contract.dto.mapper.NotFoundException;
 import java.rmi.RemoteException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.*;
+import server.dto.mapper.DtoFactory;
 /**
  *
  * @author EnjoX

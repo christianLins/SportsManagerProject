@@ -1,4 +1,4 @@
-package rmi.server;
+package server.rmi;
 
 /*
  @author Markus Mohanty <markus.mo at gmx.net>
