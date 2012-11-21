@@ -1,4 +1,4 @@
-package domain;
+package contract.domain;
 
 /**
  @author Markus Mohanty <markus.mo at gmx.net>
