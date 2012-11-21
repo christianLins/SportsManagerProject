@@ -9,7 +9,7 @@ import domain.contract.IRole;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import utils.HibernateTest;
+import utils.HibernateTestDatabase;
 
 /**
  *
@@ -22,7 +22,7 @@ public class HibernateMain
      */
     public static void main(String[] args)
     {
-        HibernateTest test = new HibernateTest();
+        HibernateTestDatabase test = new HibernateTestDatabase();
         try
         {
             Class[] classes = test.getAllClasses();
@@ -34,7 +34,7 @@ public class HibernateMain
                     System.out.println(clazz.toString());
                     System.out.println("---------------------------------------");
 
-                    test.iterateFields(obj);
+                    test.iterateGetMethodsOfObject(obj);
                 }
             }
         }
