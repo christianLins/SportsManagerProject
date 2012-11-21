@@ -5,6 +5,7 @@
 package corbaserver;
 
 import corbaContract.generated.*;
+import java.io.*;
 import java.util.logging.*;
 import org.omg.CORBA.ORB;
 import org.omg.CORBA.ORBPackage.InvalidName;
@@ -33,6 +34,7 @@ public class CorbaServer
     {
         try
         {
+          //  Runtime.getRuntime().exec("orbd -ORBInitialPort 2050");
             String[] args1 = new String[]
             {
                 "-ORBInitialPort", "2050"
@@ -52,6 +54,10 @@ public class CorbaServer
             System.out.println("Corba Server ready and waiting");
             orb.run();
         }
+//        catch (IOException ex)
+//        {
+//            Logger.getLogger(CorbaServer.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         catch (NotFound ex)
         {
             Logger.getLogger(CorbaServer.class.getName()).log(Level.SEVERE, null, ex);
