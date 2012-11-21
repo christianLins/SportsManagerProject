@@ -2,8 +2,6 @@ package presentation.forms.helper;
 
 import dto.contract.IClubTeam;
 import dto.contract.ITypeOfSport;
-import java.awt.datatransfer.StringSelection;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.AbstractListModel;
