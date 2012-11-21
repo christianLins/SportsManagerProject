@@ -43,6 +43,7 @@ public class CorbaClient
             System.out.println("Obtained a handle on server object: " + matchresultDataprovider);
 
             System.out.println("Insert exit to close the programm");
+            System.out.println("Press enter button to start request");
 
             InputStreamReader inputStreamReader = new InputStreamReader(System.in);
             BufferedReader reader = new BufferedReader(inputStreamReader);

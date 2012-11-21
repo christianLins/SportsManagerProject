@@ -456,11 +456,11 @@ public class SearchMemberForm
     private void radioAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioAdminActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_radioAdminActionPerformed
-
+    
     private void radioFemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioFemaleActionPerformed
         genderActionPerformed(evt);
     }//GEN-LAST:event_radioFemaleActionPerformed
-
+    
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         if (txtfieldSearchMemb.getText() == null)
         {
@@ -469,7 +469,7 @@ public class SearchMemberForm
         else
         {
             matchingMembers = controller.getMatchingMembers(txtfieldSearchMemb.getText());
-
+            
             if (matchingMembers == null || matchingMembers.isEmpty())
             {
                 JOptionPane.showMessageDialog(parent, "Your entry ' " + txtfieldSearchMemb.getText() + "' could not be found!");
@@ -477,30 +477,30 @@ public class SearchMemberForm
             else
             {
                 TableModel tableModel = tabMember.getModel();
-
+                
                 for (int row = 0; row < matchingMembers.size(); row++)
                 {
                     IMember tmpMember = matchingMembers.remove(row);
-
+                    
                     tableModel.setValueAt(tmpMember.getId().toString(), row, 0);
                     tableModel.setValueAt(tmpMember.getPrename(), row, 1);
                     tableModel.setValueAt(tmpMember.getLastname(), row, 2);
                     tableModel.setValueAt(tmpMember.getDateOfBirth().toString(), row, 3);
-
+                    
                     tableModel.setValueAt(tmpMember.getGender() ? "female" : "male", row, 4);
                 }
                 tabMember.setModel(tableModel);
             }
         }
     }//GEN-LAST:event_btnSearchActionPerformed
-
+    
     private void tableMemberValueChanged(ListSelectionEvent e)
     {
         controller.setSelectedMember(matchingMembers.get(tabMember.getSelectedRow()));
-
+        
         updateDetailPane();
     }
-
+    
     private void btnApplyChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyChangeActionPerformed
         if (dataExists)
         {
@@ -512,27 +512,27 @@ public class SearchMemberForm
             JOptionPane.showMessageDialog(parent, "There is no data to change!");
         }
     }//GEN-LAST:event_btnApplyChangeActionPerformed
-
+    
     private void radioMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioMaleActionPerformed
         genderActionPerformed(evt);
     }//GEN-LAST:event_radioMaleActionPerformed
-
+    
     private void radioTrainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioTrainerActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_radioTrainerActionPerformed
-
+    
     private void radioPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioPlayerActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_radioPlayerActionPerformed
-
+    
     private void radioCaretakerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioCaretakerActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_radioCaretakerActionPerformed
-
+    
     private void radioDepHeadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioDepHeadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_radioDepHeadActionPerformed
-
+    
     private void btnAddSportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSportActionPerformed
         if (radioTrainer.isSelected() || radioPlayer.isSelected())
         {
@@ -543,17 +543,17 @@ public class SearchMemberForm
         {
             JOptionPane.showMessageDialog(parent, "Member is no player or trainer!");
         }
-    }//GEN-LAST:event_btnAddSportActionPerformed
+    }
 
-    private void btnTeamsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeamsActionPerformed
+    private void btnTeamsActionPerformed(java.awt.event.ActionEvent evt) {
         SelectTeamsHelper selectTeamsHelper = new SelectTeamsHelper(selectedSports, this);
-    }//GEN-LAST:event_btnTeamsActionPerformed
+    }
 
     @Override
     public void setTxtFieldSports(List<ITypeOfSport> selection)
     {
         this.selectedSports = selection;
-
+        
         StringBuilder sb = new StringBuilder(selectedSports.size());
         for (ITypeOfSport s : selectedSports)
         {
@@ -564,11 +564,11 @@ public class SearchMemberForm
 
         txtFieldSports.setText(sb.toString());
     }
-
+    
     private void setSelectedSports(IRole role)
     {
         List<Integer> typeOfSportsID = null;
-
+        
         if (role instanceof ITrainer)
         {
             ITrainer tmp = (ITrainer) role;
@@ -592,11 +592,11 @@ public class SearchMemberForm
             }
         }
     }
-
+    
     private List<Integer> getSelectedSports()
     {
         List<Integer> tosIDs = new LinkedList<>();
-
+        
         for (ITypeOfSport tos : typeOfSports)
         {
             for (ITypeOfSport s : selectedSports)
@@ -609,13 +609,13 @@ public class SearchMemberForm
         }
         return tosIDs;
     }
-
+    
     private void updateDetailPane()
     {
         dataExists = true;
-
+        
         List<Integer> sports = new LinkedList<>();
-
+        
         for (IRole role : controller.getRoles(controller.getSelectedMember().getId()))
         {
             if (role instanceof ITrainer)
@@ -639,16 +639,15 @@ public class SearchMemberForm
                 }
             }
         }
-
+        
         availableSports.addAll(controller.getTypeOfSports(sports));
-
+        
         IMember selectedMember = controller.getSelectedMember();
         txtfieldMemberNr.setText(selectedMember.getId().toString());
         txtfieldFName.setText(selectedMember.getPrename());
         txtfieldLName.setText(selectedMember.getLastname());
         txtfieldMail.setText(selectedMember.getEmailAddress());
         txtfieldPhone.setText(selectedMember.getTelephonenumber());
-        
 
         address = controller.getAddress(selectedMember.getAddress());
         txtfieldAddress.setText(address.getStreet());
@@ -657,15 +656,15 @@ public class SearchMemberForm
         String postCode = Integer.toString(address.getPostalCode());
         txtfieldPostCode.setText(postCode);
         txtfieldCity.setText(address.getVillage());
-
+        
         country = controller.getCountry(selectedMember.getNationality());
         txtfieldCountry.setText(country.getName());
-
+        
         radioFemale.setSelected(selectedMember.getGender());
-
+        
         dateEntry.setDate(selectedMember.getMemberFrom());
         dateBirthday.setDate(selectedMember.getDateOfBirth());
-
+        
         for (IRole role : controller.getRoles(controller.getSelectedMember().getId()))
         {
             if (role instanceof IAdmin)
@@ -692,24 +691,23 @@ public class SearchMemberForm
             {
                 radioPlayer.setSelected(true);
                 setSelectedSports(role);
-
+                
                 setTxtFieldSports(controller.getTypeOfSports(((IPlayer) role).getTypeOfSportList()));
             }
         }
 
         //comboTeam.setModel(new DefaultComboBoxModel());
         selectedTeams = new LinkedList<IClubTeam>();
-        
-        
+
         //    comboTeam.setModel(new DefaultComboBoxModel(getComboTeam()));
 
         //focus auf team dessen selectedMember momentan teil ist
     }
-
+    
     private void updateMemberData()
     {
         IMember selectedMember = controller.getSelectedMember();
-
+        
         selectedMember.setPrename(txtfieldFName.getText());
         selectedMember.setLastname(txtfieldLName.getText());
         selectedMember.setDateOfBirth(dateBirthday.getDate());
@@ -723,7 +721,7 @@ public class SearchMemberForm
         address.setVillage(txtfieldCity.getText());
         country.setName(txtfieldCountry.getText());
         selectedMember.setNationality(country.getId());
-
+        
         selectedMember.setGender(radioFemale.isSelected());
 
         //   department = (IDepartment) comboDepartment.getSelectedItem();
@@ -750,14 +748,14 @@ public class SearchMemberForm
                 trainer.setTypeOfSportList(getSelectedSports());
             }
         }
-
+        
         if (radioPlayer.isSelected())
         {
             IPlayer player = null;
             roles.add(player);
             player.setTypeOfSportList(getSelectedSports());
         }
-
+        
         List<Integer> roleInt = new LinkedList<>();
         for (IRole role : roles)
         {
@@ -767,15 +765,16 @@ public class SearchMemberForm
         
 
         //make sure clubTeam is set right
-        setClubTeam(comboTeam.getSelectedItem().toString());
+//        setClubTeam(comboTeam.getSelectedItem().toString());
 
-        controller.setNewMember(selectedMember, address, clubTeam, roles.get(roles.size() - 1));
+        //  controller.setNewMember(selectedMember, address, clubTeam, roles.get(roles.size() - 1));
     }
-
-//    private String[] getComboTeam()
-//    {
-//        List<String> result = new LinkedList<>();
-//
+    
+    private String[] getComboTeam()
+    {
+        List<String> result = new LinkedList<>();
+        
+        return result.toArray(new String[1]);
 //        if (department != null)
 //        {
 //            List<Integer> cTeamInt = department.getClubTeamList();
@@ -784,7 +783,7 @@ public class SearchMemberForm
 //            {
 //                result.add(c.getName());
 //            }
-//        }
+    }
 //
 //        return result.toArray(new String[10]);
 //    }
@@ -806,7 +805,7 @@ public class SearchMemberForm
     public List<IClubTeam> getClubTeams(ITypeOfSport sport){
         return controller.getClubTeamsByTypeOfSport(sport);      
     }
-    
+
     private void genderActionPerformed(ActionEvent evt)
     {
         if (evt.getSource() == radioFemale)
@@ -818,7 +817,7 @@ public class SearchMemberForm
             radioFemale.setEnabled(!radioMale.isSelected());
         }
     }
-
+    
     private void disableExtendedRadioSelection()
     {
         radioAdmin.setEnabled(false);
@@ -826,7 +825,7 @@ public class SearchMemberForm
         radioDepHead.setEnabled(false);
         radioTrainer.setEnabled(false);
     }
-
+    
     public JPanel getPanel()
     {
         return paneSearch;

@@ -4,11 +4,11 @@
  */
 package server;
 
+import corbaserver.CorbaServer;
 import java.io.IOException;
 import rmi.server.RmiServer;
 
 /**
-
  @author Thomas
  */
 public class Server
@@ -24,7 +24,7 @@ public class Server
         new Thread(rmiServer).start();
 
         // start corba-server-thread
-//        CorbaServer corbaServer = new CorbaServer();
-//        new Thread(corbaServer).start();
+        CorbaServer corbaServer = new CorbaServer();
+       new Thread(corbaServer).start();
     }
 }
