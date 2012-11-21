@@ -2,13 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.classes;
+package server.dto.classes;
 
-import dto.classes.Country;
 import java.util.Random;
 import org.easymock.EasyMock;
 import org.junit.*;
-import dto.contract.ICountry;
+import contract.dto.ICountry;
 
 /**
 
@@ -57,7 +56,7 @@ public class CountryTest
     @Test
     public void interfaceConstructorTest()
     {
-        domain.contract.ICountry country = EasyMock.createMock(domain.contract.ICountry.class);
+        contract.domain.ICountry country = EasyMock.createMock(contract.domain.ICountry.class);
         EasyMock.expect(country.getAlpha2()).andReturn("1").anyTimes();
         EasyMock.expect(country.getAlpha3()).andReturn("2").anyTimes();
         EasyMock.expect(country.getDeutsch()).andReturn("3").anyTimes();

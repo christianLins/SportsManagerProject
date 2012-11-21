@@ -2,13 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.classes;
+package server.dto.classes;
 
-import dto.classes.TypeOfSport;
 import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
-import dto.contract.ITypeOfSport;
+import contract.dto.ITypeOfSport;
 
 /**
 
@@ -57,13 +56,13 @@ public class TypeOfSportTest
     @Test
     public void copyTest()
     {
-        domain.contract.ITypeOfSport t4 = EasyMock.createMock(domain.contract.ITypeOfSport.class);
+        contract.domain.ITypeOfSport t4 = EasyMock.createMock(contract.domain.ITypeOfSport.class);
                 EasyMock.expect(t4.getId()).andReturn(2).anyTimes();
         EasyMock.expect(t4.getName()).andReturn("name4").anyTimes();
         EasyMock.expect(t4.getDescription()).andReturn("description4").anyTimes();
         EasyMock.replay(t4);
 
-        dto.contract.ITypeOfSport actual = TypeOfSport.copy(t4);
+        contract.dto.ITypeOfSport actual = TypeOfSport.copy(t4);
 
         Assert.assertEquals(t4.getDescription(), actual.getDescription());
         Assert.assertEquals(t4.getName(), actual.getName());

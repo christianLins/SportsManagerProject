@@ -2,34 +2,32 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package classes;
-import contract.*;
-import dto.contract.IClubTeam;
-import dto.contract.ICompetition;
-import dto.contract.IMatch;
-import dto.contract.IPlayer;
-import dto.mapper.DtoFactory;
-import dto.mapper.contract.IdNotFoundException;
-import dto.mapper.contract.NotFoundException;
+package server.useCaseController;
+
+import contract.dto.*;
+import contract.dto.mapper.*;
+import contract.useCaseController.IShowCompetition;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.*;
+import java.util.logging.*;
+import server.dto.mapper.DtoFactory;
+
 /**
- *
- * @author EnjoX
+
+ @author EnjoX
  */
-public class ShowCompetition implements IShowCompetition{
-    
+public class ShowCompetition
+        implements IShowCompetition
+{
     private static ShowCompetition INSTANCE;
-    
-    private ShowCompetition() {
-        
+
+    private ShowCompetition()
+    {
     }
-    
-    public static IShowCompetition getInstance() {
-        if(INSTANCE == null)
+
+    public static IShowCompetition getInstance()
+    {
+        if (INSTANCE == null)
         {
             INSTANCE = new ShowCompetition();
         }
@@ -37,54 +35,54 @@ public class ShowCompetition implements IShowCompetition{
     }
 
     @Override
-    public List<ICompetition> getCompetitions() {
-        try {
+    public List<ICompetition> getCompetitions()
+    {
+        try
+        {
             return DtoFactory.getCompetitionMapper().getAll();
-        } catch (RemoteException | NotFoundException ex) {
+        }
+        catch (RemoteException | NotFoundException ex)
+        {
             Logger.getLogger(ShowCompetition.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
 
     @Override
-    public List<IMatch> getMatchs(List<Integer> matches) {
+    public List<IMatch> getMatchs(List<Integer> matches)
+    {
         List<IMatch> matchList = new ArrayList<>();
 
-        try {
-            for (Integer id : matches) {
+        try
+        {
+            for (Integer id : matches)
+            {
                 matchList.add(DtoFactory.getMatchMapper().getById(id));
             }
-        } catch (RemoteException | IdNotFoundException ex) {
+        }
+        catch (RemoteException | IdNotFoundException ex)
+        {
             Logger.getLogger(ShowCompetition.class.getName()).log(Level.SEVERE, null, ex);
         }
         return matchList;
     }
 
     @Override
-    public List<ShowMatchObj> getTeams(List<Integer> matches) {
-        //return nicht mehr nötig da match in DTO geändert wurde!!
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public List<IPlayer> getPlayer(IClubTeam team) {
+    public List<IPlayer> getPlayer(IClubTeam team)
+    {
         List<IPlayer> playerList = new ArrayList<>();
-        
+
         try
         {
-            for(Integer playerID : team.getPlayerList())
+            for (Integer playerID : team.getPlayerList())
             {
                 playerList.add(DtoFactory.getPlayerMapper().getById(playerID));
             }
         }
-        catch(RemoteException | IdNotFoundException ex)
+        catch (RemoteException | IdNotFoundException ex)
         {
-            
         }
         return playerList;
 
     }
-
-   
-    
 }

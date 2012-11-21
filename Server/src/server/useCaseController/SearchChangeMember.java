@@ -2,17 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package classes;
+package server.useCaseController;
 
-import contract.ISearchChangeMember;
-import dto.contract.*;
-import dto.mapper.ClubTeamNotFoundException;
-import dto.mapper.DtoFactory;
-import dto.mapper.contract.*;
+import contract.dto.*;
+import contract.dto.mapper.*;
+import contract.useCaseController.ISearchChangeMember;
 import java.rmi.RemoteException;
 import java.util.*;
 import java.util.logging.*;
-import javax.net.ssl.SSLContext;
+import server.dto.mapper.DtoFactory;
 
 /**
 
@@ -235,11 +233,15 @@ public class SearchChangeMember
     }
 
     @Override
-    public List<IClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport) { 
+    public List<IClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport)
+    {
         List<IClubTeam> cTeams = null;
-        try {
-            cTeams =  DtoFactory.getClubTeamMapper().getClubTeamsByTypeOfSport(sport);
-        } catch (RemoteException | ClubTeamNotFoundException ex) {
+        try
+        {
+            cTeams = DtoFactory.getClubTeamMapper().getClubTeamsByTypeOfSport(sport);
+        }
+        catch (RemoteException | ClubTeamNotFoundException ex)
+        {
             Logger.getLogger(SearchChangeMember.class.getName()).log(Level.SEVERE, null, ex);
         }
         return cTeams;

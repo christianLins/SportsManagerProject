@@ -2,13 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.classes;
+package server.dto.classes;
 
-import dto.classes.Address;
+import contract.dto.IAddress;
 import java.util.Random;
 import org.easymock.EasyMock;
 import org.junit.*;
-import dto.contract.*;
 
 /**
 
@@ -57,11 +56,11 @@ public class AddressTest
     @Test
     public void interfaceConstructorTest()
     {
-        domain.contract.ICountry country = EasyMock.createMock(domain.contract.ICountry.class);
+        contract.domain.ICountry country = EasyMock.createMock(contract.domain.ICountry.class);
         EasyMock.expect(country.getId()).andReturn(1).anyTimes();
         EasyMock.replay(country);
 
-        domain.contract.IAddress expected = EasyMock.createMock(domain.contract.IAddress.class);
+        contract.domain.IAddress expected = EasyMock.createMock(contract.domain.IAddress.class);
         EasyMock.expect(expected.getId()).andReturn(2).anyTimes();
         EasyMock.expect(expected.getCountry()).andReturn(country).anyTimes();
         EasyMock.expect(expected.getPostalCode()).andReturn(1).anyTimes();

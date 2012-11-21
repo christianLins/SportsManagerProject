@@ -2,12 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.classes;
+package server.dto.classes;
 
-import dto.classes.Competition;
 import java.util.*;
 import org.junit.*;
-import dto.contract.ICompetition;
+import contract.dto.ICompetition;
 
 /**
 

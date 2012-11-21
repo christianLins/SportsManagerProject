@@ -2,13 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.classes;
+package server.dto.classes;
 
-import dto.classes.Team;
+import contract.dto.ITeam;
 import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
-import dto.contract.*;
 
 /**
 

@@ -2,13 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.classes;
+package server.dto.classes;
 
-import dto.classes.Match;
 import java.util.Date;
 import org.easymock.EasyMock;
 import org.junit.*;
-import dto.contract.IMatch;
+import contract.dto.IMatch;
 
 /**
 
@@ -60,23 +59,23 @@ public class MatchTest
         Date dateFrom = new Date();
         Date dateTo = new Date();
 
-        domain.contract.ITeam hteam = EasyMock.createMock(domain.contract.ITeam.class);
+        contract.domain.ITeam hteam = EasyMock.createMock(contract.domain.ITeam.class);
         EasyMock.expect(hteam.getId()).andReturn(1).anyTimes();
         EasyMock.replay(hteam);
 
-        domain.contract.ITeam fteam = EasyMock.createMock(domain.contract.ITeam.class);
+        contract.domain.ITeam fteam = EasyMock.createMock(contract.domain.ITeam.class);
         EasyMock.expect(fteam.getId()).andReturn(3).anyTimes();
         EasyMock.replay(fteam);
 
-        domain.contract.IMatchresult result = EasyMock.createMock(domain.contract.IMatchresult.class);
+        contract.domain.IMatchresult result = EasyMock.createMock(contract.domain.IMatchresult.class);
         EasyMock.expect(result.getId()).andReturn(2).anyTimes();
         EasyMock.replay(result);
 
-        domain.contract.ICompetition competition = EasyMock.createMock(domain.contract.ICompetition.class);
+        contract.domain.ICompetition competition = EasyMock.createMock(contract.domain.ICompetition.class);
         EasyMock.expect(competition.getId()).andReturn(2).anyTimes();
         EasyMock.replay(competition);
 
-        domain.contract.IMatch expected = EasyMock.createMock(domain.contract.IMatch.class);
+        contract.domain.IMatch expected = EasyMock.createMock(contract.domain.IMatch.class);
         EasyMock.expect(expected.getId()).andReturn(2).anyTimes();
         EasyMock.expect(expected.getDateFrom()).andReturn(dateFrom).anyTimes();
         EasyMock.expect(expected.getDateTo()).andReturn(dateTo).anyTimes();
