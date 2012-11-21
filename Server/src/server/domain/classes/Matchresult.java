@@ -1,6 +1,6 @@
-package domain.classes;
+package server.domain.classes;
 
-import domain.contract.IMatchresult;
+import contract.domain.IMatchresult;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;

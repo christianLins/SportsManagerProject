@@ -1,15 +1,15 @@
-package dto.classes;
+package server.dto.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import dto.contract.IMatch;
-import dto.contract.IMatchresult;
-import dto.contract.ITeam;
-import dto.mapper.DtoFactory;
-import dto.mapper.contract.IdNotFoundException;
+import contract.dto.IMatch;
+import contract.dto.IMatchresult;
+import contract.dto.ITeam;
+import contract.dto.mapper.IdNotFoundException;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import server.dto.mapper.DtoFactory;
 
 public class Match
         implements Serializable, IMatch {
@@ -33,9 +33,9 @@ public class Match
     public Integer getId() {
         return id;
     }
-    private static HashMap<domain.contract.IMatch, Match> matchs = new HashMap<>();
+    private static HashMap<contract.domain.IMatch, Match> matchs = new HashMap<>();
 
-    public static Match copy(domain.contract.IMatch match) {
+    public static Match copy(contract.domain.IMatch match) {
         Match a;
 
         if (matchs.containsKey(match)) {

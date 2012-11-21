@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.classes;
+package server.dto.classes;
 
-import dto.contract.IAdmin;
 import java.util.HashMap;
+import contract.dto.IAdmin;
 
 /**
  @author Thomas
@@ -21,9 +21,9 @@ public class Admin
         this.setName("Admin");
         this.setDescription("Admin");
     }
-    private static HashMap<domain.contract.IAdmin, Admin> admins = new HashMap<>();
+    private static HashMap<contract.domain.IAdmin, Admin> admins = new HashMap<>();
 
-    public static Admin copy(domain.contract.IAdmin admin)
+    public static Admin copy(contract.domain.IAdmin admin)
     {
         Admin a;
 

@@ -1,16 +1,18 @@
-package domain.classes;
+package server.domain.classes;
 
-import domain.contract.*;
+import contract.domain.IRole;
+import contract.domain.IPermission;
+import contract.domain.IMember;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
 
 /**
- *
- * @author Markus Mohanty <markus.mo at gmx.net>
+
+ @author Markus Mohanty <markus.mo at gmx.net>
  */
 @Entity
-@Table(name ="MemberRole")
+@Table(name = "MemberRole")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Role
         implements Serializable, IRole
@@ -22,18 +24,18 @@ public class Role
     private Integer id;
     @Column(name = "Name")
     private String name;
-    @Column(name="Description")
+    @Column(name = "Description")
     private String description;
     @JoinTable(name = "Role_has_Permission", joinColumns =
     {
-        @JoinColumn(name = "Role_idRole",referencedColumnName="id")
+        @JoinColumn(name = "Role_idRole", referencedColumnName = "id")
     }, inverseJoinColumns =
     {
-        @JoinColumn(name = "Permission_idPermission",referencedColumnName="id")
+        @JoinColumn(name = "Permission_idPermission", referencedColumnName = "id")
     })
-    @ManyToMany(fetch= FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Permission> permissionList;
-    @ManyToMany(mappedBy="roleList")
+    @ManyToMany(mappedBy = "roleList")
     private List<Member> members;
 
     public Role()

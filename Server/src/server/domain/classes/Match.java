@@ -1,6 +1,9 @@
-package domain.classes;
+package server.domain.classes;
 
-import domain.contract.*;
+import contract.domain.ICompetition;
+import contract.domain.IMatchresult;
+import contract.domain.IMatch;
+import contract.domain.ITeam;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;

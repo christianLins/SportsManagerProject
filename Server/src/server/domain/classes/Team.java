@@ -1,9 +1,9 @@
-package domain.classes;
+package server.domain.classes;
 
-import domain.contract.ICompetition;
-import domain.contract.ILeague;
-import domain.contract.IMatch;
-import domain.contract.ITeam;
+import contract.domain.ICompetition;
+import contract.domain.ILeague;
+import contract.domain.IMatch;
+import contract.domain.ITeam;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;

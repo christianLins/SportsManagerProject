@@ -1,8 +1,8 @@
-package dto.classes;
+package server.dto.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import dto.contract.*;
+import contract.dto.ICountry;
 
 /**
 
@@ -36,9 +36,9 @@ public class Country
     {
         return id;
     }
-    private static HashMap<domain.contract.ICountry, Country> countries = new HashMap<>();
+    private static HashMap<contract.domain.ICountry, Country> countries = new HashMap<>();
 
-    public static Country copy(domain.contract.ICountry country)
+    public static Country copy(contract.domain.ICountry country)
     {
         Country a;
 

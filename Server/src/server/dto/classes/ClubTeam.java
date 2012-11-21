@@ -1,8 +1,8 @@
-package dto.classes;
+package server.dto.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import dto.contract.*;
+import contract.dto.IClubTeam;
 
 public class ClubTeam
         extends Team
@@ -17,9 +17,9 @@ public class ClubTeam
         super();
     }
     
-    private static HashMap<domain.contract.IClubTeam, ClubTeam> clubTeams = new HashMap<>();
+    private static HashMap<contract.domain.IClubTeam, ClubTeam> clubTeams = new HashMap<>();
 
-    public static ClubTeam copy(domain.contract.IClubTeam clubTeam)
+    public static ClubTeam copy(contract.domain.IClubTeam clubTeam)
     {
         ClubTeam a;
 
@@ -33,7 +33,7 @@ public class ClubTeam
 
             List<Integer> l = new LinkedList<>();
 
-            for (domain.contract.IDepartment t : clubTeam.getDepartmentList())
+            for (contract.domain.IDepartment t : clubTeam.getDepartmentList())
             {
                 l.add(t.getId());
             }
@@ -41,7 +41,7 @@ public class ClubTeam
 
             List<Integer> l2 = new LinkedList<>();
 
-            for (domain.contract.ITrainer t : clubTeam.getTrainerList())
+            for (contract.domain.ITrainer t : clubTeam.getTrainerList())
             {
                 l.add(t.getId());
             }
@@ -49,7 +49,7 @@ public class ClubTeam
 
             List<Integer> l3 = new LinkedList<>();
 
-            for (domain.contract.IPlayer t : clubTeam.getPlayerList())
+            for (contract.domain.IPlayer t : clubTeam.getPlayerList())
             {
                 l.add(t.getId());
             }

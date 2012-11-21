@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.classes;
+package server.dto.classes;
 
-import dto.contract.ICaretaker;
+import contract.dto.ICaretaker;
 import java.util.HashMap;
 
 /**
@@ -21,9 +21,9 @@ public class Caretaker
         this.setName("Caretaker");
         this.setDescription("Caretaker");
     }
-    private static HashMap<domain.contract.ICaretaker, Caretaker> admins = new HashMap<>();
+    private static HashMap<contract.domain.ICaretaker, Caretaker> admins = new HashMap<>();
 
-    public static Caretaker copy(domain.contract.ICaretaker admin)
+    public static Caretaker copy(contract.domain.ICaretaker admin)
     {
         Caretaker a;
 

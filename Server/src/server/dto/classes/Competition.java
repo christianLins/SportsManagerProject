@@ -1,6 +1,6 @@
-package dto.classes;
+package server.dto.classes;
 
-import dto.contract.ICompetition;
+import contract.dto.ICompetition;
 import java.io.Serializable;
 import java.util.*;
 
@@ -27,9 +27,9 @@ public class Competition
     {
         this.id = id;
     }
-    private static HashMap<domain.contract.ICompetition, Competition> competitions = new HashMap<>();
+    private static HashMap<contract.domain.ICompetition, Competition> competitions = new HashMap<>();
 
-    public static Competition copy(domain.contract.ICompetition competition)
+    public static Competition copy(contract.domain.ICompetition competition)
     {
         Competition a;
 
@@ -50,12 +50,12 @@ public class Competition
             a.setName(competition.getName());
             a.setDescription(competition.getDescription());
 
-            for (domain.contract.ITeam d : competition.getTeamList())
+            for (contract.domain.ITeam d : competition.getTeamList())
             {
                 a.teamList.add(d.getId());
             }
 
-            for (domain.contract.IMatch d : competition.getMatchList())
+            for (contract.domain.IMatch d : competition.getMatchList())
             {
                 a.matchList.add(d.getId());
             }

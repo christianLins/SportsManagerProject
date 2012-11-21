@@ -1,6 +1,6 @@
-package domain.classes;
+package server.domain.classes;
 
-import domain.contract.*;
+import contract.domain.*;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
@@ -57,7 +57,7 @@ public class League
     public List<ICompetition> getCompetitions()
     {
         List<ICompetition> cl = new LinkedList<>();
-        for(Competition c : competitions)
+        for (Competition c : competitions)
         {
             cl.add(c);
         }
@@ -65,9 +65,16 @@ public class League
     }
 
     @Override
-    public void setCompetitions(List<Competition> competitions)
+    public void setCompetitions(List<ICompetition> competitions)
     {
-        this.competitions = competitions;
+        List<Competition> result = new LinkedList<>();
+
+        for (ICompetition d : competitions)
+        {
+            result.add((Competition) d);
+        }
+
+        this.competitions = result;
     }
 
     public League(Integer id, String name)

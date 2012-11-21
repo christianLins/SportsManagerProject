@@ -1,6 +1,8 @@
-package domain.classes;
+package server.domain.classes;
 
-import domain.contract.*;
+import contract.domain.IPlayer;
+import contract.domain.IClubTeam;
+import contract.domain.ITypeOfSport;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;

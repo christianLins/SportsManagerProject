@@ -1,8 +1,8 @@
-package dto.classes;
+package server.dto.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import dto.contract.IDepartment;
+import contract.dto.IDepartment;
 
 public class Department
         implements Serializable, IDepartment
@@ -28,9 +28,9 @@ public class Department
     {
         return id;
     }
-    private static HashMap<domain.contract.IDepartment, Department> departments = new HashMap<>();
+    private static HashMap<contract.domain.IDepartment, Department> departments = new HashMap<>();
 
-    public static Department copy(domain.contract.IDepartment department)
+    public static Department copy(contract.domain.IDepartment department)
     {
         Department a;
 
@@ -45,12 +45,12 @@ public class Department
             a.setName(department.getName());
             a.setDescription(department.getDescription());
 
-            for (domain.contract.IClubTeam c : department.getClubTeamList())
+            for (contract.domain.IClubTeam c : department.getClubTeamList())
             {
                 a.clubTeamList.add(c.getId());
             }
 
-            for (domain.contract.ITypeOfSport d : department.getTypeOfSportList())
+            for (contract.domain.ITypeOfSport d : department.getTypeOfSportList())
             {
                 a.typeOfSportList.add(d.getId());
             }
