@@ -162,8 +162,7 @@ public class SelectTeamsHelper extends javax.swing.JFrame {
     }
     
     private void btnFinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinishActionPerformed
-       
-        //parent.setTxtFieldTeams(selectedTeams);
+        parent.setTxtFieldTeams(selectedTeams);
         
         setVisible(false);
         dispose();
