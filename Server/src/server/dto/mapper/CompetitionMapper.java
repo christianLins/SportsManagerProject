@@ -2,14 +2,19 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.mapper;
+package server.dto.mapper;
 
-import domain.*;
-import dto.classes.Competition;
-import dto.contract.ICompetition;
-import dto.mapper.contract.*;
+import contract.dto.mapper.IdNotFoundException;
+import contract.dto.mapper.IMapper;
+import contract.dto.mapper.NotFoundException;
+import contract.domain.CouldNotSaveException;
+import contract.domain.CouldNotDeleteException;
+import contract.domain.CouldNotFetchException;
 import java.util.*;
 import java.util.logging.*;
+import server.dto.classes.Competition;
+import contract.dto.ICompetition;
+import server.domain.DomainFacade;
 
 /**
 
@@ -34,12 +39,12 @@ public class CompetitionMapper
         return controller;
     }
 
-    public domain.contract.ICompetition getDomainById(Integer id)
+    public contract.domain.ICompetition getDomainById(Integer id)
             throws IdNotFoundException
     {
         try
         {
-            domain.contract.ICompetition a = DomainFacade.getInstance().getByID(domain.contract.ICompetition.class, id);
+            contract.domain.ICompetition a = DomainFacade.getInstance().getByID(contract.domain.ICompetition.class, id);
             return a;
         }
         catch (Exception ex)
@@ -55,7 +60,7 @@ public class CompetitionMapper
     {
         try
         {
-            domain.contract.ICompetition a = DomainFacade.getInstance().getByID(domain.contract.ICompetition.class, id);
+            contract.domain.ICompetition a = DomainFacade.getInstance().getByID(contract.domain.ICompetition.class, id);
             return Competition.copy(a);
         }
         catch (Exception ex)
@@ -73,7 +78,7 @@ public class CompetitionMapper
         {
             List<ICompetition> result = new LinkedList<>();
 
-            for (domain.contract.ICompetition a : DomainFacade.getInstance().getAll(domain.contract.ICompetition.class))
+            for (contract.domain.ICompetition a : DomainFacade.getInstance().getAll(contract.domain.ICompetition.class))
             {
                 result.add(Competition.copy(a));
             }
@@ -91,7 +96,7 @@ public class CompetitionMapper
     {
         try
         {
-            domain.classes.Competition competition = createDomain(value);
+            server.domain.classes.Competition competition = createDomain(value);
 
             return DomainFacade.getInstance().set(competition);
         }
@@ -108,7 +113,7 @@ public class CompetitionMapper
     {
         try
         {
-            domain.classes.Competition competition = createDomain(value);
+            server.domain.classes.Competition competition = createDomain(value);
 
             DomainFacade.getInstance().delete(competition);
         }
@@ -118,17 +123,17 @@ public class CompetitionMapper
         }
     }
 
-    private domain.classes.Competition createDomain(ICompetition value)
+    private server.domain.classes.Competition createDomain(ICompetition value)
             throws IdNotFoundException
     {
-        domain.classes.Competition competition = new domain.classes.Competition(value.getId());
+        server.domain.classes.Competition competition = new server.domain.classes.Competition(value.getId());
 
         competition.setDateFrom(value.getDateFrom());
         competition.setDateTo(value.getDateTo());
         competition.setPayment(value.getPayment());
 
-        List< domain.contract.IMatch> matchList = new LinkedList<>();
-        List< domain.contract.ITeam> teamList = new LinkedList<>();
+        List< contract.domain.IMatch> matchList = new LinkedList<>();
+        List< contract.domain.ITeam> teamList = new LinkedList<>();
 
         for (int i : value.getMatchList())
         {

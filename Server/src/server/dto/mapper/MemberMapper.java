@@ -2,14 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.mapper;
+package server.dto.mapper;
 
-import domain.*;
-import dto.classes.Member;
-import dto.contract.IMember;
-import dto.mapper.contract.*;
+import contract.domain.*;
+import contract.dto.IMember;
+import contract.dto.mapper.*;
 import java.util.*;
 import java.util.logging.*;
+import server.domain.DomainFacade;
+import server.dto.classes.Member;
 
 /**
 
@@ -34,12 +35,12 @@ public class MemberMapper
         return controller;
     }
 
-    public domain.contract.IMember getDomainById(Integer id)
+    public contract.domain.IMember getDomainById(Integer id)
             throws IdNotFoundException
     {
         try
         {
-            domain.contract.IMember a = DomainFacade.getInstance().getByID(domain.contract.IMember.class, id);
+            contract.domain.IMember a = DomainFacade.getInstance().getByID(contract.domain.IMember.class, id);
             return a;
 
         }
@@ -56,7 +57,7 @@ public class MemberMapper
     {
         try
         {
-            domain.contract.IMember a = DomainFacade.getInstance().getByID(domain.contract.IMember.class, id);
+            contract.domain.IMember a = DomainFacade.getInstance().getByID(contract.domain.IMember.class, id);
             return Member.copy(a);
         }
         catch (Exception ex)
@@ -71,7 +72,7 @@ public class MemberMapper
     {
         try
         {
-            domain.contract.IMember a = DomainFacade.getInstance().getMemberByUsername(username);
+            contract.domain.IMember a = DomainFacade.getInstance().getMemberByUsername(username);
             System.out.println(a);
             return Member.copy(a);
         }
@@ -89,7 +90,7 @@ public class MemberMapper
         {
             List<IMember> result = new LinkedList<>();
 
-            for (domain.contract.IMember a : DomainFacade.getInstance().getAll(domain.contract.IMember.class))
+            for (contract.domain.IMember a : DomainFacade.getInstance().getAll(contract.domain.IMember.class))
             {
                 result.add(Member.copy(a));
             }
@@ -107,7 +108,7 @@ public class MemberMapper
     {
         try
         {
-            domain.classes.Member member = createDomain(value);
+            server.domain.classes.Member member = createDomain(value);
 
             return DomainFacade.getInstance().set(member);
         }
@@ -124,7 +125,7 @@ public class MemberMapper
     {
         try
         {
-            domain.classes.Member member = createDomain(value);
+            server.domain.classes.Member member = createDomain(value);
 
             DomainFacade.getInstance().delete(member);
         }
@@ -134,10 +135,10 @@ public class MemberMapper
         }
     }
 
-    private domain.classes.Member createDomain(IMember value)
+    private server.domain.classes.Member createDomain(IMember value)
             throws IdNotFoundException
     {
-        domain.classes.Member member = new domain.classes.Member(value.getId());
+        server.domain.classes.Member member = new server.domain.classes.Member(value.getId());
 
 
         member.setDateOfBirth(value.getDateOfBirth());
@@ -152,7 +153,7 @@ public class MemberMapper
         member.setAddress(new AddressMapper().getDomainById(value.getAddress()));
         member.setNationality(new CountryMapper().getDomainById(value.getNationality()));
 
-        List< domain.contract.IRole> roleList = new LinkedList<>();
+        List< contract.domain.IRole> roleList = new LinkedList<>();
 
         for (int i : value.getRoleList())
         {

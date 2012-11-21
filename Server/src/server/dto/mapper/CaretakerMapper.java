@@ -2,14 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.mapper;
+package server.dto.mapper;
 
-import domain.*;
-import dto.classes.*;
-import dto.contract.*;
-import dto.mapper.contract.*;
+import contract.domain.*;
+import contract.dto.ICaretaker;
+import contract.dto.mapper.*;
 import java.util.*;
 import java.util.logging.*;
+import server.domain.DomainFacade;
+import server.dto.classes.Caretaker;
 
 /**
 
@@ -34,12 +35,12 @@ public class CaretakerMapper
         return controller;
     }
 
-    public domain.contract.ICaretaker getDomainById(Integer id)
+    public contract.domain.ICaretaker getDomainById(Integer id)
             throws IdNotFoundException
     {
         try
         {
-            return DomainFacade.getInstance().getByID(domain.contract.ICaretaker.class, id);
+            return DomainFacade.getInstance().getByID(contract.domain.ICaretaker.class, id);
         }
         catch (Exception ex)
         {
@@ -53,7 +54,7 @@ public class CaretakerMapper
     {
         try
         {
-            domain.contract.ICaretaker a = DomainFacade.getInstance().getByID(domain.contract.ICaretaker.class, id);
+            contract.domain.ICaretaker a = DomainFacade.getInstance().getByID(contract.domain.ICaretaker.class, id);
             return Caretaker.copy(a);
         }
         catch (Exception ex)
@@ -71,7 +72,7 @@ public class CaretakerMapper
         {
             List<ICaretaker> result = new LinkedList<>();
 
-            for (domain.contract.ICaretaker a : DomainFacade.getInstance().getAll(domain.contract.ICaretaker.class))
+            for (contract.domain.ICaretaker a : DomainFacade.getInstance().getAll(contract.domain.ICaretaker.class))
             {
                 result.add(Caretaker.copy(a));
             }
@@ -89,7 +90,7 @@ public class CaretakerMapper
     {
         try
         {
-            domain.classes.Caretaker address = createDomain(value);
+            server.domain.classes.Caretaker address = createDomain(value);
 
             return DomainFacade.getInstance().set(address);
         }
@@ -106,7 +107,7 @@ public class CaretakerMapper
     {
         try
         {
-            domain.classes.Caretaker address = createDomain(value);
+            server.domain.classes.Caretaker address = createDomain(value);
 
             DomainFacade.getInstance().delete(address);
         }
@@ -116,12 +117,12 @@ public class CaretakerMapper
         }
     }
 
-    private domain.classes.Caretaker createDomain(ICaretaker value)
+    private server.domain.classes.Caretaker createDomain(ICaretaker value)
             throws IdNotFoundException
     {
-        domain.classes.Caretaker caretaker = new domain.classes.Caretaker(value.getId());
+        server.domain.classes.Caretaker caretaker = new server.domain.classes.Caretaker(value.getId());
 
-        LinkedList<domain.contract.IPermission> permissionList = new LinkedList<>();
+        LinkedList<contract.domain.IPermission> permissionList = new LinkedList<>();
         for (int id : value.getPermisssionList())
         {
             permissionList.add(new PermissionMapper().getDomainById(id));
@@ -130,7 +131,7 @@ public class CaretakerMapper
         caretaker.setPermissionList(permissionList);
 
 
-        List<domain.contract.IMember> members = new LinkedList<>();
+        List<contract.domain.IMember> members = new LinkedList<>();
         for (int id : value.getMembers())
         {
             members.add(new MemberMapper().getDomainById(id));

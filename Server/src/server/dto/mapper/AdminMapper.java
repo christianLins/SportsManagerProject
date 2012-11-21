@@ -2,14 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.mapper;
+package server.dto.mapper;
 
-import domain.*;
-import dto.classes.Admin;
-import dto.contract.IAdmin;
-import dto.mapper.contract.*;
+import contract.domain.*;
+import contract.dto.IAdmin;
+import contract.dto.mapper.*;
 import java.util.*;
 import java.util.logging.*;
+import server.domain.DomainFacade;
+import server.dto.classes.Admin;
 
 /**
  @author Thomas
@@ -33,12 +34,12 @@ public class AdminMapper
         return controller;
     }
 
-    public domain.contract.IAdmin getDomainById(Integer id)
+    public contract.domain.IAdmin getDomainById(Integer id)
             throws IdNotFoundException
     {
         try
         {
-            return DomainFacade.getInstance().getByID(domain.contract.IAdmin.class, id);
+            return DomainFacade.getInstance().getByID(contract.domain.IAdmin.class, id);
         }
         catch (Exception ex)
         {
@@ -52,7 +53,7 @@ public class AdminMapper
     {
         try
         {
-            domain.contract.IAdmin a = DomainFacade.getInstance().getByID(domain.contract.IAdmin.class, id);
+            contract.domain.IAdmin a = DomainFacade.getInstance().getByID(contract.domain.IAdmin.class, id);
             return Admin.copy(a);
         }
         catch (Exception ex)
@@ -70,7 +71,7 @@ public class AdminMapper
         {
             List<IAdmin> result = new LinkedList<>();
 
-            for (domain.contract.IAdmin a : DomainFacade.getInstance().getAll(domain.contract.IAdmin.class))
+            for (contract.domain.IAdmin a : DomainFacade.getInstance().getAll(contract.domain.IAdmin.class))
             {
                 result.add(Admin.copy(a));
             }
@@ -88,7 +89,7 @@ public class AdminMapper
     {
         try
         {
-            domain.classes.Admin address = createDomain(value);
+            server.domain.classes.Admin address = createDomain(value);
 
             return DomainFacade.getInstance().set(address);
         }
@@ -105,7 +106,7 @@ public class AdminMapper
     {
         try
         {
-            domain.classes.Admin address = createDomain(value);
+            server.domain.classes.Admin address = createDomain(value);
 
             DomainFacade.getInstance().delete(address);
         }
@@ -115,10 +116,10 @@ public class AdminMapper
         }
     }
 
-    private domain.classes.Admin createDomain(IAdmin value)
+    private server.domain.classes.Admin createDomain(IAdmin value)
             throws IdNotFoundException
     {
-        domain.classes.Admin admin = new domain.classes.Admin(value.getId());
+        server.domain.classes.Admin admin = new server.domain.classes.Admin(value.getId());
 
         admin.setName(value.getName());
         admin.setDescription(value.getDescription());

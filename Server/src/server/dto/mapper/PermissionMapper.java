@@ -2,14 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.mapper;
+package server.dto.mapper;
 
-import domain.*;
-import dto.classes.Permission;
-import dto.contract.IPermission;
-import dto.mapper.contract.*;
+import contract.domain.*;
+import contract.dto.IPermission;
+import contract.dto.mapper.*;
 import java.util.*;
 import java.util.logging.*;
+import server.domain.DomainFacade;
+import server.dto.classes.Permission;
 
 /**
 
@@ -34,12 +35,12 @@ public class PermissionMapper
         return controller;
     }
 
-    public domain.contract.IPermission getDomainById(Integer id)
+    public contract.domain.IPermission getDomainById(Integer id)
             throws IdNotFoundException
     {
         try
         {
-            domain.contract.IPermission a = DomainFacade.getInstance().getByID(domain.contract.IPermission.class, id);
+            contract.domain.IPermission a = DomainFacade.getInstance().getByID(contract.domain.IPermission.class, id);
             return a;
         }
         catch (Exception ex)
@@ -54,7 +55,7 @@ public class PermissionMapper
     {
         try
         {
-            domain.contract.IPermission a = DomainFacade.getInstance().getByID(domain.contract.IPermission.class, id);
+            contract.domain.IPermission a = DomainFacade.getInstance().getByID(contract.domain.IPermission.class, id);
             return Permission.copy(a);
         }
         catch (Exception ex)
@@ -71,7 +72,7 @@ public class PermissionMapper
         {
             List<IPermission> result = new LinkedList<>();
 
-            for (domain.contract.IPermission a : DomainFacade.getInstance().getAll(domain.contract.IPermission.class))
+            for (contract.domain.IPermission a : DomainFacade.getInstance().getAll(contract.domain.IPermission.class))
             {
                 result.add(Permission.copy(a));
             }
@@ -89,7 +90,7 @@ public class PermissionMapper
     {
         try
         {
-            domain.classes.Permission permission = createDomain(value);
+            server.domain.classes.Permission permission = createDomain(value);
 
             return DomainFacade.getInstance().set(permission);
         }
@@ -106,7 +107,7 @@ public class PermissionMapper
     {
         try
         {
-            domain.classes.Permission permission = createDomain(value);
+            server.domain.classes.Permission permission = createDomain(value);
 
             DomainFacade.getInstance().delete(permission);
         }
@@ -116,10 +117,10 @@ public class PermissionMapper
         }
     }
 
-    private domain.classes.Permission createDomain(IPermission value)
+    private server.domain.classes.Permission createDomain(IPermission value)
             throws IdNotFoundException
     {
-        domain.classes.Permission permission = new domain.classes.Permission(value.getId());
+        server.domain.classes.Permission permission = new server.domain.classes.Permission(value.getId());
 
         permission.setDescription(value.getDescription());
         permission.setName(value.getName());

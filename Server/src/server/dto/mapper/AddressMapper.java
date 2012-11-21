@@ -2,14 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.mapper;
+package server.dto.mapper;
 
-import domain.*;
-import dto.classes.Address;
-import dto.contract.IAddress;
-import dto.mapper.contract.*;
+import contract.domain.*;
+import contract.dto.IAddress;
+import contract.dto.mapper.*;
 import java.util.*;
 import java.util.logging.*;
+import server.domain.DomainFacade;
+import server.dto.classes.Address;
 
 /**
  * @author Thomas
@@ -29,12 +30,12 @@ public class AddressMapper
         return controller;
     }
 
-    public domain.contract.IAddress getDomainById(Integer id)
+    public contract.domain.IAddress getDomainById(Integer id)
             throws IdNotFoundException
     {
         try
         {
-            return DomainFacade.getInstance().getByID(domain.contract.IAddress.class, id);
+            return DomainFacade.getInstance().getByID(contract.domain.IAddress.class, id);
         }
         catch (Exception ex)
         {
@@ -48,7 +49,7 @@ public class AddressMapper
     {
         try
         {
-            domain.contract.IAddress a = DomainFacade.getInstance().getByID(domain.contract.IAddress.class, id);
+            contract.domain.IAddress a = DomainFacade.getInstance().getByID(contract.domain.IAddress.class, id);
             return Address.copy(a);
         }
         catch (Exception ex)
@@ -65,7 +66,7 @@ public class AddressMapper
         {
             List<IAddress> result = new LinkedList<>();
 
-            for (domain.contract.IAddress a : DomainFacade.getInstance().getAll(domain.contract.IAddress.class))
+            for (contract.domain.IAddress a : DomainFacade.getInstance().getAll(contract.domain.IAddress.class))
             {
                 result.add(Address.copy(a));
             }
@@ -83,7 +84,7 @@ public class AddressMapper
     {
         try
         {
-            domain.classes.Address address = createDomain(value);
+            server.domain.classes.Address address = createDomain(value);
 
             return DomainFacade.getInstance().set(address);
         }
@@ -100,7 +101,7 @@ public class AddressMapper
     {
         try
         {
-            domain.classes.Address address = createDomain(value);
+            server.domain.classes.Address address = createDomain(value);
 
             DomainFacade.getInstance().delete(address);
         }
@@ -110,10 +111,10 @@ public class AddressMapper
         }
     }
 
-    private domain.classes.Address createDomain(IAddress value)
+    private server.domain.classes.Address createDomain(IAddress value)
             throws IdNotFoundException
     {
-        domain.classes.Address address = new domain.classes.Address(value.getId());
+        server.domain.classes.Address address = new server.domain.classes.Address(value.getId());
 
         address.setCountry(new CountryMapper().getDomainById(value.getCountry()));
         address.setPostalCode(value.getPostalCode());

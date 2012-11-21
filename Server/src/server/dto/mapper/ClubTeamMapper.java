@@ -2,15 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.mapper;
+package server.dto.mapper;
 
+import contract.domain.*;
+import contract.dto.IClubTeam;
+import contract.dto.ITypeOfSport;
+import contract.dto.mapper.*;
 import java.util.*;
 import java.util.logging.*;
-import domain.*;
-import dto.classes.ClubTeam;
-import dto.contract.IClubTeam;
-import dto.contract.ITypeOfSport;
-import dto.mapper.contract.*;
+import server.domain.DomainFacade;
+import server.dto.classes.ClubTeam;
 
 /**
 
@@ -35,12 +36,12 @@ public class ClubTeamMapper
         return controller;
     }
 
-    public domain.contract.IClubTeam getDomainById(Integer id)
+    public contract.domain.IClubTeam getDomainById(Integer id)
             throws IdNotFoundException
     {
         try
         {
-            domain.contract.IClubTeam a = DomainFacade.getInstance().getByID(domain.contract.IClubTeam.class, id);
+            contract.domain.IClubTeam a = DomainFacade.getInstance().getByID(contract.domain.IClubTeam.class, id);
             return a;
         }
         catch (Exception ex)
@@ -56,7 +57,7 @@ public class ClubTeamMapper
     {
         try
         {
-            domain.contract.IClubTeam a = DomainFacade.getInstance().getByID(domain.contract.IClubTeam.class, id);
+            contract.domain.IClubTeam a = DomainFacade.getInstance().getByID(contract.domain.IClubTeam.class, id);
             return ClubTeam.copy(a);
         }
         catch (Exception ex)
@@ -74,7 +75,7 @@ public class ClubTeamMapper
         {
             List<IClubTeam> result = new LinkedList<>();
 
-            for (domain.contract.IClubTeam a : DomainFacade.getInstance().getAll(domain.contract.IClubTeam.class))
+            for (contract.domain.IClubTeam a : DomainFacade.getInstance().getAll(contract.domain.IClubTeam.class))
             {
                 result.add(ClubTeam.copy(a));
             }
@@ -92,7 +93,7 @@ public class ClubTeamMapper
     {
         try
         {
-            domain.classes.ClubTeam clubTeam = createDomain(value);
+            server.domain.classes.ClubTeam clubTeam = createDomain(value);
 
             return DomainFacade.getInstance().set(clubTeam);
         }
@@ -109,7 +110,7 @@ public class ClubTeamMapper
     {
         try
         {
-            domain.classes.ClubTeam clubTeam = createDomain(value);
+            server.domain.classes.ClubTeam clubTeam = createDomain(value);
 
             DomainFacade.getInstance().delete(clubTeam);
         }
@@ -119,13 +120,13 @@ public class ClubTeamMapper
         }
     }
 
-    private domain.classes.ClubTeam createDomain(IClubTeam value)
+    private server.domain.classes.ClubTeam createDomain(IClubTeam value)
             throws IdNotFoundException
     {
-        domain.classes.ClubTeam clubTeam = new domain.classes.ClubTeam(value.getId());
-        List<domain.contract.IDepartment> departmentList = new LinkedList<>();
-        List<domain.contract.IPlayer> teamhasPlayerList = new LinkedList<>();
-        List<domain.contract.ITrainer> trainerList = new LinkedList<>();
+        server.domain.classes.ClubTeam clubTeam = new server.domain.classes.ClubTeam(value.getId());
+        List<contract.domain.IDepartment> departmentList = new LinkedList<>();
+        List<contract.domain.IPlayer> teamhasPlayerList = new LinkedList<>();
+        List<contract.domain.ITrainer> trainerList = new LinkedList<>();
 
         for (int d : value.getDepartmentList())
         {
@@ -158,8 +159,8 @@ public class ClubTeamMapper
     public List<IClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport) throws ClubTeamNotFoundException{
         try {
             List<IClubTeam> ret  = new LinkedList<>();
-            List<domain.classes.ClubTeam> clubTeams = DomainFacade.getInstance().getClubTeamsByTypeOfSport(DomainFacade.getInstance().getByID(domain.contract.ITypeOfSport.class, sport.getId()));
-            for(domain.classes.ClubTeam c : clubTeams){
+            List<server.domain.classes.ClubTeam> clubTeams = DomainFacade.getInstance().getClubTeamsByTypeOfSport(DomainFacade.getInstance().getByID(contract.domain.ITypeOfSport.class, sport.getId()));
+            for(server.domain.classes.ClubTeam c : clubTeams){
                 ret.add(ClubTeam.copy(c));
             }
             return ret;

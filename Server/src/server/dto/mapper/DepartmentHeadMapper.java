@@ -2,14 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.mapper;
+package server.dto.mapper;
 
-import domain.*;
-import dto.classes.DepartmentHead;
-import dto.contract.IDepartmentHead;
-import dto.mapper.contract.*;
+import contract.domain.*;
+import contract.dto.IDepartmentHead;
+import contract.dto.mapper.*;
 import java.util.*;
 import java.util.logging.*;
+import server.domain.DomainFacade;
+import server.dto.classes.DepartmentHead;
 
 /**
  *
@@ -34,12 +35,12 @@ public class DepartmentHeadMapper
         return controller;
     }
 
-    public domain.contract.IDepartmentHead getDomainById(Integer id)
+    public contract.domain.IDepartmentHead getDomainById(Integer id)
             throws IdNotFoundException
     {
         try
         {
-            domain.contract.IDepartmentHead a = DomainFacade.getInstance().getByID(domain.contract.IDepartmentHead.class, id);
+            contract.domain.IDepartmentHead a = DomainFacade.getInstance().getByID(contract.domain.IDepartmentHead.class, id);
             return a;
         }
         catch (Exception ex)
@@ -55,7 +56,7 @@ public class DepartmentHeadMapper
     {
         try
         {
-            domain.contract.IDepartmentHead a = DomainFacade.getInstance().getByID(domain.contract.IDepartmentHead.class,id);
+            contract.domain.IDepartmentHead a = DomainFacade.getInstance().getByID(contract.domain.IDepartmentHead.class,id);
             return DepartmentHead.copy(a);
         }
         catch (CouldNotFetchException ex)
@@ -71,7 +72,7 @@ public class DepartmentHeadMapper
         {
             List<IDepartmentHead> result = new LinkedList<>();
 
-            for (domain.contract.IDepartmentHead a : DomainFacade.getInstance().getAll(domain.contract.IDepartmentHead.class))
+            for (contract.domain.IDepartmentHead a : DomainFacade.getInstance().getAll(contract.domain.IDepartmentHead.class))
             {
                 result.add(DepartmentHead.copy(a));
             }
@@ -89,7 +90,7 @@ public class DepartmentHeadMapper
     {
         try
         {
-            domain.classes.DepartmentHead departmentHead = createDomain(value);
+            server.domain.classes.DepartmentHead departmentHead = createDomain(value);
 
             return DomainFacade.getInstance().set(departmentHead);
         }
@@ -106,7 +107,7 @@ public class DepartmentHeadMapper
     {
         try
         {
-            domain.classes.DepartmentHead departmentHead = createDomain(value);
+            server.domain.classes.DepartmentHead departmentHead = createDomain(value);
 
             DomainFacade.getInstance().delete(departmentHead);
         }
@@ -116,13 +117,13 @@ public class DepartmentHeadMapper
         }
     }
 
-    private domain.classes.DepartmentHead createDomain(IDepartmentHead value)
+    private server.domain.classes.DepartmentHead createDomain(IDepartmentHead value)
             throws IdNotFoundException
     {
-        domain.classes.DepartmentHead departmentHead = new domain.classes.DepartmentHead(value.getId());
+        server.domain.classes.DepartmentHead departmentHead = new server.domain.classes.DepartmentHead(value.getId());
 
-        List< domain.contract.IDepartment> departmentList = new LinkedList<>();
-        List<domain.contract.IPermission> permissionList = new LinkedList<>();
+        List< contract.domain.IDepartment> departmentList = new LinkedList<>();
+        List<contract.domain.IPermission> permissionList = new LinkedList<>();
 
         for (int i : value.getDepartmentList())
         {

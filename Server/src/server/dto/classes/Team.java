@@ -1,8 +1,8 @@
-package dto.classes;
+package server.dto.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import dto.contract.ITeam;
+import contract.dto.ITeam;
 
 public class Team
         implements Serializable, ITeam
@@ -13,13 +13,13 @@ public class Team
     private List<Integer> competitionList = new LinkedList<>();
     private List<Integer> matchList = new LinkedList<>();
     private Integer league;
-    private static HashMap<domain.contract.ITeam, Team> teams = new HashMap<>();
+    private static HashMap<contract.domain.ITeam, Team> teams = new HashMap<>();
 
     public Team()
     {
     }
 
-    public static Team copy(domain.contract.ITeam team)
+    public static Team copy(contract.domain.ITeam team)
     {
         Team a;
 
@@ -34,12 +34,12 @@ public class Team
             a.setName(team.getName());
             a.setDescription(team.getDescription());
             a.setLeague(team.getLeague().getId());
-            for (domain.contract.ICompetition c : team.getCompetitionList())
+            for (contract.domain.ICompetition c : team.getCompetitionList())
             {
                 a.competitionList.add(c.getId());
             }
 
-            for (domain.contract.IMatch c : team.getMatchList())
+            for (contract.domain.IMatch c : team.getMatchList())
             {
                 a.matchList.add(c.getId());
             }
@@ -50,12 +50,12 @@ public class Team
         return a;
     }
 
-    public static domain.contract.ITeam copy(ITeam team,
-                                                               domain.contract.ILeague league,
-                                                               List<domain.contract.ICompetition> competitionList,
-                                                               List<domain.contract.IMatch> matchList)
+    public static contract.domain.ITeam copy(ITeam team,
+                                                               contract.domain.ILeague league,
+                                                               List<contract.domain.ICompetition> competitionList,
+                                                               List<contract.domain.IMatch> matchList)
     {
-        domain.contract.ITeam a = new domain.classes.Team(team.getId());
+        contract.domain.ITeam a = new server.domain.classes.Team(team.getId());
 
         a.setName(team.getName());
         a.setDescription(team.getDescription());

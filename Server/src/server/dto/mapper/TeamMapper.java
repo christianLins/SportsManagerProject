@@ -2,14 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.mapper;
+package server.dto.mapper;
 
-import domain.*;
-import dto.classes.Team;
-import dto.contract.ITeam;
-import dto.mapper.contract.*;
+import contract.domain.*;
+import contract.dto.ITeam;
+import contract.dto.mapper.*;
 import java.util.*;
 import java.util.logging.*;
+import server.domain.DomainFacade;
+import server.dto.classes.Team;
 
 /**
 
@@ -34,12 +35,12 @@ public class TeamMapper
         return controller;
     }
 
-    public domain.contract.ITeam getDomainById(Integer id)
+    public contract.domain.ITeam getDomainById(Integer id)
             throws IdNotFoundException
     {
         try
         {
-            domain.contract.ITeam a = DomainFacade.getInstance().getByID(domain.contract.ITeam.class, id);
+            contract.domain.ITeam a = DomainFacade.getInstance().getByID(contract.domain.ITeam.class, id);
             return a;
         }
         catch (Exception ex)
@@ -54,7 +55,7 @@ public class TeamMapper
     {
         try
         {
-            domain.contract.ITeam a = DomainFacade.getInstance().getByID(domain.contract.ITeam.class, id);
+            contract.domain.ITeam a = DomainFacade.getInstance().getByID(contract.domain.ITeam.class, id);
             return Team.copy(a);
         }
         catch (Exception ex)
@@ -72,7 +73,7 @@ public class TeamMapper
         {
             List<ITeam> result = new LinkedList<>();
 
-            for (domain.contract.ITeam a : DomainFacade.getInstance().getAll(domain.contract.ITeam.class))
+            for (contract.domain.ITeam a : DomainFacade.getInstance().getAll(contract.domain.ITeam.class))
             {
                 result.add(Team.copy(a));
             }
@@ -91,7 +92,7 @@ public class TeamMapper
         Integer rv = 0;
         try
         {
-            domain.classes.Team team = createDomain(value);
+            server.domain.classes.Team team = createDomain(value);
 
             rv = DomainFacade.getInstance().set(team);
         }
@@ -111,10 +112,10 @@ public class TeamMapper
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    private domain.classes.Team createDomain(ITeam value)
+    private server.domain.classes.Team createDomain(ITeam value)
             throws IdNotFoundException
     {
-        domain.classes.Team team = new domain.classes.Team(value.getId());
+        server.domain.classes.Team team = new server.domain.classes.Team(value.getId());
 
         List<Integer> competitions = value.getCompetitionList();
         List<Integer> matches = value.getMatchList();
@@ -123,14 +124,14 @@ public class TeamMapper
         team.setName(value.getName());
         team.setLeague(new LeagueMapper().getDomainById(value.getLeague()));
 
-        LinkedList<domain.contract.ICompetition> c = new LinkedList<>();
+        LinkedList<contract.domain.ICompetition> c = new LinkedList<>();
         for (int id : competitions)
         {
             c.add(new CompetitionMapper().getDomainById(id));
         }
         team.setCompetitionList(c);
 
-        LinkedList<domain.contract.IMatch> m = new LinkedList<>();
+        LinkedList<contract.domain.IMatch> m = new LinkedList<>();
         for (int id : matches)
         {
             m.add(new MatchMapper().getDomainById(id));

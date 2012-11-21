@@ -1,6 +1,6 @@
-package dto.classes;
+package server.dto.classes;
 
-import dto.contract.IPlayer;
+import contract.dto.IPlayer;
 import java.io.Serializable;
 import java.util.*;
 
@@ -10,9 +10,9 @@ public class Player
 {
     private List<Integer> typeOfSportList;
     private List<Integer> memberList;
-    private static HashMap<domain.contract.IPlayer, Player> players = new HashMap<>();
+    private static HashMap<contract.domain.IPlayer, Player> players = new HashMap<>();
 
-    public static Player copy(domain.contract.IPlayer player)
+    public static Player copy(contract.domain.IPlayer player)
     {
         Player a;
 
@@ -26,7 +26,7 @@ public class Player
 
             List<Integer> l = new LinkedList<>();
 
-            for (domain.contract.ITypeOfSport t : player.getTypeOfSportList())
+            for (contract.domain.ITypeOfSport t : player.getTypeOfSportList())
             {
                 l.add(t.getId());
             }

@@ -1,6 +1,6 @@
-package dto.classes;
+package server.dto.classes;
 
-import dto.contract.ITypeOfSport;
+import contract.dto.ITypeOfSport;
 import java.io.Serializable;
 import java.util.*;
 
@@ -20,9 +20,9 @@ public class TypeOfSport
     {
         this.id = id;
     }
-    private static HashMap<domain.contract.ITypeOfSport, TypeOfSport> typeOfSports = new HashMap<>();
+    private static HashMap<contract.domain.ITypeOfSport, TypeOfSport> typeOfSports = new HashMap<>();
 
-    public static TypeOfSport copy(domain.contract.ITypeOfSport typeOfSport)
+    public static TypeOfSport copy(contract.domain.ITypeOfSport typeOfSport)
     {
         TypeOfSport a;
 
@@ -37,7 +37,7 @@ public class TypeOfSport
             a.setDescription(typeOfSport.getDescription());
 
             List<Integer> pls = new LinkedList<>();
-            for (domain.contract.IPlayer p : typeOfSport.getPlayerList())
+            for (contract.domain.IPlayer p : typeOfSport.getPlayerList())
             {
                 pls.add(p.getId());
             }

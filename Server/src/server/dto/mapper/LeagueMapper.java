@@ -2,14 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.mapper;
+package server.dto.mapper;
 
-import domain.*;
-import dto.classes.League;
-import dto.contract.*;
-import dto.mapper.contract.*;
+import contract.domain.*;
+import contract.dto.ILeague;
+import contract.dto.ITypeOfSport;
+import contract.dto.mapper.*;
 import java.util.*;
 import java.util.logging.*;
+import server.domain.DomainFacade;
+import server.dto.classes.League;
 
 /**
 
@@ -34,12 +36,12 @@ public class LeagueMapper
         return controller;
     }
 
-    public domain.contract.ILeague getDomainById(Integer id)
+    public contract.domain.ILeague getDomainById(Integer id)
             throws IdNotFoundException
     {
         try
         {
-            domain.contract.ILeague a = DomainFacade.getInstance().getByID(domain.contract.ILeague.class, id);
+            contract.domain.ILeague a = DomainFacade.getInstance().getByID(contract.domain.ILeague.class, id);
             return a;
         }
         catch (Exception ex)
@@ -55,7 +57,7 @@ public class LeagueMapper
     {
         try
         {
-            domain.contract.ILeague a = DomainFacade.getInstance().getByID(domain.contract.ILeague.class, id);
+            contract.domain.ILeague a = DomainFacade.getInstance().getByID(contract.domain.ILeague.class, id);
             return League.copy(a);
         }
         catch (Exception ex)
@@ -72,7 +74,7 @@ public class LeagueMapper
         {
             List<ILeague> result = new LinkedList<>();
 
-            for (domain.contract.ILeague a : DomainFacade.getInstance().getAll(domain.contract.ILeague.class))
+            for (contract.domain.ILeague a : DomainFacade.getInstance().getAll(contract.domain.ILeague.class))
             {
                 result.add(League.copy(a));
             }
@@ -90,7 +92,7 @@ public class LeagueMapper
     {
         try
         {
-            domain.classes.League league = createDomain(value);
+            server.domain.classes.League league = createDomain(value);
 
             return DomainFacade.getInstance().set(league);
         }
@@ -107,7 +109,7 @@ public class LeagueMapper
     {
         try
         {
-            domain.classes.League league = createDomain(value);
+            server.domain.classes.League league = createDomain(value);
 
             DomainFacade.getInstance().delete(league);
         }
@@ -117,15 +119,15 @@ public class LeagueMapper
         }
     }
 
-    private domain.classes.League createDomain(ILeague value)
+    private server.domain.classes.League createDomain(ILeague value)
             throws IdNotFoundException
     {
-        domain.classes.League league = new domain.classes.League(value.getId());
+        server.domain.classes.League league = new server.domain.classes.League(value.getId());
 
         league.setDescription(value.getDescription());
         league.setName(value.getName());
 
-        List<domain.contract.ITeam> teamList = new LinkedList<>();
+        List<contract.domain.ITeam> teamList = new LinkedList<>();
 
         for (int i : value.getTeamList())
         {
@@ -143,7 +145,7 @@ public class LeagueMapper
     {
         try
         {
-            domain.classes.TypeOfSport sport = (domain.classes.TypeOfSport) TypeOfSportMapper.getInstance().getDomainById(typeOfSport.getId());
+            server.domain.classes.TypeOfSport sport = (server.domain.classes.TypeOfSport) TypeOfSportMapper.getInstance().getDomainById(typeOfSport.getId());
             return League.copy(DomainFacade.getInstance().getLeageByNameAndTypeOfSport(sport, league));
         }
         catch (CouldNotFetchException | IdNotFoundException ex)

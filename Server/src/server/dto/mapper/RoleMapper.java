@@ -2,10 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.mapper;
+package server.dto.mapper;
 
-import dto.contract.*;
-import dto.mapper.contract.*;
+import contract.dto.mapper.IdNotFoundException;
+import contract.dto.mapper.IMapper;
+import contract.dto.mapper.NotFoundException;
+import contract.dto.IRole;
+import contract.dto.ITrainer;
+import contract.dto.IPlayer;
+import contract.dto.IDepartmentHead;
 import java.util.*;
 
 /**

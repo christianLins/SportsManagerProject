@@ -2,14 +2,19 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.mapper;
+package server.dto.mapper;
 
+import contract.dto.mapper.IdNotFoundException;
+import contract.dto.mapper.IMapper;
+import contract.dto.mapper.NotFoundException;
+import contract.domain.CouldNotSaveException;
+import contract.domain.CouldNotFetchException;
+import contract.domain.CouldNotDeleteException;
 import java.util.*;
 import java.util.logging.*;
-import domain.*;
-import dto.classes.Matchresult;
-import dto.contract.IMatchresult;
-import dto.mapper.contract.*;
+import server.dto.classes.Matchresult;
+import contract.dto.IMatchresult;
+import server.domain.DomainFacade;
 
 /**
 
@@ -34,12 +39,12 @@ public class MatchresultMapper
         return controller;
     }
 
-    public domain.contract.IMatchresult getDomainById(Integer id)
+    public contract.domain.IMatchresult getDomainById(Integer id)
             throws IdNotFoundException
     {
         try
         {
-            domain.contract.IMatchresult a = DomainFacade.getInstance().getByID(domain.contract.IMatchresult.class, id);
+            contract.domain.IMatchresult a = DomainFacade.getInstance().getByID(contract.domain.IMatchresult.class, id);
             return a;
         }
         catch (Exception ex)
@@ -55,7 +60,7 @@ public class MatchresultMapper
     {
         try
         {
-            domain.contract.IMatchresult a = DomainFacade.getInstance().getByID(domain.contract.IMatchresult.class, id);
+            contract.domain.IMatchresult a = DomainFacade.getInstance().getByID(contract.domain.IMatchresult.class, id);
             return Matchresult.copy(a);
         }
         catch (Exception ex)
@@ -73,7 +78,7 @@ public class MatchresultMapper
         {
             List<IMatchresult> result = new LinkedList<>();
 
-            for (domain.contract.IMatchresult a : DomainFacade.getInstance().getAll(domain.contract.IMatchresult.class))
+            for (contract.domain.IMatchresult a : DomainFacade.getInstance().getAll(contract.domain.IMatchresult.class))
             {
                 result.add(Matchresult.copy(a));
             }
@@ -91,7 +96,7 @@ public class MatchresultMapper
     {
         try
         {
-            domain.classes.Matchresult matchresult = createDomain(value);
+            server.domain.classes.Matchresult matchresult = createDomain(value);
 
             return DomainFacade.getInstance().set(matchresult);
         }
@@ -108,7 +113,7 @@ public class MatchresultMapper
     {
         try
         {
-            domain.classes.Matchresult matchresult = createDomain(value);
+            server.domain.classes.Matchresult matchresult = createDomain(value);
 
             DomainFacade.getInstance().delete(matchresult);
         }
@@ -118,10 +123,10 @@ public class MatchresultMapper
         }
     }
 
-    private domain.classes.Matchresult createDomain(IMatchresult value)
+    private server.domain.classes.Matchresult createDomain(IMatchresult value)
             throws IdNotFoundException
     {
-        domain.classes.Matchresult matchresult = new domain.classes.Matchresult(value.getId());
+        server.domain.classes.Matchresult matchresult = new server.domain.classes.Matchresult(value.getId());
 
         matchresult.setPointsForeignteam(value.getPointsForeignteam());
         matchresult.setPointsHometeam(value.getPointsHometeam());

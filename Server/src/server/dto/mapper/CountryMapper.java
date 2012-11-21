@@ -2,14 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.mapper;
+package server.dto.mapper;
 
-import domain.*;
-import dto.classes.Country;
-import dto.contract.ICountry;
-import dto.mapper.contract.*;
+import contract.domain.*;
+import contract.dto.ICountry;
+import contract.dto.mapper.*;
 import java.util.*;
 import java.util.logging.*;
+import server.domain.DomainFacade;
+import server.dto.classes.Country;
 
 /**
 
@@ -20,12 +21,12 @@ public class CountryMapper
 {
     private static CountryMapper controller;
 
-    domain.contract.ICountry getDomainById(int id)
+    contract.domain.ICountry getDomainById(int id)
             throws IdNotFoundException
     {
         try
         {
-            domain.contract.ICountry a = DomainFacade.getInstance().getByID(domain.contract.ICountry.class, id);
+            contract.domain.ICountry a = DomainFacade.getInstance().getByID(contract.domain.ICountry.class, id);
             return a;
         }
         catch (Exception ex)
@@ -55,7 +56,7 @@ public class CountryMapper
     {
         try
         {
-            domain.contract.ICountry a = DomainFacade.getInstance().getByID(domain.contract.ICountry.class, id);
+            contract.domain.ICountry a = DomainFacade.getInstance().getByID(contract.domain.ICountry.class, id);
             return Country.copy(a);
 
         }
@@ -74,7 +75,7 @@ public class CountryMapper
         {
             List<ICountry> result = new LinkedList<>();
 
-            for (domain.contract.ICountry a : DomainFacade.getInstance().getAll(domain.contract.ICountry.class))
+            for (contract.domain.ICountry a : DomainFacade.getInstance().getAll(contract.domain.ICountry.class))
             {
                 result.add(Country.copy(a));
             }
@@ -92,7 +93,7 @@ public class CountryMapper
     {
         try
         {
-            domain.classes.Country country = createDomain(value);
+            server.domain.classes.Country country = createDomain(value);
 
             return DomainFacade.getInstance().set(country);
         }
@@ -109,7 +110,7 @@ public class CountryMapper
     {
         try
         {
-            domain.classes.Country country = createDomain(value);
+            server.domain.classes.Country country = createDomain(value);
 
             DomainFacade.getInstance().delete(country);
         }
@@ -119,10 +120,10 @@ public class CountryMapper
         }
     }
 
-    private domain.classes.Country createDomain(ICountry value)
+    private server.domain.classes.Country createDomain(ICountry value)
             throws IdNotFoundException
     {
-        domain.classes.Country country = new domain.classes.Country(value.getId());
+        server.domain.classes.Country country = new server.domain.classes.Country(value.getId());
 
         country.setAlpha2(value.getAlpha2());
         country.setAlpha3(value.getAlpha3());

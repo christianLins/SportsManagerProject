@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.classes;
+package server.dto.classes;
 
-import dto.contract.IRole;
+import contract.dto.IRole;
 import java.util.*;
 
 /**
@@ -24,14 +24,14 @@ abstract class Role
     {
     }
 
-    public static <T extends Role> T copy(domain.contract.IRole domainRole, T role)
+    public static <T extends Role> T copy(contract.domain.IRole domainRole, T role)
     {
         role.setId(domainRole.getId());
         role.setName(domainRole.getName());
         role.setDescription(domainRole.getDesciption());
 
         List<Integer> perList = new LinkedList<>();
-        for (domain.contract.IPermission permission : domainRole.getPermissionList())
+        for (contract.domain.IPermission permission : domainRole.getPermissionList())
         {
             perList.add(permission.getId());
         }
@@ -39,7 +39,7 @@ abstract class Role
 
         List<Integer> memList = new LinkedList<>();
 
-        for (domain.contract.IMember mem : domainRole.getMembers())
+        for (contract.domain.IMember mem : domainRole.getMembers())
         {
             memList.add(mem.getId());
         }
