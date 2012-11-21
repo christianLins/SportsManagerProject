@@ -2,15 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.mapper.contract;
+package contract.dto.mapper;
 
-import dto.contract.*;
+import contract.dto.ITypeOfSport;
+import contract.dto.ILeague;
 
 /**
-
  @author Thomas
  */
-public interface ILeagueMapper extends IMapper<ILeague>
+public interface ILeagueMapper
+        extends IMapper<ILeague>
 {
-    public ILeague getByName(String league, ITypeOfSport typeOfSport) throws NotFoundException;
+    public ILeague getByName(String league, ITypeOfSport typeOfSport)
+            throws NotFoundException;
 }

@@ -2,11 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.mapper.contract;
+package contract.dto.mapper;
 
-import dto.contract.IClubTeam;
-import dto.contract.ITypeOfSport;
-import dto.mapper.ClubTeamNotFoundException;
+import contract.dto.IClubTeam;
+import contract.dto.ITypeOfSport;
 import java.util.List;
 
 /**
