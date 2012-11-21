@@ -98,7 +98,7 @@ UseCaseController/nbproject/private/private.properties
 *.jar
 *.war
 *.ear
-*.properties
+
 /PresentationService/nbproject/private/private.xml
 /CommunicationContract/nbproject/private/org-nbheaven-sqe-core-java/CompileOnSaveHelper/0910581A/ServiceClientFactory.class
 /UseCaseControllerContract/build/
