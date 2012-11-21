@@ -6,6 +6,7 @@ package domain;
 
 import domain.classes.*;
 import domain.contract.IDomain;
+import domain.contract.ITypeOfSport;
 import java.util.*;
 import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
@@ -214,6 +215,19 @@ public class DomainFacade
         catch (HibernateException ex)
         {
             throw new CouldNotFetchException(ex.getMessage());
+        }
+    }
+    
+    public List<ClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport) throws CouldNotFetchException{
+        try {
+            session.beginTransaction();
+            Query q = session.createQuery("From ClubTeam where League.typeOfSport =:sport");
+            q.setParameter("sport", sport);
+            return q.list();
+        } 
+        catch (HibernateException e) 
+        {
+            throw new CouldNotFetchException(e.getMessage());
         }
     }
 }

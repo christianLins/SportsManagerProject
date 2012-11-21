@@ -28,6 +28,8 @@ public interface ISearchChangeMember
     List<IDepartment> getDepartments();
 
     List<IClubTeam> getClubTeams(List<Integer> clubTeams);
+    
+    List<IClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport);
 
     List<ITypeOfSport> getTypeOfSports(List<Integer> sportsList);
 

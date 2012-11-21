@@ -1,8 +1,12 @@
 package presentation.forms.helper;
 
+import dto.contract.IClubTeam;
+import dto.contract.ITypeOfSport;
+import java.awt.datatransfer.StringSelection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import javax.swing.AbstractListModel;
 import presentation.basics.AbstractMainForm;
 
 /**
@@ -10,17 +14,17 @@ import presentation.basics.AbstractMainForm;
  * @author Lucia
  */
 public class SelectTeamsHelper extends javax.swing.JFrame {
-    private List<String> allSports;
+    private List<ITypeOfSport> allSports;
     private AbstractMainForm parent;
-    private HashMap<Object, Object> sportTeamMap;
+    private List<IClubTeam> selectedTeams;
 
     /**
      * Creates new form SelectSports
      */
-    public SelectTeamsHelper(List<String> allSports, AbstractMainForm parent) {
+    public SelectTeamsHelper(List<ITypeOfSport> allSports, AbstractMainForm parent) {
         this.allSports = allSports;
         this.parent = parent;
-        sportTeamMap = new HashMap<>();
+        selectedTeams = new LinkedList<>();
         initComponents();
         setVisible(true);
         
@@ -48,7 +52,7 @@ public class SelectTeamsHelper extends javax.swing.JFrame {
         panelSetTeams.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Set Teams", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
         listTeams.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = getSportsArray();
+            Object[] strings = getTeamsArray();
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
@@ -66,7 +70,7 @@ public class SelectTeamsHelper extends javax.swing.JFrame {
             }
         });
 
-        comboSports.setModel(new javax.swing.DefaultComboBoxModel(getSportsArray()));
+        comboSports.setModel(new javax.swing.DefaultComboBoxModel(allSports.toArray()));
         comboSports.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboSportsActionPerformed(evt);
@@ -132,10 +136,7 @@ public class SelectTeamsHelper extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        Object selectedTeam = listTeams.getSelectedValue();        
-        sportTeamMap.put(comboSports.getSelectedItem(), selectedTeam);   
-        
-        //TODO handle if getsectedsports called -> setvisible(false)
+        selectedTeams.add((IClubTeam)listTeams.getSelectedValue());
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void listTeamsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listTeamsValueChanged
@@ -143,24 +144,38 @@ public class SelectTeamsHelper extends javax.swing.JFrame {
     }//GEN-LAST:event_listTeamsValueChanged
 
     private void comboSportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboSportsActionPerformed
-        // TODO add your handling code here:
+        updateListTeamsModel();
+
     }//GEN-LAST:event_comboSportsActionPerformed
 
+    private void updateListTeamsModel() {
+        listTeams.setModel(new AbstractListModel() {
+            Object[] strings = getTeamsArray();
+
+            @Override
+            public int getSize() {
+                return strings.length;
+            }
+
+            @Override
+            public Object getElementAt(int i) {
+                return strings[i];
+            }
+        });
+    }
+    
     private void btnFinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinishActionPerformed
        
-        //parent.setTxtFieldTeams(sportTeamMap);
+        //parent.setTxtFieldTeams(selectedTeams);
         
         setVisible(false);
         dispose();
     }//GEN-LAST:event_btnFinishActionPerformed
 
-    private String[] getSportsArray(){
-        String[] array = new String[allSports.size()];
-        
-        for(int i = 0; i < array.length; i++){
-           array[i] = allSports.get(i);
-        }        
-        return array;
+    private Object[] getTeamsArray(){
+        ITypeOfSport tos = (ITypeOfSport) comboSports.getSelectedItem();
+        List<IClubTeam> clubTeamOfSport = parent.getClubTeams(tos);
+        return clubTeamOfSport.toArray();
     }
        
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -171,4 +186,5 @@ public class SelectTeamsHelper extends javax.swing.JFrame {
     private javax.swing.JList listTeams;
     private javax.swing.JPanel panelSetTeams;
     // End of variables declaration//GEN-END:variables
+
 }

@@ -180,12 +180,27 @@ public class SearchChangeMember
     @Override
     public IMember getSelectedMember()
     {
-        return service.getSelectedMember();
+        IMember m = null;
+        try {
+            m = service.getSelectedMember();
+        } catch (RemoteException ex) {
+            Logger.getLogger(SearchChangeMember.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return m;
     }
 
     @Override
     public void setSelectedMember(IMember selectedMember)
     {
-        service.setSelectedMember(selectedMember);
+        try {
+            service.setSelectedMember(selectedMember);
+        } catch (RemoteException ex) {
+            Logger.getLogger(SearchChangeMember.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public List<IClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

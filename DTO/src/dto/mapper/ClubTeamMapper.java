@@ -9,6 +9,7 @@ import java.util.logging.*;
 import domain.*;
 import dto.classes.ClubTeam;
 import dto.contract.IClubTeam;
+import dto.contract.ITypeOfSport;
 import dto.mapper.contract.*;
 
 /**
@@ -16,7 +17,7 @@ import dto.mapper.contract.*;
  @author Thomas
  */
 public class ClubTeamMapper
-        implements IMapper<IClubTeam>
+        implements IClubTeamMapper
 {
     private static ClubTeamMapper controller;
 
@@ -24,7 +25,7 @@ public class ClubTeamMapper
     {
     }
 
-    public static IMapper<IClubTeam> getInstance()
+    public static IClubTeamMapper getInstance()
     {
         if (controller == null)
         {
@@ -152,5 +153,20 @@ public class ClubTeamMapper
     public IClubTeam getNew()
     {
         return new ClubTeam();
+    }
+    
+    public List<IClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport) throws ClubTeamNotFoundException{
+        try {
+            List<IClubTeam> ret  = new LinkedList<>();
+            List<domain.classes.ClubTeam> clubTeams = DomainFacade.getInstance().getClubTeamsByTypeOfSport(DomainFacade.getInstance().getByID(domain.contract.ITypeOfSport.class, sport.getId()));
+            for(domain.classes.ClubTeam c : clubTeams){
+                ret.add(ClubTeam.copy(c));
+            }
+            return ret;
+            
+        } catch (CouldNotFetchException e) {
+            throw new ClubTeamNotFoundException(e.getMessage());
+        }
+        
     }
 }
