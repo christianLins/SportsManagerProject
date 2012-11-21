@@ -34,7 +34,7 @@ public class CorbaServer
     {
         try
         {
-          //  Runtime.getRuntime().exec("orbd -ORBInitialPort 2050");
+            Runtime.getRuntime().exec("orbd -ORBInitialPort 2050");
             String[] args1 = new String[]
             {
                 "-ORBInitialPort", "2050"
@@ -53,6 +53,10 @@ public class CorbaServer
             ncRef.rebind(cosName, href);
             System.out.println("Corba Server ready and waiting");
             orb.run();
+        }
+        catch (IOException ex)
+        {
+            Logger.getLogger(CorbaServer.class.getName()).log(Level.SEVERE, null, ex);
         }
 //        catch (IOException ex)
 //        {

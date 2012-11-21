@@ -7,7 +7,6 @@ package presentation;
 import ldap.presentation.LoginFrame;
 
 /**
-
  @author Thomas
  */
 public class Program

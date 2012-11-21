@@ -24,7 +24,7 @@ public class Server
         new Thread(rmiServer).start();
 
         // start corba-server-thread
-        //CorbaServer corbaServer = new CorbaServer();
-       // new Thread(corbaServer).start();
+        CorbaServer corbaServer = new CorbaServer();
+       new Thread(corbaServer).start();
     }
 }
