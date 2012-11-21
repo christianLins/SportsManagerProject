@@ -1,7 +1,6 @@
 package presentation.forms.helper;
 
 import contract.dto.*;
-
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.AbstractListModel;

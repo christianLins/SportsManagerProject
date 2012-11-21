@@ -1,6 +1,5 @@
 package presentation.forms.member;
 
-import presentation.forms.dto.Player;
 import contract.dto.*;
 import contract.useCaseController.INewMember;
 import java.util.*;
@@ -8,6 +7,7 @@ import javax.swing.*;
 import presentation.basics.*;
 import presentation.forms.dto.*;
 import presentation.forms.helper.SelectSportsHelper;
+import presentation.forms.helper.SelectTeamsHelper;
 import services.*;
 
 /**
@@ -30,6 +30,7 @@ public class NewMemberForm
     private List<ITypeOfSport> typeOfSports;
     private List<ITypeOfSport> availableSports;
     private List<ITypeOfSport> selectedSports;
+    private List<IClubTeam> selectedTeams;
     private boolean adminPermission = false;
 
     /**
@@ -39,7 +40,6 @@ public class NewMemberForm
             throws ServiceNotAvailableException
     {
         super(form);
-
         initComponents();
 
         this.client = client;
@@ -88,19 +88,18 @@ public class NewMemberForm
         paneMembershipData = new javax.swing.JPanel();
         lblEntryDate = new javax.swing.JLabel();
         dateChooserEntry = new com.toedter.calendar.JDateChooser();
-        lblDepartment = new javax.swing.JLabel();
-        comboDepartment = new javax.swing.JComboBox();
         lblRole = new javax.swing.JLabel();
         radioAdmin = new javax.swing.JRadioButton();
         radioTrainer = new javax.swing.JRadioButton();
         radioPlayer = new javax.swing.JRadioButton();
         lblTeam = new javax.swing.JLabel();
-        comboTeam = new javax.swing.JComboBox();
         radioDeptHead = new javax.swing.JRadioButton();
         radioCaretaker = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         txtFieldSport = new javax.swing.JTextField();
         btnAddSports = new javax.swing.JButton();
+        txtFieldTeam = new javax.swing.JTextField();
+        btnTeams = new javax.swing.JButton();
         btnSaveMember = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -113,31 +112,13 @@ public class NewMemberForm
 
         lblFName.setText("First Name");
 
-        txtfieldFName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfieldFNameActionPerformed(evt);
-            }
-        });
-
         lblLName.setText("Last Name");
 
         lblAddress.setText("Address");
 
-        txtfieldAddress.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfieldAddressActionPerformed(evt);
-            }
-        });
-
         lblPostCode.setText("Post Code");
 
         lblCity.setText("City");
-
-        txtfieldCity.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfieldCityActionPerformed(evt);
-            }
-        });
 
         lblCountry.setText("Country");
 
@@ -150,11 +131,6 @@ public class NewMemberForm
         lblPhone.setText("Phone");
 
         radioFemale.setText("female");
-        radioFemale.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioFemaleActionPerformed(evt);
-            }
-        });
 
         radioMale.setText("male");
 
@@ -261,60 +237,19 @@ public class NewMemberForm
 
         lblEntryDate.setText("Entry Date");
 
-        lblDepartment.setText("Department");
-
-        comboDepartment.setModel(new javax.swing.DefaultComboBoxModel(getComboDepartment()));
-        comboDepartment.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboDepartmentActionPerformed(evt);
-            }
-        });
-
         lblRole.setText("Role");
 
         radioAdmin.setText("Admin");
-        radioAdmin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioAdminActionPerformed(evt);
-            }
-        });
 
         radioTrainer.setText("Trainer");
-        radioTrainer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioTrainerActionPerformed(evt);
-            }
-        });
 
         radioPlayer.setText("Player");
-        radioPlayer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioPlayerActionPerformed(evt);
-            }
-        });
 
         lblTeam.setText("Team");
 
-        comboTeam.setModel(new javax.swing.DefaultComboBoxModel(getComboTeam()));
-        comboTeam.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboTeamActionPerformed(evt);
-            }
-        });
-
         radioDeptHead.setText("Department Head");
-        radioDeptHead.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioDeptHeadActionPerformed(evt);
-            }
-        });
 
         radioCaretaker.setText("Caretaker");
-        radioCaretaker.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioCaretakerActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Sport(s)");
 
@@ -327,6 +262,15 @@ public class NewMemberForm
             }
         });
 
+        txtFieldTeam.setEnabled(false);
+
+        btnTeams.setText("Add Team(s)");
+        btnTeams.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTeamsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout paneMembershipDataLayout = new javax.swing.GroupLayout(paneMembershipData);
         paneMembershipData.setLayout(paneMembershipDataLayout);
         paneMembershipDataLayout.setHorizontalGroup(
@@ -334,12 +278,11 @@ public class NewMemberForm
             .addGroup(paneMembershipDataLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDepartment)
                     .addComponent(lblEntryDate)
                     .addComponent(lblTeam)
                     .addComponent(lblRole)
                     .addComponent(jLabel1))
-                .addGap(18, 18, 18)
+                .addGap(23, 23, 23)
                 .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(paneMembershipDataLayout.createSequentialGroup()
                         .addComponent(radioAdmin)
@@ -351,14 +294,15 @@ public class NewMemberForm
                         .addComponent(radioTrainer)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(radioPlayer))
-                    .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(dateChooserEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(comboDepartment, 0, 200, Short.MAX_VALUE))
-                    .addComponent(comboTeam, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateChooserEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(paneMembershipDataLayout.createSequentialGroup()
-                        .addComponent(txtFieldSport, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtFieldTeam, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtFieldSport, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAddSports)))
+                        .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnAddSports, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnTeams, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         paneMembershipDataLayout.setVerticalGroup(
@@ -368,11 +312,7 @@ public class NewMemberForm
                 .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblEntryDate)
                     .addComponent(dateChooserEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDepartment)
-                    .addComponent(comboDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRole)
                     .addComponent(radioAdmin)
@@ -385,11 +325,12 @@ public class NewMemberForm
                     .addComponent(jLabel1)
                     .addComponent(txtFieldSport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAddSports))
-                .addGap(7, 7, 7)
+                .addGap(6, 6, 6)
                 .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboTeam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTeam))
-                .addGap(71, 71, 71))
+                    .addComponent(lblTeam)
+                    .addComponent(txtFieldTeam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTeams))
+                .addGap(69, 69, 69))
         );
 
         btnSaveMember.setText("Save Member");
@@ -439,41 +380,6 @@ public class NewMemberForm
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtfieldFNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfieldFNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfieldFNameActionPerformed
-
-    private void txtfieldAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfieldAddressActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfieldAddressActionPerformed
-
-    private void txtfieldCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfieldCityActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfieldCityActionPerformed
-
-    private void radioFemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioFemaleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_radioFemaleActionPerformed
-
-    private void radioAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioAdminActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_radioAdminActionPerformed
-
-    private void comboTeamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTeamActionPerformed
-        setSelectedTeam();
-    }//GEN-LAST:event_comboTeamActionPerformed
-
-    private void radioDeptHeadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioDeptHeadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_radioDeptHeadActionPerformed
-
-    private void comboDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboDepartmentActionPerformed
-        //get teams from department and set selectable teams for combobox
-        setSelectedDepartment();
-        setAvailableSports(department.getTypeOfSportList());
-        comboTeam.setModel(new DefaultComboBoxModel(getComboTeam()));
-    }//GEN-LAST:event_comboDepartmentActionPerformed
-
     private void btnSaveMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveMemberActionPerformed
         if (validInput())
         {
@@ -486,49 +392,14 @@ public class NewMemberForm
         }
     }//GEN-LAST:event_btnSaveMemberActionPerformed
 
-    private void radioCaretakerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioCaretakerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_radioCaretakerActionPerformed
-
-    private void radioTrainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioTrainerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_radioTrainerActionPerformed
-
-    private void radioPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioPlayerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_radioPlayerActionPerformed
-
     private void btnAddSportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSportsActionPerformed
+        setAvailableSports(loadSportsList());
         SelectSportsHelper selectSportsHelper = new SelectSportsHelper(availableSports, new LinkedList<ITypeOfSport>(), this);
     }//GEN-LAST:event_btnAddSportsActionPerformed
 
-    private String[] getComboDepartment()
-    {
-        return new String[1];
-//        List<IDepartment> depList = controller.getDepartments();
-//        String[] depArray = new String[depList.size()];
-//
-//        for (int i = 0; i < depList.size(); i++)
-//        {
-//            depArray[i] = depList.get(i).getName();
-//        }
-//
-//        return depArray;
-    }
-
-    private void setSelectedDepartment()
-    {
-        String selName = comboDepartment.getSelectedItem().toString();
-        List<IDepartment> depList = controller.getDepartments();
-
-        for (IDepartment d : depList)
-        {
-            if (d.getName().equals(selName))
-            {
-                department = d;
-            }
-        }
-    }
+    private void btnTeamsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeamsActionPerformed
+        SelectTeamsHelper selectTeamsHelper = new SelectTeamsHelper(selectedSports, this);
+    }//GEN-LAST:event_btnTeamsActionPerformed
 
     private List<Integer> getSelectedSports()
     {
@@ -547,45 +418,12 @@ public class NewMemberForm
         return tosIDs;
     }
 
-    private String[] getComboTeam()
-    {
-        if (department != null)
-        {
-            List<Integer> cTeamInt = department.getClubTeamList();
-            List<IClubTeam> cTeamList = controller.getClubTeams(cTeamInt);
-            Iterator<IClubTeam> cTeamIterator = cTeamList.iterator();
-            String[] cTeamArray = new String[cTeamList.size()];
-
-            for (int i = 0; cTeamIterator.hasNext(); i++)
-            {
-                cTeamArray[i] = cTeamIterator.next().getName();
-            }
-            return cTeamArray;
-        }
-        else
-        {
-            return new String[]
-                    {
-                        "Team"
-                    };
-        }
+    // TODO add getAvailableSports by logged in user 
+    private List<Integer> loadSportsList(){
+//        return controller.getAvailableSportsList(user);
+        return null;
     }
-
-    private void setSelectedTeam()
-    {
-        String selName = comboTeam.getSelectedItem().toString();
-        List<Integer> cTeamInt = department.getClubTeamList();
-        List<IClubTeam> cTeamList = controller.getClubTeams(cTeamInt);
-
-        for (IClubTeam t : cTeamList)
-        {
-            if (t.getName().equals(selName))
-            {
-                clubTeam = t;
-            }
-        }
-    }
-
+    
     private void setAvailableSports(List<Integer> typeOfSportList)
     {
         typeOfSports = controller.getTypeOfSports(typeOfSportList);
@@ -612,7 +450,37 @@ public class NewMemberForm
 
         txtFieldSport.setText(sb.toString());
     }
+    
+    @Override
+    public void setTxtFieldTeams(List<IClubTeam> selected) {
+        this.selectedTeams = selected;
 
+        StringBuilder sb = new StringBuilder(selectedTeams.size());
+
+        for (IClubTeam ct : selectedTeams) {
+            sb.append(ct);
+            sb.append(", ");
+        }
+        sb.delete(sb.length() - 2, sb.length());    //TODO check if this works 
+
+        txtFieldTeam.setText(sb.toString());
+
+    }
+    
+    @Override
+    public List<IClubTeam> getClubTeams(ITypeOfSport sport) {
+        return controller.getClubTeamsByTypeOfSport(sport);
+    }
+    
+    private List<Integer> getSelectedTeams() {
+        List<Integer> clubTeamIDs = new LinkedList<>();
+
+        for (IClubTeam c : selectedTeams) {            
+            clubTeamIDs.add(c.getId());
+        }
+        return clubTeamIDs;
+    }
+        
     private void setMemberData()
     {
         member.setPrename(txtfieldFName.getText());
@@ -640,7 +508,6 @@ public class NewMemberForm
             member.setGender(false);
         }
 
-
         //TODO: which case only member and address necessary?!
         //role list necessary?
         List<IRole> membersRoles = new LinkedList<>();
@@ -664,6 +531,7 @@ public class NewMemberForm
                 ITrainer trainer = new Trainer();
                 membersRoles.add(trainer);
                 trainer.setTypeOfSportList(getSelectedSports());
+                trainer.setClubTeamList(getSelectedTeams());
             }
         }
 
@@ -672,6 +540,7 @@ public class NewMemberForm
             IPlayer player = new Player();
             membersRoles.add(player);
             player.setTypeOfSportList(getSelectedSports());
+            //player.setClubTeamList(getSelectedTeams());
         }
 
         List<Integer> roleInt = new LinkedList<>();
@@ -686,9 +555,8 @@ public class NewMemberForm
         if (radioTrainer.isSelected() || radioPlayer.isSelected())
         {
             member.setRoleList(roleInt);
-            setSelectedDepartment();
-            setSelectedTeam();
-
+            
+            //TODO: übergabe clubTeam liste und role liste
             controller.setNewMember(member, address, department, clubTeam, role);
         }
         else
@@ -736,8 +604,7 @@ public class NewMemberForm
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddSports;
     private javax.swing.JButton btnSaveMember;
-    private javax.swing.JComboBox comboDepartment;
-    private javax.swing.JComboBox comboTeam;
+    private javax.swing.JButton btnTeams;
     private com.toedter.calendar.JDateChooser dateChooserBirth;
     private com.toedter.calendar.JDateChooser dateChooserEntry;
     private javax.swing.JLabel jLabel1;
@@ -745,7 +612,6 @@ public class NewMemberForm
     private javax.swing.JLabel lblBirthDate;
     private javax.swing.JLabel lblCity;
     private javax.swing.JLabel lblCountry;
-    private javax.swing.JLabel lblDepartment;
     private javax.swing.JLabel lblEntryDate;
     private javax.swing.JLabel lblFName;
     private javax.swing.JLabel lblGender;
@@ -766,6 +632,7 @@ public class NewMemberForm
     private javax.swing.JRadioButton radioPlayer;
     private javax.swing.JRadioButton radioTrainer;
     private javax.swing.JTextField txtFieldSport;
+    private javax.swing.JTextField txtFieldTeam;
     private javax.swing.JTextField txtfieldAddress;
     private javax.swing.JTextField txtfieldCity;
     private javax.swing.JTextField txtfieldCountry;

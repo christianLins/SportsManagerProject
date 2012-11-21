@@ -16,6 +16,8 @@ public interface INewMember
     List<IClubTeam> getClubTeams(List<Integer> clubTeams);
 
     List<ITypeOfSport> getTypeOfSports(List<Integer> typOfSportsList);
+    
+    List<IClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport);
 
     void setNewMember(IMember member, IAddress address, IDepartment department, IClubTeam clubTeam, IRole role);
 }

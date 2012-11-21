@@ -216,9 +216,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtfieldFName">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtfieldFNameActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblLName">
               <Properties>
@@ -233,9 +230,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtfieldAddress">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtfieldAddressActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtfieldPostCode">
             </Component>
@@ -250,9 +244,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtfieldCity">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtfieldCityActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtfieldCountry">
             </Component>
@@ -289,9 +280,6 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="female"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioFemaleActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="radioMale">
               <Properties>
@@ -317,13 +305,12 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblDepartment" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblEntryDate" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblTeam" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblRole" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="radioAdmin" min="-2" max="-2" attributes="0"/>
@@ -336,15 +323,17 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="radioPlayer" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="dateChooserEntry" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="comboDepartment" pref="200" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="comboTeam" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                          <Component id="dateChooserEntry" min="-2" pref="100" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="txtFieldSport" min="-2" pref="533" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="txtFieldTeam" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtFieldSport" alignment="0" pref="533" max="32767" attributes="0"/>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnAddSports" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="btnAddSports" max="32767" attributes="0"/>
+                                  <Component id="btnTeams" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -359,12 +348,7 @@
                           <Component id="lblEntryDate" min="-2" max="-2" attributes="0"/>
                           <Component id="dateChooserEntry" min="-2" pref="20" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblDepartment" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="comboDepartment" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="13" max="32767" attributes="0"/>
+                      <EmptySpace pref="51" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblRole" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="radioAdmin" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -379,12 +363,13 @@
                           <Component id="txtFieldSport" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnAddSports" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="comboTeam" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblTeam" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtFieldTeam" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnTeams" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -397,21 +382,6 @@
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="dateChooserEntry">
             </Component>
-            <Component class="javax.swing.JLabel" name="lblDepartment">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Department"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="comboDepartment">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new javax.swing.DefaultComboBoxModel(getComboDepartment())" type="code"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboDepartmentActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JLabel" name="lblRole">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Role"/>
@@ -421,56 +391,31 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Admin"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioAdminActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="radioTrainer">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Trainer"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioTrainerActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="radioPlayer">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Player"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioPlayerActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblTeam">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Team"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="comboTeam">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new javax.swing.DefaultComboBoxModel(getComboTeam())" type="code"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboTeamActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JRadioButton" name="radioDeptHead">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Department Head"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioDeptHeadActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="radioCaretaker">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Caretaker"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioCaretakerActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
@@ -488,6 +433,19 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddSportsActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtFieldTeam">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnTeams">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Add Team(s)"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTeamsActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
