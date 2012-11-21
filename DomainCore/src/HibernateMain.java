@@ -42,26 +42,5 @@ public class HibernateMain
         {
             Logger.getLogger(HibernateMain.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //        try
-        //        {
-        //            
-        //            
-        //            IMember m  = DomainFacade.getInstance().getMemberByUsername("mmo7528");
-        //            List<IRole> roleList = m.getRoleList();
-        //            for(IRole r : roleList)
-        //            {
-        //                System.out.println(r.getName());
-        //            }
-        //            List<Department> all = DomainFacade.getInstance().getAll(Department.class);
-        //            for(Department d : all)
-        //            {
-        //                System.out.println(d.getName());
-        //                System.out.println(d.getDepartmentHead().getName());
-        //            }
-        //        }
-        //        catch (CouldNotFetchException ex)
-        //        }
-        //            System.out.println(ex.getMessage());
-        //        }
     }
 }
