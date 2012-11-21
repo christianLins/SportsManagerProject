@@ -164,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `Competition` (
 --
 
 INSERT INTO `Competition` (`id`, `DateFrom`, `DateTo`, `Payment`, `League_idLeague`, `Name`, `Description`, `Address`) VALUES
-(1, '2013-11-12', '2013-11-28', 12, 1, 'Veranstaltung', 'Fußball', 1);
+(1, '2013-11-12', '2013-11-28', 12, 1, 'Veranstaltung', 'Handball', 1);
 
 -- --------------------------------------------------------
 
@@ -237,7 +237,7 @@ ENGINE = InnoDB;
 --
 
 INSERT INTO `Department` (`id`, `Name`, `Description`, `DepartmentHead_id`) VALUES
-(1, 'Fußball Abteilung', 'Abteilung Fußball', 3);
+(1, 'Handball Abteilung', 'Abteilung Handball', 3);
 
 -- --------------------------------------------------------
 
@@ -397,9 +397,9 @@ CREATE TABLE IF NOT EXISTS `MemberRole` (
 INSERT INTO `MemberRole` (`id`, `Name`, `Description`) VALUES
 (1, 'Admin', 'Aministrator'),
 (2, 'Caretaker', 'Waterboy'),
-(3, 'DepartmentHead', 'Head of Department'),
-(4, 'Fußball Trainer', 'Fußball Trainer'),
-(5, 'Footballplayer', 'Player of football');
+(3, 'DepartmentHead', 'Head of department'),
+(4, 'Fußball Trainer', 'Handball trainer'),
+(5, 'Footballplayer', 'Player of handball');
 
 -- --------------------------------------------------------
 
@@ -627,7 +627,7 @@ CREATE TABLE IF NOT EXISTS `TypeOfSport` (
 --
 
 INSERT INTO `TypeOfSport` (`id`, `Name`, `Description`) VALUES
-(1, 'Fußball', 'Ballsport mit Fuß gespielt');
+(1, 'Handball', 'Ballsport mit Hand gespielt');
 
 -- --------------------------------------------------------
 
