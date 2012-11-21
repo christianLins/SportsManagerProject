@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dto.contract;
+package contract.dto;
 
 import java.util.*;
 
