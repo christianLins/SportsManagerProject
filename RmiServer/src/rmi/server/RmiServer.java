@@ -12,11 +12,11 @@ import ldap.UserData;
 import rmi.contract.RmiServiceClient;
 
 /**
- * runnable rmi-server
- *
- * start it - if possible - in a seperate thread
- *
- * @author Lins Christian (christian.lins87@gmail.com)
+ runnable rmi-server
+
+ start it - if possible - in a seperate thread
+
+ @author Lins Christian (christian.lins87@gmail.com)
  */
 public class RmiServer
         implements Runnable
@@ -25,9 +25,9 @@ public class RmiServer
     private boolean isRunning;
 
     /**
-     * RMI server to enable client-server communiation over rmi
-     *
-     * @param port where server runs locally
+     RMI server to enable client-server communiation over rmi
+
+     @param port where server runs locally
      */
     public RmiServer(int port)
     {
@@ -35,20 +35,18 @@ public class RmiServer
     }
 
     /**
-     * starts the rmi-server
-     *
-     * check server after start if it really runs!
-     *
-     * <code>isRunning()
-     * <code>
+     starts the rmi-server
+
+     check server after start if it really runs!
+
+     <code>isRunning()
+     <code>
      */
     @Override
     public void run()
     {
         try
         {
-          
-            
             // start rmiregistry
             //LocateRegistry.createRegistry(port);
             Runtime.getRuntime().exec("rmiregistry");
@@ -61,9 +59,7 @@ public class RmiServer
 
             System.setProperty("java.security.policy", "./client.policy");
             System.setSecurityManager(new SecurityManager());
-           
-            
-            
+
             RmiServiceClient rmiServiceFactory = new RmiServiceClientFactory();
             Naming.rebind("rmi://localhost:" + port + "/CommunicationFactory", rmiServiceFactory);
             isRunning = true;
@@ -76,9 +72,9 @@ public class RmiServer
     }
 
     /**
-     * check, if rmi-server is running
-     *
-     * @return
+     check, if rmi-server is running
+
+     @return
      */
     public boolean isRunning()
     {

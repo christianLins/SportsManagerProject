@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 3.4.10.1deb1
 -- http://www.phpmyadmin.net
 --
@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `ClubMember` (
 INSERT INTO `ClubMember` (`id`, `Prename`, `Lastname`, `DateOfBirth`, `Address`, `MemberFrom`, `MemberTo`, `Nationality`, `Telephonenumber`, `EmailAddress`, `Gender`, `Username`) VALUES
 (1, 'Markus', 'Mohanty', '1988-04-14', 1, '2002-11-04', NULL, 1, NULL, NULL, 0, 'mmo7528'),
 (2, 'Lucia', 'Amann', '1989-11-10', 1, '2002-11-08', NULL, 1, NULL, NULL, 1, 'lam1977'),
-(5, 'Thomas', 'Schwarz', '1988-01-29', 1, '2002-11-04', NULL, 1, NULL, NULL, 0, 'tsc2526'),
+(5, 'Thomas', 'Schwarz', '1988-01-29', 1, '2002-11-04', NULL, 1, NULL, NULL, 0, 'tsc2536'),
 (6, 'Christian', 'Lins', '1987-08-09', 1, '2002-11-05', NULL, 1, NULL, NULL, 0, 'cli1929'),
 (7, 'Dominik', 'Gregotsch', '1990-05-05', 1, '2002-11-01', NULL, 1, NULL, NULL, 0, 'dgr9323'),
 (8, 'Thomas', 'Feilhauer', '1965-11-04', 1, '2000-11-01', NULL, 1, NULL, NULL, 0, 'tf-test');

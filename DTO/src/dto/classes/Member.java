@@ -1,15 +1,14 @@
 package dto.classes;
 
+import dto.contract.IMember;
 import java.io.Serializable;
 import java.util.*;
-import dto.contract.IMember;
 
 public class Member
         implements Serializable, IMember
 {
     private static HashMap<domain.contract.IMember, Member> members = new HashMap<>();
 
-   
     public static IMember copy(domain.contract.IMember member)
     {
         Member a;
@@ -40,6 +39,8 @@ public class Member
             {
                 a.roleList.add(c.getId());
             }
+
+            members.put(member, a);
         }
 
         return a;

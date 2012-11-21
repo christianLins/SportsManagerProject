@@ -12,11 +12,11 @@ import java.util.*;
 import java.util.logging.*;
 
 /**
- *
- * @author Lins Christian (christian.lins87@gmail.com)
+
+ @author Lins Christian (christian.lins87@gmail.com)
  */
 public class MemberMapper
-        implements IMapper<IMember>
+        implements IMemberMapper
 {
     private static MemberMapper controller;
 
@@ -24,7 +24,7 @@ public class MemberMapper
     {
     }
 
-    public static IMapper<IMember> getInstance()
+    public static IMemberMapper getInstance()
     {
         if (controller == null)
         {
@@ -66,19 +66,24 @@ public class MemberMapper
         }
     }
 
-    public IMember getMemberByUsername(String username) throws NotFoundException
+    public IMember getMemberByUsername(String username)
+            throws NotFoundException
     {
-        try{
-        domain.contract.IMember a = DomainFacade.getInstance().getMemberByUsername(username);
-        return Member.copy(a);
-        }catch(CouldNotFetchException ex)
+        try
+        {
+            domain.contract.IMember a = DomainFacade.getInstance().getMemberByUsername(username);
+            System.out.println(a);
+            return Member.copy(a);
+        }
+        catch (CouldNotFetchException ex)
         {
             throw new NotFoundException(ex);
         }
     }
-    
+
     @Override
-    public List<IMember> getAll() throws NotFoundException
+    public List<IMember> getAll()
+            throws NotFoundException
     {
         try
         {
@@ -162,6 +167,6 @@ public class MemberMapper
     @Override
     public IMember getNew()
     {
-       return new Member();
+        return new Member();
     }
 }

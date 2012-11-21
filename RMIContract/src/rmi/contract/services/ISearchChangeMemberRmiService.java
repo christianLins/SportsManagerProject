@@ -4,29 +4,53 @@
  */
 package rmi.contract.services;
 
-import java.util.List;
 import dto.contract.*;
-import java.rmi.Remote;
-import java.rmi.RemoteException;
+import java.rmi.*;
+import java.util.List;
 
 /**
- *
- * @author Lucia
+
+ @author Lucia
  */
-public interface ISearchChangeMemberRmiService extends Remote{
-    
-    IMember getMember(int searchMember) throws RemoteException;
-    List<IRole> getRoles(Integer memberId) throws RemoteException;
-    IDepartment getDepartment(Integer memberId) throws RemoteException;
-    IAddress getAddress(Integer addressId) throws RemoteException;
-    List<IDepartment> getDepartments() throws RemoteException;
-    List<IClubTeam> getClubTeams(List<Integer> clubTeams) throws RemoteException;
-    
-    void setNewMember(IMember member, IAddress address) throws RemoteException;
-    void setNewMember(IMember member, IAddress address, IDepartment department, IClubTeam clubTeam, IRole role) throws RemoteException;
-    
-    List<IMember> getMatchingMembers(String searchInput) throws RemoteException;   //find all members, matching the searched value 
-    ICountry getCountry(Integer countryID) throws RemoteException;     //new added
-    
-    
+public interface ISearchChangeMemberRmiService
+        extends Remote
+{
+    IMember getMember(int searchMember)
+            throws RemoteException;
+
+    List<IRole> getRoles(Integer memberId)
+            throws RemoteException;
+
+    IDepartment getDepartment(Integer memberId)
+            throws RemoteException;
+
+    IAddress getAddress(Integer addressId)
+            throws RemoteException;
+
+    List<IDepartment> getDepartments()
+            throws RemoteException;
+
+    List<IClubTeam> getClubTeams(List<Integer> clubTeams)
+            throws RemoteException;
+
+    void setNewMember(IMember member, IAddress address)
+            throws RemoteException;
+
+    void setNewMember(IMember member, IAddress address, IDepartment department, IClubTeam clubTeam, IRole role)
+            throws RemoteException;
+
+    List<IMember> getMatchingMembers(String searchInput)
+            throws RemoteException;   //find all members, matching the searched value 
+
+    ICountry getCountry(Integer countryID)
+            throws RemoteException;     //new added
+
+    List<ITypeOfSport> getTypeOfSports(List<Integer> sportsList)
+            throws RemoteException;     //new added
+
+    IMember getSelectedMember()
+            throws RemoteException;     //new added
+
+    void setSelectedMember(IMember selectedMember)
+            throws RemoteException;     //new added
 }

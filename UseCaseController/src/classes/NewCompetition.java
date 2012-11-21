@@ -5,6 +5,7 @@
 package classes;
 import contract.*;
 import dto.contract.ICompetition;
+import dto.contract.IDepartment;
 import dto.contract.IMember;
 import dto.contract.ITeam;
 import dto.mapper.DtoFactory;
@@ -30,9 +31,7 @@ public class NewCompetition implements INewCompetition{
 
     @Override
     public void setCompetition(ICompetition competition, IMember member) {
-        try {
-            //hier überprüfung des Member !!!
-            
+        try { 
             DtoFactory.getCompetitionMapper().set(competition);
         } catch (RemoteException ex) {
             Logger.getLogger(NewCompetition.class.getName()).log(Level.SEVERE, null, ex);

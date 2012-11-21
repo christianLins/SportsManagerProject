@@ -23,16 +23,15 @@ public class SearchMemberForm
     private boolean adminPermission;
     ServiceClient client;
     ISearchChangeMember controller;
-    IMember member;
     IMember user;
     List<IRole> roles;
-    IDepartment department;
     IAddress address;
     ICountry country;
     IClubTeam clubTeam;
     private List<ITypeOfSport> typeOfSports;
     private List<ITypeOfSport> availableSports;
     private List<ITypeOfSport> selectedSports;
+    private List<IMember> matchingMembers;
 
     /**
      Creates new form SearchMemb
@@ -72,7 +71,6 @@ public class SearchMemberForm
         radioFemale = new javax.swing.JRadioButton();
         radioMale = new javax.swing.JRadioButton();
         lblEntryDate = new javax.swing.JLabel();
-        lblDepartment = new javax.swing.JLabel();
         lblTeam = new javax.swing.JLabel();
         lblRole = new javax.swing.JLabel();
         radioAdmin = new javax.swing.JRadioButton();
@@ -93,7 +91,6 @@ public class SearchMemberForm
         txtfieldPhone = new javax.swing.JTextField();
         dateBirthday = new com.toedter.calendar.JDateChooser();
         dateEntry = new com.toedter.calendar.JDateChooser();
-        comboDepartment = new javax.swing.JComboBox();
         lblMemberNr = new javax.swing.JLabel();
         txtfieldMemberNr = new javax.swing.JTextField();
         btnApplyChange = new javax.swing.JButton();
@@ -172,8 +169,6 @@ public class SearchMemberForm
 
         lblEntryDate.setText("Entry Date");
 
-        lblDepartment.setText("Department");
-
         lblTeam.setText("Team");
 
         lblRole.setText("Role");
@@ -231,15 +226,6 @@ public class SearchMemberForm
         });
 
         dateEntry.setEnabled(false);
-
-        comboDepartment.setModel(new javax.swing.DefaultComboBoxModel(controller.getDepartments().toArray()));
-        comboDepartment.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                comboDepartmentActionPerformed(evt);
-            }
-        });
 
         lblMemberNr.setText("Membership Nr.");
 
@@ -315,7 +301,6 @@ public class SearchMemberForm
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, paneMemberDataLayout.createSequentialGroup()
                                         .addGroup(paneMemberDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(paneMemberDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(comboDepartment, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(txtfieldCity, javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(txtfieldFName, javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(txtfieldAddress, javax.swing.GroupLayout.Alignment.LEADING)
@@ -351,23 +336,20 @@ public class SearchMemberForm
                                                 .addComponent(lblMemberNr)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(txtfieldMemberNr)))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                                 .addComponent(btnApplyChange))))
                     .addGroup(paneMemberDataLayout.createSequentialGroup()
-                        .addGroup(paneMemberDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDepartment)
-                            .addGroup(paneMemberDataLayout.createSequentialGroup()
-                                .addComponent(lblRole)
-                                .addGap(58, 58, 58)
-                                .addComponent(radioAdmin)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(radioCaretaker)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(radioDepHead)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(radioTrainer)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(radioPlayer)))
+                        .addComponent(lblRole)
+                        .addGap(58, 58, 58)
+                        .addComponent(radioAdmin)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(radioCaretaker)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(radioDepHead)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(radioTrainer)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(radioPlayer)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -422,11 +404,7 @@ public class SearchMemberForm
                     .addGroup(paneMemberDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblMemberNr)
                         .addComponent(txtfieldMemberNr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(paneMemberDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDepartment)
-                    .addComponent(comboDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(38, 38, 38)
                 .addGroup(paneMemberDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(paneMemberDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(radioTrainer)
@@ -518,9 +496,9 @@ public class SearchMemberForm
         }
         else
         {
-            List<IMember> result = controller.getMatchingMembers(txtfieldSearchMemb.getText());
+            matchingMembers = controller.getMatchingMembers(txtfieldSearchMemb.getText());
 
-            if (result == null || result.isEmpty())
+            if (matchingMembers == null || matchingMembers.isEmpty())
             {
                 JOptionPane.showMessageDialog(parent, "Your entry ' " + txtfieldSearchMemb.getText() + "' could not be found!");
             }
@@ -528,9 +506,9 @@ public class SearchMemberForm
             {
                 TableModel tableModel = tabMember.getModel();
 
-                for (int row = 0; row < result.size(); row++)
+                for (int row = 0; row < matchingMembers.size(); row++)
                 {
-                    IMember tmpMember = result.remove(row);
+                    IMember tmpMember = matchingMembers.remove(row);
 
                     tableModel.setValueAt(tmpMember.getId().toString(), row, 0);
                     tableModel.setValueAt(tmpMember.getPrename(), row, 1);
@@ -546,14 +524,8 @@ public class SearchMemberForm
 
     private void tableMemberValueChanged(ListSelectionEvent e)
     {
-        Integer id = (Integer) tabMember.getModel().getValueAt(tabMember.getSelectedRow(), 1);
+        controller.setSelectedMember(matchingMembers.get(tabMember.getSelectedRow()));
 
-        if (id == null)
-        {
-            return;
-        }
-
-        member = controller.getMember(id);
         updateDetailPane();
     }
 
@@ -572,11 +544,6 @@ public class SearchMemberForm
     private void radioMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioMaleActionPerformed
         genderActionPerformed(evt);
     }//GEN-LAST:event_radioMaleActionPerformed
-
-    private void comboDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboDepartmentActionPerformed
-        setAvailableSports(((IDepartment) comboDepartment.getSelectedItem()).getTypeOfSportList());
-        comboTeam.setModel(new DefaultComboBoxModel(getComboTeam()));
-    }//GEN-LAST:event_comboDepartmentActionPerformed
 
     private void radioTrainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioTrainerActionPerformed
         // TODO add your handling code here:
@@ -620,17 +587,6 @@ public class SearchMemberForm
         sb.delete(sb.length() - 2, sb.length());    //TODO check if this works 
 
         txtFieldSports.setText(sb.toString());
-    }
-
-    private void setAvailableSports(List<Integer> typeOfSportList)
-    {
-        typeOfSports = controller.getTypeOfSports(typeOfSportList);
-        availableSports = new LinkedList<>();
-
-        for (ITypeOfSport s : typeOfSports)
-        {
-            availableSports.add(s);
-        }
     }
 
     private void setSelectedSports(IRole role)
@@ -681,16 +637,43 @@ public class SearchMemberForm
     private void updateDetailPane()
     {
         dataExists = true;
-        department = controller.getDepartment(member.getId());
-        setAvailableSports(department.getTypeOfSportList());
 
-        txtfieldMemberNr.setText(member.getId().toString());
-        txtfieldFName.setText(member.getPrename());
-        txtfieldLName.setText(member.getLastname());
-        txtfieldMail.setText(member.getEmailAddress());
-        txtfieldPhone.setText(member.getTelephonenumber());
+        List<Integer> sports = new LinkedList<>();
 
-        address = controller.getAddress(member.getAddress());
+        for (IRole role : controller.getRoles(controller.getSelectedMember().getId()))
+        {
+            if (role instanceof ITrainer)
+            {
+                for (Integer t : ((ITrainer) role).getTypeOfSportList())
+                {
+                    if (!sports.contains(t))
+                    {
+                        sports.add(t);
+                    }
+                }
+            }
+            else if (role instanceof IPlayer)
+            {
+                for (Integer t : ((IPlayer) role).getTypeOfSportList())
+                {
+                    if (!sports.contains(t))
+                    {
+                        sports.add(t);
+                    }
+                }
+            }
+        }
+
+        availableSports.addAll(controller.getTypeOfSports(sports));
+
+        IMember selectedMember = controller.getSelectedMember();
+        txtfieldMemberNr.setText(selectedMember.getId().toString());
+        txtfieldFName.setText(selectedMember.getPrename());
+        txtfieldLName.setText(selectedMember.getLastname());
+        txtfieldMail.setText(selectedMember.getEmailAddress());
+        txtfieldPhone.setText(selectedMember.getTelephonenumber());
+
+        address = controller.getAddress(selectedMember.getAddress());
         txtfieldAddress.setText(address.getStreet());
         //TODO: ADD AN EXTRA STREET NR FIELD
         //txtfieldStreetNr.setText(address.getStreetNumber());
@@ -698,15 +681,15 @@ public class SearchMemberForm
         txtfieldPostCode.setText(postCode);
         txtfieldCity.setText(address.getVillage());
 
-        country = controller.getCountry(member.getNationality());
+        country = controller.getCountry(selectedMember.getNationality());
         txtfieldCountry.setText(country.getName());
 
-        radioFemale.setSelected(member.getGender());
+        radioFemale.setSelected(selectedMember.getGender());
 
-        dateEntry.setDate(member.getMemberFrom());
-        dateBirthday.setDate(member.getDateOfBirth());
+        dateEntry.setDate(selectedMember.getMemberFrom());
+        dateBirthday.setDate(selectedMember.getDateOfBirth());
 
-        for (IRole role : controller.getRoles(member.getId()))
+        for (IRole role : controller.getRoles(controller.getSelectedMember().getId()))
         {
             if (role instanceof IAdmin)
             {
@@ -737,34 +720,33 @@ public class SearchMemberForm
             }
         }
 
-        comboDepartment.setModel(new DefaultComboBoxModel(controller.getDepartments().toArray()));
-        comboDepartment.getModel().setSelectedItem(department);
+        comboTeam.setModel(new DefaultComboBoxModel());
+        //    comboTeam.setModel(new DefaultComboBoxModel(getComboTeam()));
 
-        comboTeam.setModel(new DefaultComboBoxModel(getComboTeam()));
-
-        //focus auf team dessen member momentan teil ist
+        //focus auf team dessen selectedMember momentan teil ist
     }
 
     private void updateMemberData()
     {
+        IMember selectedMember = controller.getSelectedMember();
 
-        member.setPrename(txtfieldFName.getText());
-        member.setLastname(txtfieldLName.getText());
-        member.setDateOfBirth(dateBirthday.getDate());
-        member.setMemberFrom(dateEntry.getDate());
-        member.setTelephonenumber(txtfieldPhone.getText());
-        member.setEmailAddress(txtfieldMail.getText());
+        selectedMember.setPrename(txtfieldFName.getText());
+        selectedMember.setLastname(txtfieldLName.getText());
+        selectedMember.setDateOfBirth(dateBirthday.getDate());
+        selectedMember.setMemberFrom(dateEntry.getDate());
+        selectedMember.setTelephonenumber(txtfieldPhone.getText());
+        selectedMember.setEmailAddress(txtfieldMail.getText());
         //member.setId(Integer.parseInt(txtfieldMemberNr.getText()));
 
         address.setStreet(txtfieldAddress.getText());
         address.setPostalCode(Integer.parseInt(txtfieldPostCode.getText()));
         address.setVillage(txtfieldCity.getText());
         country.setName(txtfieldCountry.getText());
-        member.setNationality(country.getId());
+        selectedMember.setNationality(country.getId());
 
-        member.setGender(radioFemale.isSelected());
+        selectedMember.setGender(radioFemale.isSelected());
 
-        department = (IDepartment) comboDepartment.getSelectedItem();
+        //   department = (IDepartment) comboDepartment.getSelectedItem();
 
         //get selected roles
         if (adminPermission)
@@ -801,45 +783,43 @@ public class SearchMemberForm
         {
             roleInt.add(role.getId());
         }
-        member.setRoleList(roleInt);
+        selectedMember.setRoleList(roleInt);
 
         //make sure clubTeam is set right
         setClubTeam(comboTeam.getSelectedItem().toString());
 
-        controller.setNewMember(member, address, department, clubTeam, roles.get(roles.size() - 1));
+        controller.setNewMember(selectedMember, address, clubTeam, roles.get(roles.size() - 1));
     }
 
-    private String[] getComboTeam()
-    {
-        List<String> result = new LinkedList<>();
-
-        if (department != null)
-        {
-            List<Integer> cTeamInt = department.getClubTeamList();
-
-            for (IClubTeam c : controller.getClubTeams(cTeamInt))
-            {
-                result.add(c.getName());
-            }
-        }
-
-        return result.toArray(new String[10]);
-    }
-
-    private void setClubTeam(String name)
-    {
-        List<Integer> cTeamInt = department.getClubTeamList();
-        List<IClubTeam> cTeamList = controller.getClubTeams(cTeamInt);
-
-        for (int i = 0; i < cTeamList.size(); i++)
-        {
-            if (cTeamList.get(i).getName().equals(name))
-            {
-                clubTeam = cTeamList.get(i);
-            }
-        }
-    }
-
+//    private String[] getComboTeam()
+//    {
+//        List<String> result = new LinkedList<>();
+//
+//        if (department != null)
+//        {
+//            List<Integer> cTeamInt = department.getClubTeamList();
+//
+//            for (IClubTeam c : controller.getClubTeams(cTeamInt))
+//            {
+//                result.add(c.getName());
+//            }
+//        }
+//
+//        return result.toArray(new String[10]);
+//    }
+//    private void setClubTeam(String name)
+//    {
+//        List<Integer> cTeamInt = department.getClubTeamList();
+//        List<IClubTeam> cTeamList = controller.getClubTeams(cTeamInt);
+//
+//        for (int i = 0; i < cTeamList.size(); i++)
+//        {
+//            if (cTeamList.get(i).getName().equals(name))
+//            {
+//                clubTeam = cTeamList.get(i);
+//            }
+//        }
+//    }
     private void genderActionPerformed(ActionEvent evt)
     {
         if (evt.getSource() == radioFemale)
@@ -868,7 +848,6 @@ public class SearchMemberForm
     private javax.swing.JButton btnAddSport;
     private javax.swing.JButton btnApplyChange;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JComboBox comboDepartment;
     private javax.swing.JComboBox comboTeam;
     private com.toedter.calendar.JDateChooser dateBirthday;
     private com.toedter.calendar.JDateChooser dateEntry;
@@ -877,7 +856,6 @@ public class SearchMemberForm
     private javax.swing.JLabel lblBirthDate;
     private javax.swing.JLabel lblCity;
     private javax.swing.JLabel lblCountry;
-    private javax.swing.JLabel lblDepartment;
     private javax.swing.JLabel lblEntryDate;
     private javax.swing.JLabel lblFName;
     private javax.swing.JLabel lblGender;
