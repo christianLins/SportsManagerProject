@@ -4,12 +4,10 @@
  */
 package server.domain.classes;
 
-import contract.domain.IDepartmentHead;
-import contract.domain.IDepartment;
+import contract.domain.*;
 import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
-import server.domain.classes.DepartmentHead;
 
 /**
 

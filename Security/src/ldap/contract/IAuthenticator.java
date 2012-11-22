@@ -2,6 +2,7 @@ package ldap.contract;
 
 import contract.dto.IUserData;
 
+
 /**
  @author Thomas
  */

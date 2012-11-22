@@ -4,14 +4,12 @@
  */
 package presentation.forms.competition;
 
-import presentation.forms.dto.Competition;
-import presentation.forms.dto.Country;
-import presentation.forms.dto.Address;
 import contract.dto.*;
 import contract.useCaseController.INewCompetition;
 import java.util.*;
 import javax.swing.*;
 import presentation.basics.*;
+import presentation.forms.dto.*;
 import services.*;
 
 /**

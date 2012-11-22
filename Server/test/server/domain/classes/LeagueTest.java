@@ -4,9 +4,7 @@
  */
 package server.domain.classes;
 
-import contract.domain.ITeam;
-import contract.domain.ILeague;
-import server.domain.classes.League;
+import contract.domain.*;
 import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;

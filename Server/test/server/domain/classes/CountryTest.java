@@ -4,10 +4,9 @@
  */
 package server.domain.classes;
 
-import server.domain.classes.Country;
+import contract.domain.ICountry;
 import java.util.Random;
 import org.junit.*;
-import contract.domain.ICountry;
 
 /**
 

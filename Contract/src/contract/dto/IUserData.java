@@ -9,21 +9,21 @@ import java.io.Serializable;
 /**
  @author Thomas
  */
-public interface IUserData extends Serializable 
+public interface IUserData
+        extends Serializable
 {
-
     /**
-     * @return the password
+     @return the password
      */
     String getPassword();
 
     /**
-     * @return the username
+     @return the username
      */
     String getUsername();
-    
+
     /**
-     * @return the serverip
+     @return the serverip
      */
     String getIP();
 }

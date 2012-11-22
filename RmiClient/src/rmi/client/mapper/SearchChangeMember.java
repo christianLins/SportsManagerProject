@@ -5,11 +5,11 @@
 package rmi.client.mapper;
 
 import contract.dto.*;
+import contract.rmi.services.ISearchChangeMemberRmiService;
 import contract.useCaseController.ISearchChangeMember;
 import java.rmi.RemoteException;
 import java.util.*;
 import java.util.logging.*;
-import contract.rmi.services.ISearchChangeMemberRmiService;
 
 /**
  @author Thomas

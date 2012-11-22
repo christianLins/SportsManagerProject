@@ -5,11 +5,11 @@
 package rmi.client.mapper;
 
 import contract.dto.*;
+import contract.rmi.services.IChangeCompetitionTeamRmiService;
 import contract.useCaseController.IChangeCompetitionTeam;
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.logging.*;
-import contract.rmi.services.IChangeCompetitionTeamRmiService;
 
 /**
 

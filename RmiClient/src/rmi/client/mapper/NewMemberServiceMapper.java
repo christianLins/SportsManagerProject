@@ -5,12 +5,11 @@
 package rmi.client.mapper;
 
 import contract.dto.*;
-import java.rmi.RemoteException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import contract.rmi.services.INewMemberRmiService;
 import contract.useCaseController.INewMember;
+import java.rmi.RemoteException;
+import java.util.List;
+import java.util.logging.*;
 
 /**
 
