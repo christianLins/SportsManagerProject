@@ -8,7 +8,6 @@ import corbaContract.generated.*;
 import java.io.*;
 import java.util.logging.*;
 import org.omg.CORBA.ORB;
-import org.omg.CORBA.ORBPackage.*;
 import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.CosNaming.*;
 import org.omg.CosNaming.NamingContextPackage.*;
@@ -27,6 +26,7 @@ public class CorbaClient
     {
         try
         {
+            
             String[] args1 = new String[]
             {
                 "-ORBInitialPort", "2050"

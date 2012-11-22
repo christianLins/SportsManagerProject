@@ -44,7 +44,7 @@ public class MatchresultDataproviderServant
 
             ILeague l = DtoFactory.getLeagueMapper().getByName(league, t);
 
-            Date date = DateFormat.getDateInstance().parse(competitiondate);
+            Date date = new SimpleDateFormat("dd.MM.yyyy").parse(competitiondate);
 
             for (ICompetition competition : l.getCompetitionList(date))
             {

@@ -4,15 +4,17 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://194.6.190.11:3306/SportClubManagement</property>
+    <!--<property name="hibernate.connection.url">jdbc:mysql://194.6.190.11:3306/SportClubManagement</property>
     <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">stella58nera</property>
-    <!--<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/SportClubManagement</property>
-    <property name="hibernate.connection.username">root</property>-->
+    <property name="hibernate.connection.password">stella58nera</property>-->
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/SportClubManagement</property>
+    <property name="hibernate.connection.username">root</property>
     <property name="current_session_context_class">thread</property> 
     <property name="hibernate.current_session_context_class">org.hibernate.context.ThreadLocalSessionContext</property>
     <property name="show_sql">true</property>
-    <mapping class="domain.classes.Address"/>
+    <mapping class="domain.classes.Address"/>    
+    <mapping class="domain.classes.Admin"/>
+    <mapping class="domain.classes.Caretaker"/>
     <mapping class="domain.classes.ClubTeam"/>
     <mapping class="domain.classes.Competition"/>
     <mapping class="domain.classes.Country"/>

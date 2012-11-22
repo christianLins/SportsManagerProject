@@ -4,8 +4,8 @@
  */
 package server;
 
-import server.corba.CorbaServer;
 import java.io.IOException;
+import server.corba.CorbaServer;
 import server.rmi.RmiServer;
 
 /**
