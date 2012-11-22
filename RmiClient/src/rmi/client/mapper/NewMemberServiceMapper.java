@@ -19,6 +19,7 @@ import contract.useCaseController.INewMember;
 public class NewMemberServiceMapper
         implements RmiServiceToServiceMapper<INewMemberRmiService, INewMember>
 {
+    @Override
     public INewMember getService(INewMemberRmiService rmiService)
     {
 
@@ -94,7 +95,29 @@ public class NewMemberServiceMapper
         @Override
         public List<ITypeOfSport> getTypeOfSports(List<Integer> typOfSportsList)
         {
-            throw new UnsupportedOperationException("Not supported yet.");
+            try
+            {
+                return service.getTypeOfSports(typOfSportsList);
+            }
+            catch (RemoteException ex)
+            {
+                Logger.getLogger(NewMemberServiceMapper.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return null;
+        }
+
+        @Override
+        public List<IClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport)
+        {
+            try
+            {
+                return service.getClubTeamsByTypeOfSport(sport);
+            }
+            catch (RemoteException ex)
+            {
+                Logger.getLogger(NewMemberServiceMapper.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return null;
         }
     }
 }

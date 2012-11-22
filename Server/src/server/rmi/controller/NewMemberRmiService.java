@@ -45,5 +45,17 @@ public class NewMemberRmiService extends UnicastRemoteObject implements INewMemb
     {
         NewMember.getInstance().setNewMember(member, address, department, clubTeam, role);
     }
+
+    @Override
+    public List<ITypeOfSport> getTypeOfSports(List<Integer> typOfSportsList) throws RemoteException
+    {
+        return NewMember.getInstance().getTypeOfSports(typOfSportsList);
+    }
+
+    @Override
+    public List<IClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport) throws RemoteException
+    {
+        return getClubTeamsByTypeOfSport(sport);
+    }
     
 }

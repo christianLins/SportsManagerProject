@@ -18,4 +18,8 @@ public interface INewMemberRmiService extends Remote
     
     void setNewMember(IMember member, IAddress address, IDepartment department, IClubTeam clubTeam, IRole role) throws RemoteException;
     
+    List<ITypeOfSport> getTypeOfSports(List<Integer> typOfSportsList) throws RemoteException;
+    
+    List<IClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport) throws RemoteException;
+    
 }
