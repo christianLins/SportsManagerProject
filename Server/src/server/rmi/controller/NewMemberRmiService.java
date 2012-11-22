@@ -55,7 +55,7 @@ public class NewMemberRmiService extends UnicastRemoteObject implements INewMemb
     @Override
     public List<IClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport) throws RemoteException
     {
-        return getClubTeamsByTypeOfSport(sport);
+        return NewMember.getInstance().getClubTeamsByTypeOfSport(sport);
     }
     
 }
