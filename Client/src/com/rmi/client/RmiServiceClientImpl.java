@@ -2,15 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package rmi.client;
+package com.rmi.client;
 
+import com.ServiceClient;
+import com.ServiceNotAvailableException;
+import com.CommunicationProblemException;
+import com.rmi.client.mapper.*;
 import contract.rmi.RmiServiceClient;
 import contract.rmi.services.*;
 import contract.useCaseController.*;
 import java.net.MalformedURLException;
 import java.rmi.*;
-import rmi.client.mapper.*;
-import services.*;
 
 /**
 

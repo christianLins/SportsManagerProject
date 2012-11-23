@@ -1,5 +1,7 @@
 package presentation.forms.competition;
 
+import com.ServiceClient;
+import com.ServiceNotAvailableException;
 import contract.dto.*;
 import contract.useCaseController.IShowCompetition;
 import java.util.List;
@@ -7,7 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.event.*;
 import javax.swing.table.TableModel;
 import presentation.basics.*;
-import services.*;
 
 /**
  *

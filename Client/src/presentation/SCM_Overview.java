@@ -1,12 +1,13 @@
 package presentation;
 
+import com.ServiceClient;
+import com.ServiceNotAvailableException;
 import contract.dto.IMemberDto;
 import java.util.logging.*;
 import javax.swing.WindowConstants;
 import presentation.basics.AbstractForm;
 import presentation.forms.competition.*;
 import presentation.forms.member.*;
-import services.*;
 
 /**
 

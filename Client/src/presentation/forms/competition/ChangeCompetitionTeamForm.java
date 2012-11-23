@@ -14,8 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.ListModel;
 import presentation.basics.AbstractForm;
 import presentation.basics.AbstractMainForm;
-import services.ServiceClient;
-import services.ServiceNotAvailableException;
+import com.ServiceClient;
+import com.ServiceNotAvailableException;
 
 /**
  *

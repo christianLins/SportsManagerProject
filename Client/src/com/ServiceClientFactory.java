@@ -1,7 +1,8 @@
-package serviceClientFactories;
+package com;
 
-import rmi.client.RmiServiceClientImpl;
-import services.*;
+import com.ServiceClient;
+import com.CommunicationProblemException;
+import com.rmi.client.RmiServiceClientImpl;
 
 
 /*

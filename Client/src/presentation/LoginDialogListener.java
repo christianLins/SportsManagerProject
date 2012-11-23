@@ -4,13 +4,15 @@
  */
 package presentation;
 
+import com.ServiceClient;
+import com.ServiceNotAvailableException;
+import com.CommunicationProblemException;
 import contract.dto.*;
 import contract.useCaseController.*;
 import java.util.logging.*;
 import javax.swing.JOptionPane;
 import ldap.contract.IAuthenticator;
 import ldap.presentation.core.*;
-import services.*;
 
 /**
 
@@ -39,7 +41,7 @@ public class LoginDialogListener
         {
             JOptionPane.showMessageDialog(null, "Access granted!");
 
-            ServiceClient client = serviceClientFactories.ServiceClientFactory.getRmiServiceClient(userData.getIP(), 1099);
+            ServiceClient client = com.ServiceClientFactory.getRmiServiceClient(userData.getIP(), 1099);
             ILogin loginService = client.getLoginService();
             IMemberDto user = loginService.getMemberByUserData(userData);
             SCM_Overview manager = new SCM_Overview(null, client, user);

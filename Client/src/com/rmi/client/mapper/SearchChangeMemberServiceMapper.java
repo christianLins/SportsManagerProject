@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package rmi.client.mapper;
+package com.rmi.client.mapper;
 
 import contract.rmi.services.ISearchChangeMemberRmiService;
 import contract.useCaseController.ISearchChangeMember;

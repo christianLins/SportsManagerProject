@@ -4,13 +4,14 @@
  */
 package presentation.forms.competition;
 
+import com.ServiceClient;
+import com.ServiceNotAvailableException;
 import contract.dto.*;
 import contract.useCaseController.INewCompetition;
 import java.util.*;
 import javax.swing.*;
 import presentation.basics.*;
 import presentation.forms.dto.*;
-import services.*;
 
 /**
  @author Lucia

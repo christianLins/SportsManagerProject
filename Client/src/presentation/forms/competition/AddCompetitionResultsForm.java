@@ -8,8 +8,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 import presentation.basics.AbstractForm;
 import presentation.basics.AbstractMainForm;
-import services.ServiceClient;
-import services.ServiceNotAvailableException;
+import com.ServiceClient;
+import com.ServiceNotAvailableException;
 
 /**
 
