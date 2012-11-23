@@ -105,6 +105,7 @@ public class NewMember
         return typeOfSportReturnList;
     }
 
+    @Override
     public List<IClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport) {
 
         List<IClubTeam> ret = new LinkedList<>();
