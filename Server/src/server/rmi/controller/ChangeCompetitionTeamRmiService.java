@@ -22,31 +22,31 @@ public class ChangeCompetitionTeamRmiService extends UnicastRemoteObject impleme
     }
 
     @Override
-    public List<ICompetition> getCompetition()
+    public List<ICompetitionDto> getCompetition()
     {
         return ChangeCompetitionTeam.getInstance().getCompetition();
     }
 
     @Override
-    public List<IClubTeam> getClubTeams(List<Integer> teams)
+    public List<IClubTeamDto> getClubTeams(List<Integer> teams)
     {
         return ChangeCompetitionTeam.getInstance().getClubTeams(teams);
     }
 
     @Override
-    public void setCompetitonTeam(ICompetition competition, IClubTeam oldTeam, IClubTeam newTeam)
+    public void setCompetitonTeam(ICompetitionDto competition, IClubTeamDto oldTeam, IClubTeamDto newTeam)
     {
         ChangeCompetitionTeam.getInstance().setCompetitonTeam(competition, oldTeam, newTeam);
     }
 
     @Override
-    public IClubTeam getCompetitionTeam(IClubTeam team) throws RemoteException
+    public IClubTeamDto getCompetitionTeam(IClubTeamDto team) throws RemoteException
     {
         return ChangeCompetitionTeam.getInstance().getCompetitionTeam(team);
     }
 
     @Override
-    public List<IPlayer> getPlayers(List<Integer> players) throws RemoteException
+    public List<IPlayerDto> getPlayers(List<Integer> players) throws RemoteException
     {
         return ChangeCompetitionTeam.getInstance().getPlayers(players);
     }

@@ -32,7 +32,7 @@ public class LoginController
     }
 
     @Override
-    public IMember getMemberByUserData(IUserData userData)
+    public IMemberDto getMemberByUserData(IUserDataDto userData)
             throws MemberNotFoundException
     {
         try

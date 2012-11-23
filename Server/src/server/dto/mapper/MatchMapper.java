@@ -5,19 +5,19 @@
 package server.dto.mapper;
 
 import contract.domain.*;
-import contract.dto.IMatch;
+import contract.dto.IMatchDto;
 import contract.dto.mapper.*;
 import java.util.*;
 import java.util.logging.*;
 import server.domain.DomainFacade;
-import server.dto.classes.Match;
+import server.dto.classes.MatchDto;
 
 /**
 
  @author Thomas
  */
 public class MatchMapper
-        implements IMapper<IMatch>
+        implements IMapper<IMatchDto>
 {
     private static MatchMapper controller;
 
@@ -25,7 +25,7 @@ public class MatchMapper
     {
     }
 
-    public static IMapper<IMatch> getInstance()
+    public static IMapper<IMatchDto> getInstance()
     {
         if (controller == null)
         {
@@ -51,13 +51,13 @@ public class MatchMapper
     }
 
     @Override
-    public IMatch getById(Integer id)
+    public IMatchDto getById(Integer id)
             throws IdNotFoundException
     {
         try
         {
             contract.domain.IMatch a = DomainFacade.getInstance().getByID(contract.domain.IMatch.class, id);
-            return Match.copy(a);
+            return MatchDto.copy(a);
 
         }
         catch (Exception ex)
@@ -68,16 +68,16 @@ public class MatchMapper
     }
 
     @Override
-    public List<IMatch> getAll()
+    public List<IMatchDto> getAll()
             throws NotFoundException
     {
         try
         {
-            List<IMatch> result = new LinkedList<>();
+            List<IMatchDto> result = new LinkedList<>();
 
             for (contract.domain.IMatch a : DomainFacade.getInstance().getAll(contract.domain.IMatch.class))
             {
-                result.add(Match.copy(a));
+                result.add(MatchDto.copy(a));
             }
 
             return result;
@@ -89,7 +89,7 @@ public class MatchMapper
     }
 
     @Override
-    public Integer set(IMatch value)
+    public Integer set(IMatchDto value)
     {
         try
         {
@@ -106,7 +106,7 @@ public class MatchMapper
     }
 
     @Override
-    public void delete(IMatch value)
+    public void delete(IMatchDto value)
     {
         try
         {
@@ -120,7 +120,7 @@ public class MatchMapper
         }
     }
 
-    private server.domain.classes.Match createDomain(IMatch value)
+    private server.domain.classes.Match createDomain(IMatchDto value)
             throws IdNotFoundException
     {
         server.domain.classes.Match match = new server.domain.classes.Match(value.getId());
@@ -137,8 +137,8 @@ public class MatchMapper
     }
 
     @Override
-    public IMatch getNew()
+    public IMatchDto getNew()
     {
-        return new Match();
+        return new MatchDto();
     }
 }

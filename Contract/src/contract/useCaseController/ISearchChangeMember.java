@@ -13,31 +13,31 @@ import java.util.List;
  */
 public interface ISearchChangeMember
 {
-    List<IMember> getMatchingMembers(String searchInput);   //find all members, matching the searched value 
+    List<IMemberDto> getMatchingMembers(String searchInput);   //find all members, matching the searched value 
 
-    IMember getMember(/*old :String searchMember*/Integer id); //best if MemberID could be used!?
+    IMemberDto getMember(/*old :String searchMember*/Integer id); //best if MemberID could be used!?
 
-    List<IRole> getRoles(Integer memberId);
+    List<IRoleDto> getRoles(Integer memberId);
 
-    IDepartment getDepartment(Integer memberId);
+    IDepartmentDto getDepartment(Integer memberId);
 
-    IAddress getAddress(Integer addressId);
+    IAddressDto getAddress(Integer addressId);
 
-    ICountry getCountry(Integer countryID);     //new added
+    ICountryDto getCountry(Integer countryID);     //new added
 
-    List<IDepartment> getDepartments();
+    List<IDepartmentDto> getDepartments();
 
-    List<IClubTeam> getClubTeams(List<Integer> clubTeams);
+    List<IClubTeamDto> getClubTeams(List<Integer> clubTeams);
 
-    List<IClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport);
+    List<IClubTeamDto> getClubTeamsByTypeOfSport(ITypeOfSportDto sport);
 
-    List<ITypeOfSport> getTypeOfSports(List<Integer> sportsList);
+    List<ITypeOfSportDto> getTypeOfSports(List<Integer> sportsList);
 
-    void setNewMember(IMember member, IAddress address);
+    void setNewMember(IMemberDto member, IAddressDto address);
 
-    void setNewMember(IMember member, IAddress address, IDepartment department, IClubTeam clubTeam, IRole role);
+    void setNewMember(IMemberDto member, IAddressDto address, IDepartmentDto department, IClubTeamDto clubTeam, IRoleDto role);
 
-    void setSelectedMember(IMember get);
+    void setSelectedMember(IMemberDto get);
 
-    public IMember getSelectedMember();
+    public IMemberDto getSelectedMember();
 }

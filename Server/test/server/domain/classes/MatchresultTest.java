@@ -4,10 +4,9 @@
  */
 package server.domain.classes;
 
+import contract.domain.IMatchresult;
 import java.util.Random;
 import org.junit.*;
-import server.domain.classes.Matchresult;
-import contract.domain.IMatchresult;
 
 /**
 

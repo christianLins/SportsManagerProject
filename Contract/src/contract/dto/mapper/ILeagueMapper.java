@@ -4,15 +4,15 @@
  */
 package contract.dto.mapper;
 
-import contract.dto.ITypeOfSport;
-import contract.dto.ILeague;
+import contract.dto.ITypeOfSportDto;
+import contract.dto.ILeagueDto;
 
 /**
  @author Thomas
  */
 public interface ILeagueMapper
-        extends IMapper<ILeague>
+        extends IMapper<ILeagueDto>
 {
-    public ILeague getByName(String league, ITypeOfSport typeOfSport)
+    public ILeagueDto getByName(String league, ITypeOfSportDto typeOfSport)
             throws NotFoundException;
 }

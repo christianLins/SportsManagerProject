@@ -26,81 +26,81 @@ public class SearchChangeMemberRmiService
     }
 
     @Override
-    public List<IRole> getRoles(Integer memberId)
+    public List<IRoleDto> getRoles(Integer memberId)
     {
         return SearchChangeMember.getInstance().getRoles(memberId);
     }
 
     @Override
-    public IDepartment getDepartment(Integer memberId)
+    public IDepartmentDto getDepartment(Integer memberId)
     {
         return SearchChangeMember.getInstance().getDepartment(memberId);
     }
 
     @Override
-    public IAddress getAddress(Integer addressId)
+    public IAddressDto getAddress(Integer addressId)
     {
         return SearchChangeMember.getInstance().getAddress(addressId);
     }
 
     @Override
-    public List<IDepartment> getDepartments()
+    public List<IDepartmentDto> getDepartments()
     {
         return SearchChangeMember.getInstance().getDepartments();
     }
 
     @Override
-    public List<IClubTeam> getClubTeams(List<Integer> clubTeams)
+    public List<IClubTeamDto> getClubTeams(List<Integer> clubTeams)
     {
         return SearchChangeMember.getInstance().getClubTeams(clubTeams);
     }
 
     @Override
-    public void setNewMember(IMember member, IAddress address)
+    public void setNewMember(IMemberDto member, IAddressDto address)
     {
         SearchChangeMember.getInstance().setNewMember(member, address);
     }
 
     @Override
-    public void setNewMember(IMember member, IAddress address, IDepartment department, IClubTeam clubTeam, IRole role)
+    public void setNewMember(IMemberDto member, IAddressDto address, IDepartmentDto department, IClubTeamDto clubTeam, IRoleDto role)
     {
         SearchChangeMember.getInstance().setNewMember(member, address, department, clubTeam, role);
     }
 
     @Override
-    public IMember getMember(int searchMember)
+    public IMemberDto getMember(int searchMember)
             throws RemoteException
     {
         return SearchChangeMember.getInstance().getMember(searchMember);
     }
 
     @Override
-    public List<IMember> getMatchingMembers(String searchInput)
+    public List<IMemberDto> getMatchingMembers(String searchInput)
     {
         return SearchChangeMember.getInstance().getMatchingMembers(searchInput);
     }
 
     @Override
-    public ICountry getCountry(Integer countryID)
+    public ICountryDto getCountry(Integer countryID)
     {
         return SearchChangeMember.getInstance().getCountry(countryID);
     }
 
     @Override
-    public List<ITypeOfSport> getTypeOfSports(List<Integer> sportsList)
+    public List<ITypeOfSportDto> getTypeOfSports(List<Integer> sportsList)
             throws RemoteException
     {
         return SearchChangeMember.getInstance().getTypeOfSports(sportsList);
     }
 
     @Override
-    public IMember getSelectedMember()
+    public IMemberDto getSelectedMember()
     {
         return SearchChangeMember.getInstance().getSelectedMember();
     }
 
     @Override
-    public void setSelectedMember(IMember selectedMember)
+    public void setSelectedMember(IMemberDto selectedMember)
     {
         SearchChangeMember.getInstance().setSelectedMember(selectedMember);
     }

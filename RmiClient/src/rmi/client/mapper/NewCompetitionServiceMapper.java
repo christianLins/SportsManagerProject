@@ -5,12 +5,11 @@
 package rmi.client.mapper;
 
 import contract.dto.*;
+import contract.rmi.services.INewCompetitionRmiService;
 import contract.useCaseController.INewCompetition;
 import java.rmi.RemoteException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import contract.rmi.services.INewCompetitionRmiService;
+import java.util.logging.*;
 
 /**
 
@@ -38,7 +37,7 @@ public class NewCompetitionServiceMapper
         }
 
         @Override
-        public void setCompetition(ICompetition competition, IMember member)
+        public void setCompetition(ICompetitionDto competition, IMemberDto member)
         {
             try
             {
@@ -51,7 +50,7 @@ public class NewCompetitionServiceMapper
         }
 
         @Override
-        public List<ITeam> getTeams()
+        public List<ITeamDto> getTeams()
         {
             try
             {

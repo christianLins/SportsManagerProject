@@ -1,11 +1,11 @@
 package ldap.presentation.core;
 
-import contract.dto.IUserData;
+import contract.dto.IUserDataDto;
 
 /**
  @author Thomas
  */
 public interface IDialogListener
 {
-    void dialogClosed(DialogResult dialogResult, IUserData userData);
+    void dialogClosed(DialogResult dialogResult, IUserDataDto userData);
 }

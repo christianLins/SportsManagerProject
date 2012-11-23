@@ -1,10 +1,9 @@
 package server.domain.classes;
 
-import contract.domain.IAddress;
-import contract.domain.ICountry;
+import contract.domain.*;
 import java.io.Serializable;
 import javax.persistence.*;
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
 

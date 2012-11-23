@@ -1,11 +1,12 @@
 package ldap.contract;
 
-import contract.dto.IUserData;
+import contract.dto.IUserDataDto;
+
 
 /**
  @author Thomas
  */
 public interface IAuthenticator
 {
-    boolean auth(IUserData userData);
+    boolean auth(IUserDataDto userData);
 }

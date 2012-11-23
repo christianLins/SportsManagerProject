@@ -6,7 +6,7 @@ package server.dto.classes;
 
 import java.util.*;
 import org.junit.*;
-import contract.dto.ILeague;
+import contract.dto.ILeagueDto;
 
 /**
 
@@ -41,21 +41,21 @@ public class LeagueTest
     @Test
     public void emptyConstructorTest()
     {
-        League a = new League();
+        LeagueDto a = new LeagueDto();
     }
 
     @Test
     public void implementsInterfaceTest()
     {
-        League a = new League();
+        LeagueDto a = new LeagueDto();
 
-        Assert.assertTrue(a instanceof ILeague);
+        Assert.assertTrue(a instanceof ILeagueDto);
     }
 
     @Test
     public void nameTest()
     {
-        League a = new League();
+        LeagueDto a = new LeagueDto();
 
         String expected = new Random().nextInt() + "";
         String actual = "";
@@ -69,7 +69,7 @@ public class LeagueTest
     @Test
     public void descriptionTest()
     {
-        League a = new League();
+        LeagueDto a = new LeagueDto();
 
         String expected = new Random().nextInt() + "";
         String actual = "";
@@ -83,7 +83,7 @@ public class LeagueTest
     @Test
     public void teamListTest()
     {
-        League a = new League();
+        LeagueDto a = new LeagueDto();
 
         List<Integer> expected = new LinkedList<>();
         expected.add(1);

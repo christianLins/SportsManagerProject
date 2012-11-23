@@ -12,7 +12,7 @@ import java.util.*;
  @author Thomas
  */
 public class Competition
-        implements ICompetition
+        implements ICompetitionDto
 {
     Date dateFrom;
     Date dateTo;

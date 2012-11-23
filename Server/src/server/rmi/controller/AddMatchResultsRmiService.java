@@ -4,10 +4,10 @@
  */
 package server.rmi.controller;
 
-import contract.dto.IMatch;
-import contract.dto.ICompetition;
-import contract.dto.ITeam;
-import contract.dto.IMatchresult;
+import contract.dto.IMatchDto;
+import contract.dto.ICompetitionDto;
+import contract.dto.ITeamDto;
+import contract.dto.IMatchresultDto;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
@@ -27,25 +27,25 @@ public class AddMatchResultsRmiService extends UnicastRemoteObject implements IA
     
 
     @Override
-    public List<ICompetition> getCompetitionList() throws RemoteException
+    public List<ICompetitionDto> getCompetitionList() throws RemoteException
     {
         return AddMatchResults.getInstance().getCompetitionList();
     }
 
     @Override
-    public List<ITeam> getTeamList(List<Integer> team) throws RemoteException
+    public List<ITeamDto> getTeamList(List<Integer> team) throws RemoteException
     {
          return AddMatchResults.getInstance().getTeamList(team);
     }
 
     @Override
-    public List<IMatch> getMatchList(List<Integer> match) throws RemoteException
+    public List<IMatchDto> getMatchList(List<Integer> match) throws RemoteException
     {
          return AddMatchResults.getInstance().getMatchList(match);
     }
 
     @Override
-    public void setMatchResult(IMatch match, IMatchresult matchresult) throws RemoteException
+    public void setMatchResult(IMatchDto match, IMatchresultDto matchresult) throws RemoteException
     {
          AddMatchResults.getInstance().setMatchResult(match, matchresult);
     }

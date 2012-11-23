@@ -5,11 +5,11 @@
 package rmi.client.mapper;
 
 import contract.dto.*;
+import contract.rmi.services.IChangeCompetitionTeamRmiService;
 import contract.useCaseController.IChangeCompetitionTeam;
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.logging.*;
-import contract.rmi.services.IChangeCompetitionTeamRmiService;
 
 /**
 
@@ -37,7 +37,7 @@ public class ChangeCompetitionTeamServiceMapper
         }
 
         @Override
-        public List<ICompetition> getCompetition()
+        public List<ICompetitionDto> getCompetition()
         {
             try
             {
@@ -51,7 +51,7 @@ public class ChangeCompetitionTeamServiceMapper
         }
 
         @Override
-        public List<IClubTeam> getClubTeams(List<Integer> Teams)
+        public List<IClubTeamDto> getClubTeams(List<Integer> Teams)
         {
             try
             {
@@ -65,7 +65,7 @@ public class ChangeCompetitionTeamServiceMapper
         }
 
         @Override
-        public IClubTeam getCompetitionTeam(IClubTeam team)
+        public IClubTeamDto getCompetitionTeam(IClubTeamDto team)
         {
             try
             {
@@ -79,7 +79,7 @@ public class ChangeCompetitionTeamServiceMapper
         }
 
         @Override
-        public List<IPlayer> getPlayers(List<Integer> players)
+        public List<IPlayerDto> getPlayers(List<Integer> players)
         {
             try
             {
@@ -93,7 +93,7 @@ public class ChangeCompetitionTeamServiceMapper
         }
 
         @Override
-        public void setCompetitonTeam(ICompetition competition, IClubTeam oldTeam, IClubTeam newTeam)
+        public void setCompetitonTeam(ICompetitionDto competition, IClubTeamDto oldTeam, IClubTeamDto newTeam)
         {
             try
             {
@@ -106,7 +106,7 @@ public class ChangeCompetitionTeamServiceMapper
         }
 
         @Override
-        public List<IClubTeam> getClubTeams()
+        public List<IClubTeamDto> getClubTeams()
         {
             try
             {

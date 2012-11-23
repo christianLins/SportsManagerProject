@@ -5,19 +5,19 @@
 package server.dto.mapper;
 
 import contract.domain.*;
-import contract.dto.IPermission;
+import contract.dto.IPermissionDto;
 import contract.dto.mapper.*;
 import java.util.*;
 import java.util.logging.*;
 import server.domain.DomainFacade;
-import server.dto.classes.Permission;
+import server.dto.classes.PermissionDto;
 
 /**
 
  @author Thomas
  */
 public class PermissionMapper
-        implements IMapper<IPermission>
+        implements IMapper<IPermissionDto>
 {
     private static PermissionMapper controller;
 
@@ -25,7 +25,7 @@ public class PermissionMapper
     {
     }
 
-    public static IMapper<IPermission> getInstance()
+    public static IMapper<IPermissionDto> getInstance()
     {
         if (controller == null)
         {
@@ -50,13 +50,13 @@ public class PermissionMapper
     }
 
     @Override
-    public IPermission getById(Integer id)
+    public IPermissionDto getById(Integer id)
             throws IdNotFoundException
     {
         try
         {
             contract.domain.IPermission a = DomainFacade.getInstance().getByID(contract.domain.IPermission.class, id);
-            return Permission.copy(a);
+            return PermissionDto.copy(a);
         }
         catch (Exception ex)
         {
@@ -65,16 +65,16 @@ public class PermissionMapper
     }
 
     @Override
-    public List<IPermission> getAll()
+    public List<IPermissionDto> getAll()
             throws NotFoundException
     {
         try
         {
-            List<IPermission> result = new LinkedList<>();
+            List<IPermissionDto> result = new LinkedList<>();
 
             for (contract.domain.IPermission a : DomainFacade.getInstance().getAll(contract.domain.IPermission.class))
             {
-                result.add(Permission.copy(a));
+                result.add(PermissionDto.copy(a));
             }
 
             return result;
@@ -86,7 +86,7 @@ public class PermissionMapper
     }
 
     @Override
-    public Integer set(IPermission value)
+    public Integer set(IPermissionDto value)
     {
         try
         {
@@ -103,7 +103,7 @@ public class PermissionMapper
     }
 
     @Override
-    public void delete(IPermission value)
+    public void delete(IPermissionDto value)
     {
         try
         {
@@ -117,7 +117,7 @@ public class PermissionMapper
         }
     }
 
-    private server.domain.classes.Permission createDomain(IPermission value)
+    private server.domain.classes.Permission createDomain(IPermissionDto value)
             throws IdNotFoundException
     {
         server.domain.classes.Permission permission = new server.domain.classes.Permission(value.getId());
@@ -129,8 +129,8 @@ public class PermissionMapper
     }
 
     @Override
-    public IPermission getNew()
+    public IPermissionDto getNew()
     {
-        return new Permission();
+        return new PermissionDto();
     }
 }

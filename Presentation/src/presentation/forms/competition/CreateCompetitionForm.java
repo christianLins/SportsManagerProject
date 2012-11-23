@@ -4,14 +4,12 @@
  */
 package presentation.forms.competition;
 
-import presentation.forms.dto.Competition;
-import presentation.forms.dto.Country;
-import presentation.forms.dto.Address;
 import contract.dto.*;
 import contract.useCaseController.INewCompetition;
 import java.util.*;
 import javax.swing.*;
 import presentation.basics.*;
+import presentation.forms.dto.*;
 import services.*;
 
 /**
@@ -22,16 +20,16 @@ public class CreateCompetitionForm
 {
     ServiceClient client;
     INewCompetition controller;
-    ICompetition competition;
-    List<IMatch> match;
-    IMember user;
+    ICompetitionDto competition;
+    List<IMatchDto> match;
+    IMemberDto user;
     List<String> aTeam;
     List<String> bTeam;
 
     /**
      Creates new form NewMatch
      */
-    public CreateCompetitionForm(AbstractForm parent, ServiceClient client, IMember user)
+    public CreateCompetitionForm(AbstractForm parent, ServiceClient client, IMemberDto user)
             throws ServiceNotAvailableException
     {
         super(parent);
@@ -443,7 +441,7 @@ public class CreateCompetitionForm
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         List<Integer> matchInt = new LinkedList<>();
-        for (IMatch m : match)
+        for (IMatchDto m : match)
         {
             matchInt.add(m.getId());
         }
@@ -493,10 +491,10 @@ public class CreateCompetitionForm
         competition.setTeamList(getSelectedTeams(listSelectTeams));
 
         //Set Competitions address
-        IAddress address = new Address();
+        IAddressDto address = new Address();
         address.setVillage(txtfieldcity.getText());
         address.setPostalCode(Integer.parseInt(txtfieldplz.getText()));
-        ICountry country = new Country();
+        ICountryDto country = new Country();
         country.setName(txtfieldCountry.getText());
         address.setCountry(country.getId());
 
@@ -505,7 +503,7 @@ public class CreateCompetitionForm
 
     private String[] getTeamsList()
     {
-        List<ITeam> teamList = controller.getTeams();
+        List<ITeamDto> teamList = controller.getTeams();
         String[] list = new String[teamList.size()];
 
         for (int i = 0; i < list.length; i++)
@@ -547,10 +545,10 @@ public class CreateCompetitionForm
             teamSelection.add(selection[i].toString());
         }
 
-        List<ITeam> teamList = controller.getTeams();
+        List<ITeamDto> teamList = controller.getTeams();
         List<Integer> selTeam = new LinkedList<>();
 
-        for (ITeam t : teamList)
+        for (ITeamDto t : teamList)
         {
             for (int i = 0; i < teamSelection.size(); i++)
             {
@@ -565,7 +563,7 @@ public class CreateCompetitionForm
 
     private void updateMatchTables()
     {
-        IMatch newMatch = null;
+        IMatchDto newMatch = null;
         newMatch.setCompetition(competition.getId());
         newMatch.setHometeam(getTeamID(txtfieldTeamA.getText()));
         newMatch.setForeignteam(getTeamID(txtfieldTeamB.getText()));
@@ -577,10 +575,10 @@ public class CreateCompetitionForm
 
     private Integer getTeamID(String name)
     {
-        List<ITeam> teamList = controller.getTeams();
+        List<ITeamDto> teamList = controller.getTeams();
         Integer teamID = null;
 
-        for (ITeam t : teamList)
+        for (ITeamDto t : teamList)
         {
             if (t.getName().equals(name))
             {

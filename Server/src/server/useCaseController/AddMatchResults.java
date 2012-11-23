@@ -5,10 +5,10 @@
 package server.useCaseController;
 
 import contract.useCaseController.IAddMatchResults;
-import contract.dto.ICompetition;
-import contract.dto.IMatch;
-import contract.dto.IMatchresult;
-import contract.dto.ITeam;
+import contract.dto.ICompetitionDto;
+import contract.dto.IMatchDto;
+import contract.dto.IMatchresultDto;
+import contract.dto.ITeamDto;
 import contract.dto.mapper.IdNotFoundException;
 import contract.dto.mapper.NotFoundException;
 import java.rmi.RemoteException;
@@ -44,7 +44,7 @@ public class AddMatchResults
     }
 
     @Override
-    public List<ICompetition> getCompetitionList()
+    public List<ICompetitionDto> getCompetitionList()
     {
         try
         {
@@ -58,10 +58,10 @@ public class AddMatchResults
     }
 
     @Override
-    public List<ITeam> getTeamList(List<Integer> team)
+    public List<ITeamDto> getTeamList(List<Integer> team)
     {
 
-        List<ITeam> teamList = new ArrayList<>();
+        List<ITeamDto> teamList = new ArrayList<>();
         try
         {
             for (Integer id : team)
@@ -79,10 +79,10 @@ public class AddMatchResults
     }
 
     @Override
-    public List<IMatch> getMatchList(List<Integer> match)
+    public List<IMatchDto> getMatchList(List<Integer> match)
     {
 
-        List<IMatch> matchList = new ArrayList<>();
+        List<IMatchDto> matchList = new ArrayList<>();
 
         try
         {
@@ -99,7 +99,7 @@ public class AddMatchResults
     }
 
     @Override
-    public void setMatchResult(IMatch match, IMatchresult matchresult)
+    public void setMatchResult(IMatchDto match, IMatchresultDto matchresult)
     {
         try
         {

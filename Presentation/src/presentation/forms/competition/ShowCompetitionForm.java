@@ -17,16 +17,16 @@ public class ShowCompetitionForm extends AbstractMainForm {
 
     ServiceClient client;
     IShowCompetition controller;
-    ICompetition competition;
-    List<IClubTeam> clubTeams;
-    List<IMatch> compMatches;
-    IClubTeam cTeam;
-    IMember user;
+    ICompetitionDto competition;
+    List<IClubTeamDto> clubTeams;
+    List<IMatchDto> compMatches;
+    IClubTeamDto cTeam;
+    IMemberDto user;
 
     /**
      * Creates new form ShowMatchInfo
      */
-    public ShowCompetitionForm(AbstractForm form, ServiceClient client, IMember user) throws ServiceNotAvailableException {
+    public ShowCompetitionForm(AbstractForm form, ServiceClient client, IMemberDto user) throws ServiceNotAvailableException {
         super(form);
         this.client = client;
         this.user = user;
@@ -150,16 +150,16 @@ public class ShowCompetitionForm extends AbstractMainForm {
     }// </editor-fold>//GEN-END:initComponents
 
     private void comboCompetitionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCompetitionActionPerformed
-        competition = (ICompetition) comboCompetition.getSelectedItem();
+        competition = (ICompetitionDto) comboCompetition.getSelectedItem();
         setNewCompTable();
     }//GEN-LAST:event_comboCompetitionActionPerformed
 
     private void setNewCompTable() {
         TableModel tableModel = tableCompetition.getModel();
-        List<IMatch> matchList = controller.getMatchs(competition.getMatchList());
+        List<IMatchDto> matchList = controller.getMatchs(competition.getMatchList());
 
         for (int row = 0; row < matchList.size(); row++) {
-            IMatch tmp = matchList.get(row);
+            IMatchDto tmp = matchList.get(row);
             compMatches.add(tmp);
 
             tableModel.setValueAt(tmp.getHometeam().getName(), row, 0);
@@ -171,17 +171,17 @@ public class ShowCompetitionForm extends AbstractMainForm {
     
     private void tableCompetitionValueChanged(ListSelectionEvent e) {
         final int row = tableCompetition.getSelectedRow();
-        IMatch match = compMatches.get(row);
+        IMatchDto match = compMatches.get(row);
 
         setNewMembersTable(match);
     }
     
-    private void setNewMembersTable(IMatch match) {
+    private void setNewMembersTable(IMatchDto match) {
         TableModel tableModel = tableOurMembers.getModel();
         findClubTeams();
 
         if (findClubTeam(match) == true) {
-            List<IPlayer> tmpPlayer = controller.getPlayer(cTeam);
+            List<IPlayerDto> tmpPlayer = controller.getPlayer(cTeam);
             int counter;
 
             for (int row = 0; row < tmpPlayer.size(); row++) {
@@ -196,7 +196,7 @@ public class ShowCompetitionForm extends AbstractMainForm {
     }
     
     private String[] getAllCompetitions() {
-        List<ICompetition> compList = controller.getCompetitions();
+        List<ICompetitionDto> compList = controller.getCompetitions();
         String[] compArray = new String[compList.size()];
 
         for (int i = 0; i < compArray.length; i++) {
@@ -206,22 +206,22 @@ public class ShowCompetitionForm extends AbstractMainForm {
     }
 
     private void findClubTeams() {
-        List<IMatch> matchList = controller.getMatchs(competition.getMatchList());
+        List<IMatchDto> matchList = controller.getMatchs(competition.getMatchList());
         clubTeams = null;
 
-        for (IMatch m : matchList) {
+        for (IMatchDto m : matchList) {
             if (m.getForeignteam().getClass().isInstance(clubTeams)) {
-                clubTeams.add((IClubTeam) m.getForeignteam());
+                clubTeams.add((IClubTeamDto) m.getForeignteam());
             }
             if (m.getHometeam().getClass().isInstance(clubTeams)) {
-                clubTeams.add((IClubTeam) m.getHometeam());
+                clubTeams.add((IClubTeamDto) m.getHometeam());
             }
         }
     }
     
-    private boolean findClubTeam(IMatch match) {
+    private boolean findClubTeam(IMatchDto match) {
 
-        for (IClubTeam ct : clubTeams) {
+        for (IClubTeamDto ct : clubTeams) {
             if (ct.equals(match.getHometeam())) {
                 cTeam = ct;
                 return true;

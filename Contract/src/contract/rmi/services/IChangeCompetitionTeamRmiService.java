@@ -15,18 +15,18 @@ import java.util.List;
 public interface IChangeCompetitionTeamRmiService
         extends Remote
 {
-    List<ICompetition> getCompetition()
+    List<ICompetitionDto> getCompetition()
             throws RemoteException;
 
-    List<IClubTeam> getClubTeams(List<Integer> Teams)
+    List<IClubTeamDto> getClubTeams(List<Integer> Teams)
             throws RemoteException;
 
-    void setCompetitonTeam(ICompetition competition, IClubTeam oldTeam, IClubTeam newTeam)
+    void setCompetitonTeam(ICompetitionDto competition, IClubTeamDto oldTeam, IClubTeamDto newTeam)
             throws RemoteException;
 
-    IClubTeam getCompetitionTeam(IClubTeam team)
+    IClubTeamDto getCompetitionTeam(IClubTeamDto team)
             throws RemoteException;       //get team for competition from this team
 
-    List<IPlayer> getPlayers(List<Integer> players)
+    List<IPlayerDto> getPlayers(List<Integer> players)
             throws RemoteException;    //get single players
 }

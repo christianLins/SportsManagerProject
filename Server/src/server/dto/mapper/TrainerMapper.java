@@ -5,19 +5,19 @@
 package server.dto.mapper;
 
 import contract.domain.*;
-import contract.dto.ITrainer;
+import contract.dto.ITrainerDto;
 import contract.dto.mapper.*;
 import java.util.*;
 import java.util.logging.*;
 import server.domain.DomainFacade;
-import server.dto.classes.Trainer;
+import server.dto.classes.TrainerDto;
 
 /**
 
  @author Thomas
  */
 public class TrainerMapper
-        implements IMapper<ITrainer>
+        implements IMapper<ITrainerDto>
 {
     private static TrainerMapper controller;
 
@@ -25,7 +25,7 @@ public class TrainerMapper
     {
     }
 
-    public static IMapper<ITrainer> getInstance()
+    public static IMapper<ITrainerDto> getInstance()
     {
         if (controller == null)
         {
@@ -50,13 +50,13 @@ public class TrainerMapper
     }
 
     @Override
-    public ITrainer getById(Integer id)
+    public ITrainerDto getById(Integer id)
             throws IdNotFoundException
     {
         try
         {
             contract.domain.ITrainer a = DomainFacade.getInstance().getByID(contract.domain.ITrainer.class, id);
-            return Trainer.copy(a);
+            return TrainerDto.copy(a);
         }
         catch (Exception ex)
         {
@@ -65,16 +65,16 @@ public class TrainerMapper
     }
 
     @Override
-    public List<ITrainer> getAll()
+    public List<ITrainerDto> getAll()
             throws NotFoundException
     {
         try
         {
-            List<ITrainer> result = new LinkedList<>();
+            List<ITrainerDto> result = new LinkedList<>();
 
             for (contract.domain.ITrainer a : DomainFacade.getInstance().getAll(contract.domain.ITrainer.class))
             {
-                result.add(Trainer.copy(a));
+                result.add(TrainerDto.copy(a));
             }
 
             return result;
@@ -86,7 +86,7 @@ public class TrainerMapper
     }
 
     @Override
-    public Integer set(ITrainer value)
+    public Integer set(ITrainerDto value)
     {
         Integer returnv = 0;
         try
@@ -113,7 +113,7 @@ public class TrainerMapper
     }
 
     @Override
-    public void delete(ITrainer value)
+    public void delete(ITrainerDto value)
     {
         try
         {
@@ -127,7 +127,7 @@ public class TrainerMapper
         }
     }
 
-    private server.domain.classes.Trainer createDomain(ITrainer value)
+    private server.domain.classes.Trainer createDomain(ITrainerDto value)
             throws IdNotFoundException
     {
         server.domain.classes.Trainer trainer = new server.domain.classes.Trainer(value.getId());
@@ -154,8 +154,8 @@ public class TrainerMapper
     }
 
     @Override
-    public ITrainer getNew()
+    public ITrainerDto getNew()
     {
-        return new Trainer();
+        return new TrainerDto();
     }
 }

@@ -1,19 +1,19 @@
 package server.dto.mapper;
 
 import contract.domain.*;
-import contract.dto.IPlayer;
+import contract.dto.IPlayerDto;
 import contract.dto.mapper.*;
 import java.util.*;
 import java.util.logging.*;
 import server.domain.DomainFacade;
-import server.dto.classes.Player;
+import server.dto.classes.PlayerDto;
 
 /**
 
  @author Thomas
  */
 public class PlayerMapper
-        implements IMapper<IPlayer>
+        implements IMapper<IPlayerDto>
 {
     private static PlayerMapper controller;
 
@@ -21,7 +21,7 @@ public class PlayerMapper
     {
     }
 
-    public static IMapper<IPlayer> getInstance()
+    public static IMapper<IPlayerDto> getInstance()
     {
         if (controller == null)
         {
@@ -47,13 +47,13 @@ public class PlayerMapper
     }
 
     @Override
-    public IPlayer getById(Integer id)
+    public IPlayerDto getById(Integer id)
             throws IdNotFoundException
     {
         try
         {
             contract.domain.IPlayer a = DomainFacade.getInstance().getByID(contract.domain.IPlayer.class, id);
-            return Player.copy(a);
+            return PlayerDto.copy(a);
         }
         catch (Exception ex)
         {
@@ -62,16 +62,16 @@ public class PlayerMapper
     }
 
     @Override
-    public List<IPlayer> getAll()
+    public List<IPlayerDto> getAll()
             throws NotFoundException
     {
         try
         {
-            List<IPlayer> result = new LinkedList<>();
+            List<IPlayerDto> result = new LinkedList<>();
 
             for (contract.domain.IPlayer a : DomainFacade.getInstance().getAll(contract.domain.IPlayer.class))
             {
-                result.add(Player.copy(a));
+                result.add(PlayerDto.copy(a));
             }
 
             return result;
@@ -83,7 +83,7 @@ public class PlayerMapper
     }
 
     @Override
-    public Integer set(IPlayer value)
+    public Integer set(IPlayerDto value)
     {
         Integer rv = 0;
         try
@@ -102,7 +102,7 @@ public class PlayerMapper
         }
     }
 
-    private server.domain.classes.Player createDomain(IPlayer value)
+    private server.domain.classes.Player createDomain(IPlayerDto value)
             throws IdNotFoundException
     {
         server.domain.classes.Player player = new server.domain.classes.Player(value.getId());
@@ -128,7 +128,7 @@ public class PlayerMapper
     }
 
     @Override
-    public void delete(IPlayer value)
+    public void delete(IPlayerDto value)
     {
         try
         {
@@ -142,8 +142,8 @@ public class PlayerMapper
     }
 
     @Override
-    public IPlayer getNew()
+    public IPlayerDto getNew()
     {
-        return new Player();
+        return new PlayerDto();
     }
 }

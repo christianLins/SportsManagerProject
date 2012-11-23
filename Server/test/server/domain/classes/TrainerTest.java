@@ -4,12 +4,10 @@
  */
 package server.domain.classes;
 
-import contract.domain.IClubTeam;
-import contract.domain.ITrainer;
+import contract.domain.*;
 import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
-import server.domain.classes.Trainer;
 
 /**
 

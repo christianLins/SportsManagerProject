@@ -12,6 +12,6 @@ import contract.dto.*;
  */
 public interface ILogin
 {
-    IMember getMemberByUserData(IUserData userData)
+    IMemberDto getMemberByUserData(IUserDataDto userData)
             throws MemberNotFoundException;
 }

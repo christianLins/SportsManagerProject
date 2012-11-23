@@ -4,7 +4,7 @@
  */
 package server.dto.classes;
 
-import contract.dto.IAddress;
+import contract.dto.IAddressDto;
 import java.util.Random;
 import org.easymock.EasyMock;
 import org.junit.*;
@@ -42,15 +42,15 @@ public class AddressTest
     @Test
     public void emptyConstructorTest()
     {
-        Address a = new Address();
+        AddressDto a = new AddressDto();
     }
 
     @Test
     public void implementsInterfaceTest()
     {
-        Address a = new Address();
+        AddressDto a = new AddressDto();
 
-        Assert.assertTrue(a instanceof IAddress);
+        Assert.assertTrue(a instanceof IAddressDto);
     }
 
     @Test
@@ -69,7 +69,7 @@ public class AddressTest
         EasyMock.expect(expected.getVillage()).andReturn("Testvillage").anyTimes();
         EasyMock.replay(expected);
 
-        Address actual = Address.copy(expected);
+        AddressDto actual = AddressDto.copy(expected);
 
         Assert.assertEquals(expected.getPostalCode(), actual.getPostalCode());
         Assert.assertEquals(expected.getStreet(), actual.getStreet());
@@ -82,7 +82,7 @@ public class AddressTest
     @Test
     public void streetTest()
     {
-        Address a = new Address();
+        AddressDto a = new AddressDto();
 
         String expected = new Random().nextInt() + "";
         String actual = "";
@@ -96,7 +96,7 @@ public class AddressTest
     @Test
     public void streetNumberTest()
     {
-        Address a = new Address();
+        AddressDto a = new AddressDto();
 
         int expected = new Random().nextInt(10000);
         int actual = Integer.MAX_VALUE;
@@ -110,7 +110,7 @@ public class AddressTest
     @Test
     public void villageTest()
     {
-        Address a = new Address();
+        AddressDto a = new AddressDto();
 
         String expected = new Random().nextInt() + "";
         String actual = "";
@@ -124,7 +124,7 @@ public class AddressTest
     @Test
     public void postalCodeTest()
     {
-        Address a = new Address();
+        AddressDto a = new AddressDto();
 
         int expected = new Random().nextInt(10000);
         int actual = Integer.MAX_VALUE;
@@ -138,7 +138,7 @@ public class AddressTest
     @Test
     public void countryTest()
     {
-        Address a = new Address();
+        AddressDto a = new AddressDto();
 
         Integer country = 1;
         Integer actual;

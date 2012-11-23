@@ -6,7 +6,7 @@ package server.dto.classes;
 
 import java.util.*;
 import org.junit.*;
-import contract.dto.IMember;
+import contract.dto.IMemberDto;
 
 /**
 
@@ -41,21 +41,21 @@ public class MemberTest
     @Test
     public void emptyConstructorTest()
     {
-        Member a = new Member();
+        MemberDto a = new MemberDto();
     }
 
     @Test
     public void implementsInterfaceTest()
     {
-        Member a = new Member();
+        MemberDto a = new MemberDto();
 
-        Assert.assertTrue(a instanceof IMember);
+        Assert.assertTrue(a instanceof IMemberDto);
     }
 
     @Test
     public void idMemberTest()
     {
-        Member a = new Member();
+        MemberDto a = new MemberDto();
 
         int expected = new Random().nextInt(10000);
         int actual = Integer.MAX_VALUE;
@@ -69,7 +69,7 @@ public class MemberTest
     @Test
     public void prenameTest()
     {
-        Member a = new Member();
+        MemberDto a = new MemberDto();
 
         String expected = new Random().nextInt() + "";
         String actual = "";
@@ -83,7 +83,7 @@ public class MemberTest
     @Test
     public void lastnameTest()
     {
-        Member a = new Member();
+        MemberDto a = new MemberDto();
 
         String expected = new Random().nextInt() + "";
         String actual = "";
@@ -97,7 +97,7 @@ public class MemberTest
     @Test
     public void dateOfBirthTest()
     {
-        Member a = new Member();
+        MemberDto a = new MemberDto();
 
         Date expected = new Date();
         Date actual;
@@ -111,7 +111,7 @@ public class MemberTest
     @Test
     public void mmemberFromTest()
     {
-        Member a = new Member();
+        MemberDto a = new MemberDto();
 
         Date expected = new Date();
         Date actual;
@@ -125,7 +125,7 @@ public class MemberTest
     @Test
     public void mmemberToTest()
     {
-        Member a = new Member();
+        MemberDto a = new MemberDto();
 
         Date expected = new Date();
         Date actual;
@@ -139,7 +139,7 @@ public class MemberTest
     @Test
     public void telephonenumberTest()
     {
-        Member a = new Member();
+        MemberDto a = new MemberDto();
 
         String expected = new Random().nextInt() + "";
         String actual = "";
@@ -153,7 +153,7 @@ public class MemberTest
     @Test
     public void emailAddressTest()
     {
-        Member a = new Member();
+        MemberDto a = new MemberDto();
 
         String expected = new Random().nextInt() + "";
         String actual = "";
@@ -167,7 +167,7 @@ public class MemberTest
     @Test
     public void genderTest()
     {
-        Member a = new Member();
+        MemberDto a = new MemberDto();
 
         boolean expected = true;
         boolean actual = false;
@@ -181,7 +181,7 @@ public class MemberTest
     @Test
     public void nationalityTest()
     {
-        Member a = new Member();
+        MemberDto a = new MemberDto();
 
         Integer actual;
         Integer country = 4;
@@ -195,7 +195,7 @@ public class MemberTest
     @Test
     public void addressTest()
     {
-        Member a = new Member();
+        MemberDto a = new MemberDto();
 
         Integer expected = 2;
         Integer actual;
@@ -209,7 +209,7 @@ public class MemberTest
     @Test
     public void roleListTest()
     {
-        Member a = new Member();
+        MemberDto a = new MemberDto();
 
         List<Integer> expected = new LinkedList<>();
         expected.add(1);

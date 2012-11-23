@@ -32,7 +32,7 @@ public class NewMember
     }
 
     @Override
-    public void setNewMember(IMember member, IAddress address) {
+    public void setNewMember(IMemberDto member, IAddressDto address) {
         try {
             Integer adressId = DtoFactory.getAddressMapper().set(address);
             member.setAddress(adressId);
@@ -43,7 +43,7 @@ public class NewMember
     }
 
     @Override
-    public List<IDepartment> getDepartments() {
+    public List<IDepartmentDto> getDepartments() {
         try {
             return DtoFactory.getDepartmentMapper().getAll();
         } catch (RemoteException | NotFoundException ex) {
@@ -53,8 +53,8 @@ public class NewMember
     }
 
     @Override
-    public List<IClubTeam> getClubTeams(List<Integer> clubTeams) {
-        List<IClubTeam> clubTeamList = new ArrayList<>();
+    public List<IClubTeamDto> getClubTeams(List<Integer> clubTeams) {
+        List<IClubTeamDto> clubTeamList = new ArrayList<>();
         try {
             for (Integer team : clubTeams) {
                 clubTeamList.add(DtoFactory.getClubTeamMapper().getById(team));
@@ -67,7 +67,7 @@ public class NewMember
     }
 
     @Override
-    public void setNewMember(IMember member, IAddress address, IDepartment department, IClubTeam clubTeam, IRole role) {
+    public void setNewMember(IMemberDto member, IAddressDto address, IDepartmentDto department, IClubTeamDto clubTeam, IRoleDto role) {
         try {
             //Muss noch geändert werden!!!!
             Integer roleId = DtoFactory.getRoleMapper().set(role);
@@ -92,8 +92,8 @@ public class NewMember
     }
 
     @Override
-    public List<ITypeOfSport> getTypeOfSports(List<Integer> typOfSportsList) {
-        List<ITypeOfSport> typeOfSportReturnList = new ArrayList<>();
+    public List<ITypeOfSportDto> getTypeOfSports(List<Integer> typOfSportsList) {
+        List<ITypeOfSportDto> typeOfSportReturnList = new ArrayList<>();
         try {
             for (Integer sportID : typOfSportsList) {
                 typeOfSportReturnList.add(DtoFactory.getTypeOfSportMapper().getById(sportID));
@@ -105,10 +105,14 @@ public class NewMember
         return typeOfSportReturnList;
     }
 
+<<<<<<< HEAD
     @Override
     public List<IClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport) {
+=======
+    public List<IClubTeamDto> getClubTeamsByTypeOfSport(ITypeOfSportDto sport) {
+>>>>>>> 7905fcbe17856a19874a5eae9dcfd9b19b7b94f5
 
-        List<IClubTeam> ret = new LinkedList<>();
+        List<IClubTeamDto> ret = new LinkedList<>();
         try {
             ret = DtoFactory.getClubTeamMapper().getClubTeamsByTypeOfSport(sport);
 

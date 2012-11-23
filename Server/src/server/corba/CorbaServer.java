@@ -4,9 +4,7 @@
  */
 package server.corba;
 
-import server.corba.generated.MatchresultDataprovider;
-import server.corba.generated.MatchresultDataproviderHelper;
-import java.io.*;
+import java.io.IOException;
 import java.util.logging.*;
 import org.omg.CORBA.ORB;
 import org.omg.CORBA.ORBPackage.InvalidName;
@@ -15,6 +13,7 @@ import org.omg.CosNaming.NamingContextPackage.*;
 import org.omg.PortableServer.*;
 import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 import org.omg.PortableServer.POAPackage.*;
+import server.corba.generated.*;
 
 /**
  @author Thomas

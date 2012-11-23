@@ -5,19 +5,19 @@
 package server.dto.mapper;
 
 import contract.domain.*;
-import contract.dto.IDepartmentHead;
+import contract.dto.IDepartmentHeadDto;
 import contract.dto.mapper.*;
 import java.util.*;
 import java.util.logging.*;
 import server.domain.DomainFacade;
-import server.dto.classes.DepartmentHead;
+import server.dto.classes.DepartmentHeadDto;
 
 /**
  *
  * @author Thomas
  */
 public class DepartmentHeadMapper
-        implements IMapper<IDepartmentHead>
+        implements IMapper<IDepartmentHeadDto>
 {
     private static DepartmentHeadMapper controller;
 
@@ -25,7 +25,7 @@ public class DepartmentHeadMapper
     {
     }
 
-    public static IMapper<IDepartmentHead> getInstance()
+    public static IMapper<IDepartmentHeadDto> getInstance()
     {
         if (controller == null)
         {
@@ -51,13 +51,13 @@ public class DepartmentHeadMapper
     }
 
     @Override
-    public IDepartmentHead getById(Integer id)
+    public IDepartmentHeadDto getById(Integer id)
             throws IdNotFoundException
     {
         try
         {
             contract.domain.IDepartmentHead a = DomainFacade.getInstance().getByID(contract.domain.IDepartmentHead.class,id);
-            return DepartmentHead.copy(a);
+            return DepartmentHeadDto.copy(a);
         }
         catch (CouldNotFetchException ex)
         {
@@ -66,15 +66,15 @@ public class DepartmentHeadMapper
     }
 
     @Override
-    public List<IDepartmentHead> getAll() throws NotFoundException
+    public List<IDepartmentHeadDto> getAll() throws NotFoundException
     {
         try
         {
-            List<IDepartmentHead> result = new LinkedList<>();
+            List<IDepartmentHeadDto> result = new LinkedList<>();
 
             for (contract.domain.IDepartmentHead a : DomainFacade.getInstance().getAll(contract.domain.IDepartmentHead.class))
             {
-                result.add(DepartmentHead.copy(a));
+                result.add(DepartmentHeadDto.copy(a));
             }
 
             return result;
@@ -86,7 +86,7 @@ public class DepartmentHeadMapper
     }
 
     @Override
-    public Integer set(IDepartmentHead value)
+    public Integer set(IDepartmentHeadDto value)
     {
         try
         {
@@ -103,7 +103,7 @@ public class DepartmentHeadMapper
     }
 
     @Override
-    public void delete(IDepartmentHead value)
+    public void delete(IDepartmentHeadDto value)
     {
         try
         {
@@ -117,7 +117,7 @@ public class DepartmentHeadMapper
         }
     }
 
-    private server.domain.classes.DepartmentHead createDomain(IDepartmentHead value)
+    private server.domain.classes.DepartmentHead createDomain(IDepartmentHeadDto value)
             throws IdNotFoundException
     {
         server.domain.classes.DepartmentHead departmentHead = new server.domain.classes.DepartmentHead(value.getId());
@@ -142,8 +142,8 @@ public class DepartmentHeadMapper
     }
 
     @Override
-    public IDepartmentHead getNew()
+    public IDepartmentHeadDto getNew()
     {
-        return new DepartmentHead();
+        return new DepartmentHeadDto();
     }
 }

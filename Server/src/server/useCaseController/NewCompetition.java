@@ -26,7 +26,7 @@ public class NewCompetition implements INewCompetition{
     }
 
     @Override
-    public void setCompetition(ICompetition competition, IMember member) {
+    public void setCompetition(ICompetitionDto competition, IMemberDto member) {
         try { 
             DtoFactory.getCompetitionMapper().set(competition);
         } catch (RemoteException ex) {
@@ -35,7 +35,7 @@ public class NewCompetition implements INewCompetition{
     }
 
     @Override
-    public List<ITeam> getTeams() {
+    public List<ITeamDto> getTeams() {
         try {
             return DtoFactory.getTeamMapper().getAll();
         } catch (RemoteException | NotFoundException ex) {

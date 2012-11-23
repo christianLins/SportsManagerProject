@@ -6,7 +6,7 @@ package server.dto.classes;
 
 import java.util.*;
 import org.junit.*;
-import contract.dto.IPlayer;
+import contract.dto.IPlayerDto;
 
 /**
 
@@ -41,21 +41,21 @@ public class PlayerTest
     @Test
     public void emptyConstructorTest()
     {
-        Player a = new Player();
+        PlayerDto a = new PlayerDto();
     }
 
     @Test
     public void implementsInterfaceTest()
     {
-        Player a = new Player();
+        PlayerDto a = new PlayerDto();
 
-        Assert.assertTrue(a instanceof IPlayer);
+        Assert.assertTrue(a instanceof IPlayerDto);
     }
 
     @Test
     public void typeOfSportListTest()
     {
-        Player a = new Player();
+        PlayerDto a = new PlayerDto();
 
         List<Integer> expected = new LinkedList<>();
         expected.add(1);

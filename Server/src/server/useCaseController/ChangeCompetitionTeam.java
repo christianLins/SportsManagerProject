@@ -35,7 +35,7 @@ public class ChangeCompetitionTeam
     }
 
     @Override
-    public List<ICompetition> getCompetition()
+    public List<ICompetitionDto> getCompetition()
     {
         try
         {
@@ -49,9 +49,9 @@ public class ChangeCompetitionTeam
     }
 
     @Override
-    public List<IClubTeam> getClubTeams(List<Integer> Teams)
+    public List<IClubTeamDto> getClubTeams(List<Integer> Teams)
     {
-        List<IClubTeam> clubTeamList = new ArrayList<>();
+        List<IClubTeamDto> clubTeamList = new ArrayList<>();
 
         try
         {
@@ -69,7 +69,7 @@ public class ChangeCompetitionTeam
     }
 
     @Override
-    public void setCompetitonTeam(ICompetition competition, IClubTeam oldTeam, IClubTeam newTeam)
+    public void setCompetitonTeam(ICompetitionDto competition, IClubTeamDto oldTeam, IClubTeamDto newTeam)
     {
         List<Integer> teamList = competition.getTeamList();
 
@@ -91,7 +91,7 @@ public class ChangeCompetitionTeam
     }
 
     @Override
-    public List<IClubTeam> getClubTeams()
+    public List<IClubTeamDto> getClubTeams()
     {
         try
         {
@@ -105,16 +105,16 @@ public class ChangeCompetitionTeam
     }
 
     @Override
-    public IClubTeam getCompetitionTeam(IClubTeam team)
+    public IClubTeamDto getCompetitionTeam(IClubTeamDto team)
     {
         //Sry han kA meh was i do tu muss ^^
         return team;
     }
 
     @Override
-    public List<IPlayer> getPlayers(List<Integer> players)
+    public List<IPlayerDto> getPlayers(List<Integer> players)
     {
-        List<IPlayer> playerList = new ArrayList<>();
+        List<IPlayerDto> playerList = new ArrayList<>();
 
         try
         {

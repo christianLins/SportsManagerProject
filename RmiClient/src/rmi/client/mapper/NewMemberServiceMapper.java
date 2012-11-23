@@ -5,12 +5,11 @@
 package rmi.client.mapper;
 
 import contract.dto.*;
-import java.rmi.RemoteException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import contract.rmi.services.INewMemberRmiService;
 import contract.useCaseController.INewMember;
+import java.rmi.RemoteException;
+import java.util.List;
+import java.util.logging.*;
 
 /**
 
@@ -39,7 +38,7 @@ public class NewMemberServiceMapper
         }
 
         @Override
-        public void setNewMember(IMember member, IAddress address)
+        public void setNewMember(IMemberDto member, IAddressDto address)
         {
             try
             {
@@ -52,7 +51,7 @@ public class NewMemberServiceMapper
         }
 
         @Override
-        public List<IDepartment> getDepartments()
+        public List<IDepartmentDto> getDepartments()
         {
             try
             {
@@ -66,7 +65,7 @@ public class NewMemberServiceMapper
         }
 
         @Override
-        public List<IClubTeam> getClubTeams(List<Integer> clubTeams)
+        public List<IClubTeamDto> getClubTeams(List<Integer> clubTeams)
         {
             try
             {
@@ -80,7 +79,7 @@ public class NewMemberServiceMapper
         }
 
         @Override
-        public void setNewMember(IMember member, IAddress address, IDepartment department, IClubTeam clubTeam, IRole role)
+        public void setNewMember(IMemberDto member, IAddressDto address, IDepartmentDto department, IClubTeamDto clubTeam, IRoleDto role)
         {
             try
             {
@@ -93,7 +92,7 @@ public class NewMemberServiceMapper
         }
 
         @Override
-        public List<ITypeOfSport> getTypeOfSports(List<Integer> typOfSportsList)
+        public List<ITypeOfSportDto> getTypeOfSports(List<Integer> typOfSportsList)
         {
             try
             {
@@ -107,7 +106,7 @@ public class NewMemberServiceMapper
         }
 
         @Override
-        public List<IClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport)
+        public List<IClubTeamDto> getClubTeamsByTypeOfSport(ITypeOfSportDto sport)
         {
             try
             {

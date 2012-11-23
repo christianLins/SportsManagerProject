@@ -5,19 +5,19 @@
 package server.dto.mapper;
 
 import contract.domain.*;
-import contract.dto.ICountry;
+import contract.dto.ICountryDto;
 import contract.dto.mapper.*;
 import java.util.*;
 import java.util.logging.*;
 import server.domain.DomainFacade;
-import server.dto.classes.Country;
+import server.dto.classes.CountryDto;
 
 /**
 
  @author Thomas
  */
 public class CountryMapper
-        implements IMapper<ICountry>
+        implements IMapper<ICountryDto>
 {
     private static CountryMapper controller;
 
@@ -40,7 +40,7 @@ public class CountryMapper
     {
     }
 
-    public static IMapper<ICountry> getInstance()
+    public static IMapper<ICountryDto> getInstance()
     {
         if (controller == null)
         {
@@ -51,13 +51,13 @@ public class CountryMapper
     }
 
     @Override
-    public ICountry getById(Integer id)
+    public ICountryDto getById(Integer id)
             throws IdNotFoundException
     {
         try
         {
             contract.domain.ICountry a = DomainFacade.getInstance().getByID(contract.domain.ICountry.class, id);
-            return Country.copy(a);
+            return CountryDto.copy(a);
 
         }
         catch (Exception ex)
@@ -68,16 +68,16 @@ public class CountryMapper
     }
 
     @Override
-    public List<ICountry> getAll()
+    public List<ICountryDto> getAll()
             throws NotFoundException
     {
         try
         {
-            List<ICountry> result = new LinkedList<>();
+            List<ICountryDto> result = new LinkedList<>();
 
             for (contract.domain.ICountry a : DomainFacade.getInstance().getAll(contract.domain.ICountry.class))
             {
-                result.add(Country.copy(a));
+                result.add(CountryDto.copy(a));
             }
 
             return result;
@@ -89,7 +89,7 @@ public class CountryMapper
     }
 
     @Override
-    public Integer set(ICountry value)
+    public Integer set(ICountryDto value)
     {
         try
         {
@@ -106,7 +106,7 @@ public class CountryMapper
     }
 
     @Override
-    public void delete(ICountry value)
+    public void delete(ICountryDto value)
     {
         try
         {
@@ -120,7 +120,7 @@ public class CountryMapper
         }
     }
 
-    private server.domain.classes.Country createDomain(ICountry value)
+    private server.domain.classes.Country createDomain(ICountryDto value)
             throws IdNotFoundException
     {
         server.domain.classes.Country country = new server.domain.classes.Country(value.getId());
@@ -139,8 +139,8 @@ public class CountryMapper
     }
 
     @Override
-    public ICountry getNew()
+    public ICountryDto getNew()
     {
-        return new Country();
+        return new CountryDto();
     }
 }

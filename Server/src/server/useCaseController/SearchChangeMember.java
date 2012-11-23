@@ -20,7 +20,7 @@ public class SearchChangeMember
         implements ISearchChangeMember
 {
     private static SearchChangeMember INSTANCE;
-    private IMember member;
+    private IMemberDto member;
 
     private SearchChangeMember()
     {
@@ -37,13 +37,13 @@ public class SearchChangeMember
     }
 
     @Override
-    public List<IMember> getMatchingMembers(String searchInput)
+    public List<IMemberDto> getMatchingMembers(String searchInput)
     {
         try
         {
-            List<IMember> resultIMembers = new LinkedList<>();
-            List<IMember> memberList = DtoFactory.getMemberMapper().getAll();
-            for (IMember member : memberList)
+            List<IMemberDto> resultIMembers = new LinkedList<>();
+            List<IMemberDto> memberList = DtoFactory.getMemberMapper().getAll();
+            for (IMemberDto member : memberList)
             {
                 if (member.getLastname().toLowerCase().contains(searchInput.toLowerCase())
                         || member.getPrename().toLowerCase().contains(searchInput.toLowerCase())
@@ -62,7 +62,7 @@ public class SearchChangeMember
     }
 
     @Override
-    public IMember getMember(Integer id)
+    public IMemberDto getMember(Integer id)
     {
         try
         {
@@ -76,13 +76,13 @@ public class SearchChangeMember
     }
 
     @Override
-    public List<IRole> getRoles(Integer memberId)
+    public List<IRoleDto> getRoles(Integer memberId)
     {
         //RoleMapper
-        List<IRole> roleList = new ArrayList<>();
+        List<IRoleDto> roleList = new ArrayList<>();
         try
         {
-            IMember member = DtoFactory.getMemberMapper().getById(memberId);
+            IMemberDto member = DtoFactory.getMemberMapper().getById(memberId);
             for (Integer role : member.getRoleList())
             {
                 roleList.add(DtoFactory.getRoleMapper().getById(role));
@@ -96,21 +96,21 @@ public class SearchChangeMember
     }
 
     @Override
-    public IDepartment getDepartment(Integer memberId)
+    public IDepartmentDto getDepartment(Integer memberId)
     {
         try
         {
             //Auch nicht wirklich korrekt!!!!
-            List<IDepartment> depList = DtoFactory.getDepartmentMapper().getAll();
-            for (IDepartment dep : depList)
+            List<IDepartmentDto> depList = DtoFactory.getDepartmentMapper().getAll();
+            for (IDepartmentDto dep : depList)
             {
-                List<IClubTeam> clubList = new ArrayList<>();
+                List<IClubTeamDto> clubList = new ArrayList<>();
                 for (Integer club : dep.getClubTeamList())
                 {
                     clubList.add(DtoFactory.getClubTeamMapper().getById(club));
                 }
 
-                for (IClubTeam team : clubList)
+                for (IClubTeamDto team : clubList)
                 {
                     if (team.getPlayerList().contains(memberId))
                     {
@@ -129,7 +129,7 @@ public class SearchChangeMember
     }
 
     @Override
-    public IAddress getAddress(Integer addressId)
+    public IAddressDto getAddress(Integer addressId)
     {
         try
         {
@@ -143,7 +143,7 @@ public class SearchChangeMember
     }
 
     @Override
-    public ICountry getCountry(Integer countryID)
+    public ICountryDto getCountry(Integer countryID)
     {
         try
         {
@@ -157,7 +157,7 @@ public class SearchChangeMember
     }
 
     @Override
-    public List<IDepartment> getDepartments()
+    public List<IDepartmentDto> getDepartments()
     {
         try
         {
@@ -171,9 +171,9 @@ public class SearchChangeMember
     }
 
     @Override
-    public List<IClubTeam> getClubTeams(List<Integer> clubTeams)
+    public List<IClubTeamDto> getClubTeams(List<Integer> clubTeams)
     {
-        List<IClubTeam> teamList = new ArrayList<>();
+        List<IClubTeamDto> teamList = new ArrayList<>();
         try
         {
             for (Integer team : clubTeams)
@@ -189,22 +189,22 @@ public class SearchChangeMember
     }
 
     @Override
-    public void setNewMember(IMember member, IAddress address)
+    public void setNewMember(IMemberDto member, IAddressDto address)
     {
 
         NewMember.getInstance().setNewMember(member, address);
     }
 
     @Override
-    public void setNewMember(IMember member, IAddress address, IDepartment department, IClubTeam clubTeam, IRole role)
+    public void setNewMember(IMemberDto member, IAddressDto address, IDepartmentDto department, IClubTeamDto clubTeam, IRoleDto role)
     {
         NewMember.getInstance().setNewMember(member, address, department, clubTeam, role);
     }
 
     @Override
-    public List<ITypeOfSport> getTypeOfSports(List<Integer> sportsList)
+    public List<ITypeOfSportDto> getTypeOfSports(List<Integer> sportsList)
     {
-        List<ITypeOfSport> typeOfSportReturnList = new ArrayList<>();
+        List<ITypeOfSportDto> typeOfSportReturnList = new ArrayList<>();
         try
         {
             for (Integer sportID : sportsList)
@@ -221,21 +221,21 @@ public class SearchChangeMember
     }
 
     @Override
-    public void setSelectedMember(IMember member)
+    public void setSelectedMember(IMemberDto member)
     {
         this.member = member;
     }
 
     @Override
-    public IMember getSelectedMember()
+    public IMemberDto getSelectedMember()
     {
         return member;
     }
 
     @Override
-    public List<IClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport)
+    public List<IClubTeamDto> getClubTeamsByTypeOfSport(ITypeOfSportDto sport)
     {
-        List<IClubTeam> cTeams = null;
+        List<IClubTeamDto> cTeams = null;
         try
         {
             cTeams = DtoFactory.getClubTeamMapper().getClubTeamsByTypeOfSport(sport);

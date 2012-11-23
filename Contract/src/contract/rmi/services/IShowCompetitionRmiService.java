@@ -14,12 +14,12 @@ import java.util.List;
 public interface IShowCompetitionRmiService
         extends Remote
 {
-    List<ICompetition> getCompetitions()
+    List<ICompetitionDto> getCompetitions()
             throws RemoteException;
 
-    List<IMatch> getMatchs(List<Integer> matches)
+    List<IMatchDto> getMatchs(List<Integer> matches)
             throws RemoteException;
 
-    List<IPlayer> getPlayer(IClubTeam team)
+    List<IPlayerDto> getPlayer(IClubTeamDto team)
             throws RemoteException;
 }

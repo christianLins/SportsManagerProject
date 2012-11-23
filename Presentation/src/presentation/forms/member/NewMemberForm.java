@@ -20,23 +20,23 @@ public class NewMemberForm
     //Controler and contract
     ServiceClient client;
     INewMember controller;
-    IMember member;
-    IMember user;
-    IRole role;
-    IDepartment department;
-    IAddress address;
-    ICountry country;
-    IClubTeam clubTeam;
-    private List<ITypeOfSport> typeOfSports;
-    private List<ITypeOfSport> availableSports;
-    private List<ITypeOfSport> selectedSports;
-    private List<IClubTeam> selectedTeams;
+    IMemberDto member;
+    IMemberDto user;
+    IRoleDto role;
+    IDepartmentDto department;
+    IAddressDto address;
+    ICountryDto country;
+    IClubTeamDto clubTeam;
+    private List<ITypeOfSportDto> typeOfSports;
+    private List<ITypeOfSportDto> availableSports;
+    private List<ITypeOfSportDto> selectedSports;
+    private List<IClubTeamDto> selectedTeams;
     private boolean adminPermission = false;
 
     /**
      Creates new form NewMemb
      */
-    public NewMemberForm(AbstractForm form, ServiceClient client, IMember user)
+    public NewMemberForm(AbstractForm form, ServiceClient client, IMemberDto user)
             throws ServiceNotAvailableException
     {
         super(form);
@@ -394,7 +394,7 @@ public class NewMemberForm
 
     private void btnAddSportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSportsActionPerformed
         setAvailableSports(loadSportsList());
-        SelectSportsHelper selectSportsHelper = new SelectSportsHelper(availableSports, new LinkedList<ITypeOfSport>(), this);
+        SelectSportsHelper selectSportsHelper = new SelectSportsHelper(availableSports, new LinkedList<ITypeOfSportDto>(), this);
     }//GEN-LAST:event_btnAddSportsActionPerformed
 
     private void btnTeamsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeamsActionPerformed
@@ -405,9 +405,9 @@ public class NewMemberForm
     {
         List<Integer> tosIDs = new LinkedList<>();
 
-        for (ITypeOfSport tos : typeOfSports)
+        for (ITypeOfSportDto tos : typeOfSports)
         {
-            for (ITypeOfSport s : selectedSports)
+            for (ITypeOfSportDto s : selectedSports)
             {
                 if (s.equals(tos))
                 {
@@ -429,19 +429,19 @@ public class NewMemberForm
         typeOfSports = controller.getTypeOfSports(typeOfSportList);
         availableSports = new LinkedList<>();
 
-        for (ITypeOfSport s : typeOfSports)
+        for (ITypeOfSportDto s : typeOfSports)
         {
             availableSports.add(s);
         }
     }
 
     @Override
-    public void setTxtFieldSports(List<ITypeOfSport> selection)
+    public void setTxtFieldSports(List<ITypeOfSportDto> selection)
     {
         this.selectedSports = selection;
 
         StringBuilder sb = new StringBuilder(selectedSports.size());
-        for (ITypeOfSport s : selectedSports)
+        for (ITypeOfSportDto s : selectedSports)
         {
             sb.append(s);
             sb.append(", ");
@@ -452,12 +452,12 @@ public class NewMemberForm
     }
     
     @Override
-    public void setTxtFieldTeams(List<IClubTeam> selected) {
+    public void setTxtFieldTeams(List<IClubTeamDto> selected) {
         this.selectedTeams = selected;
 
         StringBuilder sb = new StringBuilder(selectedTeams.size());
 
-        for (IClubTeam ct : selectedTeams) {
+        for (IClubTeamDto ct : selectedTeams) {
             sb.append(ct);
             sb.append(", ");
         }
@@ -468,14 +468,14 @@ public class NewMemberForm
     }
     
     @Override
-    public List<IClubTeam> getClubTeams(ITypeOfSport sport) {
+    public List<IClubTeamDto> getClubTeams(ITypeOfSportDto sport) {
         return controller.getClubTeamsByTypeOfSport(sport);
     }
     
     private List<Integer> getSelectedTeams() {
         List<Integer> clubTeamIDs = new LinkedList<>();
 
-        for (IClubTeam c : selectedTeams) {            
+        for (IClubTeamDto c : selectedTeams) {            
             clubTeamIDs.add(c.getId());
         }
         return clubTeamIDs;
@@ -510,7 +510,7 @@ public class NewMemberForm
 
         //TODO: which case only member and address necessary?!
         //role list necessary?
-        List<IRole> membersRoles = new LinkedList<>();
+        List<IRoleDto> membersRoles = new LinkedList<>();
 
         if (adminPermission)
         {
@@ -528,7 +528,7 @@ public class NewMemberForm
             }
             if (radioTrainer.isSelected())
             {
-                ITrainer trainer = new Trainer();
+                ITrainerDto trainer = new Trainer();
                 membersRoles.add(trainer);
                 trainer.setTypeOfSportList(getSelectedSports());
                 trainer.setClubTeamList(getSelectedTeams());
@@ -537,14 +537,14 @@ public class NewMemberForm
 
         if (radioPlayer.isSelected())
         {
-            IPlayer player = new Player();
+            IPlayerDto player = new Player();
             membersRoles.add(player);
             player.setTypeOfSportList(getSelectedSports());
             //player.setClubTeamList(getSelectedTeams());
         }
 
         List<Integer> roleInt = new LinkedList<>();
-        for (IRole role : membersRoles)
+        for (IRoleDto role : membersRoles)
         {
             roleInt.add(role.getId());
         }

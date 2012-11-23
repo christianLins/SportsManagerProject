@@ -11,15 +11,15 @@ import java.util.List;
 public interface INewMemberRmiService extends Remote
 {
     
-    void setNewMember(IMember member, IAddress address) throws RemoteException;
+    void setNewMember(IMemberDto member, IAddressDto address) throws RemoteException;
 
-    List<IDepartment> getDepartments() throws RemoteException;  
-    List<IClubTeam> getClubTeams(List<Integer> clubTeams) throws RemoteException;
+    List<IDepartmentDto> getDepartments() throws RemoteException;  
+    List<IClubTeamDto> getClubTeams(List<Integer> clubTeams) throws RemoteException;
     
-    void setNewMember(IMember member, IAddress address, IDepartment department, IClubTeam clubTeam, IRole role) throws RemoteException;
+    void setNewMember(IMemberDto member, IAddressDto address, IDepartmentDto department, IClubTeamDto clubTeam, IRoleDto role) throws RemoteException;
     
-    List<ITypeOfSport> getTypeOfSports(List<Integer> typOfSportsList) throws RemoteException;
+    List<ITypeOfSportDto> getTypeOfSports(List<Integer> typOfSportsList) throws RemoteException;
     
-    List<IClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport) throws RemoteException;
+    List<IClubTeamDto> getClubTeamsByTypeOfSport(ITypeOfSportDto sport) throws RemoteException;
     
 }

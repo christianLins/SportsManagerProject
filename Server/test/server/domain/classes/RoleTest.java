@@ -4,12 +4,10 @@
  */
 package server.domain.classes;
 
-import contract.domain.IRole;
-import contract.domain.IPermission;
+import contract.domain.*;
 import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
-import server.domain.classes.Role;
 
 /**
 

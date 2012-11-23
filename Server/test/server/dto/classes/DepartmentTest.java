@@ -6,7 +6,7 @@ package server.dto.classes;
 
 import java.util.*;
 import org.junit.*;
-import contract.dto.IDepartment;
+import contract.dto.IDepartmentDto;
 
 /**
 
@@ -41,21 +41,21 @@ public class DepartmentTest
     @Test
     public void emptyConstructorTest()
     {
-        Department a = new Department();
+        DepartmentDto a = new DepartmentDto();
     }
 
     @Test
     public void implementsInterfaceTest()
     {
-        Department a = new Department();
+        DepartmentDto a = new DepartmentDto();
 
-        Assert.assertTrue(a instanceof IDepartment);
+        Assert.assertTrue(a instanceof IDepartmentDto);
     }
 
     @Test
     public void nameTest()
     {
-        Department a = new Department();
+        DepartmentDto a = new DepartmentDto();
 
         String expected = new Random().nextInt() + "";
         String actual = "";
@@ -69,7 +69,7 @@ public class DepartmentTest
     @Test
     public void descriptionTest()
     {
-        Department a = new Department();
+        DepartmentDto a = new DepartmentDto();
 
         String expected = new Random().nextInt() + "";
         String actual = "";
@@ -83,7 +83,7 @@ public class DepartmentTest
     @Test
     public void departmentHeadTest()
     {
-        Department a = new Department();
+        DepartmentDto a = new DepartmentDto();
 
         Integer expected = 2;
         Integer actual;
@@ -97,7 +97,7 @@ public class DepartmentTest
     @Test
     public void clubTeamListTest()
     {
-        Department a = new Department();
+        DepartmentDto a = new DepartmentDto();
 
         List<Integer> expected = new LinkedList<>();
         expected.add(1);
@@ -115,7 +115,7 @@ public class DepartmentTest
     @Test
     public void typeOfSportListTest()
     {
-        Department a = new Department();
+        DepartmentDto a = new DepartmentDto();
         
         List<Integer> expected = new LinkedList<>();
         expected.add(1);

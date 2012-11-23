@@ -12,8 +12,8 @@ import contract.domain.CouldNotDeleteException;
 import contract.domain.CouldNotFetchException;
 import java.util.*;
 import java.util.logging.*;
-import server.dto.classes.Competition;
-import contract.dto.ICompetition;
+import server.dto.classes.CompetitionDto;
+import contract.dto.ICompetitionDto;
 import server.domain.DomainFacade;
 
 /**
@@ -21,7 +21,7 @@ import server.domain.DomainFacade;
  @author Lins Christian (christian.lins87@gmail.com)
  */
 public class CompetitionMapper
-        implements IMapper<ICompetition>
+        implements IMapper<ICompetitionDto>
 {
     private static CompetitionMapper controller;
 
@@ -29,7 +29,7 @@ public class CompetitionMapper
     {
     }
 
-    public static IMapper<ICompetition> getInstance()
+    public static IMapper<ICompetitionDto> getInstance()
     {
         if (controller == null)
         {
@@ -55,13 +55,13 @@ public class CompetitionMapper
     }
 
     @Override
-    public ICompetition getById(Integer id)
+    public ICompetitionDto getById(Integer id)
             throws IdNotFoundException
     {
         try
         {
             contract.domain.ICompetition a = DomainFacade.getInstance().getByID(contract.domain.ICompetition.class, id);
-            return Competition.copy(a);
+            return CompetitionDto.copy(a);
         }
         catch (Exception ex)
         {
@@ -71,16 +71,16 @@ public class CompetitionMapper
     }
 
     @Override
-    public List<ICompetition> getAll()
+    public List<ICompetitionDto> getAll()
             throws NotFoundException
     {
         try
         {
-            List<ICompetition> result = new LinkedList<>();
+            List<ICompetitionDto> result = new LinkedList<>();
 
             for (contract.domain.ICompetition a : DomainFacade.getInstance().getAll(contract.domain.ICompetition.class))
             {
-                result.add(Competition.copy(a));
+                result.add(CompetitionDto.copy(a));
             }
 
             return result;
@@ -92,7 +92,7 @@ public class CompetitionMapper
     }
 
     @Override
-    public Integer set(ICompetition value)
+    public Integer set(ICompetitionDto value)
     {
         try
         {
@@ -109,7 +109,7 @@ public class CompetitionMapper
     }
 
     @Override
-    public void delete(ICompetition value)
+    public void delete(ICompetitionDto value)
     {
         try
         {
@@ -123,7 +123,7 @@ public class CompetitionMapper
         }
     }
 
-    private server.domain.classes.Competition createDomain(ICompetition value)
+    private server.domain.classes.Competition createDomain(ICompetitionDto value)
             throws IdNotFoundException
     {
         server.domain.classes.Competition competition = new server.domain.classes.Competition(value.getId());
@@ -153,8 +153,8 @@ public class CompetitionMapper
     }
 
     @Override
-    public ICompetition getNew()
+    public ICompetitionDto getNew()
     {
-        return new Competition();
+        return new CompetitionDto();
     }
 }

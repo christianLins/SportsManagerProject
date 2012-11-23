@@ -5,18 +5,18 @@
 package server.dto.mapper;
 
 import contract.domain.*;
-import contract.dto.IAdmin;
+import contract.dto.IAdminDto;
 import contract.dto.mapper.*;
 import java.util.*;
 import java.util.logging.*;
 import server.domain.DomainFacade;
-import server.dto.classes.Admin;
+import server.dto.classes.AdminDto;
 
 /**
  @author Thomas
  */
 public class AdminMapper
-        implements IMapper<IAdmin>
+        implements IMapper<IAdminDto>
 {
     private static AdminMapper controller;
 
@@ -24,7 +24,7 @@ public class AdminMapper
     {
     }
 
-    public static IMapper<IAdmin> getInstance()
+    public static IMapper<IAdminDto> getInstance()
     {
         if (controller == null)
         {
@@ -48,13 +48,13 @@ public class AdminMapper
     }
 
     @Override
-    public IAdmin getById(Integer id)
+    public IAdminDto getById(Integer id)
             throws IdNotFoundException
     {
         try
         {
             contract.domain.IAdmin a = DomainFacade.getInstance().getByID(contract.domain.IAdmin.class, id);
-            return Admin.copy(a);
+            return AdminDto.copy(a);
         }
         catch (Exception ex)
         {
@@ -64,16 +64,16 @@ public class AdminMapper
     }
 
     @Override
-    public List<IAdmin> getAll()
+    public List<IAdminDto> getAll()
             throws NotFoundException
     {
         try
         {
-            List<IAdmin> result = new LinkedList<>();
+            List<IAdminDto> result = new LinkedList<>();
 
             for (contract.domain.IAdmin a : DomainFacade.getInstance().getAll(contract.domain.IAdmin.class))
             {
-                result.add(Admin.copy(a));
+                result.add(AdminDto.copy(a));
             }
 
             return result;
@@ -85,7 +85,7 @@ public class AdminMapper
     }
 
     @Override
-    public Integer set(IAdmin value)
+    public Integer set(IAdminDto value)
     {
         try
         {
@@ -102,7 +102,7 @@ public class AdminMapper
     }
 
     @Override
-    public void delete(IAdmin value)
+    public void delete(IAdminDto value)
     {
         try
         {
@@ -116,7 +116,7 @@ public class AdminMapper
         }
     }
 
-    private server.domain.classes.Admin createDomain(IAdmin value)
+    private server.domain.classes.Admin createDomain(IAdminDto value)
             throws IdNotFoundException
     {
         server.domain.classes.Admin admin = new server.domain.classes.Admin(value.getId());
@@ -128,8 +128,8 @@ public class AdminMapper
     }
 
     @Override
-    public IAdmin getNew()
+    public IAdminDto getNew()
     {
-        return new Admin();
+        return new AdminDto();
     }
 }

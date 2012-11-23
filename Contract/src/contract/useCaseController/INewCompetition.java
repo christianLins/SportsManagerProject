@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface INewCompetition {
     
-    void setCompetition(ICompetition competition, IMember member);
-    List<ITeam> getTeams();
+    void setCompetition(ICompetitionDto competition, IMemberDto member);
+    List<ITeamDto> getTeams();
     
 }

@@ -5,12 +5,11 @@
 package rmi.client.mapper;
 
 import contract.dto.*;
+import contract.rmi.services.IAddMatchResultsRmiService;
 import contract.useCaseController.IAddMatchResults;
 import java.rmi.RemoteException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import contract.rmi.services.IAddMatchResultsRmiService;
+import java.util.logging.*;
 
 /**
  *
@@ -38,7 +37,7 @@ public class AddMatchResultsServiceMapper implements RmiServiceToServiceMapper<I
         }
 
         @Override
-        public List<ICompetition> getCompetitionList()
+        public List<ICompetitionDto> getCompetitionList()
         {
             try
             {
@@ -52,7 +51,7 @@ public class AddMatchResultsServiceMapper implements RmiServiceToServiceMapper<I
         }
 
         @Override
-        public List<ITeam> getTeamList(List<Integer> team)
+        public List<ITeamDto> getTeamList(List<Integer> team)
         {
             try
             {
@@ -66,7 +65,7 @@ public class AddMatchResultsServiceMapper implements RmiServiceToServiceMapper<I
         }
 
         @Override
-        public List<IMatch> getMatchList(List<Integer> match)
+        public List<IMatchDto> getMatchList(List<Integer> match)
         {
             try
             {
@@ -80,7 +79,7 @@ public class AddMatchResultsServiceMapper implements RmiServiceToServiceMapper<I
         }
 
         @Override
-        public void setMatchResult(IMatch match, IMatchresult matchresult)
+        public void setMatchResult(IMatchDto match, IMatchresultDto matchresult)
         {
             try
             {

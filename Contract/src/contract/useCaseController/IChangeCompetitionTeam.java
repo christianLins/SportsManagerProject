@@ -13,15 +13,15 @@ import java.util.List;
  */
 public interface IChangeCompetitionTeam
 {
-    List<ICompetition> getCompetition();
+    List<ICompetitionDto> getCompetition();
 
-    List<IClubTeam> getClubTeams(List<Integer> Teams);
+    List<IClubTeamDto> getClubTeams(List<Integer> Teams);
 
-    IClubTeam getCompetitionTeam(IClubTeam team);       //get team for competition from this team
+    IClubTeamDto getCompetitionTeam(IClubTeamDto team);       //get team for competition from this team
 
-    List<IPlayer> getPlayers(List<Integer> players);    //get single players
+    List<IPlayerDto> getPlayers(List<Integer> players);    //get single players
 
-    void setCompetitonTeam(ICompetition competition, IClubTeam oldTeam, IClubTeam newTeam);
+    void setCompetitonTeam(ICompetitionDto competition, IClubTeamDto oldTeam, IClubTeamDto newTeam);
 
-    public List<IClubTeam> getClubTeams();
+    public List<IClubTeamDto> getClubTeams();
 }

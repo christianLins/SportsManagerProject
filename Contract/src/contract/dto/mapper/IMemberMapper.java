@@ -4,15 +4,15 @@
  */
 package contract.dto.mapper;
 
-import contract.dto.IMember;
+import contract.dto.IMemberDto;
 
 /**
 
  @author Thomas
  */
 public interface IMemberMapper
-        extends IMapper<IMember>
+        extends IMapper<IMemberDto>
 {
-    IMember getMemberByUsername(String username)
+    IMemberDto getMemberByUsername(String username)
             throws NotFoundException;
 }

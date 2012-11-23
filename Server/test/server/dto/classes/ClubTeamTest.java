@@ -4,7 +4,7 @@
  */
 package server.dto.classes;
 
-import contract.dto.IClubTeam;
+import contract.dto.IClubTeamDto;
 import java.util.*;
 import org.junit.*;
 
@@ -41,29 +41,29 @@ public class ClubTeamTest
     @Test
     public void emptyConstructorTest()
     {
-        ClubTeam a = new ClubTeam();
+        ClubTeamDto a = new ClubTeamDto();
     }
 
     @Test
     public void implementsInterfaceTest()
     {
-        ClubTeam a = new ClubTeam();
+        ClubTeamDto a = new ClubTeamDto();
 
-        Assert.assertTrue(a instanceof IClubTeam);
+        Assert.assertTrue(a instanceof IClubTeamDto);
     }
 
     @Test
     public void implementsSuperclassTest()
     {
-        ClubTeam a = new ClubTeam();
+        ClubTeamDto a = new ClubTeamDto();
 
-        Assert.assertTrue(a instanceof Team);
+        Assert.assertTrue(a instanceof TeamDto);
     }
 
     @Test
     public void departmentListTest()
     {
-        ClubTeam a = new ClubTeam();
+        ClubTeamDto a = new ClubTeamDto();
 
         List<Integer> expected = new LinkedList<>();
         expected.add(1);
@@ -81,7 +81,7 @@ public class ClubTeamTest
     @Test
     public void trainerListTest()
     {
-        ClubTeam a = new ClubTeam();
+        ClubTeamDto a = new ClubTeamDto();
 
         List<Integer> expected = new LinkedList<>();
         expected.add(1);
@@ -99,7 +99,7 @@ public class ClubTeamTest
     @Test
     public void playerListTest()
     {
-        ClubTeam a = new ClubTeam();
+        ClubTeamDto a = new ClubTeamDto();
 
         List<Integer> expected = new LinkedList<>();
         expected.add(1);

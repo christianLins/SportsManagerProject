@@ -5,13 +5,13 @@
 package server.dto.mapper;
 
 import contract.domain.*;
-import contract.dto.ILeague;
-import contract.dto.ITypeOfSport;
+import contract.dto.ILeagueDto;
+import contract.dto.ITypeOfSportDto;
 import contract.dto.mapper.*;
 import java.util.*;
 import java.util.logging.*;
 import server.domain.DomainFacade;
-import server.dto.classes.League;
+import server.dto.classes.LeagueDto;
 
 /**
 
@@ -52,13 +52,13 @@ public class LeagueMapper
     }
 
     @Override
-    public ILeague getById(Integer id)
+    public ILeagueDto getById(Integer id)
             throws IdNotFoundException
     {
         try
         {
             contract.domain.ILeague a = DomainFacade.getInstance().getByID(contract.domain.ILeague.class, id);
-            return League.copy(a);
+            return LeagueDto.copy(a);
         }
         catch (Exception ex)
         {
@@ -67,16 +67,16 @@ public class LeagueMapper
     }
 
     @Override
-    public List<ILeague> getAll()
+    public List<ILeagueDto> getAll()
             throws NotFoundException
     {
         try
         {
-            List<ILeague> result = new LinkedList<>();
+            List<ILeagueDto> result = new LinkedList<>();
 
             for (contract.domain.ILeague a : DomainFacade.getInstance().getAll(contract.domain.ILeague.class))
             {
-                result.add(League.copy(a));
+                result.add(LeagueDto.copy(a));
             }
 
             return result;
@@ -88,7 +88,7 @@ public class LeagueMapper
     }
 
     @Override
-    public Integer set(ILeague value)
+    public Integer set(ILeagueDto value)
     {
         try
         {
@@ -105,7 +105,7 @@ public class LeagueMapper
     }
 
     @Override
-    public void delete(ILeague value)
+    public void delete(ILeagueDto value)
     {
         try
         {
@@ -119,7 +119,7 @@ public class LeagueMapper
         }
     }
 
-    private server.domain.classes.League createDomain(ILeague value)
+    private server.domain.classes.League createDomain(ILeagueDto value)
             throws IdNotFoundException
     {
         server.domain.classes.League league = new server.domain.classes.League(value.getId());
@@ -140,13 +140,13 @@ public class LeagueMapper
     }
 
     @Override
-    public ILeague getByName(String league, ITypeOfSport typeOfSport)
+    public ILeagueDto getByName(String league, ITypeOfSportDto typeOfSport)
             throws NotFoundException
     {
         try
         {
             server.domain.classes.TypeOfSport sport = (server.domain.classes.TypeOfSport) TypeOfSportMapper.getInstance().getDomainById(typeOfSport.getId());
-            return League.copy(DomainFacade.getInstance().getLeageByNameAndTypeOfSport(sport, league));
+            return LeagueDto.copy(DomainFacade.getInstance().getLeageByNameAndTypeOfSport(sport, league));
         }
         catch (CouldNotFetchException | IdNotFoundException ex)
         {
@@ -155,8 +155,8 @@ public class LeagueMapper
     }
 
     @Override
-    public ILeague getNew()
+    public ILeagueDto getNew()
     {
-        return new League();
+        return new LeagueDto();
     }
 }

@@ -54,7 +54,7 @@ public class RmiServer
             String policy = RmiServer.class.getProtectionDomain().getClassLoader().getResource("client.policy").getFile();
             String cb = "file://" + RmiServer.class.getProtectionDomain().getCodeSource().getLocation().getFile();
             cb += " file://" + RmiServiceClient.class.getProtectionDomain().getCodeSource().getLocation().getFile();
-            cb += " file://" + contract.dto.IAddress.class.getProtectionDomain().getCodeSource().getLocation().getFile();
+            cb += " file://" + contract.dto.IAddressDto.class.getProtectionDomain().getCodeSource().getLocation().getFile();
             cb += " file://" + UserData.class.getProtectionDomain().getCodeSource().getLocation().getFile();
             System.setProperty("java.rmi.server.codebase", cb);
 

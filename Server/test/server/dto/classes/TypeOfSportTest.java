@@ -7,7 +7,7 @@ package server.dto.classes;
 import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
-import contract.dto.ITypeOfSport;
+import contract.dto.ITypeOfSportDto;
 
 /**
 
@@ -42,15 +42,15 @@ public class TypeOfSportTest
     @Test
     public void emptyConstructorTest()
     {
-        TypeOfSport a = new TypeOfSport();
+        TypeOfSportDto a = new TypeOfSportDto();
     }
 
     @Test
     public void implementsInterfaceTest()
     {
-        TypeOfSport a = new TypeOfSport();
+        TypeOfSportDto a = new TypeOfSportDto();
 
-        Assert.assertTrue(a instanceof ITypeOfSport);
+        Assert.assertTrue(a instanceof ITypeOfSportDto);
     }
 
     @Test
@@ -62,7 +62,7 @@ public class TypeOfSportTest
         EasyMock.expect(t4.getDescription()).andReturn("description4").anyTimes();
         EasyMock.replay(t4);
 
-        contract.dto.ITypeOfSport actual = TypeOfSport.copy(t4);
+        contract.dto.ITypeOfSportDto actual = TypeOfSportDto.copy(t4);
 
         Assert.assertEquals(t4.getDescription(), actual.getDescription());
         Assert.assertEquals(t4.getName(), actual.getName());
@@ -71,7 +71,7 @@ public class TypeOfSportTest
     @Test
     public void nameTest()
     {
-        TypeOfSport a = new TypeOfSport();
+        TypeOfSportDto a = new TypeOfSportDto();
 
         String expected = new Random().nextInt() + "";
         String actual = "";
@@ -85,7 +85,7 @@ public class TypeOfSportTest
     @Test
     public void descriptionTest()
     {
-        TypeOfSport a = new TypeOfSport();
+        TypeOfSportDto a = new TypeOfSportDto();
 
         String expected = new Random().nextInt() + "";
         String actual = "";
@@ -99,7 +99,7 @@ public class TypeOfSportTest
     @Test
     public void playerListTest()
     {
-        TypeOfSport a = new TypeOfSport();
+        TypeOfSportDto a = new TypeOfSportDto();
 
         List<Integer> expected = new LinkedList<>();
         expected.add(1);
