@@ -105,13 +105,8 @@ public class NewMember
         return typeOfSportReturnList;
     }
 
-<<<<<<< HEAD
-    @Override
-    public List<IClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport) {
-=======
-    public List<IClubTeamDto> getClubTeamsByTypeOfSport(ITypeOfSportDto sport) {
->>>>>>> 7905fcbe17856a19874a5eae9dcfd9b19b7b94f5
 
+    public List<IClubTeamDto> getClubTeamsByTypeOfSport(ITypeOfSportDto sport) {
         List<IClubTeamDto> ret = new LinkedList<>();
         try {
             ret = DtoFactory.getClubTeamMapper().getClubTeamsByTypeOfSport(sport);
