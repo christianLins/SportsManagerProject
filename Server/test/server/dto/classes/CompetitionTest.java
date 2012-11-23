@@ -6,7 +6,7 @@ package server.dto.classes;
 
 import java.util.*;
 import org.junit.*;
-import contract.dto.ICompetition;
+import contract.dto.ICompetitionDto;
 
 /**
 
@@ -41,21 +41,21 @@ public class CompetitionTest
     @Test
     public void emptyConstructorTest()
     {
-        Competition a = new Competition();
+        CompetitionDto a = new CompetitionDto();
     }
 
     @Test
     public void implementsInterfaceTest()
     {
-        Competition a = new Competition();
+        CompetitionDto a = new CompetitionDto();
 
-        Assert.assertTrue(a instanceof ICompetition);
+        Assert.assertTrue(a instanceof ICompetitionDto);
     }
 
     @Test
     public void dateFromTest()
     {
-        Competition a = new Competition();
+        CompetitionDto a = new CompetitionDto();
 
         Date expected = new Date();
         Date actual;
@@ -69,7 +69,7 @@ public class CompetitionTest
     @Test
     public void dateToTest()
     {
-        Competition a = new Competition();
+        CompetitionDto a = new CompetitionDto();
 
         Date expected = new Date();
         Date actual;
@@ -83,7 +83,7 @@ public class CompetitionTest
     @Test
     public void paymentTest()
     {
-        Competition a = new Competition();
+        CompetitionDto a = new CompetitionDto();
 
         Double expected = new Random().nextDouble();
         Double actual;
@@ -97,7 +97,7 @@ public class CompetitionTest
     @Test
     public void teamListTest()
     {
-        Competition a = new Competition();
+        CompetitionDto a = new CompetitionDto();
 
         List<Integer> expected = new LinkedList<>();
         expected.add(1);
@@ -115,7 +115,7 @@ public class CompetitionTest
     @Test
     public void matchListTest()
     {
-        Competition a = new Competition();
+        CompetitionDto a = new CompetitionDto();
 
         List<Integer> expected = new LinkedList<>();
         expected.add(1);

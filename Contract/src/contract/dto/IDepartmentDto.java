@@ -10,7 +10,7 @@ import java.util.List;
 
  @author Thomas
  */
-public interface IDepartment
+public interface IDepartmentDto
         extends IDto
 {
     List<Integer> getClubTeamList();

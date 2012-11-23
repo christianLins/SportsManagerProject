@@ -5,27 +5,27 @@
 package server.dto.classes;
 
 import java.util.HashMap;
-import contract.dto.IAdmin;
+import contract.dto.IAdminDto;
 
 /**
  @author Thomas
  */
-public class Admin
-        extends Role
-        implements IAdmin
+public class AdminDto
+        extends RoleDto
+        implements IAdminDto
 {
-    public Admin()
+    public AdminDto()
     {
         super();
 
         this.setName("Admin");
         this.setDescription("Admin");
     }
-    private static HashMap<contract.domain.IAdmin, Admin> admins = new HashMap<>();
+    private static HashMap<contract.domain.IAdmin, AdminDto> admins = new HashMap<>();
 
-    public static Admin copy(contract.domain.IAdmin admin)
+    public static AdminDto copy(contract.domain.IAdmin admin)
     {
-        Admin a;
+        AdminDto a;
 
         if (admins.containsKey(admin))
         {
@@ -33,7 +33,7 @@ public class Admin
         }
         else
         {
-            a = copy(admin, new Admin());
+            a = copy(admin, new AdminDto());
 
             admins.put(admin, a);
         }

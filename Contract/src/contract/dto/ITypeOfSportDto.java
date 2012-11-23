@@ -10,7 +10,7 @@ import java.util.List;
 
  @author Thomas
  */
-public interface ITypeOfSport
+public interface ITypeOfSportDto
         extends IDto
 {
     String getName();

@@ -1,11 +1,11 @@
 package server.dto.classes;
 
-import contract.dto.ICompetition;
+import contract.dto.ICompetitionDto;
 import java.io.Serializable;
 import java.util.*;
 
-public class Competition
-        implements Serializable, ICompetition
+public class CompetitionDto
+        implements Serializable, ICompetitionDto
 {
     private int id;
     private Date dateFrom;
@@ -19,19 +19,19 @@ public class Competition
     private String description;
     private String name;
 
-    public Competition()
+    public CompetitionDto()
     {
     }
 
-    public Competition(int id)
+    public CompetitionDto(int id)
     {
         this.id = id;
     }
-    private static HashMap<contract.domain.ICompetition, Competition> competitions = new HashMap<>();
+    private static HashMap<contract.domain.ICompetition, CompetitionDto> competitions = new HashMap<>();
 
-    public static Competition copy(contract.domain.ICompetition competition)
+    public static CompetitionDto copy(contract.domain.ICompetition competition)
     {
-        Competition a;
+        CompetitionDto a;
 
         if (competitions.containsKey(competition))
         {
@@ -39,7 +39,7 @@ public class Competition
         }
         else
         {
-            a = new Competition(competition.getId());
+            a = new CompetitionDto(competition.getId());
 
             a.setDateFrom(competition.getDateFrom());
             a.setDateTo(competition.getDateTo());

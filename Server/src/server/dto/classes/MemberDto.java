@@ -2,16 +2,16 @@ package server.dto.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import contract.dto.IMember;
+import contract.dto.IMemberDto;
 
-public class Member
-        implements Serializable, IMember
+public class MemberDto
+        implements Serializable, IMemberDto
 {
-    private static HashMap<contract.domain.IMember, Member> members = new HashMap<>();
+    private static HashMap<contract.domain.IMember, MemberDto> members = new HashMap<>();
 
-    public static IMember copy(contract.domain.IMember member)
+    public static IMemberDto copy(contract.domain.IMember member)
     {
-        Member a;
+        MemberDto a;
 
         if (members.containsKey(member))
         {
@@ -19,7 +19,7 @@ public class Member
         }
         else
         {
-            a = new Member();
+            a = new MemberDto();
 
             a.setId(member.getIdMember());
             a.setPrename(member.getPrename());

@@ -1,6 +1,6 @@
 package presentation.forms.helper;
 
-import contract.dto.ITypeOfSport;
+import contract.dto.ITypeOfSportDto;
 import java.util.*;
 import presentation.basics.AbstractMainForm;
 
@@ -11,20 +11,20 @@ import presentation.basics.AbstractMainForm;
 public class SelectSportsHelper
         extends AbstractMainForm
 {
-    private List<ITypeOfSport> allSports;
+    private List<ITypeOfSportDto> allSports;
     private AbstractMainForm parent;
 
     /**
      Creates new form SelectSports
      */
-    public SelectSportsHelper(List<ITypeOfSport> allSports, List<ITypeOfSport> selSports, AbstractMainForm parent)
+    public SelectSportsHelper(List<ITypeOfSportDto> allSports, List<ITypeOfSportDto> selSports, AbstractMainForm parent)
     {
         this.allSports = allSports;
 
         this.parent = parent;
         initComponents();
 
-        for (ITypeOfSport sport : selSports)
+        for (ITypeOfSportDto sport : selSports)
         {
             listSports.setSelectedValue(sport, rootPaneCheckingEnabled);
         }
@@ -120,10 +120,10 @@ public class SelectSportsHelper
         }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        List<ITypeOfSport> selSports = new LinkedList<>();
+        List<ITypeOfSportDto> selSports = new LinkedList<>();
         for (Object o : listSports.getSelectedValues())
         {
-            selSports.add((ITypeOfSport) o);
+            selSports.add((ITypeOfSportDto) o);
         }
 
         parent.setTxtFieldSports(selSports);

@@ -2,10 +2,10 @@ package server.dto.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import contract.dto.IDepartment;
+import contract.dto.IDepartmentDto;
 
-public class Department
-        implements Serializable, IDepartment
+public class DepartmentDto
+        implements Serializable, IDepartmentDto
 {
     private int id;
     private Integer departmentHead;
@@ -14,11 +14,11 @@ public class Department
     private List<Integer> clubTeamList = new LinkedList<>();
     private List<Integer> typeOfSportList = new LinkedList<>();
 
-   public Department()
+   public DepartmentDto()
     {
     }
 
-    Department(int id)
+    DepartmentDto(int id)
     {
         this.id = id;
     }
@@ -28,11 +28,11 @@ public class Department
     {
         return id;
     }
-    private static HashMap<contract.domain.IDepartment, Department> departments = new HashMap<>();
+    private static HashMap<contract.domain.IDepartment, DepartmentDto> departments = new HashMap<>();
 
-    public static Department copy(contract.domain.IDepartment department)
+    public static DepartmentDto copy(contract.domain.IDepartment department)
     {
-        Department a;
+        DepartmentDto a;
 
         if (departments.containsKey(department))
         {
@@ -40,7 +40,7 @@ public class Department
         }
         else
         {
-            a = new Department();
+            a = new DepartmentDto();
 
             a.setName(department.getName());
             a.setDescription(department.getDescription());

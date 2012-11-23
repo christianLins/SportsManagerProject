@@ -4,7 +4,7 @@
  */
 package server.dto.classes;
 
-import contract.dto.ITeam;
+import contract.dto.ITeamDto;
 import java.util.*;
 import org.easymock.EasyMock;
 import org.junit.*;
@@ -42,21 +42,21 @@ public class TeamTest
     @Test
     public void emptyConstructorTest()
     {
-        Team a = new Team();
+        TeamDto a = new TeamDto();
     }
 
     @Test
     public void implementsInterfaceTest()
     {
-        Team a = new Team();
+        TeamDto a = new TeamDto();
 
-        Assert.assertTrue(a instanceof ITeam);
+        Assert.assertTrue(a instanceof ITeamDto);
     }
 
     @Test
     public void nameTest()
     {
-        Team a = new Team();
+        TeamDto a = new TeamDto();
 
         String expected = new Random().nextInt() + "";
         String actual;
@@ -70,7 +70,7 @@ public class TeamTest
     @Test
     public void descriptionTest()
     {
-        Team a = new Team();
+        TeamDto a = new TeamDto();
 
         String expected = new Random().nextInt() + "";
         String actual;
@@ -84,7 +84,7 @@ public class TeamTest
     @Test
     public void competitionListTest()
     {
-        Team a = new Team();
+        TeamDto a = new TeamDto();
 
         List<Integer> expected = new LinkedList<>();
         expected.add(1);
@@ -102,7 +102,7 @@ public class TeamTest
     @Test
     public void matchListTest()
     {
-        Team a = new Team();
+        TeamDto a = new TeamDto();
 
         List<Integer> expected = new LinkedList<>();
         expected.add(1);
@@ -120,7 +120,7 @@ public class TeamTest
     @Test
     public void leagueTest()
     {
-        Team a = new Team();
+        TeamDto a = new TeamDto();
 
         Integer expected =3;
         Integer actual;

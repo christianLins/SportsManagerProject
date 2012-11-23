@@ -1,19 +1,19 @@
 package server.dto.classes;
 
-import contract.dto.IDepartmentHead;
+import contract.dto.IDepartmentHeadDto;
 import java.io.Serializable;
 import java.util.*;
 
-public class DepartmentHead
-        extends Role
-        implements Serializable, IDepartmentHead
+public class DepartmentHeadDto
+        extends RoleDto
+        implements Serializable, IDepartmentHeadDto
 {
     private List<Integer> departmentList = new LinkedList<>();
-    private static HashMap<contract.domain.IDepartmentHead, DepartmentHead> departmentHeads = new HashMap<>();
+    private static HashMap<contract.domain.IDepartmentHead, DepartmentHeadDto> departmentHeads = new HashMap<>();
 
-    public static DepartmentHead copy(contract.domain.IDepartmentHead departmentHead)
+    public static DepartmentHeadDto copy(contract.domain.IDepartmentHead departmentHead)
     {
-        DepartmentHead a;
+        DepartmentHeadDto a;
 
         if (departmentHeads.containsKey(departmentHead))
         {
@@ -21,7 +21,7 @@ public class DepartmentHead
         }
         else
         {
-            a = copy(departmentHead, new DepartmentHead());
+            a = copy(departmentHead, new DepartmentHeadDto());
 
             List<Integer> l = new LinkedList<>();
 

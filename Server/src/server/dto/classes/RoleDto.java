@@ -4,15 +4,15 @@
  */
 package server.dto.classes;
 
-import contract.dto.IRole;
+import contract.dto.IRoleDto;
 import java.util.*;
 
 /**
 
  @author Thomas
  */
-abstract class Role
-        implements IRole
+abstract class RoleDto
+        implements IRoleDto
 {
     private Integer id;
     private String name;
@@ -20,11 +20,11 @@ abstract class Role
     private List<Integer> permissionList;
     private List<Integer> memberList;
 
-    public Role()
+    public RoleDto()
     {
     }
 
-    public static <T extends Role> T copy(contract.domain.IRole domainRole, T role)
+    public static <T extends RoleDto> T copy(contract.domain.IRole domainRole, T role)
     {
         role.setId(domainRole.getId());
         role.setName(domainRole.getName());

@@ -6,7 +6,7 @@ package server.dto.classes;
 
 import java.util.*;
 import org.junit.*;
-import contract.dto.IDepartmentHead;
+import contract.dto.IDepartmentHeadDto;
 
 /**
 
@@ -41,21 +41,21 @@ public class DepartmentHeadTest
     @Test
     public void emptyConstructorTest()
     {
-        DepartmentHead a = new DepartmentHead();
+        DepartmentHeadDto a = new DepartmentHeadDto();
     }
 
     @Test
     public void implementsInterfaceTest()
     {
-        DepartmentHead a = new DepartmentHead();
+        DepartmentHeadDto a = new DepartmentHeadDto();
 
-        Assert.assertTrue(a instanceof IDepartmentHead);
+        Assert.assertTrue(a instanceof IDepartmentHeadDto);
     }
 
     @Test
     public void departmentListTest()
     {
-        DepartmentHead a = new DepartmentHead();
+        DepartmentHeadDto a = new DepartmentHeadDto();
 
         List<Integer> expected = new LinkedList<>();
         expected.add(1);

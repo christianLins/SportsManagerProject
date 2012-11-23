@@ -10,8 +10,8 @@ import java.util.List;
 
  @author Thomas
  */
-public interface ITrainer
-        extends IRole
+public interface ITrainerDto
+        extends IRoleDto
 {
     List<Integer> getClubTeamList();
 

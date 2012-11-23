@@ -5,22 +5,22 @@
 package server.dto.mapper;
 
 import contract.domain.*;
-import contract.dto.IAddress;
+import contract.dto.IAddressDto;
 import contract.dto.mapper.*;
 import java.util.*;
 import java.util.logging.*;
 import server.domain.DomainFacade;
-import server.dto.classes.Address;
+import server.dto.classes.AddressDto;
 
 /**
  * @author Thomas
  */
 public class AddressMapper
-        implements IMapper<IAddress>
+        implements IMapper<IAddressDto>
 {
     private static AddressMapper controller;
 
-    public static IMapper<IAddress> getInstance()
+    public static IMapper<IAddressDto> getInstance()
     {
         if (controller == null)
         {
@@ -44,13 +44,13 @@ public class AddressMapper
     }
 
     @Override
-    public IAddress getById(Integer id)
+    public IAddressDto getById(Integer id)
             throws IdNotFoundException
     {
         try
         {
             contract.domain.IAddress a = DomainFacade.getInstance().getByID(contract.domain.IAddress.class, id);
-            return Address.copy(a);
+            return AddressDto.copy(a);
         }
         catch (Exception ex)
         {
@@ -60,15 +60,15 @@ public class AddressMapper
     }
 
     @Override
-    public List<IAddress> getAll() throws NotFoundException
+    public List<IAddressDto> getAll() throws NotFoundException
     {
         try
         {
-            List<IAddress> result = new LinkedList<>();
+            List<IAddressDto> result = new LinkedList<>();
 
             for (contract.domain.IAddress a : DomainFacade.getInstance().getAll(contract.domain.IAddress.class))
             {
-                result.add(Address.copy(a));
+                result.add(AddressDto.copy(a));
             }
 
             return result;
@@ -80,7 +80,7 @@ public class AddressMapper
     }
 
     @Override
-    public Integer set(IAddress value)
+    public Integer set(IAddressDto value)
     {
         try
         {
@@ -97,7 +97,7 @@ public class AddressMapper
     }
 
     @Override
-    public void delete(IAddress value)
+    public void delete(IAddressDto value)
     {
         try
         {
@@ -111,7 +111,7 @@ public class AddressMapper
         }
     }
 
-    private server.domain.classes.Address createDomain(IAddress value)
+    private server.domain.classes.Address createDomain(IAddressDto value)
             throws IdNotFoundException
     {
         server.domain.classes.Address address = new server.domain.classes.Address(value.getId());
@@ -126,8 +126,8 @@ public class AddressMapper
     }
 
     @Override
-    public IAddress getNew()
+    public IAddressDto getNew()
     {
-        return new Address();
+        return new AddressDto();
     }
 }

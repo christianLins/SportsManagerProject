@@ -10,7 +10,7 @@ import java.util.List;
 
  @author Thomas
  */
-public interface ITeam
+public interface ITeamDto
         extends IDto
 {
     List<Integer> getCompetitionList();

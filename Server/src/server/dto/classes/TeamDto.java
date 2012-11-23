@@ -2,10 +2,10 @@ package server.dto.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import contract.dto.ITeam;
+import contract.dto.ITeamDto;
 
-public class Team
-        implements Serializable, ITeam
+public class TeamDto
+        implements Serializable, ITeamDto
 {
     private int id;
     private String name;
@@ -13,15 +13,15 @@ public class Team
     private List<Integer> competitionList = new LinkedList<>();
     private List<Integer> matchList = new LinkedList<>();
     private Integer league;
-    private static HashMap<contract.domain.ITeam, Team> teams = new HashMap<>();
+    private static HashMap<contract.domain.ITeam, TeamDto> teams = new HashMap<>();
 
-    public Team()
+    public TeamDto()
     {
     }
 
-    public static Team copy(contract.domain.ITeam team)
+    public static TeamDto copy(contract.domain.ITeam team)
     {
-        Team a;
+        TeamDto a;
 
         if (teams.containsKey(team))
         {
@@ -29,7 +29,7 @@ public class Team
         }
         else
         {
-            a = new Team();
+            a = new TeamDto();
 
             a.setName(team.getName());
             a.setDescription(team.getDescription());
@@ -50,7 +50,7 @@ public class Team
         return a;
     }
 
-    public static contract.domain.ITeam copy(ITeam team,
+    public static contract.domain.ITeam copy(ITeamDto team,
                                                                contract.domain.ILeague league,
                                                                List<contract.domain.ICompetition> competitionList,
                                                                List<contract.domain.IMatch> matchList)

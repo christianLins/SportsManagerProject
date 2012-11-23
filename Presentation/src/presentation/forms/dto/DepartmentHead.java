@@ -4,7 +4,7 @@
  */
 package presentation.forms.dto;
 
-import contract.dto.IDepartmentHead;
+import contract.dto.IDepartmentHeadDto;
 import java.util.List;
 
 /**
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class DepartmentHead
         extends Role
-        implements IDepartmentHead
+        implements IDepartmentHeadDto
 {
     List<Integer> departmentList;
 

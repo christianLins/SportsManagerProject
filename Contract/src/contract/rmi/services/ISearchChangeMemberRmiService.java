@@ -15,42 +15,42 @@ import java.util.List;
 public interface ISearchChangeMemberRmiService
         extends Remote
 {
-    IMember getMember(int searchMember)
+    IMemberDto getMember(int searchMember)
             throws RemoteException;
 
-    List<IRole> getRoles(Integer memberId)
+    List<IRoleDto> getRoles(Integer memberId)
             throws RemoteException;
 
-    IDepartment getDepartment(Integer memberId)
+    IDepartmentDto getDepartment(Integer memberId)
             throws RemoteException;
 
-    IAddress getAddress(Integer addressId)
+    IAddressDto getAddress(Integer addressId)
             throws RemoteException;
 
-    List<IDepartment> getDepartments()
+    List<IDepartmentDto> getDepartments()
             throws RemoteException;
 
-    List<IClubTeam> getClubTeams(List<Integer> clubTeams)
+    List<IClubTeamDto> getClubTeams(List<Integer> clubTeams)
             throws RemoteException;
 
-    void setNewMember(IMember member, IAddress address)
+    void setNewMember(IMemberDto member, IAddressDto address)
             throws RemoteException;
 
-    void setNewMember(IMember member, IAddress address, IDepartment department, IClubTeam clubTeam, IRole role)
+    void setNewMember(IMemberDto member, IAddressDto address, IDepartmentDto department, IClubTeamDto clubTeam, IRoleDto role)
             throws RemoteException;
 
-    List<IMember> getMatchingMembers(String searchInput)
+    List<IMemberDto> getMatchingMembers(String searchInput)
             throws RemoteException;   //find all members, matching the searched value 
 
-    ICountry getCountry(Integer countryID)
+    ICountryDto getCountry(Integer countryID)
             throws RemoteException;     //new added
 
-    List<ITypeOfSport> getTypeOfSports(List<Integer> sportsList)
+    List<ITypeOfSportDto> getTypeOfSports(List<Integer> sportsList)
             throws RemoteException;     //new added
 
-    IMember getSelectedMember()
+    IMemberDto getSelectedMember()
             throws RemoteException;     //new added
 
-    void setSelectedMember(IMember selectedMember)
+    void setSelectedMember(IMemberDto selectedMember)
             throws RemoteException;     //new added
 }

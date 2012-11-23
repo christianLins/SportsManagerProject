@@ -4,8 +4,8 @@
  */
 package contract.rmi.services;
 
-import contract.dto.IMember;
-import contract.dto.IUserData;
+import contract.dto.IMemberDto;
+import contract.dto.IUserDataDto;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -14,5 +14,5 @@ import java.rmi.RemoteException;
  * @author Lucia
  */
 public interface ILoginRmiService extends Remote {
-    IMember  getMemberByUserData(IUserData userData) throws RemoteException;
+    IMemberDto  getMemberByUserData(IUserDataDto userData) throws RemoteException;
 }

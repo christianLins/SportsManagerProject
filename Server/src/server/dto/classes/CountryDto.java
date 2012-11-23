@@ -2,14 +2,14 @@ package server.dto.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import contract.dto.ICountry;
+import contract.dto.ICountryDto;
 
 /**
 
  @author Markus Mohanty <markus.mo at gmx.net>
  */
-public class Country
-        implements Serializable, ICountry
+public class CountryDto
+        implements Serializable, ICountryDto
 {
     private int id;
     private String name;
@@ -22,11 +22,11 @@ public class Country
     private String italiano;
     private String portugues;
 
-  public  Country()
+  public  CountryDto()
     {
     }
 
-    Country(int id)
+    CountryDto(int id)
     {
         this.id = id;
     }
@@ -36,11 +36,11 @@ public class Country
     {
         return id;
     }
-    private static HashMap<contract.domain.ICountry, Country> countries = new HashMap<>();
+    private static HashMap<contract.domain.ICountry, CountryDto> countries = new HashMap<>();
 
-    public static Country copy(contract.domain.ICountry country)
+    public static CountryDto copy(contract.domain.ICountry country)
     {
-        Country a;
+        CountryDto a;
 
         if (countries.containsKey(country))
         {
@@ -48,7 +48,7 @@ public class Country
         }
         else
         {
-            a = new Country();
+            a = new CountryDto();
 
             a.setName(country.getName());
             a.setAlpha3(country.getAlpha3());

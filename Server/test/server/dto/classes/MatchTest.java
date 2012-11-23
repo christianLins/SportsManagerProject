@@ -7,7 +7,7 @@ package server.dto.classes;
 import java.util.Date;
 import org.easymock.EasyMock;
 import org.junit.*;
-import contract.dto.IMatch;
+import contract.dto.IMatchDto;
 
 /**
 
@@ -42,15 +42,15 @@ public class MatchTest
     @Test
     public void emptyConstructorTest()
     {
-        Match a = new Match();
+        MatchDto a = new MatchDto();
     }
 
     @Test
     public void implementsInterfaceTest()
     {
-        Match a = new Match();
+        MatchDto a = new MatchDto();
 
-        Assert.assertTrue(a instanceof IMatch);
+        Assert.assertTrue(a instanceof IMatchDto);
     }
 
     @Test
@@ -86,15 +86,15 @@ public class MatchTest
 
         EasyMock.replay(expected);
 
-        Match a = Match.copy(expected);
+        MatchDto a = MatchDto.copy(expected);
 
-        Assert.assertTrue(a instanceof IMatch);
+        Assert.assertTrue(a instanceof IMatchDto);
     }
 
     @Test
     public void dateFromTest()
     {
-        Match a = new Match();
+        MatchDto a = new MatchDto();
 
         Date expected = new Date();
         Date actual;
@@ -108,7 +108,7 @@ public class MatchTest
     @Test
     public void dateToTest()
     {
-        Match a = new Match();
+        MatchDto a = new MatchDto();
 
         Date expected = new Date();
         Date actual;
@@ -122,7 +122,7 @@ public class MatchTest
     @Test
     public void competitionTest()
     {
-        Match a = new Match();
+        MatchDto a = new MatchDto();
 
         Integer expected = 1;
         Integer actual;
@@ -137,7 +137,7 @@ public class MatchTest
     public void matchresultTest()
     {
         Assert.fail();
-//        Match a = new Match();
+//        MatchDto a = new MatchDto();
 //
 //        Integer expected = 2;
 //        Integer actual;
@@ -152,7 +152,7 @@ public class MatchTest
     public void foreignteamTest()
     {
         Assert.fail();
-//     Match a = new Match();
+//     MatchDto a = new MatchDto();
 //
 //        Integer expected = 1;
 //        Integer actual;
@@ -167,7 +167,7 @@ public class MatchTest
     public void hometeamTest()
     {
         Assert.fail();
-//        Match a = new Match();
+//        MatchDto a = new MatchDto();
 //
 //        Integer expected = 1;
 //        Integer actual;

@@ -11,7 +11,7 @@ import contract.dto.*;
  @author Thomas
  */
 public class Country
-        implements ICountry
+        implements ICountryDto
 {
     String alpha2;
     String alpha3;

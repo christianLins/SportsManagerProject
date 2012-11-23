@@ -13,9 +13,9 @@ import java.util.List;
  */
 public interface IShowCompetition
 {
-    List<ICompetition> getCompetitions();
+    List<ICompetitionDto> getCompetitions();
 
-    List<IMatch> getMatchs(List<Integer> matches);
+    List<IMatchDto> getMatchs(List<Integer> matches);
 
-    List<IPlayer> getPlayer(IClubTeam team);
+    List<IPlayerDto> getPlayer(IClubTeamDto team);
 }

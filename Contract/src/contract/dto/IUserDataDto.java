@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  @author Thomas
  */
-public interface IUserData
+public interface IUserDataDto
         extends Serializable
 {
     /**

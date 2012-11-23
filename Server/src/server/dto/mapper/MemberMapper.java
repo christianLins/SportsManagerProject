@@ -5,12 +5,12 @@
 package server.dto.mapper;
 
 import contract.domain.*;
-import contract.dto.IMember;
+import contract.dto.IMemberDto;
 import contract.dto.mapper.*;
 import java.util.*;
 import java.util.logging.*;
 import server.domain.DomainFacade;
-import server.dto.classes.Member;
+import server.dto.classes.MemberDto;
 
 /**
 
@@ -52,13 +52,13 @@ public class MemberMapper
     }
 
     @Override
-    public IMember getById(Integer id)
+    public IMemberDto getById(Integer id)
             throws IdNotFoundException
     {
         try
         {
             contract.domain.IMember a = DomainFacade.getInstance().getByID(contract.domain.IMember.class, id);
-            return Member.copy(a);
+            return MemberDto.copy(a);
         }
         catch (Exception ex)
         {
@@ -67,14 +67,14 @@ public class MemberMapper
         }
     }
 
-    public IMember getMemberByUsername(String username)
+    public IMemberDto getMemberByUsername(String username)
             throws NotFoundException
     {
         try
         {
             contract.domain.IMember a = DomainFacade.getInstance().getMemberByUsername(username);
             System.out.println(a);
-            return Member.copy(a);
+            return MemberDto.copy(a);
         }
         catch (CouldNotFetchException ex)
         {
@@ -83,16 +83,16 @@ public class MemberMapper
     }
 
     @Override
-    public List<IMember> getAll()
+    public List<IMemberDto> getAll()
             throws NotFoundException
     {
         try
         {
-            List<IMember> result = new LinkedList<>();
+            List<IMemberDto> result = new LinkedList<>();
 
             for (contract.domain.IMember a : DomainFacade.getInstance().getAll(contract.domain.IMember.class))
             {
-                result.add(Member.copy(a));
+                result.add(MemberDto.copy(a));
             }
 
             return result;
@@ -104,7 +104,7 @@ public class MemberMapper
     }
 
     @Override
-    public Integer set(IMember value)
+    public Integer set(IMemberDto value)
     {
         try
         {
@@ -121,7 +121,7 @@ public class MemberMapper
     }
 
     @Override
-    public void delete(IMember value)
+    public void delete(IMemberDto value)
     {
         try
         {
@@ -135,7 +135,7 @@ public class MemberMapper
         }
     }
 
-    private server.domain.classes.Member createDomain(IMember value)
+    private server.domain.classes.Member createDomain(IMemberDto value)
             throws IdNotFoundException
     {
         server.domain.classes.Member member = new server.domain.classes.Member(value.getId());
@@ -166,8 +166,8 @@ public class MemberMapper
     }
 
     @Override
-    public IMember getNew()
+    public IMemberDto getNew()
     {
-        return new Member();
+        return new MemberDto();
     }
 }

@@ -2,28 +2,28 @@ package server.dto.classes;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import contract.dto.IPermission;
+import contract.dto.IPermissionDto;
 
-public class Permission
-        implements Serializable, IPermission
+public class PermissionDto
+        implements Serializable, IPermissionDto
 {
     private int id;
     private String name;
     private String description;
-    private static HashMap<contract.domain.IPermission, Permission> competitions = new HashMap<>();
+    private static HashMap<contract.domain.IPermission, PermissionDto> competitions = new HashMap<>();
 
-    public Permission()
+    public PermissionDto()
     {
     }
 
-    Permission(int id)
+    PermissionDto(int id)
     {
         this.id = id;
     }
 
-    public static Permission copy(contract.domain.IPermission permission)
+    public static PermissionDto copy(contract.domain.IPermission permission)
     {
-        Permission a;
+        PermissionDto a;
 
         if (competitions.containsKey(permission))
         {
@@ -31,7 +31,7 @@ public class Permission
         }
         else
         {
-            a = new Permission(permission.getId());
+            a = new PermissionDto(permission.getId());
 
             a.setName(permission.getName());
             a.setDescription(permission.getDescription());

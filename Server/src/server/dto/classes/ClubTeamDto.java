@@ -2,26 +2,26 @@ package server.dto.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import contract.dto.IClubTeam;
+import contract.dto.IClubTeamDto;
 
-public class ClubTeam
-        extends Team
-        implements Serializable, IClubTeam
+public class ClubTeamDto
+        extends TeamDto
+        implements Serializable, IClubTeamDto
 {
     private List<Integer> departmentList = new LinkedList<>();
     private List<Integer> trainerList = new LinkedList<>();
     private List<Integer> playerList = new LinkedList<>();
 
-   public  ClubTeam()
+   public  ClubTeamDto()
     {
         super();
     }
     
-    private static HashMap<contract.domain.IClubTeam, ClubTeam> clubTeams = new HashMap<>();
+    private static HashMap<contract.domain.IClubTeam, ClubTeamDto> clubTeams = new HashMap<>();
 
-    public static ClubTeam copy(contract.domain.IClubTeam clubTeam)
+    public static ClubTeamDto copy(contract.domain.IClubTeam clubTeam)
     {
-        ClubTeam a;
+        ClubTeamDto a;
 
         if (clubTeams.containsKey(clubTeam))
         {
@@ -29,7 +29,7 @@ public class ClubTeam
         }
         else
         {
-            a = new ClubTeam();
+            a = new ClubTeamDto();
 
             List<Integer> l = new LinkedList<>();
 

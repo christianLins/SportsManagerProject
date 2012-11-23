@@ -4,14 +4,14 @@
  */
 package presentation.forms.dto;
 
-import contract.dto.IAddress;
+import contract.dto.IAddressDto;
 
 /**
 
  @author Thomas
  */
 public class Address
-        implements IAddress
+        implements IAddressDto
 {
     int country;
     int postalCode;

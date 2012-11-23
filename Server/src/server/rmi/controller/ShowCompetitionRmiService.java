@@ -26,21 +26,21 @@ public class ShowCompetitionRmiService
     }
 
     @Override
-    public List<ICompetition> getCompetitions()
+    public List<ICompetitionDto> getCompetitions()
             throws RemoteException
     {
         return ShowCompetition.getInstance().getCompetitions();
     }
 
     @Override
-    public List<IMatch> getMatchs(List<Integer> matches)
+    public List<IMatchDto> getMatchs(List<Integer> matches)
             throws RemoteException
     {
         return ShowCompetition.getInstance().getMatchs(matches);
     }
 
     @Override
-    public List<IPlayer> getPlayer(IClubTeam team)
+    public List<IPlayerDto> getPlayer(IClubTeamDto team)
             throws RemoteException
     {
         return ShowCompetition.getInstance().getPlayer(team);

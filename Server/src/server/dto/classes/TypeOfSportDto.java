@@ -1,30 +1,30 @@
 package server.dto.classes;
 
-import contract.dto.ITypeOfSport;
+import contract.dto.ITypeOfSportDto;
 import java.io.Serializable;
 import java.util.*;
 
-public class TypeOfSport
-        implements Serializable, ITypeOfSport
+public class TypeOfSportDto
+        implements Serializable, ITypeOfSportDto
 {
     private int id;
     private String name;
     private String description;
     private List<Integer> playerList = new LinkedList<>();
 
-    public TypeOfSport()
+    public TypeOfSportDto()
     {
     }
 
-    TypeOfSport(int id)
+    TypeOfSportDto(int id)
     {
         this.id = id;
     }
-    private static HashMap<contract.domain.ITypeOfSport, TypeOfSport> typeOfSports = new HashMap<>();
+    private static HashMap<contract.domain.ITypeOfSport, TypeOfSportDto> typeOfSports = new HashMap<>();
 
-    public static TypeOfSport copy(contract.domain.ITypeOfSport typeOfSport)
+    public static TypeOfSportDto copy(contract.domain.ITypeOfSport typeOfSport)
     {
-        TypeOfSport a;
+        TypeOfSportDto a;
 
         if (typeOfSports.containsKey(typeOfSport))
         {
@@ -32,7 +32,7 @@ public class TypeOfSport
         }
         else
         {
-            a = new TypeOfSport(typeOfSport.getId());
+            a = new TypeOfSportDto(typeOfSport.getId());
             a.setName(typeOfSport.getName());
             a.setDescription(typeOfSport.getDescription());
 

@@ -13,11 +13,11 @@ import java.util.List;
  */
 public interface IAddMatchResults
 {
-    List<ICompetition> getCompetitionList();
+    List<ICompetitionDto> getCompetitionList();
 
-    List<ITeam> getTeamList(List<Integer> team);
+    List<ITeamDto> getTeamList(List<Integer> team);
 
-    List<IMatch> getMatchList(List<Integer> match);
+    List<IMatchDto> getMatchList(List<Integer> match);
 
-    void setMatchResult(IMatch match, IMatchresult matchresult);
+    void setMatchResult(IMatchDto match, IMatchresultDto matchresult);
 }

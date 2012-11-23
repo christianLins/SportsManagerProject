@@ -5,19 +5,19 @@
 package server.dto.mapper;
 
 import contract.domain.*;
-import contract.dto.ITeam;
+import contract.dto.ITeamDto;
 import contract.dto.mapper.*;
 import java.util.*;
 import java.util.logging.*;
 import server.domain.DomainFacade;
-import server.dto.classes.Team;
+import server.dto.classes.TeamDto;
 
 /**
 
  @author Thomas
  */
 public class TeamMapper
-        implements IMapper<ITeam>
+        implements IMapper<ITeamDto>
 {
     private static TeamMapper controller;
 
@@ -25,7 +25,7 @@ public class TeamMapper
     {
     }
 
-    public static IMapper<ITeam> getInstance()
+    public static IMapper<ITeamDto> getInstance()
     {
         if (controller == null)
         {
@@ -50,13 +50,13 @@ public class TeamMapper
     }
 
     @Override
-    public ITeam getById(Integer id)
+    public ITeamDto getById(Integer id)
             throws IdNotFoundException
     {
         try
         {
             contract.domain.ITeam a = DomainFacade.getInstance().getByID(contract.domain.ITeam.class, id);
-            return Team.copy(a);
+            return TeamDto.copy(a);
         }
         catch (Exception ex)
         {
@@ -66,16 +66,16 @@ public class TeamMapper
     }
 
     @Override
-    public List<ITeam> getAll()
+    public List<ITeamDto> getAll()
             throws NotFoundException
     {
         try
         {
-            List<ITeam> result = new LinkedList<>();
+            List<ITeamDto> result = new LinkedList<>();
 
             for (contract.domain.ITeam a : DomainFacade.getInstance().getAll(contract.domain.ITeam.class))
             {
-                result.add(Team.copy(a));
+                result.add(TeamDto.copy(a));
             }
 
             return result;
@@ -87,7 +87,7 @@ public class TeamMapper
     }
 
     @Override
-    public Integer set(ITeam value)
+    public Integer set(ITeamDto value)
     {
         Integer rv = 0;
         try
@@ -107,12 +107,12 @@ public class TeamMapper
     }
 
     @Override
-    public void delete(ITeam value)
+    public void delete(ITeamDto value)
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    private server.domain.classes.Team createDomain(ITeam value)
+    private server.domain.classes.Team createDomain(ITeamDto value)
             throws IdNotFoundException
     {
         server.domain.classes.Team team = new server.domain.classes.Team(value.getId());
@@ -141,8 +141,8 @@ public class TeamMapper
     }
 
     @Override
-    public ITeam getNew()
+    public ITeamDto getNew()
     {
-        return new Team();
+        return new TeamDto();
     }
 }

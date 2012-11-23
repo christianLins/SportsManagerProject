@@ -4,7 +4,7 @@
  */
 package ldap;
 
-import contract.dto.IUserData;
+import contract.dto.IUserDataDto;
 import java.util.*;
 import javax.naming.*;
 import ldap.contract.IAuthenticator;
@@ -23,7 +23,7 @@ public class Authenticator
     }
 
     @Override
-    public boolean auth(IUserData userData)
+    public boolean auth(IUserDataDto userData)
     {
         int hash = (userData.getUsername() + "@@@@" + userData.getPassword()).hashCode();
 

@@ -9,20 +9,20 @@ import contract.dto.mapper.IMemberMapper;
 import contract.dto.mapper.IClubTeamMapper;
 import contract.dto.mapper.IMapper;
 import contract.dto.mapper.ILeagueMapper;
-import contract.dto.IDepartment;
-import contract.dto.ICountry;
-import contract.dto.IAddress;
-import contract.dto.IMatch;
-import contract.dto.ICompetition;
-import contract.dto.IPermission;
-import contract.dto.ITeam;
-import contract.dto.IMatchresult;
-import contract.dto.IRole;
-import contract.dto.ICaretaker;
-import contract.dto.IAdmin;
-import contract.dto.IPlayer;
-import contract.dto.IDepartmentHead;
-import contract.dto.ITrainer;
+import contract.dto.IDepartmentDto;
+import contract.dto.ICountryDto;
+import contract.dto.IAddressDto;
+import contract.dto.IMatchDto;
+import contract.dto.ICompetitionDto;
+import contract.dto.IPermissionDto;
+import contract.dto.ITeamDto;
+import contract.dto.IMatchresultDto;
+import contract.dto.IRoleDto;
+import contract.dto.ICaretakerDto;
+import contract.dto.IAdminDto;
+import contract.dto.IPlayerDto;
+import contract.dto.IDepartmentHeadDto;
+import contract.dto.ITrainerDto;
 import java.rmi.RemoteException;
 
 /**
@@ -30,13 +30,13 @@ import java.rmi.RemoteException;
  */
 public class DtoFactory
 {
-    public static IMapper<IAdmin> getAdminMapper()
+    public static IMapper<IAdminDto> getAdminMapper()
             throws RemoteException
     {
         return AdminMapper.getInstance();
     }
 
-    public static IMapper<ICaretaker> getCaretakerMapper()
+    public static IMapper<ICaretakerDto> getCaretakerMapper()
             throws RemoteException
     {
         return CaretakerMapper.getInstance();
@@ -48,19 +48,19 @@ public class DtoFactory
         return MemberMapper.getInstance();
     }
 
-    public static IMapper<IRole> getRoleMapper()
+    public static IMapper<IRoleDto> getRoleMapper()
             throws RemoteException
     {
         return RoleMapper.getInstance();
     }
 
-    public static IMapper<ICompetition> getCompetitionMapper()
+    public static IMapper<ICompetitionDto> getCompetitionMapper()
             throws RemoteException
     {
         return CompetitionMapper.getInstance();
     }
 
-    public static IMapper<IAddress> getAddressMapper()
+    public static IMapper<IAddressDto> getAddressMapper()
             throws RemoteException
     {
         return AddressMapper.getInstance();
@@ -72,19 +72,19 @@ public class DtoFactory
         return ClubTeamMapper.getInstance();
     }
 
-    public static IMapper<ICountry> getCountryMapper()
+    public static IMapper<ICountryDto> getCountryMapper()
             throws RemoteException
     {
         return CountryMapper.getInstance();
     }
 
-    public static IMapper<IDepartment> getDepartmentMapper()
+    public static IMapper<IDepartmentDto> getDepartmentMapper()
             throws RemoteException
     {
         return DepartmentMapper.getInstance();
     }
 
-    public static IMapper<ITeam> getTeamMapper()
+    public static IMapper<ITeamDto> getTeamMapper()
             throws RemoteException
     {
         return TeamMapper.getInstance();
@@ -96,13 +96,13 @@ public class DtoFactory
         return TypeOfSportMapper.getInstance();
     }
 
-    public static IMapper<ITrainer> getTrainerMapper()
+    public static IMapper<ITrainerDto> getTrainerMapper()
             throws RemoteException
     {
         return TrainerMapper.getInstance();
     }
 
-    public static IMapper<IDepartmentHead> getDepartmentHeadMapper()
+    public static IMapper<IDepartmentHeadDto> getDepartmentHeadMapper()
             throws RemoteException
     {
         return DepartmentHeadMapper.getInstance();
@@ -114,25 +114,25 @@ public class DtoFactory
         return LeagueMapper.getInstance();
     }
 
-    public static IMapper<IPermission> getPermissionMapper()
+    public static IMapper<IPermissionDto> getPermissionMapper()
             throws RemoteException
     {
         return PermissionMapper.getInstance();
     }
 
-    public static IMapper<IPlayer> getPlayerMapper()
+    public static IMapper<IPlayerDto> getPlayerMapper()
             throws RemoteException
     {
         return PlayerMapper.getInstance();
     }
 
-    public static IMapper<IMatchresult> getMatchresultMapper()
+    public static IMapper<IMatchresultDto> getMatchresultMapper()
             throws RemoteException
     {
         return MatchresultMapper.getInstance();
     }
 
-    public static IMapper<IMatch> getMatchMapper()
+    public static IMapper<IMatchDto> getMatchMapper()
             throws RemoteException
     {
         return MatchMapper.getInstance();

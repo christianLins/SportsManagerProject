@@ -23,37 +23,37 @@ public class NewMemberRmiService extends UnicastRemoteObject implements INewMemb
     }
     
     @Override
-    public void setNewMember(IMember member, IAddress address) throws RemoteException
+    public void setNewMember(IMemberDto member, IAddressDto address) throws RemoteException
     {
         NewMember.getInstance().setNewMember(member, address);
     }
 
     @Override
-    public List<IDepartment> getDepartments()
+    public List<IDepartmentDto> getDepartments()
     {
         return NewMember.getInstance().getDepartments();
     }
 
     @Override
-    public List<IClubTeam> getClubTeams(List<Integer> clubTeams) throws RemoteException
+    public List<IClubTeamDto> getClubTeams(List<Integer> clubTeams) throws RemoteException
     {
         return NewMember.getInstance().getClubTeams(clubTeams);
     }
 
     @Override
-    public void setNewMember(IMember member, IAddress address, IDepartment department, IClubTeam clubTeam, IRole role) throws RemoteException
+    public void setNewMember(IMemberDto member, IAddressDto address, IDepartmentDto department, IClubTeamDto clubTeam, IRoleDto role) throws RemoteException
     {
         NewMember.getInstance().setNewMember(member, address, department, clubTeam, role);
     }
 
     @Override
-    public List<ITypeOfSport> getTypeOfSports(List<Integer> typOfSportsList) throws RemoteException
+    public List<ITypeOfSportDto> getTypeOfSports(List<Integer> typOfSportsList) throws RemoteException
     {
         return NewMember.getInstance().getTypeOfSports(typOfSportsList);
     }
 
     @Override
-    public List<IClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport) throws RemoteException
+    public List<IClubTeamDto> getClubTeamsByTypeOfSport(ITypeOfSportDto sport) throws RemoteException
     {
         return NewMember.getInstance().getClubTeamsByTypeOfSport(sport);
     }

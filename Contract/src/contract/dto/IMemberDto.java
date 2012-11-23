@@ -10,7 +10,7 @@ import java.util.*;
 
  @author Thomas
  */
-public interface IMember
+public interface IMemberDto
         extends IDto
 {
     void setId(Integer idMember);

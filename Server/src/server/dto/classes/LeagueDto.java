@@ -1,12 +1,12 @@
 package server.dto.classes;
 
-import contract.dto.ILeague;
-import contract.dto.ICompetition;
+import contract.dto.ILeagueDto;
+import contract.dto.ICompetitionDto;
 import java.io.Serializable;
 import java.util.*;
 
-public class League
-        implements Serializable, ILeague
+public class LeagueDto
+        implements Serializable, ILeagueDto
 {
     private int id;
     private String name;
@@ -14,11 +14,11 @@ public class League
     private List<Integer> teamList = new LinkedList<>();
     private List<Integer> competitions = new LinkedList<>();
 
-    public League()
+    public LeagueDto()
     {
     }
 
-    League(int id)
+    LeagueDto(int id)
     {
         this.id = id;
     }
@@ -28,11 +28,11 @@ public class League
     {
         return id;
     }
-    private static HashMap<contract.domain.ILeague, League> leagues = new HashMap<>();
+    private static HashMap<contract.domain.ILeague, LeagueDto> leagues = new HashMap<>();
 
-    public static League copy(contract.domain.ILeague league)
+    public static LeagueDto copy(contract.domain.ILeague league)
     {
-        League a;
+        LeagueDto a;
 
         if (leagues.containsKey(league))
         {
@@ -40,7 +40,7 @@ public class League
         }
         else
         {
-            a = new League();
+            a = new LeagueDto();
 
             a.setName(league.getName());
             a.setDescription(league.getDescription());
@@ -110,7 +110,7 @@ public class League
     }
 
     @Override
-    public List<ICompetition> getCompetitionList(Date date)
+    public List<ICompetitionDto> getCompetitionList(Date date)
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }

@@ -4,13 +4,13 @@
  */
 package ldap;
 
-import contract.dto.IUserData;
+import contract.dto.IUserDataDto;
 
 /**
  @author Thomas
  */
 public class UserData
-        implements IUserData
+        implements IUserDataDto
 {
     private String username;
     private String password;

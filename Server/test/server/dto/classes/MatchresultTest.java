@@ -6,7 +6,7 @@ package server.dto.classes;
 
 import java.util.Random;
 import org.junit.*;
-import contract.dto.IMatchresult;
+import contract.dto.IMatchresultDto;
 
 /**
 
@@ -41,21 +41,21 @@ public class MatchresultTest
     @Test
     public void emptyConstructorTest()
     {
-        Matchresult a = new Matchresult();
+        MatchresultDto a = new MatchresultDto();
     }
 
     @Test
     public void implementsInterfaceTest()
     {
-        Matchresult a = new Matchresult();
+        MatchresultDto a = new MatchresultDto();
 
-        Assert.assertTrue(a instanceof IMatchresult);
+        Assert.assertTrue(a instanceof IMatchresultDto);
     }
 
     @Test
     public void pointsHometeamTest()
     {
-        Matchresult a = new Matchresult();
+        MatchresultDto a = new MatchresultDto();
 
         double expected = new Random().nextDouble();
         double actual = Integer.MAX_VALUE;
@@ -69,7 +69,7 @@ public class MatchresultTest
     @Test
     public void pointsForeignteamTest()
     {
-        Matchresult a = new Matchresult();
+        MatchresultDto a = new MatchresultDto();
 
         double expected = new Random().nextDouble();
         double actual = Integer.MAX_VALUE;

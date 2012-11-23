@@ -4,14 +4,14 @@
  */
 package contract.dto.mapper;
 
-import contract.dto.ITypeOfSport;
+import contract.dto.ITypeOfSportDto;
 
 /**
 
  @author Thomas
  */
 public interface ITypeOfSportMapper
-        extends IMapper<ITypeOfSport>
+        extends IMapper<ITypeOfSportDto>
 {
-    ITypeOfSport getByName(String name);
+    ITypeOfSportDto getByName(String name);
 }

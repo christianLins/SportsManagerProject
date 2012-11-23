@@ -4,8 +4,8 @@
  */
 package contract.dto.mapper;
 
-import contract.dto.IClubTeam;
-import contract.dto.ITypeOfSport;
+import contract.dto.IClubTeamDto;
+import contract.dto.ITypeOfSportDto;
 import java.io.Serializable;
 import java.util.List;
 

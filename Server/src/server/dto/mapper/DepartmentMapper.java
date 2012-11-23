@@ -5,18 +5,18 @@
 package server.dto.mapper;
 
 import contract.domain.*;
-import contract.dto.IDepartment;
+import contract.dto.IDepartmentDto;
 import contract.dto.mapper.*;
 import java.util.*;
 import java.util.logging.*;
 import server.domain.DomainFacade;
-import server.dto.classes.Department;
+import server.dto.classes.DepartmentDto;
 
 /**
  @author Thomas
  */
 public class DepartmentMapper
-        implements IMapper<IDepartment>
+        implements IMapper<IDepartmentDto>
 {
     private static DepartmentMapper controller;
 
@@ -24,7 +24,7 @@ public class DepartmentMapper
     {
     }
 
-    public static IMapper<IDepartment> getInstance()
+    public static IMapper<IDepartmentDto> getInstance()
     {
         if (controller == null)
         {
@@ -50,13 +50,13 @@ public class DepartmentMapper
     }
 
     @Override
-    public IDepartment getById(Integer id)
+    public IDepartmentDto getById(Integer id)
             throws IdNotFoundException
     {
         try
         {
             contract.domain.IDepartment a = DomainFacade.getInstance().getByID(contract.domain.IDepartment.class, id);
-            return Department.copy(a);
+            return DepartmentDto.copy(a);
         }
         catch (CouldNotFetchException ex)
         {
@@ -65,16 +65,16 @@ public class DepartmentMapper
     }
 
     @Override
-    public List<IDepartment> getAll()
+    public List<IDepartmentDto> getAll()
             throws NotFoundException
     {
         try
         {
-            List<IDepartment> result = new LinkedList<>();
+            List<IDepartmentDto> result = new LinkedList<>();
 
             for (contract.domain.IDepartment a : DomainFacade.getInstance().getAll(contract.domain.IDepartment.class))
             {
-                result.add(Department.copy(a));
+                result.add(DepartmentDto.copy(a));
             }
 
             return result;
@@ -86,7 +86,7 @@ public class DepartmentMapper
     }
 
     @Override
-    public Integer set(IDepartment value)
+    public Integer set(IDepartmentDto value)
     {
         try
         {
@@ -103,7 +103,7 @@ public class DepartmentMapper
     }
 
     @Override
-    public void delete(IDepartment value)
+    public void delete(IDepartmentDto value)
     {
         try
         {
@@ -117,7 +117,7 @@ public class DepartmentMapper
         }
     }
 
-    private server.domain.classes.Department createDomain(IDepartment value)
+    private server.domain.classes.Department createDomain(IDepartmentDto value)
             throws IdNotFoundException
     {
         server.domain.classes.Department department = new server.domain.classes.Department(value.getId());
@@ -147,8 +147,8 @@ public class DepartmentMapper
     }
 
     @Override
-    public IDepartment getNew()
+    public IDepartmentDto getNew()
     {
-        return new Department();
+        return new DepartmentDto();
     }
 }

@@ -2,29 +2,29 @@ package server.dto.classes;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import contract.dto.IMatchresult;
+import contract.dto.IMatchresultDto;
 
-public class Matchresult
-        implements Serializable, IMatchresult
+public class MatchresultDto
+        implements Serializable, IMatchresultDto
 {
     private int id;
     private boolean fin;
     private double pointsHometeam;
     private double pointsForeignteam;
 
-    public Matchresult()
+    public MatchresultDto()
     {
     }
 
-    Matchresult(int id)
+    MatchresultDto(int id)
     {
         this.id = id;
     }
-    private static HashMap<contract.domain.IMatchresult, Matchresult> matchresults = new HashMap<>();
+    private static HashMap<contract.domain.IMatchresult, MatchresultDto> matchresults = new HashMap<>();
 
-    public static Matchresult copy(contract.domain.IMatchresult matchresult)
+    public static MatchresultDto copy(contract.domain.IMatchresult matchresult)
     {
-        Matchresult a;
+        MatchresultDto a;
 
         if (matchresults.containsKey(matchresult))
         {
@@ -32,7 +32,7 @@ public class Matchresult
         }
         else
         {
-            a = new Matchresult(matchresult.getId());
+            a = new MatchresultDto(matchresult.getId());
 
             a.setPointsHometeam(matchresult.getPointsHometeam());
             a.setPointsForeignteam(matchresult.getPointsForeignteam());

@@ -10,8 +10,8 @@ import java.util.List;
 
  @author Thomas
  */
-public interface IClubTeam
-        extends ITeam
+public interface IClubTeamDto
+        extends ITeamDto
 {
     List<Integer> getDepartmentList();
 

@@ -7,7 +7,7 @@ package contract.dto;
 /**
  @author Thomas
  */
-public interface IAdmin
-        extends IRole
+public interface IAdminDto
+        extends IRoleDto
 {
 }

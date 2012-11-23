@@ -4,8 +4,8 @@
  */
 package server.rmi.controller;
 
-import contract.dto.IUserData;
-import contract.dto.IMember;
+import contract.dto.IUserDataDto;
+import contract.dto.IMemberDto;
 import server.useCaseController.LoginController;
 import contract.useCaseController.MemberNotFoundException;
 import java.rmi.RemoteException;
@@ -26,7 +26,7 @@ public class LoginRmiService extends UnicastRemoteObject implements ILoginRmiSer
     }
 
     @Override
-    public IMember getMemberByUserData(IUserData userData) throws RemoteException
+    public IMemberDto getMemberByUserData(IUserDataDto userData) throws RemoteException
     {
         try
         {

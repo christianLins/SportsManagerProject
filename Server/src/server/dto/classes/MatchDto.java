@@ -2,17 +2,17 @@ package server.dto.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import contract.dto.IMatch;
-import contract.dto.IMatchresult;
-import contract.dto.ITeam;
+import contract.dto.IMatchDto;
+import contract.dto.IMatchresultDto;
+import contract.dto.ITeamDto;
 import contract.dto.mapper.IdNotFoundException;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import server.dto.mapper.DtoFactory;
 
-public class Match
-        implements Serializable, IMatch {
+public class MatchDto
+        implements Serializable, IMatchDto {
 
     private int id;
     private Date dateFrom;
@@ -22,10 +22,10 @@ public class Match
     private Integer foreignteam;
     private Integer hometeam;
 
-   public Match() {
+   public MatchDto() {
     }
 
-    Match(int id) {
+    MatchDto(int id) {
         this.id = id;
     }
 
@@ -33,15 +33,15 @@ public class Match
     public Integer getId() {
         return id;
     }
-    private static HashMap<contract.domain.IMatch, Match> matchs = new HashMap<>();
+    private static HashMap<contract.domain.IMatch, MatchDto> matchs = new HashMap<>();
 
-    public static Match copy(contract.domain.IMatch match) {
-        Match a;
+    public static MatchDto copy(contract.domain.IMatch match) {
+        MatchDto a;
 
         if (matchs.containsKey(match)) {
             a = matchs.get(match);
         } else {
-            a = new Match();
+            a = new MatchDto();
 
             a.setDateFrom(match.getDateFrom());
             a.setDateTo(match.getDateTo());
@@ -87,15 +87,15 @@ public class Match
     }
 
     @Override
-    public IMatchresult getMatchresult() {
+    public IMatchresultDto getMatchresult() {
         try {
             try {
                 return DtoFactory.getMatchresultMapper().getById(matchresult);
             } catch (RemoteException ex) {
-                Logger.getLogger(Match.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(MatchDto.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (IdNotFoundException ex) {
-            Logger.getLogger(Match.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MatchDto.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return null;
@@ -107,15 +107,15 @@ public class Match
     }
 
     @Override
-    public ITeam getForeignteam() {
+    public ITeamDto getForeignteam() {
         try {
             try {
                 return DtoFactory.getTeamMapper().getById(foreignteam);
             } catch (IdNotFoundException ex) {
-                Logger.getLogger(Match.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(MatchDto.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (RemoteException ex) {
-            Logger.getLogger(Match.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MatchDto.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return null;
@@ -127,15 +127,15 @@ public class Match
     }
 
     @Override
-    public ITeam getHometeam() {
+    public ITeamDto getHometeam() {
         try {
             try {
                 return DtoFactory.getTeamMapper().getById(hometeam);
             } catch (IdNotFoundException ex) {
-                Logger.getLogger(Match.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(MatchDto.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (RemoteException ex) {
-            Logger.getLogger(Match.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MatchDto.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

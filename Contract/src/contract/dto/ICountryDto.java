@@ -8,7 +8,7 @@ package contract.dto;
 
  @author Thomas
  */
-public interface ICountry
+public interface ICountryDto
         extends IDto
 {
     String getAlpha2();

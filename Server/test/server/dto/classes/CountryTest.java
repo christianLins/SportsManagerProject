@@ -7,7 +7,7 @@ package server.dto.classes;
 import java.util.Random;
 import org.easymock.EasyMock;
 import org.junit.*;
-import contract.dto.ICountry;
+import contract.dto.ICountryDto;
 
 /**
 
@@ -42,15 +42,15 @@ public class CountryTest
     @Test
     public void emptyConstructorTest()
     {
-        Country a = new Country();
+        CountryDto a = new CountryDto();
     }
 
     @Test
     public void implementsInterfaceTest()
     {
-        Country a = new Country();
+        CountryDto a = new CountryDto();
 
-        Assert.assertTrue(a instanceof ICountry);
+        Assert.assertTrue(a instanceof ICountryDto);
     }
 
     @Test
@@ -68,7 +68,7 @@ public class CountryTest
         EasyMock.expect(country.getTld()).andReturn("9").anyTimes();
         EasyMock.replay(country);
 
-        Country actual = Country.copy(country);
+        CountryDto actual = CountryDto.copy(country);
 
         Assert.assertEquals(country.getName(), actual.getName());
         Assert.assertEquals(country.getAlpha3(), actual.getAlpha3());
@@ -81,13 +81,13 @@ public class CountryTest
         Assert.assertEquals(country.getPortugues(), actual.getPortugues());
 
 
-        Country a = new Country();
+        CountryDto a = new CountryDto();
     }
 
     @Test
     public void nameTest()
     {
-        Country a = new Country();
+        CountryDto a = new CountryDto();
 
         String expected = new Random().nextInt() + "";
         String actual = "";
@@ -101,7 +101,7 @@ public class CountryTest
     @Test
     public void alpha3Test()
     {
-        Country a = new Country();
+        CountryDto a = new CountryDto();
 
         String expected = new Random().nextInt() + "";
         String actual = "";
@@ -115,7 +115,7 @@ public class CountryTest
     @Test
     public void alpha2Test()
     {
-        Country a = new Country();
+        CountryDto a = new CountryDto();
 
         String expected = new Random().nextInt() + "";
         String actual = "";
@@ -129,7 +129,7 @@ public class CountryTest
     @Test
     public void tldTest()
     {
-        Country a = new Country();
+        CountryDto a = new CountryDto();
 
         String expected = new Random().nextInt() + "";
         String actual = "";
@@ -143,7 +143,7 @@ public class CountryTest
     @Test
     public void deutschTest()
     {
-        Country a = new Country();
+        CountryDto a = new CountryDto();
 
         String expected = new Random().nextInt() + "";
         String actual = "";
@@ -157,7 +157,7 @@ public class CountryTest
     @Test
     public void espanolTest()
     {
-        Country a = new Country();
+        CountryDto a = new CountryDto();
 
         String expected = new Random().nextInt() + "";
         String actual = "";
@@ -171,7 +171,7 @@ public class CountryTest
     @Test
     public void francaiseTest()
     {
-        Country a = new Country();
+        CountryDto a = new CountryDto();
 
         String expected = new Random().nextInt() + "";
         String actual = "";
@@ -185,7 +185,7 @@ public class CountryTest
     @Test
     public void italianoTest()
     {
-        Country a = new Country();
+        CountryDto a = new CountryDto();
 
         String expected = new Random().nextInt() + "";
         String actual = "";
@@ -199,7 +199,7 @@ public class CountryTest
     @Test
     public void portuguesTest()
     {
-        Country a = new Country();
+        CountryDto a = new CountryDto();
 
         String expected = new Random().nextInt() + "";
         String actual = "";

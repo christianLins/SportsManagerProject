@@ -9,7 +9,7 @@ import java.util.List;
 /**
  @author Thomas
  */
-public interface IRole
+public interface IRoleDto
         extends IDto
 {
     List<Integer> getPermisssionList();

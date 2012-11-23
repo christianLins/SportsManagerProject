@@ -4,28 +4,28 @@
  */
 package server.dto.classes;
 
-import contract.dto.ICaretaker;
+import contract.dto.ICaretakerDto;
 import java.util.HashMap;
 
 /**
  @author Thomas
  */
-public class Caretaker
-        extends Role
-        implements ICaretaker
+public class CaretakerDto
+        extends RoleDto
+        implements ICaretakerDto
 {
-    public Caretaker()
+    public CaretakerDto()
     {
         super();
 
         this.setName("Caretaker");
         this.setDescription("Caretaker");
     }
-    private static HashMap<contract.domain.ICaretaker, Caretaker> admins = new HashMap<>();
+    private static HashMap<contract.domain.ICaretaker, CaretakerDto> admins = new HashMap<>();
 
-    public static Caretaker copy(contract.domain.ICaretaker admin)
+    public static CaretakerDto copy(contract.domain.ICaretaker admin)
     {
-        Caretaker a;
+        CaretakerDto a;
 
         if (admins.containsKey(admin))
         {
@@ -33,7 +33,7 @@ public class Caretaker
         }
         else
         {
-            a = copy(admin, new Caretaker());
+            a = copy(admin, new CaretakerDto());
 
             admins.put(admin, a);
         }

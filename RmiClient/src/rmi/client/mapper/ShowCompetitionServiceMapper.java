@@ -37,7 +37,7 @@ public class ShowCompetitionServiceMapper
         }
 
         @Override
-        public List<ICompetition> getCompetitions()
+        public List<ICompetitionDto> getCompetitions()
         {
             try
             {
@@ -51,7 +51,7 @@ public class ShowCompetitionServiceMapper
         }
 
         @Override
-        public List<IMatch> getMatchs(List<Integer> matches)
+        public List<IMatchDto> getMatchs(List<Integer> matches)
         {
             try
             {
@@ -65,7 +65,7 @@ public class ShowCompetitionServiceMapper
         }
 
         @Override
-        public List<IPlayer> getPlayer(IClubTeam team)
+        public List<IPlayerDto> getPlayer(IClubTeamDto team)
         {
             try
             {

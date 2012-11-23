@@ -8,7 +8,7 @@ package contract.dto;
 
  @author Thomas
  */
-public interface IMatchresult
+public interface IMatchresultDto
         extends IDto
 {
     double getPointsForeignteam();

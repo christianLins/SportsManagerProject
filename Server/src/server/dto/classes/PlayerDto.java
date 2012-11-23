@@ -1,20 +1,20 @@
 package server.dto.classes;
 
-import contract.dto.IPlayer;
+import contract.dto.IPlayerDto;
 import java.io.Serializable;
 import java.util.*;
 
-public class Player
-        extends Role
-        implements Serializable, IPlayer
+public class PlayerDto
+        extends RoleDto
+        implements Serializable, IPlayerDto
 {
     private List<Integer> typeOfSportList;
     private List<Integer> memberList;
-    private static HashMap<contract.domain.IPlayer, Player> players = new HashMap<>();
+    private static HashMap<contract.domain.IPlayer, PlayerDto> players = new HashMap<>();
 
-    public static Player copy(contract.domain.IPlayer player)
+    public static PlayerDto copy(contract.domain.IPlayer player)
     {
-        Player a;
+        PlayerDto a;
 
         if (players.containsKey(player))
         {
@@ -22,7 +22,7 @@ public class Player
         }
         else
         {
-            a = copy(player, new Player());
+            a = copy(player, new PlayerDto());
 
             List<Integer> l = new LinkedList<>();
 

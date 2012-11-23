@@ -4,7 +4,7 @@
  */
 package ldap.presentation;
 
-import contract.dto.IUserData;
+import contract.dto.IUserDataDto;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.LinkedList;
@@ -268,7 +268,7 @@ public class LoginFrame
     private javax.swing.JTextField txtFieldIP;
     // End of variables declaration//GEN-END:variables
 
-    public IUserData getUserData()
+    public IUserDataDto getUserData()
     {
         return new UserData(jTextField1.getText(), new String(jPasswordField1.getPassword()), txtFieldIP.getText());
     }

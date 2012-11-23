@@ -6,11 +6,11 @@ package server.corba;
 
 import contract.dto.mapper.IdNotFoundException;
 import contract.dto.mapper.NotFoundException;
-import contract.dto.ITypeOfSport;
-import contract.dto.ILeague;
-import contract.dto.IMatch;
-import contract.dto.ICompetition;
-import contract.dto.IMatchresult;
+import contract.dto.ITypeOfSportDto;
+import contract.dto.ILeagueDto;
+import contract.dto.IMatchDto;
+import contract.dto.ICompetitionDto;
+import contract.dto.IMatchresultDto;
 import java.rmi.RemoteException;
 import java.text.*;
 import java.util.*;
@@ -40,18 +40,18 @@ public class MatchresultDataproviderServant
         {
             List<MatchresultCorba> results = new LinkedList<>();
 
-            ITypeOfSport t = DtoFactory.getTypeOfSportMapper().getByName(typeOfSport);
+            ITypeOfSportDto t = DtoFactory.getTypeOfSportMapper().getByName(typeOfSport);
 
-            ILeague l = DtoFactory.getLeagueMapper().getByName(league, t);
+            ILeagueDto l = DtoFactory.getLeagueMapper().getByName(league, t);
 
             Date date = new SimpleDateFormat("dd.MM.yyyy").parse(competitiondate);
 
-            for (ICompetition competition : l.getCompetitionList(date))
+            for (ICompetitionDto competition : l.getCompetitionList(date))
             {
                 for (int matchId : competition.getMatchList())
                 {
-                    IMatch match = DtoFactory.getMatchMapper().getById(matchId);
-                    IMatchresult matchresult = match.getMatchresult();
+                    IMatchDto match = DtoFactory.getMatchMapper().getById(matchId);
+                    IMatchresultDto matchresult = match.getMatchresult();
 
                     results.add(new MatchresultCorba(matchresult.getId(), match.getDateFrom().toString(), match.getHometeam().getName(), match.getForeignteam().getName(), matchresult.getPointsHometeam(), matchresult.getPointsForeignteam()));
                 }
@@ -84,7 +84,7 @@ public class MatchresultDataproviderServant
     {
         try
         {
-            IMatchresult m = DtoFactory.getMatchresultMapper().getById(matchresult.Id);
+            IMatchresultDto m = DtoFactory.getMatchresultMapper().getById(matchresult.Id);
 
             return m.IsFinal();
         }

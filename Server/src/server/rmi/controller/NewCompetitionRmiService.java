@@ -4,9 +4,9 @@
  */
 package server.rmi.controller;
 
-import contract.dto.IMember;
-import contract.dto.ICompetition;
-import contract.dto.ITeam;
+import contract.dto.IMemberDto;
+import contract.dto.ICompetitionDto;
+import contract.dto.ITeamDto;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
@@ -25,13 +25,13 @@ public class NewCompetitionRmiService extends UnicastRemoteObject implements INe
     }
     
     @Override
-    public void setCompetition(ICompetition competition, IMember member) throws RemoteException
+    public void setCompetition(ICompetitionDto competition, IMemberDto member) throws RemoteException
     {
         NewCompetition.getInstance().setCompetition(competition, member);
     }
 
     @Override
-    public List<ITeam> getTeams() throws RemoteException
+    public List<ITeamDto> getTeams() throws RemoteException
     {
         return NewCompetition.getInstance().getTeams();
     }

@@ -1,6 +1,6 @@
 package presentation;
 
-import contract.dto.IMember;
+import contract.dto.IMemberDto;
 import java.util.logging.*;
 import javax.swing.WindowConstants;
 import presentation.basics.AbstractForm;
@@ -16,12 +16,12 @@ public class SCM_Overview
         extends AbstractForm
 {
     private ServiceClient rmiClient;
-    private IMember user;
+    private IMemberDto user;
 
     /**
      Creates new form SCM_Overview
      */
-    public SCM_Overview(AbstractForm form, ServiceClient rmiClient, IMember user)
+    public SCM_Overview(AbstractForm form, ServiceClient rmiClient, IMemberDto user)
     {
         super(form);
         this.rmiClient = rmiClient;

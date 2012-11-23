@@ -4,7 +4,7 @@
  */
 package presentation.forms.dto;
 
-import contract.dto.IRole;
+import contract.dto.IRoleDto;
 import java.util.*;
 
 /**
@@ -12,7 +12,7 @@ import java.util.*;
  @author Thomas
  */
 public class Role
-        implements IRole
+        implements IRoleDto
 {
     List<Integer> permisssionList;
     List<Integer> members;

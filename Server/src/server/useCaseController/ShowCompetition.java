@@ -35,7 +35,7 @@ public class ShowCompetition
     }
 
     @Override
-    public List<ICompetition> getCompetitions()
+    public List<ICompetitionDto> getCompetitions()
     {
         try
         {
@@ -49,9 +49,9 @@ public class ShowCompetition
     }
 
     @Override
-    public List<IMatch> getMatchs(List<Integer> matches)
+    public List<IMatchDto> getMatchs(List<Integer> matches)
     {
-        List<IMatch> matchList = new ArrayList<>();
+        List<IMatchDto> matchList = new ArrayList<>();
 
         try
         {
@@ -68,9 +68,9 @@ public class ShowCompetition
     }
 
     @Override
-    public List<IPlayer> getPlayer(IClubTeam team)
+    public List<IPlayerDto> getPlayer(IClubTeamDto team)
     {
-        List<IPlayer> playerList = new ArrayList<>();
+        List<IPlayerDto> playerList = new ArrayList<>();
 
         try
         {

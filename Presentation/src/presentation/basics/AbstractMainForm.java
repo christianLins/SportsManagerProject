@@ -32,17 +32,17 @@ public class AbstractMainForm
         // setSize(x, y);
     }
 
-    public void setTxtFieldSports(List<ITypeOfSport> selected)
+    public void setTxtFieldSports(List<ITypeOfSportDto> selected)
     {
         // handle in code
     }
 
   
-    public void setTxtFieldTeams(List<IClubTeam> selected){
+    public void setTxtFieldTeams(List<IClubTeamDto> selected){
         //handle in code
     }
     
-    public List<IClubTeam> getClubTeams(ITypeOfSport sport){
+    public List<IClubTeamDto> getClubTeams(ITypeOfSportDto sport){
       return null;
     }
 }

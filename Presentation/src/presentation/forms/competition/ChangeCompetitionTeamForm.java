@@ -23,20 +23,20 @@ import services.ServiceNotAvailableException;
  */
 public class ChangeCompetitionTeamForm extends AbstractMainForm {
 
-    IMember user;
+    IMemberDto user;
     ServiceClient client;
     IChangeCompetitionTeam controller;
-    ICompetition competition;
-    List<IClubTeam> cTeams;
-    IClubTeam team;
-    List<IPlayer> teamMember;
-    List<IPlayer> oldTeam;
-    List<IPlayer> newTeam;
+    ICompetitionDto competition;
+    List<IClubTeamDto> cTeams;
+    IClubTeamDto team;
+    List<IPlayerDto> teamMember;
+    List<IPlayerDto> oldTeam;
+    List<IPlayerDto> newTeam;
 
     /**
      * Creates new form AddTeamMember
      */
-    public ChangeCompetitionTeamForm(AbstractForm form, ServiceClient client, IMember user) throws ServiceNotAvailableException {
+    public ChangeCompetitionTeamForm(AbstractForm form, ServiceClient client, IMemberDto user) throws ServiceNotAvailableException {
         super(form);
         this.client = client;
         this.user = user;
@@ -213,14 +213,14 @@ public class ChangeCompetitionTeamForm extends AbstractMainForm {
     private void comboTeamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTeamActionPerformed
         String teamName = comboTeam.getSelectedItem().toString();
 
-        for (IClubTeam ct : cTeams) {
+        for (IClubTeamDto ct : cTeams) {
             if (ct.getName().equals(teamName)) {
                 team = ct;
             }
         }
         setTeamMemberList();
 
-        IClubTeam compTeam = controller.getCompetitionTeam(team);
+        IClubTeamDto compTeam = controller.getCompetitionTeam(team);
         List<Integer> playerInt = compTeam.getPlayerList();
         oldTeam = controller.getPlayers(playerInt);
         newTeam = controller.getPlayers(playerInt);
@@ -245,8 +245,8 @@ public class ChangeCompetitionTeamForm extends AbstractMainForm {
         }
         for (int i = cTeamModel.getSize(); i < cTeam.length; i++) {
             cTeam[i] = origSel[i - cTeamModel.getSize()];
-            newTeam.add((IPlayer) origSel[i - cTeamModel.getSize()]);
-            teamMember.remove((IPlayer) origSel[i-cTeamModel.getSize()]);   //remove from available team member list
+            newTeam.add((IPlayerDto) origSel[i - cTeamModel.getSize()]);
+            teamMember.remove((IPlayerDto) origSel[i-cTeamModel.getSize()]);   //remove from available team member list
             
             tmpOrig.remove(origSel[i - cTeamModel.getSize()]);
         }
@@ -281,8 +281,8 @@ public class ChangeCompetitionTeamForm extends AbstractMainForm {
         }
 
         for (int i = 0; i < cTeamSel.length; i++) {
-            teamMember.add((IPlayer) cTeamSel[i]);
-            newTeam.remove((IPlayer) cTeamSel[i]);  //remove from new team list
+            teamMember.add((IPlayerDto) cTeamSel[i]);
+            newTeam.remove((IPlayerDto) cTeamSel[i]);  //remove from new team list
         }
 
         Object[] nTeam = tmpTeam.toArray();
@@ -292,11 +292,11 @@ public class ChangeCompetitionTeamForm extends AbstractMainForm {
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        IClubTeam oldCompTeam = controller.getCompetitionTeam(team);   
-        IClubTeam newCompTeam = oldCompTeam;
+        IClubTeamDto oldCompTeam = controller.getCompetitionTeam(team);   
+        IClubTeamDto newCompTeam = oldCompTeam;
         
         List<Integer> newPlayInt = new LinkedList<>();
-        for(IPlayer player: newTeam){
+        for(IPlayerDto player: newTeam){
             newPlayInt.add(player.getId());
         }                
         newCompTeam.setPlayerList(newPlayInt);        
@@ -351,7 +351,7 @@ public class ChangeCompetitionTeamForm extends AbstractMainForm {
     }
     
     private String[] getCompetitionList() {
-        List<ICompetition> compList = controller.getCompetition();
+        List<ICompetitionDto> compList = controller.getCompetition();
         String[] compArray = new String[compList.size()];
 
         for (int i = 0; i < compList.size(); i++) {
@@ -362,7 +362,7 @@ public class ChangeCompetitionTeamForm extends AbstractMainForm {
     }
 
     private String[] getTeamList() {
-        competition = (ICompetition) comboCompetition.getSelectedItem(); //TODO: get compname
+        competition = (ICompetitionDto) comboCompetition.getSelectedItem(); //TODO: get compname
         List<Integer> allTeams = competition.getTeamList();
 
         cTeams = controller.getClubTeams(allTeams);

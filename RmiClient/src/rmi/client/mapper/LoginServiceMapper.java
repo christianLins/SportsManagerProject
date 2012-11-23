@@ -36,7 +36,7 @@ public class LoginServiceMapper
         }
 
         @Override
-        public IMember getMemberByUserData(IUserData userData)
+        public IMemberDto getMemberByUserData(IUserDataDto userData)
         {
             try
             {

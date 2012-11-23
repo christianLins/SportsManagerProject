@@ -9,15 +9,15 @@ import java.util.List;
  */
 public interface INewMember
 {
-    void setNewMember(IMember member, IAddress address);
+    void setNewMember(IMemberDto member, IAddressDto address);
 
-    List<IDepartment> getDepartments();
+    List<IDepartmentDto> getDepartments();
 
-    List<IClubTeam> getClubTeams(List<Integer> clubTeams);
+    List<IClubTeamDto> getClubTeams(List<Integer> clubTeams);
 
-    List<ITypeOfSport> getTypeOfSports(List<Integer> typOfSportsList);
+    List<ITypeOfSportDto> getTypeOfSports(List<Integer> typOfSportsList);
     
-    List<IClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport);
+    List<IClubTeamDto> getClubTeamsByTypeOfSport(ITypeOfSportDto sport);
 
-    void setNewMember(IMember member, IAddress address, IDepartment department, IClubTeam clubTeam, IRole role);
+    void setNewMember(IMemberDto member, IAddressDto address, IDepartmentDto department, IClubTeamDto clubTeam, IRoleDto role);
 }

@@ -10,7 +10,7 @@ import java.util.Date;
 
  @author Thomas
  */
-public interface IMatch
+public interface IMatchDto
         extends IDto
 {
     Integer getCompetition();
@@ -19,11 +19,11 @@ public interface IMatch
 
     Date getDateTo();
 
-    ITeam getForeignteam();
+    ITeamDto getForeignteam();
 
-    ITeam getHometeam();
+    ITeamDto getHometeam();
 
-    IMatchresult getMatchresult();
+    IMatchresultDto getMatchresult();
 
     void setCompetition(Integer competition);
 

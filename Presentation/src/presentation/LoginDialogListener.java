@@ -20,7 +20,7 @@ public class LoginDialogListener
         implements IDialogListener
 {
     @Override
-    public void dialogClosed(DialogResult dialogResult, IUserData userData)
+    public void dialogClosed(DialogResult dialogResult, IUserDataDto userData)
     {
         if (!dialogResult.equals(DialogResult.Ok))
         {
@@ -41,7 +41,7 @@ public class LoginDialogListener
 
             ServiceClient client = serviceClientFactories.ServiceClientFactory.getRmiServiceClient(userData.getIP(), 1099);
             ILogin loginService = client.getLoginService();
-            IMember user = loginService.getMemberByUserData(userData);
+            IMemberDto user = loginService.getMemberByUserData(userData);
             SCM_Overview manager = new SCM_Overview(null, client, user);
             manager.setVisible(true);
         }

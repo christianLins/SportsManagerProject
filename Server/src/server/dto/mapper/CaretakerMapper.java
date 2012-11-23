@@ -5,19 +5,19 @@
 package server.dto.mapper;
 
 import contract.domain.*;
-import contract.dto.ICaretaker;
+import contract.dto.ICaretakerDto;
 import contract.dto.mapper.*;
 import java.util.*;
 import java.util.logging.*;
 import server.domain.DomainFacade;
-import server.dto.classes.Caretaker;
+import server.dto.classes.CaretakerDto;
 
 /**
 
  @author Thomas
  */
 public class CaretakerMapper
-        implements IMapper<ICaretaker>
+        implements IMapper<ICaretakerDto>
 {
     private static CaretakerMapper controller;
 
@@ -25,7 +25,7 @@ public class CaretakerMapper
     {
     }
 
-    public static IMapper<ICaretaker> getInstance()
+    public static IMapper<ICaretakerDto> getInstance()
     {
         if (controller == null)
         {
@@ -49,13 +49,13 @@ public class CaretakerMapper
     }
 
     @Override
-    public ICaretaker getById(Integer id)
+    public ICaretakerDto getById(Integer id)
             throws IdNotFoundException
     {
         try
         {
             contract.domain.ICaretaker a = DomainFacade.getInstance().getByID(contract.domain.ICaretaker.class, id);
-            return Caretaker.copy(a);
+            return CaretakerDto.copy(a);
         }
         catch (Exception ex)
         {
@@ -65,16 +65,16 @@ public class CaretakerMapper
     }
 
     @Override
-    public List<ICaretaker> getAll()
+    public List<ICaretakerDto> getAll()
             throws NotFoundException
     {
         try
         {
-            List<ICaretaker> result = new LinkedList<>();
+            List<ICaretakerDto> result = new LinkedList<>();
 
             for (contract.domain.ICaretaker a : DomainFacade.getInstance().getAll(contract.domain.ICaretaker.class))
             {
-                result.add(Caretaker.copy(a));
+                result.add(CaretakerDto.copy(a));
             }
 
             return result;
@@ -86,7 +86,7 @@ public class CaretakerMapper
     }
 
     @Override
-    public Integer set(ICaretaker value)
+    public Integer set(ICaretakerDto value)
     {
         try
         {
@@ -103,7 +103,7 @@ public class CaretakerMapper
     }
 
     @Override
-    public void delete(ICaretaker value)
+    public void delete(ICaretakerDto value)
     {
         try
         {
@@ -117,7 +117,7 @@ public class CaretakerMapper
         }
     }
 
-    private server.domain.classes.Caretaker createDomain(ICaretaker value)
+    private server.domain.classes.Caretaker createDomain(ICaretakerDto value)
             throws IdNotFoundException
     {
         server.domain.classes.Caretaker caretaker = new server.domain.classes.Caretaker(value.getId());
@@ -146,8 +146,8 @@ public class CaretakerMapper
     }
 
     @Override
-    public ICaretaker getNew()
+    public ICaretakerDto getNew()
     {
-        return new Caretaker();
+        return new CaretakerDto();
     }
 }

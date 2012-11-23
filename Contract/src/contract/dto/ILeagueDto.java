@@ -11,7 +11,7 @@ import java.util.List;
 
  @author Thomas
  */
-public interface ILeague
+public interface ILeagueDto
         extends IDto
 {
     String getDescription();
@@ -30,5 +30,5 @@ public interface ILeague
 
     void setTeamList(List<Integer> teamList);
 
-    public List<ICompetition> getCompetitionList(Date date);
+    public List<ICompetitionDto> getCompetitionList(Date date);
 }

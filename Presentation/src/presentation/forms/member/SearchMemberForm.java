@@ -24,21 +24,21 @@ public class SearchMemberForm
     private boolean adminPermission;
     ServiceClient client;
     ISearchChangeMember controller;
-    IMember user;
-    List<IRole> roles;
-    IAddress address;
-    ICountry country;
-    IClubTeam clubTeam;
-    private List<ITypeOfSport> typeOfSports;
-    private List<ITypeOfSport> availableSports;
-    private List<ITypeOfSport> selectedSports;
-    private List<IClubTeam> selectedTeams;
-    private List<IMember> matchingMembers;
+    IMemberDto user;
+    List<IRoleDto> roles;
+    IAddressDto address;
+    ICountryDto country;
+    IClubTeamDto clubTeam;
+    private List<ITypeOfSportDto> typeOfSports;
+    private List<ITypeOfSportDto> availableSports;
+    private List<ITypeOfSportDto> selectedSports;
+    private List<IClubTeamDto> selectedTeams;
+    private List<IMemberDto> matchingMembers;
 
     /**
      * Creates new form SearchMemb
      */
-    public SearchMemberForm(AbstractForm form, ServiceClient client, IMember user)
+    public SearchMemberForm(AbstractForm form, ServiceClient client, IMemberDto user)
             throws ServiceNotAvailableException {
         super(form);
         this.client = client;
@@ -472,7 +472,7 @@ public class SearchMemberForm
                 TableModel tableModel = tabMember.getModel();
 
                 for (int row = 0; row < matchingMembers.size(); row++) {
-                    IMember tmpMember = matchingMembers.remove(row);
+                    IMemberDto tmpMember = matchingMembers.remove(row);
 
                     tableModel.setValueAt(tmpMember.getId().toString(), row, 0);
                     tableModel.setValueAt(tmpMember.getPrename(), row, 1);
@@ -535,11 +535,11 @@ public class SearchMemberForm
     }
 
     @Override
-    public void setTxtFieldSports(List<ITypeOfSport> selection) {
+    public void setTxtFieldSports(List<ITypeOfSportDto> selection) {
         this.selectedSports = selection;
 
         StringBuilder sb = new StringBuilder(selectedSports.size());
-        for (ITypeOfSport s : selectedSports) {
+        for (ITypeOfSportDto s : selectedSports) {
             sb.append(s);
             sb.append(", ");
         }
@@ -549,12 +549,12 @@ public class SearchMemberForm
     }
 
     @Override
-    public void setTxtFieldTeams(List<IClubTeam> selected) {
+    public void setTxtFieldTeams(List<IClubTeamDto> selected) {
         this.selectedTeams = selected;
 
         StringBuilder sb = new StringBuilder(selectedTeams.size());
 
-        for (IClubTeam ct : selectedTeams) {
+        for (IClubTeamDto ct : selectedTeams) {
             sb.append(ct);
             sb.append(", ");
         }
@@ -564,19 +564,19 @@ public class SearchMemberForm
 
     }
 
-    private void setSelectedSports(IRole role) {
+    private void setSelectedSports(IRoleDto role) {
         List<Integer> typeOfSportsID = null;
 
-        if (role instanceof ITrainer) {
-            ITrainer tmp = (ITrainer) role;
+        if (role instanceof ITrainerDto) {
+            ITrainerDto tmp = (ITrainerDto) role;
             typeOfSportsID = tmp.getTypeOfSportList();
         } else {
-            IPlayer tmp = (IPlayer) role;
+            IPlayerDto tmp = (IPlayerDto) role;
             typeOfSportsID = tmp.getTypeOfSportList();
         }
 
         //add members sports to his/her selectedSportsList
-        for (ITypeOfSport tos : typeOfSports) {
+        for (ITypeOfSportDto tos : typeOfSports) {
             for (Integer i : typeOfSportsID) {
                 if ((tos.getId()).equals(i)) {
                     selectedSports.add(tos);
@@ -588,8 +588,8 @@ public class SearchMemberForm
     private List<Integer> getSelectedSports() {
         List<Integer> tosIDs = new LinkedList<>();
 
-        for (ITypeOfSport tos : typeOfSports) {
-            for (ITypeOfSport s : selectedSports) {
+        for (ITypeOfSportDto tos : typeOfSports) {
+            for (ITypeOfSportDto s : selectedSports) {
                 if (s.equals(tos)) {
                     tosIDs.add(tos.getId());
                 }
@@ -604,23 +604,23 @@ public class SearchMemberForm
         List<Integer> sports = new LinkedList<>();
         List<Integer> clubTeamIDList = new LinkedList<>();
         
-        for (IRole role : controller.getRoles(controller.getSelectedMember().getId())) {
-            if (role instanceof ITrainer) {
-                for (Integer t : ((ITrainer) role).getTypeOfSportList()) {
+        for (IRoleDto role : controller.getRoles(controller.getSelectedMember().getId())) {
+            if (role instanceof ITrainerDto) {
+                for (Integer t : ((ITrainerDto) role).getTypeOfSportList()) {
                     if (!sports.contains(t)) {
                         sports.add(t);
                     }
                 }
-                clubTeamIDList = ((ITrainer) role).getClubTeamList();
+                clubTeamIDList = ((ITrainerDto) role).getClubTeamList();
 
-            } else if (role instanceof IPlayer) {
-                for (Integer t : ((IPlayer) role).getTypeOfSportList()) {
+            } else if (role instanceof IPlayerDto) {
+                for (Integer t : ((IPlayerDto) role).getTypeOfSportList()) {
                     if (!sports.contains(t)) {
                         sports.add(t);
                     }
                 }
-                //TODO clubTeamList bei IPlayer
-                //clubTeamIDList = ((IPlayer) role).getClubTeamList();
+                //TODO clubTeamList bei IPlayerDto
+                //clubTeamIDList = ((IPlayerDto) role).getClubTeamList();
             }
         }
 
@@ -628,7 +628,7 @@ public class SearchMemberForm
         setSelectedTeams(clubTeamIDList);
         setTxtFieldTeams(selectedTeams);
         
-        IMember selectedMember = controller.getSelectedMember();
+        IMemberDto selectedMember = controller.getSelectedMember();
         txtfieldMemberNr.setText(selectedMember.getId().toString());
         txtfieldFName.setText(selectedMember.getPrename());
         txtfieldLName.setText(selectedMember.getLastname());
@@ -651,30 +651,30 @@ public class SearchMemberForm
         dateEntry.setDate(selectedMember.getMemberFrom());
         dateBirthday.setDate(selectedMember.getDateOfBirth());
 
-        for (IRole role : controller.getRoles(controller.getSelectedMember().getId())) {
-            if (role instanceof IAdmin) {
+        for (IRoleDto role : controller.getRoles(controller.getSelectedMember().getId())) {
+            if (role instanceof IAdminDto) {
                 radioAdmin.setSelected(true);
                 disableExtendedRadioSelection();
-            } else if (role instanceof ICaretaker) {
+            } else if (role instanceof ICaretakerDto) {
                 radioCaretaker.setSelected(true);
-            } else if (role instanceof IDepartmentHead) {
+            } else if (role instanceof IDepartmentHeadDto) {
                 radioDepHead.setSelected(true);
-            } else if (role instanceof ITrainer) {
+            } else if (role instanceof ITrainerDto) {
                 radioTrainer.setSelected(true);
                 setSelectedSports(role);
 
-                setTxtFieldSports(controller.getTypeOfSports(((ITrainer) role).getTypeOfSportList()));
-            } else if (role instanceof IPlayer) {
+                setTxtFieldSports(controller.getTypeOfSports(((ITrainerDto) role).getTypeOfSportList()));
+            } else if (role instanceof IPlayerDto) {
                 radioPlayer.setSelected(true);
                 setSelectedSports(role);
 
-                setTxtFieldSports(controller.getTypeOfSports(((IPlayer) role).getTypeOfSportList()));
+                setTxtFieldSports(controller.getTypeOfSports(((IPlayerDto) role).getTypeOfSportList()));
             }
         }
     }
 
     private void updateMemberData() {
-        IMember selectedMember = controller.getSelectedMember();
+        IMemberDto selectedMember = controller.getSelectedMember();
 
         selectedMember.setPrename(txtfieldFName.getText());
         selectedMember.setLastname(txtfieldLName.getText());
@@ -704,7 +704,7 @@ public class SearchMemberForm
                 roles.add(new DepartmentHead());
             }
             if (radioTrainer.isSelected()) {
-                ITrainer trainer = new Trainer();
+                ITrainerDto trainer = new Trainer();
                 roles.add(trainer);
                 trainer.setTypeOfSportList(getSelectedSports());
                 trainer.setClubTeamList(getSelectedTeams());
@@ -712,14 +712,14 @@ public class SearchMemberForm
         }
 
         if (radioPlayer.isSelected()) {
-            IPlayer player = null;
+            IPlayerDto player = null;
             roles.add(player);
             player.setTypeOfSportList(getSelectedSports());
             //player.setClubTeamList(getSelectedTeams());
         }
 
         List<Integer> roleInt = new LinkedList<>();
-        for (IRole role : roles) {
+        for (IRoleDto role : roles) {
             roleInt.add(role.getId());
         }
         selectedMember.setRoleList(roleInt);
@@ -730,7 +730,7 @@ public class SearchMemberForm
 
 
     @Override
-    public List<IClubTeam> getClubTeams(ITypeOfSport sport) {
+    public List<IClubTeamDto> getClubTeams(ITypeOfSportDto sport) {
         return controller.getClubTeamsByTypeOfSport(sport);
     }
         
@@ -742,7 +742,7 @@ public class SearchMemberForm
     private List<Integer> getSelectedTeams() {
         List<Integer> clubTeamIDs = new LinkedList<>();
 
-        for (IClubTeam c : selectedTeams) {            
+        for (IClubTeamDto c : selectedTeams) {            
             clubTeamIDs.add(c.getId());
         }
         return clubTeamIDs;

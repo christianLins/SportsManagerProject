@@ -5,12 +5,12 @@
 package server.dto.mapper;
 
 import contract.domain.*;
-import contract.dto.ITypeOfSport;
+import contract.dto.ITypeOfSportDto;
 import contract.dto.mapper.*;
 import java.util.*;
 import java.util.logging.*;
 import server.domain.DomainFacade;
-import server.dto.classes.TypeOfSport;
+import server.dto.classes.TypeOfSportDto;
 
 /**
 
@@ -50,13 +50,13 @@ public class TypeOfSportMapper
     }
 
     @Override
-    public ITypeOfSport getById(Integer id)
+    public ITypeOfSportDto getById(Integer id)
             throws IdNotFoundException
     {
         try
         {
             contract.domain.ITypeOfSport a = DomainFacade.getInstance().getByID(contract.domain.ITypeOfSport.class, id);
-            return TypeOfSport.copy(a);
+            return TypeOfSportDto.copy(a);
         }
         catch (Exception ex)
         {
@@ -65,16 +65,16 @@ public class TypeOfSportMapper
     }
 
     @Override
-    public List<ITypeOfSport> getAll()
+    public List<ITypeOfSportDto> getAll()
             throws NotFoundException
     {
         try
         {
-            List<ITypeOfSport> result = new LinkedList<>();
+            List<ITypeOfSportDto> result = new LinkedList<>();
 
             for (contract.domain.ITypeOfSport a : DomainFacade.getInstance().getAll(contract.domain.ITypeOfSport.class))
             {
-                result.add(TypeOfSport.copy(a));
+                result.add(TypeOfSportDto.copy(a));
             }
 
             return result;
@@ -86,7 +86,7 @@ public class TypeOfSportMapper
     }
 
     @Override
-    public Integer set(ITypeOfSport value)
+    public Integer set(ITypeOfSportDto value)
     {
         try
         {
@@ -103,7 +103,7 @@ public class TypeOfSportMapper
     }
 
     @Override
-    public void delete(ITypeOfSport value)
+    public void delete(ITypeOfSportDto value)
     {
         try
         {
@@ -117,7 +117,7 @@ public class TypeOfSportMapper
         }
     }
 
-    private server.domain.classes.TypeOfSport createDomain(ITypeOfSport value)
+    private server.domain.classes.TypeOfSport createDomain(ITypeOfSportDto value)
             throws IdNotFoundException
     {
         server.domain.classes.TypeOfSport typeofsport = new server.domain.classes.TypeOfSport(value.getId());
@@ -136,14 +136,14 @@ public class TypeOfSportMapper
     }
 
     @Override
-    public ITypeOfSport getByName(String name)
+    public ITypeOfSportDto getByName(String name)
     {
-        return TypeOfSport.copy(DomainFacade.getInstance().getByName(server.domain.classes.TypeOfSport.class, name));
+        return TypeOfSportDto.copy(DomainFacade.getInstance().getByName(server.domain.classes.TypeOfSport.class, name));
     }
 
     @Override
-    public ITypeOfSport getNew()
+    public ITypeOfSportDto getNew()
     {
-        return new TypeOfSport();
+        return new TypeOfSportDto();
     }
 }

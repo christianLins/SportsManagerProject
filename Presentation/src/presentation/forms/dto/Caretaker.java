@@ -4,7 +4,7 @@
  */
 package presentation.forms.dto;
 
-import contract.dto.ICaretaker;
+import contract.dto.ICaretakerDto;
 import presentation.forms.dto.Role;
 
 /**
@@ -13,7 +13,7 @@ import presentation.forms.dto.Role;
  */
 public class Caretaker
         extends Role
-        implements ICaretaker
+        implements ICaretakerDto
 {
     public Caretaker()
     {

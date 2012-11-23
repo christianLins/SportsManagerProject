@@ -37,7 +37,7 @@ public class NewCompetitionServiceMapper
         }
 
         @Override
-        public void setCompetition(ICompetition competition, IMember member)
+        public void setCompetition(ICompetitionDto competition, IMemberDto member)
         {
             try
             {
@@ -50,7 +50,7 @@ public class NewCompetitionServiceMapper
         }
 
         @Override
-        public List<ITeam> getTeams()
+        public List<ITeamDto> getTeams()
         {
             try
             {

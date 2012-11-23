@@ -1,11 +1,11 @@
 package server.dto.classes;
 
-import contract.dto.IAddress;
+import contract.dto.IAddressDto;
 import java.io.Serializable;
 import java.util.HashMap;
 
-public class Address
-        implements Serializable, IAddress
+public class AddressDto
+        implements Serializable, IAddressDto
 {
     private int id;
     private String street;
@@ -13,16 +13,16 @@ public class Address
     private String village;
     private int postalCode;
     private int country;
-    private static HashMap<contract.domain.IAddress, Address> addresses = new HashMap<>();
+    private static HashMap<contract.domain.IAddress, AddressDto> addresses = new HashMap<>();
 
-    Address(int id)
+    AddressDto(int id)
     {
         this.id = id;
     }
 
-    public static Address copy(contract.domain.IAddress address)
+    public static AddressDto copy(contract.domain.IAddress address)
     {
-        Address a;
+        AddressDto a;
 
         if (addresses.containsKey(address))
         {
@@ -30,7 +30,7 @@ public class Address
         }
         else
         {
-            a = new Address(address.getId());
+            a = new AddressDto(address.getId());
 
             a.setStreet(address.getStreet());
             a.setPostalCode(address.getPostalCode());
@@ -44,7 +44,7 @@ public class Address
         return a;
     }
 
-    public Address()
+    public AddressDto()
     {
     }
 

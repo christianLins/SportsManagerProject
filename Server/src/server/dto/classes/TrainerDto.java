@@ -2,19 +2,19 @@ package server.dto.classes;
 
 import java.io.Serializable;
 import java.util.*;
-import contract.dto.ITrainer;
+import contract.dto.ITrainerDto;
 
-public class Trainer
-        extends Role
-        implements Serializable, ITrainer
+public class TrainerDto
+        extends RoleDto
+        implements Serializable, ITrainerDto
 {
     private List<Integer> clubTeamList = new LinkedList<>();
     private List<Integer> typeOfSportList = new LinkedList<>();
-    private static HashMap<contract.domain.ITrainer, Trainer> trainers = new HashMap<>();
+    private static HashMap<contract.domain.ITrainer, TrainerDto> trainers = new HashMap<>();
 
-    public static Trainer copy(contract.domain.ITrainer trainer)
+    public static TrainerDto copy(contract.domain.ITrainer trainer)
     {
-        Trainer a;
+        TrainerDto a;
 
         if (trainers.containsKey(trainer))
         {
@@ -22,7 +22,7 @@ public class Trainer
         }
         else
         {
-            a = copy(trainer, new Trainer());
+            a = copy(trainer, new TrainerDto());
 
             List<Integer> clubTeamList = new LinkedList<>();
 

@@ -4,7 +4,7 @@
  */
 package server.dto.classes;
 
-import contract.dto.ITrainer;
+import contract.dto.ITrainerDto;
 import java.util.*;
 import org.junit.*;
 
@@ -41,21 +41,21 @@ public class TrainerTest
     @Test
     public void emptyConstructorTest()
     {
-        Trainer a = new Trainer();
+        TrainerDto a = new TrainerDto();
     }
 
     @Test
     public void implementsInterfaceTest()
     {
-        Trainer a = new Trainer();
+        TrainerDto a = new TrainerDto();
 
-        Assert.assertTrue(a instanceof ITrainer);
+        Assert.assertTrue(a instanceof ITrainerDto);
     }
 
     @Test
     public void clubTeamListTest()
     {
-        Trainer a = new Trainer();
+        TrainerDto a = new TrainerDto();
 
         List<Integer> expected = new LinkedList<>();
         expected.add(1);

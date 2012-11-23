@@ -10,8 +10,8 @@ import java.util.List;
 
  @author Thomas
  */
-public interface IPlayer
-        extends IRole
+public interface IPlayerDto
+        extends IRoleDto
 {
     List<Integer> getTypeOfSportList();
 

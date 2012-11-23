@@ -5,13 +5,13 @@
 package server.dto.mapper;
 
 import contract.domain.*;
-import contract.dto.IClubTeam;
-import contract.dto.ITypeOfSport;
+import contract.dto.IClubTeamDto;
+import contract.dto.ITypeOfSportDto;
 import contract.dto.mapper.*;
 import java.util.*;
 import java.util.logging.*;
 import server.domain.DomainFacade;
-import server.dto.classes.ClubTeam;
+import server.dto.classes.ClubTeamDto;
 
 /**
 
@@ -52,13 +52,13 @@ public class ClubTeamMapper
     }
 
     @Override
-    public IClubTeam getById(Integer id)
+    public IClubTeamDto getById(Integer id)
             throws IdNotFoundException
     {
         try
         {
             contract.domain.IClubTeam a = DomainFacade.getInstance().getByID(contract.domain.IClubTeam.class, id);
-            return ClubTeam.copy(a);
+            return ClubTeamDto.copy(a);
         }
         catch (Exception ex)
         {
@@ -68,16 +68,16 @@ public class ClubTeamMapper
     }
 
     @Override
-    public List<IClubTeam> getAll()
+    public List<IClubTeamDto> getAll()
             throws NotFoundException
     {
         try
         {
-            List<IClubTeam> result = new LinkedList<>();
+            List<IClubTeamDto> result = new LinkedList<>();
 
             for (contract.domain.IClubTeam a : DomainFacade.getInstance().getAll(contract.domain.IClubTeam.class))
             {
-                result.add(ClubTeam.copy(a));
+                result.add(ClubTeamDto.copy(a));
             }
 
             return result;
@@ -89,7 +89,7 @@ public class ClubTeamMapper
     }
 
     @Override
-    public Integer set(IClubTeam value)
+    public Integer set(IClubTeamDto value)
     {
         try
         {
@@ -106,7 +106,7 @@ public class ClubTeamMapper
     }
 
     @Override
-    public void delete(IClubTeam value)
+    public void delete(IClubTeamDto value)
     {
         try
         {
@@ -120,7 +120,7 @@ public class ClubTeamMapper
         }
     }
 
-    private server.domain.classes.ClubTeam createDomain(IClubTeam value)
+    private server.domain.classes.ClubTeam createDomain(IClubTeamDto value)
             throws IdNotFoundException
     {
         server.domain.classes.ClubTeam clubTeam = new server.domain.classes.ClubTeam(value.getId());
@@ -151,17 +151,17 @@ public class ClubTeamMapper
     }
 
     @Override
-    public IClubTeam getNew()
+    public IClubTeamDto getNew()
     {
-        return new ClubTeam();
+        return new ClubTeamDto();
     }
     
-    public List<IClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport) throws ClubTeamNotFoundException{
+    public List<IClubTeamDto> getClubTeamsByTypeOfSport(ITypeOfSportDto sport) throws ClubTeamNotFoundException{
         try {
-            List<IClubTeam> ret  = new LinkedList<>();
+            List<IClubTeamDto> ret  = new LinkedList<>();
             List<server.domain.classes.ClubTeam> clubTeams = DomainFacade.getInstance().getClubTeamsByTypeOfSport(DomainFacade.getInstance().getByID(contract.domain.ITypeOfSport.class, sport.getId()));
             for(server.domain.classes.ClubTeam c : clubTeams){
-                ret.add(ClubTeam.copy(c));
+                ret.add(ClubTeamDto.copy(c));
             }
             return ret;
             

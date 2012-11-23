@@ -11,7 +11,7 @@ import java.util.*;
 
  @author Thomas
  */
-public interface ICompetition
+public interface ICompetitionDto
         extends Serializable, IDto
 {
     Date getDateFrom();

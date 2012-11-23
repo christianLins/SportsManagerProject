@@ -4,7 +4,7 @@
  */
 package presentation.forms.dto;
 
-import contract.dto.IPlayer;
+import contract.dto.IPlayerDto;
 import java.util.List;
 
 /**
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class Player
         extends Role
-        implements IPlayer
+        implements IPlayerDto
 {
     List<Integer> typeOfSportList;
 

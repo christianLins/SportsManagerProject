@@ -4,14 +4,14 @@
  */
 package presentation.forms.dto;
 
-import contract.dto.IAdmin;
+import contract.dto.IAdminDto;
 
 /**
  @author Thomas
  */
 public class Admin
         extends Role
-        implements IAdmin
+        implements IAdminDto
 {
     public Admin()
     {

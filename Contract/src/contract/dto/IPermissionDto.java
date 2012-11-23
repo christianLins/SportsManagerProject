@@ -8,7 +8,7 @@ package contract.dto;
 
  @author Thomas
  */
-public interface IPermission
+public interface IPermissionDto
         extends IDto
 {
     String getDescription();

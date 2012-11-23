@@ -20,16 +20,16 @@ public class AddCompetitionResultsForm
 {
     ServiceClient client;
     IAddMatchResults controller;
-    ICompetition competition;
-    List<ITeam> teamList;
-    List<IMatch> matchList;
-    IMatch match;
-    IMember user;
+    ICompetitionDto competition;
+    List<ITeamDto> teamList;
+    List<IMatchDto> matchList;
+    IMatchDto match;
+    IMemberDto user;
 
     /**
      Creates new form MatchResultEntr
      */
-    public AddCompetitionResultsForm(AbstractForm form, ServiceClient client, IMember user)
+    public AddCompetitionResultsForm(AbstractForm form, ServiceClient client, IMemberDto user)
             throws ServiceNotAvailableException
     {
         super(form);
@@ -207,7 +207,7 @@ public class AddCompetitionResultsForm
     }// </editor-fold>//GEN-END:initComponents
 
     private void comboCompetitionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCompetitionActionPerformed
-        competition = (ICompetition) comboCompetition.getSelectedItem();    //search competition
+        competition = (ICompetitionDto) comboCompetition.getSelectedItem();    //search competition
         matchList = controller.getMatchList(competition.getMatchList());
         teamList = controller.getTeamList(competition.getTeamList());
 
@@ -220,16 +220,16 @@ public class AddCompetitionResultsForm
 
         if (!name.equals("Teams"))
         {
-            ITeam team = null;
+            ITeamDto team = null;
 
-            for (ITeam t : teamList)
+            for (ITeamDto t : teamList)
             {
                 if (t.getName().equals(name))
                 {
                     team = t;
                 }
             }
-            List<IMatch> matches = controller.getMatchList(team.getMatchList());
+            List<IMatchDto> matches = controller.getMatchList(team.getMatchList());
             setListMatches(matches);
         }
     }//GEN-LAST:event_comboTeamsActionPerformed
@@ -241,7 +241,7 @@ public class AddCompetitionResultsForm
         String home = array[0];
         String foreign = array[2];
 
-        for (IMatch m : matchList)
+        for (IMatchDto m : matchList)
         {
             if (m.getHometeam().getName().equals(home))
             {
@@ -256,7 +256,7 @@ public class AddCompetitionResultsForm
     }//GEN-LAST:event_listMatchesValueChanged
 
     private void btnAddResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddResultActionPerformed
-        IMatchresult result = null;
+        IMatchresultDto result = null;
         result.setPointsHometeam((double) spinTeamA.getValue());
         result.setPointsForeignteam((double) spinTeamB.getValue());
         controller.setMatchResult(match, result);
@@ -268,7 +268,7 @@ public class AddCompetitionResultsForm
 
     private String[] getAllCompetitions()
     {
-        List<ICompetition> compList = controller.getCompetitionList();
+        List<ICompetitionDto> compList = controller.getCompetitionList();
         String[] compArray = new String[compList.size()];
 
         for (int i = 0; i < compArray.length; i++)
@@ -323,7 +323,7 @@ public class AddCompetitionResultsForm
         });
     }
 
-    private void setListMatches(List<IMatch> matches)
+    private void setListMatches(List<IMatchDto> matches)
     {
         final String[] array = new String[matches.size()];
 

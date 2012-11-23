@@ -7,7 +7,7 @@ package contract.dto;
 /**
  @author Thomas
  */
-public interface ICaretaker
-        extends IRole
+public interface ICaretakerDto
+        extends IRoleDto
 {
 }

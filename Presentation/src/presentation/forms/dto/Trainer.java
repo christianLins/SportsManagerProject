@@ -4,7 +4,7 @@
  */
 package presentation.forms.dto;
 
-import contract.dto.ITrainer;
+import contract.dto.ITrainerDto;
 import java.util.List;
 
 /**
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class Trainer
         extends Role
-        implements ITrainer
+        implements ITrainerDto
 {
     List<Integer> ClubTeamList;
     List<Integer> typeOfSportList;

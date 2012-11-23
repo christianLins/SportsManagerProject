@@ -25,7 +25,7 @@ public class SearchChangeMember
     }
 
     @Override
-    public List<IMember> getMatchingMembers(String searchInput)
+    public List<IMemberDto> getMatchingMembers(String searchInput)
     {
         try
         {
@@ -39,7 +39,7 @@ public class SearchChangeMember
     }
 
     @Override
-    public IMember getMember(Integer id)
+    public IMemberDto getMember(Integer id)
     {
         try
         {
@@ -53,7 +53,7 @@ public class SearchChangeMember
     }
 
     @Override
-    public List<IRole> getRoles(Integer memberId)
+    public List<IRoleDto> getRoles(Integer memberId)
     {
         try
         {
@@ -67,7 +67,7 @@ public class SearchChangeMember
     }
 
     @Override
-    public IDepartment getDepartment(Integer memberId)
+    public IDepartmentDto getDepartment(Integer memberId)
     {
         try
         {
@@ -81,7 +81,7 @@ public class SearchChangeMember
     }
 
     @Override
-    public IAddress getAddress(Integer addressId)
+    public IAddressDto getAddress(Integer addressId)
     {
         try
         {
@@ -95,7 +95,7 @@ public class SearchChangeMember
     }
 
     @Override
-    public ICountry getCountry(Integer countryID)
+    public ICountryDto getCountry(Integer countryID)
     {
         try
         {
@@ -109,7 +109,7 @@ public class SearchChangeMember
     }
 
     @Override
-    public List<IDepartment> getDepartments()
+    public List<IDepartmentDto> getDepartments()
     {
         try
         {
@@ -123,7 +123,7 @@ public class SearchChangeMember
     }
 
     @Override
-    public List<IClubTeam> getClubTeams(List<Integer> clubTeams)
+    public List<IClubTeamDto> getClubTeams(List<Integer> clubTeams)
     {
         try
         {
@@ -137,7 +137,7 @@ public class SearchChangeMember
     }
 
     @Override
-    public void setNewMember(IMember member, IAddress address)
+    public void setNewMember(IMemberDto member, IAddressDto address)
     {
         try
         {
@@ -150,7 +150,7 @@ public class SearchChangeMember
     }
 
     @Override
-    public void setNewMember(IMember member, IAddress address, IDepartment department, IClubTeam clubTeam, IRole role)
+    public void setNewMember(IMemberDto member, IAddressDto address, IDepartmentDto department, IClubTeamDto clubTeam, IRoleDto role)
     {
         try
         {
@@ -163,7 +163,7 @@ public class SearchChangeMember
     }
 
     @Override
-    public List<ITypeOfSport> getTypeOfSports(List<Integer> sportsList)
+    public List<ITypeOfSportDto> getTypeOfSports(List<Integer> sportsList)
     {
         try
         {
@@ -178,9 +178,9 @@ public class SearchChangeMember
     }
 
     @Override
-    public IMember getSelectedMember()
+    public IMemberDto getSelectedMember()
     {
-        IMember m = null;
+        IMemberDto m = null;
         try
         {
             m = service.getSelectedMember();
@@ -193,7 +193,7 @@ public class SearchChangeMember
     }
 
     @Override
-    public void setSelectedMember(IMember selectedMember)
+    public void setSelectedMember(IMemberDto selectedMember)
     {
         try
         {
@@ -206,7 +206,7 @@ public class SearchChangeMember
     }
 
     @Override
-    public List<IClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport)
+    public List<IClubTeamDto> getClubTeamsByTypeOfSport(ITypeOfSportDto sport)
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }

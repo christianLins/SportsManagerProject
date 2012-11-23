@@ -11,14 +11,14 @@ import presentation.basics.AbstractMainForm;
  * @author Lucia
  */
 public class SelectTeamsHelper extends javax.swing.JFrame {
-    private List<ITypeOfSport> allSports;
+    private List<ITypeOfSportDto> allSports;
     private AbstractMainForm parent;
-    private List<IClubTeam> selectedTeams;
+    private List<IClubTeamDto> selectedTeams;
 
     /**
      * Creates new form SelectSports
      */
-    public SelectTeamsHelper(List<ITypeOfSport> allSports, AbstractMainForm parent) {
+    public SelectTeamsHelper(List<ITypeOfSportDto> allSports, AbstractMainForm parent) {
         this.allSports = allSports;
         this.parent = parent;
         selectedTeams = new LinkedList<>();
@@ -133,7 +133,7 @@ public class SelectTeamsHelper extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        selectedTeams.add((IClubTeam)listTeams.getSelectedValue());
+        selectedTeams.add((IClubTeamDto)listTeams.getSelectedValue());
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void listTeamsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listTeamsValueChanged
@@ -169,8 +169,8 @@ public class SelectTeamsHelper extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFinishActionPerformed
 
     private Object[] getTeamsArray(){
-        ITypeOfSport tos = (ITypeOfSport) comboSports.getSelectedItem();
-        List<IClubTeam> clubTeamOfSport = parent.getClubTeams(tos);
+        ITypeOfSportDto tos = (ITypeOfSportDto) comboSports.getSelectedItem();
+        List<IClubTeamDto> clubTeamOfSport = parent.getClubTeams(tos);
         return clubTeamOfSport.toArray();
     }
        

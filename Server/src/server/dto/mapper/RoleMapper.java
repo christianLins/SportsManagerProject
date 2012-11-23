@@ -7,10 +7,10 @@ package server.dto.mapper;
 import contract.dto.mapper.IdNotFoundException;
 import contract.dto.mapper.IMapper;
 import contract.dto.mapper.NotFoundException;
-import contract.dto.IRole;
-import contract.dto.ITrainer;
-import contract.dto.IPlayer;
-import contract.dto.IDepartmentHead;
+import contract.dto.IRoleDto;
+import contract.dto.ITrainerDto;
+import contract.dto.IPlayerDto;
+import contract.dto.IDepartmentHeadDto;
 import java.util.*;
 
 /**
@@ -18,7 +18,7 @@ import java.util.*;
  @author Thomas
  */
 public class RoleMapper
-        implements IMapper<IRole>
+        implements IMapper<IRoleDto>
 {
     private static RoleMapper controller;
 
@@ -26,7 +26,7 @@ public class RoleMapper
     {
     }
 
-    public static IMapper<IRole> getInstance()
+    public static IMapper<IRoleDto> getInstance()
     {
         if (controller == null)
         {
@@ -37,12 +37,12 @@ public class RoleMapper
     }
 
     @Override
-    public IRole getById(Integer id)
+    public IRoleDto getById(Integer id)
             throws IdNotFoundException
     {
         try
         {
-            IRole r = PlayerMapper.getInstance().getById(id);
+            IRoleDto r = PlayerMapper.getInstance().getById(id);
             return r;
         }
         catch (IdNotFoundException e)
@@ -51,7 +51,7 @@ public class RoleMapper
 
         try
         {
-            IRole r = TrainerMapper.getInstance().getById(id);
+            IRoleDto r = TrainerMapper.getInstance().getById(id);
             return r;
         }
         catch (IdNotFoundException e)
@@ -60,7 +60,7 @@ public class RoleMapper
 
         try
         {
-            IRole r = DepartmentHeadMapper.getInstance().getById(id);
+            IRoleDto r = DepartmentHeadMapper.getInstance().getById(id);
             return r;
         }
         catch (IdNotFoundException e)
@@ -71,12 +71,12 @@ public class RoleMapper
     }
 
     @Override
-    public List<IRole> getAll()
+    public List<IRoleDto> getAll()
             throws NotFoundException
     {
         try
         {
-            List<IRole> roles = new LinkedList<>();
+            List<IRoleDto> roles = new LinkedList<>();
 
             roles.addAll(TrainerMapper.getInstance().getAll());
             roles.addAll(PlayerMapper.getInstance().getAll());
@@ -91,43 +91,43 @@ public class RoleMapper
     }
 
     @Override
-    public Integer set(IRole value)
+    public Integer set(IRoleDto value)
     {
-        if (value instanceof ITrainer)
+        if (value instanceof ITrainerDto)
         {
-            return TrainerMapper.getInstance().set((ITrainer) value);
+            return TrainerMapper.getInstance().set((ITrainerDto) value);
         }
-        else if (value instanceof IPlayer)
+        else if (value instanceof IPlayerDto)
         {
-            return PlayerMapper.getInstance().set((IPlayer) value);
+            return PlayerMapper.getInstance().set((IPlayerDto) value);
         }
-        else if (value instanceof IDepartmentHead)
+        else if (value instanceof IDepartmentHeadDto)
         {
-            return DepartmentHeadMapper.getInstance().set((IDepartmentHead) value);
+            return DepartmentHeadMapper.getInstance().set((IDepartmentHeadDto) value);
         }
 
         return 0;
     }
 
     @Override
-    public void delete(IRole value)
+    public void delete(IRoleDto value)
     {
-        if (value instanceof ITrainer)
+        if (value instanceof ITrainerDto)
         {
-            TrainerMapper.getInstance().delete((ITrainer) value);
+            TrainerMapper.getInstance().delete((ITrainerDto) value);
         }
-        else if (value instanceof IPlayer)
+        else if (value instanceof IPlayerDto)
         {
-            PlayerMapper.getInstance().delete((IPlayer) value);
+            PlayerMapper.getInstance().delete((IPlayerDto) value);
         }
-        else if (value instanceof IDepartmentHead)
+        else if (value instanceof IDepartmentHeadDto)
         {
-            DepartmentHeadMapper.getInstance().delete((IDepartmentHead) value);
+            DepartmentHeadMapper.getInstance().delete((IDepartmentHeadDto) value);
         }
     }
 
     @Override
-    public IRole getNew()
+    public IRoleDto getNew()
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
