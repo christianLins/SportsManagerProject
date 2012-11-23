@@ -16,7 +16,7 @@ public class HibernateTestDatabase
     private static final String CLASSENDING = ".class";
     private static final String EMPTYSTRING = "";
     private static final String METHODBEGINNING = "get";
-    private static final String PACKAGENAME = "domain.classes";
+    private static final String PACKAGENAME = "server.domain.classes";
 
     public Class[] getAllClasses() throws ClassNotFoundException
     {

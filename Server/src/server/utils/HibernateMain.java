@@ -1,9 +1,8 @@
-package server;
+package server.utils;
 
 import contract.domain.CouldNotFetchException;
 import java.util.logging.*;
 import server.domain.DomainFacade;
-import server.utils.HibernateTestDatabase;
 
 /**
  *

@@ -132,3 +132,4 @@ Server/dist/README.TXT
 /CorbaClient/build/
 /Contract/build/
 /Contract/dist/
+Contract/nbproject/private/config.properties
