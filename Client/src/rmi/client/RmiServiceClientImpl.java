@@ -34,8 +34,6 @@ public class RmiServiceClientImpl
     private void init()
             throws CommunicationProblemException
     {
-        System.setProperty("java.security.policy", "./client.policy");
-        System.setSecurityManager(new RMISecurityManager());
         try
         {
             rmiServiceClient = (RmiServiceClient) Naming.lookup("rmi://" + host + ":" + port + "/CommunicationFactory");
