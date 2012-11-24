@@ -6,27 +6,6 @@ PipesAndFilters/build/
 PipesAndFilters/.gitignore
 PipesAndFilters/nbproject/build-impl.xml
 
-DTO/nbproject/private/
-DTO/nbproject/private/private.properties
-DTO/dist/
-DTO/build/
-DTO/.gitignore
-DTO/nbproject/build-impl.xml
-
-CommunicationContract/nbproject/private/
-CommunicationContract/nbproject/private/private.properties
-CommunicationContract/dist/
-CommunicationContract/build/
-CommunicationContract/.gitignore
-CommunicationContract/nbproject/build-impl.xml
-
-DomainCore/nbproject/private/
-DomainCore/nbproject/private/private.properties
-DomainCore/dist/
-DomainCore/build/
-DomainCore/.gitignore
-DomainCore/nbproject/build-impl.xml
-
 Presentation/nbproject/private/
 Presentation/nbproject/private/private.properties
 Presentation/dist/
@@ -41,20 +20,6 @@ RmiClient/build/
 RmiClient/.gitignore
 RmiClient/nbproject/build-impl.xml
 
-RMIContract/nbproject/private/
-RMIContract/nbproject/private/private.properties
-RMIContract/dist/
-RMIContract/build/
-RMIContract/.gitignore
-RMIContract/nbproject/build-impl.xml
-
-RmiServer/nbproject/private/
-RmiServer/nbproject/private/private.properties
-RmiServer/dist/
-RmiServer/build/
-RmiServer/.gitignore
-RmiServer/nbproject/build-impl.xml
-
 Security/nbproject/private/
 Security/nbproject/private/private.properties/
 Security/dist/
@@ -62,52 +27,22 @@ Security/build/
 Security/.gitignore
 Security/nbproject/build-impl.xml
 
-UseCaseController/nbproject/private/
-UseCaseController/nbproject/private/private.properties
-UseCaseController/dist/
-UseCaseController/build/
-UseCaseController/.gitignore
-UseCaseController/nbproject/build-impl.xml
-CommunicationContract/nbproject/private/private.properties
-
-CommunicationContract/nbproject/private/private.xml
-
-DTO/nbproject/private/private.properties
-
-DomainCore/nbproject/private/private.properties
-
 Presentation/nbproject/private/private.properties
 
 Presentation/nbproject/private/private.xml
-
-RMIContract/nbproject/private/private.properties
 
 RmiClient/nbproject/private/private.properties
 
 RmiClient/nbproject/private/private.xml
 
-RmiServer/nbproject/private/private.properties
-
 Security/nbproject/private/private.properties
 
-UseCaseController/nbproject/private/private.properties
-
 *.class
-*.xml
 # Package Files #
 *.jar
 *.war
 *.ear
 
-/PresentationService/nbproject/private/private.xml
-/CommunicationContract/nbproject/private/org-nbheaven-sqe-core-java/CompileOnSaveHelper/0910581A/ServiceClientFactory.class
-/UseCaseControllerContract/build/
-/UseCaseControllerContract/dist/
-/PresentationService/build/
-/PresentationService/dist/
-DTO/nbproject/private/private.xml
-
-UseCaseControllerContract/nbproject/private/private.xml
 /CorbaServer/nbproject/private/
 /CorbaClient/nbproject/private/
 /Server/nbproject/private/
@@ -133,3 +68,9 @@ Server/dist/README.TXT
 /Contract/build/
 /Contract/dist/
 Contract/nbproject/private/config.properties
+
+PresentationAdapter/nbproject/private/private.xml
+
+PresentationService/nbproject/private/private.xml
+
+RMITest/nbproject/private/private.xml
