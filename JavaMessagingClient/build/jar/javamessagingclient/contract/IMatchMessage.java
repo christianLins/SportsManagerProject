@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package javamessagingclient;
+package javamessagingclient.contract;
 
 import javamessagingclient.stubs.IClubTeamDto;
 import javamessagingclient.stubs.ICompetitionDto;
