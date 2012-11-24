@@ -4,6 +4,8 @@
  */
 package presentation.forms.competition;
 
+import com.ServiceClient;
+import com.ServiceNotAvailableException;
 import contract.dto.*;
 import contract.useCaseController.IChangeCompetitionTeam;
 import java.util.LinkedList;
@@ -14,8 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.ListModel;
 import presentation.basics.AbstractForm;
 import presentation.basics.AbstractMainForm;
-import com.ServiceClient;
-import com.ServiceNotAvailableException;
 
 /**
  *

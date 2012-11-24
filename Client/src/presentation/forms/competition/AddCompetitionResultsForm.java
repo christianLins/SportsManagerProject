@@ -1,5 +1,7 @@
 package presentation.forms.competition;
 
+import com.ServiceClient;
+import com.ServiceNotAvailableException;
 import contract.dto.*;
 import contract.useCaseController.IAddMatchResults;
 import java.util.List;
@@ -8,8 +10,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 import presentation.basics.AbstractForm;
 import presentation.basics.AbstractMainForm;
-import com.ServiceClient;
-import com.ServiceNotAvailableException;
 
 /**
 
@@ -263,7 +263,7 @@ public class AddCompetitionResultsForm
     }//GEN-LAST:event_btnAddResultActionPerformed
 
     private void checkBoxFinishedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxFinishedActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_checkBoxFinishedActionPerformed
 
     private String[] getAllCompetitions()

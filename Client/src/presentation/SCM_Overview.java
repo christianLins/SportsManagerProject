@@ -47,6 +47,7 @@ public class SCM_Overview
         paneMemberNavi = new javax.swing.JPanel();
         btnMember = new javax.swing.JButton();
         btnNewMember = new javax.swing.JButton();
+        btnAddToTeam = new javax.swing.JButton();
         paneMemberMain = new javax.swing.JPanel();
         tabMatch = new javax.swing.JSplitPane();
         paneCompNavi = new javax.swing.JPanel();
@@ -82,6 +83,13 @@ public class SCM_Overview
             }
         });
 
+        btnAddToTeam.setText("Add To Team");
+        btnAddToTeam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddToTeamActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout paneMemberNaviLayout = new javax.swing.GroupLayout(paneMemberNavi);
         paneMemberNavi.setLayout(paneMemberNaviLayout);
         paneMemberNaviLayout.setHorizontalGroup(
@@ -90,7 +98,8 @@ public class SCM_Overview
                 .addContainerGap()
                 .addGroup(paneMemberNaviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnNewMember, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                    .addComponent(btnMember, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnMember, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAddToTeam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         paneMemberNaviLayout.setVerticalGroup(
@@ -100,7 +109,9 @@ public class SCM_Overview
                 .addComponent(btnMember)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnNewMember)
-                .addContainerGap(486, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(btnAddToTeam)
+                .addContainerGap(432, Short.MAX_VALUE))
         );
 
         tabMember.setLeftComponent(paneMemberNavi);
@@ -312,8 +323,19 @@ public class SCM_Overview
             Logger.getLogger(SCM_Overview.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnChangeTeamActionPerformed
+
+    private void btnAddToTeamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToTeamActionPerformed
+        paneMemberMain.removeAll();
+            paneMemberMain = new AddToATeamForm(null, rmiClient, user).getPanel();
+
+            tabMember.setRightComponent(paneMemberMain);
+            tabMember.validate();
+            tabMember.repaint();
+    }//GEN-LAST:event_btnAddToTeamActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddResult;
+    private javax.swing.JButton btnAddToTeam;
     private javax.swing.JButton btnChangeTeam;
     private javax.swing.JButton btnCreateCompetition;
     private javax.swing.JButton btnMember;

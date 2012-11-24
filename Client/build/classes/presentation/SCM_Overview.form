@@ -95,6 +95,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="btnNewMember" pref="120" max="32767" attributes="0"/>
                               <Component id="btnMember" max="32767" attributes="0"/>
+                              <Component id="btnAddToTeam" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -107,7 +108,9 @@
                           <Component id="btnMember" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnNewMember" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="486" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="btnAddToTeam" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="432" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -127,6 +130,14 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNewMemberActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnAddToTeam">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Add To Team"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddToTeamActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
