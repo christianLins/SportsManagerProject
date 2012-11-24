@@ -55,7 +55,7 @@ public class DomainFacade
         try
         {
             session.beginTransaction();
-            Query q = session.createQuery("From Member where Username = :Username");
+            Query q = session.createQuery("From ClubMember where Username = :Username");
             q.setParameter("Username", username);
             return (Member) q.uniqueResult();
         }
