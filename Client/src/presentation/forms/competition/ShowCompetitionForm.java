@@ -5,6 +5,7 @@ import com.ServiceNotAvailableException;
 import contract.dto.*;
 import contract.useCaseController.IShowCompetition;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.event.*;
 import javax.swing.table.TableModel;
@@ -56,7 +57,7 @@ public class ShowCompetitionForm extends AbstractMainForm {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(848, 549));
 
-        comboCompetition.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboCompetition.setModel(new javax.swing.DefaultComboBoxModel(getCompetitions()));
         comboCompetition.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboCompetitionActionPerformed(evt);
@@ -151,94 +152,103 @@ public class ShowCompetitionForm extends AbstractMainForm {
     }// </editor-fold>//GEN-END:initComponents
 
     private void comboCompetitionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCompetitionActionPerformed
-        competition = (ICompetitionDto) comboCompetition.getSelectedItem();
-        setNewCompTable();
+        competition = (ICompetitionDto) comboCompetition.getSelectedItem(); //set competition new
+        compMatches = controller.getMatchs(competition.getMatchList());     //get the competitions matches
+        
+        if (competition != null) {
+            setNewCompTable();
+        }
     }//GEN-LAST:event_comboCompetitionActionPerformed
+
+    private Object[] getCompetitions() {
+        if (controller.getCompetitions() != null) {
+            return controller.getCompetitions().toArray();
+        } else {
+            JOptionPane.showMessageDialog(null, "There are currently no competitions!");
+            return new Object[0];
+        }
+    }
 
     private void setNewCompTable() {
         TableModel tableModel = tableCompetition.getModel();
-        List<IMatchDto> matchList = controller.getMatchs(competition.getMatchList());
 
-        for (int row = 0; row < matchList.size(); row++) {
-            IMatchDto tmp = matchList.get(row);
-            compMatches.add(tmp);
+        for (int row = 0; row < compMatches.size(); row++) {
+            int i = 0;
+            IMatchDto tmp = compMatches.get(row);     //get next match from list
 
-            tableModel.setValueAt(tmp.getHometeam().getName(), row, 0);
-            tableModel.setValueAt(tmp.getForeignteam().getName(), row, 1);
-            tableModel.setValueAt(tmp.getMatchresult().getPointsHometeam() + " : " + tmp.getMatchresult().getPointsForeignteam(), row, 2);
+            tableModel.setValueAt(tmp.getHometeam().getName(), row, i++);
+            tableModel.setValueAt(tmp.getForeignteam().getName(), row, i++);
+            tableModel.setValueAt(tmp.getMatchresult().getPointsHometeam() + " : " + tmp.getMatchresult().getPointsForeignteam(), row, i);
         }
         tableCompetition.setModel(tableModel);
     }
-    
+
     private void tableCompetitionValueChanged(ListSelectionEvent e) {
         final int row = tableCompetition.getSelectedRow();
         IMatchDto match = compMatches.get(row);
 
         setNewMembersTable(match);
     }
-    
+
     private void setNewMembersTable(IMatchDto match) {
         TableModel tableModel = tableOurMembers.getModel();
-        findClubTeams();
+        findClubTeams();    //build up list with club teams
 
-        if (findClubTeam(match) == true) {
+        //check if selected match contains relevant clubteam
+        if (containsClubTeam(match) == true) {
             List<IPlayerDto> tmpPlayer = controller.getPlayer(cTeam);
             int counter;
 
             for (int row = 0; row < tmpPlayer.size(); row++) {
-                counter = 0; 
-                
+                counter = 0;
+
                 String[] fullname = tmpPlayer.get(row).getName().split(" ");
-                tableModel.setValueAt(fullname[counter], row, counter++);     // first name
+                tableModel.setValueAt(fullname[counter], row, counter++);   // first name
                 tableModel.setValueAt(fullname[counter], row, counter);     // last name
             }
         }
         tableOurMembers.setModel(tableModel);
     }
-    
-    private String[] getAllCompetitions() {
-        List<ICompetitionDto> compList = controller.getCompetitions();
-        String[] compArray = new String[compList.size()];
-
-        for (int i = 0; i < compArray.length; i++) {
-            compArray[i] = compList.get(i)/*.getName()*/.toString();
-        }
-        return compArray;
-    }
 
     private void findClubTeams() {
-        List<IMatchDto> matchList = controller.getMatchs(competition.getMatchList());
         clubTeams = null;
 
-        for (IMatchDto m : matchList) {
-            if (m.getForeignteam().getClass().isInstance(clubTeams)) {
+        for (IMatchDto m : compMatches) {
+            if (m.getForeignteam() instanceof IClubTeamDto) {
                 clubTeams.add((IClubTeamDto) m.getForeignteam());
             }
-            if (m.getHometeam().getClass().isInstance(clubTeams)) {
+            if (m.getHometeam() instanceof IClubTeamDto) {
                 clubTeams.add((IClubTeamDto) m.getHometeam());
             }
         }
     }
-    
-    private boolean findClubTeam(IMatchDto match) {
 
+    private boolean containsClubTeam(IMatchDto match) {
         for (IClubTeamDto ct : clubTeams) {
             if (ct.equals(match.getHometeam())) {
                 cTeam = ct;
                 return true;
-            }
-            if (ct.equals(match.getForeignteam())) {
+            } else if (ct.equals(match.getForeignteam())) {
                 cTeam = ct;
                 return true;
             }
         }
         return false;
     }
-    
-    public JPanel getPanel(){
+
+    public JPanel getPanel() {
         return paneShowCompetition;
     }
-    
+//    private Object[] getAllCompetitions() {        
+//        List<ICompetitionDto> compList = controller.getCompetitions();
+//        String[] compArray = new String[compList.size()];
+//
+//        for (int i = 0; i < compArray.length; i++) {
+//            compArray[i] = compList.get(i).getName();
+//        }
+//         
+//        return compArray;
+//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox comboCompetition;
     private javax.swing.JLabel lblCompetition;

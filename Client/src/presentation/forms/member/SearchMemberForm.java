@@ -132,7 +132,7 @@ public class SearchMemberForm
         });
         jScrollPane1.setViewportView(tabMember);
 
-        paneMemberData.setBorder(javax.swing.BorderFactory.createTitledBorder("Details"));
+        paneMemberData.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
         lblFName.setText("First Name");
 
@@ -480,11 +480,8 @@ public class SearchMemberForm
         if (txtfieldSearchMemb.getText() == null) {
             JOptionPane.showMessageDialog(parent, "Please enter a name!");
         } else {
-            matchingMembers = controller.getMatchingMembers(txtfieldSearchMemb.getText());
-
-            if (matchingMembers == null || matchingMembers.isEmpty()) {
-                JOptionPane.showMessageDialog(parent, "Your entry ' " + txtfieldSearchMemb.getText() + "' could not be found!");
-            } else {
+            try {
+                matchingMembers = controller.getMatchingMembers(txtfieldSearchMemb.getText());
                 TableModel tableModel = tabMember.getModel();
 
                 for (int row = 0; row < matchingMembers.size(); row++) {
@@ -494,10 +491,11 @@ public class SearchMemberForm
                     tableModel.setValueAt(tmpMember.getPrename(), row, 1);
                     tableModel.setValueAt(tmpMember.getLastname(), row, 2);
                     tableModel.setValueAt(tmpMember.getDateOfBirth().toString(), row, 3);
-
                     tableModel.setValueAt(tmpMember.getGender() ? "female" : "male", row, 4);
                 }
                 tabMember.setModel(tableModel);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(parent, "Your entry ' " + txtfieldSearchMemb.getText() + "' could not be found!");
             }
         }
     }//GEN-LAST:event_btnSearchActionPerformed

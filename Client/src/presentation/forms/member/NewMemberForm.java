@@ -110,7 +110,7 @@ public class NewMemberForm
         paneNewMember.setName(""); // NOI18N
         paneNewMember.setPreferredSize(new java.awt.Dimension(848, 546));
 
-        panePersonData.setBorder(javax.swing.BorderFactory.createTitledBorder("Person Data"));
+        panePersonData.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Person Data", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
         lblFName.setText("First Name");
 
@@ -245,7 +245,7 @@ public class NewMemberForm
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        paneMembershipData.setBorder(javax.swing.BorderFactory.createTitledBorder("Membership Data"));
+        paneMembershipData.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Membership Data", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
         lblEntryDate.setText("Entry Date");
 
@@ -373,7 +373,7 @@ public class NewMemberForm
                 .addComponent(panePersonData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(paneMembershipData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(btnSaveMember)
                 .addGap(18, 18, 18))
         );
@@ -444,6 +444,7 @@ public class NewMemberForm
 
     // TODO add getAvailableSports by logged in user 
     private List<Integer> loadSportsList(){
+        
 //        return controller.getAvailableSportsList(user);
         return null;
     }

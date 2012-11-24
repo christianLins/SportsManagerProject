@@ -53,6 +53,7 @@ public class AddToATeamForm extends AbstractMainForm {
         listPlayer = new javax.swing.JList();
         jScrollPane3 = new javax.swing.JScrollPane();
         listTrainer = new javax.swing.JList();
+        btnSave = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(848, 546));
@@ -136,6 +137,13 @@ public class AddToATeamForm extends AbstractMainForm {
         });
         jScrollPane3.setViewportView(listTrainer);
 
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout thePanelLayout = new javax.swing.GroupLayout(thePanel);
         thePanel.setLayout(thePanelLayout);
         thePanelLayout.setHorizontalGroup(
@@ -165,6 +173,10 @@ public class AddToATeamForm extends AbstractMainForm {
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblTrainer))))
                 .addContainerGap(161, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, thePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSave)
+                .addContainerGap())
         );
         thePanelLayout.setVerticalGroup(
             thePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,7 +207,9 @@ public class AddToATeamForm extends AbstractMainForm {
                         .addGroup(thePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                             .addComponent(jScrollPane2))))
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
+                .addComponent(btnSave)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -245,6 +259,10 @@ public class AddToATeamForm extends AbstractMainForm {
         
     }//GEN-LAST:event_btnAddActionPerformed
 
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSaveActionPerformed
+
     public JPanel getPanel(){
         return thePanel;
     }
@@ -252,6 +270,7 @@ public class AddToATeamForm extends AbstractMainForm {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnRemove;
+    private javax.swing.JButton btnSave;
     private javax.swing.JCheckBox checkBoxPlayer;
     private javax.swing.JCheckBox checkBoxTrainer;
     private javax.swing.JComboBox comboTeam;
