@@ -35,8 +35,9 @@ public class Role
     })
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Permission> permissionList;
-    @ManyToMany(mappedBy = "roleList")
-    private List<Member> members;
+    @JoinColumn(name="MemberId",referencedColumnName="id")
+    @ManyToOne
+    private Member member;
 
     public Role()
     {
@@ -97,27 +98,15 @@ public class Role
     }
 
     @Override
-    public List<IMember> getMembers()
+    public IMember getMember()
     {
-        if (members == null)
-        {
-            this.members = new LinkedList<>();
-        }
-        List<IMember> mem = new LinkedList<>();
-        for (Member m : members)
-        {
-            mem.add(m);
-        }
-        return mem;
+        return this.member;
     }
 
     @Override
-    public void setMembers(List<IMember> members)
+    public void setMember(IMember member)
     {
-        for (IMember m : members)
-        {
-            this.members.add((Member) m);
-        }
+        this.member = (Member) member;
     }
 
     @Override

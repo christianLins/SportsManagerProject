@@ -49,16 +49,4 @@ public class PlayerDto
     {
         this.typeOfSportList = typeOfSportList;
     }
-
-    @Override
-    public List<Integer> getMembers()
-    {
-        return this.memberList;
-    }
-
-    @Override
-    public void setMembers(List<Integer> members)
-    {
-        this.memberList = members;
-    }
 }

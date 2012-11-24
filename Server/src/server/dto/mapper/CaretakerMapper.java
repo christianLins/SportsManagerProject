@@ -130,14 +130,7 @@ public class CaretakerMapper
 
         caretaker.setPermissionList(permissionList);
 
-
-        List<contract.domain.IMember> members = new LinkedList<>();
-        for (int id : value.getMembers())
-        {
-            members.add(new MemberMapper().getDomainById(id));
-        }
-
-        caretaker.setMembers(members);
+        caretaker.setMember(new MemberMapper().getDomainById(value.getMember()));
 
         caretaker.setName(value.getName());
         caretaker.setDescription(value.getDescription());

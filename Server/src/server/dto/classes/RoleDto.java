@@ -18,7 +18,7 @@ abstract class RoleDto
     private String name;
     private String description;
     private List<Integer> permissionList;
-    private List<Integer> memberList;
+    private Integer member;
 
     public RoleDto()
     {
@@ -37,13 +37,7 @@ abstract class RoleDto
         }
         role.setPermisssionList(perList);
 
-        List<Integer> memList = new LinkedList<>();
-
-        for (contract.domain.IMember mem : domainRole.getMembers())
-        {
-            memList.add(mem.getId());
-        }
-        role.setMembers(memList);
+        role.setMember(domainRole.getMember().getId());
 
         return role;
     }
@@ -55,9 +49,9 @@ abstract class RoleDto
     }
 
     @Override
-    public List<Integer> getMembers()
+    public Integer getMember()
     {
-        return memberList;
+        return member;
     }
 
     @Override
@@ -85,9 +79,9 @@ abstract class RoleDto
     }
 
     @Override
-    public void setMembers(List<Integer> members)
+    public void setMember(Integer member)
     {
-        memberList = members;
+        this.member = member;
     }
 
     @Override

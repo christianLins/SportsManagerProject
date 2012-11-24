@@ -33,7 +33,7 @@ public class TypeOfSport
         @JoinColumn(name = "TypeOfSport_idTypeOfSport",referencedColumnName="id")
     }, inverseJoinColumns =
     {
-        @JoinColumn(name = "Player_Role_idRole",referencedColumnName="id")
+        @JoinColumn(name = "Player_idPlayer",referencedColumnName="id")
     })
     @ManyToMany
     private List<Player> playerList;

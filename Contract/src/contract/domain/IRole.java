@@ -14,7 +14,7 @@ public interface IRole
 {
     List<IPermission> getPermissionList();
 
-    List<IMember> getMembers();
+    IMember getMember();
 
     String getName();
 
@@ -22,7 +22,7 @@ public interface IRole
 
     void setName(String name);
 
-    void setMembers(List<IMember> members);
+    void setMember(IMember member);
 
     void setPermissionList(List<IPermission> permisssionList);
 

@@ -1,7 +1,7 @@
 package server.domain.classes;
 
-import contract.domain.IDepartmentHead;
 import contract.domain.IDepartment;
+import contract.domain.IDepartmentHead;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;

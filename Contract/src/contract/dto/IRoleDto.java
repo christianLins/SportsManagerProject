@@ -14,7 +14,7 @@ public interface IRoleDto
 {
     List<Integer> getPermisssionList();
 
-    List<Integer> getMembers();
+    Integer getMember();
 
     String getName();
 
@@ -24,7 +24,7 @@ public interface IRoleDto
 
     void setDescription(String description);
 
-    void setMembers(List<Integer> members);
+    void setMember(Integer member);
 
     void setPermisssionList(List<Integer> permisssionList);
 }

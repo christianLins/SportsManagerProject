@@ -31,7 +31,7 @@ public class ClubTeam
     private List<Department> departmentList;
     @JoinTable(name = "Team_has_Player", joinColumns =
     {
-        @JoinColumn(name = "ClubTeam_idTeam", referencedColumnName = "id")
+        @JoinColumn(name = "ClubTeam_idClubTeam", referencedColumnName = "id")
     }, inverseJoinColumns =
     {
         @JoinColumn(name = "Player_idPlayer", referencedColumnName = "id")

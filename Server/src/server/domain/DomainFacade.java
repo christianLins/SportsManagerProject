@@ -74,7 +74,10 @@ public class DomainFacade
     public Department getDepartmentsBySport(TypeOfSport sport)
     {
         session.beginTransaction();
-        Query q = session.createQuery("From Department where typeOfSports = :sport");
+        Query q = session.createQuery("Select dep From Department as dep"
+                + " inner join dep.typeOfSports as sport"
+                + " where sport = :sport");
+        
         q.setParameter("sport", sport);
         return (Department) q.uniqueResult();
     }
@@ -103,7 +106,10 @@ public class DomainFacade
     public Member getMemberByName(String firstname, String lastname)
     {
         session.beginTransaction();
-        Query query = session.createQuery("From Member1 where prename = :firstname and lastname = :lastname");
+        Query query = session.createQuery("From Member "
+                + "where prename = :firstname and lastname = :lastname");
+        query.setParameter("lastname", lastname);
+        query.setParameter("firstname", firstname);
         return (Member) query.uniqueResult();
     }
 
@@ -206,8 +212,11 @@ public class DomainFacade
         try
         {
             session.beginTransaction();
-            Query q = session.createQuery("From League where sport = :t and name = :leaguename");
-            q.setParameter("t", t);
+            Query q = session.createQuery("Select league From League as league"
+                    + " inner join league.typeOfSport as sport"
+                    + " where sport = :sport and"
+                    + " league.name = :leaguename");
+            q.setParameter("sport", t);
             q.setParameter("leaguename", leaguename);
             return (League) q.uniqueResult();
         }
@@ -220,8 +229,10 @@ public class DomainFacade
     public List<ClubTeam> getClubTeamsByTypeOfSport(ITypeOfSport sport) throws CouldNotFetchException{
         try {
             session.beginTransaction();
-            Query q = session.createQuery("From ClubTeam where League.typeOfSport =:sport");
-            q.setParameter("sport", sport);
+            Query q = session.createQuery("Select team From ClubTeam as team"
+                    + " inner join team.league.typeOfSport as sport"
+                    + " where sport = :tsport");
+            q.setParameter("tsport", sport);
             return q.list();
         } 
         catch (HibernateException e) 

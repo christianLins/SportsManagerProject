@@ -56,14 +56,7 @@ public class Member
     @JoinColumn(name = "Address", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Address address;
-    @JoinTable(name="Member_has_Role",joinColumns=
-    {
-        @JoinColumn(name="Member_idMember",referencedColumnName="id")
-    },inverseJoinColumns=
-    {
-        @JoinColumn(name="Role_idRole",referencedColumnName="id")
-    })
-    @ManyToMany(fetch= FetchType.LAZY)
+    @OneToMany(cascade= CascadeType.ALL,mappedBy="member")
     private List<Role> roleList;
 
     public Member()

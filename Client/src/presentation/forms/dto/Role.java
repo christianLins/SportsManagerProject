@@ -15,7 +15,7 @@ public class Role
         implements IRoleDto
 {
     List<Integer> permisssionList;
-    List<Integer> members;
+    Integer member;
     String name;
 
     @Override
@@ -31,15 +31,15 @@ public class Role
     }
 
     @Override
-    public List<Integer> getMembers()
+    public Integer getMember()
     {
-        return members;
+        return member;
     }
 
     @Override
-    public void setMembers(List<Integer> members)
+    public void setMember(Integer member)
     {
-        this.members = members;
+        this.member = member;
     }
 
     @Override
