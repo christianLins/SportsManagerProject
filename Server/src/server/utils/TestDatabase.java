@@ -37,6 +37,9 @@ public class TestDatabase extends javax.swing.JFrame
         checkBoxObjects = new javax.swing.JCheckBox();
         checkBoxQueries = new javax.swing.JCheckBox();
         jToggleButton1 = new javax.swing.JToggleButton();
+        message = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        errormessage = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(140, 131));
@@ -73,6 +76,10 @@ public class TestDatabase extends javax.swing.JFrame
             }
         });
 
+        errormessage.setColumns(20);
+        errormessage.setRows(5);
+        jScrollPane1.setViewportView(errormessage);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -80,11 +87,18 @@ public class TestDatabase extends javax.swing.JFrame
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(checkBoxQueries)
-                    .addComponent(jLabel1)
-                    .addComponent(checkBoxObjects)
-                    .addComponent(jToggleButton1))
-                .addContainerGap(41, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(170, 170, 170)
+                                .addComponent(message, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(checkBoxQueries)
+                            .addComponent(jLabel1)
+                            .addComponent(checkBoxObjects)
+                            .addComponent(jToggleButton1))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,7 +111,11 @@ public class TestDatabase extends javax.swing.JFrame
                 .addComponent(checkBoxQueries)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jToggleButton1)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(message)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -115,6 +133,8 @@ public class TestDatabase extends javax.swing.JFrame
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jToggleButton1ActionPerformed
     {//GEN-HEADEREND:event_jToggleButton1ActionPerformed
+        message.setText("");
+        try{
         HibernateTestDatabase test = new HibernateTestDatabase();
         if(objects)
         {
@@ -123,6 +143,14 @@ public class TestDatabase extends javax.swing.JFrame
         if(queries)
         {
             test.runQueryTests();
+        }
+        }catch(Exception ex)
+        {
+            errormessage.setText(ex.getMessage());
+        }
+        finally
+        {
+            message.setText("Done");
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
@@ -179,7 +207,10 @@ public class TestDatabase extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox checkBoxObjects;
     private javax.swing.JCheckBox checkBoxQueries;
+    private javax.swing.JTextArea errormessage;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JLabel message;
     // End of variables declaration//GEN-END:variables
 }
