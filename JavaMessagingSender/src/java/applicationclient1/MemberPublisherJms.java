@@ -4,8 +4,8 @@
  */
 package applicationclient1;
 
+import applicationclient1.stubs.*;
 import java.io.*;
-import java.util.*;
 import java.util.logging.*;
 import javax.jms.*;
 import javax.naming.*;
@@ -14,12 +14,12 @@ import javax.naming.*;
 
  @author Thomas
  */
-public class MatchPublisherJms
+public class MemberPublisherJms
 {
     /**
      @param args the command line arguments
      */
-    public void publish(IClubTeamDto clubTeam, ICompetitionDto competition)
+    public void publish(IDepartmentDto department, IMemberDto member)
     {
         try
         {
@@ -27,10 +27,10 @@ public class MatchPublisherJms
             InitialContext ctx = new InitialContext();
 
             // lookup the topic object
-            Topic topic = (Topic) ctx.lookup("topic/memberAddedToClubTeamTopic");
+            Topic topic = (Topic) ctx.lookup("topic/memberAddedToDepartmentTopic");
 
             // lookup the topic connection factory
-            TopicConnectionFactory connFactory = (TopicConnectionFactory) ctx.lookup("topic/memberAddedToClubTeamFactory");
+            TopicConnectionFactory connFactory = (TopicConnectionFactory) ctx.lookup("topic/memberAddedToDepartmentFactory");
 
             // create a topic connection
             TopicConnection topicConn = connFactory.createTopicConnection();
@@ -45,10 +45,7 @@ public class MatchPublisherJms
             InputStreamReader inputStreamReader = new InputStreamReader(System.in);
             BufferedReader reader = new BufferedReader(inputStreamReader);
 
-            for(IPlayerDto player : clubTeam.getPlayerList())
-            {
-                IMemberDto member = DtoFactory.getMemberMapper().getMemberByRole(player);
-            MatchMessage msg = new MatchMessage(member, competition, clubTeam);
+            MemberDepartmentMessage msg = new MemberDepartmentMessage(member, department);
             // create the "Hello World" message
             ObjectMessage message = topicSession.createObjectMessage(msg);
 
@@ -57,17 +54,17 @@ public class MatchPublisherJms
 
             // print what we did
             System.out.println("published: " + message);
-            }
+
             // close the topic connection
             topicConn.close();
         }
         catch (JMSException ex)
         {
-            Logger.getLogger(MatchPublisherJms.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MemberPublisherJms.class.getName()).log(Level.SEVERE, null, ex);
         }
         catch (NamingException ex)
         {
-            Logger.getLogger(MatchPublisherJms.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MemberPublisherJms.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

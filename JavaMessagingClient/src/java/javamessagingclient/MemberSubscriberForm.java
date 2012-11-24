@@ -4,34 +4,34 @@
  */
 package javamessagingclient;
 
-import javamessagingclient.stubs.IMemberDto;
 import java.util.*;
+import javamessagingclient.contract.*;
+import javamessagingclient.stubs.*;
 import javax.jms.*;
 import javax.swing.event.*;
-import javax.swing.table.TableModel;
 
 /**
 
  @author Thomas
  */
-public class SubscriberForm
+public class MemberSubscriberForm
         extends javax.swing.JFrame
         implements MessageListener, ExceptionListener
 {
-    private IMatchMessage selectedMessage = null;
-    private List<IMatchMessage> messages = new LinkedList<IMatchMessage>();
-    private DeleteMemberFromClubTeam controller = new DeleteMemberFromClubTeam();
-    private IMemberDto member;
-    private MatchSubscriberJms subscriberJms;
+    private IMemberDepartmentMessage selectedMessage = null;
+    private List<IMemberDepartmentMessage> messages = new LinkedList<IMemberDepartmentMessage>();
+    private AddMemberAddClubTeam controller = new AddMemberAddClubTeam();
+    private IDepartmentHeadDto departmentHeadDto;
+    private MemberSubscriberJms subscriberJms;
 
     /**
-     Creates new form SubscriberForm
+     Creates new form MatchSubscriberForm
      */
-    public SubscriberForm(IMemberDto member)
+    public MemberSubscriberForm(IDepartmentHeadDto departmentHead)
     {
         initComponents();
 
-        this.member = member;
+        this.departmentHeadDto = departmentHead;
 
         jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener()
         {
@@ -52,7 +52,7 @@ public class SubscriberForm
             }
         });
 
-        subscriberJms = new MatchSubscriberJms(member);
+        subscriberJms = new MemberSubscriberJms(departmentHead);
         subscriberJms.read(this, this);
     }
 
@@ -67,28 +67,11 @@ public class SubscriberForm
     private void initComponents()
     {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String []
-            {
-                "Datum", "Mannschaft", "Wettbewerb"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable1);
 
         jButton1.setText("Ja");
         jButton1.setEnabled(false);
@@ -132,11 +115,6 @@ public class SubscriberForm
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 254, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
-                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,11 +125,6 @@ public class SubscriberForm
                     .addComponent(jButton2)
                     .addComponent(jButton3))
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(53, Short.MAX_VALUE)))
         );
 
         pack();
@@ -177,30 +150,21 @@ public class SubscriberForm
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void onMessage(Message message)
     {
-        IMatchMessage msg = (IMatchMessage) message;
+        IMemberDepartmentMessage msg = (IMemberDepartmentMessage) message;
 
         System.out.println("received: " + msg);
 
-        if (!member.getUsername().equals(msg.getMember().getUsername()))
+        if (!departmentHeadDto.getDepartmentList().contains(msg.getDepartment()))
         {
             return;
         }
         messages.add(msg);
 
-        TableModel tableModel = jTable1.getModel();
-
-        tableModel.setValueAt(msg.getDate(), tableModel.getRowCount() + 1, 0);
-        tableModel.setValueAt(msg.getClubTeam(), tableModel.getRowCount() + 1, 1);
-        tableModel.setValueAt(msg.getCompetition(), tableModel.getRowCount() + 1, 2);
-
-        jTable1.setModel(tableModel);
     }
 
     @Override
@@ -224,6 +188,7 @@ public class SubscriberForm
         {
             return;
         }
-        controller.deleteMemberFromClubTeam(selectedMessage.getClubTeam(), member);
+
+        //controller.deleteMemberFromClubTeam(selectedMessage.getClubTeam(), departmentHeadDto);
     }
 }

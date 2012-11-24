@@ -4,19 +4,16 @@
  */
 package applicationclient1.contract;
 
-import applicationclient1.stubs.*;
-import java.util.Date;
-import javax.jms.Message;
+import applicationclient1.stubs.IDepartmentDto;
+import applicationclient1.stubs.IMemberDto;
 
 /**
 
  @author Thomas
  */
-public interface IMatchMessage 
+public interface IMemberDepartmentMessage
 {
     IMemberDto getMember();
     
-     IClubTeamDto getClubTeam();
-
-     ICompetitionDto getCompetition();
+    IDepartmentDto getDepartment();
 }

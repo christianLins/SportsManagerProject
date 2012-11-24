@@ -4,8 +4,8 @@
  */
 package applicationclient1;
 
+import applicationclient1.stubs.*;
 import java.io.*;
-import java.util.*;
 import java.util.logging.*;
 import javax.jms.*;
 import javax.naming.*;
@@ -45,18 +45,17 @@ public class MatchPublisherJms
             InputStreamReader inputStreamReader = new InputStreamReader(System.in);
             BufferedReader reader = new BufferedReader(inputStreamReader);
 
-            for(IPlayerDto player : clubTeam.getPlayerList())
+            for (IPlayerDto player : clubTeam.getPlayerList())
             {
-                IMemberDto member = DtoFactory.getMemberMapper().getMemberByRole(player);
-            MatchMessage msg = new MatchMessage(member, competition, clubTeam);
-            // create the "Hello World" message
-            ObjectMessage message = topicSession.createObjectMessage(msg);
+                MatchMessage msg = new MatchMessage(player.getMember(), competition, clubTeam);
+                // create the "Hello World" message
+                ObjectMessage message = topicSession.createObjectMessage(msg);
 
-            // publish the messages
-            topicPublisher.publish(message);
+                // publish the messages
+                topicPublisher.publish(message);
 
-            // print what we did
-            System.out.println("published: " + message);
+                // print what we did
+                System.out.println("published: " + message);
             }
             // close the topic connection
             topicConn.close();

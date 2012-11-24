@@ -8,8 +8,7 @@ package applicationclient1.stubs;
 
  @author Thomas
  */
-public interface IClubTeamDto
+public interface IPlayerDto
 {
-
-    public Iterable<IPlayerDto> getPlayerList();
+    IMemberDto getMember();
 }

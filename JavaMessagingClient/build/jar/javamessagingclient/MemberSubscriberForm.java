@@ -7,6 +7,8 @@ package javamessagingclient;
 import javamessagingclient.contract.IMatchMessage;
 import javamessagingclient.stubs.IMemberDto;
 import java.util.*;
+import javamessagingclient.contract.*;
+import javamessagingclient.stubs.*;
 import javax.jms.*;
 import javax.swing.event.*;
 import javax.swing.table.TableModel;
@@ -15,24 +17,24 @@ import javax.swing.table.TableModel;
 
  @author Thomas
  */
-public class MatchSubscriberForm
+public class MemberSubscriberForm
         extends javax.swing.JFrame
         implements MessageListener, ExceptionListener
 {
-    private IMatchMessage selectedMessage = null;
-    private List<IMatchMessage> messages = new LinkedList<IMatchMessage>();
-    private DeleteMemberFromClubTeam controller = new DeleteMemberFromClubTeam();
-    private IMemberDto member;
-    private MatchSubscriberJms subscriberJms;
+    private IMemberDepartmentMessage selectedMessage = null;
+    private List<IMemberDepartmentMessage> messages = new LinkedList<IMemberDepartmentMessage>();
+    private AddMemberAddClubTeam controller = new AddMemberAddClubTeam();
+    private IDepartmentHeadDto departmentHeadDto;
+    private MemberSubscriberJms subscriberJms;
 
     /**
      Creates new form MatchSubscriberForm
      */
-    public MatchSubscriberForm(IMemberDto member)
+    public MemberSubscriberForm(IDepartmentHeadDto departmentHead)
     {
         initComponents();
 
-        this.member = member;
+        this.departmentHeadDto = departmentHead;
 
         jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener()
         {
@@ -53,7 +55,7 @@ public class MatchSubscriberForm
             }
         });
 
-        subscriberJms = new MatchSubscriberJms(member);
+        subscriberJms = new MemberSubscriberJms(departmentHead);
         subscriberJms.read(this, this);
     }
 
@@ -77,18 +79,25 @@ public class MatchSubscriberForm
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String []
-            {
-                "Mannschaft", "Wettbewerb"
-            }
-        ));
+                new Object[][]
+                {
+                    {
+                        null, null
+                    },
+                    {
+                        null, null
+                    },
+                    {
+                        null, null
+                    },
+                    {
+                        null, null
+                    }
+                },
+                new String[]
+                {
+                    "Mannschaft", "Wettbewerb"
+                }));
         jScrollPane2.setViewportView(jTable1);
 
         jButton1.setText("Ja");
@@ -124,8 +133,8 @@ public class MatchSubscriberForm
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
                 .addGap(307, 307, 307)
                 .addComponent(jButton1)
                 .addGap(39, 39, 39)
@@ -133,27 +142,25 @@ public class MatchSubscriberForm
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 254, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
+                .addContainerGap())));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(308, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                .addComponent(jButton1)
+                .addComponent(jButton2)
+                .addComponent(jButton3))
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(53, Short.MAX_VALUE)))
-        );
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(53, Short.MAX_VALUE))));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -185,22 +192,16 @@ public class MatchSubscriberForm
     @Override
     public void onMessage(Message message)
     {
-        IMatchMessage msg = (IMatchMessage) message;
+        IMemberDepartmentMessage msg = (IMemberDepartmentMessage) message;
 
         System.out.println("received: " + msg);
 
-        if (!member.getUsername().equals(msg.getMember().getUsername()))
+        if (!departmentHeadDto.getDepartmentList().contains(msg.getDepartment()))
         {
             return;
         }
         messages.add(msg);
 
-        TableModel tableModel = jTable1.getModel();
-
-        tableModel.setValueAt(msg.getClubTeam(), tableModel.getRowCount() + 1, 0);
-        tableModel.setValueAt(msg.getCompetition(), tableModel.getRowCount() + 1, 1);
-
-        jTable1.setModel(tableModel);
     }
 
     @Override
@@ -224,6 +225,7 @@ public class MatchSubscriberForm
         {
             return;
         }
-        controller.deleteMemberFromClubTeam(selectedMessage.getClubTeam(), member);
+
+        //controller.deleteMemberFromClubTeam(selectedMessage.getClubTeam(), departmentHeadDto);
     }
 }

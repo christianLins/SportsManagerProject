@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package applicationclient1.stubs;
+package javamessagingclient.stubs;
 
 /**
 
@@ -10,6 +10,4 @@ package applicationclient1.stubs;
  */
 public interface IClubTeamDto
 {
-
-    public Iterable<IPlayerDto> getPlayerList();
 }

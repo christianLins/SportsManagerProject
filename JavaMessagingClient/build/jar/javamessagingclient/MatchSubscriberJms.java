@@ -4,31 +4,31 @@
  */
 package javamessagingclient;
 
+import javamessagingclient.stubs.IMemberDto;
 import java.util.logging.*;
-import javamessagingclient.stubs.IDepartmentHeadDto;
 import javax.jms.*;
 import javax.naming.*;
 
 /**
  @author Thomas
  */
-public class MemberSubscriberJms
+public class MatchSubscriberJms
 {
-    IDepartmentHeadDto departmentHead;
+    IMemberDto member;
 
-    public IDepartmentHeadDto getDepartmentHead()
+    public MatchSubscriberJms(IMemberDto member)
     {
-        return departmentHead;
+        this.member = member;
     }
 
-    public void setDepartmentHead(IDepartmentHeadDto departmentHead)
+    public IMemberDto getMember()
     {
-        this.departmentHead = departmentHead;
+        return member;
     }
 
-    public MemberSubscriberJms(IDepartmentHeadDto departmentHead)
+    public void setMember(IMemberDto member)
     {
-        this.departmentHead = departmentHead;
+        this.member = member;
     }
 
     public void read(MessageListener messageListener, ExceptionListener exceptionListener)
@@ -39,19 +39,19 @@ public class MemberSubscriberJms
             InitialContext ctx = new InitialContext();
 
             // lookup the topic object
-            Topic topic = (Topic) ctx.lookup("topic/memberAddedToDepartmentTopic");
+            Topic topic = (Topic) ctx.lookup("topic/memberAddedToClubTeamTopic");
 
             // lookup the topic connection factory
-            TopicConnectionFactory connFactory = (TopicConnectionFactory) ctx.lookup("topic/memberAddedToDepartmentFactory");
+            TopicConnectionFactory connFactory = (TopicConnectionFactory) ctx.lookup("topic/memberAddedToClubTeamFactory");
 
             // create a topic connection
             TopicConnection topicConn = connFactory.createTopicConnection();
-            topicConn.setClientID(departmentHead.getMember().getUsername());
+            topicConn.setClientID(member.getUsername());
             // create a topic session
             TopicSession topicSession = topicConn.createTopicSession(false, Session.AUTO_ACKNOWLEDGE);
 
             // create a topic subscriber
-            TopicSubscriber topicSubscriber = topicSession.createDurableSubscriber(topic, departmentHead.getMember().getUsername());
+            TopicSubscriber topicSubscriber = topicSession.createDurableSubscriber(topic, member.getUsername());
 
             // set an asynchronous message listener
             topicSubscriber.setMessageListener(messageListener);
@@ -76,15 +76,15 @@ public class MemberSubscriberJms
         }
         catch (InterruptedException ex)
         {
-            Logger.getLogger(MemberSubscriberJms.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MatchSubscriberJms.class.getName()).log(Level.SEVERE, null, ex);
         }
         catch (JMSException ex)
         {
-            Logger.getLogger(MemberSubscriberJms.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MatchSubscriberJms.class.getName()).log(Level.SEVERE, null, ex);
         }
         catch (NamingException ex)
         {
-            Logger.getLogger(MemberSubscriberJms.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MatchSubscriberJms.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
