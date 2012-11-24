@@ -108,6 +108,7 @@ public class NewMemberForm
         setMinimumSize(new java.awt.Dimension(848, 549));
 
         paneNewMember.setName(""); // NOI18N
+        paneNewMember.setPreferredSize(new java.awt.Dimension(848, 546));
 
         panePersonData.setBorder(javax.swing.BorderFactory.createTitledBorder("Person Data"));
 
@@ -132,8 +133,18 @@ public class NewMemberForm
         lblPhone.setText("Phone");
 
         radioFemale.setText("female");
+        radioFemale.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                radioFemaleStateChanged(evt);
+            }
+        });
 
         radioMale.setText("male");
+        radioMale.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                radioMaleStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout panePersonDataLayout = new javax.swing.GroupLayout(panePersonData);
         panePersonData.setLayout(panePersonDataLayout);
@@ -149,16 +160,19 @@ public class NewMemberForm
                     .addComponent(lblPhone))
                 .addGap(26, 26, 26)
                 .addGroup(panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtfieldCity)
-                        .addComponent(txtfieldFName)
-                        .addComponent(txtfieldAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtfieldPhone)
-                        .addGroup(panePersonDataLayout.createSequentialGroup()
-                            .addComponent(dateChooserBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(96, 96, 96))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                    .addGroup(panePersonDataLayout.createSequentialGroup()
+                        .addGroup(panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtfieldPhone)
+                            .addGroup(panePersonDataLayout.createSequentialGroup()
+                                .addGroup(panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtfieldCity)
+                                    .addComponent(txtfieldFName)
+                                    .addComponent(txtfieldAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE))
+                    .addGroup(panePersonDataLayout.createSequentialGroup()
+                        .addComponent(dateChooserBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panePersonDataLayout.createSequentialGroup()
                         .addGroup(panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,7 +210,11 @@ public class NewMemberForm
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtfieldCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
-                        .addComponent(txtfieldPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtfieldPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPhone))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(dateChooserBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panePersonDataLayout.createSequentialGroup()
                         .addGroup(panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblLName)
@@ -223,15 +241,8 @@ public class NewMemberForm
                                     .addComponent(radioFemale)
                                     .addComponent(radioMale)
                                     .addComponent(lblGender)))
-                            .addGroup(panePersonDataLayout.createSequentialGroup()
-                                .addGroup(panePersonDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblBirthDate)
-                                    .addGroup(panePersonDataLayout.createSequentialGroup()
-                                        .addComponent(lblPhone)
-                                        .addGap(29, 29, 29))
-                                    .addComponent(dateChooserBirth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 4, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(26, Short.MAX_VALUE))
+                            .addComponent(lblBirthDate))))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         paneMembershipData.setBorder(javax.swing.BorderFactory.createTitledBorder("Membership Data"));
@@ -256,7 +267,7 @@ public class NewMemberForm
 
         txtFieldSport.setEnabled(false);
 
-        btnAddSports.setText("Add Sport(s)");
+        btnAddSports.setText("Select Sport(s)");
         btnAddSports.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddSportsActionPerformed(evt);
@@ -265,7 +276,7 @@ public class NewMemberForm
 
         txtFieldTeam.setEnabled(false);
 
-        btnTeams.setText("Add Team(s)");
+        btnTeams.setText("Select Team(s)");
         btnTeams.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTeamsActionPerformed(evt);
@@ -283,7 +294,7 @@ public class NewMemberForm
                     .addComponent(lblTeam)
                     .addComponent(lblRole)
                     .addComponent(jLabel1))
-                .addGap(23, 23, 23)
+                .addGap(28, 28, 28)
                 .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(paneMembershipDataLayout.createSequentialGroup()
                         .addComponent(radioAdmin)
@@ -295,15 +306,15 @@ public class NewMemberForm
                         .addComponent(radioTrainer)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(radioPlayer))
-                    .addComponent(dateChooserEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(paneMembershipDataLayout.createSequentialGroup()
-                        .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtFieldTeam, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFieldSport, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))
+                        .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtFieldTeam)
+                            .addComponent(txtFieldSport, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnAddSports, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnTeams, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnTeams, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)))
+                    .addComponent(dateChooserEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         paneMembershipDataLayout.setVerticalGroup(
@@ -312,8 +323,8 @@ public class NewMemberForm
                 .addContainerGap()
                 .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblEntryDate)
-                    .addComponent(dateChooserEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                    .addComponent(dateChooserEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(paneMembershipDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRole)
                     .addComponent(radioAdmin)
@@ -361,8 +372,8 @@ public class NewMemberForm
                 .addContainerGap()
                 .addComponent(panePersonData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(paneMembershipData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(paneMembershipData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addComponent(btnSaveMember)
                 .addGap(18, 18, 18))
         );
@@ -371,11 +382,11 @@ public class NewMemberForm
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(paneNewMember, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(paneNewMember, javax.swing.GroupLayout.DEFAULT_SIZE, 835, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(paneNewMember, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(paneNewMember, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
         );
 
         pack();
@@ -401,6 +412,18 @@ public class NewMemberForm
     private void btnTeamsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeamsActionPerformed
         SelectTeamsHelper selectTeamsHelper = new SelectTeamsHelper(selectedSports, this);
     }//GEN-LAST:event_btnTeamsActionPerformed
+
+    private void radioFemaleStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_radioFemaleStateChanged
+        if(radioFemale.isSelected()){
+            radioMale.setSelected(false);
+        }
+    }//GEN-LAST:event_radioFemaleStateChanged
+
+    private void radioMaleStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_radioMaleStateChanged
+        if(radioMale.isSelected()){
+            radioFemale.setSelected(false);
+        }
+    }//GEN-LAST:event_radioMaleStateChanged
 
     private List<Integer> getSelectedSports()
     {
