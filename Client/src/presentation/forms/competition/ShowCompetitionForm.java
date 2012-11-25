@@ -153,7 +153,7 @@ public class ShowCompetitionForm extends AbstractMainForm {
 
     private void comboCompetitionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCompetitionActionPerformed
         competition = (ICompetitionDto) comboCompetition.getSelectedItem(); //set competition new
-        compMatches = controller.getMatchs(competition.getMatchList());     //get the competitions matches
+        compMatches = controller.getMatchs(competition.getMatchList());     //competitions matches
         
         if (competition != null) {
             setNewCompTable();
@@ -162,6 +162,8 @@ public class ShowCompetitionForm extends AbstractMainForm {
 
     private Object[] getCompetitions() {
         if (controller.getCompetitions() != null) {
+            List<ICompetitionDto> compDtos = controller.getCompetitions();
+            
             return controller.getCompetitions().toArray();
         } else {
             JOptionPane.showMessageDialog(null, "There are currently no competitions!");
@@ -175,7 +177,7 @@ public class ShowCompetitionForm extends AbstractMainForm {
         for (int row = 0; row < compMatches.size(); row++) {
             int i = 0;
             IMatchDto tmp = compMatches.get(row);     //get next match from list
-
+            
             tableModel.setValueAt(tmp.getHometeam().getName(), row, i++);
             tableModel.setValueAt(tmp.getForeignteam().getName(), row, i++);
             tableModel.setValueAt(tmp.getMatchresult().getPointsHometeam() + " : " + tmp.getMatchresult().getPointsForeignteam(), row, i);

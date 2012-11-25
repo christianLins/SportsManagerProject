@@ -5,6 +5,7 @@ import com.ServiceNotAvailableException;
 import contract.dto.*;
 import contract.useCaseController.ISearchChangeMember;
 import java.awt.event.ActionEvent;
+import java.nio.channels.SelectionKey;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
@@ -485,7 +486,7 @@ public class SearchMemberForm
                 TableModel tableModel = tabMember.getModel();
 
                 for (int row = 0; row < matchingMembers.size(); row++) {
-                    IMemberDto tmpMember = matchingMembers.remove(row);
+                    IMemberDto tmpMember = matchingMembers.get(row);
 
                     tableModel.setValueAt(tmpMember.getId().toString(), row, 0);
                     tableModel.setValueAt(tmpMember.getPrename(), row, 1);
@@ -635,7 +636,10 @@ public class SearchMemberForm
         List<Integer> sports = new LinkedList<>();
         List<Integer> clubTeamIDList = new LinkedList<>();
 
-        for (IRoleDto role : controller.getRoles(controller.getSelectedMember().getId())) {
+        IMemberDto selectedMember = controller.getSelectedMember();
+        List<IRoleDto> allTheRoles = controller.getRoles(selectedMember.getId());
+        
+        for (IRoleDto role : controller.getRoles(selectedMember.getId())) {
             if (role instanceof ITrainerDto) {
                 for (Integer t : ((ITrainerDto) role).getTypeOfSportList()) {
                     if (!sports.contains(t)) {
@@ -659,7 +663,6 @@ public class SearchMemberForm
         setSelectedTeams(clubTeamIDList);
         setTxtFieldTeams(selectedTeams);
 
-        IMemberDto selectedMember = controller.getSelectedMember();
         txtfieldMemberNr.setText(selectedMember.getId().toString());
         txtfieldFName.setText(selectedMember.getPrename());
         txtfieldLName.setText(selectedMember.getLastname());

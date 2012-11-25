@@ -8,10 +8,14 @@ import com.ServiceClient;
 import com.ServiceNotAvailableException;
 import contract.dto.*;
 import contract.useCaseController.INewCompetition;
+import java.rmi.RemoteException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import presentation.basics.*;
 import presentation.forms.dto.*;
+import server.dto.mapper.DtoFactory;
 
 /**
  @author Lucia
@@ -462,14 +466,9 @@ public class CreateCompetitionForm
             String teamA = listSelectMatch.getSelectedValue().toString();
             txtfieldTeamA.setText(teamA);
         }
-        else if (txtfieldTeamB.getText().isEmpty())
-        {
+        else {
             String teamB = listSelectMatch.getSelectedValue().toString();
             txtfieldTeamB.setText(teamB);
-        }
-        else
-        {
-            //TODO: support later txtfieldTeamA.setText(null);
         }
     }//GEN-LAST:event_listSelectMatchValueChanged
 
@@ -482,28 +481,33 @@ public class CreateCompetitionForm
     }//GEN-LAST:event_btnAddMatchActionPerformed
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
-        setMatchTeamList();
-        confirmed = true;
-        btnAddMatch.setEnabled(true);
-        listSelectMatch.setEnabled(true);
+        try {
+            setMatchTeamList();
+            confirmed = true;
+            btnAddMatch.setEnabled(true);
+            listSelectMatch.setEnabled(true);
+            match = new LinkedList<>();
 
-        competition = new Competition();
-        competition.setName(txtfieldName.getText());
-        competition.setDescription(txtfieldLocation.getText());
-        competition.setDateFrom(dateDateFrom.getDate());
-        competition.setDateTo(dateDateTo.getDate());
-        competition.setPayment(Double.parseDouble(txtfieldFee.getText()));
-        competition.setTeamList(getSelectedTeams(listSelectTeams));
+            competition = new Competition();
+            competition.setName(txtfieldName.getText());
+            competition.setDescription(txtfieldLocation.getText());
+            competition.setDateFrom(dateDateFrom.getDate());
+            competition.setDateTo(dateDateTo.getDate());
+            competition.setPayment(Double.parseDouble(txtfieldFee.getText()));
+            competition.setTeamList(getSelectedTeams(listSelectTeams));
 
-        //Set Competitions address
-        IAddressDto address = new Address();
-        address.setVillage(txtfieldcity.getText());
-        address.setPostalCode(Integer.parseInt(txtfieldplz.getText()));
-        ICountryDto country = new Country();
-        country.setName(txtfieldCountry.getText());
-        address.setCountry(country.getId());
+            //Set Competitions address
+            IAddressDto address = DtoFactory.getAddressMapper().getNew();
+            address.setVillage(txtfieldcity.getText());
+            address.setPostalCode(Integer.parseInt(txtfieldplz.getText()));
+            ICountryDto country = DtoFactory.getCountryMapper().getNew();
+            country.setName(txtfieldCountry.getText());
+            address.setCountry(country.getId());
 
-        competition.setAddress(address.getId());
+            competition.setAddress(address.getId());
+        } catch (RemoteException ex) {
+            Logger.getLogger(CreateCompetitionForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnConfirmActionPerformed
 
     private String[] getTeamsList()
@@ -520,19 +524,22 @@ public class CreateCompetitionForm
 
     private void setMatchTeamList()
     {
-        listSelectMatch.setModel(new AbstractListModel()
-        {
-            String[] strings = (String[]) listSelectTeams.getSelectedValues();
-
+        Object[] selectedObj = listSelectTeams.getSelectedValues();        
+        final String[] selString = new String[selectedObj.length];        
+        for(int i = 0; i < selectedObj.length; i++){
+            selString[i] = selectedObj[i].toString();
+        }
+        
+        listSelectMatch.setModel(new AbstractListModel(){
+            String[] strings = selString;
+            
             @Override
-            public int getSize()
-            {
+            public int getSize(){
                 return strings.length;
             }
 
             @Override
-            public Object getElementAt(int i)
-            {
+            public Object getElementAt(int i){
                 return strings[i];
             }
         });
@@ -540,7 +547,6 @@ public class CreateCompetitionForm
 
     private List<Integer> getSelectedTeams(JList list)
     {
-
         Object[] selection = list.getSelectedValues();      //array with selected values
         List<String> teamSelection = new LinkedList<>();    //selected teams
 
@@ -568,7 +574,7 @@ public class CreateCompetitionForm
 
     private void updateMatchTables()
     {
-        IMatchDto newMatch = null;
+        IMatchDto newMatch = new Match();
         newMatch.setCompetition(competition.getId());
         newMatch.setHometeam(getTeamID(txtfieldTeamA.getText()));
         newMatch.setForeignteam(getTeamID(txtfieldTeamB.getText()));
@@ -595,11 +601,18 @@ public class CreateCompetitionForm
 
     private void addToATeams(String name)
     {
+        if(aTeam == null){
+            aTeam = new LinkedList<>();
+        }
         aTeam.add(name);
     }
 
     private String[] getATeams()
     {
+        if(aTeam == null){
+            aTeam = new LinkedList<>();
+        }
+        
         String[] aArray = new String[aTeam.size()];
         for (int i = 0; i < aTeam.size(); i++)
         {
@@ -610,11 +623,18 @@ public class CreateCompetitionForm
 
     private void addToBTeams(String name)
     {
+        if(bTeam == null){
+            bTeam = new LinkedList<>();
+        }
         bTeam.add(name);
     }
 
     private String[] getBTeams()
     {
+        if(bTeam == null){
+            bTeam = new LinkedList<>();
+        }
+        
         String[] bArray = new String[bTeam.size()];
         for (int i = 0; i < bTeam.size(); i++)
         {
