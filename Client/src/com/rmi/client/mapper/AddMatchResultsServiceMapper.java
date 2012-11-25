@@ -8,8 +8,11 @@ import contract.dto.*;
 import contract.rmi.services.IAddMatchResultsRmiService;
 import contract.useCaseController.IAddMatchResults;
 import java.rmi.RemoteException;
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.*;
+import presentation.forms.dto.Competition;
 
 /**
  *
@@ -48,6 +51,26 @@ public class AddMatchResultsServiceMapper implements RmiServiceToServiceMapper<I
                 Logger.getLogger(AddMatchResultsServiceMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
             return null;
+            
+            //once used to TEST
+//            List<ICompetitionDto> compList = new LinkedList<>();
+//            List<Integer> ids = new LinkedList<>();
+//            ids.add(1);
+//            ids.add(2);
+//            ids.add(3);
+//            Competition c = new Competition();
+//            c.setDescription("Cubus");
+//            c.setName("TheUltimateCompetition");
+//            c.setPayment(15.00);
+//            c.setMatchList(ids);
+//            c.setTeamList(ids);
+//            c.setAddress(1);
+//            c.setSport(1);
+//            Date d = new Date(2012, 01, 01);
+//            c.setDateFrom(d);
+//            c.setDateTo(d);
+//            compList.add(c);
+//            return compList;
         }
 
         @Override

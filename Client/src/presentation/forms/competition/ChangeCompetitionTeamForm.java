@@ -8,6 +8,7 @@ import com.ServiceClient;
 import com.ServiceNotAvailableException;
 import contract.dto.*;
 import contract.useCaseController.IChangeCompetitionTeam;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.AbstractListModel;
@@ -32,6 +33,8 @@ public class ChangeCompetitionTeamForm extends AbstractMainForm {
     List<IPlayerDto> teamMember;
     List<IPlayerDto> oldTeam;
     List<IPlayerDto> newTeam;
+    HashMap<String, ICompetitionDto> compMap;
+    HashMap<String, IClubTeamDto> teamMap;
 
     /**
      * Creates new form AddTeamMember
@@ -41,6 +44,8 @@ public class ChangeCompetitionTeamForm extends AbstractMainForm {
         this.client = client;
         this.user = user;
         controller = this.client.getChangeCompetitionTeamService();
+        compMap = new HashMap<>();
+        teamMap = new HashMap<>();
         initComponents();
     }
 
@@ -211,13 +216,7 @@ public class ChangeCompetitionTeamForm extends AbstractMainForm {
     }//GEN-LAST:event_comboCompetitionActionPerformed
 
     private void comboTeamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTeamActionPerformed
-        String teamName = comboTeam.getSelectedItem().toString();
-
-        for (IClubTeamDto ct : cTeams) {
-            if (ct.getName().equals(teamName)) {
-                team = ct;
-            }
-        }
+        team = teamMap.get(comboTeam.getSelectedItem());        
         setTeamMemberList();
 
         IClubTeamDto compTeam = controller.getCompetitionTeam(team);
@@ -355,21 +354,23 @@ public class ChangeCompetitionTeamForm extends AbstractMainForm {
         String[] compArray = new String[compList.size()];
 
         for (int i = 0; i < compList.size(); i++) {
-            //TODO: check how to name it
-            compArray[i] = compList.get(i).toString();
-        }
+            compArray[i] = compList.get(i).getName();
+            compMap.put(compArray[i], compList.get(i));
+        }        
         return compArray;
     }
 
     private String[] getTeamList() {
-        competition = (ICompetitionDto) comboCompetition.getSelectedItem(); //TODO: get compname
-        List<Integer> allTeams = competition.getTeamList();
-
-        cTeams = controller.getClubTeams(allTeams);
+        competition = compMap.get(comboCompetition.getSelectedItem());     
+        cTeams = controller.getClubTeams(competition.getTeamList());
         String[] cTeamArray = new String[cTeams.size()];
 
         for (int i = 0; i < cTeamArray.length; i++) {
+            if (cTeams.get(i).getName() == null) {
+                cTeams.get(i).setName("Masterteam");                
+            }
             cTeamArray[i] = cTeams.get(i).getName();
+            teamMap.put(cTeamArray[i], cTeams.get(i));
         }
         return cTeamArray;
     }

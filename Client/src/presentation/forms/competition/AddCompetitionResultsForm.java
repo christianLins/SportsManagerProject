@@ -4,13 +4,18 @@ import com.ServiceClient;
 import com.ServiceNotAvailableException;
 import contract.dto.*;
 import contract.useCaseController.IAddMatchResults;
+import java.sql.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 import presentation.basics.AbstractForm;
 import presentation.basics.AbstractMainForm;
+import presentation.forms.dto.Match;
+import presentation.forms.dto.Matchresult;
+import presentation.forms.dto.Team;
 
 /**
  *
@@ -39,9 +44,6 @@ public class AddCompetitionResultsForm
         this.client = client;
         this.user = user;
         controller = this.client.getAddMatchResultsService();
-        competitionMap = new HashMap<>();
-        teamMap = new HashMap<>();
-        matchMap = new HashMap<>();
         initComponents();
     }
 
@@ -213,11 +215,35 @@ public class AddCompetitionResultsForm
     }// </editor-fold>//GEN-END:initComponents
 
     private void comboCompetitionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCompetitionActionPerformed
-        
-        
+                
         competition = competitionMap.get(comboCompetition.getSelectedItem().toString());    //search competition
-        matchList = controller.getMatchList(competition.getMatchList());
-        teamList = controller.getTeamList(competition.getTeamList());
+        //4 TESTS ONLY
+        matchList = new LinkedList<>();
+        IMatchDto match1 = new Match();
+        match1.setForeignteam(1);
+        match1.setHometeam(2);
+        match1.setDateFrom(new Date(2012, 1, 1));
+        match1.setDateTo(new Date(2012, 1, 1));
+        match1.setCompetition(competition.getId());
+        IMatchDto match2 = new Match();
+        match2.setForeignteam(5);
+        match2.setHometeam(3);
+        match2.setDateFrom(new Date(2012, 1, 1));
+        match2.setDateTo(new Date(2012, 1, 1));
+        match2.setCompetition(competition.getId());
+        matchList.add(match1);
+        
+        teamList = new LinkedList<>();
+        ITeamDto team1 = new Team();
+        team1.setName("TestTeam1");
+        teamList.add(team1);
+        ITeamDto team2 = new Team();
+        team2.setName("TestTeam2");
+        teamList.add(team2);
+        
+        //UNCOMMENT LATER
+//        matchList = controller.getMatchList(competition.getMatchList());
+//        teamList = controller.getTeamList(competition.getTeamList());
 
         setListMatches();
         setComboTeams();
@@ -227,15 +253,12 @@ public class AddCompetitionResultsForm
         String name = comboTeams.getSelectedItem().toString();
 
         if (!name.equals("Teams")) {
-            ITeamDto team = null;
-
-            for (ITeamDto t : teamList) {
-                if (t.getName().equals(name)) {
-                    team = t;
-                }
-            }
-            List<IMatchDto> matches = controller.getMatchList(team.getMatchList());
-            setListMatches(matches);
+            ITeamDto team = teamMap.get(name);
+            
+            //JUST Commet to avoid TESTING failure
+            //List<IMatchDto> matches = controller.getMatchList(team.getMatchList());
+            //setListMatches(matches);
+            setListMatches(matchList);
         }
     }//GEN-LAST:event_comboTeamsActionPerformed
 
@@ -258,22 +281,28 @@ public class AddCompetitionResultsForm
     }//GEN-LAST:event_listMatchesValueChanged
 
     private void btnAddResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddResultActionPerformed
-        IMatchresultDto result = null;
-        result.setPointsHometeam((double) spinTeamA.getValue());
-        result.setPointsForeignteam((double) spinTeamB.getValue());
-        controller.setMatchResult(match, result);
+        IMatchresultDto result = new Matchresult();
+        result.setPointsHometeam(new Double(spinTeamA.getValue().toString()));
+        result.setPointsForeignteam(new Double(spinTeamB.getValue().toString()));
+        //TODO: Set Final true
+              
+        controller.setMatchResult(match, result); //TODO: Throws error
     }//GEN-LAST:event_btnAddResultActionPerformed
 
     private void checkBoxFinishedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxFinishedActionPerformed
+//        if(checkBoxFinished.isSelected()){
+//            competition.isFinal();
+//        }
     }//GEN-LAST:event_checkBoxFinishedActionPerformed
 
     private String[] getAllCompetitions() {
         List<ICompetitionDto> compList = controller.getCompetitionList();
+        competitionMap = new HashMap<>();
         String[] compArray = new String[compList.size() + 1];
         compArray[0] = "Select Competition";
-        
-        int j = 0;
-        for (int i = 0; i < compArray.length; i++) {
+                
+        int j = 0;  int i = 0;        
+        while(i < compArray.length-1){
             j = i; i++;
             compArray[i] = compList.get(j).getName();
             competitionMap.put(compArray[i], compList.get(j));
@@ -284,10 +313,11 @@ public class AddCompetitionResultsForm
     private String[] getTeams() {
         String[] array = new String[teamList.size() + 1];
         array[0] = "Select Team";
+        teamMap = new HashMap<>();
 
-        int j = 0; 
-        for (int i = 0; i < array.length; i++) {
-            j = i; i++;
+        int j = 0; int i = 0;        
+        while(i < array.length-1){
+            j = i; i++; 
             array[i] = teamList.get(j).getName();
             teamMap.put(array[i], teamList.get(j));
         }
@@ -300,9 +330,11 @@ public class AddCompetitionResultsForm
 
     private void setListMatches() {
         final String[] array = new String[matchList.size()];
-
+        matchMap = new HashMap<>();
+        
         for (int i = 0; i < array.length; i++) {
             array[i] = matchList.get(i).getHometeam().getName() + " : " + matchList.get(i).getForeignteam().getName();
+            matchMap.put(array[i], matchList.get(i));
         }
 
         listMatches.setModel(new AbstractListModel() {
@@ -322,11 +354,12 @@ public class AddCompetitionResultsForm
 
     private void setListMatches(List<IMatchDto> matches) {
         final String[] array = new String[matches.size()];
+        matchMap.clear();
 
         for (int i = 0; i < array.length; i++) {
             array[i] = matches.get(i).getHometeam().getName() + " : " + matches.get(i).getForeignteam().getName();
+            matchMap.put(array[i], matches.get(i));
         }
-
 
         listMatches.setModel(new AbstractListModel() {
             String[] strings = array;
