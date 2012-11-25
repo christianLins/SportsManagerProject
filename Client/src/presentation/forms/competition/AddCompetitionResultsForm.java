@@ -241,7 +241,7 @@ public class AddCompetitionResultsForm
         team2.setName("TestTeam2");
         teamList.add(team2);
         
-        //UNCOMMENT LATER
+        //UNCOMMENT LATER & TEST
 //        matchList = controller.getMatchList(competition.getMatchList());
 //        teamList = controller.getTeamList(competition.getTeamList());
 
