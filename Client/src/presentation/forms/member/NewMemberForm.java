@@ -13,6 +13,8 @@ import presentation.basics.AbstractMainForm;
 import presentation.forms.dto.*;
 import presentation.forms.helper.SelectSportsHelper;
 import presentation.forms.helper.SelectTeamsHelper;
+import server.dto.classes.AddressDto;
+import server.dto.classes.MemberDto;
 
 /**
  *
@@ -471,6 +473,13 @@ public class NewMemberForm
 
     @Override
     public void setTxtFieldTeams(List<IClubTeamDto> selected) {
+        
+        if(selected.isEmpty())
+        {
+            txtFieldTeam.setText("");
+            return;
+        }
+        
         this.selectedTeams = selected;
 
         StringBuilder sb = new StringBuilder(selectedTeams.size());
@@ -479,9 +488,9 @@ public class NewMemberForm
             sb.append(ct);
             sb.append(", ");
         }
-        sb.delete(sb.length() - 2, sb.length());    //TODO check if this works 
-
-        txtFieldTeam.setText(sb.toString());
+       
+        
+        txtFieldTeam.setText(sb.toString().substring(sb.length() -2,sb.length()));
 
     }
 
@@ -492,6 +501,7 @@ public class NewMemberForm
 
     private List<Integer> getSelectedTeams() {
         List<Integer> clubTeamIDs = new LinkedList<>();
+        if(selectedTeams == null) return null;
 
         for (IClubTeamDto c : selectedTeams) {
             clubTeamIDs.add(c.getId());

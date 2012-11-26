@@ -13,6 +13,12 @@ import contract.dto.IAddressDto;
 public class Address
         implements IAddressDto
 {
+
+    public Address()
+    {
+    }
+    
+    
     int country;
     int postalCode;
     String street;

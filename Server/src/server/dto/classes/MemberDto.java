@@ -1,8 +1,11 @@
 package server.dto.classes;
 
-import java.io.Serializable;
-import java.util.*;
 import contract.dto.IMemberDto;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MemberDto
         implements Serializable, IMemberDto
