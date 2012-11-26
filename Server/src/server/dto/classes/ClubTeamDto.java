@@ -96,4 +96,12 @@ public class ClubTeamDto
     {
         this.playerList = playerList;
     }
+
+    @Override
+    public String toString()
+    {
+        return getName();
+    }
+    
+    
 }

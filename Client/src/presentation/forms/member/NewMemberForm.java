@@ -3,18 +3,16 @@ package presentation.forms.member;
 import com.ServiceClient;
 import com.ServiceNotAvailableException;
 import contract.dto.*;
-import contract.dto.mapper.NotFoundException;
 import contract.useCaseController.INewMember;
-import java.rmi.RemoteException;
-import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.*;
-import presentation.basics.*;
+import java.util.LinkedList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import presentation.basics.AbstractForm;
+import presentation.basics.AbstractMainForm;
 import presentation.forms.dto.*;
 import presentation.forms.helper.SelectSportsHelper;
 import presentation.forms.helper.SelectTeamsHelper;
-import server.dto.mapper.DtoFactory;
 
 /**
  *
@@ -438,21 +436,12 @@ public class NewMemberForm
         return tosIDs;
     }
 
-    // TODO add getAvailableSports by logged in user 
     private List<Integer> loadSportsList() {
         LinkedList<Integer> ids = new LinkedList<>();
-        try {
-            //   TODO: return controller.getAvailableSportsList(user);
-            List<ITypeOfSportDto> allSportDtos = DtoFactory.getTypeOfSportMapper().getAll();
-                        
-            for(ITypeOfSportDto dto : allSportDtos){
-                ids.add(dto.getId());
-            }
+        List<ITypeOfSportDto> allSports = controller.getAllSports();
 
-        } catch (NotFoundException ex) {
-            Logger.getLogger(NewMemberForm.class.getName()).log(Level.SEVERE, null, ex);
-        }catch (RemoteException ex) {
-            Logger.getLogger(NewMemberForm.class.getName()).log(Level.SEVERE, null, ex);
+        for(ITypeOfSportDto dto : allSports){
+            ids.add(dto.getId());
         }
         return ids;
     }
