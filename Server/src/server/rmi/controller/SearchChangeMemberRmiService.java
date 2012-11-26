@@ -62,9 +62,15 @@ public class SearchChangeMemberRmiService
     }
 
     @Override
-    public void setNewMember(IMemberDto member, IAddressDto address, IDepartmentDto department, IClubTeamDto clubTeam, IRoleDto role)
+    public void setNewPlayer(IMemberDto member, IAddressDto address, List<IClubTeamDto> clubTeam)
     {
-        SearchChangeMember.getInstance().setNewMember(member, address, department, clubTeam, role);
+        SearchChangeMember.getInstance().setNewPlayer(member, address, clubTeam);
+    }
+
+    @Override
+    public void setNewTrainer(IMemberDto member, IAddressDto address, List<IClubTeamDto> clubTeam)
+    {
+        SearchChangeMember.getInstance().setNewTrainer(member, address, clubTeam);
     }
 
     @Override

@@ -3,9 +3,9 @@
  * and open the template in the editor.
  */
 package server.useCaseController;
-import contract.useCaseController.INewCompetition;
 import contract.dto.*;
 import contract.dto.mapper.NotFoundException;
+import contract.useCaseController.INewCompetition;
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.logging.*;

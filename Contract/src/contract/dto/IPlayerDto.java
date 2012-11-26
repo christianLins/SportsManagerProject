@@ -16,4 +16,8 @@ public interface IPlayerDto
     List<Integer> getTypeOfSportList();
 
     void setTypeOfSportList(List<Integer> typeOfSportList);
+
+    void setClubTeamList(List<Integer> selectedTeams);
+
+    List<Integer> getClubTeamList();
 }

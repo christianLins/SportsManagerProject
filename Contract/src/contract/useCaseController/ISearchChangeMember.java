@@ -35,7 +35,9 @@ public interface ISearchChangeMember
 
     void setNewMember(IMemberDto member, IAddressDto address);
 
-    void setNewMember(IMemberDto member, IAddressDto address, IDepartmentDto department, IClubTeamDto clubTeam, IRoleDto role);
+    void setNewPlayer(IMemberDto member, IAddressDto address, List<IClubTeamDto> clubTeam);
+
+    void setNewTrainer(IMemberDto member, IAddressDto address, List<IClubTeamDto> clubTeam);
 
     void setSelectedMember(IMemberDto get);
 

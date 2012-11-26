@@ -5,21 +5,30 @@ import java.rmi.*;
 import java.util.List;
 
 /**
- *
- * @author Lucia
- */
-public interface INewMemberRmiService extends Remote
-{
-    
-    void setNewMember(IMemberDto member, IAddressDto address) throws RemoteException;
 
-    List<IDepartmentDto> getDepartments() throws RemoteException;  
-    List<IClubTeamDto> getClubTeams(List<Integer> clubTeams) throws RemoteException;
-    
-    void setNewMember(IMemberDto member, IAddressDto address, IDepartmentDto department, IClubTeamDto clubTeam, IRoleDto role) throws RemoteException;
-    
-    List<ITypeOfSportDto> getTypeOfSports(List<Integer> typOfSportsList) throws RemoteException;
-    
-    List<IClubTeamDto> getClubTeamsByTypeOfSport(ITypeOfSportDto sport) throws RemoteException;
-    
+ @author Lucia
+ */
+public interface INewMemberRmiService
+        extends Remote
+{
+    List<IDepartmentDto> getDepartments()
+            throws RemoteException;
+
+    List<IClubTeamDto> getClubTeams(List<Integer> clubTeams)
+            throws RemoteException;
+
+    void setNewMember(IMemberDto member, IAddressDto address)
+            throws RemoteException;
+
+    void setNewTrainer(IMemberDto member, IAddressDto address, List<IClubTeamDto> clubTeamList)
+            throws RemoteException;
+
+    void setNewPlayer(IMemberDto member, IAddressDto address, List<IClubTeamDto> clubTeamList)
+            throws RemoteException;
+
+    List<ITypeOfSportDto> getTypeOfSports(List<Integer> typOfSportsList)
+            throws RemoteException;
+
+    List<IClubTeamDto> getClubTeamsByTypeOfSport(ITypeOfSportDto sport)
+            throws RemoteException;
 }
