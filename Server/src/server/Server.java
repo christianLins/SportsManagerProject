@@ -25,6 +25,6 @@ public class Server
 
         // start corba-server-thread
         CorbaServer corbaServer = new CorbaServer();
-       new Thread(corbaServer).start();
+        new Thread(corbaServer).start();
     }
 }

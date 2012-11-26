@@ -150,11 +150,24 @@ public class SearchChangeMember
     }
 
     @Override
-    public void setNewMember(IMemberDto member, IAddressDto address, IDepartmentDto department, IClubTeamDto clubTeam, IRoleDto role)
+    public void setNewTrainer(IMemberDto member, IAddressDto address, List<IClubTeamDto> clubTeam)
     {
         try
         {
-            service.setNewMember(member, address, department, clubTeam, role);
+            service.setNewTrainer(member, address, clubTeam);
+        }
+        catch (RemoteException ex)
+        {
+            Logger.getLogger(SearchChangeMemberServiceMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void setNewPlayer(IMemberDto member, IAddressDto address, List<IClubTeamDto> clubTeam)
+    {
+        try
+        {
+            service.setNewPlayer(member, address, clubTeam);
         }
         catch (RemoteException ex)
         {

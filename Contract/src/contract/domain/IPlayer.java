@@ -4,7 +4,7 @@
  */
 package contract.domain;
 
-import java.util.List;
+import java.util.*;
 
 /**
 
@@ -30,4 +30,8 @@ public interface IPlayer
     List<ITypeOfSport> getTypeOfSportList();
 
     void setTypeOfSportList(List<ITypeOfSport> typeOfSportList);
+
+    List<IClubTeam> getClubTeams();
+
+    void setClubTeams(List<IClubTeam> clubTeams);
 }

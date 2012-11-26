@@ -196,9 +196,15 @@ public class SearchChangeMember
     }
 
     @Override
-    public void setNewMember(IMemberDto member, IAddressDto address, IDepartmentDto department, IClubTeamDto clubTeam, IRoleDto role)
+    public void setNewTrainer(IMemberDto member, IAddressDto address,  List<IClubTeamDto> clubTeam)
     {
-        NewMember.getInstance().setNewMember(member, address, department, clubTeam, role);
+        NewMember.getInstance().setNewTrainer(member, address, clubTeam);
+    }
+
+    @Override
+    public void setNewPlayer(IMemberDto member, IAddressDto address,  List<IClubTeamDto> clubTeam)
+    {
+        NewMember.getInstance().setNewPlayer(member, address, clubTeam);
     }
 
     @Override

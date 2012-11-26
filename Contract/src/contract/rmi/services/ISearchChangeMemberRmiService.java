@@ -36,7 +36,10 @@ public interface ISearchChangeMemberRmiService
     void setNewMember(IMemberDto member, IAddressDto address)
             throws RemoteException;
 
-    void setNewMember(IMemberDto member, IAddressDto address, IDepartmentDto department, IClubTeamDto clubTeam, IRoleDto role)
+    void setNewPlayer(IMemberDto member, IAddressDto address, List<IClubTeamDto> clubTeam)
+            throws RemoteException;
+
+    void setNewTrainer(IMemberDto member, IAddressDto address, List<IClubTeamDto> clubTeam)
             throws RemoteException;
 
     List<IMemberDto> getMatchingMembers(String searchInput)

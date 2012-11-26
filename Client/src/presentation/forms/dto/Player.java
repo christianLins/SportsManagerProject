@@ -16,14 +16,29 @@ public class Player
         implements IPlayerDto
 {
     List<Integer> typeOfSportList;
+    List<Integer> selectedTeams;
 
+    @Override
     public List<Integer> getTypeOfSportList()
     {
         return typeOfSportList;
     }
 
+    @Override
     public void setTypeOfSportList(List<Integer> typeOfSportList)
     {
         this.typeOfSportList = typeOfSportList;
+    }
+
+    @Override
+    public void setClubTeamList(List<Integer> selectedTeams)
+    {
+        this.selectedTeams = selectedTeams;
+    }
+
+    @Override
+    public List<Integer> getClubTeamList()
+    {
+        return selectedTeams;
     }
 }

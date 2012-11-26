@@ -12,18 +12,22 @@ import java.util.List;
 import server.useCaseController.NewMember;
 
 /**
- *
- * @author Lins Christian (christian.lins87@gmail.com)
- */
-public class NewMemberRmiService extends UnicastRemoteObject implements INewMemberRmiService
-{
 
-    public NewMemberRmiService() throws RemoteException {
+ @author Lins Christian (christian.lins87@gmail.com)
+ */
+public class NewMemberRmiService
+        extends UnicastRemoteObject
+        implements INewMemberRmiService
+{
+    public NewMemberRmiService()
+            throws RemoteException
+    {
         super();
     }
-    
+
     @Override
-    public void setNewMember(IMemberDto member, IAddressDto address) throws RemoteException
+    public void setNewMember(IMemberDto member, IAddressDto address)
+            throws RemoteException
     {
         NewMember.getInstance().setNewMember(member, address);
     }
@@ -35,27 +39,37 @@ public class NewMemberRmiService extends UnicastRemoteObject implements INewMemb
     }
 
     @Override
-    public List<IClubTeamDto> getClubTeams(List<Integer> clubTeams) throws RemoteException
+    public List<IClubTeamDto> getClubTeams(List<Integer> clubTeams)
+            throws RemoteException
     {
         return NewMember.getInstance().getClubTeams(clubTeams);
     }
 
     @Override
-    public void setNewMember(IMemberDto member, IAddressDto address, IDepartmentDto department, IClubTeamDto clubTeam, IRoleDto role) throws RemoteException
+    public void setNewPlayer(IMemberDto member, IAddressDto address, List<IClubTeamDto> clubTeams)
+            throws RemoteException
     {
-        NewMember.getInstance().setNewMember(member, address, department, clubTeam, role);
+        NewMember.getInstance().setNewPlayer(member, address, clubTeams);
     }
 
     @Override
-    public List<ITypeOfSportDto> getTypeOfSports(List<Integer> typOfSportsList) throws RemoteException
+    public void setNewTrainer(IMemberDto member, IAddressDto address, List<IClubTeamDto> clubTeams)
+            throws RemoteException
+    {
+        NewMember.getInstance().setNewTrainer(member, address, clubTeams);
+    }
+
+    @Override
+    public List<ITypeOfSportDto> getTypeOfSports(List<Integer> typOfSportsList)
+            throws RemoteException
     {
         return NewMember.getInstance().getTypeOfSports(typOfSportsList);
     }
 
     @Override
-    public List<IClubTeamDto> getClubTeamsByTypeOfSport(ITypeOfSportDto sport) throws RemoteException
+    public List<IClubTeamDto> getClubTeamsByTypeOfSport(ITypeOfSportDto sport)
+            throws RemoteException
     {
         return NewMember.getInstance().getClubTeamsByTypeOfSport(sport);
     }
-    
 }

@@ -1,5 +1,6 @@
 package server.dto.classes;
 
+import contract.domain.IClubTeam;
 import contract.dto.IPlayerDto;
 import java.io.Serializable;
 import java.util.*;
@@ -10,6 +11,7 @@ public class PlayerDto
 {
     private List<Integer> typeOfSportList;
     private List<Integer> memberList;
+    private List<Integer> clubTeamList;
     private static HashMap<contract.domain.IPlayer, PlayerDto> players = new HashMap<>();
 
     public static PlayerDto copy(contract.domain.IPlayer player)
@@ -32,6 +34,15 @@ public class PlayerDto
             }
             a.setTypeOfSportList(l);
 
+            List<Integer> c = new LinkedList<>();
+
+            for (IClubTeam t : player.getClubTeams())
+            {
+                c.add(t.getId());
+            }
+
+            a.setClubTeamList(c);
+
             players.put(player, a);
         }
 
@@ -48,5 +59,17 @@ public class PlayerDto
     public void setTypeOfSportList(List<Integer> typeOfSportList)
     {
         this.typeOfSportList = typeOfSportList;
+    }
+
+    @Override
+    public void setClubTeamList(List<Integer> clubTeamList)
+    {
+        this.clubTeamList = clubTeamList;
+    }
+
+    @Override
+    public List<Integer> getClubTeamList()
+    {
+        return clubTeamList;
     }
 }

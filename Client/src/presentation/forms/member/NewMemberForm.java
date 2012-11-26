@@ -14,9 +14,6 @@ import presentation.basics.*;
 import presentation.forms.dto.*;
 import presentation.forms.helper.SelectSportsHelper;
 import presentation.forms.helper.SelectTeamsHelper;
-import server.dto.classes.AddressDto;
-import server.dto.classes.MemberDto;
-import server.dto.classes.TypeOfSportDto;
 import server.dto.mapper.DtoFactory;
 
 /**
@@ -526,8 +523,7 @@ public class NewMemberForm
         address.setStreet(txtfieldAddress.getText());
         address.setPostalCode(Integer.parseInt(txtfieldPostCode.getText()));
         address.setVillage(txtfieldCity.getText());
-        // member.setAddress(address.getId());
-
+        member.setAddress(address.getId());
 
         country = new Country();
         country.setName(txtfieldCountry.getText());
@@ -565,7 +561,7 @@ public class NewMemberForm
             IPlayerDto player = new Player();
             membersRoles.add(player);
             player.setTypeOfSportList(getSelectedSports());
-            //player.setClubTeamList(getSelectedTeams());
+            player.setClubTeamList(getSelectedTeams());
         }
 
         List<Integer> roleInt = new LinkedList<>();
@@ -579,8 +575,9 @@ public class NewMemberForm
         if (radioTrainer.isSelected() || radioPlayer.isSelected()) {
             member.setRoleList(roleInt);
 
+           
             //TODO: übergabe clubTeam liste und role liste
-            controller.setNewMember(member, address, department, clubTeam, role);
+            controller.setNewMember(member, address);
         } else {
             controller.setNewMember(member, address);
         }

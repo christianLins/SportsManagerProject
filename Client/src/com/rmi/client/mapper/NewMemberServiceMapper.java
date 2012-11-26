@@ -79,11 +79,24 @@ public class NewMemberServiceMapper
         }
 
         @Override
-        public void setNewMember(IMemberDto member, IAddressDto address, IDepartmentDto department, IClubTeamDto clubTeam, IRoleDto role)
+        public void setNewTrainer(IMemberDto member, IAddressDto address, List<IClubTeamDto> clubTeamList)
         {
             try
             {
-                service.setNewMember(member, address, department, clubTeam, role);
+                service.setNewTrainer(member, address, clubTeamList);
+            }
+            catch (RemoteException ex)
+            {
+                Logger.getLogger(NewMemberServiceMapper.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        @Override
+        public void setNewPlayer(IMemberDto member, IAddressDto address, List<IClubTeamDto> clubTeamList)
+        {
+            try
+            {
+                service.setNewPlayer(member, address, clubTeamList);
             }
             catch (RemoteException ex)
             {
