@@ -116,4 +116,10 @@ public class NewMember
         }
         return ret;
     }
+
+    @Override
+    public void setNewMember(IMemberDto member, IAddressDto address, List<Integer> clubTeamList, List<Integer> roleList) {
+            member.setRoleList(roleList);
+            setNewMember(member, address);
+    }
 }
