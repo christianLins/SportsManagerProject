@@ -31,4 +31,6 @@ public interface INewMemberRmiService
 
     List<IClubTeamDto> getClubTeamsByTypeOfSport(ITypeOfSportDto sport)
             throws RemoteException;
+    
+    List<ITypeOfSportDto> getAllSports() throws RemoteException;
 }

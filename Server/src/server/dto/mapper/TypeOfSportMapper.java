@@ -71,8 +71,10 @@ public class TypeOfSportMapper
         try
         {
             List<ITypeOfSportDto> result = new LinkedList<>();
+            DomainFacade instance = DomainFacade.getInstance();
+            List<ITypeOfSport> all = instance.getAll(contract.domain.ITypeOfSport.class);
 
-            for (contract.domain.ITypeOfSport a : DomainFacade.getInstance().getAll(contract.domain.ITypeOfSport.class))
+            for (contract.domain.ITypeOfSport a : all)
             {
                 result.add(TypeOfSportDto.copy(a));
             }
